@@ -41,6 +41,7 @@ LIBS:pwr_splitter
 LIBS:rf_crossbar
 LIBS:scbd-16-63
 LIBS:tcm-63ax+
+LIBS:coupler_breakout-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -287,4 +288,6 @@ F 3 "" H 4550 1500 60  0000 C CNN
 	1    4550 1500
 	1    0    0    -1  
 $EndComp
+Text Notes 4300 2050 0    60   ~ 0
+Pomona Size 3754 Box
 $EndSCHEMATC

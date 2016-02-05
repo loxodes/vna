@@ -566,4 +566,6 @@ Connection ~ 6600 5450
 Wire Wire Line
 	6650 5450 6650 5500
 Connection ~ 6650 5450
+Text Notes 2350 3950 0    60   ~ 0
+RF Gain Block\n500 MHz to 6 GHz\n17 dBm P1dB\n\n14 dB gain at 500 MHz\n9 dB gain at 6 GHz
 $EndSCHEMATC
