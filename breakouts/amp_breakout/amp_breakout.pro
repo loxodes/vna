@@ -1,4 +1,4 @@
-update=Sun Jan 24 22:37:03 2016
+update=Sat 06 Feb 2016 07:21:06 AM AKST
 version=1
 last_client=kicad
 [pcbnew]
@@ -71,3 +71,4 @@ LibName39=/home/kleinjt/repos/vna/lib/pwr_splitter
 LibName40=/home/kleinjt/repos/vna/lib/rf_crossbar
 LibName41=/home/kleinjt/repos/vna/lib/scbd-16-63
 LibName42=/home/kleinjt/repos/vna/lib/tcm-63ax+
+LibName43=/home/kleinjt/repos/vna/lib/mounting_box
