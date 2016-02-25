@@ -1,8 +1,8 @@
 (export (version D)
   (design
     (source /home/kleinjt/repos/vna/breakouts/splitter_breakout/splitter_breakout.sch)
-    (date "Wed 17 Feb 2016 10:21:50 PM AKST")
-    (tool "Eeschema 4.0.1-stable")
+    (date "Wed Feb 24 16:19:12 2016")
+    (tool "Eeschema 4.0.2-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
         (title)
@@ -17,7 +17,7 @@
   (components
     (comp (ref U3)
       (value PWR_SPLITTER)
-      (footprint vna_footprints:FV1206)
+      (footprint vna_footprints:PS1608)
       (libsource (lib pwr_splitter) (part PWR_SPLITTER))
       (sheetpath (names /) (tstamps /))
       (tstamp 56A5DB75))
@@ -63,7 +63,8 @@
       (pins
         (pin (num 1) (name INPUT) (type input))
         (pin (num 2) (name OUTPUT) (type input))
-        (pin (num 3) (name OUTPUT) (type input))))
+        (pin (num 3) (name OUTPUT) (type input))
+        (pin (num 4) (name GND) (type input))))
     (libpart (lib mounting_box) (part mounting_box)
       (fields
         (field (name Reference) U)
@@ -78,6 +79,7 @@
   (nets
     (net (code 1) (name GND)
       (node (ref U4) (pin 2))
+      (node (ref U3) (pin 4))
       (node (ref U5) (pin 2))
       (node (ref U5) (pin 3))
       (node (ref U5) (pin 4))
@@ -89,12 +91,12 @@
       (node (ref U1) (pin 2))
       (node (ref U1) (pin 4))
       (node (ref U1) (pin 5)))
-    (net (code 2) (name "Net-(U3-Pad3)")
+    (net (code 2) (name "Net-(U3-Pad2)")
       (node (ref U5) (pin 1))
-      (node (ref U3) (pin 3)))
-    (net (code 3) (name "Net-(U3-Pad2)")
-      (node (ref U4) (pin 1))
       (node (ref U3) (pin 2)))
+    (net (code 3) (name "Net-(U3-Pad3)")
+      (node (ref U4) (pin 1))
+      (node (ref U3) (pin 3)))
     (net (code 4) (name "Net-(U1-Pad1)")
       (node (ref U3) (pin 1))
       (node (ref U1) (pin 1)))))
