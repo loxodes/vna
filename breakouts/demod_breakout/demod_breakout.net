@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/kleinjt/repos/vna/breakouts/demod_breakout/demod_breakout.sch)
-    (date "Fri 04 Mar 2016 07:00:56 PM HST")
+    (date "Fri 04 Mar 2016 07:58:53 PM HST")
     (tool "Eeschema 4.0.2-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -689,7 +689,7 @@
       (node (ref C16) (pin 1))
       (node (ref C30) (pin 1))
       (node (ref U3) (pin 3))
-      (node (ref P2) (pin 2))
+      (node (ref P2) (pin 1))
       (node (ref U4) (pin 25))
       (node (ref U4) (pin 14))
       (node (ref U4) (pin 23))
@@ -736,7 +736,7 @@
       (node (ref U7) (pin 7))
       (node (ref R2) (pin 2)))
     (net (code 21) (name "Net-(C19-Pad2)")
-      (node (ref P2) (pin 1))
+      (node (ref P2) (pin 2))
       (node (ref R2) (pin 1))
       (node (ref U7) (pin 8))
       (node (ref C20) (pin 2))
