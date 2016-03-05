@@ -1873,8 +1873,6 @@ Wire Wire Line
 	11450 5450 11500 5450
 Connection ~ 11500 5350
 Wire Wire Line
-	11250 5450 11100 5450
-Wire Wire Line
 	9450 5850 9450 5350
 Wire Wire Line
 	9600 5550 9600 5450
@@ -1964,8 +1962,6 @@ Wire Wire Line
 Wire Wire Line
 	11600 7700 11650 7700
 Connection ~ 11650 7600
-Wire Wire Line
-	11400 7700 11250 7700
 Wire Wire Line
 	9600 8100 9600 7600
 Wire Wire Line
@@ -2082,4 +2078,8 @@ Wire Wire Line
 	6000 5750 6300 5750
 Wire Wire Line
 	1900 2400 2200 2400
+Wire Wire Line
+	11250 7700 11400 7700
+Wire Wire Line
+	11100 5450 11250 5450
 $EndSCHEMATC
