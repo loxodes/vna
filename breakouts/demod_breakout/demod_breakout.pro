@@ -1,4 +1,4 @@
-update=Thu 03 Mar 2016 01:33:37 PM AKST
+update=Sat 05 Mar 2016 04:54:07 PM HST
 version=1
 last_client=kicad
 [pcbnew]
@@ -75,3 +75,4 @@ LibName43=/home/kleinjt/repos/vna/lib/tcm-63ax+
 LibName44=/home/kleinjt/repos/vna/lib/mounting_box
 LibName45=/home/kleinjt/repos/vna/lib/ltc1566-1
 LibName46=/home/kleinjt/repos/vna/lib/lt1567
+LibName47=/home/kleinjt/repos/vna/lib/cat102
