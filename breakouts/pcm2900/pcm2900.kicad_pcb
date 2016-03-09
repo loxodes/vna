@@ -2,8 +2,8 @@
 
   (general
     (links 76)
-    (no_connects 1)
-    (area 117.924999 106.924999 161.575001 131.575001)
+    (no_connects 0)
+    (area 112.672143 105 162.500001 135.000001)
     (thickness 1.6)
     (drawings 11)
     (tracks 228)
@@ -15,7 +15,7 @@
   (page A4)
   (layers
     (0 F.Cu signal)
-    (31 B.Cu signal hide)
+    (31 B.Cu signal)
     (32 B.Adhes user)
     (33 F.Adhes user)
     (34 B.Paste user)
@@ -37,7 +37,7 @@
   )
 
   (setup
-    (last_trace_width 0.4)
+    (last_trace_width 0.25)
     (user_trace_width 0.4)
     (trace_clearance 0.15)
     (zone_clearance 0.508)

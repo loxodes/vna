@@ -2,11 +2,11 @@
 
   (general
     (links 76)
-    (no_connects 2)
+    (no_connects 1)
     (area 117.924999 106.924999 161.575001 131.575001)
     (thickness 1.6)
     (drawings 11)
-    (tracks 227)
+    (tracks 228)
     (zones 0)
     (modules 33)
     (nets 33)
@@ -15,7 +15,7 @@
   (page A4)
   (layers
     (0 F.Cu signal)
-    (31 B.Cu signal)
+    (31 B.Cu signal hide)
     (32 B.Adhes user)
     (33 F.Adhes user)
     (34 B.Paste user)
@@ -1443,8 +1443,9 @@
   (segment (start 128.25 117.25) (end 122.08 117.25) (width 0.4) (layer F.Cu) (net 21))
   (segment (start 122.08 117.25) (end 122.04 117.21) (width 0.4) (layer F.Cu) (net 21))
   (segment (start 128.25 117.25) (end 128.25 119) (width 0.4) (layer F.Cu) (net 21))
+  (segment (start 128.25 127.25) (end 122.08 127.25) (width 0.4) (layer F.Cu) (net 22))
+  (segment (start 122.08 127.25) (end 122.04 127.21) (width 0.4) (layer F.Cu) (net 22))
   (segment (start 128.25 127.25) (end 128.25 125.5) (width 0.4) (layer F.Cu) (net 22))
-  (segment (start 122.04 127.21) (end 127.96 127.21) (width 0.4) (layer F.Cu) (net 22))
   (segment (start 128.21 127.21) (end 128.25 127.25) (width 0.4) (layer F.Cu) (net 22))
   (segment (start 140.2 120) (end 140.95 120) (width 0.4) (layer F.Cu) (net 23))
   (segment (start 140.95 120) (end 141.525 119.425) (width 0.4) (layer F.Cu) (net 23))
