@@ -1,4 +1,4 @@
-update=Fri 05 Feb 2016 04:41:56 PM AKST
+update=Wed Feb 24 17:04:56 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -23,8 +23,6 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
-[general]
-version=1
 [eeschema]
 version=1
 LibDir=
@@ -72,3 +70,5 @@ LibName40=/home/kleinjt/repos/vna/lib/rf_crossbar
 LibName41=/home/kleinjt/repos/vna/lib/scbd-16-63
 LibName42=/home/kleinjt/repos/vna/lib/tcm-63ax+
 LibName43=/home/kleinjt/repos/vna/lib/mounting_box
+[general]
+version=1

@@ -1,4 +1,4 @@
-update=Sat 06 Feb 2016 07:25:54 AM AKST
+update=Wed Feb 24 19:09:53 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,6 +25,16 @@ version=1
 NetIExt=net
 [general]
 version=1
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
 [eeschema]
 version=1
 LibDir=
@@ -72,3 +82,4 @@ LibName40=/home/kleinjt/repos/vna/lib/rf_crossbar
 LibName41=/home/kleinjt/repos/vna/lib/scbd-16-63
 LibName42=/home/kleinjt/repos/vna/lib/tcm-63ax+
 LibName43=/home/kleinjt/repos/vna/lib/mounting_box
+LibName44=/home/kleinjt/repos/vna/lib/74xx1g14
