@@ -6,8 +6,8 @@ EESchema-LIBRARY Version 2.3
 DEF +5V #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
 F1 "+5V" 0 140 50 H V C CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
+F2 "" 0 0 50 H V C CNN
+F3 "" 0 0 50 H V C CNN
 DRAW
 P 2 0 1 0  -30 50  0 100 N
 P 2 0 1 0  0 0  0 100 N
@@ -50,8 +50,8 @@ ENDDEF
 DEF CONN_01X08 P 0 40 Y N 1 F N
 F0 "P" 0 450 50 H V C CNN
 F1 "CONN_01X08" 100 0 50 V V C CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
+F2 "" 0 0 50 H V C CNN
+F3 "" 0 0 50 H V C CNN
 $FPLIST
  Pin_Header_Straight_1X08
  Pin_Header_Angled_1X08
@@ -101,8 +101,8 @@ ENDDEF
 DEF C_Small C 0 10 N N 1 F N
 F0 "C" 10 70 50 H V L CNN
 F1 "C_Small" 10 -80 50 H V L CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
+F2 "" 0 0 50 H V C CNN
+F3 "" 0 0 50 H V C CNN
 $FPLIST
  C?
  C_????_*
@@ -123,8 +123,8 @@ ENDDEF
 DEF GND #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
 F1 "GND" 0 -150 50 H V C CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
+F2 "" 0 0 50 H V C CNN
+F3 "" 0 0 50 H V C CNN
 DRAW
 P 6 0 1 0  0 0  0 -50  50 -50  0 -100  -50 -50  0 -50 N
 X GND 1 0 0 0 D 50 50 1 1 W N
@@ -148,8 +148,8 @@ ENDDEF
 DEF R_Small R 0 10 N N 1 F N
 F0 "R" 30 20 50 H V L CNN
 F1 "R_Small" 30 -40 50 H V L CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
+F2 "" 0 0 50 H V C CNN
+F3 "" 0 0 50 H V C CNN
 $FPLIST
  Resistor_*
  R_*
