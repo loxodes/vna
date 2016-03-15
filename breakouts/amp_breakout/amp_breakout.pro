@@ -1,4 +1,4 @@
-update=Sat 06 Feb 2016 07:21:06 AM AKST
+update=Sat Mar 12 13:47:57 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -72,3 +72,4 @@ LibName40=/home/kleinjt/repos/vna/lib/rf_crossbar
 LibName41=/home/kleinjt/repos/vna/lib/scbd-16-63
 LibName42=/home/kleinjt/repos/vna/lib/tcm-63ax+
 LibName43=/home/kleinjt/repos/vna/lib/mounting_box
+LibName44=/home/kleinjt/repos/vna/lib/hmc311sc70

@@ -42,6 +42,7 @@ LIBS:rf_crossbar
 LIBS:scbd-16-63
 LIBS:tcm-63ax+
 LIBS:mounting_box
+LIBS:hmc311sc70
 LIBS:amp_breakout-cache
 EELAYER 25 0
 EELAYER END
@@ -594,4 +595,6 @@ F 3 "" H 3150 1950 60  0000 C CNN
 	1    3150 1950
 	1    0    0    -1  
 $EndComp
+Text Notes 3800 4600 0    60   ~ 0
+or, use HMC311
 $EndSCHEMATC
