@@ -69,15 +69,50 @@
 #define ON 1
 #define OFF 0
 
+// command structure
+// [region][index][command]
+#define SWITCH_CMD 'w'
+#define FILT_CMD 'f'
+#define POW_CMD 'p'
+#define SYNTH_CMD 's'
+#define DET_CMD 'd'
+#define ATT_CMD 'a'
+#define IQ_CMD 'q'
+#define CMD_ERR 'E'
+
 const uint8_t LMX_LE = 18;
 const uint8_t LMX_CE = 17;
 const uint8_t LMX_AUX = 19;
+const uint8_t LMX_LOCK0 = 8;
+const uint8_t LMX_LOCK1 = 19;
+
 const uint16_t MIN_N = 16;
 const uint32_t FRAC_DENOM = 200000; 
 const float PFD = 100e6;
 const float F_VCO_MIN = 3.55e9;
 const float F_VCO_MAX = 7.1e9;
 const uint32_t PRE_N = 2;
+
+const uint8_t DET_0 = 28;
+
+const uint8_t SW_0 = 28;
+const uint8_t SW_1 = 29;
+const uint8_t SW_2 = 30;
+const uint8_t SW_3 = 13;
+const uint8_t SW_4 = 12;
+const uint8_t SW_5 = 11;
+
+const uint8_t I_0 = 23;
+const uint8_t Q_0 = 24;
+const uint8_t I_1 = 25;
+const uint8_t Q_1 = 26;
+
+const uint8_t FILT0_A = 31;
+const uint8_t FILT0_B = 32;
+const uint8_t FILT0_C = 33;
+const uint8_t FILT1_A = 34;
+const uint8_t FILT1_B = 35;
+const uint8_t FILT1_C = 36;
 
 uint16_t spi_read_reg(uint8_t reg)
 {
@@ -111,7 +146,22 @@ void spi_set_reg(uint8_t reg, uint32_t d)
     Serial.println(d, HEX);
     delay(1);
 }
+void gpio_init()
+{
+//    pinMode(SW_0, OUTPUT); (use SW_0 as DET)
+    pinMode(SW_1, OUTPUT);
+    pinMode(SW_2, OUTPUT);
+    pinMode(SW_3, OUTPUT);
+    pinMode(SW_4, OUTPUT);
+    pinMode(SW_5, OUTPUT);
 
+    pinMode(FILT0_A, OUTPUT);
+    pinMode(FILT0_B, OUTPUT);
+    pinMode(FILT0_C, OUTPUT);
+    pinMode(FILT1_A, OUTPUT);
+    pinMode(FILT1_B, OUTPUT);
+    pinMode(FILT1_C, OUTPUT); 
+}
 void lmx2592_init()
 {
     pinMode(LMX_LE, OUTPUT);
@@ -286,9 +336,89 @@ void setup()
     lmx2592_set_freq(3.450e9);
 }
 
+
 void loop()
 {
-    for(;;) {
-        ;
+  const uint8_t switches[6] =   {SW_0, SW_1, SW_2, SW_3, SW_4, SW_5};
+  const uint8_t sw_state[2] =   {LOW, HIGH};
+  uint8_t c_temp;
+  float f_temp;
+  uint16_t adc1, adc2;
+  
+  if (Serial.available() > 2) {
+    uint8_t cmd = Serial.read();
+    uint8_t idx = Serial.read();
+    delay(50); // TODO: wait for an appropriate number of bytes for each command
+    
+    switch (cmd) {
+      case SWITCH_CMD:
+        c_temp = Serial.read();
+        digitalWrite(switches[idx], sw_state[c_temp]);
+        Serial.write(cmd);
+        break;
+        
+      case FILT_CMD:
+        c_temp = Serial.read();
+        Serial.write(cmd);
+        if(idx == CHANNELA) {
+          digitalWrite(FILT0_A, (c_temp & 0x01 > 0));
+          digitalWrite(FILT0_B, (c_temp & 0x02 > 0));
+          digitalWrite(FILT0_C, (c_temp & 0x04 > 0));
+        }
+        else if(idx == CHANNELB) {
+          digitalWrite(FILT1_A, (c_temp & 0x01 > 0));
+          digitalWrite(FILT1_B, (c_temp & 0x02 > 0));
+          digitalWrite(FILT1_C, (c_temp & 0x04 > 0));
+        }
+        break;
+        
+      case POW_CMD:
+        c_temp = Serial.read();
+        lmx2592_chan_power(idx, c_temp);
+        break;
+        
+      case SYNTH_CMD:
+        // TODO: write more commands? set power, etc..
+        f_temp = Serial.parseFloat();
+        lmx2592_set_freq(f_temp);
+        Serial.write(cmd);
+        break;
+        
+      case ATT_CMD:
+        c_temp = Serial.read();
+        // TODO set attenuator pins..
+        Serial.write(CMD_ERR);
+        break;
+        
+      case IQ_CMD:
+        if(idx == CHANNELA) {
+          adc1 = analogRead(I_0);
+          adc2 = analogRead(Q_0);
+        }
+        else if(idx == CHANNELB) {
+          adc1 = analogRead(I_1);
+          adc2 = analogRead(Q_1);
+        }
+        else {
+          adc1 = 0;
+          adc2 = 0;
+        }
+        Serial.write(adc1);
+        Serial.write(adc2);
+        Serial.write(cmd);
+        break;
+                                
+      case DET_CMD:
+        adc1 = analogRead(DET_0);
+        Serial.write(adc1);
+        Serial.write(cmd);
+        break;
+        
+      default:
+        Serial.write(CMD_ERR);
+        break;
     }
+    
+    Serial.write('\n');    
+  }
 }
