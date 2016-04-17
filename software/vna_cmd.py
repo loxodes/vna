@@ -1,8 +1,9 @@
 import serial
 import cmd
-import np
+import numpy as np
+import pdb
 
-VNAPORT = '/dev/ttyUSB0'
+VNAPORT = '/dev/ttyACM1'
 
 SWITCH_CMD = np.uint8(ord('w'))
 FILT_CMD = np.uint8(ord('f'))
@@ -14,9 +15,10 @@ IQ_CMD = np.uint8(ord('q'))
 CMD_ERR = np.uint8(ord('E'))
 
 def ser_cmd(port, values):
+    port.reset_input_buffer()
     args_str = ''.join([a.tobytes() for a in values])
-    ser.write(args_str)
-    return ser.readline()
+    port.write(args_str)
+    return port.readline()
 
 class vna(cmd.Cmd):
     def preloop(self):
@@ -27,41 +29,44 @@ class vna(cmd.Cmd):
         '''att [0/1] [value]'''
         l = line.split()
         args = [ATT_CMD, np.uint8(l[0]), np.uint8(l[1])]
-        ser_cmd(self.ser, args)
-
+        print ser_cmd(self.ser, args)
+    
     def do_freq(self, line):
         '''freq [0/1] [value]'''
         l = line.split()
-        self.freq = np.float32(l[1])
-        args = [FREQ_CMD, np.uint8(l[0]), self.freq]
-        ser_cmd(self.ser, args)
+        self.freq = int(float(l[1]))
+        strfreq = str(self.freq) 
+        args = [SYNTH_CMD, np.uint8(l[0])]
+        args_str = ''.join([a.tobytes() for a in args]) + strfreq
+        print('sending: {}'.format(args_str))
+        self.ser.write(args_str)
+        print self.ser.readline()
 
     def do_sw(self, line):
         '''sw [1..6] [0/1]'''
         l = line.split()
         args = [SWITCH_CMD, np.uint8(l[0]), np.uint8(l[1])]
-        ser_cmd(self.ser, args)
+        print ser_cmd(self.ser, args)
 
     def do_filt(self, line):
         '''filt [0/1] [1..8]'''
         l = line.split()
         args = [FILT_CMD, np.uint8(l[0]), np.uint8(l[1])]
-        ser_cmd(self.ser, args)
+        print ser_cmd(self.ser, args)
 
     def do_pow(self, line):
         '''pow [0/1] [0..63]'''
         l = line.split()
         args = [POW_CMD, np.uint8(l[0]), np.uint8(l[1])]
-        ser_cmd(self.ser, args)
+        print ser_cmd(self.ser, args)
 
     def do_iq(self, line):
         '''iq'''
-        iq = ser_cmd(self.ser, [IQ_CMD])
+        print ser_cmd(self.ser, [IQ_CMD])
 
     def do_det(self, line):
         '''det'''
-        det = ser_cmd(self.ser, [DET_CMD])
-
+        print ser_cmd(self.ser, [DET_CMD])
+    
 if __name__ == '__main__':
     vna().cmdloop()
-

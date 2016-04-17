@@ -34,6 +34,7 @@
 #define REG46_OUTA_PD BIT6
 #define REG46_OUTB_PD BIT7
 #define REG46_OUTA_POW BIT8
+#define REG30_VCO_2X_EN BIT0
 
 #define REG38_PLL_N 1
 #define REG39_PFD_DLY_2 BIT9
@@ -140,10 +141,6 @@ void spi_set_reg(uint8_t reg, uint32_t d)
     SPI.transfer((d >> 8) & 0xFF);
     SPI.transfer((d >> 0) & 0xFF);
     digitalWrite(LMX_LE, HIGH);
-    Serial.print("register:");
-    Serial.print(reg);
-    Serial.print(" value: ");
-    Serial.println(d, HEX);
     delay(1);
 }
 void gpio_init()
@@ -240,18 +237,10 @@ void lmx2592_set_freq(float f)
     const uint32_t div3_options[N_DIV_RATIOS] = {0, 0, 0, 0, 0, 1, 1,  4,  8};    
     if(f < F_VCO_MIN) {
         for(div_i = 0; div_i < N_DIV_RATIOS; div_i++) {
-            Serial.print("i: ");\
-            Serial.println(div_i);\
             if(f > F_VCO_MIN / div_ratios[div_i]) {
                 div1 = div1_options[div_i];
                 div2 = div2_options[div_i];
                 div3 = div3_options[div_i];
-                Serial.print("div1: ");\
-                Serial.print(div1);
-                Serial.print(" div2: ");
-                Serial.print(div2);
-                Serial.print(" div3: ");
-                Serial.println(div3);
                 break;
             }
         }
@@ -260,9 +249,8 @@ void lmx2592_set_freq(float f)
         frac = calc_frac(f, n, n_step, frac_step, div_ratios[div_i]);
     }
     else if (f > F_VCO_MAX) {
-        // TODO: floatr is currently unsupported
-        n = MIN_N;
-        frac = 0;	
+        n = calc_n(f/2, n_step, 1);
+        frac = calc_frac(f/2, n, n_step, frac_step, 1);	
     }
     else {
         n = calc_n(f, n_step, 1);
@@ -278,9 +266,16 @@ void lmx2592_set_freq(float f)
     
     spi_set_reg(44, frac_msw);
     spi_set_reg(45, frac_lsw);
-    // disable dividers if we're using VCO output directly	
-    if(f > F_VCO_MIN) {
-        Serial.println("using vco directly!");
+
+    if(f > F_VCO_MAX) {
+        spi_set_reg(30, REG30_VCO_2X_EN);        
+    } 
+    else {
+        spi_set_reg(30, 0);
+    }
+    
+    // disable dividers if we're using VCO output directly
+   if(f > F_VCO_MIN) {
         spi_set_reg(34, 0);
         spi_set_reg(35, 0);
         spi_set_reg(36, 0);
@@ -290,7 +285,6 @@ void lmx2592_set_freq(float f)
     else {
         uint32_t reg35 = REG35_CHDIV_SEG1_EN;
         uint32_t reg36 = REG36_CHDIV_DISTB_EN;
-        Serial.println("using output dividers!");
 
         if(div3 != 0) {
             reg35 |= REG35_CHDIV_SEG2_EN | REG35_CHDIV_SEG3_EN;
@@ -305,22 +299,16 @@ void lmx2592_set_freq(float f)
             reg35 |= div1_options[div_i] << REG35_CHDIV_SEG1;
             reg36 |= REG36_CHDIV_SEG_SEL_12;
         } else {
-            Serial.print("div1: ");
-            Serial.println(div1_options[div_i]);
             reg35 |= 0;//div1_options[div_i] << REG35_CHDIV_SEG1;
             reg36 |= REG36_CHDIV_SEG_SEL_1;
         }
-
+        
         spi_set_reg(34, REG34_CHDIV_EN);
         spi_set_reg(35, reg35);
         spi_set_reg(36, reg36);
         spi_set_reg(48, REG48_OUTB_MUX_DIV);
 
     }
-        Serial.print("n: ");
-        Serial.println(n);
-        Serial.print("frac: ");
-        Serial.println(frac);    
     // recalibrate vco
     spi_set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL);
 }
@@ -328,14 +316,18 @@ void lmx2592_set_freq(float f)
 void setup()
 {
     Serial.begin(9600);
-    Serial.println("starting!");
     SPI.begin();
     lmx2592_init();
     lmx2592_chan_power(CHANNELB, 15);
     lmx2592_set_denom(FRAC_DENOM);
-    lmx2592_set_freq(3.450e9);
+    lmx2592_set_freq(10.0e9);
 }
 
+uint8_t get_char()
+{
+  while(Serial.available() == 0);
+  return Serial.read();
+}
 
 void loop()
 {
@@ -345,80 +337,84 @@ void loop()
   float f_temp;
   uint16_t adc1, adc2;
   
-  if (Serial.available() > 2) {
-    uint8_t cmd = Serial.read();
-    uint8_t idx = Serial.read();
-    delay(50); // TODO: wait for an appropriate number of bytes for each command
+  uint8_t cmd = get_char();
+  uint8_t idx = get_char();
+  Serial.print("idx: ");
+  Serial.print(idx);
+  Serial.print(" ");
+  delay(50); // TODO: wait for an appropriate number of bytes for each command
     
-    switch (cmd) {
-      case SWITCH_CMD:
-        c_temp = Serial.read();
-        digitalWrite(switches[idx], sw_state[c_temp]);
-        Serial.write(cmd);
-        break;
-        
-      case FILT_CMD:
-        c_temp = Serial.read();
-        Serial.write(cmd);
-        if(idx == CHANNELA) {
-          digitalWrite(FILT0_A, (c_temp & 0x01 > 0));
-          digitalWrite(FILT0_B, (c_temp & 0x02 > 0));
-          digitalWrite(FILT0_C, (c_temp & 0x04 > 0));
-        }
-        else if(idx == CHANNELB) {
-          digitalWrite(FILT1_A, (c_temp & 0x01 > 0));
-          digitalWrite(FILT1_B, (c_temp & 0x02 > 0));
-          digitalWrite(FILT1_C, (c_temp & 0x04 > 0));
-        }
-        break;
-        
-      case POW_CMD:
-        c_temp = Serial.read();
-        lmx2592_chan_power(idx, c_temp);
-        break;
-        
-      case SYNTH_CMD:
-        // TODO: write more commands? set power, etc..
-        f_temp = Serial.parseFloat();
-        lmx2592_set_freq(f_temp);
-        Serial.write(cmd);
-        break;
-        
-      case ATT_CMD:
-        c_temp = Serial.read();
-        // TODO set attenuator pins..
-        Serial.write(CMD_ERR);
-        break;
-        
-      case IQ_CMD:
-        if(idx == CHANNELA) {
-          adc1 = analogRead(I_0);
-          adc2 = analogRead(Q_0);
-        }
-        else if(idx == CHANNELB) {
-          adc1 = analogRead(I_1);
-          adc2 = analogRead(Q_1);
-        }
-        else {
-          adc1 = 0;
-          adc2 = 0;
-        }
-        Serial.write(adc1);
-        Serial.write(adc2);
-        Serial.write(cmd);
-        break;
-                                
-      case DET_CMD:
-        adc1 = analogRead(DET_0);
-        Serial.write(adc1);
-        Serial.write(cmd);
-        break;
-        
-      default:
-        Serial.write(CMD_ERR);
-        break;
-    }
-    
-    Serial.write('\n');    
+  switch (cmd) {
+    case SWITCH_CMD:
+      c_temp = get_char();
+      digitalWrite(switches[idx], sw_state[c_temp]);
+      break;
+      
+    case FILT_CMD:
+      c_temp = get_char();
+      if(idx == CHANNELA) {
+        digitalWrite(FILT0_A, (c_temp & 0x01 > 0));
+        digitalWrite(FILT0_B, (c_temp & 0x02 > 0));
+        digitalWrite(FILT0_C, (c_temp & 0x04 > 0));
+      }
+      else if(idx == CHANNELB) {
+        digitalWrite(FILT1_A, (c_temp & 0x01 > 0));
+        digitalWrite(FILT1_B, (c_temp & 0x02 > 0));
+        digitalWrite(FILT1_C, (c_temp & 0x04 > 0));
+      }
+      break;
+      
+    case POW_CMD:
+      c_temp = get_char();
+      lmx2592_chan_power(idx, c_temp);
+
+      break;
+      
+    case SYNTH_CMD:
+      // TODO: write more commands? set power, etc..
+      while(Serial.available() == 0);
+      f_temp = Serial.parseFloat();
+
+      Serial.print("freq: ");
+      Serial.print(f_temp);
+      Serial.print(" ");
+      lmx2592_set_freq(f_temp);
+      break;
+      
+    case ATT_CMD:
+      c_temp = get_char();
+      // TODO set attenuator pins..
+      break;
+      
+    case IQ_CMD:
+      if(idx == CHANNELA) {
+        adc1 = analogRead(I_0);
+        adc2 = analogRead(Q_0);
+      }
+      else if(idx == CHANNELB) {
+        adc1 = analogRead(I_1);
+        adc2 = analogRead(Q_1);
+      }
+      else {
+        adc1 = 0;
+        adc2 = 0;
+      }
+      Serial.write(adc1);
+      Serial.write(adc2);
+      break;
+                              
+    case DET_CMD:
+      adc1 = analogRead(DET_0);
+      Serial.write(adc1);
+      break;
+      
+    default:
+      Serial.print(" unrecognized command ");
+      Serial.write(CMD_ERR);
+      break;
   }
+  
+  Serial.print(cmd);
+  Serial.println(" - finished command");
+ 
 }
