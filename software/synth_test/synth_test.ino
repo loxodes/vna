@@ -115,6 +115,15 @@ const uint8_t FILT1_A = 34;
 const uint8_t FILT1_B = 35;
 const uint8_t FILT1_C = 36;
 
+const uint8_t ATT_0 = 57;
+const uint8_t ATT_1 = 58;
+const uint8_t ATT_2 = 59;
+const uint8_t ATT_3 = 60;
+const uint8_t ATT_4 = 61;
+const uint8_t ATT_5 = 62;
+const uint8_t ATT_6 = 63;
+
+
 uint16_t spi_read_reg(uint8_t reg)
 {
   
@@ -157,7 +166,14 @@ void gpio_init()
     pinMode(FILT0_C, OUTPUT);
     pinMode(FILT1_A, OUTPUT);
     pinMode(FILT1_B, OUTPUT);
-    pinMode(FILT1_C, OUTPUT); 
+    pinMode(FILT1_C, OUTPUT);
+    
+    pinMode(ATT_0, OUTPUT);
+    pinMode(ATT_1, OUTPUT);
+    pinMode(ATT_2, OUTPUT);
+    pinMode(ATT_3, OUTPUT);
+    pinMode(ATT_4, OUTPUT);
+    pinMode(ATT_5, OUTPUT);   
 }
 void lmx2592_init()
 {
@@ -233,8 +249,8 @@ void lmx2592_set_freq(float f)
     const uint16_t N_DIV_RATIOS = 11;	
     const uint32_t div_ratios[N_DIV_RATIOS] =   {2, 4, 8, 12,16,24,48,96, 128};
     const uint32_t div1_options[N_DIV_RATIOS] = {0, 0, 0, 0, 0, 0, 0,  0,  0}; // for some reason, div3 on seg1 doesn't work..
-    const uint32_t div2_options[N_DIV_RATIOS] = {0, 1, 2, 4, 8, 4, 8,  8,  8};
-    const uint32_t div3_options[N_DIV_RATIOS] = {0, 0, 0, 0, 0, 1, 1,  4,  8};    
+    const uint32_t div2_options[N_DIV_RATIOS] = {0, 1, 2, 4, 8, 4, 4,  8,  8};
+    const uint32_t div3_options[N_DIV_RATIOS] = {0, 0, 0, 0, 0, 1, 2,  4,  8};    
     if(f < F_VCO_MIN) {
         for(div_i = 0; div_i < N_DIV_RATIOS; div_i++) {
             if(f > F_VCO_MIN / div_ratios[div_i]) {
@@ -320,7 +336,7 @@ void setup()
     lmx2592_init();
     lmx2592_chan_power(CHANNELB, 15);
     lmx2592_set_denom(FRAC_DENOM);
-    lmx2592_set_freq(10.0e9);
+    lmx2592_set_freq(900e6);
 }
 
 uint8_t get_char()
@@ -348,6 +364,11 @@ void loop()
     case SWITCH_CMD:
       c_temp = get_char();
       digitalWrite(switches[idx], sw_state[c_temp]);
+      Serial.print("state: ");
+      Serial.print(c_temp);      
+      Serial.print("idx: ");
+      Serial.print(idx);
+      Serial.print(" ");   
       break;
       
     case FILT_CMD:
@@ -367,22 +388,39 @@ void loop()
     case POW_CMD:
       c_temp = get_char();
       lmx2592_chan_power(idx, c_temp);
-
+      Serial.print("pow: ");
+      Serial.print(c_temp);      
+      Serial.print("chan: ");
+      Serial.print(idx);
+      Serial.print(" ");   
       break;
       
     case SYNTH_CMD:
-      // TODO: write more commands? set power, etc..
       while(Serial.available() == 0);
       f_temp = Serial.parseFloat();
 
       Serial.print("freq: ");
       Serial.print(f_temp);
       Serial.print(" ");
+      f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..    
       lmx2592_set_freq(f_temp);
       break;
       
     case ATT_CMD:
       c_temp = get_char();
+      
+      digitalWrite(ATT_0, c_temp & BIT0 ? HIGH : LOW);
+      digitalWrite(ATT_1, c_temp & BIT1 ? HIGH : LOW);
+      digitalWrite(ATT_2, c_temp & BIT2 ? HIGH : LOW);
+      digitalWrite(ATT_3, c_temp & BIT3 ? HIGH : LOW);
+      digitalWrite(ATT_4, c_temp & BIT4 ? HIGH : LOW);
+      digitalWrite(ATT_5, c_temp & BIT5 ? HIGH : LOW);
+      Serial.print("att: ");
+      Serial.print(c_temp);      
+      Serial.print("chan: ");
+      Serial.print(idx);
+      Serial.print(" ");       
+
       // TODO set attenuator pins..
       break;
       
@@ -405,7 +443,8 @@ void loop()
                               
     case DET_CMD:
       adc1 = analogRead(DET_0);
-      Serial.write(adc1);
+      Serial.print("det: ");
+      Serial.print(adc1); 
       break;
       
     default:

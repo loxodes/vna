@@ -3,7 +3,7 @@ import cmd
 import numpy as np
 import pdb
 
-VNAPORT = '/dev/ttyACM1'
+VNAPORT = '/dev/ttyACM0'
 
 SWITCH_CMD = np.uint8(ord('w'))
 FILT_CMD = np.uint8(ord('f'))
@@ -35,7 +35,7 @@ class vna(cmd.Cmd):
         '''freq [0/1] [value]'''
         l = line.split()
         self.freq = int(float(l[1]))
-        strfreq = str(self.freq) 
+        strfreq = str(self.freq/10) 
         args = [SYNTH_CMD, np.uint8(l[0])]
         args_str = ''.join([a.tobytes() for a in args]) + strfreq
         print('sending: {}'.format(args_str))
