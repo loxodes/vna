@@ -11,7 +11,7 @@ Run `software\vna_cmd.py` for a terminal to test
 ## Hardware Design
 ![picture of modules](./doc/modules.jpg)
 I'm still at the stage of testing individual modules (demodulators, synthesizers, filter banks, amplifiers, switches..).
-See `hardware\breakouts` for various modules developed for the network analyzer.
+See `breakouts` for various modules developed for the network analyzer.
 
 | Breakout Name | Description   | Status |
 | ------------- | ------------- | ------ |
