@@ -9,7 +9,7 @@ Load `software\synth_test\synth_test.ino` on a MSP432 Lauchpad.
 Run `software\vna_cmd.py` for a terminal to test  
 
 ## Hardware Design
-![GitHub Logo](/doc/modules.jpg)
+![picture of modules](./doc/modules.jpg)
 I'm still at the stage of testing individual modules (demodulators, synthesizers, filter banks, amplifiers, switches..).
 See `hardware\breakouts` for various modules developed for the network analyzer.
 
