@@ -2,6 +2,8 @@
 I'm developing a proof of concept two port microwave vector network analyzer. 
 I don't have a working prototype yet, I'm still developing and testing individual components of the design.
 
+![block diagram](./doc/block_diagram.png)
+
 ## Usage
 This project is still under development, y'all probably don't want to try reproducing it yet.
 
@@ -25,6 +27,7 @@ See `breakouts` for various modules developed for the network analyzer.
 | attenuator | variable attenuator | working! |
 | amp | broadband amplifier | partially working, resonance at 4 GHz.. |
 
+All 4 layer PCBs are routed assuming OSH Park's 4 layer stackup (http://docs.oshpark.com/services/four-layer/) with FR-408 and 6.7 mil prepreg height. 
 
 ## Software Design
 See the `software` directory for scraps of software written for testing VNA modules. 
