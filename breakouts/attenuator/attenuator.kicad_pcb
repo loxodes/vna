@@ -2,7 +2,7 @@
 
   (general
     (links 82)
-    (no_connects 34)
+    (no_connects 0)
     (area 121.814999 85.883 175.365001 123.575)
     (thickness 1.6)
     (drawings 12)
@@ -1395,7 +1395,7 @@
   (gr_text "20 dBm\nmax" (at 128.016 116.078 90) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.25)) (justify left))
   )
-  (gr_circle (center 132.334 101.854) (end 132.08 101.854) (layer F.SilkS) (width 0.2))
+  (gr_circle (center 128.905 107.315) (end 128.651 107.315) (layer F.SilkS) (width 0.2))
   (gr_circle (center 143.764 95.504) (end 143.51 95.504) (layer F.SilkS) (width 0.2))
   (gr_text "variable attenuator r0" (at 150.622 93.98) (layer F.SilkS)
     (effects (font (size 1.1 1.1) (thickness 0.275)))
