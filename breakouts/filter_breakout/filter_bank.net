@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/kleinjt/repos/vna/breakouts/filter_breakout/filter_bank.sch)
-    (date "Mon Feb 29 20:32:53 2016")
+    (date "Mon Apr 18 20:56:50 2016")
     (tool "Eeschema 4.0.2-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -29,7 +29,7 @@
       (tstamp 56AEE393))
     (comp (ref U1)
       (value CONN_SMA)
-      (footprint vna_footprints:732512200_SMA)
+      (footprint vna_footprints:732511150_sma)
       (libsource (lib conn_sma) (part CONN_SMA))
       (sheetpath (names /) (tstamps /))
       (tstamp 56AF2210))
@@ -179,7 +179,7 @@
       (tstamp 56AF4C58))
     (comp (ref U4)
       (value CONN_SMA)
-      (footprint vna_footprints:732512200_SMA)
+      (footprint vna_footprints:732511150_sma)
       (libsource (lib conn_sma) (part CONN_SMA))
       (sheetpath (names /) (tstamps /))
       (tstamp 56AF4C5E))
@@ -333,8 +333,6 @@
   (libraries
     (library (logical device)
       (uri /usr/share/kicad/library/device.lib))
-    (library (logical conn)
-      (uri /usr/share/kicad/library/conn.lib))
     (library (logical conn_sma)
       (uri /home/kleinjt/repos/vna/lib/conn_sma.lib))
     (library (logical hmc321)
@@ -342,7 +340,9 @@
     (library (logical mounting_box)
       (uri /home/kleinjt/repos/vna/lib/mounting_box.lib))
     (library (logical 74xx1g14)
-      (uri /home/kleinjt/repos/vna/lib/74xx1g14.lib)))
+      (uri /home/kleinjt/repos/vna/lib/74xx1g14.lib))
+    (library (logical conn)
+      (uri /usr/share/kicad/library/conn.lib)))
   (nets
     (net (code 1) (name GND)
       (node (ref U8) (pin 3))
