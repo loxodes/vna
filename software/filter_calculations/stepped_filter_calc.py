@@ -4,26 +4,12 @@
 # line length calculation in degrees works,
 # physical line length calculations need improvement..
 # TODO: automatically generate openEMS simulation?
+# TODO: automatically generate KiCAD footprint(s)?
+# TODO: calculate filter losses
+# TODO: plot filter frequency response
 
 import numpy as np
 import pdb
-
-fcutoff = 2.5e9 # hz
-z0 = 50 # ohms
-c = 3e8
-er = 4.2 #3.66$a
-d = .158e-2 #mil_to_meter(6.7) # meters substrate thickness
-
-fstop = 4e9
-stopatt = 20 # dB
-
-tand = .02
-#ch = mil_to_meter(.5) # mil copper thickness
-
-fnorm = fstop / fcutoff - 1
-
-zmin = 20 # 
-zmax = 120 # 80
 
 # calculate effective dielectric constant of microstrip
 def e_effective(er, w, d):
@@ -31,8 +17,8 @@ def e_effective(er, w, d):
     print('e effective: {}'.format(ee))
     return ee
 
-# should be 11.3 mm
 # pozar (3.197)
+# numerical approximation to calculate microstrip width
 def calc_w(z0, d, er):
     A = (z0 / 60) * np.sqrt(.5 * (er + 1)) + ((er - 1) / (er + 1)) * (.23 + .11 / er)
     B = 377 * np.pi / (2 * z0 * np.sqrt(er))
@@ -62,6 +48,10 @@ def calc_len(z0, d, er, deg):
 def mil_to_meter(h):
     return ((h / 1000.) * 2.54) / 100.
 
+# convert mm to thousands of an inch..
+def m_to_mil(w):
+    return ((w * 100) / 2.54) * 1000
+
 # table 8.3 from pozar, page 404
 N_maxflat = \
    [[1.0000], \
@@ -78,19 +68,49 @@ N_maxflat = \
 
 N = 6 # TODO: determine filter order
 
+
 if __name__ == '__main__':
+    fcutoff = 2.5e9 # hz
+    z0 = 50 # ohms
+    c = 3e8
+    er = 4.2 #3.66$a
+    d = .158e-2 #mil_to_meter(6.7) # meters substrate thickness
+
+    fstop = 4e9
+    stopatt = 20 # dB
+
+    tand = .02
+    #ch = mil_to_meter(.5) # mil copper thickness 
+
+    fnorm = fstop / fcutoff - 1
+
+    zmin = 20 # 
+    zmax = 120 # 80
+
+    l_seg = np.zeros(N)
+    w_seg = np.zeros(N)
+
     for segment in range(N):
         bl = 0
         l = 0
+        w = 0
         if segment % 2 == 0:
             bl = N_maxflat[N][segment] * zmin / z0
             l = calc_len(zmin, d, er, bl)
+            w = calc_w(zmin, d, er) 
         else:
             bl = N_maxflat[N][segment] * z0 / zmax
             l = calc_len(zmax, d, er, bl)
+            w = calc_w(zmax, d, er) 
        
         bl_deg = bl * 180.0 / np.pi
-
+        l_seg[segment] = l
+        w_seg[segment] = w
 
         print('{}, \t norm: {} \t bl (deg): {} \t len {} mm'.format(segment, N_maxflat[N][segment], bl_deg, l))
+    
+
+    print('total length: {} mm'.format(sum(l_seg)))
+    widths_mil = [m_to_mil(w) for w in w_seg]
+    print('microstrip widths: {}'.format(widths_mil))
 
