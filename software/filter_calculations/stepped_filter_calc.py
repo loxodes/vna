@@ -75,20 +75,9 @@ def e_effective(er, w, d):
     return ee
 
 # numerical approximation to calculate microstrip width
-# TODO: fix this.. not matching simulations at high impedances
-def calc_w(z0, d, er):
-    A = (z0 / 60) * np.sqrt(.5 * (er + 1)) + ((er - 1) / (er + 1)) * (.23 + .11 / er)
-    B = 377 * np.pi / (2 * z0 * np.sqrt(er))
-
-   # w1 = d * (8 * np.exp(A)) / (np.exp(2 * A) - 2)
-    w2 = d * (2 / np.pi) * (B - 1 - np.log(2 * B - 1) + ((er - 1) / (2 * er)) * (np.log(B - 1) + .39 - .61 / er))
-    
-   # print('w1: {}, w2: {}, d: {}, er: {}, z0: {}'.format(w1, w2, d, er, z0))
-   # if A >= 1.52:
-   #     return w1
-   # else:
-    return w2
-    # return width in meters
+# Design Guide for Electronic Packaging Utilizing High-Speed Techniques (4th Working Draft, IPC-2251, February 2001).
+def calc_w(z0, d, er, t = .0000178):
+    return (5.98 * d / (np.exp(z0 * np.sqrt(er + 1.41) / 87)) - t) / .8
 
 # calculate the physical length of a microstrip line
 # given impedance and dielectric constant
