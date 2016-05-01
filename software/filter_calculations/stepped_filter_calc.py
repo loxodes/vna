@@ -53,13 +53,11 @@ def generate_stepped_filter_kicad_poly(l_seg, w_seg):
 
         y_coord = -w_seg[segment-1] / 2
         poly_points.append((x_coord, y_coord))
-        pdb.set_trace()
     
     # add final point to close the polygon
     poly_points.append((0, -w_seg[0]/2))
     poly_points.append((0, w_seg[0]/2))
     
-    pdb.set_trace()
     # create polygon file
     poly_file = 'Unit=MM\n'
     poly_file += 'XScale={}\n'.format(total_length)
@@ -76,19 +74,20 @@ def e_effective(er, w, d):
     ee = .5 *((er + 1) + (er - 1) / np.sqrt(1 + 12 * d / w))
     return ee
 
-# pozar (3.197)
 # numerical approximation to calculate microstrip width
+# TODO: fix this.. not matching simulations at high impedances
 def calc_w(z0, d, er):
     A = (z0 / 60) * np.sqrt(.5 * (er + 1)) + ((er - 1) / (er + 1)) * (.23 + .11 / er)
     B = 377 * np.pi / (2 * z0 * np.sqrt(er))
 
-    w1 = d * (8 * np.exp(A)) / (np.exp(2 * A) - 2)
+   # w1 = d * (8 * np.exp(A)) / (np.exp(2 * A) - 2)
     w2 = d * (2 / np.pi) * (B - 1 - np.log(2 * B - 1) + ((er - 1) / (2 * er)) * (np.log(B - 1) + .39 - .61 / er))
     
-    if w1 / d < 2 and w1 > 0:
-        return w1
-    else:
-        return w2
+   # print('w1: {}, w2: {}, d: {}, er: {}, z0: {}'.format(w1, w2, d, er, z0))
+   # if A >= 1.52:
+   #     return w1
+   # else:
+    return w2
     # return width in meters
 
 # calculate the physical length of a microstrip line
@@ -140,7 +139,7 @@ if __name__ == '__main__':
     d = mil_to_meter(6.7) #.158e-2 #mil_to_meter(6.7) # meters substrate thickness
     tand = .0125 # fr408
     zmin = 15 # TODO: determine these from minimum and maximum trace widths
-    zmax = 120 # 
+    zmax = 80 # 
 
     fnorm = fstop / fcutoff - 1
     l_seg = np.zeros(N)
