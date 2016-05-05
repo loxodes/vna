@@ -18,15 +18,24 @@ See `breakouts` for various modules developed for the network analyzer.
 | Breakout Name | Description   | Status |
 | ------------- | ------------- | ------ |
 | synth | 20 MHz to 10 GHz synthesizer | working! |
-| switch | SPDT RF switch | untested |
-| splitter | 2 way splitter | untested |
-| powerdet | log power detector | untested |
-| pcm2900 | usb sound card daq | untested |
-| filter breakout | filter bank | untested |
+| switch | SPDT RF switch | sma footprint is terrible |
+| splitter | 2 way splitter | sma footprint is terrible |
+| powerdet | log power detector | sma footprint is terrible |
+| filter breakout | filter bank | sma footprint is terrible |
 | boosterpack | breakout board for booster pack | working! |
 | attenuator | variable attenuator | working! |
 | amp | broadband amplifier | partially working, resonance at 4 GHz.. |
-| demod | quadrature demodulator | working? |
+| demod | quadrature demodulator | working up to output buffer.. |
+
+The edge launch SMA connector footprint on some boards results in high reflection above 2 GHz due to the excess pad width relative to 50 ohm microstrip.. 
+
+Breakout boards are combined into modules.. I'm currently working on a synthesizer module.
+| Module Name | Description   | Status |
+| ----------- | ------------- | ------ |
+| Frequency Synth | Frequency synth with filtered harmonics and closed loop amplitude control | schematic in progress |
+
+
+
 
 All 4 layer PCBs are routed assuming OSH Park's 4 layer stackup (http://docs.oshpark.com/services/four-layer/) with FR-408 and 6.7 mil prepreg height. 
 All layouts/schematics are created in KiCad 4.0.2

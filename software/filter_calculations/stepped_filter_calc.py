@@ -79,6 +79,10 @@ def e_effective(er, w, d):
 def calc_w(z0, d, er, t = .0000178):
     return (5.98 * d / (np.exp(z0 * np.sqrt(er + 1.41) / 87)) - t) / .8
 
+def calc_z(w, d, er, t = .0000178):
+    return (87 / np.sqrt(er + 1.41)) * np.log((5.98 * d) / (.8 * w + t))
+
+
 # calculate the physical length of a microstrip line
 # given impedance and dielectric constant
 def calc_len(z0, d, er, deg):
@@ -117,19 +121,24 @@ N_maxflat = \
 if __name__ == '__main__':
     fcutoff = 2.5e9 # hz
     fstop = 4e9
-    N = 6 # filter order, TODO: determine filter order automatically using stopband attenuation
+    N = 3 # filter order, TODO: determine filter order automatically using stopband attenuation
     filename = 'stepped_filter.poly'
 
     z0 = 50 # ohms
     c = 3e8
 
+    min_width = mil_to_meter(5.0)
+    max_width = .7e-3 
+
     # stackup information, set for oshpark fr408 4-layer
     er = 3.66
-    d = mil_to_meter(6.7) #.158e-2 #mil_to_meter(6.7) # meters substrate thickness
+    d = mil_to_meter(6.7)
     tand = .0125 # fr408
-    zmin = 15 # TODO: determine these from minimum and maximum trace widths
-    zmax = 80 # 
 
+
+    zmin = calc_z(max_width, d, er)
+    zmax = calc_z(min_width, d, er)
+    pdb.set_trace()
     fnorm = fstop / fcutoff - 1
     l_seg = np.zeros(N)
     w_seg = np.zeros(N)
@@ -164,6 +173,7 @@ if __name__ == '__main__':
 
     # generate kicad polygon
     poly_str = generate_stepped_filter_kicad_poly(l_seg, w_seg)
-    
+    #generate_openems_sim(l_seg, w_seg) 
+
     with open(filename, 'w') as f:
         f.write(poly_str)
