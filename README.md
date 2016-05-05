@@ -30,9 +30,10 @@ See `breakouts` for various modules developed for the network analyzer.
 The edge launch SMA connector footprint on some boards results in high reflection above 2 GHz due to the excess pad width relative to 50 ohm microstrip.. 
 
 Breakout boards are combined into modules.. I'm currently working on a synthesizer module.
+
 | Module Name | Description   | Status |
 | ----------- | ------------- | ------ |
-| Frequency Synth | Frequency synth with filtered harmonics and closed loop amplitude control | schematic in progress |
+| hardware/frequency_synth | Frequency synthesizer with filtered harmonics and closed loop amplitude control | schematic in progress |
 
 
 
