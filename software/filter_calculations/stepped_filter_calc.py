@@ -1,37 +1,87 @@
-# worksheet to calculate stepped impedance microstrip filters
+# undertested script to calculate stepped impedance microstrip filters and generate kicad microwave shape files
+# jtklein@alaska.edu, http://github.com/loxodes
+# mit license
+
 # references: pozar, microwave engineering, 4th edition
-# currently configured to replicate example 8.6, page 425
-# line length calculation in degrees works,
-# physical line length calculations need improvement..
-# TODO: automatically generate openEMS simulation?
-# TODO: automatically generate KiCAD footprint(s)?
-# TODO: calculate filter losses
-# TODO: plot filter frequency response
+
+# to add to a filter to a KiCad layout, import the shape description .poly file using the microwave toolbar
+# this only works for me using the default KiCad renderer (as in not OpenGL or cairo..)
+
+# TODO: automatically generate openEMS simulation? (see pyopenems)
+# TODO: plot estimated filter frequency response of filter? generate qucs schematics?
 
 import numpy as np
 import pdb
 
+# generate a polygon shape file for the kicad microwave toolbar
+def generate_stepped_filter_kicad_poly(l_seg, w_seg):
+    total_length = sum(l_seg)
+    max_width = max(w_seg)
+
+    # normalize widths and lengths
+    l_seg = np.array(l_seg) / total_length
+    w_seg = np.array(w_seg) / max_width
+
+    poly_points = []
+
+    nsegs = len(l_seg)
+    
+    # add initial point
+    poly_points.append((0, w_seg[0]/2))
+   
+    # step foward 
+    for segment in range(nsegs - 1):
+        x_coord = 0 + sum(l_seg[:segment + 1])
+        y_coord = w_seg[segment] / 2
+        poly_points.append((x_coord, y_coord))
+
+        y_coord = w_seg[segment+1] / 2
+        poly_points.append((x_coord, y_coord))
+
+    # add end points
+    x_coord = sum(l_seg)
+    y_coord = w_seg[-1] / 2
+    poly_points.append((x_coord, y_coord))
+    y_coord = -w_seg[-1] / 2
+    poly_points.append((x_coord, y_coord))
+
+    # step backward through segments, add bottom line of points
+    for segment in range(nsegs - 1, 0, -1):
+        x_coord = 0 + sum(l_seg[:segment])
+        y_coord = -w_seg[segment] / 2
+        poly_points.append((x_coord, y_coord))
+
+        y_coord = -w_seg[segment-1] / 2
+        poly_points.append((x_coord, y_coord))
+    
+    # add final point to close the polygon
+    poly_points.append((0, -w_seg[0]/2))
+    poly_points.append((0, w_seg[0]/2))
+    
+    # create polygon file
+    poly_file = 'Unit=MM\n'
+    poly_file += 'XScale={}\n'.format(total_length)
+    poly_file += 'YScale={}\n'.format(max_width)
+    poly_file += '\n$COORD\n'
+    for point in poly_points:
+        poly_file += '{} {}\n'.format(point[0], point[1])
+    poly_file += '\n$ENDCOORD\n'
+
+    return poly_file
+
 # calculate effective dielectric constant of microstrip
 def e_effective(er, w, d):
     ee = .5 *((er + 1) + (er - 1) / np.sqrt(1 + 12 * d / w))
-    print('e effective: {}'.format(ee))
     return ee
 
-# pozar (3.197)
 # numerical approximation to calculate microstrip width
-def calc_w(z0, d, er):
-    A = (z0 / 60) * np.sqrt(.5 * (er + 1)) + ((er - 1) / (er + 1)) * (.23 + .11 / er)
-    B = 377 * np.pi / (2 * z0 * np.sqrt(er))
+# Design Guide for Electronic Packaging Utilizing High-Speed Techniques (4th Working Draft, IPC-2251, February 2001).
+def calc_w(z0, d, er, t = .0000178):
+    return (5.98 * d / (np.exp(z0 * np.sqrt(er + 1.41) / 87)) - t) / .8
 
-    w1 = d * (8 * np.exp(A)) / (np.exp(2 * A) - 2)
-    w2 = d * (2 / np.pi) * (B - 1 - np.log(2 * B - 1) + ((er - 1) / (2 * er)) * (np.log(B - 1) + .39 - .61 / er))
-    
-    if w1 / d < 2 and w1 > 0:
-        print('w: {}'.format(w1 * 1000))
-        return w1
-    else:
-        print('w: {}'.format(w2 * 1000))
-        return w2
+def calc_z(w, d, er, t = .0000178):
+    return (87 / np.sqrt(er + 1.41)) * np.log((5.98 * d) / (.8 * w + t))
+
 
 # calculate the physical length of a microstrip line
 # given impedance and dielectric constant
@@ -41,8 +91,8 @@ def calc_len(z0, d, er, deg):
     # calculate the wavelength at the effective dielectric constant
     l = (c / fcutoff) / np.sqrt(ee)
     
-    # return length in mm 
-    return 1000 * l * deg / (2 * np.pi)
+    # return length in meters
+    return l * deg / (2 * np.pi)
 
 # convert mils (thousands of inch) to meters
 def mil_to_meter(h):
@@ -66,30 +116,35 @@ N_maxflat = \
     [0.3473,1.0000,1.5321,1.8794,2.0000,1.8794,1.5321,1.0000,0.3473,1.0000],\
     [0.3129,0.9080,1.4142,1.7820,1.9754,1.9754,1.7820,1.4142,0.9080,0.3129,1.0000]]
 
-N = 6 # TODO: determine filter order
 
-
+# example usage, create a 2.5 GHz cutoff filter
 if __name__ == '__main__':
     fcutoff = 2.5e9 # hz
+    fstop = 4e9
+    N = 3 # filter order, TODO: determine filter order automatically using stopband attenuation
+    filename = 'stepped_filter.poly'
+
     z0 = 50 # ohms
     c = 3e8
-    er = 4.2 #3.66$a
-    d = .158e-2 #mil_to_meter(6.7) # meters substrate thickness
 
-    fstop = 4e9
-    stopatt = 20 # dB
+    min_width = mil_to_meter(5.0)
+    max_width = .7e-3 
 
-    tand = .02
-    #ch = mil_to_meter(.5) # mil copper thickness 
+    # stackup information, set for oshpark fr408 4-layer
+    er = 3.66
+    d = mil_to_meter(6.7)
+    tand = .0125 # fr408
 
+
+    zmin = calc_z(max_width, d, er)
+    zmax = calc_z(min_width, d, er)
+    pdb.set_trace()
     fnorm = fstop / fcutoff - 1
-
-    zmin = 20 # 
-    zmax = 120 # 80
-
     l_seg = np.zeros(N)
     w_seg = np.zeros(N)
-
+    print('50 ohm width: {}'.format(1000 * (calc_w(50, d, er))))
+    
+    # calculate filter segment sizes
     for segment in range(N):
         bl = 0
         l = 0
@@ -104,13 +159,21 @@ if __name__ == '__main__':
             w = calc_w(zmax, d, er) 
        
         bl_deg = bl * 180.0 / np.pi
-        l_seg[segment] = l
-        w_seg[segment] = w
+        l_seg[segment] = l * 1000
+        w_seg[segment] = w * 1000
 
-        print('{}, \t norm: {} \t bl (deg): {} \t len {} mm'.format(segment, N_maxflat[N][segment], bl_deg, l))
+        print('{}, \t norm: {} \t bl (deg): {} \t len {} mm \t w {} mm'.format(segment, N_maxflat[N][segment], bl_deg, l_seg[segment], w_seg[segment]))
     
+    total_length = sum(l_seg)
+    max_width = max(w_seg)
 
-    print('total length: {} mm'.format(sum(l_seg)))
-    widths_mil = [m_to_mil(w) for w in w_seg]
-    print('microstrip widths: {}'.format(widths_mil))
+    print('total length: {} mm'.format(total_length))
+    print('microstrip lengths: {}'.format(l_seg))
+    print('microstrip widths: {}'.format(w_seg))
 
+    # generate kicad polygon
+    poly_str = generate_stepped_filter_kicad_poly(l_seg, w_seg)
+    #generate_openems_sim(l_seg, w_seg) 
+
+    with open(filename, 'w') as f:
+        f.write(poly_str)
