@@ -1,4 +1,4 @@
-update=Wed May  4 22:28:15 2016
+update=Thu May  5 21:20:40 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -91,3 +91,4 @@ LibName59=/home/kleinjt/repos/vna/lib/adf4355-3
 LibName60=/home/kleinjt/repos/vna/lib/74xx1g14
 LibName61=/home/kleinjt/repos/vna/lib/74hc04
 LibName62=/home/kleinjt/repos/vna/lib/74hc04_full
+LibName63=/home/kleinjt/repos/vna/lib/conn_sma_2gnd
