@@ -3,7 +3,7 @@ import cmd
 import numpy as np
 import pdb
 
-VNAPORT = '/dev/ttyACM1'
+VNAPORT = '/dev/ttyACM0'
 
 SWITCH_CMD = np.uint8(ord('w'))
 FILT_CMD = np.uint8(ord('f'))
