@@ -154,23 +154,23 @@ Text Label 9900 1900 0    60   ~ 0
 ADF_CLK_0
 Text Label 9900 1800 0    60   ~ 0
 ADF_LOCK_0
-Text Label 1200 2150 2    60   ~ 0
+Text Label 2700 3150 0    60   ~ 0
 ADF_CE_0
-Text Label 1200 2250 2    60   ~ 0
+Text Label 2700 3550 0    60   ~ 0
 ADF_LE_0
 Text Label 2950 3450 0    60   ~ 0
 ADF_DATA_0
 Text Label 950  2350 2    60   ~ 0
 ADF_CLK_0
-Text Label 950  2450 2    60   ~ 0
+Text Label 2950 3750 0    60   ~ 0
 ADF_LOCK_0
-Text Label 3000 2450 0    60   ~ 0
+Text Label 900  2250 2    60   ~ 0
 RFSW_0
-Text Label 1250 3850 2    60   ~ 0
+Text Label 1250 3150 2    60   ~ 0
 FILTA_0
-Text Label 1250 3750 2    60   ~ 0
+Text Label 1250 3350 2    60   ~ 0
 FILTB_0
-Text Label 1250 3650 2    60   ~ 0
+Text Label 1250 3550 2    60   ~ 0
 FILTC_0
 $Comp
 L LED D1002
@@ -250,7 +250,7 @@ Text Label 1100 2550 2    60   ~ 0
 REF_SCL
 Text Label 1100 2650 2    60   ~ 0
 REF_SDA
-Text Label 1100 2950 2    60   ~ 0
+Text Label 2800 2050 0    60   ~ 0
 REF_OE
 Text Label 10250 2400 0    60   ~ 0
 REF_SCL
@@ -277,17 +277,17 @@ F 3 "" H 9850 1400 50  0000 C CNN
 	1    9850 1400
 	0    1    1    0   
 $EndComp
-Text Label 1250 3050 2    60   ~ 0
-ATT_1
-Text Label 1250 3150 2    60   ~ 0
-ATT_2
-Text Label 1250 3250 2    60   ~ 0
-ATT_3
-Text Label 1250 3350 2    60   ~ 0
-ATT_4
 Text Label 1250 3450 2    60   ~ 0
+ATT_1
+Text Label 1250 3650 2    60   ~ 0
+ATT_2
+Text Label 1250 3850 2    60   ~ 0
+ATT_3
+Text Label 2650 2550 0    60   ~ 0
+ATT_4
+Text Label 2650 2350 0    60   ~ 0
 ATT_5
-Text Label 1250 3550 2    60   ~ 0
+Text Label 2650 2150 0    60   ~ 0
 ATT_6
 Text Label 10300 2950 0    60   ~ 0
 ATT_1
@@ -515,7 +515,7 @@ F 3 "" H 8200 4250 50  0000 C CNN
 $EndComp
 Text Label 8100 4500 2    60   ~ 0
 LMXPOW_EN
-Text Label 2950 3650 0    60   ~ 0
+Text Label 950  3750 2    60   ~ 0
 LMXPOW_EN
 $Comp
 L C_Small C1001
@@ -606,11 +606,11 @@ Wire Wire Line
 Wire Wire Line
 	2650 2950 2550 2950
 Wire Wire Line
-	950  2450 1350 2450
+	2950 3750 2550 3750
 Wire Wire Line
-	1200 2250 1350 2250
+	2700 3550 2550 3550
 Wire Wire Line
-	1200 2150 1350 2150
+	2700 3150 2550 3150
 Wire Wire Line
 	950  2350 1350 2350
 Wire Wire Line
@@ -620,19 +620,19 @@ Wire Wire Line
 Wire Wire Line
 	5300 800  5300 900 
 Wire Wire Line
-	3000 2450 2550 2450
+	900  2250 1350 2250
+Wire Wire Line
+	2650 2550 2550 2550
+Wire Wire Line
+	2650 2350 2550 2350
+Wire Wire Line
+	1250 3150 1350 3150
 Wire Wire Line
 	1250 3350 1350 3350
 Wire Wire Line
-	1250 3450 1350 3450
-Wire Wire Line
-	1250 3850 1350 3850
-Wire Wire Line
-	1250 3750 1350 3750
-Wire Wire Line
-	1250 3650 1350 3650
-Wire Wire Line
 	1250 3550 1350 3550
+Wire Wire Line
+	2650 2150 2550 2150
 Wire Wire Line
 	9600 1800 9900 1800
 Wire Wire Line
@@ -668,7 +668,7 @@ Wire Wire Line
 Wire Wire Line
 	1100 2550 1350 2550
 Wire Wire Line
-	1100 2950 1350 2950
+	2800 2050 2550 2050
 Wire Wire Line
 	2550 3450 2950 3450
 Wire Wire Line
@@ -680,11 +680,7 @@ Wire Wire Line
 Wire Wire Line
 	9850 1400 9550 1400
 Wire Wire Line
-	1350 3050 1250 3050
-Wire Wire Line
-	1350 3150 1250 3150
-Wire Wire Line
-	1350 3250 1250 3250
+	1350 3850 1250 3850
 Wire Wire Line
 	10300 2950 9750 2950
 Wire Wire Line
@@ -731,7 +727,7 @@ Connection ~ 8300 4300
 Wire Wire Line
 	8400 4500 8100 4500
 Wire Wire Line
-	2950 3650 2550 3650
+	950  3750 1350 3750
 Wire Wire Line
 	8050 5050 8050 4950
 Wire Wire Line
@@ -770,18 +766,18 @@ Wire Wire Line
 	4450 5650 5250 5650
 Wire Wire Line
 	4450 5750 5250 5750
-Text Label 2750 3250 0    60   ~ 0
+Text Label 1150 3250 2    60   ~ 0
 FILT~A_0
-Text Label 2750 3150 0    60   ~ 0
+Text Label 1150 3050 2    60   ~ 0
 FILT~B_0
-Text Label 2750 3050 0    60   ~ 0
+Text Label 1150 2950 2    60   ~ 0
 FILT~C_0
 Wire Wire Line
-	2550 3050 2750 3050
+	1350 2950 1150 2950
 Wire Wire Line
-	2550 3150 2750 3150
+	1350 3050 1150 3050
 Wire Wire Line
-	2550 3250 2750 3250
+	1350 3250 1150 3250
 Text Notes 1500 4800 0    60   ~ 0
 replace connector with\n1175-1749-ND\n
 $Comp
@@ -808,4 +804,52 @@ Wire Wire Line
 Wire Wire Line
 	6250 2900 6100 2900
 Connection ~ 6100 2900
+$Comp
+L MOUNTING_HOLE H1001
+U 1 1 57384540
+P 1300 5750
+F 0 "H1001" H 1000 5800 60  0000 C CNN
+F 1 "MOUNTING_HOLE" H 1300 5900 60  0000 C CNN
+F 2 "Mounting_Holes:MountingHole_2-7mm" H 1300 5750 60  0001 C CNN
+F 3 "" H 1300 5750 60  0000 C CNN
+	1    1300 5750
+	1    0    0    1   
+$EndComp
+$Comp
+L MOUNTING_HOLE H1002
+U 1 1 573845CA
+P 1600 5750
+F 0 "H1002" H 1300 5800 60  0000 C CNN
+F 1 "MOUNTING_HOLE" H 1600 5900 60  0000 C CNN
+F 2 "Mounting_Holes:MountingHole_2-7mm" H 1600 5750 60  0001 C CNN
+F 3 "" H 1600 5750 60  0000 C CNN
+	1    1600 5750
+	1    0    0    1   
+$EndComp
+$Comp
+L MOUNTING_HOLE H1003
+U 1 1 57384647
+P 1950 5750
+F 0 "H1003" H 1650 5800 60  0000 C CNN
+F 1 "MOUNTING_HOLE" H 1950 5900 60  0000 C CNN
+F 2 "Mounting_Holes:MountingHole_2-7mm" H 1950 5750 60  0001 C CNN
+F 3 "" H 1950 5750 60  0000 C CNN
+	1    1950 5750
+	1    0    0    1   
+$EndComp
+$Comp
+L MOUNTING_HOLE H1004
+U 1 1 5738469B
+P 2250 5750
+F 0 "H1004" H 1950 5800 60  0000 C CNN
+F 1 "MOUNTING_HOLE" H 2250 5900 60  0000 C CNN
+F 2 "Mounting_Holes:MountingHole_2-7mm" H 2250 5750 60  0001 C CNN
+F 3 "" H 2250 5750 60  0000 C CNN
+	1    2250 5750
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	1250 3650 1350 3650
+Wire Wire Line
+	1250 3450 1350 3450
 $EndSCHEMATC
