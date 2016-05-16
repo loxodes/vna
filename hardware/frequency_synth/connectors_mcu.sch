@@ -852,4 +852,15 @@ Wire Wire Line
 	1250 3650 1350 3650
 Wire Wire Line
 	1250 3450 1350 3450
+$Comp
+L mounting_box U1004
+U 1 1 57396670
+P 4400 7250
+F 0 "U1004" H 4400 7250 60  0000 C CNN
+F 1 "picture" H 4350 7400 60  0000 C CNN
+F 2 "vna_footprints:cat" H 4400 7250 60  0001 C CNN
+F 3 "" H 4400 7250 60  0000 C CNN
+	1    4400 7250
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
