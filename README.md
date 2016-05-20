@@ -33,7 +33,7 @@ Breakout boards are combined into modules.. I'm currently working on a synthesiz
 
 | Module Name | Description   | Status |
 | ----------- | ------------- | ------ |
-| hardware/frequency_synth | Frequency synthesizer with filtered harmonics and closed loop amplitude control | schematic in progress |
+| hardware/frequency_synth | Frequency synthesizer with filtered harmonics and closed loop amplitude control | layout complete, untested |
 
 
 
