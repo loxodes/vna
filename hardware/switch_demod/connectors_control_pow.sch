@@ -71,7 +71,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 9
+Sheet 9 9
 Title ""
 Date ""
 Rev ""
@@ -81,4 +81,397 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+$Comp
+L CONN_SMA_2GND U901
+U 1 1 574F72D7
+P 7950 5200
+F 0 "U901" H 7650 5400 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 8000 5500 60  0000 C CNN
+F 2 "vna_footprints:142-0721-882_sma_cutout" H 7950 5200 60  0001 C CNN
+F 3 "" H 7950 5200 60  0000 C CNN
+	1    7950 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR0147
+U 1 1 574F731D
+P 7950 5800
+F 0 "#PWR0147" H 7950 5550 50  0001 C CNN
+F 1 "GND" H 7950 5650 50  0000 C CNN
+F 2 "" H 7950 5800 50  0000 C CNN
+F 3 "" H 7950 5800 50  0000 C CNN
+	1    7950 5800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7900 5650 7900 5700
+Wire Wire Line
+	7900 5700 8000 5700
+Wire Wire Line
+	7950 5700 7950 5800
+Wire Wire Line
+	8000 5700 8000 5650
+Connection ~ 7950 5700
+Wire Wire Line
+	8350 5200 8600 5200
+Text HLabel 8600 5200 2    60   Input ~ 0
+SYNTH_IN
+Text HLabel 8450 3300 2    60   Input ~ 0
+ATT_A1
+Text HLabel 8450 3400 2    60   Input ~ 0
+ATT_A2
+Text HLabel 8450 3500 2    60   Input ~ 0
+ATT_A3
+Text HLabel 8450 3600 2    60   Input ~ 0
+ATT_A4
+Text HLabel 8450 3700 2    60   Input ~ 0
+ATT_A5
+Text HLabel 8450 3800 2    60   Input ~ 0
+ATT_A6
+Wire Wire Line
+	8450 3300 8350 3300
+Wire Wire Line
+	8350 3400 8450 3400
+Wire Wire Line
+	8450 3500 8350 3500
+Wire Wire Line
+	8350 3600 8450 3600
+Wire Wire Line
+	8450 3700 8350 3700
+Wire Wire Line
+	8350 3800 8450 3800
+Text HLabel 8450 3150 2    60   Input ~ 0
+SWITCH_CTRL_DUT
+Text HLabel 8450 3050 2    60   Input ~ 0
+DEMOD_ENBL
+Text HLabel 8450 2600 2    60   Input ~ 0
+ADC_SCK
+Text HLabel 8450 2700 2    60   Input ~ 0
+ADC_SDO2
+Text HLabel 8450 2800 2    60   Input ~ 0
+ADC_SDO1
+Text HLabel 8450 2900 2    60   Input ~ 0
+ADC_CONV_PULSE
+Text HLabel 8450 2500 2    60   Input ~ 0
+ADC_CONV_CLK_IN
+Text HLabel 8450 2400 2    60   Input ~ 0
+ADC_CONV_CLK_OUT
+Text HLabel 8450 2300 2    60   Input ~ 0
+ADC_CLKOUT
+Text HLabel 8450 2200 2    60   Input ~ 0
+ADC_VIO_EXT
+Wire Wire Line
+	8450 2900 8350 2900
+Wire Wire Line
+	8450 3050 8350 3050
+Wire Wire Line
+	8450 3150 8350 3150
+Text HLabel 8450 4050 2    60   Input ~ 0
+DUT1_FWD_LED
+Text HLabel 8450 4150 2    60   Input ~ 0
+DUT1_REV_LED
+Text HLabel 8450 4300 2    60   Input ~ 0
+DUT2_FWD_LED
+Text HLabel 8450 4400 2    60   Input ~ 0
+DUT2_REV_LED
+Text HLabel 8450 4550 2    60   Input ~ 0
+VNA_PWR_LED
+Text HLabel 8450 4650 2    60   Input ~ 0
+VNA_ERR_LED
+Text Notes 4100 4850 0    60   ~ 0
+TODO:\ncreate beaglebone header symbol\ncheck io voltages, add buffers?\nadd ADC clock input\nadd adc input netlist length constraints
+$Comp
+L CONN_01X02 P901
+U 1 1 574F73CD
+P 2700 1950
+F 0 "P901" H 2700 2100 50  0000 C CNN
+F 1 "CONN_01X02" V 2800 1950 50  0000 C CNN
+F 2 "Terminal_Blocks:TerminalBlock_Pheonix_PT-3.5mm_2pol" H 2700 1950 50  0001 C CNN
+F 3 "" H 2700 1950 50  0000 C CNN
+	1    2700 1950
+	0    1    -1   0   
+$EndComp
+$Comp
+L +5V #PWR0148
+U 1 1 574F7428
+P 5400 2000
+F 0 "#PWR0148" H 5400 1850 50  0001 C CNN
+F 1 "+5V" H 5400 2140 50  0000 C CNN
+F 2 "" H 5400 2000 50  0000 C CNN
+F 3 "" H 5400 2000 50  0000 C CNN
+	1    5400 2000
+	-1   0    0    -1  
+$EndComp
+Text Notes 4600 1650 2    60   ~ 0
+TODO: add fuse, reverse polarity, power led
+Wire Wire Line
+	5400 2000 5400 2500
+Wire Wire Line
+	2750 2150 2750 2650
+$Comp
+L GND #PWR0149
+U 1 1 574F767F
+P 2650 3100
+F 0 "#PWR0149" H 2650 2850 50  0001 C CNN
+F 1 "GND" H 2650 2950 50  0000 C CNN
+F 2 "" H 2650 3100 50  0000 C CNN
+F 3 "" H 2650 3100 50  0000 C CNN
+	1    2650 3100
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 2150 2650 3100
+$Comp
+L FUSE F901
+U 1 1 574F76AF
+P 3200 2350
+F 0 "F901" H 3300 2400 50  0000 C CNN
+F 1 "PTC" H 3100 2300 50  0000 C CNN
+F 2 "Resistors_SMD:R_1210" H 3200 2350 50  0001 C CNN
+F 3 "" H 3200 2350 50  0000 C CNN
+	1    3200 2350
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 2350 2750 2350
+$Comp
+L INDUCTOR_SMALL L901
+U 1 1 574F77A9
+P 4900 2350
+F 0 "L901" H 4900 2450 50  0000 C CNN
+F 1 "FERRITE CHIP" H 4900 2300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805" H 4900 2350 50  0001 C CNN
+F 3 "" H 4900 2350 50  0000 C CNN
+	1    4900 2350
+	-1   0    0    -1  
+$EndComp
+$Comp
+L CP_Small C901
+U 1 1 574F7852
+P 5400 2600
+F 0 "C901" H 5410 2670 50  0000 L CNN
+F 1 "100 uF" H 5410 2520 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1210" H 5400 2600 50  0001 C CNN
+F 3 "" H 5400 2600 50  0000 C CNN
+	1    5400 2600
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND #PWR0150
+U 1 1 574F7A07
+P 5400 2800
+F 0 "#PWR0150" H 5400 2550 50  0001 C CNN
+F 1 "GND" H 5400 2650 50  0000 C CNN
+F 2 "" H 5400 2800 50  0000 C CNN
+F 3 "" H 5400 2800 50  0000 C CNN
+	1    5400 2800
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	4100 2350 4650 2350
+Wire Wire Line
+	5400 2800 5400 2700
+Connection ~ 5400 2350
+Wire Wire Line
+	8350 2800 8450 2800
+Wire Wire Line
+	8450 2700 8350 2700
+Wire Wire Line
+	8350 2600 8450 2600
+Wire Wire Line
+	8450 2500 8350 2500
+Wire Wire Line
+	8350 2400 8450 2400
+Wire Wire Line
+	8450 2300 8350 2300
+Wire Wire Line
+	8350 2200 8450 2200
+Wire Wire Line
+	8350 4050 8450 4050
+Wire Wire Line
+	8350 4150 8450 4150
+Wire Wire Line
+	8350 4300 8450 4300
+Wire Wire Line
+	8350 4400 8450 4400
+Wire Wire Line
+	8350 4550 8450 4550
+Wire Wire Line
+	8350 4650 8450 4650
+Text Label 8350 4050 2    60   ~ 0
+DUT1_FWD_LED
+Text Label 8350 4150 2    60   ~ 0
+DUT1_REV_LED
+Text Label 8350 4300 2    60   ~ 0
+DUT2_FWD_LED
+Text Label 8350 4400 2    60   ~ 0
+DUT2_REV_LED
+Text Label 8350 4550 2    60   ~ 0
+VNA_PWR_LED
+Text Label 8350 4650 2    60   ~ 0
+VNA_ERR_LED
+Text Label 8350 3300 2    60   ~ 0
+ATT_A1
+Text Label 8350 3400 2    60   ~ 0
+ATT_A2
+Text Label 8350 3500 2    60   ~ 0
+ATT_A3
+Text Label 8350 3600 2    60   ~ 0
+ATT_A4
+Text Label 8350 3700 2    60   ~ 0
+ATT_A5
+Text Label 8350 3800 2    60   ~ 0
+ATT_A6
+Text Label 8350 3050 2    60   ~ 0
+DEMOD_ENBL
+Text Label 8350 3150 2    60   ~ 0
+SWITCH_CTRL_OUT
+Text Label 8350 2900 2    60   ~ 0
+ADC_CONV_PULSE
+Text Label 8350 2800 2    60   ~ 0
+ADC_SDO1
+Text Label 8350 2700 2    60   ~ 0
+ADC_SDO2
+Text Label 8350 2600 2    60   ~ 0
+ADC_SCK
+Text Label 8350 2500 2    60   ~ 0
+ADC_CONV_CLK_IN
+Text Label 8350 2400 2    60   ~ 0
+ADC_CONV_CLK_OUT
+Text Label 8350 2300 2    60   ~ 0
+ADC_CLKOUT
+Text Label 8350 2200 2    60   ~ 0
+ADC_VIO_EXT
+$Comp
+L Q_PMOS_GSD Q901
+U 1 1 57508798
+P 3900 2450
+F 0 "Q901" H 4200 2500 50  0000 R CNN
+F 1 "DMG2305UX" H 4550 2400 50  0000 R CNN
+F 2 "TO_SOT_Packages_SMD:SOT-23" H 4100 2550 50  0001 C CNN
+F 3 "" H 3900 2450 50  0000 C CNN
+	1    3900 2450
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3450 2350 3700 2350
+Wire Wire Line
+	5400 2350 5150 2350
+$Comp
+L MOUNTING_HOLE H901
+U 1 1 5751CEF7
+P 1750 5250
+F 0 "H901" H 1450 5300 60  0000 C CNN
+F 1 "MOUNTING_HOLE" H 1750 5400 60  0000 C CNN
+F 2 "Mounting_Holes:MountingHole_2-7mm" H 1750 5250 60  0001 C CNN
+F 3 "" H 1750 5250 60  0000 C CNN
+	1    1750 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L MOUNTING_HOLE H902
+U 1 1 5751CF6A
+P 1750 5550
+F 0 "H902" H 1450 5600 60  0000 C CNN
+F 1 "MOUNTING_HOLE" H 1750 5700 60  0000 C CNN
+F 2 "Mounting_Holes:MountingHole_2-7mm" H 1750 5550 60  0001 C CNN
+F 3 "" H 1750 5550 60  0000 C CNN
+	1    1750 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L MOUNTING_HOLE H903
+U 1 1 5751CF9D
+P 1750 5850
+F 0 "H903" H 1450 5900 60  0000 C CNN
+F 1 "MOUNTING_HOLE" H 1750 6000 60  0000 C CNN
+F 2 "Mounting_Holes:MountingHole_2-7mm" H 1750 5850 60  0001 C CNN
+F 3 "" H 1750 5850 60  0000 C CNN
+	1    1750 5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L MOUNTING_HOLE H904
+U 1 1 5751CFD3
+P 1750 6150
+F 0 "H904" H 1450 6200 60  0000 C CNN
+F 1 "MOUNTING_HOLE" H 1750 6300 60  0000 C CNN
+F 2 "Mounting_Holes:MountingHole_2-7mm" H 1750 6150 60  0001 C CNN
+F 3 "" H 1750 6150 60  0000 C CNN
+	1    1750 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L LED D901
+U 1 1 5751D2D2
+P 5850 2250
+F 0 "D901" H 5850 2350 50  0000 C CNN
+F 1 "RED" H 5850 2150 50  0000 C CNN
+F 2 "LEDs:LED_0603" H 5850 2250 50  0001 C CNN
+F 3 "" H 5850 2250 50  0000 C CNN
+	1    5850 2250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_Small R901
+U 1 1 5751D441
+P 5850 2650
+F 0 "R901" H 5880 2670 50  0000 L CNN
+F 1 "1k" H 5880 2610 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 5850 2650 50  0001 C CNN
+F 3 "" H 5850 2650 50  0000 C CNN
+	1    5850 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L +5V #PWR0152
+U 1 1 5751D51D
+P 5850 2000
+F 0 "#PWR0152" H 5850 1850 50  0001 C CNN
+F 1 "+5V" H 5850 2140 50  0000 C CNN
+F 2 "" H 5850 2000 50  0000 C CNN
+F 3 "" H 5850 2000 50  0000 C CNN
+	1    5850 2000
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND #PWR0153
+U 1 1 5751D54F
+P 5850 2800
+F 0 "#PWR0153" H 5850 2550 50  0001 C CNN
+F 1 "GND" H 5850 2650 50  0000 C CNN
+F 2 "" H 5850 2800 50  0000 C CNN
+F 3 "" H 5850 2800 50  0000 C CNN
+	1    5850 2800
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 2750 5850 2800
+Wire Wire Line
+	5850 2450 5850 2550
+Wire Wire Line
+	5850 2000 5850 2050
+$Comp
+L SWITCH_INV SW?
+U 1 1 5752A991
+P 3300 2750
+F 0 "SW?" H 3100 2900 50  0000 C CNN
+F 1 "SWITCH_INV" H 3150 2600 50  0000 C CNN
+F 2 "" H 3300 2750 50  0000 C CNN
+F 3 "" H 3300 2750 50  0000 C CNN
+	1    3300 2750
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3800 2750 3900 2750
+Wire Wire Line
+	3900 2750 3900 2650
+Wire Wire Line
+	2750 2650 2800 2650
+Connection ~ 2750 2350
+Wire Wire Line
+	2800 2850 2650 2850
+Connection ~ 2650 2850
+Text Notes 3000 3100 0    60   ~ 0
+TODO: simulate switch\n
 $EndSCHEMATC
