@@ -26,17 +26,18 @@ See `breakouts` for various modules developed for the network analyzer.
 | attenuator | variable attenuator | working! |
 | amp | broadband amplifier | partially working, resonance at 4 GHz.. |
 | demod | quadrature demodulator | working up to output buffer.. |
-
+| adc_dual | dual adc | untested | 
+| refclk | PLL reference clock | working! |
 The edge launch SMA connector footprint on some boards results in high reflection above 2 GHz due to the excess pad width relative to 50 ohm microstrip.. 
 
 Breakout boards are combined into modules.. I'm currently working on a synthesizer module.
 
 | Module Name | Description   | Status |
 | ----------- | ------------- | ------ |
-| hardware/frequency_synth | Frequency synthesizer with filtered harmonics and closed loop amplitude control | layout complete, untested |
+| hardware/frequency_synth | Frequency synthesizer with filtered harmonics and closed loop amplitude control | assembled, untested |
+| hardware/switch_demod    | I/Q demodulator, adc, LO splitting, and rf switching for DUT connectors | schematic in progress | 
 
-
-
+![picture synth board](./doc/synth.jpg)
 
 All 4 layer PCBs are routed assuming OSH Park's 4 layer stackup (http://docs.oshpark.com/services/four-layer/) with FR-408 and 6.7 mil prepreg height. 
 All layouts/schematics are created in KiCad 4.0.2
