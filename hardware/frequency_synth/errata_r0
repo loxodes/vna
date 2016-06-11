@@ -1,0 +1,8 @@
+R0 ERRATA
+
+- add pullup/pulldown to 3.3V enable line
+- add U.FL connector to bypass LMX2592 and inject a signal
+- add 3.3V test point, ground test point
+- fix highpass filter footprint
+- condense BOM, eliminate unused resistors in power detector
+- rework short in attenuator control lines
