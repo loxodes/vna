@@ -81,11 +81,13 @@
 #define IQ_CMD 'q'
 #define CMD_ERR 'E'
 
-const uint8_t LMX_LE = 18;
-const uint8_t LMX_CE = 17;
-const uint8_t LMX_AUX = 19;
-const uint8_t LMX_LOCK0 = 8;
-const uint8_t LMX_LOCK1 = 19;
+const uint8_t LMX_LE = 14;
+const uint8_t LMX_CE = 18;
+const uint8_t LMX_AUX = 12;
+const uint8_t LMX_POWEN = 32;
+
+const uint8_t REFCLK_EN = 24;
+
 
 const uint16_t MIN_N = 16;
 const uint32_t FRAC_DENOM = 200000; 
@@ -94,34 +96,33 @@ const float F_VCO_MIN = 3.55e9;
 const float F_VCO_MAX = 7.1e9;
 const uint32_t PRE_N = 2;
 
-const uint8_t DET_0 = 28;
+const uint8_t DET_0 = 23;
 
-const uint8_t SW_0 = 28;
-const uint8_t SW_1 = 29;
-const uint8_t SW_2 = 30;
-const uint8_t SW_3 = 13;
-const uint8_t SW_4 = 12;
-const uint8_t SW_5 = 11;
+const uint8_t SW_0 = 6;
+const uint8_t SW_1 = 6;
+const uint8_t SW_2 = 6;
+const uint8_t SW_3 = 6;
+const uint8_t SW_4 = 6;
+const uint8_t SW_5 = 6;
 
-const uint8_t I_0 = 23;
-const uint8_t Q_0 = 24;
-const uint8_t I_1 = 25;
-const uint8_t Q_1 = 26;
+const uint8_t I_0 = 26;
+const uint8_t Q_0 = 28;
+const uint8_t I_1 = 26;
+const uint8_t Q_1 = 28;
 
-const uint8_t FILT0_A = 31;
-const uint8_t FILT0_B = 32;
-const uint8_t FILT0_C = 33;
-const uint8_t FILT1_A = 34;
-const uint8_t FILT1_B = 35;
-const uint8_t FILT1_C = 36;
+const uint8_t FILT0_A = 38;
+const uint8_t FILT0_B = 36;
+const uint8_t FILT0_C = 34;
+const uint8_t FILT0_AN = 37;
+const uint8_t FILT0_BN = 39;
+const uint8_t FILT0_CN = 40;
 
-const uint8_t ATT_0 = 57;
-const uint8_t ATT_1 = 58;
-const uint8_t ATT_2 = 59;
-const uint8_t ATT_3 = 60;
-const uint8_t ATT_4 = 61;
-const uint8_t ATT_5 = 62;
-const uint8_t ATT_6 = 63;
+const uint8_t ATT_1 = 35;
+const uint8_t ATT_2 = 33;
+const uint8_t ATT_3 = 31;
+const uint8_t ATT_4 = 29;
+const uint8_t ATT_5 = 27;
+const uint8_t ATT_6 = 25;
 
 
 uint16_t spi_read_reg(uint8_t reg)
@@ -164,25 +165,37 @@ void gpio_init()
     pinMode(FILT0_A, OUTPUT);
     pinMode(FILT0_B, OUTPUT);
     pinMode(FILT0_C, OUTPUT);
-    pinMode(FILT1_A, OUTPUT);
-    pinMode(FILT1_B, OUTPUT);
-    pinMode(FILT1_C, OUTPUT);
+    pinMode(FILT0_AN, OUTPUT);
+    pinMode(FILT0_BN, OUTPUT);
+    pinMode(FILT0_CN, OUTPUT);
     
-    pinMode(ATT_0, OUTPUT);
     pinMode(ATT_1, OUTPUT);
     pinMode(ATT_2, OUTPUT);
     pinMode(ATT_3, OUTPUT);
     pinMode(ATT_4, OUTPUT);
     pinMode(ATT_5, OUTPUT);   
+    pinMode(ATT_6, OUTPUT);   
 }
+
+void clk_init()
+{
+    // TODO: init i2c
+    pinMode(REFCLK_EN, OUTPUT);   
+    digitalWrite(REFCLK_EN, HIGH);
+}
+
 void lmx2592_init()
 {
     pinMode(LMX_LE, OUTPUT);
     pinMode(LMX_CE, OUTPUT);
+
+    pinMode(LMX_POWEN, OUTPUT);
     pinMode(LMX_AUX, INPUT);
 
     digitalWrite(LMX_CE, HIGH);
     digitalWrite(LMX_LE, HIGH);
+    digitalWrite(LMX_POWEN, HIGH);
+
     delay(100);
 
     delay(10);
@@ -377,11 +390,10 @@ void loop()
         digitalWrite(FILT0_A, (c_temp & 0x01 > 0));
         digitalWrite(FILT0_B, (c_temp & 0x02 > 0));
         digitalWrite(FILT0_C, (c_temp & 0x04 > 0));
-      }
-      else if(idx == CHANNELB) {
-        digitalWrite(FILT1_A, (c_temp & 0x01 > 0));
-        digitalWrite(FILT1_B, (c_temp & 0x02 > 0));
-        digitalWrite(FILT1_C, (c_temp & 0x04 > 0));
+        digitalWrite(FILT0_AN, (c_temp & 0x01 == 0));
+        digitalWrite(FILT0_BN, (c_temp & 0x02 == 0));
+        digitalWrite(FILT0_CN, (c_temp & 0x04 == 0));
+
       }
       break;
       
@@ -409,12 +421,12 @@ void loop()
     case ATT_CMD:
       c_temp = get_char();
       
-      digitalWrite(ATT_0, c_temp & BIT0 ? HIGH : LOW);
-      digitalWrite(ATT_1, c_temp & BIT1 ? HIGH : LOW);
-      digitalWrite(ATT_2, c_temp & BIT2 ? HIGH : LOW);
-      digitalWrite(ATT_3, c_temp & BIT3 ? HIGH : LOW);
-      digitalWrite(ATT_4, c_temp & BIT4 ? HIGH : LOW);
-      digitalWrite(ATT_5, c_temp & BIT5 ? HIGH : LOW);
+      digitalWrite(ATT_1, c_temp & BIT0 ? HIGH : LOW);
+      digitalWrite(ATT_2, c_temp & BIT1 ? HIGH : LOW);
+      digitalWrite(ATT_3, c_temp & BIT2 ? HIGH : LOW);
+      digitalWrite(ATT_4, c_temp & BIT3 ? HIGH : LOW);
+      digitalWrite(ATT_5, c_temp & BIT4 ? HIGH : LOW);
+      digitalWrite(ATT_6, c_temp & BIT5 ? HIGH : LOW);
       Serial.print("att: ");
       Serial.print(c_temp);      
       Serial.print("chan: ");
