@@ -46,6 +46,7 @@
 #define REG36_CHDIV_SEG_SEL_123 BIT6
 #define REG36_CHDIV_SEG3 0
 
+
 #define REG35_CHDIV_SEG2 9
 #define REG35_CHDIV_SEG3_EN BIT8
 #define REG35_CHDIV_SEG2_EN BIT7
@@ -61,8 +62,14 @@
 #define REG11_PLL_R 4
 #define REG12_PLL_R_PRE 0
 #define REG47_OUTB_POW 0
+#define REG46_OUTA_POW 8
+
+#define REG47_OUTA_MUX_DIV 0
+#define REG47_OUTA_MUX_VCO BIT11
+
 
 #define REG31_VCO_DISTA_PD BIT9
+#define REG31_VCO_DISTB_PD BIT10
 
 #define CHANNELA 0
 #define CHANNELB 1
@@ -144,6 +151,8 @@ void spi_set_reg(uint8_t reg, uint32_t d)
       0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, // 56-63
       0x00af}; // 64
     
+    LMX_REG_DEFAULTS[46] |= REG46_MASH_ORDER_2 | REG46_MASH_EN;
+    
     d = d | LMX_REG_DEFAULTS[reg];
     
     digitalWrite(LMX_LE, LOW);
@@ -157,24 +166,34 @@ void gpio_init()
 {
 //    pinMode(SW_0, OUTPUT); (use SW_0 as DET)
     pinMode(SW_1, OUTPUT);
-    pinMode(SW_2, OUTPUT);
-    pinMode(SW_3, OUTPUT);
-    pinMode(SW_4, OUTPUT);
-    pinMode(SW_5, OUTPUT);
-
+    digitalWrite(SW_1, LOW);
+    
     pinMode(FILT0_A, OUTPUT);
     pinMode(FILT0_B, OUTPUT);
     pinMode(FILT0_C, OUTPUT);
+    digitalWrite(FILT0_A, HIGH);
+    digitalWrite(FILT0_B, HIGH);
+    digitalWrite(FILT0_C, HIGH);
+    
     pinMode(FILT0_AN, OUTPUT);
     pinMode(FILT0_BN, OUTPUT);
     pinMode(FILT0_CN, OUTPUT);
+    digitalWrite(FILT0_AN, LOW);
+    digitalWrite(FILT0_BN, LOW);
+    digitalWrite(FILT0_CN, LOW);
     
     pinMode(ATT_1, OUTPUT);
     pinMode(ATT_2, OUTPUT);
     pinMode(ATT_3, OUTPUT);
     pinMode(ATT_4, OUTPUT);
     pinMode(ATT_5, OUTPUT);   
-    pinMode(ATT_6, OUTPUT);   
+    pinMode(ATT_6, OUTPUT);
+    digitalWrite(ATT_1, LOW);
+    digitalWrite(ATT_2, LOW);   
+    digitalWrite(ATT_3, LOW);    
+    digitalWrite(ATT_4, LOW);
+    digitalWrite(ATT_5, LOW);   
+    digitalWrite(ATT_6, LOW);    
 }
 
 void clk_init()
@@ -189,12 +208,12 @@ void lmx2592_init()
     pinMode(LMX_LE, OUTPUT);
     pinMode(LMX_CE, OUTPUT);
 
-    pinMode(LMX_POWEN, OUTPUT);
+    pinMode(LMX_POWEN, INPUT);
     pinMode(LMX_AUX, INPUT);
 
     digitalWrite(LMX_CE, HIGH);
     digitalWrite(LMX_LE, HIGH);
-    digitalWrite(LMX_POWEN, HIGH);
+    //digitalWrite(LMX_POWEN, HIGH);
 
     delay(100);
 
@@ -207,8 +226,8 @@ void lmx2592_init()
 //    } 
       // 0x0F23
       // mash order 3, mash en, 
-    spi_set_reg(46, REG46_MASH_ORDER_2 | REG46_MASH_EN | REG46_OUTA_PD);
-    spi_set_reg(31, REG31_VCO_DISTA_PD);
+    spi_set_reg(46, REG46_MASH_ORDER_2 | REG46_MASH_EN | REG46_OUTB_PD | (0 << REG46_OUTA_POW)); //  REG46_OUTA_PD
+    spi_set_reg(31, REG31_VCO_DISTB_PD);
 
 //    spi_set_reg(12, 1 << REG12_PLL_R_PRE);
 //    spi_set_reg(11, 1 << REG11_PLL_R);
@@ -235,6 +254,10 @@ void lmx2592_chan_power(uint8_t chan, uint8_t power)
     if(chan == CHANNELB) {
         spi_set_reg(47, (0x3F & power) << REG47_OUTB_POW);
     }
+    else if(chan == CHANNELA) {
+        ;//spi_set_reg(46, (0x3F & power) << REG46_OUTA_POW);
+        // TODO: set channel power without wiping out other settings on register..
+    } 
 }
 
 uint32_t calc_n(float f, float n_step, uint32_t div)
@@ -309,11 +332,12 @@ void lmx2592_set_freq(float f)
         spi_set_reg(35, 0);
         spi_set_reg(36, 0);
         spi_set_reg(48, REG48_OUTB_MUX_VCO);
+        spi_set_reg(47, REG47_OUTA_MUX_VCO);
     }
 
     else {
         uint32_t reg35 = REG35_CHDIV_SEG1_EN;
-        uint32_t reg36 = REG36_CHDIV_DISTB_EN;
+        uint32_t reg36 = REG36_CHDIV_DISTA_EN;
 
         if(div3 != 0) {
             reg35 |= REG35_CHDIV_SEG2_EN | REG35_CHDIV_SEG3_EN;
@@ -336,7 +360,7 @@ void lmx2592_set_freq(float f)
         spi_set_reg(35, reg35);
         spi_set_reg(36, reg36);
         spi_set_reg(48, REG48_OUTB_MUX_DIV);
-
+        spi_set_reg(47, REG47_OUTA_MUX_DIV);
     }
     // recalibrate vco
     spi_set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL);
@@ -346,10 +370,12 @@ void setup()
 {
     Serial.begin(9600);
     SPI.begin();
+    clk_init();
+    gpio_init();
     lmx2592_init();
-    lmx2592_chan_power(CHANNELB, 15);
+//    lmx2592_chan_power(CHANNELA, 15);
     lmx2592_set_denom(FRAC_DENOM);
-    lmx2592_set_freq(900e6);
+    lmx2592_set_freq(3.5e9);
 }
 
 uint8_t get_char()

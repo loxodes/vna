@@ -5,4 +5,6 @@ R0 ERRATA
 - add 3.3V test point, ground test point
 - fix highpass filter footprint
 - condense BOM, eliminate unused resistors in power detector
-- rework short in attenuator control lines
+- fix attenuator driver buffer attenuator control lines (switch inverters?)
+- fix resistor values on lmx2592 output
+- fix driver for channel a, no divider
