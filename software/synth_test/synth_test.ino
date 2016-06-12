@@ -412,13 +412,15 @@ void loop()
       
     case FILT_CMD:
       c_temp = get_char();
+      // TODO: write filter path command,
+      // TODO: add filter selection to freq command
       if(idx == CHANNELA) {
-        digitalWrite(FILT0_A, (c_temp & 0x01 > 0));
-        digitalWrite(FILT0_B, (c_temp & 0x02 > 0));
-        digitalWrite(FILT0_C, (c_temp & 0x04 > 0));
-        digitalWrite(FILT0_AN, (c_temp & 0x01 == 0));
-        digitalWrite(FILT0_BN, (c_temp & 0x02 == 0));
-        digitalWrite(FILT0_CN, (c_temp & 0x04 == 0));
+        digitalWrite(FILT0_A, ((c_temp & 0x01) > 0));
+        digitalWrite(FILT0_B, ((c_temp & 0x02) > 0));
+        digitalWrite(FILT0_C, ((c_temp & 0x04) > 0));
+        digitalWrite(FILT0_AN, ((c_temp & 0x01) == 0));
+        digitalWrite(FILT0_BN, ((c_temp & 0x02) == 0));
+        digitalWrite(FILT0_CN, ((c_temp & 0x04) == 0));
 
       }
       break;
