@@ -70,6 +70,7 @@
 
 #define REG31_VCO_DISTA_PD BIT9
 #define REG31_VCO_DISTB_PD BIT10
+#define REG31_CHDIV_DIST_PD BIT7
 
 #define CHANNELA 0
 #define CHANNELB 1
@@ -83,10 +84,16 @@
 #define FILT_CMD 'f'
 #define POW_CMD 'p'
 #define SYNTH_CMD 's'
+#define OUTPUT_CMD 'o'
 #define DET_CMD 'd'
 #define ATT_CMD 'a'
 #define IQ_CMD 'q'
 #define CMD_ERR 'E'
+
+#define SWITCH_LOWFREQ LOW
+#define SWITCH_HIGHFREQ HIGH
+
+#define FILTER_BANK_SIZE 8
 
 const uint8_t LMX_LE = 14;
 const uint8_t LMX_CE = 18;
@@ -162,11 +169,12 @@ void spi_set_reg(uint8_t reg, uint32_t d)
     digitalWrite(LMX_LE, HIGH);
     delay(1);
 }
+
 void gpio_init()
 {
 //    pinMode(SW_0, OUTPUT); (use SW_0 as DET)
     pinMode(SW_1, OUTPUT);
-    digitalWrite(SW_1, LOW);
+    digitalWrite(SW_1, SWITCH_LOWFREQ);
     
     pinMode(FILT0_A, OUTPUT);
     pinMode(FILT0_B, OUTPUT);
@@ -220,23 +228,15 @@ void lmx2592_init()
     delay(10);
     spi_set_reg(0, REG0_RESET);
     
-//    program registers with defaults?!
-//    for(int i = 1; i < 65; i++) {
-//      spi_set_reg(i, 0);
-//    } 
-      // 0x0F23
-      // mash order 3, mash en, 
     spi_set_reg(46, REG46_MASH_ORDER_2 | REG46_MASH_EN | REG46_OUTB_PD | (0 << REG46_OUTA_POW)); //  REG46_OUTA_PD
     spi_set_reg(31, REG31_VCO_DISTB_PD);
 
-//    spi_set_reg(12, 1 << REG12_PLL_R_PRE);
-//    spi_set_reg(11, 1 << REG11_PLL_R);
-//    spi_set_reg(10, 1 << REG10_MULT);
     spi_set_reg(12, 0x7001);
     spi_set_reg(11, 0x0018);
     spi_set_reg(10, 0x10d8);
 
     lmx2592_set_denom(FRAC_DENOM);
+
     spi_set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL);
 }
 
@@ -268,6 +268,54 @@ uint32_t calc_n(float f, float n_step, uint32_t div)
 uint32_t calc_frac(float f, uint32_t n, float n_step, float frac_step, uint32_t div)
 {
     return (f - n * (n_step / div)) / (frac_step / div);
+}
+
+// set the filter bank automatically from output frequency
+// if the output frequency is above the max vco frequency, brek the path
+// to improve isolation from the vco doubler path
+void set_filterbank(float f)
+{
+    const uint32_t filter_bank_cutoffs[N_DIV_RATIOS] = {0e9, 6e9, 4.4e9, 3.4e9, 2.25e9, 1.45e9, 1e9, .63e9, 0};
+
+    uint8_t filt_i;
+    
+    if(f > F_VCO_MAX) {
+        filt_i = FILT_BANK_SIZE - 1;
+        digitalWrite(FILT0_A, HIGH);
+        digitalWrite(FILT0_B, HIGH);
+        digitalWrite(FILT0_C, HIGH);
+        digitalWrite(FILT0_AN, HIGH);
+        digitalWrite(FILT0_BN, HIGH);
+        digitalWrite(FILT0_CN, HIGH);
+    }
+
+    else {
+        for(filt_i = 1; f < FILT_BANK_SIZE; filt_i++) {
+            if(f > filter_bank_cutoffs[filt_i]) {
+                filt_i--;
+                break;
+            }
+        }
+
+        digitalWrite(FILT0_A, ((filt_i & 0x01) > 0));
+        digitalWrite(FILT0_B, ((filt_i & 0x02) > 0));
+        digitalWrite(FILT0_C, ((filt_i & 0x04) > 0));
+        digitalWrite(FILT0_AN, ((filt_i & 0x01) == 0));
+        digitalWrite(FILT0_BN, ((filt_i & 0x02) == 0));
+        digitalWrite(FILT0_CN, ((filt_i & 0x04) == 0));
+    }
+
+
+ }
+
+void set_path_switch(float f)
+{
+    if(f > F_VCO_MAX) {
+        digitalWrite(SW_1, SWITCH_HIGHFREQ);
+    }
+    else {
+        digitalWrite(SW_1, SWITCH_LOWFREQ);
+    }
 }
 
 void lmx2592_set_freq(float f)
@@ -333,6 +381,9 @@ void lmx2592_set_freq(float f)
         spi_set_reg(36, 0);
         spi_set_reg(48, REG48_OUTB_MUX_VCO);
         spi_set_reg(47, REG47_OUTA_MUX_VCO);
+        
+        // enable B to bypass filter bank, disable A buffer
+        spi_set_reg(31, REG31_VCO_DISTA_PD, REG31_CHDIV_DIST_PD);
     }
 
     else {
@@ -356,6 +407,7 @@ void lmx2592_set_freq(float f)
             reg36 |= REG36_CHDIV_SEG_SEL_1;
         }
         
+        spi_set_reg(31, REG31_VCO_DISTB_PD);
         spi_set_reg(34, REG34_CHDIV_EN);
         spi_set_reg(35, reg35);
         spi_set_reg(36, reg36);
@@ -445,7 +497,21 @@ void loop()
       f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..    
       lmx2592_set_freq(f_temp);
       break;
-      
+
+   case OUTPUT_CMD:
+      while(Serial.available() == 0);
+      f_temp = Serial.parseFloat();
+
+      Serial.print("freq: ");
+      Serial.print(f_temp);
+      Serial.print(" ");
+      f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..    
+
+      lmx2592_set_freq(f_temp);
+      set_filterbank(f_temp);
+      set_path_switch(f_temp);
+      break;
+     
     case ATT_CMD:
       c_temp = get_char();
       
