@@ -615,7 +615,7 @@ L R_Small R704
 U 1 1 572B0D78
 P 3200 2500
 F 0 "R704" H 3230 2520 50  0000 L CNN
-F 1 "5.6" H 3230 2460 50  0000 L CNN
+F 1 "187" H 3230 2460 50  0000 L CNN
 F 2 "Resistors_SMD:R_0402" H 3200 2500 60  0001 C CNN
 F 3 "" H 3200 2500 60  0000 C CNN
 	1    3200 2500
@@ -626,7 +626,7 @@ L R_Small R705
 U 1 1 572B0D79
 P 3200 3450
 F 0 "R705" H 3230 3470 50  0000 L CNN
-F 1 "187" H 3230 3410 50  0000 L CNN
+F 1 "5.6" H 3230 3410 50  0000 L CNN
 F 2 "Resistors_SMD:R_0402" H 3200 3450 60  0001 C CNN
 F 3 "" H 3200 3450 60  0000 C CNN
 	1    3200 3450
@@ -667,7 +667,7 @@ $EndComp
 Wire Wire Line
 	2500 2850 2750 2850
 Text Notes 2550 1750 0    60   ~ 0
-Adams uneven resitive splitter
+Adams uneven resitive splitter\nabout 20 dB coupling, 2 dB loss\nhttp://www.microwaves101.com/microwave-encyclopedia/adams-resistive-splitter
 $Comp
 L C_Small C707
 U 1 1 572B0D7C
