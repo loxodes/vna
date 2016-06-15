@@ -251,10 +251,10 @@ void lmx2592_chan_power(uint8_t chan, uint8_t power)
 {
     if(chan == CHANNELB) {
         spi_set_reg(47, (0x3F & power) << REG47_OUTB_POW);
+        spi_set_reg(46, REG46_OUTA_PD);
     }
     else if(chan == CHANNELA) {
-        ;//spi_set_reg(46, (0x3F & power) << REG46_OUTA_POW);
-        // TODO: set channel power without wiping out other settings on register..
+        spi_set_reg(46, REG46_OUTB_PD |(0x3F & power) << REG46_OUTA_POW);
     } 
 }
 
@@ -316,9 +316,11 @@ void set_path_switch(float f)
 {
     if(f > F_VCO_MAX) {
         digitalWrite(SW_1, SWITCH_HIGHFREQ);
+        lmx2592_chan_power(CHANNELB, 0);
     }
     else {
         digitalWrite(SW_1, SWITCH_LOWFREQ);
+        lmx2592_chan_power(CHANNELA, 0);
     }
 }
 
@@ -431,7 +433,9 @@ void setup()
     lmx2592_init();
 //    lmx2592_chan_power(CHANNELA, 15);
     lmx2592_set_denom(FRAC_DENOM);
-    lmx2592_set_freq(3.5e9);
+    lmx2592_set_freq(2e9);
+    set_filterbank(2e9);
+    set_path_switch(2e9);
 }
 
 uint8_t get_char()
