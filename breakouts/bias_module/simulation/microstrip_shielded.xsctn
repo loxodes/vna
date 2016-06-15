@@ -1,0 +1,45 @@
+#----------------------------------
+# File:  Z:/home/kleinjt/repos/vna/breakouts/bias_module/simulation/microstrip_shielded.xsctn
+# Wed Jun 15 12:51:31 AM Alaskan Daylight Time 2016
+#----------------------------------
+
+package require csdl
+
+set _title "Example Five Conductor Microstrip"
+set ::Stackup::couplingLength "0.1"
+set ::Stackup::riseTime "400"
+set ::Stackup::frequency "1e9"
+set ::Stackup::defaultLengthUnits "microns"
+set CSEG 100
+set DSEG 100
+
+GroundPlane ground  \
+	 -thickness 1.0 \
+	 -yOffset 0.0 \
+	 -xOffset 0.0
+DielectricLayer FR408  \
+	 -thickness 53.7 \
+	 -lossTangent 0.0 \
+	 -permittivity 3.66 \
+	 -permeability 1.0 \
+	 -yOffset 0.0 \
+	 -xOffset 0.0
+RectangleConductors c1  \
+	 -width 108 \
+	 -pitch 20 \
+	 -conductivity 5.0e7S/m \
+	 -height 1.4 \
+	 -number 1 \
+	 -yOffset 0 \
+	 -xOffset 0
+DielectricLayer AIR  \
+	 -thickness 200 \
+	 -lossTangent 0.0 \
+	 -permittivity 1.0 \
+	 -permeability 1.0 \
+	 -yOffset 0.0 \
+	 -xOffset 0.0
+GroundPlane GrouPlan1  \
+	 -thickness 1.0 \
+	 -yOffset 0.0 \
+	 -xOffset 0.0

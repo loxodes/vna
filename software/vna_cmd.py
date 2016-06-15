@@ -66,7 +66,7 @@ class vna(cmd.Cmd):
 
     def do_det(self, line):
         '''det'''
-        print ser_cmd(self.ser, [DET_CMD])
+        print ser_cmd(self.ser, [DET_CMD, np.uint8(0), np.uint8(0)])
     
 if __name__ == '__main__':
     vna().cmdloop()

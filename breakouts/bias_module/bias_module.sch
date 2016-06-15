@@ -1,0 +1,267 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:conn_sma
+LIBS:bias_module-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L CONN_SMA U102
+U 1 1 57614536
+P 6450 2900
+F 0 "U102" H 6100 3100 60  0000 C CNN
+F 1 "CONN_SMA" H 6300 3250 60  0000 C CNN
+F 2 "" H 6450 2900 60  0001 C CNN
+F 3 "" H 6450 2900 60  0000 C CNN
+	1    6450 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_SMA U101
+U 1 1 57614580
+P 4350 2900
+F 0 "U101" H 4000 3100 60  0000 C CNN
+F 1 "CONN_SMA" H 4200 3250 60  0000 C CNN
+F 2 "" H 4350 2900 60  0001 C CNN
+F 3 "" H 4350 2900 60  0000 C CNN
+	1    4350 2900
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND #PWR01
+U 1 1 57614629
+P 4350 3450
+F 0 "#PWR01" H 4350 3200 50  0001 C CNN
+F 1 "GND" H 4350 3300 50  0000 C CNN
+F 2 "" H 4350 3450 50  0000 C CNN
+F 3 "" H 4350 3450 50  0000 C CNN
+	1    4350 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4200 3350 4200 3400
+Wire Wire Line
+	4200 3400 4500 3400
+Wire Wire Line
+	4500 3400 4500 3350
+Wire Wire Line
+	4400 3350 4400 3400
+Connection ~ 4400 3400
+Wire Wire Line
+	4300 3350 4300 3400
+Connection ~ 4300 3400
+Wire Wire Line
+	4350 3450 4350 3400
+Connection ~ 4350 3400
+$Comp
+L GND #PWR02
+U 1 1 5761468B
+P 6450 3450
+F 0 "#PWR02" H 6450 3200 50  0001 C CNN
+F 1 "GND" H 6450 3300 50  0000 C CNN
+F 2 "" H 6450 3450 50  0000 C CNN
+F 3 "" H 6450 3450 50  0000 C CNN
+	1    6450 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6300 3350 6300 3400
+Wire Wire Line
+	6300 3400 6600 3400
+Wire Wire Line
+	6600 3400 6600 3350
+Wire Wire Line
+	6500 3350 6500 3400
+Connection ~ 6500 3400
+Wire Wire Line
+	6400 3350 6400 3400
+Connection ~ 6400 3400
+Wire Wire Line
+	6450 3450 6450 3400
+Connection ~ 6450 3400
+$Comp
+L C_Small C104
+U 1 1 576146B2
+P 5500 2900
+F 0 "C104" H 5510 2970 50  0000 L CNN
+F 1 "100 nF" H 5510 2820 50  0000 L CNN
+F 2 "vna_footprints:ATC550L" H 5500 2900 50  0001 C CNN
+F 3 "" H 5500 2900 50  0000 C CNN
+	1    5500 2900
+	0    1    1    0   
+$EndComp
+$Comp
+L L_Small L101
+U 1 1 576146F4
+P 5150 2550
+F 0 "L101" H 5180 2590 50  0000 L CNN
+F 1 "6 uH" H 5180 2510 50  0000 L CNN
+F 2 "vna_footprints:ATC506WLS" H 5150 2550 50  0001 C CNN
+F 3 "" H 5150 2550 50  0000 C CNN
+	1    5150 2550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4900 2900 5400 2900
+Wire Wire Line
+	5150 2650 5150 2900
+Connection ~ 5150 2900
+Wire Wire Line
+	5600 2900 5900 2900
+$Comp
+L C_Small C102
+U 1 1 5761480E
+P 4550 2150
+F 0 "C102" H 4560 2220 50  0000 L CNN
+F 1 "100 nF" H 4560 2070 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 4550 2150 50  0001 C CNN
+F 3 "" H 4550 2150 50  0000 C CNN
+	1    4550 2150
+	1    0    0    -1  
+$EndComp
+$Comp
+L CP_Small C103
+U 1 1 5761485B
+P 4900 2150
+F 0 "C103" H 4910 2220 50  0000 L CNN
+F 1 "10 uF" H 4910 2070 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0805" H 4900 2150 50  0001 C CNN
+F 3 "" H 4900 2150 50  0000 C CNN
+	1    4900 2150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5150 1700 5150 2450
+Wire Wire Line
+	4900 1950 4900 2050
+Wire Wire Line
+	4550 1950 4550 2050
+Wire Wire Line
+	4200 1950 5150 1950
+Connection ~ 4900 1950
+$Comp
+L GND #PWR03
+U 1 1 57614A22
+P 4550 2300
+F 0 "#PWR03" H 4550 2050 50  0001 C CNN
+F 1 "GND" H 4550 2150 50  0000 C CNN
+F 2 "" H 4550 2300 50  0000 C CNN
+F 3 "" H 4550 2300 50  0000 C CNN
+	1    4550 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR04
+U 1 1 57614A45
+P 4900 2300
+F 0 "#PWR04" H 4900 2050 50  0001 C CNN
+F 1 "GND" H 4900 2150 50  0000 C CNN
+F 2 "" H 4900 2300 50  0000 C CNN
+F 3 "" H 4900 2300 50  0000 C CNN
+	1    4900 2300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 2300 4900 2250
+Wire Wire Line
+	4550 2300 4550 2250
+$Comp
+L GND #PWR05
+U 1 1 57614AA9
+P 5400 1950
+F 0 "#PWR05" H 5400 1700 50  0001 C CNN
+F 1 "GND" H 5400 1800 50  0000 C CNN
+F 2 "" H 5400 1950 50  0000 C CNN
+F 3 "" H 5400 1950 50  0000 C CNN
+	1    5400 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X02 P101
+U 1 1 57614AD4
+P 5200 1500
+F 0 "P101" H 5200 1650 50  0000 C CNN
+F 1 "CONN_01X02" V 5300 1500 50  0000 C CNN
+F 2 "Terminal_Blocks:TerminalBlock_Pheonix_PT-3.5mm_2pol" H 5200 1500 50  0001 C CNN
+F 3 "" H 5200 1500 50  0000 C CNN
+	1    5200 1500
+	0    -1   -1   0   
+$EndComp
+Connection ~ 5150 1950
+Wire Wire Line
+	5250 1700 5250 1850
+Wire Wire Line
+	5250 1850 5400 1850
+Wire Wire Line
+	5400 1850 5400 1950
+$Comp
+L C_Small C101
+U 1 1 57614C2B
+P 4200 2150
+F 0 "C101" H 4210 2220 50  0000 L CNN
+F 1 "100 pF" H 4210 2070 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" H 4200 2150 50  0001 C CNN
+F 3 "" H 4200 2150 50  0000 C CNN
+	1    4200 2150
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR06
+U 1 1 57614C5F
+P 4200 2300
+F 0 "#PWR06" H 4200 2050 50  0001 C CNN
+F 1 "GND" H 4200 2150 50  0000 C CNN
+F 2 "" H 4200 2300 50  0000 C CNN
+F 3 "" H 4200 2300 50  0000 C CNN
+	1    4200 2300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4200 2300 4200 2250
+Wire Wire Line
+	4200 1950 4200 2050
+Connection ~ 4550 1950
+Text Notes 4500 4050 0    60   ~ 0
+2.75 mm wide microstrip trace\nground plane on layer 3, layer 2 and 4 empty
+Text Notes 4500 4300 0    60   ~ 0
+add BMI-S-103 shield
+$EndSCHEMATC

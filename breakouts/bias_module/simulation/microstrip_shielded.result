@@ -1,0 +1,44 @@
+
+2016 06 15 00:50:19 kleinjt NMMTL_2DLF
+
+File = Z:/home/kleinjt/repos/vna/breakouts/bias_module/simulation/microstrip_shielded
+Number of Signal Lines  =   1
+Number of Ground Planes =   2
+Number of Ground Wires  =   0
+Coupling Length =   0.10000 meters
+Rise Time =   400.0000 picoseconds
+Contour (conductor) segments [cseg] = 100
+Ground Plane/Dielectric segments [dseg] = 100
+Conductivity c1R0 = 5e+007 siemens/meter
+Note: minimum frequency for surface current assumptions is 258473 MHz.
+Mutual and Self Electrostatic Induction:
+B(Active Signal , Passive Signal) Farads/Meter
+B( ::c1R0 , ::c1R0 )=  1.0836557e-010
+
+Mutual and Self Inductance:
+L(Active Signal , Passive Signal) Henrys/Meter
+L( ::c1R0 , ::c1R0 )=  2.7699306e-007
+
+Characteristic Impedance (Ohms):
+For Signal Line ::c1R0= 50.5579
+
+Effective Dielectric Constant:
+For Signal Line ::c1R0= 2.70149
+
+Propagation Velocity (meters/second):
+For Signal Line ::c1R0=  1.8239773e+008
+
+Propagation Delay (seconds/meter):
+For Signal Line ::c1R0=  5.4825244e-009
+
+Rdc:
+Rdc(Active Signal , Passive Signal) Ohms/Meter
+Rdc( ::c1R0 , ::c1R0 )=  1.3227513e+002
+
+Far-End (Forward) Cross Talk:
+FXT(Active Signal, Passive Signal)
+
+Near-End (Backward) Cross Talk:
+BXT(Active Signal, Passive Signal)
+
+NOTE: Cross talk results assume there are no reflections.
