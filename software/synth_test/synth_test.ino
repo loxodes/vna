@@ -33,7 +33,7 @@
 #define REG46_MASH_EN BIT5
 #define REG46_OUTA_PD BIT6
 #define REG46_OUTB_PD BIT7
-#define REG46_OUTA_POW BIT8
+
 #define REG30_VCO_2X_EN BIT0
 
 #define REG38_PLL_N 1
@@ -84,7 +84,7 @@
 #define FILT_CMD 'f'
 #define POW_CMD 'p'
 #define SYNTH_CMD 's'
-#define OUTPUT_CMD 'o'
+#define OUTPUT_CMD 's'
 #define DET_CMD 'd'
 #define ATT_CMD 'a'
 #define IQ_CMD 'q'
@@ -93,7 +93,6 @@
 #define SWITCH_LOWFREQ LOW
 #define SWITCH_HIGHFREQ HIGH
 
-#define FILTER_BANK_SIZE 8
 
 const uint8_t LMX_LE = 14;
 const uint8_t LMX_CE = 18;
@@ -110,7 +109,7 @@ const float F_VCO_MIN = 3.55e9;
 const float F_VCO_MAX = 7.1e9;
 const uint32_t PRE_N = 2;
 
-const uint8_t DET_0 = 23;
+const uint8_t DET_0 = A14; // pin 23
 
 const uint8_t SW_0 = 6;
 const uint8_t SW_1 = 6;
@@ -172,7 +171,6 @@ void spi_set_reg(uint8_t reg, uint32_t d)
 
 void gpio_init()
 {
-//    pinMode(SW_0, OUTPUT); (use SW_0 as DET)
     pinMode(SW_1, OUTPUT);
     digitalWrite(SW_1, SWITCH_LOWFREQ);
     
@@ -253,10 +251,10 @@ void lmx2592_chan_power(uint8_t chan, uint8_t power)
 {
     if(chan == CHANNELB) {
         spi_set_reg(47, (0x3F & power) << REG47_OUTB_POW);
+        spi_set_reg(46, REG46_OUTA_PD);
     }
     else if(chan == CHANNELA) {
-        ;//spi_set_reg(46, (0x3F & power) << REG46_OUTA_POW);
-        // TODO: set channel power without wiping out other settings on register..
+        spi_set_reg(46, REG46_OUTB_PD |(0x3F & power) << REG46_OUTA_POW);
     } 
 }
 
@@ -275,35 +273,41 @@ uint32_t calc_frac(float f, uint32_t n, float n_step, float frac_step, uint32_t 
 // to improve isolation from the vco doubler path
 void set_filterbank(float f)
 {
-    const uint32_t filter_bank_cutoffs[N_DIV_RATIOS] = {0e9, 6e9, 4.4e9, 3.4e9, 2.25e9, 1.45e9, 1e9, .63e9, 0};
-
-    uint8_t filt_i;
+  
+    const uint8_t FILTER_BANK_SIZE = 8;
+    const float filter_bank_cutoffs[FILTER_BANK_SIZE] = {6.0e9, 4.4e9, 3.4e9, 2.25e9, 1.45e9, 1.0e9, 0.63e9, 0.0};
+    uint8_t filt_i = 0;
     
     if(f > F_VCO_MAX) {
-        filt_i = FILT_BANK_SIZE - 1;
         digitalWrite(FILT0_A, HIGH);
         digitalWrite(FILT0_B, HIGH);
         digitalWrite(FILT0_C, HIGH);
         digitalWrite(FILT0_AN, HIGH);
         digitalWrite(FILT0_BN, HIGH);
         digitalWrite(FILT0_CN, HIGH);
-    }
-
-    else {
-        for(filt_i = 1; f < FILT_BANK_SIZE; filt_i++) {
+    } else {
+       if(f < filter_bank_cutoffs[0]) {
+         for(filt_i = 1; filt_i < FILTER_BANK_SIZE; filt_i++) {
             if(f > filter_bank_cutoffs[filt_i]) {
                 filt_i--;
                 break;
             }
-        }
+          }
+       } else {
+         filt_i = 7; // set bypass filter if frequency is above highest lowpass
+       }
 
-        digitalWrite(FILT0_A, ((filt_i & 0x01) > 0));
-        digitalWrite(FILT0_B, ((filt_i & 0x02) > 0));
-        digitalWrite(FILT0_C, ((filt_i & 0x04) > 0));
-        digitalWrite(FILT0_AN, ((filt_i & 0x01) == 0));
-        digitalWrite(FILT0_BN, ((filt_i & 0x02) == 0));
-        digitalWrite(FILT0_CN, ((filt_i & 0x04) == 0));
+       digitalWrite(FILT0_A, ((filt_i & 0x01) > 0));
+       digitalWrite(FILT0_B, ((filt_i & 0x02) > 0));
+       digitalWrite(FILT0_C, ((filt_i & 0x04) > 0));
+       digitalWrite(FILT0_AN, ((filt_i & 0x01) == 0));
+       digitalWrite(FILT0_BN, ((filt_i & 0x02) == 0));
+       digitalWrite(FILT0_CN, ((filt_i & 0x04) == 0));
     }
+    
+    Serial.print(" filt: ");
+    Serial.print(filt_i);
+    Serial.print(" ");
 
 
  }
@@ -312,9 +316,11 @@ void set_path_switch(float f)
 {
     if(f > F_VCO_MAX) {
         digitalWrite(SW_1, SWITCH_HIGHFREQ);
+        lmx2592_chan_power(CHANNELB, 0);
     }
     else {
         digitalWrite(SW_1, SWITCH_LOWFREQ);
+        lmx2592_chan_power(CHANNELA, 0);
     }
 }
 
@@ -383,7 +389,7 @@ void lmx2592_set_freq(float f)
         spi_set_reg(47, REG47_OUTA_MUX_VCO);
         
         // enable B to bypass filter bank, disable A buffer
-        spi_set_reg(31, REG31_VCO_DISTA_PD, REG31_CHDIV_DIST_PD);
+        spi_set_reg(31, REG31_CHDIV_DIST_PD);
     }
 
     else {
@@ -427,7 +433,9 @@ void setup()
     lmx2592_init();
 //    lmx2592_chan_power(CHANNELA, 15);
     lmx2592_set_denom(FRAC_DENOM);
-    lmx2592_set_freq(3.5e9);
+    lmx2592_set_freq(2e9);
+    set_filterbank(2e9);
+    set_path_switch(2e9);
 }
 
 uint8_t get_char()
@@ -486,7 +494,7 @@ void loop()
       Serial.print(idx);
       Serial.print(" ");   
       break;
-      
+    /*  
     case SYNTH_CMD:
       while(Serial.available() == 0);
       f_temp = Serial.parseFloat();
@@ -496,7 +504,7 @@ void loop()
       Serial.print(" ");
       f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..    
       lmx2592_set_freq(f_temp);
-      break;
+      break;*/
 
    case OUTPUT_CMD:
       while(Serial.available() == 0);
@@ -515,19 +523,17 @@ void loop()
     case ATT_CMD:
       c_temp = get_char();
       
-      digitalWrite(ATT_1, c_temp & BIT0 ? HIGH : LOW);
-      digitalWrite(ATT_2, c_temp & BIT1 ? HIGH : LOW);
-      digitalWrite(ATT_3, c_temp & BIT2 ? HIGH : LOW);
-      digitalWrite(ATT_4, c_temp & BIT3 ? HIGH : LOW);
-      digitalWrite(ATT_5, c_temp & BIT4 ? HIGH : LOW);
-      digitalWrite(ATT_6, c_temp & BIT5 ? HIGH : LOW);
+      digitalWrite(ATT_1, c_temp & BIT5 ? HIGH : LOW);
+      digitalWrite(ATT_2, c_temp & BIT4 ? HIGH : LOW);
+      digitalWrite(ATT_3, c_temp & BIT3 ? HIGH : LOW);
+      digitalWrite(ATT_4, c_temp & BIT2 ? HIGH : LOW);
+      digitalWrite(ATT_5, c_temp & BIT1 ? HIGH : LOW);
+      digitalWrite(ATT_6, c_temp & BIT0 ? HIGH : LOW);
       Serial.print("att: ");
       Serial.print(c_temp);      
       Serial.print("chan: ");
       Serial.print(idx);
-      Serial.print(" ");       
-
-      // TODO set attenuator pins..
+      Serial.print(" ");
       break;
       
     case IQ_CMD:
@@ -543,11 +549,12 @@ void loop()
         adc1 = 0;
         adc2 = 0;
       }
-      Serial.write(adc1);
-      Serial.write(adc2);
+      Serial.print(adc1);
+      Serial.print(adc2);
       break;
                               
     case DET_CMD:
+      c_temp = get_char();
       adc1 = analogRead(DET_0);
       Serial.print("det: ");
       Serial.print(adc1); 
