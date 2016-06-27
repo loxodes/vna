@@ -1,4 +1,4 @@
-update=Sat 23 Apr 2016 12:38:28 AM AKDT
+update=Thu Jun 23 23:13:14 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -87,3 +87,4 @@ LibName55=/home/kleinjt/repos/vna/lib/rf_crossbar
 LibName56=/home/kleinjt/repos/vna/lib/scbd-16-63
 LibName57=/home/kleinjt/repos/vna/lib/tcm-63ax+
 LibName58=/home/kleinjt/repos/vna/lib/txco
+LibName59=/home/kleinjt/repos/vna/lib/conn_sma_2gnd

@@ -1,4 +1,4 @@
-update=Tue Jun 14 23:48:08 2016
+update=Thu Jun 23 23:20:45 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -59,3 +59,4 @@ LibName27=atmel
 LibName28=contrib
 LibName29=valves
 LibName30=/home/kleinjt/repos/vna/lib/conn_sma
+LibName31=/home/kleinjt/repos/vna/lib/conn_sma_2gnd

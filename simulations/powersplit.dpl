@@ -1,0 +1,31 @@
+<Qucs Schematic 0.0.18>
+<Properties>
+  <View=0,0,800,800,1,0,0>
+  <Grid=10,10,0>
+  <DataSet=powersplit.dat>
+  <DataDisplay=powersplit.sch>
+  <OpenDisplay=1>
+  <Script=powersplit.m>
+  <RunScript=0>
+  <showFrame=0>
+  <FrameText0=Title>
+  <FrameText1=Drawn By:>
+  <FrameText2=Date:>
+  <FrameText3=Revision:>
+</Properties>
+<Symbol>
+</Symbol>
+<Components>
+</Components>
+<Wires>
+</Wires>
+<Diagrams>
+  <Rect 290 450 240 160 3 #c0c0c0 1 00 1 0 0.2 1 1 -0.1 0.5 1.1 1 -0.1 0.5 1.1 315 0 225 "" "" "">
+	<"dBS31" #0000ff 0 3 0 0 0>
+	  <Mkr 1.93389e+09 106 -73 3 0 0>
+	<"dBS21" #ff0000 0 3 0 0 0>
+	  <Mkr 1.10975e+09 87 -207 3 0 0>
+  </Rect>
+</Diagrams>
+<Paintings>
+</Paintings>

@@ -29,6 +29,7 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:conn_sma
+LIBS:conn_sma_2gnd
 LIBS:bias_module-cache
 EELAYER 25 0
 EELAYER END
@@ -45,28 +46,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L CONN_SMA U102
-U 1 1 57614536
-P 6450 2900
-F 0 "U102" H 6100 3100 60  0000 C CNN
-F 1 "CONN_SMA" H 6300 3250 60  0000 C CNN
-F 2 "" H 6450 2900 60  0001 C CNN
-F 3 "" H 6450 2900 60  0000 C CNN
-	1    6450 2900
-	1    0    0    -1  
-$EndComp
-$Comp
-L CONN_SMA U101
-U 1 1 57614580
-P 4350 2900
-F 0 "U101" H 4000 3100 60  0000 C CNN
-F 1 "CONN_SMA" H 4200 3250 60  0000 C CNN
-F 2 "" H 4350 2900 60  0001 C CNN
-F 3 "" H 4350 2900 60  0000 C CNN
-	1    4350 2900
-	-1   0    0    -1  
-$EndComp
-$Comp
 L GND #PWR01
 U 1 1 57614629
 P 4350 3450
@@ -77,21 +56,6 @@ F 3 "" H 4350 3450 50  0000 C CNN
 	1    4350 3450
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4200 3350 4200 3400
-Wire Wire Line
-	4200 3400 4500 3400
-Wire Wire Line
-	4500 3400 4500 3350
-Wire Wire Line
-	4400 3350 4400 3400
-Connection ~ 4400 3400
-Wire Wire Line
-	4300 3350 4300 3400
-Connection ~ 4300 3400
-Wire Wire Line
-	4350 3450 4350 3400
-Connection ~ 4350 3400
 $Comp
 L GND #PWR02
 U 1 1 5761468B
@@ -103,21 +67,6 @@ F 3 "" H 6450 3450 50  0000 C CNN
 	1    6450 3450
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6300 3350 6300 3400
-Wire Wire Line
-	6300 3400 6600 3400
-Wire Wire Line
-	6600 3400 6600 3350
-Wire Wire Line
-	6500 3350 6500 3400
-Connection ~ 6500 3400
-Wire Wire Line
-	6400 3350 6400 3400
-Connection ~ 6400 3400
-Wire Wire Line
-	6450 3450 6450 3400
-Connection ~ 6450 3400
 $Comp
 L C_Small C104
 U 1 1 576146B2
@@ -140,13 +89,6 @@ F 3 "" H 5150 2550 50  0000 C CNN
 	1    5150 2550
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	4900 2900 5400 2900
-Wire Wire Line
-	5150 2650 5150 2900
-Connection ~ 5150 2900
-Wire Wire Line
-	5600 2900 5900 2900
 $Comp
 L C_Small C102
 U 1 1 5761480E
@@ -169,15 +111,6 @@ F 3 "" H 4900 2150 50  0000 C CNN
 	1    4900 2150
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5150 1700 5150 2450
-Wire Wire Line
-	4900 1950 4900 2050
-Wire Wire Line
-	4550 1950 4550 2050
-Wire Wire Line
-	4200 1950 5150 1950
-Connection ~ 4900 1950
 $Comp
 L GND #PWR03
 U 1 1 57614A22
@@ -200,10 +133,6 @@ F 3 "" H 4900 2300 50  0000 C CNN
 	1    4900 2300
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4900 2300 4900 2250
-Wire Wire Line
-	4550 2300 4550 2250
 $Comp
 L GND #PWR05
 U 1 1 57614AA9
@@ -226,13 +155,6 @@ F 3 "" H 5200 1500 50  0000 C CNN
 	1    5200 1500
 	0    -1   -1   0   
 $EndComp
-Connection ~ 5150 1950
-Wire Wire Line
-	5250 1700 5250 1850
-Wire Wire Line
-	5250 1850 5400 1850
-Wire Wire Line
-	5400 1850 5400 1950
 $Comp
 L C_Small C101
 U 1 1 57614C2B
@@ -255,13 +177,118 @@ F 3 "" H 4200 2300 50  0000 C CNN
 	1    4200 2300
 	1    0    0    -1  
 $EndComp
+Text Notes 4500 4050 0    60   ~ 0
+2.75 mm wide microstrip trace\nground plane on layer 3, layer 2 and 4 empty
+Text Notes 4500 4300 0    60   ~ 0
+add BMI-S-103 shield
+Wire Wire Line
+	4200 3350 4200 3400
+Wire Wire Line
+	4200 3400 4500 3400
+Wire Wire Line
+	4500 3400 4500 3350
+Wire Wire Line
+	4400 3350 4400 3400
+Connection ~ 4400 3400
+Wire Wire Line
+	4300 3350 4300 3400
+Connection ~ 4300 3400
+Wire Wire Line
+	4350 3450 4350 3400
+Connection ~ 4350 3400
+Wire Wire Line
+	6300 3350 6300 3400
+Wire Wire Line
+	6300 3400 6600 3400
+Wire Wire Line
+	6600 3400 6600 3350
+Wire Wire Line
+	6500 3350 6500 3400
+Connection ~ 6500 3400
+Wire Wire Line
+	6400 3350 6400 3400
+Connection ~ 6400 3400
+Wire Wire Line
+	6450 3450 6450 3400
+Connection ~ 6450 3400
+Wire Wire Line
+	4900 2900 5400 2900
+Wire Wire Line
+	5150 2650 5150 2900
+Connection ~ 5150 2900
+Wire Wire Line
+	5600 2900 5900 2900
+Wire Wire Line
+	5150 1700 5150 2450
+Wire Wire Line
+	4900 1950 4900 2050
+Wire Wire Line
+	4550 1950 4550 2050
+Wire Wire Line
+	4200 1950 5150 1950
+Connection ~ 4900 1950
+Wire Wire Line
+	4900 2300 4900 2250
+Wire Wire Line
+	4550 2300 4550 2250
+Connection ~ 5150 1950
+Wire Wire Line
+	5250 1700 5250 1850
+Wire Wire Line
+	5250 1850 5400 1850
+Wire Wire Line
+	5400 1850 5400 1950
 Wire Wire Line
 	4200 2300 4200 2250
 Wire Wire Line
 	4200 1950 4200 2050
 Connection ~ 4550 1950
-Text Notes 4500 4050 0    60   ~ 0
-2.75 mm wide microstrip trace\nground plane on layer 3, layer 2 and 4 empty
-Text Notes 4500 4300 0    60   ~ 0
-add BMI-S-103 shield
+$Comp
+L CONN_SMA U101
+U 1 1 57614580
+P 4350 2900
+F 0 "U101" H 4000 3100 60  0000 C CNN
+F 1 "CONN_SMA" H 4200 3250 60  0000 C CNN
+F 2 "vna_footprints:732511150_sma_thin" H 4350 2900 60  0001 C CNN
+F 3 "" H 4350 2900 60  0000 C CNN
+	1    4350 2900
+	-1   0    0    -1  
+$EndComp
+$Comp
+L CONN_SMA U102
+U 1 1 57614536
+P 6450 2900
+F 0 "U102" H 6100 3100 60  0000 C CNN
+F 1 "CONN_SMA" H 6300 3250 60  0000 C CNN
+F 2 "vna_footprints:732511150_sma_thin" H 6450 2900 60  0001 C CNN
+F 3 "" H 6450 2900 60  0000 C CNN
+	1    6450 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X01 P102
+U 1 1 576CF8BB
+P 7350 3900
+F 0 "P102" H 7350 4000 50  0000 C CNN
+F 1 "CONN_01X01" V 7450 3900 50  0000 C CNN
+F 2 "vna_footprints:BMI-S-103-NOSIDES" H 7350 3900 50  0001 C CNN
+F 3 "" H 7350 3900 50  0000 C CNN
+	1    7350 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR07
+U 1 1 576CF8E9
+P 7050 3950
+F 0 "#PWR07" H 7050 3700 50  0001 C CNN
+F 1 "GND" H 7050 3800 50  0000 C CNN
+F 2 "" H 7050 3950 50  0000 C CNN
+F 3 "" H 7050 3950 50  0000 C CNN
+	1    7050 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7150 3900 7050 3900
+Wire Wire Line
+	7050 3900 7050 3950
 $EndSCHEMATC

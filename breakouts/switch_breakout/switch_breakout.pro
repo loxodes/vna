@@ -1,4 +1,4 @@
-update=Sat 06 Feb 2016 07:30:19 AM AKST
+update=Fri Jun 24 00:42:58 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,3 +61,4 @@ LibName29=valves
 LibName30=/home/kleinjt/repos/vna/lib/pe42521
 LibName31=/home/kleinjt/repos/vna/lib/conn_sma
 LibName32=/home/kleinjt/repos/vna/lib/mounting_box
+LibName33=/home/kleinjt/repos/vna/lib/conn_sma_2gnd
