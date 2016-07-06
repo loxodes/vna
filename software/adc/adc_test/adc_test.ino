@@ -11,8 +11,9 @@ int ADC_SCK = 34; // LTC2323 pin 21, input spi clock
 int ADC_CLKOUT = 35; // LTC2323 pin 17, output spi clock
 int ADC_SD2 = 36; // LTC2323 pin 19, adc channel 1
 int ADC_SD1 = 37; // LTC2323 pin 15, adc channel 1  
-
-
+int DUTPORT_SW = 2; //
+int S21_SW = LOW;
+int S11_SW = HIGH;
 void ltc2323_init()
 {
   pinMode(ADC_CNV_INPUT, OUTPUT);
@@ -62,18 +63,31 @@ void setup() {
   Serial.begin(9600);
   Serial.println("hello!");
   ltc2323_init();
-
+  pinMode(DUTPORT_SW, OUTPUT);
+  digitalWrite(DUTPORT_SW, S11_SW);
 }
 
 void loop() {
+  int32_t sdo1 = 0;
+  int32_t sdo2 = 0;
   uint32_t sample = ltc2323_conv();
-  uint16_t sdo1 = sample & 0xFFFF;
-  uint16_t sdo2 = sample >> 16;
+  
+  for(uint32_t i = 0; i < 64; i++) {
+    uint32_t sample = ltc2323_conv();
+    sdo1 += ((int16_t) (sample & 0xFFFF));
+    sdo2 += ((int16_t) (sample >> 16));
+  }
+  
+  sdo1 /= 64;
+  sdo2 /= 64;
+
   
   Serial.print("1:");
   Serial.print(sdo1);
   Serial.print(" 2:");
   Serial.println(sdo2);
+  
+  delay(500);
 }
 
 
