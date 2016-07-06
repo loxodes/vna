@@ -1,8 +1,7 @@
 # Open Hardware Vector Network Analyzer
-I'm developing a proof of concept two port microwave vector network analyzer. 
-I don't have a working prototype yet system, I'm still developing and testing individual components of the design.
+I'm developing a proof of concept two port microwave vector network analyzer. The project is under developent.
+![picture synth board](./doc/r0_vna.jpg)
 
-![block diagram](./doc/block_diagram.png)
 
 ## Usage
 This project is still under development, y'all probably don't want to try reproducing it yet.
@@ -26,7 +25,7 @@ See `breakouts` for various modules developed for the network analyzer.
 | attenuator | variable attenuator | working! |
 | amp | broadband amplifier | partially working, resonance at 4 GHz.. |
 | demod | quadrature demodulator | working up to output buffer.. |
-| adc_dual | dual adc | untested | 
+| adc_dual | dual adc | working! | 
 | refclk | PLL reference clock | working! |
 The edge launch SMA connector footprint on some boards results in high reflection above 2 GHz due to the excess pad width relative to 50 ohm microstrip.. 
 
@@ -38,6 +37,7 @@ Breakout boards are combined into modules.. I'm currently working on a synthesiz
 | hardware/switch_demod    | I/Q demodulator, adc, LO splitting, and rf switching for DUT connectors | schematic in progress | 
 
 ![picture synth board](./doc/synth.jpg)
+
 
 All 4 layer PCBs are routed assuming OSH Park's 4 layer stackup (http://docs.oshpark.com/services/four-layer/) with FR-408 and 6.7 mil prepreg height. 
 All layouts/schematics are created in KiCad 4.0.2

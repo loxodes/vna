@@ -137,6 +137,7 @@ const uint8_t ATT_4 = 29;
 const uint8_t ATT_5 = 27;
 const uint8_t ATT_6 = 25;
 
+float output_freq;
 
 uint16_t spi_read_reg(uint8_t reg)
 {
@@ -258,6 +259,38 @@ void lmx2592_chan_power(uint8_t chan, uint8_t power)
     } 
 }
 
+float adl5902_get_int(float f)
+{
+  return -37;
+}
+
+float adl5902_get_slope(float f)
+{
+  return 47.5e-3;
+}
+
+void adl5902_init()
+{
+  analogReference(INTERNAL2V5);
+  analogReadResolution(12);
+  uint32_t i = 0;
+  for(i = 0; i < 200; i++) {
+    analogRead(DET_0);
+  }
+}
+float adl5902_powerdet(float f)
+{
+  float ADC_REF = 2.5;
+  float det_voltage, det_power;
+  uint32_t ADC_STEPS = 4096;
+  float det_adc = analogRead(DET_0);
+  Serial.print("RAW ADC: ");
+  Serial.print(det_adc);
+  det_voltage = (ADC_REF / (float) ADC_STEPS) * det_adc;
+  det_power = adl5902_get_int(f) + (det_voltage / adl5902_get_slope(f));
+  return det_power;
+}
+
 uint32_t calc_n(float f, float n_step, uint32_t div)
 {
     return f / (n_step / div);
@@ -304,13 +337,8 @@ void set_filterbank(float f)
        digitalWrite(FILT0_BN, ((filt_i & 0x02) == 0));
        digitalWrite(FILT0_CN, ((filt_i & 0x04) == 0));
     }
-    
-    Serial.print(" filt: ");
-    Serial.print(filt_i);
-    Serial.print(" ");
-
-
  }
+
 
 void set_path_switch(float f)
 {
@@ -322,6 +350,19 @@ void set_path_switch(float f)
         digitalWrite(SW_1, SWITCH_LOWFREQ);
         lmx2592_chan_power(CHANNELA, 0);
     }
+}
+
+// set attenuator value, in dB
+void set_att(float att_db)
+{
+  float ATT_STEP = .5;
+  uint8_t att = att_db / ATT_STEP;
+  digitalWrite(ATT_1, att & BIT5 ? HIGH : LOW);
+  digitalWrite(ATT_2, att & BIT4 ? HIGH : LOW);
+  digitalWrite(ATT_3, att & BIT3 ? HIGH : LOW);
+  digitalWrite(ATT_4, att & BIT2 ? HIGH : LOW);
+  digitalWrite(ATT_5, att & BIT1 ? HIGH : LOW);
+  digitalWrite(ATT_6, att & BIT0 ? HIGH : LOW);
 }
 
 void lmx2592_set_freq(float f)
@@ -340,7 +381,9 @@ void lmx2592_set_freq(float f)
     const uint32_t div_ratios[N_DIV_RATIOS] =   {2, 4, 8, 12,16,24,48,96, 128};
     const uint32_t div1_options[N_DIV_RATIOS] = {0, 0, 0, 0, 0, 0, 0,  0,  0}; // for some reason, div3 on seg1 doesn't work..
     const uint32_t div2_options[N_DIV_RATIOS] = {0, 1, 2, 4, 8, 4, 4,  8,  8};
-    const uint32_t div3_options[N_DIV_RATIOS] = {0, 0, 0, 0, 0, 1, 2,  4,  8};    
+    const uint32_t div3_options[N_DIV_RATIOS] = {0, 0, 0, 0, 0, 1, 2,  4,  8};
+    output_freq = f;
+    
     if(f < F_VCO_MIN) {
         for(div_i = 0; div_i < N_DIV_RATIOS; div_i++) {
             if(f > F_VCO_MIN / div_ratios[div_i]) {
@@ -430,12 +473,24 @@ void setup()
     SPI.begin();
     clk_init();
     gpio_init();
+    adl5902_init();
+
     lmx2592_init();
 //    lmx2592_chan_power(CHANNELA, 15);
     lmx2592_set_denom(FRAC_DENOM);
-    lmx2592_set_freq(2e9);
-    set_filterbank(2e9);
-    set_path_switch(2e9);
+    lmx2592_set_freq(500e6);
+    set_filterbank(500e6);
+    set_path_switch(500e6);
+    lmx2592_chan_power(CHANNELA, 0);
+    uint32_t i;
+    while(1) {
+      set_att((i % 5) * 5);
+      i++;
+      delay(1000);
+    }    
+    float pow = adl5902_powerdet(output_freq);
+    Serial.print("power: ");
+    Serial.println(pow);
 }
 
 uint8_t get_char()
@@ -450,8 +505,8 @@ void loop()
   const uint8_t sw_state[2] =   {LOW, HIGH};
   uint8_t c_temp;
   float f_temp;
-  uint16_t adc1, adc2;
-  
+  float output_power;
+  uint32_t adc1, adc2;
   uint8_t cmd = get_char();
   uint8_t idx = get_char();
   Serial.print("idx: ");
@@ -555,9 +610,9 @@ void loop()
                               
     case DET_CMD:
       c_temp = get_char();
-      adc1 = analogRead(DET_0);
+      output_power = adl5902_powerdet(output_freq);
       Serial.print("det: ");
-      Serial.print(adc1); 
+      Serial.print(output_power); 
       break;
       
     default:
