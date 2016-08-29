@@ -67,7 +67,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 10 10
+Sheet 10 9
 Title ""
 Date ""
 Rev ""
@@ -513,7 +513,7 @@ F 3 "" H 8200 4250 50  0000 C CNN
 	1    8200 4250
 	1    0    0    -1  
 $EndComp
-Text Label 8100 4500 2    60   ~ 0
+Text Label 7600 4500 2    60   ~ 0
 LMXPOW_EN
 Text Label 950  3750 2    60   ~ 0
 LMXPOW_EN
@@ -725,7 +725,7 @@ Wire Wire Line
 	8200 3800 8300 3800
 Connection ~ 8300 4300
 Wire Wire Line
-	8400 4500 8100 4500
+	7600 4500 8400 4500
 Wire Wire Line
 	950  3750 1350 3750
 Wire Wire Line
@@ -876,4 +876,60 @@ NoConn ~ 1350 1850
 NoConn ~ 2550 2250
 NoConn ~ 2550 2450
 NoConn ~ 2550 2650
+$Comp
+L R_Small R?
+U 1 1 57C21F15
+P 7300 3700
+F 0 "R?" H 7330 3720 50  0000 L CNN
+F 1 "10k" H 7330 3660 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 7300 3700 50  0001 C CNN
+F 3 "" H 7300 3700 50  0000 C CNN
+	1    7300 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 57C21FD2
+P 7300 4050
+F 0 "R?" H 7330 4070 50  0000 L CNN
+F 1 "10k" H 7330 4010 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 7300 4050 50  0001 C CNN
+F 3 "" H 7300 4050 50  0000 C CNN
+	1    7300 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 57C220EE
+P 7300 4200
+F 0 "#PWR?" H 7300 3950 50  0001 C CNN
+F 1 "GND" H 7300 4050 50  0000 C CNN
+F 2 "" H 7300 4200 50  0000 C CNN
+F 3 "" H 7300 4200 50  0000 C CNN
+	1    7300 4200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 4150 7300 4200
+$Comp
+L +5V #PWR?
+U 1 1 57C22311
+P 7300 3500
+F 0 "#PWR?" H 7300 3350 50  0001 C CNN
+F 1 "+5V" H 7300 3640 50  0000 C CNN
+F 2 "" H 7300 3500 50  0000 C CNN
+F 3 "" H 7300 3500 50  0000 C CNN
+	1    7300 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 3500 7300 3600
+Wire Wire Line
+	7300 3800 7300 3950
+Wire Wire Line
+	7300 3900 7750 3900
+Wire Wire Line
+	7750 3900 7750 4500
+Connection ~ 7750 4500
+Connection ~ 7300 3900
 $EndSCHEMATC

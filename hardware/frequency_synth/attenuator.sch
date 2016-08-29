@@ -67,7 +67,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 10
+Sheet 4 9
 Title ""
 Date ""
 Rev ""
@@ -681,17 +681,17 @@ F 3 "" H 1200 4050 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 1300 3250 0    60   ~ 0
-A1
+ATT_1
 Text Label 1300 3350 0    60   ~ 0
-A2
+ATT_2
 Text Label 1300 3550 0    60   ~ 0
-A4
+ATT_4
 Text Label 1300 3450 0    60   ~ 0
-A3
+ATT_3
 Text Label 1300 3650 0    60   ~ 0
-A5
+ATT_5
 Text Label 1300 3750 0    60   ~ 0
-A6
+ATT_6
 Wire Wire Line
 	1100 3250 1300 3250
 Wire Wire Line
@@ -970,4 +970,122 @@ F 3 "" H 8100 2100 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	3250 5250 3600 5250
+$Comp
+L 74HC04_FULL U?
+U 1 1 57C3BD51
+P 8200 3950
+F 0 "U?" H 7900 4550 60  0000 C CNN
+F 1 "74HC04_FULL" H 8000 4450 60  0000 C CNN
+F 2 "Housings_SSOP:TSSOP-14_4.4x5mm_Pitch0.65mm" H 8200 3950 60  0001 C CNN
+F 3 "" H 8200 3950 60  0000 C CNN
+	1    8200 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 57C3BF75
+P 8850 3300
+F 0 "C?" H 8860 3370 50  0000 L CNN
+F 1 "100 nF" H 8860 3220 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" H 8850 3300 50  0001 C CNN
+F 3 "" H 8850 3300 50  0000 C CNN
+	1    8850 3300
+	-1   0    0    1   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 57C3C099
+P 8850 3450
+F 0 "#PWR?" H 8850 3200 50  0001 C CNN
+F 1 "GND" H 8850 3300 50  0000 C CNN
+F 2 "" H 8850 3450 50  0000 C CNN
+F 3 "" H 8850 3450 50  0000 C CNN
+	1    8850 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8850 3400 8850 3450
+$Comp
+L +5V #PWR?
+U 1 1 57C3C52B
+P 8850 3100
+F 0 "#PWR?" H 8850 2950 50  0001 C CNN
+F 1 "+5V" H 8850 3240 50  0000 C CNN
+F 2 "" H 8850 3100 50  0000 C CNN
+F 3 "" H 8850 3100 50  0000 C CNN
+	1    8850 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8850 3100 8850 3200
+Wire Wire Line
+	8850 3150 8700 3150
+Wire Wire Line
+	8700 3150 8700 3650
+Wire Wire Line
+	8700 3650 8650 3650
+Connection ~ 8850 3150
+$Comp
+L GND #PWR?
+U 1 1 57C3CA74
+P 7700 4300
+F 0 "#PWR?" H 7700 4050 50  0001 C CNN
+F 1 "GND" H 7700 4150 50  0000 C CNN
+F 2 "" H 7700 4300 50  0000 C CNN
+F 3 "" H 7700 4300 50  0000 C CNN
+	1    7700 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7750 4250 7700 4250
+Wire Wire Line
+	7700 4250 7700 4300
+Text Label 7400 3750 2    60   ~ 0
+A1
+Wire Wire Line
+	7400 3750 7750 3750
+Wire Wire Line
+	7400 3650 7750 3650
+Text Label 7400 3650 2    60   ~ 0
+ATT_1
+Text Label 7400 3850 2    60   ~ 0
+ATT_2
+Wire Wire Line
+	7400 3850 7750 3850
+Text Label 7400 3950 2    60   ~ 0
+A2
+Wire Wire Line
+	7400 3950 7750 3950
+Text Label 7400 4050 2    60   ~ 0
+ATT_3
+Text Label 7400 4150 2    60   ~ 0
+A3
+Wire Wire Line
+	7400 4150 7750 4150
+Wire Wire Line
+	7400 4050 7750 4050
+Text Label 9000 3850 0    60   ~ 0
+A6
+Wire Wire Line
+	9000 3850 8650 3850
+Wire Wire Line
+	9000 3750 8650 3750
+Text Label 9000 3750 0    60   ~ 0
+ATT_6
+Text Label 9000 3950 0    60   ~ 0
+ATT_5
+Wire Wire Line
+	9000 3950 8650 3950
+Text Label 9000 4050 0    60   ~ 0
+A5
+Wire Wire Line
+	9000 4050 8650 4050
+Text Label 9000 4150 0    60   ~ 0
+ATT_4
+Text Label 9000 4250 0    60   ~ 0
+A4
+Wire Wire Line
+	9000 4250 8650 4250
+Wire Wire Line
+	9000 4150 8650 4150
 $EndSCHEMATC

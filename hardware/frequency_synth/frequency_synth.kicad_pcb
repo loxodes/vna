@@ -1,9 +1,9 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.2-stable)
+(kicad_pcb (version 4) (host pcbnew 4.0.3-stable)
 
   (general
     (links 455)
     (no_connects 0)
-    (area 160.724999 81.358 276.442 118.542)
+    (area 160.724999 81.508 276.512 118.612)
     (thickness 1.6)
     (drawings 57)
     (tracks 1613)
@@ -6513,7 +6513,7 @@
   (gr_text https://github.com/loxodes/vna (at 262 86.75) (layer F.SilkS) (tstamp 5738E5F3)
     (effects (font (size 0.8 0.8) (thickness 0.2)))
   )
-  (gr_text "r0 2016.05" (at 233.75 85.25) (layer F.SilkS) (tstamp 5738E5EE)
+  (gr_text "r1 2016.08" (at 233.75 85.25) (layer F.SilkS) (tstamp 5738E5EE)
     (effects (font (size 1 1) (thickness 0.25)))
   )
   (gr_text "500 MHz to 10 GHz synth" (at 261.75 85.25) (layer F.SilkS)
