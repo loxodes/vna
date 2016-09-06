@@ -2430,12 +2430,12 @@ Wire Wire Line
 	7650 1650 7650 1600
 Connection ~ 7650 1600
 $Comp
-L mounting_box U?
+L mounting_box U108
 U 1 1 57CA7A8F
 P 12750 2300
-F 0 "U?" H 12750 2300 60  0000 C CNN
+F 0 "U108" H 12750 2300 60  0000 C CNN
 F 1 "mounting_box" H 12700 2450 60  0000 C CNN
-F 2 "" H 12750 2300 60  0000 C CNN
+F 2 "vna_footprints:momo" H 12750 2300 60  0001 C CNN
 F 3 "" H 12750 2300 60  0000 C CNN
 	1    12750 2300
 	1    0    0    -1  
