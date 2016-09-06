@@ -1,82 +1,15 @@
 #include <SPI.h>
-
-#define BIT0 (1 << 0)
-#define BIT1 (1 << 1)
-#define BIT2 (1 << 2)
-#define BIT3 (1 << 3)
-#define BIT4 (1 << 4)
-#define BIT5 (1 << 5)
-#define BIT6 (1 << 6)
-#define BIT7 (1 << 7)
-#define BIT8 (1 << 8)
-#define BIT9 (1 << 9)
-#define BIT10 (1 << 10)
-#define BIT11 (1 << 11)
-#define BIT12 (1 << 12)
-#define BIT13 (1 << 13)
-#define BIT14 (1 << 14)
-#define BIT15 (1 << 15)
-#define BIT16 (1 << 16)
-#define BIT17 (1 << 17)
-#define BIT18 (1 << 18)
-#define BIT19 (1 << 19)
-#define BIT20 (1 << 20)
-#define BIT21 (1 << 21)
-#define BIT22 (1 << 22)
-#define BIT23 (1 << 23)
-
-#define REG0_LD_EN BIT13
-#define REG0_FCAL_EN BIT3
-#define REG0_RESET BIT1
-#define REG0_MUXOUT_SEL BIT2
-#define REG46_MASH_ORDER_2 2
-#define REG46_MASH_EN BIT5
-#define REG46_OUTA_PD BIT6
-#define REG46_OUTB_PD BIT7
-
-#define REG30_VCO_2X_EN BIT0
-
-#define REG38_PLL_N 1
-#define REG39_PFD_DLY_2 BIT9
-
-#define REG36_CHDIV_DISTB_EN BIT11
-#define REG36_CHDIV_DISTA_EN BIT10
-#define REG36_CHDIV_SEG_SEL_1 BIT4
-#define REG36_CHDIV_SEG_SEL_12 BIT5
-#define REG36_CHDIV_SEG_SEL_123 BIT6
-#define REG36_CHDIV_SEG3 0
-
-
-#define REG35_CHDIV_SEG2 9
-#define REG35_CHDIV_SEG3_EN BIT8
-#define REG35_CHDIV_SEG2_EN BIT7
-#define REG35_CHDIV_SEG1 2 
-#define REG35_CHDIV_SEG1_EN BIT1
-
-#define REG34_CHDIV_EN BIT5
-
-#define REG48_OUTB_MUX_VCO BIT0
-#define REG48_OUTB_MUX_DIV 0
-
-#define REG10_MULT 7
-#define REG11_PLL_R 4
-#define REG12_PLL_R_PRE 0
-#define REG47_OUTB_POW 0
-#define REG46_OUTA_POW 8
-
-#define REG47_OUTA_MUX_DIV 0
-#define REG47_OUTA_MUX_VCO BIT11
-
-
-#define REG31_VCO_DISTA_PD BIT9
-#define REG31_VCO_DISTB_PD BIT10
-#define REG31_CHDIV_DIST_PD BIT7
+#include <Ethernet.h>
+#include <EthernetUdp.h>
+#include "lmx2592.h"
 
 #define CHANNELA 0
 #define CHANNELB 1
-
 #define ON 1
 #define OFF 0
+#define ADC_BITS 16
+#define CNV_DELAY 1
+#define SCK_DELAY 1
 
 // command structure
 // [region][index][command]
@@ -93,23 +26,13 @@
 #define SWITCH_LOWFREQ LOW
 #define SWITCH_HIGHFREQ HIGH
 
-
+// pins
 const uint8_t LMX_LE = 14;
 const uint8_t LMX_CE = 18;
 const uint8_t LMX_AUX = 12;
 const uint8_t LMX_POWEN = 32;
 
 const uint8_t REFCLK_EN = 24;
-
-
-const uint16_t MIN_N = 16;
-const uint32_t FRAC_DENOM = 200000; 
-const float PFD = 100e6;
-const float F_VCO_MIN = 3.55e9;
-const float F_VCO_MAX = 7.1e9;
-const uint32_t PRE_N = 2;
-
-const uint8_t DET_0 = A14; // pin 23
 
 const uint8_t SW_0 = 6;
 const uint8_t SW_1 = 6;
@@ -137,13 +60,89 @@ const uint8_t ATT_4 = 29;
 const uint8_t ATT_5 = 27;
 const uint8_t ATT_6 = 25;
 
+const uint8_t DET_0 = A14; // pin 23
+
+
+// TODO fix pins
+int ADC_CNV_INPUT = 31; // LTC2323 pin 9, high defines sample phase, low starts conversion phase
+int ADC_CNV_CLK_OUT = 32; // LTC2323 conversion clock output
+int ADC_CNV_EN = 33; // LTC2323 conversion enable, high is enabled?
+int ADC_SCK = 34; // LTC2323 pin 21, input spi clock
+int ADC_CLKOUT = 35; // LTC2323 pin 17, output spi clock
+int ADC_SD2 = 36; // LTC2323 pin 19, adc channel 1
+int ADC_SD1 = 37; // LTC2323 pin 15, adc channel 1  
+
+// synth settings
+const uint16_t MIN_N = 16;
+const uint32_t FRAC_DENOM = 200000; 
+const float PFD = 100e6;
+const float F_VCO_MIN = 3.55e9;
+const float F_VCO_MAX = 7.1e9;
+const uint32_t PRE_N = 2;
+
+// ethernet stuff
+byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
+IPAddress ip(192,168,1,177);
+unsigned int port = 8888;
+EthernetUDP Udp;
+
+// buffers for receiving and sending data
+char packetBuffer[UDP_TX_PACKET_MAX_SIZE]; //buffer to hold incoming packet
+char replyBuffer[UDP_TX_PACKET_MAX_SIZE]; // buffer to hold outgoing packet 
+
+
 float output_freq;
+
+void ltc2323_init()
+{
+  pinMode(ADC_CNV_INPUT, OUTPUT);
+  pinMode(ADC_CNV_CLK_OUT, INPUT_PULLUP);
+  pinMode(ADC_CNV_EN, OUTPUT);
+  pinMode(ADC_SCK, OUTPUT);
+  pinMode(ADC_CLKOUT, INPUT_PULLUP);
+  pinMode(ADC_SD2, INPUT_PULLUP);
+  pinMode(ADC_SD1, INPUT_PULLUP);
+  
+  digitalWrite(ADC_CNV_EN, HIGH); // INVERTED
+  digitalWrite(ADC_CNV_INPUT, LOW); // INVERTED
+}
+
+uint32_t ltc2323_conv()
+{
+  uint32_t adc1 = 0;
+  uint32_t adc2 = 0;
+  // why do I need to pulse CNV_EN?...
+  digitalWrite(ADC_CNV_EN, LOW);
+  delayMicroseconds(CNV_DELAY);
+ digitalWrite(ADC_CNV_EN, HIGH); // INVERTED
+  
+//  digitalWrite(ADC_SCK, HIGH);
+
+  digitalWrite(ADC_CNV_INPUT, HIGH);
+  delayMicroseconds(CNV_DELAY);
+  digitalWrite(ADC_CNV_INPUT, LOW);
+  delayMicroseconds(CNV_DELAY);
+  
+  for(uint32_t i = 0; i < ADC_BITS; i++) {
+    digitalWrite(ADC_SCK, HIGH);
+    delayMicroseconds(SCK_DELAY);
+    adc1 = adc1 << 1;
+    adc2 = adc2 << 1;
+    adc1 |= digitalRead(ADC_SD1) ^ 1;
+    adc2 |= digitalRead(ADC_SD2) ^ 1;
+    digitalWrite(ADC_SCK, LOW);
+    delayMicroseconds(SCK_DELAY);
+  }
+  
+  return adc1 | (adc2 << 16);
+  
+}
+
 
 uint16_t spi_read_reg(uint8_t reg)
 {
   
 }
-
 void spi_set_reg(uint8_t reg, uint32_t d)
 {
     // so, a bunch of registers have default values that need to be maintained... wtf
@@ -220,10 +219,8 @@ void lmx2592_init()
 
     digitalWrite(LMX_CE, HIGH);
     digitalWrite(LMX_LE, HIGH);
-    //digitalWrite(LMX_POWEN, HIGH);
-
-    delay(100);
-
+    digitalWrite(LMX_POWEN, HIGH);
+    
     delay(10);
     spi_set_reg(0, REG0_RESET);
     
@@ -271,7 +268,7 @@ float adl5902_get_slope(float f)
 
 void adl5902_init()
 {
-  analogReference(INTERNAL2V5);
+//  analogReference(INTERNAL2V5);
   analogReadResolution(12);
   uint32_t i = 0;
   for(i = 0; i < 200; i++) {
@@ -470,24 +467,21 @@ void lmx2592_set_freq(float f)
 void setup()
 {
     Serial.begin(9600);
+    Ethernet.begin(mac, ip);
+    Udp.begin(port);
     SPI.begin();
     clk_init();
     gpio_init();
     adl5902_init();
-
+//    ltc2323_init();
     lmx2592_init();
-//    lmx2592_chan_power(CHANNELA, 15);
+    
     lmx2592_set_denom(FRAC_DENOM);
     lmx2592_set_freq(500e6);
     set_filterbank(500e6);
     set_path_switch(500e6);
     lmx2592_chan_power(CHANNELA, 0);
-    uint32_t i;
-    while(1) {
-      set_att((i % 5) * 5);
-      i++;
-      delay(1000);
-    }    
+     
     float pow = adl5902_powerdet(output_freq);
     Serial.print("power: ");
     Serial.println(pow);
@@ -507,120 +501,136 @@ void loop()
   float f_temp;
   float output_power;
   uint32_t adc1, adc2;
-  uint8_t cmd = get_char();
-  uint8_t idx = get_char();
+  uint8_t cmd, idx;
+  
+  IPAddress remote;
   Serial.print("idx: ");
   Serial.print(idx);
   Serial.print(" ");
-  delay(50); // TODO: wait for an appropriate number of bytes for each command
-    
-  switch (cmd) {
-    case SWITCH_CMD:
-      c_temp = get_char();
-      digitalWrite(switches[idx], sw_state[c_temp]);
-      Serial.print("state: ");
-      Serial.print(c_temp);      
-      Serial.print("idx: ");
-      Serial.print(idx);
-      Serial.print(" ");   
-      break;
-      
-    case FILT_CMD:
-      c_temp = get_char();
-      // TODO: write filter path command,
-      // TODO: add filter selection to freq command
-      if(idx == CHANNELA) {
-        digitalWrite(FILT0_A, ((c_temp & 0x01) > 0));
-        digitalWrite(FILT0_B, ((c_temp & 0x02) > 0));
-        digitalWrite(FILT0_C, ((c_temp & 0x04) > 0));
-        digitalWrite(FILT0_AN, ((c_temp & 0x01) == 0));
-        digitalWrite(FILT0_BN, ((c_temp & 0x02) == 0));
-        digitalWrite(FILT0_CN, ((c_temp & 0x04) == 0));
 
-      }
-      break;
-      
-    case POW_CMD:
-      c_temp = get_char();
-      lmx2592_chan_power(idx, c_temp);
-      Serial.print("pow: ");
-      Serial.print(c_temp);      
-      Serial.print("chan: ");
-      Serial.print(idx);
-      Serial.print(" ");   
-      break;
-    /*  
-    case SYNTH_CMD:
-      while(Serial.available() == 0);
-      f_temp = Serial.parseFloat();
-
-      Serial.print("freq: ");
-      Serial.print(f_temp);
-      Serial.print(" ");
-      f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..    
-      lmx2592_set_freq(f_temp);
-      break;*/
-
-   case OUTPUT_CMD:
-      while(Serial.available() == 0);
-      f_temp = Serial.parseFloat();
-
-      Serial.print("freq: ");
-      Serial.print(f_temp);
-      Serial.print(" ");
-      f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..    
-
-      lmx2592_set_freq(f_temp);
-      set_filterbank(f_temp);
-      set_path_switch(f_temp);
-      break;
-     
-    case ATT_CMD:
-      c_temp = get_char();
-      
-      digitalWrite(ATT_1, c_temp & BIT5 ? HIGH : LOW);
-      digitalWrite(ATT_2, c_temp & BIT4 ? HIGH : LOW);
-      digitalWrite(ATT_3, c_temp & BIT3 ? HIGH : LOW);
-      digitalWrite(ATT_4, c_temp & BIT2 ? HIGH : LOW);
-      digitalWrite(ATT_5, c_temp & BIT1 ? HIGH : LOW);
-      digitalWrite(ATT_6, c_temp & BIT0 ? HIGH : LOW);
-      Serial.print("att: ");
-      Serial.print(c_temp);      
-      Serial.print("chan: ");
-      Serial.print(idx);
-      Serial.print(" ");
-      break;
-      
-    case IQ_CMD:
-      if(idx == CHANNELA) {
-        adc1 = analogRead(I_0);
-        adc2 = analogRead(Q_0);
-      }
-      else if(idx == CHANNELB) {
-        adc1 = analogRead(I_1);
-        adc2 = analogRead(Q_1);
-      }
-      else {
-        adc1 = 0;
-        adc2 = 0;
-      }
-      Serial.print(adc1);
-      Serial.print(adc2);
-      break;
-                              
-    case DET_CMD:
-      c_temp = get_char();
-      output_power = adl5902_powerdet(output_freq);
-      Serial.print("det: ");
-      Serial.print(output_power); 
-      break;
-      
-    default:
-      Serial.print(" unrecognized command ");
-      Serial.write(CMD_ERR);
-      break;
-  }
+  int32_t packet_size = Udp.parsePacket();
   
+  if(packet_size) {
+    Udp.read(packetBuffer,UDP_TX_PACKET_MAX_SIZE);
+    
+    cmd = packetBuffer[0];
+    idx = packetBuffer[1];
+    
+    switch (cmd) {
+      case SWITCH_CMD:
+        c_temp = packetBuffer[2];
+        digitalWrite(switches[idx], sw_state[c_temp]);
+        Serial.print("state: ");
+        Serial.print(c_temp);      
+        Serial.print("idx: ");
+        Serial.print(idx);
+        Serial.print(" ");   
+        break;
+        
+      case FILT_CMD:
+        c_temp = packetBuffer[2];
+        // TODO: write filter path command,
+        // TODO: add filter selection to freq command
+        if(idx == CHANNELA) {
+          digitalWrite(FILT0_A, ((c_temp & 0x01) > 0));
+          digitalWrite(FILT0_B, ((c_temp & 0x02) > 0));
+          digitalWrite(FILT0_C, ((c_temp & 0x04) > 0));
+          digitalWrite(FILT0_AN, ((c_temp & 0x01) == 0));
+          digitalWrite(FILT0_BN, ((c_temp & 0x02) == 0));
+          digitalWrite(FILT0_CN, ((c_temp & 0x04) == 0));
+  
+        }
+        break;
+        
+      case POW_CMD:
+        c_temp = packetBuffer[2];
+        lmx2592_chan_power(idx, c_temp);
+        Serial.print("pow: ");
+        Serial.print(c_temp);      
+        Serial.print("chan: ");
+        Serial.print(idx);
+        Serial.print(" ");   
+        break;
+      /*  
+      case SYNTH_CMD:
+        while(Serial.available() == 0);
+        f_temp = Serial.parseFloat();
+  
+        Serial.print("freq: ");
+        Serial.print(f_temp);
+        Serial.print(" ");
+        f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..    
+        lmx2592_set_freq(f_temp);
+        break;*/
+  
+     case OUTPUT_CMD:
+        while(Serial.available() == 0);
+        f_temp = Serial.parseFloat();
+  
+        Serial.print("freq: ");
+        Serial.print(f_temp);
+        Serial.print(" ");
+        f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..    
+  
+        lmx2592_set_freq(f_temp);
+        set_filterbank(f_temp);
+        set_path_switch(f_temp);
+        break;
+       
+      case ATT_CMD:
+        c_temp = get_char();
+        
+        digitalWrite(ATT_1, c_temp & BIT5 ? HIGH : LOW);
+        digitalWrite(ATT_2, c_temp & BIT4 ? HIGH : LOW);
+        digitalWrite(ATT_3, c_temp & BIT3 ? HIGH : LOW);
+        digitalWrite(ATT_4, c_temp & BIT2 ? HIGH : LOW);
+        digitalWrite(ATT_5, c_temp & BIT1 ? HIGH : LOW);
+        digitalWrite(ATT_6, c_temp & BIT0 ? HIGH : LOW);
+        Serial.print("att: ");
+        Serial.print(c_temp);      
+        Serial.print("chan: ");
+        Serial.print(idx);
+        Serial.print(" ");
+        break;
+        
+      case IQ_CMD:
+        if(idx == CHANNELA) {
+          adc1 = analogRead(I_0);
+          adc2 = analogRead(Q_0);
+        }
+        else if(idx == CHANNELB) {
+          adc1 = analogRead(I_1);
+          adc2 = analogRead(Q_1);
+        }
+        else {
+          adc1 = 0;
+          adc2 = 0;
+        }
+        
+        //((int32_t *) &replyBuffer[0]) = adc1;
+        //((int32_t *) &replyBuffer[1]) = adc2;
+
+        //Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
+        //Udp.write(ReplyBuffer);
+        //Udp.endPacket();
+        
+        Serial.print(adc1);
+        Serial.print(adc2);
+        break;
+                                
+      case DET_CMD:
+        c_temp = packetBuffer[2];
+        output_power = adl5902_powerdet(output_freq);
+        Serial.print("det: ");
+        Serial.print(output_power); 
+        break;
+        
+      default:
+        Serial.print(" unrecognized command ");
+        Serial.write(CMD_ERR);
+        break;
+    }
+  }  
   Serial.print(cmd);
   Serial.println(" - finished command");
  
