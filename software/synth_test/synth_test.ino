@@ -213,8 +213,7 @@ void lmx2592_init()
 {
   pinMode(LMX_LE, OUTPUT);
   pinMode(LMX_CE, OUTPUT);
-
-  pinMode(LMX_POWEN, INPUT);
+  pinMode(LMX_POWEN, OUTPUT);
   pinMode(LMX_AUX, INPUT);
 
   digitalWrite(LMX_CE, HIGH);
@@ -223,17 +222,14 @@ void lmx2592_init()
 
   delay(10);
   spi_set_reg(0, REG0_RESET);
-
   spi_set_reg(46, REG46_MASH_ORDER_2 | REG46_MASH_EN | REG46_OUTB_PD | (0 << REG46_OUTA_POW)); //  REG46_OUTA_PD
   spi_set_reg(31, REG31_VCO_DISTB_PD);
-
   spi_set_reg(12, 0x7001);
   spi_set_reg(11, 0x0018);
   spi_set_reg(10, 0x10d8);
-
   lmx2592_set_denom(FRAC_DENOM);
-
   spi_set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL);
+  delay(10);
 }
 
 void lmx2592_set_denom(uint32_t denom)
@@ -258,17 +254,49 @@ void lmx2592_chan_power(uint8_t chan, uint8_t power)
 
 float adl5902_get_int(float f)
 {
-  return -37;
+  const float filt_freqs[9] = {500e6, 1e9, 2e9, 3e9, 4e9, 5e9, 6e9, 7e9, 8e9};
+  const float cal_table[9] = {-30.4, -33.93, -35.73, -37.33, -40.46, -45.59, -48.31, -45.87, -45.11};
+
+  // TODO: break this out into a function and don't copy/paste..
+  if(f < filt_freqs[0]) {
+    return cal_table[0];
+  }
+  if(f > filt_freqs[8]) {
+    return cal_table[8];
+  }
+  
+  for (uint32_t i = 1; i < 9; i++) {
+    if (f < filt_freqs[i]) {
+      return cal_table[i-1] + ((f - filt_freqs[i-1]) / (filt_freqs[i] - filt_freqs[i-1])) * (cal_table[i] - cal_table[i-1]);
+    }
+  }
+  return -100;
 }
 
 float adl5902_get_slope(float f)
 {
-  return 47.5e-3;
+  const float filt_freqs[9] = {500e6, 1e9, 2e9, 3e9, 4e9, 5e9, 6e9, 7e9, 8e9};
+  const float cal_table[9] = {43.6e-3, 48.6e-3, 48.6e-3, 48.1e-3, 45.1e-3, 39.3e-3, 33.1e-3, 34.7e-3, 31.6e-3};
+  
+
+  // TODO: break this out into a function and don't copy/paste..
+  if(f < filt_freqs[0]) {
+    return cal_table[0];
+  }
+  if(f > filt_freqs[8]) {
+    return cal_table[8];
+  }
+  
+  for (uint32_t i = 1; i < 9; i++) {
+    if (f < filt_freqs[i]) {
+      return cal_table[i-1] + ((f - filt_freqs[i-1]) / (filt_freqs[i] - filt_freqs[i-1])) * (cal_table[i] - cal_table[i-1]);
+    }
+  }
+  return -100;
 }
 
 void adl5902_init()
 {
-  //  analogReference(INTERNAL2V5);
   analogReadResolution(12);
   uint32_t i = 0;
   for (i = 0; i < 200; i++) {
@@ -277,10 +305,17 @@ void adl5902_init()
 }
 float adl5902_powerdet(float f)
 {
-  float ADC_REF = 2.5;
+  float ADC_REF = 3.3;
   float det_voltage, det_power;
-  uint32_t ADC_STEPS = 1024;
-  float det_adc = analogRead(DET_0);
+  uint32_t ADC_STEPS = 4096;
+  uint32_t DET_AVG = 16;
+  
+  float det_adc = 0;
+  for(uint8_t i = 0; i < DET_AVG; i++) {
+    det_adc += analogRead(DET_0);
+  }
+  det_adc /= DET_AVG;
+  
   Serial.print("RAW ADC: ");
   Serial.print(det_adc);
   det_voltage = (ADC_REF / (float) ADC_STEPS) * det_adc;
@@ -467,15 +502,15 @@ void lmx2592_set_freq(float f)
 void setup()
 {
   Serial.begin(9600);
-  Ethernet.begin(mac, ip);
-  Udp.begin(port);
   SPI.begin();
-  clk_init();
   gpio_init();
   adl5902_init();
   ltc2323_init();
+  delay(10);
+  clk_init();
   lmx2592_init();
 
+  
   lmx2592_set_denom(FRAC_DENOM);
   lmx2592_set_freq(500e6);
   set_filterbank(500e6);
@@ -485,6 +520,9 @@ void setup()
   float pow = adl5902_powerdet(output_freq);
   Serial.print("power: ");
   Serial.println(pow);
+
+  Ethernet.begin(mac, ip);
+  Udp.begin(port);
 }
 
 uint8_t get_char()
@@ -498,6 +536,7 @@ void loop()
   const uint8_t switches[6] =   {SW_0, SW_1, SW_2, SW_3, SW_4, SW_5};
   const uint8_t sw_state[2] =   {LOW, HIGH};
   uint8_t c_temp;
+  int16_t i_temp;
   float f_temp;
   float output_power;
   int32_t adc1, adc2;
@@ -551,17 +590,6 @@ void loop()
         Serial.print(idx);
         Serial.print(" ");
         break;
-      /*
-        case SYNTH_CMD:
-        while(Serial.available() == 0);
-        f_temp = Serial.parseFloat();
-
-        Serial.print("freq: ");
-        Serial.print(f_temp);
-        Serial.print(" ");
-        f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..
-        lmx2592_set_freq(f_temp);
-        break;*/
 
       case OUTPUT_CMD:
         freq_long = packetBuffer[2] + (packetBuffer[3] << 8) + (packetBuffer[4] << 16) + (packetBuffer[5] << 24);
@@ -621,8 +649,13 @@ void loop()
       case DET_CMD:
         c_temp = packetBuffer[2];
         output_power = adl5902_powerdet(output_freq);
+        i_temp = output_power * 4;
         Serial.print("det: ");
         Serial.print(output_power);
+        reply_buffer_size = 3;
+        replyBuffer[1] = i_temp & 0xff;
+        replyBuffer[2] = (i_temp >> 8) & 0xff;
+        
         break;
 
       default:

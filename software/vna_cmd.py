@@ -2,6 +2,7 @@ import socket
 import cmd
 import numpy as np
 import pdb
+import struct
 
 VNAPORT = 8888
 VNAIP = '192.168.1.177'
@@ -18,7 +19,9 @@ CMD_ERR = np.uint8(ord('E'))
 def eth_cmd(sock, values):
     args_str = ''.join([a.tobytes() for a in values])
     sock.sendto(args_str, (VNAIP, VNAPORT))
-    return sock.recvfrom(1024)
+    rval = sock.recvfrom(1024)
+    assert rval[0][0] == args_str[0]
+    return rval[0][1:]
 
 class vna(cmd.Cmd):
     def preloop(self):
@@ -63,11 +66,14 @@ class vna(cmd.Cmd):
 
     def do_iq(self, line):
         '''iq'''
-        print eth_cmd(self.sock, [IQ_CMD])
+        iq = eth_cmd(self.sock, [IQ_CMD])
+        adc1 = struct.unpack("<h", iq[0:2])[0]
+        adc2 = struct.unpack("<h", iq[2:4])[0]
+        print("adc1: {}, adc2: {}".format(adc1, adc2))
 
     def do_det(self, line):
         '''det'''
-        print eth_cmd(self.sock, [DET_CMD, np.uint8(0), np.uint8(0)])
-    
+        det_val = eth_cmd(self.sock, [DET_CMD, np.uint8(0), np.uint8(0)])
+        print("power: " + str(struct.unpack("<h", det_val)[0]/4))
 if __name__ == '__main__':
     vna().cmdloop()
