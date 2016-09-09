@@ -10,6 +10,7 @@ VNAIP = '192.168.1.177'
 SWITCH_CMD = np.uint8(ord('w'))
 FILT_CMD = np.uint8(ord('f'))
 POW_CMD = np.uint8(ord('p'))
+DBM_CMD = np.uint8(ord('b'))
 SYNTH_CMD = np.uint8(ord('s'))
 DET_CMD = np.uint8(ord('d'))
 ATT_CMD = np.uint8(ord('a'))
@@ -63,6 +64,14 @@ class vna(cmd.Cmd):
         l = line.split()
         args = [POW_CMD, np.uint8(l[0]), np.uint8(l[1])]
         print eth_cmd(self.sock, args)
+
+    def do_dbm(self, line):
+        '''dbm [+10..-30]'''
+        l = line.split()
+        args = [DBM_CMD, np.int8(l[0])]
+        print args
+        print eth_cmd(self.sock, args)
+
 
     def do_iq(self, line):
         '''iq'''

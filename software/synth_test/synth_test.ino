@@ -19,6 +19,7 @@
 #define SYNTH_CMD 's'
 #define OUTPUT_CMD 's'
 #define DET_CMD 'd'
+#define DBM_CMD 'b'
 #define ATT_CMD 'a'
 #define IQ_CMD 'q'
 #define CMD_ERR 'E'
@@ -250,6 +251,7 @@ void lmx2592_chan_power(uint8_t chan, uint8_t power)
   else if (chan == CHANNELA) {
     spi_set_reg(46, REG46_OUTB_PD | (0x3F & power) << REG46_OUTA_POW);
   }
+  delay(10);
 }
 
 float adl5902_get_int(float f)
@@ -371,7 +373,6 @@ void set_filterbank(float f)
   }
 }
 
-
 void set_path_switch(float f)
 {
   if (f > F_VCO_MAX) {
@@ -395,8 +396,65 @@ void set_att(float att_db)
   digitalWrite(ATT_4, att & BIT2 ? HIGH : LOW);
   digitalWrite(ATT_5, att & BIT1 ? HIGH : LOW);
   digitalWrite(ATT_6, att & BIT0 ? HIGH : LOW);
+  delay(10);
 }
 
+// sets the output power, measured power level error
+float set_pow_dbm(float p, float f)
+{
+  float pdiff, att;
+  uint8_t channel = f > F_VCO_MAX ? CHANNELB : CHANNELA;
+  const float MAX_ATT = 30;
+  set_att(MAX_ATT);
+  Serial.println("starting dbm command");
+  Serial.print("target power: ");
+  Serial.println(p);
+  
+  lmx2592_chan_power(channel, 0);
+
+  pdiff = adl5902_powerdet(output_freq) - p;
+  Serial.print("initial pdiff: ");
+  Serial.println(pdiff);
+  
+  if(pdiff > 0) {
+    att = MAX_ATT;    
+  }
+  else if(-pdiff > MAX_ATT) {
+    att = 0;
+  }
+  else {
+    att = MAX_ATT + pdiff;
+  }
+  Serial.print("setting att: ");
+  Serial.println(att);
+  set_att(att);
+
+  pdiff = adl5902_powerdet(output_freq) - p;
+  Serial.print("new pdiff: ");
+  Serial.println(pdiff);
+  
+  if(-pdiff > att){
+    for(uint8_t pidx = 0; pidx < 63; pidx++) {
+      lmx2592_chan_power(channel, pidx);
+      pdiff = adl5902_powerdet(output_freq) - p;
+      Serial.print("pow pdiff: ");
+      Serial.print(pidx);
+      Serial.print(", ");
+      Serial.println(pdiff);
+      if(pdiff > 0) {
+        lmx2592_chan_power(channel, max(pidx - 1, 0));
+        pdiff = adl5902_powerdet(output_freq) - p;
+        break;
+      }
+    }
+  }
+
+  set_att(min(att + pdiff, MAX_ATT));
+  pdiff = adl5902_powerdet(output_freq) - p;
+  Serial.print("final pdiff: ");
+  Serial.println(pdiff);
+  return pdiff;
+}
 void lmx2592_set_freq(float f)
 {
   float n_step = PFD * PRE_N;
@@ -515,7 +573,7 @@ void setup()
   lmx2592_set_freq(500e6);
   set_filterbank(500e6);
   set_path_switch(500e6);
-  lmx2592_chan_power(CHANNELA, 0);
+//  lmx2592_chan_power(CHANNELA, 0);
 
   float pow = adl5902_powerdet(output_freq);
   Serial.print("power: ");
@@ -536,6 +594,7 @@ void loop()
   const uint8_t switches[6] =   {SW_0, SW_1, SW_2, SW_3, SW_4, SW_5};
   const uint8_t sw_state[2] =   {LOW, HIGH};
   uint8_t c_temp;
+  int8_t p_temp;
   int16_t i_temp;
   float f_temp;
   float output_power;
@@ -590,7 +649,17 @@ void loop()
         Serial.print(idx);
         Serial.print(" ");
         break;
-
+        
+      case DBM_CMD:
+        p_temp = packetBuffer[1];
+        if(p_temp > 127) { // this is a terrible idea
+          p_temp ^= 0xFF;
+          p_temp += 1;
+          p_temp = -p_temp;
+        }
+        set_pow_dbm(p_temp, output_freq);
+        break;
+        
       case OUTPUT_CMD:
         freq_long = packetBuffer[2] + (packetBuffer[3] << 8) + (packetBuffer[4] << 16) + (packetBuffer[5] << 24);
         f_temp = freq_long;
