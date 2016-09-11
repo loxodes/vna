@@ -1,0 +1,17 @@
+** Drc report for /home/kleinjt/repos/vna/breakouts/amp_cpw_maam/amp_cpw_mamm.kicad_pcb **
+** Created on 2016-09-11 01:12:49 **
+
+** Found 1 DRC errors **
+ErrType(4): Track near pad
+    @ (141.000 mm,105.300 mm): Track 1.000 mm, net [Net-(C103-Pad1)] (3) on layer F.Cu, length: 3.150 mm
+    @ (141.000 mm,108.000 mm): Pad 2 on F.Cu, Non-copper of U103
+
+** Found 2 unconnected pads **
+ErrType(2): Unconnected pads
+    @ (134.400 mm,105.300 mm): Pad 1 on F.Cu, Non-copper of U102 net Net-(C103-Pad2)
+    @ (135.100 mm,105.300 mm): Pad 1 on F.Cu, Non-copper of L101
+ErrType(2): Unconnected pads
+    @ (133.600 mm,105.300 mm): Pad 3 on F.Cu, Non-copper of U102 net Net-(U101-Pad1)
+    @ (129.050 mm,105.300 mm): Pad 1 on F.Cu, Non-copper of U101
+
+** End of Report **

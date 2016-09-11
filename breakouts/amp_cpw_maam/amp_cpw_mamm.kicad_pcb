@@ -1,0 +1,1497 @@
+(kicad_pcb (version 4) (host pcbnew 4.0.3-stable)
+
+  (general
+    (links 131)
+    (no_connects 2)
+    (area 126.024999 94.924999 144.075001 110.075001)
+    (thickness 1.6)
+    (drawings 8)
+    (tracks 13)
+    (zones 0)
+    (modules 92)
+    (nets 6)
+  )
+
+  (page A4)
+  (layers
+    (0 F.Cu signal hide)
+    (1 In1.Cu signal hide)
+    (2 In2.Cu signal)
+    (31 B.Cu signal)
+    (32 B.Adhes user)
+    (33 F.Adhes user)
+    (34 B.Paste user)
+    (35 F.Paste user)
+    (36 B.SilkS user)
+    (37 F.SilkS user)
+    (38 B.Mask user)
+    (39 F.Mask user)
+    (40 Dwgs.User user)
+    (41 Cmts.User user)
+    (42 Eco1.User user)
+    (43 Eco2.User user)
+    (44 Edge.Cuts user)
+    (45 Margin user)
+    (46 B.CrtYd user)
+    (47 F.CrtYd user)
+    (48 B.Fab user)
+    (49 F.Fab user)
+  )
+
+  (setup
+    (last_trace_width 0.25)
+    (user_trace_width 0.5)
+    (user_trace_width 1)
+    (trace_clearance 0.2)
+    (zone_clearance 0.2)
+    (zone_45_only yes)
+    (trace_min 0.11)
+    (segment_width 0.2)
+    (edge_width 0.15)
+    (via_size 0.6)
+    (via_drill 0.4)
+    (via_min_size 0.3)
+    (via_min_drill 0.2)
+    (user_via 0.46 0.254)
+    (uvia_size 0.3)
+    (uvia_drill 0.1)
+    (uvias_allowed no)
+    (uvia_min_size 0.2)
+    (uvia_min_drill 0.1)
+    (pcb_text_width 0.3)
+    (pcb_text_size 1.5 1.5)
+    (mod_edge_width 0.15)
+    (mod_text_size 0.7 0.7)
+    (mod_text_width 0.15)
+    (pad_size 0.381 0.381)
+    (pad_drill 0.254)
+    (pad_to_mask_clearance 0.2)
+    (aux_axis_origin 0 0)
+    (visible_elements FFFEFF7F)
+    (pcbplotparams
+      (layerselection 0x010f0_80000007)
+      (usegerberextensions true)
+      (excludeedgelayer true)
+      (linewidth 0.100000)
+      (plotframeref false)
+      (viasonmask false)
+      (mode 1)
+      (useauxorigin false)
+      (hpglpennumber 1)
+      (hpglpenspeed 20)
+      (hpglpendiameter 15)
+      (hpglpenoverlay 2)
+      (psnegative false)
+      (psa4output false)
+      (plotreference true)
+      (plotvalue true)
+      (plotinvisibletext false)
+      (padsonsilk false)
+      (subtractmaskfromsilk false)
+      (outputformat 1)
+      (mirror false)
+      (drillshape 0)
+      (scaleselection 1)
+      (outputdirectory gerbs/))
+  )
+
+  (net 0 "")
+  (net 1 "Net-(C101-Pad1)")
+  (net 2 GND)
+  (net 3 "Net-(C103-Pad1)")
+  (net 4 "Net-(C103-Pad2)")
+  (net 5 "Net-(U101-Pad1)")
+
+  (net_class Default "This is the default net class."
+    (clearance 0.2)
+    (trace_width 0.25)
+    (via_dia 0.6)
+    (via_drill 0.4)
+    (uvia_dia 0.3)
+    (uvia_drill 0.1)
+    (add_net GND)
+    (add_net "Net-(C101-Pad1)")
+    (add_net "Net-(C103-Pad1)")
+    (add_net "Net-(C103-Pad2)")
+    (add_net "Net-(U101-Pad1)")
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52A37)
+    (at 136.85 102.5)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52331)
+    (at 130.9 109.45)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5232D)
+    (at 132.9 109.45)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52329)
+    (at 136.9 109.45)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52325)
+    (at 142.9 109.45)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52321)
+    (at 140.9 109.45)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5231D)
+    (at 138.9 109.45)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52319)
+    (at 126.9 109.45)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52315)
+    (at 128.9 109.45)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52310)
+    (at 132.9 107.7)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5230C)
+    (at 136.9 107.7)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52308)
+    (at 142.9 107.7)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52304)
+    (at 140.9 107.7)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52300)
+    (at 138.9 107.7)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522FC)
+    (at 126.9 107.7)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522F8)
+    (at 130.9 107.7)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522F4)
+    (at 128.9 107.7)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522E5)
+    (at 142.85 103.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522E1)
+    (at 140.85 103.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522DD)
+    (at 138.85 103.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522D9)
+    (at 136.85 103.5)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522D1)
+    (at 132.85 103.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522CD)
+    (at 130.85 103.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522C9)
+    (at 128.85 103.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522C5)
+    (at 126.85 103.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522BD)
+    (at 142.85 101.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522B9)
+    (at 140.85 101.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522B5)
+    (at 138.85 101.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522B1)
+    (at 136.85 101.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522A9)
+    (at 132.85 101.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522A5)
+    (at 130.85 101.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D522A1)
+    (at 128.85 101.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5229D)
+    (at 126.85 101.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52295)
+    (at 142.85 99.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52291)
+    (at 140.85 99.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5228D)
+    (at 138.85 99.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52289)
+    (at 136.85 99.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52281)
+    (at 132.85 99.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5227D)
+    (at 130.85 99.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52279)
+    (at 128.85 99.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52085)
+    (at 126.85 99.35)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5207A)
+    (at 126.4 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52076)
+    (at 126.4 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5205F)
+    (at 127.35 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52057)
+    (at 128.35 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52053)
+    (at 128.35 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5204B)
+    (at 127.35 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5203F)
+    (at 130.35 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52033)
+    (at 131.35 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5202F)
+    (at 129.35 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52023)
+    (at 130.35 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D5201B)
+    (at 131.35 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52013)
+    (at 129.35 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52008)
+    (at 143.5 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D52002)
+    (at 140.5 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51FF6)
+    (at 141.5 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51FEE)
+    (at 142.5 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51EF6)
+    (at 139.5 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51EEE)
+    (at 138.5 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51EDE)
+    (at 143.5 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51ED6)
+    (at 142.5 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51ECE)
+    (at 141.5 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51EC6)
+    (at 140.5 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51EBE)
+    (at 139.5 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51EB6)
+    (at 138.5 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51E56)
+    (at 132.3 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51E4E)
+    (at 133.1 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51E46)
+    (at 132.3 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51E3D)
+    (at 133.1 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51E2A)
+    (at 137.5 104.4)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51E26)
+    (at 137.5 106.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51E17)
+    (at 136.7 106)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51E0F)
+    (at 135.9 106)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51E02)
+    (at 135.1 106)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DEF)
+    (at 136.6 104.6)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DE7)
+    (at 135.8 104.6)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DE3)
+    (at 135.8 104.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DDF)
+    (at 134.4 104.2)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DDB)
+    (at 134.4 104.6)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DD3)
+    (at 133.6 104.6)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DCE)
+    (at 134.7 106.1)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DCA)
+    (at 134.3 106.1)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DC6)
+    (at 133.9 106.1)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 57D51B77) (tstamp 57D51DC2)
+    (at 133.5 106.1)
+    (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 0.381 0.381) (drill 0.254) (layers *.Cu)
+      (net 2 GND))
+  )
+
+  (module Capacitors_SMD:C_0402 (layer F.Cu) (tedit 5415D599) (tstamp 57D509EE)
+    (at 135.1 104.75 90)
+    (descr "Capacitor SMD 0402, reflow soldering, AVX (see smccp.pdf)")
+    (tags "capacitor 0402")
+    (path /57D4F6CB)
+    (attr smd)
+    (fp_text reference L101 (at 1.3 -1.75 180) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value BLM15GG471 (at 0 1.7 90) (layer F.Fab)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_line (start -1.15 -0.6) (end 1.15 -0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -1.15 0.6) (end 1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -1.15 -0.6) (end -1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 1.15 -0.6) (end 1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 0.25 -0.475) (end -0.25 -0.475) (layer F.SilkS) (width 0.15))
+    (fp_line (start -0.25 0.475) (end 0.25 0.475) (layer F.SilkS) (width 0.15))
+    (pad 1 smd rect (at -0.55 0 90) (size 0.6 0.5) (layers F.Cu F.Paste F.Mask)
+      (net 4 "Net-(C103-Pad2)"))
+    (pad 2 smd rect (at 0.55 0 90) (size 0.6 0.5) (layers F.Cu F.Paste F.Mask)
+      (net 1 "Net-(C101-Pad1)"))
+    (model Capacitors_SMD.3dshapes/C_0402.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+  )
+
+  (module Capacitors_SMD:C_0402 (layer F.Cu) (tedit 5415D599) (tstamp 57D509DC)
+    (at 135.65 103)
+    (descr "Capacitor SMD 0402, reflow soldering, AVX (see smccp.pdf)")
+    (tags "capacitor 0402")
+    (path /57D4F765)
+    (attr smd)
+    (fp_text reference C101 (at -2.25 -0.7) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value "100 nF" (at 0 1.7) (layer F.Fab)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_line (start -1.15 -0.6) (end 1.15 -0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -1.15 0.6) (end 1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -1.15 -0.6) (end -1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 1.15 -0.6) (end 1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 0.25 -0.475) (end -0.25 -0.475) (layer F.SilkS) (width 0.15))
+    (fp_line (start -0.25 0.475) (end 0.25 0.475) (layer F.SilkS) (width 0.15))
+    (pad 1 smd rect (at -0.55 0) (size 0.6 0.5) (layers F.Cu F.Paste F.Mask)
+      (net 1 "Net-(C101-Pad1)"))
+    (pad 2 smd rect (at 0.55 0) (size 0.6 0.5) (layers F.Cu F.Paste F.Mask)
+      (net 2 GND))
+    (model Capacitors_SMD.3dshapes/C_0402.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+  )
+
+  (module Capacitors_SMD:C_0402 (layer F.Cu) (tedit 5415D599) (tstamp 57D509E2)
+    (at 135.65 101.8)
+    (descr "Capacitor SMD 0402, reflow soldering, AVX (see smccp.pdf)")
+    (tags "capacitor 0402")
+    (path /57D4F715)
+    (attr smd)
+    (fp_text reference C102 (at -2.25 -0.7) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value "100 pF" (at 0 1.7) (layer F.Fab)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_line (start -1.15 -0.6) (end 1.15 -0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -1.15 0.6) (end 1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -1.15 -0.6) (end -1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 1.15 -0.6) (end 1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 0.25 -0.475) (end -0.25 -0.475) (layer F.SilkS) (width 0.15))
+    (fp_line (start -0.25 0.475) (end 0.25 0.475) (layer F.SilkS) (width 0.15))
+    (pad 1 smd rect (at -0.55 0) (size 0.6 0.5) (layers F.Cu F.Paste F.Mask)
+      (net 1 "Net-(C101-Pad1)"))
+    (pad 2 smd rect (at 0.55 0) (size 0.6 0.5) (layers F.Cu F.Paste F.Mask)
+      (net 2 GND))
+    (model Capacitors_SMD.3dshapes/C_0402.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+  )
+
+  (module Capacitors_SMD:C_0402 (layer F.Cu) (tedit 5415D599) (tstamp 57D509E8)
+    (at 136.5 105.3 180)
+    (descr "Capacitor SMD 0402, reflow soldering, AVX (see smccp.pdf)")
+    (tags "capacitor 0402")
+    (path /57D4F416)
+    (attr smd)
+    (fp_text reference C103 (at 0 -1.7 180) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value "100 pF" (at 0 1.7 180) (layer F.Fab)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_line (start -1.15 -0.6) (end 1.15 -0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -1.15 0.6) (end 1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -1.15 -0.6) (end -1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 1.15 -0.6) (end 1.15 0.6) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 0.25 -0.475) (end -0.25 -0.475) (layer F.SilkS) (width 0.15))
+    (fp_line (start -0.25 0.475) (end 0.25 0.475) (layer F.SilkS) (width 0.15))
+    (pad 1 smd rect (at -0.55 0 180) (size 0.6 0.5) (layers F.Cu F.Paste F.Mask)
+      (net 3 "Net-(C103-Pad1)"))
+    (pad 2 smd rect (at 0.55 0 180) (size 0.6 0.5) (layers F.Cu F.Paste F.Mask)
+      (net 4 "Net-(C103-Pad2)"))
+    (model Capacitors_SMD.3dshapes/C_0402.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+  )
+
+  (module Terminal_Blocks:TerminalBlock_Pheonix_PT-3.5mm_2pol (layer F.Cu) (tedit 0) (tstamp 57D509F4)
+    (at 135.2 96.9 180)
+    (descr "2-way 3.5mm pitch terminal block, Phoenix PT series")
+    (path /57D4F799)
+    (fp_text reference P101 (at -2.5 -1.95 270) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value CONN_01X02 (at 1.75 6 180) (layer F.Fab)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_line (start -1.9 -3.3) (end 5.4 -3.3) (layer F.CrtYd) (width 0.05))
+    (fp_line (start -1.9 4.7) (end -1.9 -3.3) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 5.4 4.7) (end -1.9 4.7) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 5.4 -3.3) (end 5.4 4.7) (layer F.CrtYd) (width 0.05))
+    (fp_line (start 1.75 4.1) (end 1.75 4.5) (layer F.SilkS) (width 0.15))
+    (fp_line (start -1.75 3) (end 5.25 3) (layer F.SilkS) (width 0.15))
+    (fp_line (start -1.75 4.1) (end 5.25 4.1) (layer F.SilkS) (width 0.15))
+    (fp_line (start -1.75 -3.1) (end -1.75 4.5) (layer F.SilkS) (width 0.15))
+    (fp_line (start 5.25 4.5) (end 5.25 -3.1) (layer F.SilkS) (width 0.15))
+    (fp_line (start 5.25 -3.1) (end -1.75 -3.1) (layer F.SilkS) (width 0.15))
+    (pad 2 thru_hole circle (at 3.5 0 180) (size 2.4 2.4) (drill 1.2) (layers *.Cu *.Mask F.SilkS)
+      (net 2 GND))
+    (pad 1 thru_hole rect (at 0 0 180) (size 2.4 2.4) (drill 1.2) (layers *.Cu *.Mask F.SilkS)
+      (net 1 "Net-(C101-Pad1)"))
+    (model Terminal_Blocks.3dshapes/TerminalBlock_Pheonix_PT-3.5mm_2pol.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+  )
+
+  (module vna_footprints:SMA_CPW_1MM_.2MM (layer F.Cu) (tedit 577AF781) (tstamp 57D509FC)
+    (at 129.05 105.3 90)
+    (path /57D4F1A7)
+    (fp_text reference U101 (at -3.9 5.55 180) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value CONN_SMA (at -6.5 4.6 180) (layer F.Fab)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 smd rect (at 0 0 90) (size 1 6) (layers F.Cu F.Paste F.Mask)
+      (net 5 "Net-(U101-Pad1)"))
+    (pad 2 smd rect (at -2.7 0 90) (size 4 6) (layers F.Cu F.Paste F.Mask)
+      (net 2 GND))
+    (pad 2 smd rect (at 2.7 0 90) (size 4 6) (layers F.Cu F.Paste F.Mask)
+      (net 2 GND))
+    (pad 3 smd rect (at 0 -1.5) (size 3 8) (layers B.Cu B.Paste B.Mask)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:TDFN6 (layer F.Cu) (tedit 57D5090A) (tstamp 57D50A07)
+    (at 134 106.05 270)
+    (path /57D4F183)
+    (fp_text reference U102 (at 2 -0.6 360) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value MAAM-011101 (at -3.1 -3.6 270) (layer F.Fab)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_line (start -0.9 -1.1) (end -1.1 -0.9) (layer F.SilkS) (width 0.15))
+    (fp_line (start -0.8 0.8) (end 0.8 0.8) (layer F.SilkS) (width 0.15))
+    (fp_line (start -0.8 -0.8) (end 0.8 -0.8) (layer F.SilkS) (width 0.15))
+    (pad 1 smd rect (at -0.75 -0.4 270) (size 0.58 0.2) (layers F.Cu F.Paste F.Mask)
+      (net 4 "Net-(C103-Pad2)"))
+    (pad 2 smd rect (at -0.75 0 270) (size 0.58 0.2) (layers F.Cu F.Paste F.Mask))
+    (pad 3 smd rect (at -0.75 0.4 270) (size 0.58 0.2) (layers F.Cu F.Paste F.Mask)
+      (net 5 "Net-(U101-Pad1)"))
+    (pad 4 smd rect (at 0.75 0.4 270) (size 0.58 0.2) (layers F.Cu F.Paste F.Mask))
+    (pad 5 smd rect (at 0.75 0 270) (size 0.58 0.2) (layers F.Cu F.Paste F.Mask))
+    (pad 6 smd rect (at 0.75 -0.4 270) (size 0.58 0.2) (layers F.Cu F.Paste F.Mask))
+    (pad 7 smd rect (at 0 0 270) (size 0.47 0.85) (layers F.Cu F.Paste F.Mask)
+      (net 2 GND))
+  )
+
+  (module vna_footprints:SMA_CPW_1MM_.2MM (layer F.Cu) (tedit 577AF781) (tstamp 57D50A0F)
+    (at 141 105.3 270)
+    (path /57D4F50A)
+    (fp_text reference U103 (at 5.4 -1.5 360) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value CONN_SMA (at -6.5 4.6 360) (layer F.Fab)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (pad 1 smd rect (at 0 0 270) (size 1 6) (layers F.Cu F.Paste F.Mask)
+      (net 3 "Net-(C103-Pad1)"))
+    (pad 2 smd rect (at -2.7 0 270) (size 4 6) (layers F.Cu F.Paste F.Mask)
+      (net 2 GND))
+    (pad 2 smd rect (at 2.7 0 270) (size 4 6) (layers F.Cu F.Paste F.Mask)
+      (net 2 GND))
+    (pad 3 smd rect (at 0 -1.5 180) (size 3 8) (layers B.Cu B.Paste B.Mask)
+      (net 2 GND))
+  )
+
+  (gr_text "RF OUT" (at 141.2 98.6) (layer F.SilkS) (tstamp 57D52850)
+    (effects (font (size 0.8 0.8) (thickness 0.2)))
+  )
+  (gr_text "RF IN\n" (at 127.95 98.45) (layer F.SilkS) (tstamp 57D52848)
+    (effects (font (size 0.8 0.8) (thickness 0.2)))
+  )
+  (gr_text gnd (at 127.95 96.7) (layer F.SilkS)
+    (effects (font (size 1 1) (thickness 0.25)))
+  )
+  (gr_text Vin (at 138.4 96.8) (layer F.SilkS)
+    (effects (font (size 1 1) (thickness 0.25)))
+  )
+  (gr_line (start 126.1 95) (end 126.1 110) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 144 95) (end 126.1 95) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 144 110) (end 144 95) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 126.1 110) (end 144 110) (layer Edge.Cuts) (width 0.15))
+
+  (segment (start 135.1 96.8) (end 135.1 101.8) (width 0.5) (layer F.Cu) (net 1))
+  (segment (start 135.1 103) (end 135.1 101.8) (width 0.5) (layer F.Cu) (net 1))
+  (segment (start 135.1 104.2) (end 135.1 103) (width 0.5) (layer F.Cu) (net 1))
+  (segment (start 136.2 103) (end 136.7 103) (width 0.5) (layer F.Cu) (net 2))
+  (via (at 136.7 103) (size 0.6) (drill 0.4) (layers F.Cu B.Cu) (net 2))
+  (via (at 136.7 101.8) (size 0.6) (drill 0.4) (layers F.Cu B.Cu) (net 2))
+  (segment (start 136.2 101.8) (end 136.7 101.8) (width 0.5) (layer F.Cu) (net 2))
+  (segment (start 137.85 105.3) (end 137.05 105.3) (width 0.5) (layer F.Cu) (net 3))
+  (segment (start 141 105.3) (end 137.85 105.3) (width 1) (layer F.Cu) (net 3))
+  (segment (start 135.1 105.3) (end 134.6 105.3) (width 0.5) (layer F.Cu) (net 4))
+  (segment (start 135.1 105.3) (end 135.95 105.3) (width 0.5) (layer F.Cu) (net 4))
+  (segment (start 133.05 105.3) (end 133.449999 105.3) (width 0.5) (layer F.Cu) (net 5))
+  (segment (start 129.05 105.3) (end 133.05 105.3) (width 1) (layer F.Cu) (net 5))
+
+  (zone (net 2) (net_name GND) (layer F.Cu) (tstamp 0) (hatch edge 0.508)
+    (connect_pads yes (clearance 0.2))
+    (min_thickness 0.2)
+    (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (polygon
+      (pts
+        (xy 126.1 110) (xy 144 110.1) (xy 144 95) (xy 126.1 95)
+      )
+    )
+    (filled_polygon
+      (pts
+        (xy 136.630997 105.831778) (xy 136.75 105.855877) (xy 137.277761 105.855877) (xy 137.284315 105.865685) (xy 137.543853 106.039104)
+        (xy 137.85 106.1) (xy 137.970979 106.1) (xy 138 106.105877) (xy 143.625 106.105877) (xy 143.625 109.625)
+        (xy 126.475 109.625) (xy 126.475 106.51) (xy 133.194123 106.51) (xy 133.194123 107.09) (xy 133.215042 107.201173)
+        (xy 133.280745 107.303279) (xy 133.380997 107.371778) (xy 133.5 107.395877) (xy 133.7 107.395877) (xy 133.803671 107.37637)
+        (xy 133.9 107.395877) (xy 134.1 107.395877) (xy 134.203671 107.37637) (xy 134.3 107.395877) (xy 134.5 107.395877)
+        (xy 134.611173 107.374958) (xy 134.713279 107.309255) (xy 134.781778 107.209003) (xy 134.805877 107.09) (xy 134.805877 106.51)
+        (xy 134.784958 106.398827) (xy 134.719255 106.296721) (xy 134.619003 106.228222) (xy 134.5 106.204123) (xy 134.3 106.204123)
+        (xy 134.196329 106.22363) (xy 134.1 106.204123) (xy 133.9 106.204123) (xy 133.796329 106.22363) (xy 133.7 106.204123)
+        (xy 133.5 106.204123) (xy 133.388827 106.225042) (xy 133.286721 106.290745) (xy 133.218222 106.390997) (xy 133.194123 106.51)
+        (xy 126.475 106.51) (xy 126.475 106.105877) (xy 132.05 106.105877) (xy 132.081233 106.1) (xy 133.05 106.1)
+        (xy 133.356147 106.039104) (xy 133.5705 105.895877) (xy 133.7 105.895877) (xy 133.803671 105.87637) (xy 133.9 105.895877)
+        (xy 134.1 105.895877) (xy 134.203671 105.87637) (xy 134.3 105.895877) (xy 134.5 105.895877) (xy 134.611173 105.874958)
+        (xy 134.649959 105.85) (xy 134.684488 105.85) (xy 134.730997 105.881778) (xy 134.85 105.905877) (xy 135.35 105.905877)
+        (xy 135.461173 105.884958) (xy 135.5155 105.85) (xy 135.620979 105.85) (xy 135.65 105.855877) (xy 136.25 105.855877)
+        (xy 136.361173 105.834958) (xy 136.4155 105.8) (xy 136.584488 105.8)
+      )
+    )
+    (filled_polygon
+      (pts
+        (xy 143.625 104.494123) (xy 138 104.494123) (xy 137.968767 104.5) (xy 137.85 104.5) (xy 137.543853 104.560896)
+        (xy 137.284315 104.734315) (xy 137.277761 104.744123) (xy 136.75 104.744123) (xy 136.638827 104.765042) (xy 136.5845 104.8)
+        (xy 136.415512 104.8) (xy 136.369003 104.768222) (xy 136.25 104.744123) (xy 135.65 104.744123) (xy 135.618767 104.75)
+        (xy 135.515512 104.75) (xy 135.515506 104.749996) (xy 135.563279 104.719255) (xy 135.631778 104.619003) (xy 135.655877 104.5)
+        (xy 135.655877 103.9) (xy 135.65 103.868767) (xy 135.65 103.415512) (xy 135.681778 103.369003) (xy 135.705877 103.25)
+        (xy 135.705877 102.75) (xy 135.684958 102.638827) (xy 135.65 102.5845) (xy 135.65 102.215512) (xy 135.681778 102.169003)
+        (xy 135.705877 102.05) (xy 135.705877 101.55) (xy 135.684958 101.438827) (xy 135.65 101.3845) (xy 135.65 98.405877)
+        (xy 136.4 98.405877) (xy 136.511173 98.384958) (xy 136.613279 98.319255) (xy 136.681778 98.219003) (xy 136.705877 98.1)
+        (xy 136.705877 95.7) (xy 136.684958 95.588827) (xy 136.619255 95.486721) (xy 136.519003 95.418222) (xy 136.4 95.394123)
+        (xy 134 95.394123) (xy 133.888827 95.415042) (xy 133.786721 95.480745) (xy 133.718222 95.580997) (xy 133.694123 95.7)
+        (xy 133.694123 98.1) (xy 133.715042 98.211173) (xy 133.780745 98.313279) (xy 133.880997 98.381778) (xy 134 98.405877)
+        (xy 134.55 98.405877) (xy 134.55 101.384488) (xy 134.518222 101.430997) (xy 134.494123 101.55) (xy 134.494123 102.05)
+        (xy 134.515042 102.161173) (xy 134.55 102.2155) (xy 134.55 102.584488) (xy 134.518222 102.630997) (xy 134.494123 102.75)
+        (xy 134.494123 103.25) (xy 134.515042 103.361173) (xy 134.55 103.4155) (xy 134.55 103.870979) (xy 134.544123 103.9)
+        (xy 134.544123 104.5) (xy 134.565042 104.611173) (xy 134.630745 104.713279) (xy 134.684488 104.75) (xy 134.650876 104.75)
+        (xy 134.619003 104.728222) (xy 134.5 104.704123) (xy 134.3 104.704123) (xy 134.196329 104.72363) (xy 134.1 104.704123)
+        (xy 133.9 104.704123) (xy 133.796329 104.72363) (xy 133.7 104.704123) (xy 133.5705 104.704123) (xy 133.356147 104.560896)
+        (xy 133.05 104.5) (xy 132.079021 104.5) (xy 132.05 104.494123) (xy 126.475 104.494123) (xy 126.475 95.375)
+        (xy 143.625 95.375)
+      )
+    )
+  )
+  (zone (net 2) (net_name GND) (layer In2.Cu) (tstamp 0) (hatch edge 0.508)
+    (connect_pads yes (clearance 0.2))
+    (min_thickness 0.254)
+    (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (polygon
+      (pts
+        (xy 126.1 95) (xy 126.1 110) (xy 144 110) (xy 144 95)
+      )
+    )
+    (filled_polygon
+      (pts
+        (xy 133.767526 95.461012) (xy 133.692862 95.570286) (xy 133.666594 95.7) (xy 133.666594 98.1) (xy 133.689395 98.221179)
+        (xy 133.761012 98.332474) (xy 133.870286 98.407138) (xy 134 98.433406) (xy 136.4 98.433406) (xy 136.521179 98.410605)
+        (xy 136.632474 98.338988) (xy 136.707138 98.229714) (xy 136.733406 98.1) (xy 136.733406 95.7) (xy 136.710605 95.578821)
+        (xy 136.638988 95.467526) (xy 136.543088 95.402) (xy 143.598 95.402) (xy 143.598 109.598) (xy 126.502 109.598)
+        (xy 126.502 95.402) (xy 133.859232 95.402)
+      )
+    )
+  )
+  (zone (net 0) (net_name "") (layer F.Mask) (tstamp 0) (hatch edge 0.508)
+    (connect_pads (clearance 0.2))
+    (min_thickness 0.254)
+    (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (polygon
+      (pts
+        (xy 131.6 104.15) (xy 133.35 104.15) (xy 133.35 106.5) (xy 131.95 106.5)
+      )
+    )
+    (filled_polygon
+      (pts
+        (xy 133.223 106.373) (xy 132.059486 106.373) (xy 131.747315 104.277) (xy 133.223 104.277)
+      )
+    )
+  )
+  (zone (net 0) (net_name "") (layer F.Mask) (tstamp 0) (hatch edge 0.508)
+    (connect_pads (clearance 0.2))
+    (min_thickness 0.254)
+    (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (polygon
+      (pts
+        (xy 133.15 105.7) (xy 133.1 106.35) (xy 133.5 106.35) (xy 133.55 105.65)
+      )
+    )
+    (filled_polygon
+      (pts
+        (xy 133.381748 106.223) (xy 133.237144 106.223) (xy 133.268671 105.813154) (xy 133.412305 105.7952)
+      )
+    )
+  )
+  (zone (net 0) (net_name "") (layer F.Mask) (tstamp 0) (hatch edge 0.508)
+    (connect_pads (clearance 0.2))
+    (min_thickness 0.254)
+    (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (polygon
+      (pts
+        (xy 133 104.4) (xy 136.8 104.4) (xy 137 104.15) (xy 137.95 104.15) (xy 137.9 106.4)
+        (xy 136.95 106.45) (xy 136.8 106.25) (xy 134.95 106.25) (xy 134.65 106.4)
+      )
+    )
+    (filled_polygon
+      (pts
+        (xy 137.775649 106.279369) (xy 137.010962 106.319616) (xy 136.9016 106.1738) (xy 136.863949 106.140275) (xy 136.8 106.123)
+        (xy 134.95 106.123) (xy 134.893204 106.136408) (xy 134.683628 106.241196) (xy 133.269416 104.527) (xy 136.8 104.527)
+        (xy 136.84941 104.516994) (xy 136.89917 104.479336) (xy 137.061039 104.277) (xy 137.820146 104.277)
+      )
+    )
+  )
+  (zone (net 0) (net_name "") (layer F.Cu) (tstamp 0) (hatch edge 0.508)
+    (connect_pads (clearance 0.2))
+    (min_thickness 0.254)
+    (keepout (tracks not_allowed) (vias not_allowed) (copperpour not_allowed))
+    (fill (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (polygon
+      (pts
+        (xy 136.35 104.9) (xy 136.7 104.9) (xy 136.7 105.7) (xy 136.3 105.7)
+      )
+    )
+  )
+)

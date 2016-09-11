@@ -1,0 +1,17 @@
+** Drc report for /home/kleinjt/repos/vna/breakouts/amp_cpw_hmc311/amp_cpw_hmc311.kicad_pcb **
+** Created on 2016-09-11 01:34:42 **
+
+** Found 3 DRC errors **
+ErrType(19): Pad near pad
+    @ (144.250 mm,104.050 mm): Pad 3 on F.Cu, Non-copper of U102
+    @ (145.000 mm,104.000 mm): Pad 1 on F.Cu, B.Cu, Internal of REF**
+ErrType(4): Track near pad
+    @ (138.000 mm,104.000 mm): Track 1.000 mm, net [Net-(C101-Pad2)] (2) on layer F.Cu, length: 3.400 mm
+    @ (138.000 mm,101.300 mm): Pad 2 on F.Cu, Non-copper of U101
+ErrType(4): Track near pad
+    @ (154.000 mm,102.500 mm): Track 1.000 mm, net [Net-(C104-Pad1)] (5) on layer F.Cu, length: 3.700 mm
+    @ (154.000 mm,105.200 mm): Pad 2 on F.Cu, Non-copper of U103
+
+** Found 0 unconnected pads **
+
+** End of Report **
