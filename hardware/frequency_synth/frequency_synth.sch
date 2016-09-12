@@ -642,4 +642,6 @@ Wire Wire Line
 NoConn ~ 9850 3650
 Wire Wire Line
 	13950 3300 14900 3300
+Text Notes 9750 7400 0    118  ~ 0
+TODO:\n\n- Make enclosure\n- Add microcontroller\n- Fix amplifier\n- Add more switchable attenuation\n- Check lmx2592 outputs\n- Fix att buffer drive levels?\n- Add test points, mounting holes\n- Fix highpass filter footprint\n- Add u.fl to inject signal past lmx2592\n- condense bom\n- add MAAM-011101.pdf to high frequency path
 $EndSCHEMATC

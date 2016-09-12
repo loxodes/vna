@@ -78,6 +78,8 @@ class vna(cmd.Cmd):
         iq = eth_cmd(self.sock, [IQ_CMD])
         adc1 = struct.unpack("<h", iq[0:2])[0]
         adc2 = struct.unpack("<h", iq[2:4])[0]
+        adc1 = 1e3 * 3.3 * ((adc1 - 2048)/4096.0) # convert to mV
+        adc2 = 1e3 * 3.3 * ((adc2 - 2048)/4096.0) # convert to mV
         print("adc1: {}, adc2: {}".format(adc1, adc2))
 
     def do_det(self, line):

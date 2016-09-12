@@ -26,6 +26,9 @@
 
 #define SWITCH_LOWFREQ LOW
 #define SWITCH_HIGHFREQ HIGH
+#define SW2_S21 LOW
+#define SW2_S11 HIGH
+#define ADC_AVG 16
 
 // pins
 const uint8_t LMX_LE = 14;
@@ -37,7 +40,7 @@ const uint8_t REFCLK_EN = 24;
 
 const uint8_t SW_0 = 6;
 const uint8_t SW_1 = 6;
-const uint8_t SW_2 = 6;
+const uint8_t SW_2 = PG_1;
 const uint8_t SW_3 = 6;
 const uint8_t SW_4 = 6;
 const uint8_t SW_5 = 6;
@@ -174,6 +177,8 @@ void gpio_init()
 {
   pinMode(SW_1, OUTPUT);
   digitalWrite(SW_1, SWITCH_LOWFREQ);
+  pinMode(SW_2, OUTPUT);
+  digitalWrite(SW_2, SW2_S21);
 
   pinMode(FILT0_A, OUTPUT);
   pinMode(FILT0_B, OUTPUT);
@@ -434,7 +439,7 @@ float set_pow_dbm(float p, float f)
   Serial.println(pdiff);
   
   if(-pdiff > att){
-    for(uint8_t pidx = 0; pidx < 63; pidx++) {
+    for(uint8_t pidx = 0; pidx < 62; pidx++) {
       lmx2592_chan_power(channel, pidx);
       pdiff = adl5902_powerdet(output_freq) - p;
       Serial.print("pow pdiff: ");
@@ -442,7 +447,7 @@ float set_pow_dbm(float p, float f)
       Serial.print(", ");
       Serial.println(pdiff);
       if(pdiff > 0) {
-        lmx2592_chan_power(channel, max(pidx - 1, 0));
+        lmx2592_chan_power(channel, pidx+1);
         pdiff = adl5902_powerdet(output_freq) - p;
         break;
       }
@@ -690,24 +695,22 @@ void loop()
         break;
 
       case IQ_CMD:
+        for(c_temp = 0; c_temp < ADC_AVG; c_temp++) {
+                adc1 += 2048 + analogRead(I_0) - analogRead(I_1);
+                adc2 += 2048 + analogRead(Q_0) - analogRead(Q_1);  
+        }
+
+        adc1 /= ADC_AVG;
+        adc2 /= ADC_AVG;
+        
         reply_buffer_size = 5;
-        if (idx == CHANNELA) {
-          adc1 = analogRead(I_0);
-          adc2 = analogRead(Q_0);
-        }
-        else if (idx == CHANNELB) {
-          adc1 = analogRead(I_1);
-          adc2 = analogRead(Q_1);
-        }
-        else {
-          adc1 = 0;
-          adc2 = 0;
-        }
+ 
         Serial.print("adc1: ");
         Serial.print(adc1);
         Serial.print(" adc2: ");
         Serial.print(adc2);
         Serial.print(" ");
+        
         replyBuffer[1] = adc1 & 0xff;
         replyBuffer[2] = (adc1 >> 8) & 0xff;
         replyBuffer[3] = adc2 & 0xff;
