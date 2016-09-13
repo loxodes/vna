@@ -14,6 +14,13 @@ VNAIP = '192.168.1.177'
 SWITCH_PATH1 = 1
 SWITCH_PATH0 = 0
 
+ADC_BITS = 16
+ADC_REF = 4.096
+
+S21 = 0
+S11 = 1
+SDIR_SWITCH = 2
+
 SWITCH_CMD = np.uint8(ord('w'))
 FILT_CMD = np.uint8(ord('f'))
 POW_CMD = np.uint8(ord('p'))
@@ -104,13 +111,16 @@ class eth_vna:
         args = [DBM_CMD, np.int8(power)]
         self._eth_cmd(args)
 
+    def set_meas(self, meas)
+        self.set_sw(SDIR_SWITCH, meas)
+
     def read_iq(self):
         iq = self._eth_cmd([IQ_CMD])
         adc1 = struct.unpack("<h", iq[0:2])[0]
         adc2 = struct.unpack("<h", iq[2:4])[0]
 
-        adc1 = 1e3 * 3.3 * ((adc1 - 2048)/4096.0) # convert to mV
-        adc2 = 1e3 * 3.3 * ((adc2 - 2048)/4096.0) # convert to mV
+        adc1 = 1e3 * ADC_REF * ((adc1)/(2.0 ** ADC_BITS)) # convert to mV
+        adc2 = 1e3 * ADC_REF * ((adc2)/(2.0 ** ADC_BITS)) # convert to mV
 
         print("adc1: {}, adc2: {}".format(adc1, adc2))
         return adc1, adc2

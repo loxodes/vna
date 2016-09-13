@@ -28,7 +28,7 @@
 #define SWITCH_HIGHFREQ HIGH
 #define SW2_S21 LOW
 #define SW2_S11 HIGH
-#define ADC_AVG 16
+#define ADC_AVG 32
 
 // pins
 const uint8_t LMX_LE = 14;
@@ -67,13 +67,12 @@ const uint8_t ATT_6 = 25;
 const uint8_t DET_0 = A3; // pin 23
 
 
-int ADC_CNV_INPUT = 71; // LTC2323 pin 9, high defines sample phase, low starts conversion phase
-int ADC_CNV_CLK_OUT = 72; // LTC2323 conversion clock output
-int ADC_CNV_EN = 73; // LTC2323 conversion enable, high is enabled?
-int ADC_SCK = 74; // LTC2323 pin 21, input spi clock
-int ADC_CLKOUT = 75; // LTC2323 pin 17, output spi clock
-int ADC_SD2 = 76; // LTC2323 pin 19, adc channel 1
-int ADC_SD1 = 77; // LTC2323 pin 15, adc channel 1
+int ADC_CNV_INPUT = PK_3; // LTC2323 pin 9, high defines sample phase, low starts conversion phase
+int ADC_CNV_EN = PK_2; // LTC2323 conversion enable, high is enabled?
+int ADC_SCK = PB_4; // LTC2323 pin 21, input spi clock
+int ADC_CLKOUT = PK_0; // LTC2323 pin 17, output spi clock
+int ADC_SD2 = PB_5; // LTC2323 pin 19, adc channel 1
+int ADC_SD1 = PK_1; // LTC2323 pin 15, adc channel 1
 
 // synth settings
 const uint16_t MIN_N = 16;
@@ -99,7 +98,6 @@ float output_freq;
 void ltc2323_init()
 {
   pinMode(ADC_CNV_INPUT, OUTPUT);
-  pinMode(ADC_CNV_CLK_OUT, INPUT_PULLUP);
   pinMode(ADC_CNV_EN, OUTPUT);
   pinMode(ADC_SCK, OUTPUT);
   pinMode(ADC_CLKOUT, INPUT_PULLUP);
@@ -118,8 +116,6 @@ uint32_t ltc2323_conv()
   digitalWrite(ADC_CNV_EN, LOW);
   delayMicroseconds(CNV_DELAY);
   digitalWrite(ADC_CNV_EN, HIGH); // INVERTED
-
-  //  digitalWrite(ADC_SCK, HIGH);
 
   digitalWrite(ADC_CNV_INPUT, HIGH);
   delayMicroseconds(CNV_DELAY);
@@ -178,7 +174,7 @@ void gpio_init()
   pinMode(SW_1, OUTPUT);
   digitalWrite(SW_1, SWITCH_LOWFREQ);
   pinMode(SW_2, OUTPUT);
-  digitalWrite(SW_2, SW2_S21);
+  digitalWrite(SW_2, SW2_S11);
 
   pinMode(FILT0_A, OUTPUT);
   pinMode(FILT0_B, OUTPUT);
@@ -604,6 +600,8 @@ void loop()
   float f_temp;
   float output_power;
   int32_t adc1, adc2;
+  int16_t adc1_avg, adc2_avg;
+  uint32_t adc_tmp;
   uint64_t freq_long;
   uint8_t cmd, idx;
   uint8_t reply_buffer_size;
@@ -695,26 +693,33 @@ void loop()
         break;
 
       case IQ_CMD:
+        adc_tmp = ltc2323_conv(); // one conversion lag 
+        adc1 = 0;
+        adc2 = 0;
+        
         for(c_temp = 0; c_temp < ADC_AVG; c_temp++) {
-                adc1 += 2048 + analogRead(I_0) - analogRead(I_1);
-                adc2 += 2048 + analogRead(Q_0) - analogRead(Q_1);  
+              adc_tmp = ltc2323_conv(); // do a few conversions to work the cruft out..
+              adc1 += (int16_t) (adc_tmp & 0xffff);
+              adc2 += (int16_t) ((adc_tmp >> 16) & 0xffff);
         }
 
-        adc1 /= ADC_AVG;
-        adc2 /= ADC_AVG;
+        adc1_avg = adc1 /= ADC_AVG;
+        adc2_avg = adc2 /= ADC_AVG;
+
+
         
         reply_buffer_size = 5;
  
         Serial.print("adc1: ");
-        Serial.print(adc1);
+        Serial.print(adc1_avg);
         Serial.print(" adc2: ");
-        Serial.print(adc2);
+        Serial.print(adc2_avg);
         Serial.print(" ");
         
-        replyBuffer[1] = adc1 & 0xff;
-        replyBuffer[2] = (adc1 >> 8) & 0xff;
-        replyBuffer[3] = adc2 & 0xff;
-        replyBuffer[4] = (adc2 >> 8) & 0xff;
+        replyBuffer[1] = adc1_avg & 0xff;
+        replyBuffer[2] = (adc1_avg >> 8) & 0xff;
+        replyBuffer[3] = adc2_avg & 0xff;
+        replyBuffer[4] = (adc2_avg >> 8) & 0xff;
   
         break;
 
