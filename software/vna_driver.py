@@ -42,36 +42,36 @@ class eth_vna:
         
         for (fidx, f) in enumerate(sweep_freqs):
             self.set_freq(f)
-            time.sleep(.01)
             self.set_dbm(6)
-            time.sleep(.01)
             i, q = self.read_iq()
             sweep_iq[fidx] = i + 1j * q
         
-        net = rf.Network(f=sweep_freqs, s=sweep_iq, z0=50)
+        net = rf.Network(f=sweep_freqs/1e9, s=sweep_iq, z0=50)
         return net 
     
     def slot_calibrate_oneport(self, fstart, fstop, points):
-        raw_input("connect open, then press enter to continue")
-        self.cal_open = self.sweep(fstart, fstop, points)
         raw_input("connect short, then press enter to continue")
         self.cal_short = self.sweep(fstart, fstop, points)
+
         raw_input("connect load, then press enter to continue")
         self.cal_load = self.sweep(fstart, fstop, points)
 
-        ideal_open = rf.network(f=sweep_freqs, s=np.ones(points), z0=50)
-        ideal_short = rf.network(f=sweep_freqs, s=-1*np.ones(points), z0=50)
-        ideal_load = rf.network(f=sweep_freqs, s=np.zeros(points), z0=50)
+        raw_input("connect open, then press enter to continue")
+        self.cal_open = self.sweep(fstart, fstop, points)
+        sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
+
+        ideal_open = rf.Network(f=sweep_freqs, s=np.ones(points), z0=50)
+        ideal_short = rf.Network(f=sweep_freqs, s=-1*np.ones(points), z0=50)
+        ideal_load = rf.Network(f=sweep_freqs, s=np.zeros(points), z0=50)
 
         #raw_input("connect thru, then press enter to continue")
         #self.cal_thru = self.sweep(fstart, fstop, points)
         self.cal_oneport = rf.OnePort(\
-                ideal = [ideal_short, ideal_open, ideal_load],\
+                ideals = [ideal_short, ideal_open, ideal_load],\
                 measured = [self.cal_short, self.cal_open, self.cal_load])        
                 
         self.cal_oneport.run()
         short_caled = self.cal_oneport.apply_cal(self.cal_short)
-        pdb.set_trace()
     
     def plot_oneport_sparam(self, fstart, fstop, points):
         sweep = self.sweep(fstart, fstop, points)
@@ -111,7 +111,7 @@ class eth_vna:
         args = [DBM_CMD, np.int8(power)]
         self._eth_cmd(args)
 
-    def set_meas(self, meas)
+    def set_meas(self, meas):
         self.set_sw(SDIR_SWITCH, meas)
 
     def read_iq(self):
@@ -135,12 +135,15 @@ if __name__ == '__main__':
     vna  = eth_vna(VNAPORT, VNAIP)
     fstart = 1e9
     fstop = 3e9
-    points = 201
+    points = 51 
+
+    vna.set_meas(S11)
     vna.slot_calibrate_oneport(fstart, fstop, points)
 
     while True:
         raw_input("connect dut, then press enter to continue")
         vna.plot_oneport_sparam(fstart, fstop, points)
+        pdb.set_trace()
 
     pdb.set_trace()
 
