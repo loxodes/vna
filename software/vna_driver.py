@@ -103,13 +103,22 @@ class eth_vna:
         self._eth_cmd(args)
 
     def set_pow(self, path, power):
+        self.channel_power = power
+
         l = line.split()
         args = [POW_CMD, np.uint8(path), np.uint8(power)]
         self._eth_cmd(args)
 
     def set_dbm(self, power):
         args = [DBM_CMD, np.int8(power)]
-        self._eth_cmd(args)
+        dbm_return = self._eth_cmd(args)
+
+        power_measured = struct.unpack("<h", dbm_return[0:2])[0]/4
+        self.att_setting = struct.unpack("B", dbm_return[2])[0]/2
+        self.channel_power = struct.unpack("B", dbm_return[3])[0]
+        self.channel_select = struct.unpack("B", dbm_return[4])[0]
+
+        return power_measured
 
     def set_meas(self, meas):
         self.set_sw(SDIR_SWITCH, meas)
