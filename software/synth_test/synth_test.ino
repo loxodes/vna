@@ -94,6 +94,9 @@ uint8_t replyBuffer[UDP_TX_PACKET_MAX_SIZE]; // buffer to hold outgoing packet
 
 
 float output_freq;
+float att;
+uint8_t current_channel;
+uint8_t channel_power;
 
 void ltc2323_init()
 {
@@ -245,13 +248,16 @@ void lmx2592_set_denom(uint32_t denom)
 }
 void lmx2592_chan_power(uint8_t chan, uint8_t power)
 {
+  current_channel = chan;
+  channel_power = power;
+  
   if (chan == CHANNELB) {
     spi_set_reg(47, (0x3F & power) << REG47_OUTB_POW);
     spi_set_reg(46, REG46_OUTA_PD);
   }
   else if (chan == CHANNELA) {
     spi_set_reg(46, REG46_OUTB_PD | (0x3F & power) << REG46_OUTA_POW);
-  }
+  }  
   delay(10);
 }
 
@@ -390,20 +396,21 @@ void set_path_switch(float f)
 void set_att(float att_db)
 {
   float ATT_STEP = .5;
-  uint8_t att = att_db / ATT_STEP;
-  digitalWrite(ATT_1, att & BIT5 ? HIGH : LOW);
-  digitalWrite(ATT_2, att & BIT4 ? HIGH : LOW);
-  digitalWrite(ATT_3, att & BIT3 ? HIGH : LOW);
-  digitalWrite(ATT_4, att & BIT2 ? HIGH : LOW);
-  digitalWrite(ATT_5, att & BIT1 ? HIGH : LOW);
-  digitalWrite(ATT_6, att & BIT0 ? HIGH : LOW);
+  att = att_db;
+  uint8_t att_bits = att_db / ATT_STEP;
+  digitalWrite(ATT_1, att_bits & BIT5 ? HIGH : LOW);
+  digitalWrite(ATT_2, att_bits & BIT4 ? HIGH : LOW);
+  digitalWrite(ATT_3, att_bits & BIT3 ? HIGH : LOW);
+  digitalWrite(ATT_4, att_bits & BIT2 ? HIGH : LOW);
+  digitalWrite(ATT_5, att_bits & BIT1 ? HIGH : LOW);
+  digitalWrite(ATT_6, att_bits & BIT0 ? HIGH : LOW);
   delay(10);
 }
 
 // sets the output power, measured power level error
 float set_pow_dbm(float p, float f)
 {
-  float pdiff, att;
+  float pdiff;
   uint8_t channel = f > F_VCO_MAX ? CHANNELB : CHANNELA;
   const float MAX_ATT = 30;
   set_att(MAX_ATT);
@@ -451,10 +458,7 @@ float set_pow_dbm(float p, float f)
   }
 
   set_att(min(att + pdiff, MAX_ATT));
-  pdiff = adl5902_powerdet(output_freq) - p;
-  Serial.print("final pdiff: ");
-  Serial.println(pdiff);
-  return pdiff;
+  return adl5902_powerdet(output_freq);;
 }
 void lmx2592_set_freq(float f)
 {
@@ -660,12 +664,15 @@ void loop()
           p_temp += 1;
           p_temp = -p_temp;
         }
-        set_pow_dbm(p_temp, output_freq);
-        reply_buffer_size = 4;
-        replyBuffer[1] = adc1_avg & 0xff; // measured power (dBm * 4)
-        replyBuffer[1] = adc1_avg & 0xff; // attenuator setting (raw index)
-        replyBuffer[1] = adc1_avg & 0xff; // power setting (raw index)
+        output_power = set_pow_dbm(p_temp, output_freq);
+        i_temp = output_power * 4;
         
+        reply_buffer_size = 6;
+        replyBuffer[1] = i_temp & 0xff; // measured power (dBm * 4)
+        replyBuffer[2] = (i_temp >> 8) & 0xff;        
+        replyBuffer[3] = att / .5; // attenuator setting (raw index)
+        replyBuffer[4] = channel_power; // power setting (raw index)
+        replyBuffer[5] = current_channel;
         break;
         
       case OUTPUT_CMD:
