@@ -661,6 +661,11 @@ void loop()
           p_temp = -p_temp;
         }
         set_pow_dbm(p_temp, output_freq);
+        reply_buffer_size = 4;
+        replyBuffer[1] = adc1_avg & 0xff; // measured power (dBm * 4)
+        replyBuffer[1] = adc1_avg & 0xff; // attenuator setting (raw index)
+        replyBuffer[1] = adc1_avg & 0xff; // power setting (raw index)
+        
         break;
         
       case OUTPUT_CMD:

@@ -66,6 +66,7 @@ LIBS:adl5902
 LIBS:adl5380
 LIBS:adf4355-3
 LIBS:74xx1g14
+LIBS:crystal_filter-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -172,7 +173,7 @@ L C_Small C101
 U 1 1 577B0E92
 P 3400 3350
 F 0 "C101" H 3410 3420 50  0000 L CNN
-F 1 "27 pF" H 3410 3270 50  0000 L CNN
+F 1 "28 pF" H 3410 3270 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805" H 3400 3350 50  0001 C CNN
 F 3 "" H 3400 3350 50  0000 C CNN
 	1    3400 3350
@@ -241,7 +242,7 @@ L C_Small C102
 U 1 1 577B13A7
 P 5050 3350
 F 0 "C102" H 5060 3420 50  0000 L CNN
-F 1 "27 pF" H 5060 3270 50  0000 L CNN
+F 1 "28 pF" H 5060 3270 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805" H 5050 3350 50  0001 C CNN
 F 3 "" H 5050 3350 50  0000 C CNN
 	1    5050 3350
@@ -316,4 +317,6 @@ F 3 "" H 4200 3350 50  0000 C CNN
 	1    4200 3350
 	1    0    0    -1  
 $EndComp
+Text Notes 3450 2650 0    60   ~ 0
+matching circuit values:\n21A15 - series 28 pF, shunt 2 uH (below)\n21A30 - series 24 pF, shunt 2.4 uH\n45A30 - series 11 pF, shunt 1 uH\n
 $EndSCHEMATC
