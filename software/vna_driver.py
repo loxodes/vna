@@ -22,7 +22,7 @@ S11 = 1
 SDIR_SWITCH = 2
 
 
-SYNTH_POW = 6 # dBm
+SYNTH_POW = 7 # dBm
 
 SWITCH_CMD = np.uint8(ord('w'))
 FILT_CMD = np.uint8(ord('f'))
@@ -73,7 +73,6 @@ class eth_vna:
                 self.set_att(self.cal_att[fidx])
                 self.set_pow(self.cal_path[fidx], self.cal_pow[fidx])
                 time.sleep(.05)
-                print('det power: {}'.format(self.read_det()))
 
             i, q = self.read_iq()
             sweep_iq[fidx] = i + 1j * q
@@ -176,7 +175,7 @@ if __name__ == '__main__':
     vna  = eth_vna(VNAPORT, VNAIP)
     fstart = 1e9
     fstop = 3e9
-    points = 201 
+    points = 401 
 
     vna.set_meas(S11)
     vna.slot_calibrate_oneport(fstart, fstop, points)
@@ -188,7 +187,6 @@ if __name__ == '__main__':
         plt.subplot(1,2,2)
         sweep_cal.plot_s_smith()
         plt.show()
-        pdb.set_trace()
 
     pdb.set_trace()
 

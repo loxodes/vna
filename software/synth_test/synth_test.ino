@@ -28,7 +28,7 @@
 #define SWITCH_HIGHFREQ HIGH
 #define SW2_S21 LOW
 #define SW2_S11 HIGH
-#define ADC_AVG 32
+#define ADC_AVG 4
 
 // pins
 const uint8_t LMX_LE = 14;
@@ -117,23 +117,23 @@ uint32_t ltc2323_conv()
   uint32_t adc2 = 0;
   // why do I need to pulse CNV_EN?...
   digitalWrite(ADC_CNV_EN, LOW);
-  delayMicroseconds(CNV_DELAY);
+//  delayMicroseconds(CNV_DELAY);
   digitalWrite(ADC_CNV_EN, HIGH); // INVERTED
 
   digitalWrite(ADC_CNV_INPUT, HIGH);
-  delayMicroseconds(CNV_DELAY);
+//  delayMicroseconds(CNV_DELAY);
   digitalWrite(ADC_CNV_INPUT, LOW);
-  delayMicroseconds(CNV_DELAY);
+//  delayMicroseconds(CNV_DELAY);
 
   for (uint32_t i = 0; i < ADC_BITS; i++) {
     digitalWrite(ADC_SCK, HIGH);
-    delayMicroseconds(SCK_DELAY);
+//    delayMicroseconds(SCK_DELAY);
     adc1 = adc1 << 1;
     adc2 = adc2 << 1;
     adc1 |= digitalRead(ADC_SD1) ^ 1;
     adc2 |= digitalRead(ADC_SD2) ^ 1;
     digitalWrite(ADC_SCK, LOW);
-    delayMicroseconds(SCK_DELAY);
+//    delayMicroseconds(SCK_DELAY);
   }
 
   return adc1 | (adc2 << 16);
@@ -317,7 +317,7 @@ float adl5902_powerdet(float f)
   float ADC_REF = 3.3;
   float det_voltage, det_power;
   uint32_t ADC_STEPS = 4096;
-  uint32_t DET_AVG = 16;
+  uint32_t DET_AVG = 8;
   
   float det_adc = 0;
   for(uint8_t i = 0; i < DET_AVG; i++) {
@@ -325,8 +325,6 @@ float adl5902_powerdet(float f)
   }
   det_adc /= DET_AVG;
   
-  Serial.print("RAW ADC: ");
-  Serial.print(det_adc);
   det_voltage = (ADC_REF / (float) ADC_STEPS) * det_adc;
   det_power = adl5902_get_int(f) + (det_voltage / adl5902_get_slope(f));
   return det_power;
@@ -414,16 +412,12 @@ float set_pow_dbm(float p, float f)
   uint8_t channel = f > F_VCO_MAX ? CHANNELB : CHANNELA;
   const float MAX_ATT = 30;
   set_att(MAX_ATT);
-  Serial.println("starting dbm command");
-  Serial.print("target power: ");
-  Serial.println(p);
+
   
   lmx2592_chan_power(channel, 0);
 
   pdiff = adl5902_powerdet(output_freq) - p;
-  Serial.print("initial pdiff: ");
-  Serial.println(pdiff);
-  
+
   if(pdiff > 0) {
     att = MAX_ATT;    
   }
@@ -433,22 +427,15 @@ float set_pow_dbm(float p, float f)
   else {
     att = MAX_ATT + pdiff;
   }
-  Serial.print("setting att: ");
-  Serial.println(att);
+
   set_att(att);
 
   pdiff = adl5902_powerdet(output_freq) - p;
-  Serial.print("new pdiff: ");
-  Serial.println(pdiff);
-  
+
   if(-pdiff > att){
     for(uint8_t pidx = 0; pidx < 62; pidx++) {
       lmx2592_chan_power(channel, pidx);
       pdiff = adl5902_powerdet(output_freq) - p;
-      Serial.print("pow pdiff: ");
-      Serial.print(pidx);
-      Serial.print(", ");
-      Serial.println(pdiff);
       if(pdiff > 0) {
         lmx2592_chan_power(channel, pidx+1);
         pdiff = adl5902_powerdet(output_freq) - p;
@@ -573,16 +560,9 @@ void setup()
   clk_init();
   lmx2592_init();
 
-  
-  lmx2592_set_denom(FRAC_DENOM);
-  lmx2592_set_freq(500e6);
-  set_filterbank(500e6);
-  set_path_switch(500e6);
-//  lmx2592_chan_power(CHANNELA, 0);
-
-  float pow = adl5902_powerdet(output_freq);
-  Serial.print("power: ");
-  Serial.println(pow);
+  lmx2592_set_freq(2e9);
+  set_filterbank(2e9);
+  set_path_switch(2e9);
 
   Ethernet.begin(mac, ip);
   Udp.begin(port);
@@ -625,11 +605,6 @@ void loop()
       case SWITCH_CMD:
         c_temp = packetBuffer[2];
         digitalWrite(switches[idx], sw_state[c_temp]);
-        Serial.print("state: ");
-        Serial.print(c_temp);
-        Serial.print("idx: ");
-        Serial.print(idx);
-        Serial.print(" ");
         break;
 
       case FILT_CMD:
@@ -650,11 +625,6 @@ void loop()
       case POW_CMD:
         c_temp = packetBuffer[2];
         lmx2592_chan_power(idx, c_temp);
-        Serial.print("pow: ");
-        Serial.print(c_temp);
-        Serial.print("chan: ");
-        Serial.print(idx);
-        Serial.print(" ");
         break;
         
       case DBM_CMD:
@@ -680,10 +650,6 @@ void loop()
         f_temp = freq_long;
         f_temp = (double) f_temp * (double) 10.00; // parse float uses an int internally, so we are limited to 10 hz resolution..
 
-        Serial.print("freq: ");
-        Serial.print(f_temp);
-        Serial.print(" ");
-
         lmx2592_set_freq(f_temp);
         set_filterbank(f_temp);
         set_path_switch(f_temp);
@@ -697,11 +663,6 @@ void loop()
         digitalWrite(ATT_4, c_temp & BIT2 ? HIGH : LOW);
         digitalWrite(ATT_5, c_temp & BIT1 ? HIGH : LOW);
         digitalWrite(ATT_6, c_temp & BIT0 ? HIGH : LOW);
-        Serial.print("att: ");
-        Serial.print(c_temp);
-        Serial.print("chan: ");
-        Serial.print(idx);
-        Serial.print(" ");
         break;
 
       case IQ_CMD:
@@ -718,16 +679,7 @@ void loop()
         adc1_avg = adc1 /= ADC_AVG;
         adc2_avg = adc2 /= ADC_AVG;
 
-
-        
         reply_buffer_size = 5;
- 
-        Serial.print("adc1: ");
-        Serial.print(adc1_avg);
-        Serial.print(" adc2: ");
-        Serial.print(adc2_avg);
-        Serial.print(" ");
-        
         replyBuffer[1] = adc1_avg & 0xff;
         replyBuffer[2] = (adc1_avg >> 8) & 0xff;
         replyBuffer[3] = adc2_avg & 0xff;
@@ -739,8 +691,6 @@ void loop()
         c_temp = packetBuffer[2];
         output_power = adl5902_powerdet(output_freq);
         i_temp = output_power * 4;
-        Serial.print("det: ");
-        Serial.print(output_power);
         reply_buffer_size = 3;
         replyBuffer[1] = i_temp & 0xff;
         replyBuffer[2] = (i_temp >> 8) & 0xff;
@@ -755,8 +705,6 @@ void loop()
     Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
     Udp.write(replyBuffer, reply_buffer_size);
     Udp.endPacket();
-    Serial.print(cmd);
-    Serial.println(" - finished command");
   }
 
 
