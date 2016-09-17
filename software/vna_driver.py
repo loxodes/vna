@@ -21,6 +21,9 @@ S21 = 0
 S11 = 1
 SDIR_SWITCH = 2
 
+
+SYNTH_POW = 6 # dBm
+
 SWITCH_CMD = np.uint8(ord('w'))
 FILT_CMD = np.uint8(ord('f'))
 POW_CMD = np.uint8(ord('p'))
@@ -35,14 +38,43 @@ class eth_vna:
     def __init__(self, vna_port, vna_ip):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.freq = np.float32(0)
-    
-    def sweep(self, fstart, fstop, points):
+        self.pow_cal = False   
+
+    def cal_sweep_pow(self, fstart, fstop, points):
+        self.pow_cal = True
+        print('precomputing sweep amplitudes')
+        sweep_freqs = np.linspace(fstart, fstop, points)
+
+        self.cal_att = np.zeros(points)
+        self.cal_path = np.zeros(points)
+        self.cal_pow = np.zeros(points)
+
+        for (fidx, f) in enumerate(sweep_freqs):
+            self.set_freq(f)
+            dbm_actual = self.set_dbm(SYNTH_POW)
+            self.cal_att[fidx] = self.att_setting
+            self.cal_path[fidx] = self.channel_select
+            self.cal_pow[fidx] = self.channel_power
+            print('{}/{} frequency {}, actual power {}'.format(fidx, points, f, dbm_actual)) 
+
+    def sweep(self, fstart, fstop, points, use_cal = True):
+        if use_cal and not self.pow_cal:
+            self.cal_sweep_pow(fstart, fstop, points)
+
         sweep_freqs = np.linspace(fstart, fstop, points)
         sweep_iq = 1j * np.zeros(points)
         
         for (fidx, f) in enumerate(sweep_freqs):
             self.set_freq(f)
-            self.set_dbm(6)
+
+            if not use_cal:
+                self.set_dbm(SYNTH_POW)
+            else:
+                self.set_att(self.cal_att[fidx])
+                self.set_pow(self.cal_path[fidx], self.cal_pow[fidx])
+                time.sleep(.05)
+                print('det power: {}'.format(self.read_det()))
+
             i, q = self.read_iq()
             sweep_iq[fidx] = i + 1j * q
         
@@ -50,11 +82,11 @@ class eth_vna:
         return net 
     
     def slot_calibrate_oneport(self, fstart, fstop, points):
-        raw_input("connect short, then press enter to continue")
-        self.cal_short = self.sweep(fstart, fstop, points)
-
         raw_input("connect load, then press enter to continue")
         self.cal_load = self.sweep(fstart, fstop, points)
+
+        raw_input("connect short, then press enter to continue")
+        self.cal_short = self.sweep(fstart, fstop, points)
 
         raw_input("connect open, then press enter to continue")
         self.cal_open = self.sweep(fstart, fstop, points)
@@ -98,26 +130,26 @@ class eth_vna:
         self._eth_cmd(args)
 
     def set_filt(self, path, bank = 0):
-        l = line.split()
         args = [FILT_CMD, np.uint8(bank), np.uint8(path)]
         self._eth_cmd(args)
 
     def set_pow(self, path, power):
         self.channel_power = power
-
-        l = line.split()
         args = [POW_CMD, np.uint8(path), np.uint8(power)]
         self._eth_cmd(args)
 
-    def set_dbm(self, power):
+    def set_att(self, att):
+        args = [ATT_CMD, np.uint8(0), np.uint8(att/.5)]
+        self._eth_cmd(args)
+
+
+    def set_dbm(self, power, use_cache = True):
         args = [DBM_CMD, np.int8(power)]
         dbm_return = self._eth_cmd(args)
-
         power_measured = struct.unpack("<h", dbm_return[0:2])[0]/4
         self.att_setting = struct.unpack("B", dbm_return[2])[0]/2
         self.channel_power = struct.unpack("B", dbm_return[3])[0]
         self.channel_select = struct.unpack("B", dbm_return[4])[0]
-
         return power_measured
 
     def set_meas(self, meas):
@@ -144,14 +176,18 @@ if __name__ == '__main__':
     vna  = eth_vna(VNAPORT, VNAIP)
     fstart = 1e9
     fstop = 3e9
-    points = 51 
+    points = 201 
 
     vna.set_meas(S11)
     vna.slot_calibrate_oneport(fstart, fstop, points)
 
     while True:
         raw_input("connect dut, then press enter to continue")
-        vna.plot_oneport_sparam(fstart, fstop, points)
+        plt.subplot(1,2,1)
+        sweep_cal = vna.plot_oneport_sparam(fstart, fstop, points)
+        plt.subplot(1,2,2)
+        sweep_cal.plot_s_smith()
+        plt.show()
         pdb.set_trace()
 
     pdb.set_trace()
