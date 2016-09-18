@@ -22,7 +22,7 @@ S11 = 1
 SDIR_SWITCH = 2
 
 
-SYNTH_POW = 7 # dBm
+SYNTH_POW = 4 # dBm
 
 SWITCH_CMD = np.uint8(ord('w'))
 FILT_CMD = np.uint8(ord('f'))
@@ -173,9 +173,9 @@ class eth_vna:
 
 if __name__ == '__main__':
     vna  = eth_vna(VNAPORT, VNAIP)
-    fstart = 1e9
-    fstop = 3e9
-    points = 401 
+    fstart = .5e9
+    fstop = 4e9
+    points = 501 
 
     vna.set_meas(S11)
     vna.slot_calibrate_oneport(fstart, fstop, points)
