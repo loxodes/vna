@@ -3,7 +3,7 @@
   (general
     (links 514)
     (no_connects 0)
-    (area 160.724999 83.724999 258.025001 116.675001)
+    (area 160.724999 81.515 265.024762 118.605)
     (thickness 1.6)
     (drawings 50)
     (tracks 1475)
@@ -39,7 +39,7 @@
   )
 
   (setup
-    (last_trace_width 0.35)
+    (last_trace_width 0.12)
     (user_trace_width 0.2)
     (user_trace_width 0.3)
     (user_trace_width 0.35)
@@ -6941,11 +6941,11 @@
       (net 1 GND))
   )
 
-  (module vna_footprints:SMA_CPW_1MM_.2MM (layer F.Cu) (tedit 577AF781) (tstamp 57DE26AA)
+  (module vna_footprints:SMA_CPW_1MM_.2MM (layer F.Cu) (tedit 57DF152C) (tstamp 57DE26AA)
     (at 254.9 94.5 270)
     (path /572B07F0/572C89B0)
-    (fp_text reference U1002 (at 6.2 0 360) (layer F.SilkS)
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text reference U1002 (at 5.75 0.9 360) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
     )
     (fp_text value CONN_SMA_2GND (at -6.5 4.6 360) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
