@@ -1,0 +1,10 @@
+PRU code for reading AD9864 ADC (under development)
+
+tested on beaglebone green, running Debian 7.11, Linux beaglebone 3.8.13-bone80
+
+see:
+http://www.righto.com/2016/08/pru-tips-understanding-beaglebones.html
+http://www.embedded-things.com/bbb/understanding-bbb-pru-shared-memory-access/
+https://groups.google.com/forum/#!topic/beagleboard/0a4tszlq2y0
+
+
