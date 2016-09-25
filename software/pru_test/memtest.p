@@ -26,7 +26,7 @@
 #define CTPPR0               0x28
 #define SHARED_RAM           0x100
 
-#define SHM_TOTAL_SAMPLE_IDX 4
+#define BYTES_PER_SAMPLE 4
 
 .origin 0
 .entrypoint TOP
@@ -75,9 +75,9 @@ TOP:
     MOV r2, ADC_BUF_STATUS_EMPTY
     SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
    
-    LBCO &SAMPLE_COUNTER, CONST_PRUSHAREDRAM, SHM_TOTAL_SAMPLE_IDX, 4
+    LBCO &SAMPLE_COUNTER, CONST_PRUSHAREDRAM, SAMPLE_COUNT_IDX, 4
    
-    MOV TMP, 5000
+    MOV TMP, 15000
     DELAY_US
   
     SHM_LOOP_TOP:
@@ -92,7 +92,7 @@ TOP:
             ; save current sample index to shm buffer
             ; (replace with ADC value..)
             MOV r2, r13
-            SBCO r2, CONST_PRUSHAREDRAM, r14, 4
+            SBCO r2, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
             SUB r13, r13, 1 
@@ -101,7 +101,7 @@ TOP:
         MOV r2, ADC_BUF_STATUS_BUF0
         SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
 
-        MOV TMP, 4000
+        MOV TMP, 7000
         DELAY_US
         
         MOV r13, ADC_BUF_LEN_SAMPLES
@@ -115,7 +115,7 @@ TOP:
             ; save current sample index to shm buffer
             ; (replace with ADC value..)
             MOV r2, r13
-            SBCO r2, CONST_PRUSHAREDRAM, r14, 4
+            SBCO r2, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
             SUB r13, r13, 1 
@@ -125,7 +125,7 @@ TOP:
         MOV r2, ADC_BUF_STATUS_BUF1
         SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
 
-        MOV TMP, 4000
+        MOV TMP, 7000 
         DELAY_US
 
         SUB SAMPLE_COUNTER, SAMPLE_COUNTER, r15 

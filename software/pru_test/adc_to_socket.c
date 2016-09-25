@@ -1,6 +1,10 @@
 // Compile with:
 // gcc -o loader loader.c -lprussdrv
 
+// TODO: use interrupts or smarter polling to signal buffer is ready
+// add socket dump of samples
+// 
+//
 // Based on https://credentiality2.blogspot.com/2015/09/beaglebone-pru-gpio-example.html
 // Based on http://www.righto.com/2016/08/pru-tips-understanding-beaglebones.html
 // Based on https://groups.google.com/forum/#!topic/beagleboard/0a4tszlq2y0
@@ -27,7 +31,6 @@
 
 // shared memory
 // [ 32 bytes, config/misc ] [ 2048 bytes (512 samples) buffer 0 ] [ 2048 bytes (512 samples) buffer 1 ]
-#define ADC_STATUS_OFFSET 0 
 
 #define PRU_BIN "./memtest.bin"
 
@@ -60,9 +63,6 @@ int main(int argc, char **argv) {
     exit(-1);
   }
 
-  // TODO: add memory reading stuff
-  // poll shared memory location
-  
   fprintf(stderr, "loaded adc reader.. waiting for PRU to initialize buffer status\n");
 
   fprintf(stderr, "%d %d: %d\n", target_buffer, ADC_BUF_STATUS_IDX, sharedMem_int[ADC_BUF_STATUS_IDX]);
