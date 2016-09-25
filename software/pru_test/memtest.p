@@ -5,6 +5,8 @@
 ;   clkout  - spi clk output        - P9.30, R31 2
 ; 
 
+#include "adc_shm.h"
+
 #define DOUTA 0
 #define FS 1
 #define CLKOUT 2
@@ -16,7 +18,6 @@
 #define INREG 31
 #define RADDR r7
 
-#define BITS_PER_SAMPLE 16
 
 ; defines from http://www.embedded-things.com/bbb/understanding-bbb-pru-shared-memory-access/
 #define CONST_PRUCFG         C4
@@ -24,14 +25,8 @@
 #define PRU0_CTRL            0x22000
 #define CTPPR0               0x28
 #define SHARED_RAM           0x100
+
 #define SHM_TOTAL_SAMPLE_IDX 4
-#define SHM_ADC_BUF_STATUS_IDX 0
-#define ADC_BUF_STATUS_EMPTY 10
-#define ADC_BUF_STATUS_BUF0 0
-#define ADC_BUF_STATUS_BUF1 1
-#define ADC_BUF_START_OFFSET 32
-#define ADC_BUF_LEN_SAMPLES 512
-#define ADC_BUF_IDX_OFFSET
 
 .origin 0
 .entrypoint TOP
@@ -78,11 +73,11 @@ TOP:
     SBBO    r0, r1, 0, 4
    
     MOV r2, ADC_BUF_STATUS_EMPTY
-    SBCO r2, CONST_PRUSHAREDRAM, SHM_ADC_BUF_STATUS_IDX, 4
+    SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
    
     LBCO &SAMPLE_COUNTER, CONST_PRUSHAREDRAM, SHM_TOTAL_SAMPLE_IDX, 4
    
-    MOV TMP, 100000
+    MOV TMP, 5000
     DELAY_US
   
     SHM_LOOP_TOP:
@@ -91,7 +86,7 @@ TOP:
         SHM_BUF0:
             ; calculate next shm address in r14
             MOV r14, r13
-            ADD r14, r14, ADC_BUF_START_OFFSET 
+            ADD r14, r14, ADC_BUF_OFFSET 
             LSL r14, r14, 2
             
             ; save current sample index to shm buffer
@@ -104,16 +99,16 @@ TOP:
             QBNE SHM_BUF0, r13, 0
 
         MOV r2, ADC_BUF_STATUS_BUF0
-        SBCO r2, CONST_PRUSHAREDRAM, SHM_ADC_BUF_STATUS_IDX, 4
+        SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
 
-        MOV TMP, 50000
+        MOV TMP, 4000
         DELAY_US
         
         MOV r13, ADC_BUF_LEN_SAMPLES
         SHM_BUF1:
             ; calculate next shm address in r14
             MOV r14, r13
-            ADD r14, r14, ADC_BUF_START_OFFSET 
+            ADD r14, r14, ADC_BUF_OFFSET 
             ADD r14, r14, r15 ; target buffer 1
             LSL r14, r14, 2
             
@@ -128,9 +123,9 @@ TOP:
 
      
         MOV r2, ADC_BUF_STATUS_BUF1
-        SBCO r2, CONST_PRUSHAREDRAM, SHM_ADC_BUF_STATUS_IDX, 4
+        SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
 
-        MOV TMP, 50000
+        MOV TMP, 4000
         DELAY_US
 
         SUB SAMPLE_COUNTER, SAMPLE_COUNTER, r15 
