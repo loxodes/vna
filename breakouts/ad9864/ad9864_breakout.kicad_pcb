@@ -1,4 +1,4 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.3-stable)
+(kicad_pcb (version 4) (host pcbnew 4.0.4-stable)
 
   (general
     (links 216)
@@ -39,7 +39,7 @@
   )
 
   (setup
-    (last_trace_width 1)
+    (last_trace_width 0.25)
     (user_trace_width 0.2)
     (user_trace_width 0.4)
     (user_trace_width 1)
@@ -70,7 +70,7 @@
     (aux_axis_origin 0 0)
     (visible_elements FFFEFF7F)
     (pcbplotparams
-      (layerselection 0x010f0_80000007)
+      (layerselection 0x010f8_80000007)
       (usegerberextensions true)
       (excludeedgelayer true)
       (linewidth 0.100000)

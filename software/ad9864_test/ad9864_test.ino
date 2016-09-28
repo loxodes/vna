@@ -1,6 +1,10 @@
 
 // configures AD9864 IF digitizer
 // sampling with beaglebone pru (see /software/pru_test)
+// max2605 VCO tune to ~45.15 MHz
+// 26 MHz xco input
+// 45 MHz IF
+// 
 
 #include <SPI.h>
 
@@ -9,7 +13,7 @@ const int ADC_SPI_CLK = 7; // P1_5,  pc
 const int ADC_SPI_DAT = 15; // P1_6, pd
 const int ADC_SPI_EN = 12; //P5_2. pe
 const int ADC_SPI_RB = 14; //P1_7, doutb
-
+// douta, syncb, fs, clkout connected to beaglebone
 
 #define AD9864_READ_MASK ((1 << 15))
 
