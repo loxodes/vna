@@ -29,6 +29,7 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:OSD335x
+LIBS:controller-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
