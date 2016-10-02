@@ -47,15 +47,15 @@ void ad9864_init()
   // init
   ad9864_write_reg(0x3F, 0x99); // software reset
   ad9864_write_reg(0x19, 0x87); // 4-wire SPI, 16 bit I/Q
-  ad9864_write_reg(0x00, 0x45); // take ref, gc, clk syn/lo out of standby
+  ad9864_write_reg(0x00, 0x55); // take ref, gc, cko out of standby. leave ck off
 
-  // configure clock synth
-  ad9864_write_reg(0x01, 0x0C);
-  ad9864_write_reg(0x10, 0x00); // ???
-  ad9864_write_reg(0x11, 0x38); // ???
-  ad9864_write_reg(0x12, 0x00); // ???
-  ad9864_write_reg(0x13, 0x3C); // ???
-  ad9864_write_reg(0x14, 0x03); // ???
+// configure clock synth (bypass vco, use 26 MHz crystal osc)
+//  ad9864_write_reg(0x01, 0x0C);
+//  ad9864_write_reg(0x10, 0x00); // ???
+//  ad9864_write_reg(0x11, 0x38); // ???
+//  ad9864_write_reg(0x12, 0x00); // ???
+//  ad9864_write_reg(0x13, 0x3C); // ???
+//  ad9864_write_reg(0x14, 0x03); // ???
   delayMicroseconds(1000); // TODO: how long to wait for CLK SYN output to settle?
   
   // lc and rc resonator calibration
@@ -78,25 +78,26 @@ void ad9864_init()
   ad9864_write_reg(0x38, 0x00);
   ad9864_write_reg(0x3E, 0x00);
 
-  // lo synth configuration
-  ad9864_write_reg(0x00, 0x00);
-  ad9864_write_reg(0x08, 0x00); // ???
-  ad9864_write_reg(0x09, 0x38); // ???
-  ad9864_write_reg(0x0A, 0xA0); // ???
-  ad9864_write_reg(0x0B, 0x1D); // ???
-  ad9864_write_reg(0x0C, 0x03); // ???
+  // lo synth configuration, set LO to 48.25 MHz
+  ad9864_write_reg(0x00, 0x10); // enable everything but clk synth
+  ad9864_write_reg(0x08, 0x00); // 
+  ad9864_write_reg(0x09, 0x68); // LOR = 104 (so, fif = 250 kHz * (8 LOB + LOA)
+  ad9864_write_reg(0x0A, 0xA0); // LOA = 1
+  ad9864_write_reg(0x0B, 0x18); // LOB = 24
+  ad9864_write_reg(0x0C, 0x03); // normal LO charge pump current control, Ipump = .625 mA
 
-  // configure SSI, AGC, decimation
-  ad9864_write_reg(0x03, 0x00); // ??
-  ad9864_write_reg(0x04, 0x00); // ??
-  ad9864_write_reg(0x05, 0x00); // ??
-  ad9864_write_reg(0x06, 0x00); // ??
-  ad9864_write_reg(0x07, 0x04); // ?? (decimation rate/)
-  ad9864_write_reg(0x1A, 0x01); // ?? (clkout freq)
-  ad9864_write_reg(0x18, 0x40); // enable output
-
+  // disable agc
+  ad9864_write_reg(0x03, 0x00); //
+  ad9864_write_reg(0x04, 0x00); // 
+  ad9864_write_reg(0x05, 0x00); // 
+  ad9864_write_reg(0x06, 0x00); //
+   
+  // configure decimation
+  ad9864_write_reg(0x07, 0x0E); // set decimation rate to 900, 60 * (M + 1) if K = 0, M = 14
   
-  
+  // configure SSI
+  ad9864_write_reg(0x1A, 0x08); // (clkout freq = fclk / 8)
+  ad9864_write_reg(0x18, 0x00); // take fs and clkout out of tristate
 }
 
 void setup() {

@@ -1,4 +1,4 @@
-update=Mon Sep 26 21:37:07 2016
+update=Fri Sep 30 23:55:36 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -59,3 +59,7 @@ LibName27=atmel
 LibName28=contrib
 LibName29=valves
 LibName30=/home/kleinjt/repos/OSD335x-KiCad/OSD335x
+LibName31=/home/kleinjt/repos/vna/lib/74xx1g14
+LibName32=/home/kleinjt/repos/vna/lib/conn_microsd
+LibName33=/home/kleinjt/repos/vna/lib/lan8710a
+LibName34=/home/kleinjt/repos/vna/lib/sn74lvc1g07

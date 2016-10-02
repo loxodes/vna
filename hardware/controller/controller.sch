@@ -29,6 +29,10 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:OSD335x
+LIBS:74xx1g14
+LIBS:conn_microsd
+LIBS:lan8710a
+LIBS:sn74lvc1g07
 LIBS:controller-cache
 EELAYER 25 0
 EELAYER END
