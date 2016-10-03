@@ -21,7 +21,7 @@ void ad9864_write_reg(uint8_t addr, uint8_t value)
 {
   uint16_t payload = addr << 9 | value;
   digitalWrite(ADC_SPI_EN, LOW);
-  SPI.transfer(payload);\
+  SPI.transfer(payload);
   digitalWrite(ADC_SPI_EN, HIGH);
 }
 
