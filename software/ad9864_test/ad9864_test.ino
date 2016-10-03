@@ -1,4 +1,4 @@
-
+ 
 // configures AD9864 IF digitizer
 // sampling with beaglebone pru (see /software/pru_test)
 // max2605 VCO tune to ~45.15 MHz
@@ -21,7 +21,8 @@ void ad9864_write_reg(uint8_t addr, uint8_t value)
 {
   uint16_t payload = addr << 9 | value;
   digitalWrite(ADC_SPI_EN, LOW);
-  SPI.transfer(payload);
+  SPI.transfer(payload >> 8);
+  SPI.transfer(payload & 0xFF);
   digitalWrite(ADC_SPI_EN, HIGH);
 }
 
@@ -29,7 +30,8 @@ uint8_t ad9864_read_reg(uint8_t addr)
 {
   uint16_t payload = addr << 9 | AD9864_READ_MASK;
   digitalWrite(ADC_SPI_EN, LOW);
-  uint16_t response = SPI.transfer(payload);
+  SPI.transfer(payload >> 8);
+  uint16_t response = SPI.transfer(payload & 0xFF);
   digitalWrite(ADC_SPI_EN, HIGH);
   return response & 0xFF;
 }
@@ -37,11 +39,7 @@ uint8_t ad9864_read_reg(uint8_t addr)
 void ad9864_init()
 {
   uint8_t r;
-  
-  pinMode(ADC_SPI_CLK, OUTPUT);
-  pinMode(ADC_SPI_DAT, OUTPUT);
   pinMode(ADC_SPI_EN, OUTPUT);
-  pinMode(ADC_SPI_RB, INPUT_PULLUP);
   digitalWrite(ADC_SPI_EN, HIGH);
   
   // init
@@ -69,7 +67,7 @@ void ad9864_init()
     delayMicroseconds(6000);
     r = ad9864_read_reg(0x1C);
     if(r == 0) {
-     break;  
+     break;
     }
     ad9864_write_reg(0x1C, 0x00);
     Serial.println("LC/RC calibration failed, retrying..");
@@ -82,7 +80,7 @@ void ad9864_init()
   ad9864_write_reg(0x00, 0x10); // enable everything but clk synth
   ad9864_write_reg(0x08, 0x00); // 
   ad9864_write_reg(0x09, 0x68); // LOR = 104 (so, fif = 250 kHz * (8 LOB + LOA)
-  ad9864_write_reg(0x0A, 0xA0); // LOA = 1 
+  ad9864_write_reg(0x0A, 0xA0); // LOA = 1
   ad9864_write_reg(0x0B, 0x18); // LOB = 24
   ad9864_write_reg(0x0C, 0x03); // normal LO charge pump current control, Ipump = .625 mA
 
