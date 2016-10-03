@@ -82,7 +82,7 @@ void ad9864_init()
   ad9864_write_reg(0x00, 0x10); // enable everything but clk synth
   ad9864_write_reg(0x08, 0x00); // 
   ad9864_write_reg(0x09, 0x68); // LOR = 104 (so, fif = 250 kHz * (8 LOB + LOA)
-  ad9864_write_reg(0x0A, 0xA0); // LOA = 1
+  ad9864_write_reg(0x0A, 0xA0); // LOA = 1 
   ad9864_write_reg(0x0B, 0x18); // LOB = 24
   ad9864_write_reg(0x0C, 0x03); // normal LO charge pump current control, Ipump = .625 mA
 
