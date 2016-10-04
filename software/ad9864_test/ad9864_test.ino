@@ -31,9 +31,9 @@ uint8_t ad9864_read_reg(uint8_t addr)
   uint16_t payload = addr << 9 | AD9864_READ_MASK;
   digitalWrite(ADC_SPI_EN, LOW);
   SPI.transfer(payload >> 8);
-  uint16_t response = SPI.transfer(payload & 0xFF);
+  uint8_t response = SPI.transfer(payload & 0xFF);
   digitalWrite(ADC_SPI_EN, HIGH);
-  return response & 0xFF;
+  return response;
 }
 
 void ad9864_init()
@@ -45,16 +45,17 @@ void ad9864_init()
   // init
   ad9864_write_reg(0x3F, 0x99); // software reset
   ad9864_write_reg(0x19, 0x87); // 4-wire SPI, 16 bit I/Q
-  ad9864_write_reg(0x00, 0x55); // take ref, gc, cko out of standby. leave ck off
+
+  ad9864_write_reg(0x00, 0x75); // take ref, gc, ck, cko out of standby
 
 // configure clock synth (bypass vco, use 26 MHz crystal osc)
-//  ad9864_write_reg(0x01, 0x0C);
-//  ad9864_write_reg(0x10, 0x00); // ???
-//  ad9864_write_reg(0x11, 0x38); // ???
-//  ad9864_write_reg(0x12, 0x00); // ???
-//  ad9864_write_reg(0x13, 0x3C); // ???
-//  ad9864_write_reg(0x14, 0x03); // ???
-  delayMicroseconds(1000); // TODO: how long to wait for CLK SYN output to settle?
+  ad9864_write_reg(0x01, 0x0C);
+  ad9864_write_reg(0x10, 0x00); // ???
+  ad9864_write_reg(0x11, 0x10); // ???
+  ad9864_write_reg(0x12, 0x00); // ???
+  ad9864_write_reg(0x13, 0x10); // ???
+  ad9864_write_reg(0x14, 0x03); // ???
+  delayMicroseconds(100000); // TODO: how long to wait for CLK SYN output to settle?
   
   // lc and rc resonator calibration
   ad9864_write_reg(0x3E, 0x47);
@@ -63,11 +64,12 @@ void ad9864_init()
 
   for(uint8_t i = 0; i < 5; i++) {
     ad9864_write_reg(0x1C, 0x03);
-    ad9864_write_reg(0x00, 0x44);
+    ad9864_write_reg(0x00, 0x74);
     delayMicroseconds(6000);
     r = ad9864_read_reg(0x1C);
     if(r == 0) {
-     break;
+      Serial.println("LC/RC worked!!");
+      break;
     }
     ad9864_write_reg(0x1C, 0x00);
     Serial.println("LC/RC calibration failed, retrying..");
@@ -77,7 +79,7 @@ void ad9864_init()
   ad9864_write_reg(0x3E, 0x00);
 
   // lo synth configuration, set LO to 48.25 MHz
-  ad9864_write_reg(0x00, 0x10); // enable everything but clk synth
+  ad9864_write_reg(0x00, 0x30); // enable everything but clk synth
   ad9864_write_reg(0x08, 0x00); // 
   ad9864_write_reg(0x09, 0x68); // LOR = 104 (so, fif = 250 kHz * (8 LOB + LOA)
   ad9864_write_reg(0x0A, 0xA0); // LOA = 1
