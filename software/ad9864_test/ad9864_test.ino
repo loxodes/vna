@@ -39,6 +39,7 @@ uint8_t ad9864_read_reg(uint8_t addr)
 void ad9864_init()
 {
   uint8_t r;
+  uint8_t c;
   pinMode(ADC_SPI_EN, OUTPUT);
   digitalWrite(ADC_SPI_EN, HIGH);
   
@@ -46,26 +47,27 @@ void ad9864_init()
   ad9864_write_reg(0x3F, 0x99); // software reset
   ad9864_write_reg(0x19, 0x87); // 4-wire SPI, 16 bit I/Q
 
-  ad9864_write_reg(0x00, 0x75); // take ref, gc, ck, cko out of standby
+  ad9864_write_reg(0x00, 0x77); // take ref out of standby
 
 // configure clock synth (bypass vco, use 26 MHz crystal osc)
-  ad9864_write_reg(0x01, 0x0C);
-  ad9864_write_reg(0x10, 0x00); // ???
-  ad9864_write_reg(0x11, 0x10); // ???
-  ad9864_write_reg(0x12, 0x00); // ???
-  ad9864_write_reg(0x13, 0x10); // ???
-  ad9864_write_reg(0x14, 0x03); // ???
-  delayMicroseconds(100000); // TODO: how long to wait for CLK SYN output to settle?
+//  ad9864_write_reg(0x01, 0x0C);/
+//  ad9864_write_reg(0x10, 0x00); // ???
+//  ad9864_write_reg(0x11, 0x10); // ???
+//  ad9864_write_reg(0x12, 0x00); // ???
+//  ad9864_write_reg(0x13, 0x10); // ???
+//  ad9864_write_reg(0x14, 0x03); // ???
+//  delayMicroseconds(100000); // TODO: how long to wait for CLK SYN output to settle?
   
   // lc and rc resonator calibration
   ad9864_write_reg(0x3E, 0x47);
   ad9864_write_reg(0x38, 0x01);
   ad9864_write_reg(0x39, 0x0F);
-
+  delayMicroseconds(100000);  
+  
   for(uint8_t i = 0; i < 5; i++) {
     ad9864_write_reg(0x1C, 0x03);
-    ad9864_write_reg(0x00, 0x74);
-    delayMicroseconds(6000);
+    ad9864_write_reg(0x00, 0x74); // 74
+    delayMicroseconds(10000);
     r = ad9864_read_reg(0x1C);
     if(r == 0) {
       Serial.println("LC/RC worked!!");
@@ -79,7 +81,7 @@ void ad9864_init()
   ad9864_write_reg(0x3E, 0x00);
 
   // lo synth configuration, set LO to 48.25 MHz
-  ad9864_write_reg(0x00, 0x30); // enable everything but clk synth
+  ad9864_write_reg(0x00, 0x30); // enable everything but ck..
   ad9864_write_reg(0x08, 0x00); // 
   ad9864_write_reg(0x09, 0x68); // LOR = 104 (so, fif = 250 kHz * (8 LOB + LOA)
   ad9864_write_reg(0x0A, 0xA0); // LOA = 1
@@ -87,17 +89,22 @@ void ad9864_init()
   ad9864_write_reg(0x0C, 0x03); // normal LO charge pump current control, Ipump = .625 mA
 
   // disable agc
-  ad9864_write_reg(0x03, 0x00); //
-  ad9864_write_reg(0x04, 0x00); // 
-  ad9864_write_reg(0x05, 0x00); // 
-  ad9864_write_reg(0x06, 0x00); //
+//  ad9864_write_reg(0x03, 0x00); //
+//  ad9864_write_reg(0x04, 0x00); // 
+//  ad9864_write_reg(0x05, 0x00); // 
+//  ad9864_write_reg(0x06, 0x00); //
    
   // configure decimation
-  ad9864_write_reg(0x07, 0x0E); // set decimation rate to 900, 60 * (M + 1) if K = 0, M = 14
+  ad9864_write_reg(0x07, 0x04); // 0Eset decimation rate to 900, 60 * (M + 1) if K = 0, M = 14
   
   // configure SSI
-  ad9864_write_reg(0x1A, 0x08); // (clkout freq = fclk / 8)
-  ad9864_write_reg(0x18, 0x00); // take fs and clkout out of tristate
+  ad9864_write_reg(0x1A, 0x08); // 8 (clkout freq = fclk / 8)
+  ad9864_write_reg(0x18, 0x00); // 00 take fs and clkout out of tristate
+  c = ad9864_read_reg(0x1A); // 00 take fs and clkout out of tristate
+  ad9864_read_reg(0x3E);
+  ad9864_read_reg(0x19);
+  Serial.print("reg 1A: ");
+  Serial.println(c);
 }
 
 void setup() {
