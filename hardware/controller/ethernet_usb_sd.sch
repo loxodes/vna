@@ -1,0 +1,141 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:OSD335x
+LIBS:74xx1g14
+LIBS:conn_microsd
+LIBS:lan8710a
+LIBS:sn74lvc1g07
+LIBS:controller-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 3 4
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L OSD3358 U201
+U 7 1 57EDF939
+P 3150 3250
+F 0 "U201" H 3350 3500 60  0000 L CNN
+F 1 "OSD3358" H 3350 3400 60  0000 L CNN
+F 2 "" H 3150 3250 60  0001 C CNN
+F 3 "" H 3150 3250 60  0001 C CNN
+	7    3150 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L OSD3358 U201
+U 3 1 57EDFEF7
+P 6550 3350
+F 0 "U201" H 6750 3600 60  0000 L CNN
+F 1 "OSD3358" H 6750 3500 60  0000 L CNN
+F 2 "" H 6550 3350 60  0001 C CNN
+F 3 "" H 6550 3350 60  0001 C CNN
+	3    6550 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L USB_A P?
+U 1 1 57EF70DB
+P 2500 1700
+F 0 "P?" H 2700 1500 50  0000 C CNN
+F 1 "USB_A" H 2450 1900 50  0000 C CNN
+F 2 "" V 2450 1600 50  0000 C CNN
+F 3 "" V 2450 1600 50  0000 C CNN
+	1    2500 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L USB_OTG P?
+U 1 1 57EF711A
+P 1300 2400
+F 0 "P?" H 1625 2275 50  0000 C CNN
+F 1 "USB_OTG" H 1300 2600 50  0000 C CNN
+F 2 "" V 1250 2300 50  0000 C CNN
+F 3 "" V 1250 2300 50  0000 C CNN
+	1    1300 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L LAN8710A U?
+U 1 1 57EF7169
+P 2250 5950
+F 0 "U?" H 1300 7000 60  0000 C CNN
+F 1 "LAN8710A" H 1450 7100 60  0000 C CNN
+F 2 "" H 2250 5950 60  0001 C CNN
+F 3 "" H 2250 5950 60  0001 C CNN
+	1    2250 5950
+	1    0    0    -1  
+$EndComp
+$Comp
+L conn_microsd U?
+U 1 1 57EF7201
+P 9150 2450
+F 0 "U?" H 8700 3100 60  0000 C CNN
+F 1 "conn_microsd" H 8950 3050 60  0000 C CNN
+F 2 "" H 8900 2800 60  0001 C CNN
+F 3 "" H 8900 2800 60  0001 C CNN
+	1    9150 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L CNT-RJ45 P?
+U 1 1 57EF74D0
+P 5700 5850
+F 0 "P?" V 5670 5850 50  0000 C CNN
+F 1 "CNT-RJ45" V 5780 5850 50  0000 C CNN
+F 2 "" H 5700 5850 50  0000 C CNN
+F 3 "" H 5700 5850 50  0000 C CNN
+	1    5700 5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 57EF7709
+P 2700 7200
+F 0 "#PWR?" H 2700 6950 50  0001 C CNN
+F 1 "GND" H 2700 7050 50  0000 C CNN
+F 2 "" H 2700 7200 50  0000 C CNN
+F 3 "" H 2700 7200 50  0000 C CNN
+	1    2700 7200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2700 7100 2700 7200
+$EndSCHEMATC
