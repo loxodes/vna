@@ -62,12 +62,12 @@ void ad9864_init()
   ad9864_write_reg(0x3E, 0x47);
   ad9864_write_reg(0x38, 0x01);
   ad9864_write_reg(0x39, 0x0F);
-  delayMicroseconds(100000);  
+  delayMicroseconds(1000);  
   
   for(uint8_t i = 0; i < 5; i++) {
     ad9864_write_reg(0x1C, 0x03);
     ad9864_write_reg(0x00, 0x74); // 74
-    delayMicroseconds(10000);
+    delayMicroseconds(6000);
     r = ad9864_read_reg(0x1C);
     if(r == 0) {
       Serial.println("LC/RC worked!!");
@@ -84,9 +84,9 @@ void ad9864_init()
   ad9864_write_reg(0x00, 0x30); // enable everything but ck..
   ad9864_write_reg(0x08, 0x00); // 
   ad9864_write_reg(0x09, 0x68); // LOR = 104 (so, fif = 250 kHz * (8 LOB + LOA)
-  ad9864_write_reg(0x0A, 0xA0); // LOA = 1
+  ad9864_write_reg(0x0A, 0x20); // LOA = 1
   ad9864_write_reg(0x0B, 0x18); // LOB = 24
-  ad9864_write_reg(0x0C, 0x03); // normal LO charge pump current control, Ipump = .625 mA
+  ad9864_write_reg(0x0C, 0x07); // normal LO charge pump current control
 
   // disable agc
 //  ad9864_write_reg(0x03, 0x00); //
@@ -95,16 +95,11 @@ void ad9864_init()
 //  ad9864_write_reg(0x06, 0x00); //
    
   // configure decimation
-  ad9864_write_reg(0x07, 0x04); // 0Eset decimation rate to 900, 60 * (M + 1) if K = 0, M = 14
+  ad9864_write_reg(0x07, 0x0e); // 0Eset decimation rate to 900, 60 * (M + 1) if K = 0, M = 14
   
   // configure SSI
   ad9864_write_reg(0x1A, 0x08); // 8 (clkout freq = fclk / 8)
-  ad9864_write_reg(0x18, 0x00); // 00 take fs and clkout out of tristate
-  c = ad9864_read_reg(0x1A); // 00 take fs and clkout out of tristate
-  ad9864_read_reg(0x3E);
-  ad9864_read_reg(0x19);
-  Serial.print("reg 1A: ");
-  Serial.println(c);
+  ad9864_write_reg(0x18, 0x00); // 00 take fs and clkout out of tristate//
 }
 
 void setup() {

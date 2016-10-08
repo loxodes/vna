@@ -1390,7 +1390,7 @@ L L_Small L105
 U 1 1 57C07B18
 P 12650 6600
 F 0 "L105" H 12680 6640 50  0000 L CNN
-F 1 "1.8 uH" H 12680 6560 50  0000 L CNN
+F 1 "1.4 uH" H 12680 6560 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805" H 12650 6600 50  0001 C CNN
 F 3 "" H 12650 6600 50  0000 C CNN
 	1    12650 6600
@@ -2496,6 +2496,6 @@ F 3 "" H 11200 6900 50  0000 C CNN
 $EndComp
 Text Notes 10650 7550 0    60   ~ 0
 about 10 MHz/V
-Text Notes 13150 6900 0    60   ~ 0
-TODO: determine actual PLL loop filter values..
+Text Notes 13000 6600 0    60   ~ 0
+replace this with two inductors in series to allow for more tuning..
 $EndSCHEMATC
