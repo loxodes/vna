@@ -1,4 +1,4 @@
-; adc.p: move samples from ad9864 into shared ram
+; Adc.p: move samples from ad9864 into shared ram
 ; pins: 
 ;   douta   - data output from adc  - P9.31, R31 0
 ;   fs      - frame sync            - P9.29, R31 1
@@ -13,7 +13,7 @@
 
 #define ADC_VAL r5
 #define TMP r6
-#define TMP_IDX r10
+#defIne TMP_IDX r10
 #define SAMPLE_COUNTER r12
 #define INREG 31
 #define RADDR r7
@@ -32,11 +32,11 @@
 .entrypoint TOP
 
 ; reads ADC, stores result in ADC_VAL (r5)
-; uses TMP (r5) and TMP_IDX (r10) registers 
-
+; uses TMP (r6) and TMP_IDX (r10) registers 
 .macro READADC
     mov TMP_IDX, BITS_PER_SAMPLE 
     mov TMP, 0
+    mov ADC_VAL, 0
  
     WBS r31, FS
     WBC r31, FS
@@ -89,10 +89,9 @@ TOP:
             ADD r14, r14, ADC_BUF_OFFSET 
             LSL r14, r14, 2
             
-            ; save current sample index to shm buffer
-            ; (replace with ADC value..)
+            READADC
             MOV r2, r13
-            SBCO r2, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            SBCO r2, CONST_PRUSHAREDRAM, ADC_VAL, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
             SUB r13, r13, 1 
@@ -114,8 +113,9 @@ TOP:
             
             ; save current sample index to shm buffer
             ; (replace with ADC value..)
+            READADC
             MOV r2, r13
-            SBCO r2, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            SBCO r2, CONST_PRUSHAREDRAM, ADC_VAL, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
             SUB r13, r13, 1 
