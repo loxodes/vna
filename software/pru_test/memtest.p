@@ -7,7 +7,7 @@
 
 #include "adc_shm.h"
 
-#define DOUTA 0
+#define DOUTA_MASK 1
 #define FS 1
 #define CLKOUT 2
 
@@ -43,9 +43,9 @@
 
     READBIT:
         WBC r31, CLKOUT
-        AND TMP, r31, DOUTA
-        OR ADC_VAL, ADC_VAL, TMP
+        AND TMP, r31, DOUTA_MASK 
         LSL ADC_VAL, ADC_VAL, 1
+        OR ADC_VAL, ADC_VAL, TMP
         SUB TMP_IDX, TMP_IDX, 1
         WBS r31, CLKOUT ; TODO: do I need to do this?
         QBNE READBIT, TMP_IDX, 0
@@ -77,12 +77,13 @@ TOP:
    
     LBCO &SAMPLE_COUNTER, CONST_PRUSHAREDRAM, SAMPLE_COUNT_IDX, 4
    
-    MOV TMP, 15000
+    MOV TMP, 25000
     DELAY_US
   
     SHM_LOOP_TOP:
-        MOV r13, ADC_BUF_LEN_SAMPLES
         MOV r15, ADC_BUF_LEN_SAMPLES 
+
+        MOV r13, 0 
         SHM_BUF0:
             ; calculate next shm address in r14
             MOV r14, r13
@@ -90,20 +91,16 @@ TOP:
             LSL r14, r14, 2
             
             READADC
-            MOV r2, r13
-            SBCO r2, CONST_PRUSHAREDRAM, ADC_VAL, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
-            SUB r13, r13, 1 
-            QBNE SHM_BUF0, r13, 0
+            ADD r13, r13, 1 
+            QBNE SHM_BUF0, r13, r15
 
         MOV r2, ADC_BUF_STATUS_BUF0
         SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
 
-        MOV TMP, 7000
-        DELAY_US
-        
-        MOV r13, ADC_BUF_LEN_SAMPLES
+        MOV r13, 0 
         SHM_BUF1:
             ; calculate next shm address in r14
             MOV r14, r13
@@ -114,25 +111,20 @@ TOP:
             ; save current sample index to shm buffer
             ; (replace with ADC value..)
             READADC
-            MOV r2, r13
-            SBCO r2, CONST_PRUSHAREDRAM, ADC_VAL, BYTES_PER_SAMPLE 
+            sBCO ADC_VAL, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
-            SUB r13, r13, 1 
-            QBNE SHM_BUF1, r13, 0
+            ADD r13, r13, 1 
+            QBNE SHM_BUF1, r13, r15
 
      
         MOV r2, ADC_BUF_STATUS_BUF1
         SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
 
-        MOV TMP, 7000 
-        DELAY_US
-
         SUB SAMPLE_COUNTER, SAMPLE_COUNTER, r15 
         SUB SAMPLE_COUNTER, SAMPLE_COUNTER, r15 
 
         QBNE SHM_LOOP_TOP, SAMPLE_COUNTER, 0
-
 
         SBCO r2, CONST_PRUSHAREDRAM, 4, 4
 

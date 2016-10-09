@@ -27,7 +27,7 @@
 #define PRU_NUM      0
 #define PRUSS0_SHARED_DATARAM    4
 
-#define TOTAL_SAMPLES 128 //7680000
+#define TOTAL_SAMPLES 7680
 
 // shared memory
 // [ 32 bytes, config/misc ] [ 2048 bytes (512 samples) buffer 0 ] [ 2048 bytes (512 samples) buffer 1 ]
@@ -37,7 +37,7 @@
 static void *sharedMem;
 
 static uint32_t *sharedMem_int;
-//static uint16_t *sharedMem_sample;
+static int16_t *sharedMem_sample;
 
 int main(int argc, char **argv) {
   uint8_t target_buffer = 0;
@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
   prussdrv_map_prumem(PRUSS0_SHARED_DATARAM, &sharedMem);
 
   sharedMem_int = (unsigned int*) sharedMem;
- // sharedMem_sample = (int16_t*) sharedMem + ADC_BUF_OFFSET * 2;
+  sharedMem_sample = (int16_t*) sharedMem + ADC_BUF_OFFSET * 2;
 
   fprintf(stderr, "loading sample count to shared memory..\n");
   sharedMem_int[1] = TOTAL_SAMPLES;
@@ -81,9 +81,8 @@ int main(int argc, char **argv) {
     //fprintf(stderr, "%d %d: %d\n", target_buffer, ADC_BUF_STATUS_IDX, sharedMem_int[ADC_BUF_STATUS_IDX]);
     if(sharedMem_int[ADC_BUF_STATUS_IDX] == target_buffer) {
         for(i = 0; i < ADC_BUF_LEN_SAMPLES; i++) {
-            uint32_t mem_idx = ADC_BUF_OFFSET + ADC_BUF_LEN_SAMPLES * target_buffer + i;
-            t = sharedMem_int[mem_idx];
-            fprintf(stderr, "%d: %d\n", i, t);
+            uint32_t mem_idx = ADC_BUF_LEN_SAMPLES * target_buffer + i * 2;
+            //fprintf(stderr, "%d: %d + j%d\n", i, sharedMem_sample[mem_idx], sharedMem_sample[mem_idx+1]);
         }
         remaining_samples -= ADC_BUF_LEN_SAMPLES;
         target_buffer ^= 1;
@@ -95,9 +94,8 @@ int main(int argc, char **argv) {
   prussdrv_pru_wait_event(PRU_EVTOUT_0);
   printf("All done\n");
   
-//  for(i = 0; i < TOTAL_SAMPLES; i++) {
-//    fprintf(stderr, "%d: %d + j%d\n", i, sharedMem_sample[2*i], sharedMem_sample[2*i+1]);
-//  }
+  for(i = 0; i < TOTAL_SAMPLES; i++) {
+  }
 
 
   prussdrv_pru_clear_event(PRU_EVTOUT_0, PRU0_ARM_INTERRUPT);
