@@ -111,7 +111,7 @@ TOP:
             ; save current sample index to shm buffer
             ; (replace with ADC value..)
             READADC
-            sBCO ADC_VAL, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
             ADD r13, r13, 1 
