@@ -85,7 +85,7 @@ void ad9864_init()
   ad9864_write_reg(0x08, 0x00); // 
   ad9864_write_reg(0x09, 0x68); // LOR = 104 (so, fif = 250 kHz * (8 LOB + LOA)
   ad9864_write_reg(0x0A, 0x20); // LOA = 1
-  ad9864_write_reg(0x0B, 0x18); // LOB = 24
+  ad9864_write_reg(0x0B, 0x18); // LOB = 24 (0x18)
   ad9864_write_reg(0x0C, 0x07); // normal LO charge pump current control
 
   // disable agc
