@@ -435,4 +435,7 @@ Wire Wire Line
 	9200 5150 9200 5100
 Wire Wire Line
 	9100 5150 9100 5100
+Wire Wire Line
+	9150 5200 9150 5150
+Connection ~ 9150 5150
 $EndSCHEMATC
