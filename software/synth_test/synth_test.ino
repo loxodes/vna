@@ -560,10 +560,10 @@ void setup()
   clk_init();
   lmx2592_init();
 
-  lmx2592_set_freq(2e9);
-  set_filterbank(2e9);
-  set_path_switch(2e9);
-
+  lmx2592_set_freq(7.2e9);
+  set_filterbank(7.2e9);
+  set_path_switch(7.2e9);
+  set_att(0);
   Ethernet.begin(mac, ip);
   Udp.begin(port);
 }
