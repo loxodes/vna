@@ -14,10 +14,10 @@
 
   (page A4)
   (layers
-    (0 F.Cu signal hide)
+    (0 F.Cu signal)
     (1 In1.Cu signal)
-    (2 In2.Cu signal hide)
-    (31 B.Cu signal hide)
+    (2 In2.Cu signal)
+    (31 B.Cu signal)
     (32 B.Adhes user)
     (33 F.Adhes user)
     (34 B.Paste user)
@@ -1740,12 +1740,12 @@
     (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
     (polygon
       (pts
-        (xy 147.5 95) (xy 147.5 104.5) (xy 149 104.5) (xy 149 95)
+        (xy 147 95) (xy 147 104.5) (xy 149.5 104.5) (xy 149.5 95)
       )
     )
     (filled_polygon
       (pts
-        (xy 148.873 104.373) (xy 147.627 104.373) (xy 147.627 95.127) (xy 148.873 95.127)
+        (xy 149.373 104.373) (xy 147.127 104.373) (xy 147.127 95.127) (xy 149.373 95.127)
       )
     )
   )
