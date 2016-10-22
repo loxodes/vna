@@ -55,7 +55,7 @@ F0 "power" 60
 F1 "power.sch" 60
 $EndSheet
 $Sheet
-S 2600 4200 2250 1900
+S 2850 4350 2250 1900
 U 57EDF45B
 F0 "ethernet_usb_sd" 60
 F1 "ethernet_usb_sd.sch" 60
