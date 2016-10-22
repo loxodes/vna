@@ -33,6 +33,8 @@ LIBS:74xx1g14
 LIBS:conn_microsd
 LIBS:lan8710a
 LIBS:sn74lvc1g07
+LIBS:tpd4s012
+LIBS:tps2051
 LIBS:controller-cache
 EELAYER 25 0
 EELAYER END

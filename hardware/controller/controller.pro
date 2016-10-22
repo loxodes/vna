@@ -1,4 +1,4 @@
-update=Fri Sep 30 23:55:36 2016
+update=Sat Oct 22 00:16:03 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -63,3 +63,5 @@ LibName31=/home/kleinjt/repos/vna/lib/74xx1g14
 LibName32=/home/kleinjt/repos/vna/lib/conn_microsd
 LibName33=/home/kleinjt/repos/vna/lib/lan8710a
 LibName34=/home/kleinjt/repos/vna/lib/sn74lvc1g07
+LibName35=/home/kleinjt/repos/vna/lib/tpd4s012
+LibName36=/home/kleinjt/repos/vna/lib/tps2051
