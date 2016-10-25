@@ -1,4 +1,4 @@
-update=Mon Oct 24 22:03:14 2016
+update=Mon Oct 24 22:17:56 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,3 +61,4 @@ LibName29=valves
 LibName30=/home/kleinjt/repos/vna/lib/conn_sma_2gnd
 LibName31=/home/kleinjt/repos/vna/lib/hmc475
 LibName32=/home/kleinjt/repos/vna/lib/nb3n551
+LibName33=/home/kleinjt/repos/vna/lib/mounting_hole
