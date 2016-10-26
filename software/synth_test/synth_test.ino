@@ -83,8 +83,10 @@ const float F_VCO_MAX = 7.1e9;
 const uint32_t PRE_N = 2;
 
 // ethernet stuff
-byte mac[] = {0x00, 0x1A, 0xB6, 0x03, 0x0A, 0xB5};
-IPAddress ip(192, 168, 1, 177);
+//byte mac[] = {0x00, 0x1A, 0xB6, 0x03, 0x0A, 0xB5};
+byte mac[] = {0x00, 0x1A, 0xB6, 0x03, 0x04, 0x41 };
+IPAddress ip(192, 168, 1, 178);
+//IPAddress ip(192, 168, 1, 177);
 unsigned int port = 8888;
 EthernetUDP Udp;
 

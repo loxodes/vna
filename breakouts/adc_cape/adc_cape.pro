@@ -1,4 +1,4 @@
-update=Tue Oct 25 22:03:30 2016
+update=Tue Oct 25 23:22:53 2016
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,3 +61,4 @@ LibName29=valves
 LibName30=/home/kleinjt/repos/vna/lib/boosterpack_ti
 LibName31=/home/kleinjt/repos/vna/lib/74hc04_full
 LibName32=/home/kleinjt/repos/vna/lib/74hc04
+LibName33=/home/kleinjt/repos/vna/lib/mounting_hole
