@@ -10,34 +10,6 @@ from adc_client import ethernet_pru_adc
 import os
 import matplotlib.pyplot as plt
 
-
-VNAPORT = 8888
-VNAIP = '192.168.1.177'
-
-SWITCH_PATH1 = 1
-SWITCH_PATH0 = 0
-
-ADC_BITS = 16
-ADC_REF = 4.096
-
-S21 = 0
-S11 = 1
-SDIR_SWITCH = 2
-
-
-SYNTH_POW = 4 # dBm
-IF_FREQ = 45e6
-
-SWITCH_CMD = np.uint8(ord('w'))
-FILT_CMD = np.uint8(ord('f'))
-POW_CMD = np.uint8(ord('p'))
-DBM_CMD = np.uint8(ord('b'))
-SYNTH_CMD = np.uint8(ord('s'))
-DET_CMD = np.uint8(ord('d'))
-ATT_CMD = np.uint8(ord('a'))
-IQ_CMD = np.uint8(ord('q'))
-CMD_ERR = np.uint8(ord('E'))
-
 class eth_vna:
     def __init__(self, lo_synth, rf_synth, pru_adc):
         self.lo_synth = lo_synth
@@ -100,11 +72,10 @@ if __name__ == '__main__':
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
     fstart = .5e9
-    fstop = 4e9
-    points = 501 
+    fstop = 6e9
+    points = 551 
 
     vna = eth_vna(synth_rf, synth_lo, pru_adc)
-
     vna.slot_calibrate_oneport(fstart, fstop, points)
 
     while True:
