@@ -27,7 +27,7 @@ class bitbang_spi:
         response = 0
         for i in range(bits):
             # data clocked in on clock rising edge
-            GPIO.output(spi_mosi, (payload >> i) & 0x01)
+            GPIO.output(spi_mosi, (payload >> (bits - i + 1)) & 0x01)
             GPIO.output(spi_clk, GPIO_HIGH)
             response |= GPIO.input(spi_miso) 
             response = response << 1
@@ -36,6 +36,7 @@ class bitbang_spi:
         GPIO.output(spi_cs, GPIO_HIGH)
 
         return response
+
 
 
 def ad9864_write_reg(spi, addr, val):
@@ -97,13 +98,13 @@ def ad9864_init(spi):
 
 if __name__ == '__main__':
     # TODO: pick pins for spi..
-    ADC_SPI_CS = "P8_N"
-    ADC_SPI_MOSI = "P8_N"
-    ADC_SPI_MISO = "P8_N"
-    ADC_SPI_CLK = "P8_N"
+    ADC_SPI_CS = "P9_16"
+    ADC_SPI_MOSI = "P9_14"
+    ADC_SPI_MISO = "P9_18"
+    ADC_SPI_CLK = "P9_12"
     # spi clk, spi mosi and spi miso 
     
-    spi = bitbang_spi_init(ADC_SPI_CS, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    spi = bitbang_spi(ADC_SPI_CS, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     ad9864_init(spi)
 
 
