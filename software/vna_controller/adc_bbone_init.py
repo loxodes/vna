@@ -5,10 +5,10 @@
 
 import Adafruit_BBIO.GPIO as GPIO
 import time
-
+import pdb
 
 class bitbang_spi:
-   def init(self, spi_cs, spi_mosi, spi_miso, spi_clk):
+   def __init__(self, spi_cs, spi_mosi, spi_miso, spi_clk):
         self.spi_cs = spi_cs
         self.spi_mosi = spi_mosi
         self.spi_miso = spi_miso
@@ -18,22 +18,23 @@ class bitbang_spi:
         GPIO.setup(spi_mosi, GPIO.OUT)
         GPIO.setup(spi_clk, GPIO.OUT)
         GPIO.setup(spi_miso, GPIO.IN)
-        GPIO.output(spi_cs, GPIO_HIGH)
+        GPIO.output(spi_cs, GPIO.HIGH)
     
-    def transfer(payload, bits = 8):
-        GPIO.output(spi_cs, GPIO_LOW)
-        GPIO.output(spi_clk, GPIO_LOW)
+   def transfer(self, payload, bits = 8):
+        print('sending: {}'.format(hex(payload)))
+        GPIO.output(self.spi_cs, GPIO.LOW)
+        GPIO.output(self.spi_clk, GPIO.LOW)
 
         response = 0
         for i in range(bits):
-            # data clocked in on clock rising edge
-            GPIO.output(spi_mosi, (payload >> (bits - i + 1)) & 0x01)
-            GPIO.output(spi_clk, GPIO_HIGH)
-            response |= GPIO.input(spi_miso) 
             response = response << 1
-            GPIO.output(spi_clk, GPIO_LOW)
+            # data clocked in on clock rising edge
+            GPIO.output(self.spi_mosi, (payload >> (bits - (i + 1))) & 0x01)
+            GPIO.output(self.spi_clk, GPIO.HIGH)
+            response |= GPIO.input(self.spi_miso) 
+            GPIO.output(self.spi_clk, GPIO.LOW)
 
-        GPIO.output(spi_cs, GPIO_HIGH)
+        GPIO.output(self.spi_cs, GPIO.HIGH)
 
         return response
 
@@ -42,9 +43,10 @@ class bitbang_spi:
 def ad9864_write_reg(spi, addr, val):
     payload = addr << 9 | val
     spi.transfer(payload, bits = 16)
+    print('readback: ' + str(ad9864_read_reg(spi, addr)) + ' for val: ' + str(val))
 
 def ad9864_read_reg(spi, addr):
-    AD9864_READ_MASK = ((1 << 15))
+    AD9864_READ_MASK = 1 << 15
 
     payload = addr << 9 | AD9864_READ_MASK;
     response = spi.transfer(payload, bits = 16)
@@ -70,7 +72,7 @@ def ad9864_init(spi):
         r = ad9864_read_reg(spi, 0x1C)
 
         if r == 0:
-            print('LC/RC calibration worked!'
+            print('LC/RC calibration worked!')
             break
 
         ad9864_write_reg(spi, 0x1C, 0x00)
@@ -93,7 +95,7 @@ def ad9864_init(spi):
 
     # configure SSI
     ad9864_write_reg(spi, 0x1A, 0x08) # (clkout freq = fclk / 8)
-
+    ad9864_write_reg(spi, 0x18, 0x00) # take fs and clkout out of tristate
 
 
 if __name__ == '__main__':
