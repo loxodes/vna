@@ -10,7 +10,7 @@ class ethernet_pru_adc:
         self.adc_addr = adc_addr
         self.adc_port = adc_port
 
-    def grab_samples(paths = 2, number_of_samples = 1024):
+    def grab_samples(self, paths = 2, number_of_samples = 1024):
         t1 =  time.time()
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(5)
@@ -18,7 +18,7 @@ class ethernet_pru_adc:
 
         sock.connect(server_address)
 
-        sock.sendall(np.uint32(number_of_samples).tobytes())
+        sock.sendall(np.uint32(number_of_samples).tostring())
         adc_buff_size = np.fromstring(sock.recv(4), dtype=np.uint32)[0]
 
         remaining_samples = number_of_samples 
@@ -29,7 +29,7 @@ class ethernet_pru_adc:
             data += adc_buffer
             remaining_samples -= len(adc_buffer) / 4
 
-        sock.sendall(np.uint32(number_of_samples).tobytes())
+        sock.sendall(np.uint32(number_of_samples).tostring())
         samples = np.fromstring(data, dtype=np.int16)
         samples = samples[0::2] + 1j * samples[1::2]
         sock.close()
@@ -39,24 +39,24 @@ class ethernet_pru_adc:
 
         return np.split(samples, paths)
            
-    def calc_power_spectrum(samples):
+    def calc_power_spectrum(self, samples):
         fs = 26e6 / 900 # ad9864 adc clock of 26 MHz, decimation rate of 900
 
-        power_spectrum = 20 * log10(abs(fftshift(fft(samples, norm='ortho'))))
+        power_spectrum = 20 * log10(abs(fftshift(fft(samples))))#, norm='ortho'))))
         freqs = fftshift(fftfreq(len(samples), d = 1/fs))
 
         return power_spectrum, freqs
 
-    def plot_power_spectrum(power_spectrum, freqs):
+    def plot_power_spectrum(self, power_spectrum, freqs):
         plt.plot(freqs / 1000, power_spectrum - max(power_spectrum))
         plt.xlabel('frequency (kHz)')
         plt.ylabel('power (dB, relative to max)')
         plt.show()
 
 if __name__ == '__main__':
-    adc = ethernet_pru_adc('bbone', 10520)
-    samples = grab_samples(paths=1)
-    pows, freqs = calc_power_spectrum(samples)
-    plot_power_spectrum(samples)
+    adc = ethernet_pru_adc('localhost', 10520)
+    samples = adc.grab_samples(paths=1)
+    pows, freqs = adc.calc_power_spectrum(samples)
+    adc.plot_power_spectrum(pows, freqs)
 
 
