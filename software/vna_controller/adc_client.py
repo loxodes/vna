@@ -25,7 +25,7 @@ class ethernet_pru_adc:
         data = ''
         while(remaining_samples > 0):
             adc_buffer = sock.recv(adc_buff_size * 4, socket.MSG_WAITALL)
-            print('received {} of {} bytes'.format(len(adc_buffer), adc_buff_size * 4))
+            #print('received {} of {} bytes'.format(len(adc_buffer), adc_buff_size * 4))
             data += adc_buffer
             remaining_samples -= len(adc_buffer) / 4
 
@@ -35,23 +35,24 @@ class ethernet_pru_adc:
         sock.close()
         
         t2 = time.time()
-        print("grabbing samples took {} seconds".format(t2 - t1))
+        #print("grabbing samples took {} seconds".format(t2 - t1))
 
         return np.split(samples, paths)
            
     def calc_power_spectrum(self, samples):
         fs = 26e6 / 900 # ad9864 adc clock of 26 MHz, decimation rate of 900
 
-        power_spectrum = 20 * log10(abs(fftshift(fft(samples))))#, norm='ortho'))))
+        power_spectrum = 20 * log10(abs(fftshift(fft(samples, norm='ortho'))))
         freqs = fftshift(fftfreq(len(samples), d = 1/fs))
 
         return power_spectrum, freqs
 
-    def plot_power_spectrum(self, power_spectrum, freqs):
-        plt.plot(freqs / 1000, power_spectrum - max(power_spectrum))
+    def plot_power_spectrum(self, power_spectrum, freqs, show_plot = True):
+        plt.plot(freqs / 1000, power_spectrum)
         plt.xlabel('frequency (kHz)')
         plt.ylabel('power (dB, relative to max)')
-        plt.show()
+        if show_plot:
+            plt.show()
 
 if __name__ == '__main__':
     adc = ethernet_pru_adc('localhost', 10520)

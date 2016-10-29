@@ -10,6 +10,8 @@ from adc_client import ethernet_pru_adc
 import os
 import matplotlib.pyplot as plt
 
+IF_FREQ = 45e6
+
 class eth_vna:
     def __init__(self, lo_synth, rf_synth, pru_adc):
         self.lo_synth = lo_synth
@@ -27,10 +29,27 @@ class eth_vna:
             self.lo_synth.set_freq(f + IF_FREQ)
             self.lo_synth.level_pow()
 
-            path1, path2 = pru_adc.grab_samples(paths = 2, number_of_samples = 1024)
+            ref, dut = pru_adc.grab_samples(paths = 2, number_of_samples = 1024)
             # TODO: extract power/phase at center frequency...
-            pdb.set_trace()
-            sweep_iq[fidx] = path1 / path2
+            ref = ref[265:] # trim samples because of delay though ADC, do this better..
+            dut = dut[265:]
+
+            pref, fref = pru_adc.calc_power_spectrum(ref)
+            pdut, fdut = pru_adc.calc_power_spectrum(dut)
+            
+            fmax_idx = np.argmax(pref) # assume frequency with maximum power in ref path is signal
+            a1 = np.fft.fftshift(np.fft.fft(ref, norm='ortho'))[fmax_idx]
+            b1 = np.fft.fftshift(np.fft.fft(dut, norm='ortho'))[fmax_idx]
+
+            if False:
+                plt.subplot(2,1,1)
+                pru_adc.plot_power_spectrum(p1, f1, show_plot = False)
+                plt.subplot(2,1,2)
+                pru_adc.plot_power_spectrum(p2, f2, show_plot = False)
+                plt.show()
+
+
+            sweep_iq[fidx] = b1 / a1 
         
         net = rf.Network(f=sweep_freqs/1e9, s=sweep_iq, z0=50)
         return net 
@@ -71,9 +90,9 @@ if __name__ == '__main__':
     synth_lo = ethernet_synth('192.168.1.178', 8888)
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
-    fstart = .5e9
-    fstop = 6e9
-    points = 551 
+    fstart = 1e9
+    fstop = 4e9
+    points = 101 
 
     vna = eth_vna(synth_rf, synth_lo, pru_adc)
     vna.slot_calibrate_oneport(fstart, fstop, points)

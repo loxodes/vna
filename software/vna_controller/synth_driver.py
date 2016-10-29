@@ -27,7 +27,7 @@ HMC311_7DBM_TABLE_POW = [14, 8, 12, 8, 6, 1, 5, 10, 31, 31, 31]
 HMC311_7DBM_TABLE_FREQ = [250e6, 500e6, 1e9, 2e9, 2.5e9, 3e9, 3.5e9, 4e9, 5e9, 6e9, 7e9]
 
 class ethernet_synth:
-    def __init__(self, synth_port, synth_ip):
+    def __init__(self, synth_ip, synth_port):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.port = synth_port
         self.ip = synth_ip
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     RF_IP = '192.168.1.177'
     LO_IP = '192.168.1.178'
 
-    lo_synth = ethernet_synth(LOPORT, LO_IP)
+    lo_synth = ethernet_synth(LO_IP, LO_PORT)
 
     
     lo_synth.set_freq(2.2e9);
