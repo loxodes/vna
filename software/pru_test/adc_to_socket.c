@@ -62,7 +62,7 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
   prussdrv_map_prumem(PRUSS0_SHARED_DATARAM, &sharedMem);
 
   sharedMem_int = (unsigned int*) sharedMem;
-  sharedMem_sample = (int16_t*) sharedMem + ADC_BUF_OFFSET * 2;
+  sharedMem_sample = (int16_t*) sharedMem + ADC_BUF_OFFSET / sizeof(int16_t);
 
   fprintf(stderr, "loading sample count to shared memory..\n");
   sharedMem_int[1] = nsamples;
@@ -87,10 +87,10 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
     //fprintf(stderr, "%d %d: %d\n", target_buffer, ADC_BUF_STATUS_IDX, sharedMem_int[ADC_BUF_STATUS_IDX]);
     if(sharedMem_int[ADC_BUF_STATUS_IDX] == target_buffer) {
         for(i = 0; i < ADC_BUF_LEN_SAMPLES; i++) {
-            uint32_t mem_idx = ADC_BUF_LEN_SAMPLES * target_buffer + i * 2;
+            uint32_t mem_idx = (ADC_BUF_LEN_SAMPLES * target_buffer + i) * 2;
             sample_buffer[sample_idx++] = sharedMem_sample[mem_idx];
             sample_buffer[sample_idx++] = sharedMem_sample[mem_idx+1];
-            //fprintf(stderr, "%d: %d + j%d\n", i, sharedMem_sample[mem_idx], sharedMem_sample[mem_idx+1]);
+            //fprintf(stderr, "%d, %d: %d + j%d\n", i, mem_idx, sharedMem_sample[mem_idx], sharedMem_sample[mem_idx+1]);
         }
         remaining_samples -= ADC_BUF_LEN_SAMPLES;
         target_buffer ^= 1;
@@ -132,35 +132,35 @@ int main(int argc, char **argv) {
   printf("bind complete\n");
 
   listen(socket_desc, 3);
-  
-  printf("waiting for incoming connections..");
+  while(1) {  
+      printf("waiting for incoming connections..");
 
-  c = sizeof(struct sockaddr_in);
-  client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
+      c = sizeof(struct sockaddr_in);
+      client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
 
-  if (client_sock < 0) {
-    printf("socket accept failed!\n");
-    return 1;
+      if (client_sock < 0) {
+        printf("socket accept failed!\n");
+        return 1;
+      }
+      printf("accepted connection!\n");
+
+      recv(client_sock, &number_of_samples, sizeof(number_of_samples), MSG_WAITALL);
+      
+      grab_samples_pru(number_of_samples, sample_buffer);
+
+      //for(i = 0; i < number_of_samples; i++) {
+      //printf("[%d] %d +%dj\n", i, sample_buffer[2*i], sample_buffer[2*i+1]);
+      //}
+     
+      i = ADC_BUF_LEN_SAMPLES;
+      write(client_sock, &i, sizeof(i));
+      for(i = 0; i < number_of_samples / ADC_BUF_LEN_SAMPLES; i++) {
+        printf("sending %d bytes..\n", ADC_BUF_LEN_SAMPLES * 2 * 2);
+        write(client_sock, sample_buffer + i * 2 * ADC_BUF_LEN_SAMPLES, ADC_BUF_LEN_SAMPLES * 4);
+      }
+
+      recv(client_sock, &number_of_samples, sizeof(number_of_samples), MSG_WAITALL);
   }
-  printf("accepted connection!\n");
-
-  recv(client_sock, &number_of_samples, sizeof(number_of_samples), MSG_WAITALL);
-  
-  grab_samples_pru(number_of_samples, sample_buffer);
-
-  for(i = 0; i < number_of_samples; i++) {
-    printf("[%d] %d +%dj\n", i, sample_buffer[2*i], sample_buffer[2*i+1]);
-  }
- 
-  i = ADC_BUF_LEN_SAMPLES;
-  write(client_sock, &i, sizeof(i));
-  for(i = 0; i < number_of_samples / ADC_BUF_LEN_SAMPLES; i++) {
-    printf("sending %d bytes..\n", ADC_BUF_LEN_SAMPLES * 2 * 2);
-    write(client_sock, sample_buffer + i * 2 * ADC_BUF_LEN_SAMPLES, ADC_BUF_LEN_SAMPLES * 4);
-  }
-
-  recv(client_sock, &number_of_samples, sizeof(number_of_samples), MSG_WAITALL);
-
   close(client_sock);
   close(socket_desc);
   return 0;
