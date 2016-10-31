@@ -11,31 +11,40 @@ class ethernet_pru_adc:
         self.adc_port = adc_port
 
     def grab_samples(self, paths = 2, number_of_samples = 2048):
-        t1 =  time.time()
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(5)
-        server_address = (self.adc_addr, self.adc_port)
+        while True:
+            try:
+                t1 =  time.time()
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(5)
+                server_address = (self.adc_addr, self.adc_port)
 
-        sock.connect(server_address)
+                sock.connect(server_address)
 
-        sock.sendall(np.uint32(number_of_samples).tostring())
-        adc_buff_size = np.fromstring(sock.recv(4), dtype=np.uint32)[0]
+                sock.sendall(np.uint32(number_of_samples).tostring())
 
-        remaining_samples = number_of_samples 
-        data = ''
-        while(remaining_samples > 0):
-            adc_buffer = sock.recv(adc_buff_size * 4, socket.MSG_WAITALL)
-            #print('received {} of {} bytes'.format(len(adc_buffer), adc_buff_size * 4))
-            data += adc_buffer
-            remaining_samples -= len(adc_buffer) / 4
+                adc_buff_size = np.fromstring(sock.recv(4), dtype=np.uint32)[0]
 
-        sock.sendall(np.uint32(number_of_samples).tostring())
-        samples = np.fromstring(data, dtype=np.int16)
-        samples = samples[0::2] + 1j * samples[1::2]
-        sock.close()
-        
-        t2 = time.time()
-        #print("grabbing samples took {} seconds".format(t2 - t1))
+                remaining_samples = number_of_samples 
+                data = ''
+                while(remaining_samples > 0):
+                    adc_buffer = sock.recv(adc_buff_size * 4, socket.MSG_WAITALL)
+                    #print('received {} of {} bytes'.format(len(adc_buffer), adc_buff_size * 4))
+                    data += adc_buffer
+                    remaining_samples -= len(adc_buffer) / 4
+
+                sock.sendall(np.uint32(number_of_samples).tostring())
+                samples = np.fromstring(data, dtype=np.int16)
+                samples = samples[0::2] + 1j * samples[1::2]
+                sock.close()
+                
+                t2 = time.time()
+                break
+                #print("grabbing samples took {} seconds".format(t2 - t1))
+            except:
+                # TODO: figure out why it crashes... or restart automatically?
+                raw_input('adc grabbing failed, restart adc server and press enter to continue')
+
+
 
         return np.split(samples, paths)
            

@@ -34,37 +34,35 @@ class eth_vna:
         
             # independently fit phase and amplitude?
             s_mag = np.mean(np.abs(dut)) /  np.mean(np.abs(ref))
-            print(s_mag)
-            s_angle = np.mean(np.unwrap(np.angle(ref)) - np.unwrap(np.angle(dut)))
+            s_angle = np.mean(np.mod(np.unwrap(np.angle(ref)) - np.unwrap(np.angle(dut)), 2 * np.pi))
 
             s11 = s_mag * np.exp(1j * s_angle)
-            '''
+
             # TODO: extract power/phase at center frequency...
-            ref_windowed = ref * np.hamming(len(ref))
-            dut_windowed = dut * np.hamming(len(dut))
+            #ref_windowed = ref * np.hamming(len(ref))
+            #dut_windowed = dut * np.hamming(len(dut))
 
-            pref, fref = pru_adc.calc_power_spectrum(ref_windowed)
-            pdut, fdut = pru_adc.calc_power_spectrum(dut_windowed)
-            fmax_idx = np.argmax(pref) # assume frequency with maximum power in ref path is signal
+            #pref, fref = pru_adc.calc_power_spectrum(ref_windowed)
+            #pdut, fdut = pru_adc.calc_power_spectrum(dut_windowed)
+            #fmax_idx = np.argmax(pref) # assume frequency with maximum power in ref path is signal
 
-            pdb.set_trace()
             # fit amplitude/phase
+            #a1 = np.fft.fftshift(np.fft.fft(ref, norm='ortho'))[fmax_idx]
+            #b1 = np.fft.fftshift(np.fft.fft(dut, norm='ortho'))[fmax_idx]
 
-            a1 = np.fft.fftshift(np.fft.fft(ref, norm='ortho'))[fmax_idx]
-            b1 = np.fft.fftshift(np.fft.fft(dut, norm='ortho'))[fmax_idx]
+            # calculate and apply correction from non-simultaneous sampling
+            ref_freq = (26e6 / 900) * (np.mean(np.diff(np.unwrap(np.angle(ref)))) / (2 * np.pi)) 
+            s11 *= 1/(np.exp(1j * 2 * np.pi * ref_freq * (900 / 26e6) * (len(ref) + SWITCH_TRIM)))
 
-            # calculate offset correction
-            a1 *= np.exp(1j * 2 * np.pi * fref[fmax_idx] * (900 / 26e6) * len(ref))
-        
-            print('max freq: ' + str(fref[fmax_idx]))
-            if True:
+            print(' {} s11: {} < {}'.format(i, s_mag, s_angle))
+            if False:
                 plt.subplot(4,1,1)
                 pru_adc.plot_power_spectrum(pref, fref, show_plot = False)
                 plt.subplot(4,1,2)
                 pru_adc.plot_power_spectrum(pdut, fdut, show_plot = False)
                 plt.subplot(4,1,3)
-                plt.plot(np.real(np.append(ref, dut))[1000:1050])
-                plt.plot(np.imag(np.append(ref, dut))[1000:1050])
+                plt.plot(dut)
+                plt.plot(ref)
                 plt.subplot(4,1,4)
                 plt.plot(ref_windowed)
                 plt.plot(dut_windowed)
@@ -77,7 +75,7 @@ class eth_vna:
                 #f, t, Sxx = spectrogram(samples, fs, nperseg = 4096)
                 #plt.pcolormesh(t, f, Sxx)
                 #plt.show()
-            '''
+            
             s11_avg += s11
 
 
@@ -91,20 +89,20 @@ class eth_vna:
             self.rf_synth.set_freq(f)
             self.lo_synth.set_freq(f + IF_FREQ)
             self.lo_synth.level_pow()
-            time.sleep(.05) 
-            s11 = self._grab_s_raw(navg = 1)
-            print('raw mag s11: ' + str(abs(s11)))
+            time.sleep(.1) 
+            print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
+            s11 = self._grab_s_raw(navg = 8)
             sweep_iq[fidx] = s11
         
         net = rf.Network(f=sweep_freqs/1e9, s=sweep_iq, z0=50)
         return net 
     
     def slot_calibrate_oneport(self, fstart, fstop, points):
+        raw_input("connect short, then press enter to continue")
+        self.cal_short = self.sweep(fstart, fstop, points)
         raw_input("connect load, then press enter to continue")
         self.cal_load = self.sweep(fstart, fstop, points)
 
-        raw_input("connect short, then press enter to continue")
-        self.cal_short = self.sweep(fstart, fstop, points)
 
         raw_input("connect open, then press enter to continue")
         self.cal_open = self.sweep(fstart, fstop, points)
@@ -135,9 +133,9 @@ if __name__ == '__main__':
     synth_lo = ethernet_synth('192.168.1.178', 8888)
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
-    fstart = 1e9
-    fstop = 4e9
-    points = 301 
+    fstart = 2e9
+    fstop = 6e9
+    points = 51 
 
     vna = eth_vna(synth_rf, synth_lo, pru_adc)
     vna.slot_calibrate_oneport(fstart, fstop, points)
