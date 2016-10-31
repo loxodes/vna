@@ -49,7 +49,7 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
   uint32_t i;
   uint32_t sample_idx = 0;
 
-  printf("init pru..\n");
+  //printf("init pru..\n");
   prussdrv_init();
   if (prussdrv_open(PRU_EVTOUT_0) == -1) {
     printf("prussdrv_open() failed\n");
@@ -64,7 +64,7 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
   sharedMem_int = (unsigned int*) sharedMem;
   sharedMem_sample = (int16_t*) sharedMem + ADC_BUF_OFFSET / sizeof(int16_t);
 
-  fprintf(stderr, "loading sample count to shared memory..\n");
+  //fprintf(stderr, "loading sample count to shared memory..\n");
   sharedMem_int[1] = nsamples;
 
   if (prussdrv_exec_program(PRU_NUM, PRU_BIN) < 0) {
@@ -72,14 +72,14 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
     exit(-1);
   }
 
-  fprintf(stderr, "loaded adc reader.. waiting for PRU to initialize buffer status\n");
+//  fprintf(stderr, "loaded adc reader.. waiting for PRU to initialize buffer status\n");
 
-  fprintf(stderr, "%d %d: %d\n", target_buffer, ADC_BUF_STATUS_IDX, sharedMem_int[ADC_BUF_STATUS_IDX]);
+//  fprintf(stderr, "%d %d: %d\n", target_buffer, ADC_BUF_STATUS_IDX, sharedMem_int[ADC_BUF_STATUS_IDX]);
   while(sharedMem_int[ADC_BUF_STATUS_IDX] != ADC_BUF_STATUS_EMPTY) {
     ;
   }
 
-  fprintf(stderr, "\nbuffer is ready\n");
+//  fprintf(stderr, "\nbuffer is ready\n");
   uint32_t remaining_samples = nsamples;
 
   while(remaining_samples > 0) {
@@ -94,7 +94,7 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
         }
         remaining_samples -= ADC_BUF_LEN_SAMPLES;
         target_buffer ^= 1;
-        printf("remaining samples: %d: new target: %d\n", remaining_samples, target_buffer);
+        //printf("remaining samples: %d: new target: %d\n", remaining_samples, target_buffer);
     }
   }
 
@@ -133,7 +133,7 @@ int main(int argc, char **argv) {
 
   listen(socket_desc, 3);
   while(1) {  
-      printf("waiting for incoming connections..");
+      //printf("waiting for incoming connections..");
 
       c = sizeof(struct sockaddr_in);
       client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
@@ -142,7 +142,7 @@ int main(int argc, char **argv) {
         printf("socket accept failed!\n");
         return 1;
       }
-      printf("accepted connection!\n");
+      //printf("accepted connection!\n");
 
       recv(client_sock, &number_of_samples, sizeof(number_of_samples), MSG_WAITALL);
       
@@ -155,11 +155,12 @@ int main(int argc, char **argv) {
       i = ADC_BUF_LEN_SAMPLES;
       write(client_sock, &i, sizeof(i));
       for(i = 0; i < number_of_samples / ADC_BUF_LEN_SAMPLES; i++) {
-        printf("sending %d bytes..\n", ADC_BUF_LEN_SAMPLES * 2 * 2);
+        //printf("sending %d bytes..\n", ADC_BUF_LEN_SAMPLES * 2 * 2);
         write(client_sock, sample_buffer + i * 2 * ADC_BUF_LEN_SAMPLES, ADC_BUF_LEN_SAMPLES * 4);
       }
 
       recv(client_sock, &number_of_samples, sizeof(number_of_samples), MSG_WAITALL);
+      close(client_sock);
   }
   close(client_sock);
   close(socket_desc);
