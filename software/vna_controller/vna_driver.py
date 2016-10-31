@@ -9,8 +9,10 @@ from synth_driver import ethernet_synth
 from adc_client import ethernet_pru_adc
 import os
 import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
 
-IF_FREQ = 45e6
+IF_FREQ = 45.000e6
+SWITCH_TRIM = 8 # samples to discard to eliminate switching transient
 
 class eth_vna:
     def __init__(self, lo_synth, rf_synth, pru_adc):
@@ -20,6 +22,67 @@ class eth_vna:
 
         self.freq = np.float32(0)
 
+    def _grab_s_raw(self, navg = 1):
+        s11_avg = 0
+         
+        for i in range(navg):
+            ref, dut = pru_adc.grab_samples(paths = 2, number_of_samples = 256)
+
+            # trim out switching transient
+            ref = ref[SWITCH_TRIM:]
+            dut = dut[SWITCH_TRIM:]
+        
+            # independently fit phase and amplitude?
+            s_mag = np.mean(np.abs(dut)) /  np.mean(np.abs(ref))
+            print(s_mag)
+            s_angle = np.mean(np.unwrap(np.angle(ref)) - np.unwrap(np.angle(dut)))
+
+            s11 = s_mag * np.exp(1j * s_angle)
+            '''
+            # TODO: extract power/phase at center frequency...
+            ref_windowed = ref * np.hamming(len(ref))
+            dut_windowed = dut * np.hamming(len(dut))
+
+            pref, fref = pru_adc.calc_power_spectrum(ref_windowed)
+            pdut, fdut = pru_adc.calc_power_spectrum(dut_windowed)
+            fmax_idx = np.argmax(pref) # assume frequency with maximum power in ref path is signal
+
+            pdb.set_trace()
+            # fit amplitude/phase
+
+            a1 = np.fft.fftshift(np.fft.fft(ref, norm='ortho'))[fmax_idx]
+            b1 = np.fft.fftshift(np.fft.fft(dut, norm='ortho'))[fmax_idx]
+
+            # calculate offset correction
+            a1 *= np.exp(1j * 2 * np.pi * fref[fmax_idx] * (900 / 26e6) * len(ref))
+        
+            print('max freq: ' + str(fref[fmax_idx]))
+            if True:
+                plt.subplot(4,1,1)
+                pru_adc.plot_power_spectrum(pref, fref, show_plot = False)
+                plt.subplot(4,1,2)
+                pru_adc.plot_power_spectrum(pdut, fdut, show_plot = False)
+                plt.subplot(4,1,3)
+                plt.plot(np.real(np.append(ref, dut))[1000:1050])
+                plt.plot(np.imag(np.append(ref, dut))[1000:1050])
+                plt.subplot(4,1,4)
+                plt.plot(ref_windowed)
+                plt.plot(dut_windowed)
+
+                plt.show()
+            
+                #fs = 26e6 / 900
+                #N = len(dut)
+                #samples = np.append(ref, dut)
+                #f, t, Sxx = spectrogram(samples, fs, nperseg = 4096)
+                #plt.pcolormesh(t, f, Sxx)
+                #plt.show()
+            '''
+            s11_avg += s11
+
+
+        return s11_avg/navg
+
     def sweep(self, fstart, fstop, points, use_cal = True):
         sweep_freqs = np.linspace(fstart, fstop, points)
         sweep_iq = 1j * np.zeros(points)
@@ -28,28 +91,10 @@ class eth_vna:
             self.rf_synth.set_freq(f)
             self.lo_synth.set_freq(f + IF_FREQ)
             self.lo_synth.level_pow()
-
-            ref, dut = pru_adc.grab_samples(paths = 2, number_of_samples = 1024)
-            # TODO: extract power/phase at center frequency...
-            ref = ref[265:] # trim samples because of delay though ADC, do this better..
-            dut = dut[265:]
-
-            pref, fref = pru_adc.calc_power_spectrum(ref)
-            pdut, fdut = pru_adc.calc_power_spectrum(dut)
-            
-            fmax_idx = np.argmax(pref) # assume frequency with maximum power in ref path is signal
-            a1 = np.fft.fftshift(np.fft.fft(ref, norm='ortho'))[fmax_idx]
-            b1 = np.fft.fftshift(np.fft.fft(dut, norm='ortho'))[fmax_idx]
-
-            if False:
-                plt.subplot(2,1,1)
-                pru_adc.plot_power_spectrum(p1, f1, show_plot = False)
-                plt.subplot(2,1,2)
-                pru_adc.plot_power_spectrum(p2, f2, show_plot = False)
-                plt.show()
-
-
-            sweep_iq[fidx] = b1 / a1 
+            time.sleep(.05) 
+            s11 = self._grab_s_raw(navg = 1)
+            print('raw mag s11: ' + str(abs(s11)))
+            sweep_iq[fidx] = s11
         
         net = rf.Network(f=sweep_freqs/1e9, s=sweep_iq, z0=50)
         return net 
@@ -92,7 +137,7 @@ if __name__ == '__main__':
 
     fstart = 1e9
     fstop = 4e9
-    points = 101 
+    points = 301 
 
     vna = eth_vna(synth_rf, synth_lo, pru_adc)
     vna.slot_calibrate_oneport(fstart, fstop, points)

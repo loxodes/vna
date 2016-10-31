@@ -10,7 +10,7 @@ class ethernet_pru_adc:
         self.adc_addr = adc_addr
         self.adc_port = adc_port
 
-    def grab_samples(self, paths = 2, number_of_samples = 1024):
+    def grab_samples(self, paths = 2, number_of_samples = 2048):
         t1 =  time.time()
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(5)
@@ -55,9 +55,19 @@ class ethernet_pru_adc:
             plt.show()
 
 if __name__ == '__main__':
-    adc = ethernet_pru_adc('localhost', 10520)
-    samples = adc.grab_samples(paths=1)
-    pows, freqs = adc.calc_power_spectrum(samples)
-    adc.plot_power_spectrum(pows, freqs)
+    adc = ethernet_pru_adc('bbone', 10520)
+    path1, path2 = adc.grab_samples(paths=2)
+    series = np.append(path1, path2)
+    path1 = path1 * hamming(len(path1))
+    path2 = path2 * hamming(len(path1))
+    subplot(2,1,1)
+    plt.plot(path1)
+    plt.plot(path2)
+    subplot(2,1,2)
+    plt.plot(series)
+    plt.show()
+    #pows, freqs = adc.calc_power_spectrum(path1)
+    #adc.plot_power_spectrum(pows, freqs)
+    pdb.set_trace()
 
 
