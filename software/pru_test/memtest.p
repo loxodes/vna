@@ -10,6 +10,7 @@
 #define DOUTA_MASK 1
 #define FS 1
 #define CLKOUT 2
+#define SWITCH_0 15
 
 #define ADC_VAL r5
 #define TMP r6
@@ -64,6 +65,7 @@
 .endm
 
 TOP:
+
     LBCO    r0, CONST_PRUCFG, 4, 4          ; Enable OCP master port
     CLR     r0, r0, 4
     SBCO    r0, CONST_PRUCFG, 4, 4
@@ -77,18 +79,20 @@ TOP:
    
     LBCO &SAMPLE_COUNTER, CONST_PRUSHAREDRAM, SAMPLE_COUNT_IDX, 4
    
-    MOV TMP, 25000
+    MOV TMP, 10000
     DELAY_US
   
+
     SHM_LOOP_TOP:
         MOV r15, ADC_BUF_LEN_SAMPLES 
 
+        CLR r30, r30, SWITCH_0 
         MOV r13, 0 
         SHM_BUF0:
             ; calculate next shm address in r14
             MOV r14, r13
-            ADD r14, r14, ADC_BUF_OFFSET 
             LSL r14, r14, 2
+            ADD r14, r14, ADC_BUF_OFFSET 
             
             READADC
             SBCO ADC_VAL, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
@@ -97,16 +101,19 @@ TOP:
             ADD r13, r13, 1 
             QBNE SHM_BUF0, r13, r15
 
+        SET r30, r30, SWITCH_0 
+
         MOV r2, ADC_BUF_STATUS_BUF0
         SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
 
         MOV r13, 0 
+
         SHM_BUF1:
             ; calculate next shm address in r14
             MOV r14, r13
-            ADD r14, r14, ADC_BUF_OFFSET 
             ADD r14, r14, r15 ; target buffer 1
             LSL r14, r14, 2
+            ADD r14, r14, ADC_BUF_OFFSET 
             
             ; save current sample index to shm buffer
             ; (replace with ADC value..)
@@ -118,6 +125,7 @@ TOP:
             QBNE SHM_BUF1, r13, r15
 
      
+
         MOV r2, ADC_BUF_STATUS_BUF1
         SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
 
@@ -128,6 +136,8 @@ TOP:
 
         SBCO r2, CONST_PRUSHAREDRAM, 4, 4
 
+    CLR r30, r30, SWITCH_0              ; clear switch control pin
     MOV r31.b0, 32 + 3
+
     HALT
 

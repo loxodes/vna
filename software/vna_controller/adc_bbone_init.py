@@ -94,7 +94,7 @@ def ad9864_init(spi):
     ad9864_write_reg(spi, 0x07, 0x0e) # set decimation rate to 900, 60 * (M + 1) if K = 0, M = 14
 
     # configure SSI
-    ad9864_write_reg(spi, 0x1A, 0x08) # (clkout freq = fclk / 8)
+    ad9864_write_reg(spi, 0x1A, 0x02) # (clkout freq = fclk / 2)
     ad9864_write_reg(spi, 0x18, 0x00) # take fs and clkout out of tristate
 
 
