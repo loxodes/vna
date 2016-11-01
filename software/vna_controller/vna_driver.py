@@ -96,26 +96,44 @@ class eth_vna:
         
         net = rf.Network(f=sweep_freqs/1e9, s=sweep_iq, z0=50)
         return net 
+   
+    def generate_sdrkits_cal_standard(self, sweep_freqs):
+        # generate cal stardard for sdr-kits Female Rosenberger HochFrequenz .. economy SMA SOL cal kit
+        # see http://sdr-kits.net/VNWA/Rosenberger_Female_Cal_Standards_rev4.pdf
+        # load resistance of 48.76 ohms from box SN678
+        f = rf.Frequency.from_f(sweep_freqs, unit='GHz') 
+        media = rf.media.Media(f, 0, 50)
+        sdrkit_open = media.line(43.78, 'ps', z0 = 50) ** media.open()
+        sdrkit_short = media.line(26.91, 'ps', z0 = 50) ** media.short()
+        # TODO: add parallep capacitance to load?
+        sdrkit_load = rf.Network(f=sweep_freqs, s=-.0126*np.ones(points), z0=50) # 48.76 ohms
+
+        return [sdrkit_short, sdrkit_open, sdrkit_load]
     
+ 
+    def ideal_cal_standard(self, sweep_freqs):
+        ideal_open = rf.Network(f=sweep_freqs, s=np.ones(points), z0=50)
+        ideal_short = rf.Network(f=sweep_freqs, s=-1*np.ones(points), z0=50)
+        ideal_load = rf.Network(f=sweep_freqs, s=np.zeros(points), z0=50)
+        return  [ideal_short, ideal_open, ideal_load]
+    
+
+
     def slot_calibrate_oneport(self, fstart, fstop, points):
+        sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
+        cal_kit = self.generate_sdrkits_cal_standard(sweep_freqs)
+
         raw_input("connect short, then press enter to continue")
         self.cal_short = self.sweep(fstart, fstop, points)
         raw_input("connect load, then press enter to continue")
         self.cal_load = self.sweep(fstart, fstop, points)
-
-
         raw_input("connect open, then press enter to continue")
         self.cal_open = self.sweep(fstart, fstop, points)
-        sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
-
-        ideal_open = rf.Network(f=sweep_freqs, s=np.ones(points), z0=50)
-        ideal_short = rf.Network(f=sweep_freqs, s=-1*np.ones(points), z0=50)
-        ideal_load = rf.Network(f=sweep_freqs, s=np.zeros(points), z0=50)
 
         #raw_input("connect thru, then press enter to continue")
         #self.cal_thru = self.sweep(fstart, fstop, points)
         self.cal_oneport = rf.OnePort(\
-                ideals = [ideal_short, ideal_open, ideal_load],\
+                ideals = cal_kit,\
                 measured = [self.cal_short, self.cal_open, self.cal_load])        
                 
         self.cal_oneport.run()
