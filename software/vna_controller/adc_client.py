@@ -41,8 +41,12 @@ class ethernet_pru_adc:
                 break
                 #print("grabbing samples took {} seconds".format(t2 - t1))
             except:
-                # TODO: figure out why it crashes... or restart automatically?
-                raw_input('adc grabbing failed, restart adc server and press enter to continue')
+                # TODO: figure out why it crashes...
+                import subprocess
+                import sys
+                print('restarting ADC server..')
+                ssh = subprocess.Popen(["ssh", "debian@bbone", "/home/debian/restart_adc_server"])
+                time.sleep(.4)
 
 
 

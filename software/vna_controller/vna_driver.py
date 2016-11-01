@@ -52,7 +52,7 @@ class eth_vna:
 
             # calculate and apply correction from non-simultaneous sampling
             ref_freq = (26e6 / 900) * (np.mean(np.diff(np.unwrap(np.angle(ref)))) / (2 * np.pi)) 
-            s11 *= 1/(np.exp(1j * 2 * np.pi * ref_freq * (900 / 26e6) * (len(ref) + SWITCH_TRIM)))
+            s11 *= 1/(np.exp(1j * 2 * np.pi * ref_freq * (900 / 26e6) * (len(ref))))
 
             print(' {} s11: {} < {}'.format(i, s_mag, s_angle))
             if False:
