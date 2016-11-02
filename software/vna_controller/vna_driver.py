@@ -10,6 +10,7 @@ from adc_client import ethernet_pru_adc
 import os
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+from scipy.stats import circmean
 
 IF_FREQ = 45.000e6
 SWITCH_TRIM = 8 # samples to discard to eliminate switching transient
@@ -28,14 +29,23 @@ class eth_vna:
         for i in range(navg):
             ref, dut = pru_adc.grab_samples(paths = 2, number_of_samples = 256)
 
+            # calculate and apply correction from non-simultaneous sampling
+            ref_freq = (26e6 / 900) * (np.mean(np.diff(np.unwrap(np.angle(ref)))) / (2 * np.pi)) 
+            ref_to_dut_tshift = len(ref) * 900 / 26e6
+            ref_to_dut_pshift = np.exp(1j * 2 * np.pi * ref_freq * ref_to_dut_tshift)
+            ref *= ref_to_dut_pshift 
+
             # trim out switching transient
             ref = ref[SWITCH_TRIM:]
             dut = dut[SWITCH_TRIM:]
         
             # independently fit phase and amplitude?
             s_mag = np.mean(np.abs(dut)) /  np.mean(np.abs(ref))
-            s_angle = np.mean(np.mod(np.unwrap(np.angle(ref)) - np.unwrap(np.angle(dut)), 2 * np.pi))
 
+            ref_angle = np.unwrap(np.angle(ref))
+            dut_angle = np.unwrap(np.angle(dut))
+            s_angle = circmean(dut_angle - ref_angle)
+            
             s11 = s_mag * np.exp(1j * s_angle)
 
             # TODO: extract power/phase at center frequency...
@@ -46,14 +56,12 @@ class eth_vna:
             #pdut, fdut = pru_adc.calc_power_spectrum(dut_windowed)
             #fmax_idx = np.argmax(pref) # assume frequency with maximum power in ref path is signal
 
+            #pdb.set_trace()
             # fit amplitude/phase
             #a1 = np.fft.fftshift(np.fft.fft(ref, norm='ortho'))[fmax_idx]
             #b1 = np.fft.fftshift(np.fft.fft(dut, norm='ortho'))[fmax_idx]
 
-            # calculate and apply correction from non-simultaneous sampling
-            ref_freq = (26e6 / 900) * (np.mean(np.diff(np.unwrap(np.angle(ref)))) / (2 * np.pi)) 
-            s11 *= 1/(np.exp(1j * 2 * np.pi * ref_freq * (900 / 26e6) * (len(ref))))
-
+            
             print(' {} s11: {} < {}'.format(i, s_mag, s_angle))
             if False:
                 plt.subplot(4,1,1)
@@ -121,7 +129,7 @@ class eth_vna:
 
     def slot_calibrate_oneport(self, fstart, fstop, points):
         sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
-        cal_kit = self.generate_sdrkits_cal_standard(sweep_freqs)
+        cal_kit = self.ideal_cal_standard(sweep_freqs)
 
         raw_input("connect short, then press enter to continue")
         self.cal_short = self.sweep(fstart, fstop, points)
@@ -152,8 +160,8 @@ if __name__ == '__main__':
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
     fstart = 2e9
-    fstop = 6e9
-    points = 51 
+    fstop = 7e9
+    points = 401 
 
     vna = eth_vna(synth_rf, synth_lo, pru_adc)
     vna.slot_calibrate_oneport(fstart, fstop, points)
