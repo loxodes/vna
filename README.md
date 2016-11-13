@@ -11,30 +11,16 @@ Run `software\vna_cmd.py` for a console to control the launchpad.
 
 ## Hardware Design
 ![picture of modules](./doc/modules.jpg)
+
 I'm still at the stage of testing individual modules (demodulators, synthesizers, filter banks, amplifiers, switches..).
 See `breakouts` for various modules developed for the network analyzer.
 
-| Breakout Name | Description   | Status |
-| ------------- | ------------- | ------ |
-| synth | 20 MHz to 10 GHz synthesizer | working! |
-| switch | SPDT RF switch | sma footprint is terrible |
-| splitter | 2 way splitter | sma footprint is terrible |
-| powerdet | log power detector | sma footprint is terrible |
-| filter breakout | filter bank | sma footprint is terrible |
-| boosterpack | breakout board for booster pack | working! |
-| attenuator | variable attenuator | working! |
-| amp | broadband amplifier | partially working, resonance at 4 GHz.. |
-| demod | quadrature demodulator | working up to output buffer.. |
-| adc_dual | dual adc | working! | 
-| refclk | PLL reference clock | working! |
-The edge launch SMA connector footprint on some boards results in high reflection above 2 GHz due to the excess pad width relative to 50 ohm microstrip.. 
-
-Breakout boards are combined into modules.. I'm currently working on a synthesizer module.
+Breakout boards are combined into modules.. 
 
 | Module Name | Description   | Status |
 | ----------- | ------------- | ------ |
 | hardware/frequency_synth | Frequency synthesizer with filtered harmonics and closed loop amplitude control | appears to work! |
-| hardware/switch_demod    | I/Q demodulator, adc, LO splitting, and rf switching for DUT connectors | schematic in progress | 
+| hardware/demod_adc | I/Q demodulator/adc | assembled, testing in progress | 
 
 ![picture synth board](./doc/synth.jpg)
 
