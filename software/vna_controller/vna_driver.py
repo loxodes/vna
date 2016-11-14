@@ -12,6 +12,9 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from scipy.stats import circmean
 
+ADC_RATE = 26e6
+DECIMATION_RATE = 900
+
 IF_FREQ = 45.000e6
 SWITCH_TRIM = 8 # samples to discard to eliminate switching transient
 
@@ -30,8 +33,8 @@ class eth_vna:
             ref, dut = pru_adc.grab_samples(paths = 2, number_of_samples = 256)
 
             # calculate and apply correction from non-simultaneous sampling
-            ref_freq = (26e6 / 900) * (np.mean(np.diff(np.unwrap(np.angle(ref)))) / (2 * np.pi)) 
-            ref_to_dut_tshift = len(ref) * 900 / 26e6
+            ref_freq = (ADC_RATE / DECIMATION_RATE) * (np.mean(np.diff(np.unwrap(np.angle(ref)))) / (2 * np.pi)) 
+            ref_to_dut_tshift = len(ref) * DECIMATION_RATE / ADC_RATE 
             ref_to_dut_pshift = np.exp(1j * 2 * np.pi * ref_freq * ref_to_dut_tshift)
             ref *= ref_to_dut_pshift 
 
@@ -40,6 +43,7 @@ class eth_vna:
             dut = dut[SWITCH_TRIM:]
         
             # independently fit phase and amplitude?
+            # probably want to do this with goertzel algorithm or something
             s_mag = np.mean(np.abs(dut)) /  np.mean(np.abs(ref))
 
             ref_angle = np.unwrap(np.angle(ref))
@@ -48,7 +52,6 @@ class eth_vna:
             
             s11 = s_mag * np.exp(1j * s_angle)
 
-            # TODO: extract power/phase at center frequency...
             #ref_windowed = ref * np.hamming(len(ref))
             #dut_windowed = dut * np.hamming(len(dut))
 
@@ -97,9 +100,9 @@ class eth_vna:
             self.rf_synth.set_freq(f)
             self.lo_synth.set_freq(f + IF_FREQ)
             self.lo_synth.level_pow()
-            time.sleep(.1) 
+            time.sleep(.05)
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
-            s11 = self._grab_s_raw(navg = 8)
+            s11 = self._grab_s_raw(navg = 4)
             sweep_iq[fidx] = s11
         
         net = rf.Network(f=sweep_freqs/1e9, s=sweep_iq, z0=50)
@@ -129,7 +132,7 @@ class eth_vna:
 
     def slot_calibrate_oneport(self, fstart, fstop, points):
         sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
-        cal_kit = self.ideal_cal_standard(sweep_freqs)
+        cal_kit = self.generate_sdrkits_cal_standard(sweep_freqs)
 
         raw_input("connect short, then press enter to continue")
         self.cal_short = self.sweep(fstart, fstop, points)
@@ -159,9 +162,9 @@ if __name__ == '__main__':
     synth_lo = ethernet_synth('192.168.1.178', 8888)
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
-    fstart = 2e9
-    fstop = 7e9
-    points = 401 
+    fstart = .5e9
+    fstop = 5.5e9
+    points = 251 
 
     vna = eth_vna(synth_rf, synth_lo, pru_adc)
     vna.slot_calibrate_oneport(fstart, fstop, points)
