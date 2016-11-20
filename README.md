@@ -6,8 +6,9 @@ I'm developing a proof of concept two port microwave vector network analyzer. Th
 ## Usage
 This project is still under development, y'all probably don't want to try reproducing it yet.
 
-Load `software\synth_test\synth_test.ino` on a MSP432 lauchpad.
-Run `software\vna_cmd.py` for a console to control the launchpad. 
+Run `software/vna_controller/adc_bbone_init.py` and `software/vna_controller/pru_test/run.sh` on the Beaglebone,
+then run `software/vna_controller/vna_driver.py` to start the VNA. 
+
 
 ## Hardware Design
 ![picture of modules](./doc/modules.jpg)
@@ -26,7 +27,7 @@ Breakout boards are combined into modules..
 
 
 All 4 layer PCBs are routed assuming OSH Park's 4 layer stackup (http://docs.oshpark.com/services/four-layer/) with FR-408 and 6.7 mil prepreg height. 
-All layouts/schematics are created in KiCad 4.0.2
+All layouts/schematics are created in KiCad 4
 
 ## Software Design
 See the `software` directory for scraps of software written for testing VNA modules. 
