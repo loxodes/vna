@@ -3,8 +3,9 @@
 
 import time
 import pdb
-from bbone_spi_bitbang import bitbang_spi
 import Adafruit_BBIO.GPIO as GPIO
+from bbone_spi_bitbang import bitbang_spi
+import numpy as np
 
 BIT0 = (1 << 0)
 BIT1 = (1 << 1)
@@ -101,10 +102,10 @@ CHANNELB = 1
 
 # TODO: break this out into a better format..
 N_DIV_RATIOS = 11
-div_ratios[N_DIV_RATIOS] = [2, 4, 8, 12, 16, 24, 48, 96, 128]
-div1_options[N_DIV_RATIOS] = [0, 0, 0, 0, 0, 0, 0,  0,  0]
-div2_options[N_DIV_RATIOS] = [0, 1, 2, 4, 8, 4, 4,  8,  8]
-div3_options[N_DIV_RATIOS] = [0, 0, 0, 0, 0, 1, 2,  4,  8]
+div_ratios = [2, 4, 8, 12, 16, 24, 48, 96, 128]
+div1_options = [0, 0, 0, 0, 0, 0, 0,  0,  0]
+div2_options = [0, 1, 2, 4, 8, 4, 4,  8,  8]
+div3_options = [0, 0, 0, 0, 0, 1, 2,  4,  8]
 
 
 
@@ -162,57 +163,21 @@ FILTER_BANK_SIZE = 8
 
 class synth_r1:
     def __init__(self, pins, enable_ref_clk = True):
-	self.pins = pins
+        self.pins = pins
 
         self.io_init()
-        self.set_attenuator(0)
+
+        self.set_attenuator(31)
         self.set_filter_bank(0)
+
         if enable_ref_clk:
             self.clk_init()
+        
         self.lmx_init()
 
         self.current_channel = None
         self.current_freq = None
         self.current_pow = None
-
-    def lmx_init(self):
-        GPIO.output(self.pins['lmx_pow_en'], GPIO.HIGH)
-        GPIO.output(self.pins['lmx_ce'], GPIO.HIGH)
-
-        time.sleep(.01)
-	self._set_reg(0, REG0_RESET)
-	self._set_reg(46, REG46_MASH_ORDER_2 | REG46_MASH_EN | REG46_OUTB_PD | (0 << REG46_OUTA_POW))
-	self._set_reg(31, REG31_VCO_DISTB_PD)
-	self._set_reg(12, 0x7001)
-	self._set_reg(11, 0x0018)
-	self._set_reg(10, 0x10d8)
-	self._set_reg(40, FRAC_DENOM & 0xffff)
-	self._set_reg(41, (FRAC_DENOM >> 16) & 0xffff)
-	self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
-
-	time.sleep(.01)
-    
-    def set_pow(self, power):
-        self.channel_power = power
-
-        if self.current_channel == CHANNELA:
-            self._set_reg(46, REG46_OUTB_PD | (0x3F & power) << REG46_OUTA_POW)
-        else:
-            spi_set_reg(47, (0x3F & power) << REG47_OUTB_POW)
-            spi_set_reg(46, REG46_OUTA_PD)
-
-
-
-    def _calc_n(self, f, n_step, div):
-        # TODO verify floating point stuff..
-        pdb.set_trace()
-        return f / (n_step / div)
-    
-    def _calc_frac(self, f, n, n_step, frac_step, div):
-
-        pdb.set_trace()
-        return (f - n * (n_step / div)) / (frac_step / div)
-
 
     def clk_init(self):
         GPIO.output(self.pins['ref_oe'], GPIO.HIGH)
@@ -245,6 +210,43 @@ class synth_r1:
 
         # set sane initial pin values
 
+    def lmx_init(self):
+        GPIO.output(self.pins['lmx_pow_en'], GPIO.HIGH)
+        GPIO.output(self.pins['lmx_ce'], GPIO.HIGH)
+
+        time.sleep(.1)
+
+        self._set_reg(0, REG0_RESET)
+        self._set_reg(46, REG46_MASH_ORDER_2 | REG46_MASH_EN | REG46_OUTB_PD | (0 << REG46_OUTA_POW))
+        self._set_reg(31, REG31_VCO_DISTB_PD)
+        self._set_reg(12, 0x7001)
+        self._set_reg(11, 0x0018)
+        self._set_reg(10, 0x10d8)
+        self._set_reg(40, FRAC_DENOM & 0xffff)
+        self._set_reg(41, (FRAC_DENOM >> 16) & 0xffff)
+        self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
+
+        time.sleep(.1)
+    
+    def set_pow(self, power):
+        self.channel_power = power
+
+        if self.current_channel == CHANNELA:
+            self._set_reg(46, REG46_OUTB_PD | (0x3F & power) << REG46_OUTA_POW)
+        else:
+            self._set_reg(47, (0x3F & power) << REG47_OUTB_POW)
+            self._set_reg(46, REG46_OUTA_PD)
+
+
+
+    def _calc_n(self, f, n_step, div):
+        # TODO verify floating point stuff..
+        return int(f / (n_step / div))
+    
+    def _calc_frac(self, f, n, n_step, frac_step, div):
+        return int((f - n * (n_step / div)) / (frac_step / div))
+
+
     
     # set attenuator in dB
     def set_attenuator(self, att):
@@ -263,7 +265,7 @@ class synth_r1:
     def set_filter_bank(self, freq):
         fidx = 6
 
-        if f > F_VCO_MAX:
+        if freq > F_VCO_MAX:
             GPIO.output(self.pins['rf_sw'], RF_SW_HIGHFREQ)
             self.current_channel = CHANNELB
         else:
@@ -272,14 +274,14 @@ class synth_r1:
 
             for (i, fc) in enumerate(FILTER_BANK_CUTOFFS):
                 if(freq > fc):
-                    bank_index = np.mod(i - 1, FILTER_BANK_SIZE)
+                    fidx = np.mod(i - 1, FILTER_BANK_SIZE)
                     break
 
         GPIO.output(self.pins['filta'], fidx & BIT0)
         GPIO.output(self.pins['filtb'], fidx & BIT1)
         GPIO.output(self.pins['filtc'], fidx & BIT2)
 
-        self.current_filter = bank_index 
+        self.current_filter = fidx 
 
     # set synth frequency
     def set_freq(self, freq):
@@ -288,8 +290,8 @@ class synth_r1:
         n_step = PFD * PRE_N
         frac_step = n_step / FRAC_DENOM
         n = MIN_N
+
         frac = 0
-        
         div1 = 1
         div2 = 1
         div3 = 1
@@ -302,79 +304,80 @@ class synth_r1:
                     div3 = div3_options[div_i]
                     break
 
-            n = calc_n(freq, n_step, div_ratios[div_i])
-            frac = calc_frac(f, n, n_step, frac_step, div_ratios[div_i])
-            spi_set_reg(30, 0)
+            n = self._calc_n(freq, n_step, div_ratios[div_i])
+            frac = self._calc_frac(freq, n, n_step, frac_step, div_ratios[div_i])
 
             reg35 = REG35_CHDIV_SEG1_EN
             reg36 = REG36_CHDIV_DISTA_EN
         
 
-	    if div3 != 0:
-	      reg35 |= REG35_CHDIV_SEG2_EN | REG35_CHDIV_SEG3_EN
-	      reg35 |= div2_options[div_i] << REG35_CHDIV_SEG2
-	      reg35 |= div1_options[div_i] << REG35_CHDIV_SEG1
+            if div3 != 0:
+              reg35 |= REG35_CHDIV_SEG2_EN | REG35_CHDIV_SEG3_EN
+              reg35 |= div2_options[div_i] << REG35_CHDIV_SEG2
+              reg35 |= div1_options[div_i] << REG35_CHDIV_SEG1
 
-	      reg36 |= div3_options[div_i] << REG36_CHDIV_SEG3
-	      reg36 |= REG36_CHDIV_SEG_SEL_123
+              reg36 |= div3_options[div_i] << REG36_CHDIV_SEG3
+              reg36 |= REG36_CHDIV_SEG_SEL_123
 
-	    elif div2 != 0:
-	      reg35 |= REG35_CHDIV_SEG2_EN
-	      reg35 |= div2_options[div_i] << REG35_CHDIV_SEG2
-	      reg35 |= div1_options[div_i] << REG35_CHDIV_SEG1
-	      reg36 |= REG36_CHDIV_SEG_SEL_12
+            elif div2 != 0:
+              reg35 |= REG35_CHDIV_SEG2_EN
+              reg35 |= div2_options[div_i] << REG35_CHDIV_SEG2
+              reg35 |= div1_options[div_i] << REG35_CHDIV_SEG1
+              reg36 |= REG36_CHDIV_SEG_SEL_12
 
-	    else:
-	      reg35 |= 0
-	      reg36 |= REG36_CHDIV_SEG_SEL_1
+            else:
+              reg35 |= 0
+              reg36 |= REG36_CHDIV_SEG_SEL_1
 
-            spi_set_reg(31, REG31_VCO_DISTB_PD)
-            spi_set_reg(34, REG34_CHDIV_EN)
-            spi_set_reg(35, reg35)
-            spi_set_reg(36, reg36)
-            spi_set_reg(48, REG48_OUTB_MUX_DIV)
-            spi_set_reg(47, REG47_OUTA_MUX_DIV)
-
+            self._set_reg(30, 0)
+            self._set_reg(31, REG31_VCO_DISTB_PD)
+            self._set_reg(34, REG34_CHDIV_EN)
+            self._set_reg(35, reg35)
+            self._set_reg(36, reg36)
+            self._set_reg(48, REG48_OUTB_MUX_DIV)
+            self._set_reg(47, REG47_OUTA_MUX_DIV)
 
         else:
-            n = calc_n(f/2, n_step, 1)
-            frac = calc_frac(f/2, n, n_step, frac_step, 1)
-            spi_set_reg(30, REG30_VCO_2X_EN)
+            n = self._calc_n(f/2, n_step, 1)
+            frac = self._calc_frac(f/2, n, n_step, frac_step, 1)
+
+            # enable vco doubler
+            self._set_reg(30, REG30_VCO_2X_EN)
 
             # disable output dividers
-            spi_set_reg(34, 0)
-            spi_set_reg(35, 0)
-            spi_set_reg(36, 0)
-            spi_set_reg(47, REG47_OUTA_MUX_VCO)
-            spi_set_reg(48, REG48_OUTB_MUX_VCO)
+            self._set_reg(34, 0)
+            self._set_reg(35, 0)
+            self._set_reg(36, 0)
+            self._set_reg(47, REG47_OUTA_MUX_VCO)
+            self._set_reg(48, REG48_OUTB_MUX_VCO)
 
             # enable channel b, bypass filter bank, disable a buffer
-            spi_set_reg(31, REG31_CHDIV_DIST_PD)
+            self._set_reg(31, REG31_CHDIV_DIST_PD)
 
         # load new n and frac registers 
-        spi_set_reg(38, (n << REG38_PLL_N))
-        spi_set_reg(44, (frac >> 16) & 0xFFFF)
-        spi_set_reg(45, frac & 0xFFFF)
+        self._set_reg(38, (n << REG38_PLL_N))
+        self._set_reg(44, (frac >> 16) & 0xFFFF)
+        self._set_reg(45, frac & 0xFFFF)
         
         # recalibrate VCO
-        spi_set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
+        self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
 
     def _set_reg(self, reg, d):
         d = d | LMX_REG_DEFAULTS[reg]
 
         payload = reg << 16
         payload |= (d & 0xffff)
-
-        spi.transfer(payload, bits = 24)
+        self.spi.transfer(payload, bits = 24)
 
     def _read_reg(self, reg):
         payload = (reg << 16) + (1 << 23)
-        return spi.transfer(payload, bits = 24)
+        return self.spi.transfer(payload, bits = 24)
 
-if __name__ == __main__:
+if __name__ == '__main__':
     synth = synth_r1(SYNTHA_PINS)
+    time.sleep(.1)
     synth.set_freq(2e9)
-    synth.set_filter_bank(2e9)
-    synth.set_attenuator(0)
-    synth.set_pow(0)
-
+#    synth.set_filter_bank(2e9)
+#    synth.set_attenuator(30)
+#    synth.set_pow(0)
+    raw_input('press enter to exit')
