@@ -13,7 +13,7 @@
 #define DOUTA_MASK 0x80
 #define FS 2
 #define CLKOUT 0
-#define SYNCB 4
+;#define SYNCB 4
 
 #define ADC_VAL r5
 #define TMP r6
@@ -27,7 +27,7 @@
 #define CONST_PRUCFG         C4
 #define CONST_PRUSHAREDRAM   C28
 #define PRU1_CTRL            0x24000
-#define CTPPR1               0x2C
+#define CTPPR0               0x28
 #define SHARED_RAM           0x100
 
 #define BYTES_PER_SAMPLE 4
@@ -75,7 +75,7 @@ TOP:
     SBCO    r0, CONST_PRUCFG, 4, 4
     
     MOV     r0, SHARED_RAM                  ; Set C28 to point to shared RAM
-    MOV     r1, PRU1_CTRL + CTPPR1
+    MOV     r1, PRU1_CTRL + CTPPR0
     SBBO    r0, r1, 0, 4
    
     MOV r2, ADC_BUF_STATUS_EMPTY
@@ -83,7 +83,6 @@ TOP:
    
     LBCO &SAMPLE_COUNTER, CONST_PRUSHAREDRAM, SAMPLE_COUNT_IDX, 4
    
-    SET r30, r30, SYNCB
 
     MOV TMP, 10000
     DELAY_US

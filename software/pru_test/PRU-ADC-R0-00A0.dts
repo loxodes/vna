@@ -34,10 +34,10 @@
    // P8.40, 42, 44, 46 -  DOUT, inputs, bits 7, 5, 3, 1
    // P8.45 - CLKOUT, input, bit 0
    // P8.43 - FS, input, bit 2
-   // P8.41 - SYNCB, output, bit 4
+   // removed P8.41 - SYNCB, output, bit 4
 
    exclusive-use =  
-      "P8.40", "P8.42", "P8.44", "P8.46", "P8.45", "P8.43", "P8.41", "pru1";  
+      "P8.40", "P8.42", "P8.44", "P8.46", "P8.45", "P8.43", "pru1";  
    
    fragment@0 {  
     target = <&am33xx_pinmux>;  
@@ -59,7 +59,6 @@
        // a value of 0x26. We could also set bits 3 and 4 to enable a pullup  
        // or pulldown.  
        pinctrl-single,pins = <  
-         0x0b0 0x06  
          0x0bc 0x26
          0x0b4 0x26
          0x0ac 0x26
