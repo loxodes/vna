@@ -22,8 +22,8 @@
 #include <string.h>
 #include <time.h>
 
-#define PRU_NUM      0
-#define PRUSS0_SHARED_DATARAM    4
+#define PRU_NUM      1
+#define PRUSS1_SHARED_DATARAM    4
 
 
 static void *sharedMem;
@@ -47,12 +47,12 @@ int main(int argc, char **argv) {
 
   printf("Executing program and waiting for termination\n");
   if (argc == 3) {
-    if (prussdrv_load_datafile(0 /* PRU0 */, argv[2]) < 0) {
+    if (prussdrv_load_datafile(PRU_NUM, argv[2]) < 0) {
       fprintf(stderr, "Error loading %s\n", argv[2]);
       exit(-1);
     }
   }
-  if (prussdrv_exec_program(0 /* PRU0 */, argv[1]) < 0) {
+  if (prussdrv_exec_program(PRU_NUM, argv[1]) < 0) {
     fprintf(stderr, "Error loading %s\n", argv[1]);
     exit(-1);
   }
@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
   prussdrv_pru_wait_event(PRU_EVTOUT_0);
   printf("All done\n");
 
-prussdrv_map_prumem(PRUSS0_SHARED_DATARAM, &sharedMem);
+  prussdrv_map_prumem(PRUSS1_SHARED_DATARAM, &sharedMem);
   sharedMem_int = (unsigned int*) sharedMem;
   
   printf("0: %d\n", sharedMem_int[0]);
@@ -72,7 +72,7 @@ prussdrv_map_prumem(PRUSS0_SHARED_DATARAM, &sharedMem);
   printf("5: %d\n", sharedMem_int[4]);
   printf("6: %d\n", sharedMem_int[4]);
 
-  prussdrv_pru_disable(0 /* PRU0 */);
+  prussdrv_pru_disable(PRU_NUM);
   prussdrv_exit();
 
 

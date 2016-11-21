@@ -66,14 +66,17 @@ def ad9864_init(spi):
 
 
 if __name__ == '__main__':
-    # TODO: pick pins for spi..
-    ADC_SPI_CS = "P9_16"
-    ADC_SPI_MOSI = "P9_14"
-    ADC_SPI_MISO = "P9_18"
-    ADC_SPI_CLK = "P9_12"
+    # for adc1 on adc_cape
+    ADC_SPI_CS1 = "P8_38" # adc1
+    ADC_SPI_CS2 = "P8_36" # adc2
+    ADC_SPI_CS3 = "P8_34" # adc3
+    ADC_SPI_CS4 = "P8_32" # adc4
+    ADC_SPI_MOSI = "P8_35"
+    ADC_SPI_MISO = "P8_26"
+    ADC_SPI_CLK = "P8_37"
     # spi clk, spi mosi and spi miso 
     
-    spi = bitbang_spi(ADC_SPI_CS, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    spi = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     ad9864_init(spi)
 
 

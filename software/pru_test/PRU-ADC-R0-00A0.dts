@@ -31,13 +31,13 @@
    // http://elinux.org/Ti_AM33XX_PRUSSv2#Beaglebone_PRU_connections_and_modes  
    // shows which pins can be used with PRU0 and PRU1 for input and output via  
    // registers R31 and R30.  
-   // Our output pin, P8_11, corresponds to PRU 0, register 30, bit 15  
-   // Our input pin, P8_16, corresponds to PRU 0, register 31, bit 14  
-   //  
-   // Beware: Many other PRU EGP pins are reserved by HDMI or onboard flash, which  
-   // would need to be disabled first by editing uEnv.txt and rebooting.  
+   // P8.40, 42, 44, 46 -  DOUT, inputs, bits 7, 5, 3, 1
+   // P8.45 - CLKOUT, input, bit 0
+   // P8.43 - FS, input, bit 2
+   // P8.41 - SYNCB, output, bit 4
+
    exclusive-use =  
-      "P8.11", "P8.16", "P9.31", "P9.29", "P9.30", "pru0";  
+      "P8.40", "P8.42", "P8.44", "P8.46", "P8.45", "P8.43", "P8.41", "pru1";  
    
    fragment@0 {  
     target = <&am33xx_pinmux>;  
@@ -59,11 +59,13 @@
        // a value of 0x26. We could also set bits 3 and 4 to enable a pullup  
        // or pulldown.  
        pinctrl-single,pins = <  
-         0x34 0x06  
-         0x190 0x26
-         0x194 0x26
-         0x198 0x26
-         0x38 0x26  
+         0x0b0 0x06  
+         0x0bc 0x26
+         0x0b4 0x26
+         0x0ac 0x26
+         0x0a4 0x26
+         0x0a0 0x26
+         0x0a8 0x26
        >;  
       };  
     };  

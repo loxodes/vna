@@ -1,16 +1,19 @@
 ; Adc.p: move samples from ad9864 into shared ram
-; pins: 
-;   douta   - data output from adc  - P9.31, R31 0
-;   fs      - frame sync            - P9.29, R31 1
-;   clkout  - spi clk output        - P9.30, R31 2
-; 
+; pins:                                  bit 
+;   douta 1 - data output from adc1 - R31 7 
+;   douta 2 - data output from adc2 - R31 5
+;   douta 3 - data output from adc3 - R31 3
+;   douta 4 - data output from adc4 - R31 1
+;   fs      - frame sync            - R31 2
+;   clkout  - spi clk output        - R31 0
+;   syncb   - sync input,           - R30 4
 
 #include "adc_shm.h"
 
-#define DOUTA_MASK 1
-#define FS 1
-#define CLKOUT 2
-#define SWITCH_0 15
+#define DOUTA_MASK 0x80
+#define FS 2
+#define CLKOUT 0
+#define SYNCB 4
 
 #define ADC_VAL r5
 #define TMP r6
@@ -23,8 +26,8 @@
 ; defines from http://www.embedded-things.com/bbb/understanding-bbb-pru-shared-memory-access/
 #define CONST_PRUCFG         C4
 #define CONST_PRUSHAREDRAM   C28
-#define PRU0_CTRL            0x22000
-#define CTPPR0               0x28
+#define PRU1_CTRL            0x24000
+#define CTPPR1               0x2C
 #define SHARED_RAM           0x100
 
 #define BYTES_PER_SAMPLE 4
@@ -45,6 +48,7 @@
     READBIT:
         WBC r31, CLKOUT
         AND TMP, r31, DOUTA_MASK 
+        LSL TMP, TMP, 7 ; .. for now, move douta for adc1 into first bit
         LSL ADC_VAL, ADC_VAL, 1
         OR ADC_VAL, ADC_VAL, TMP
         SUB TMP_IDX, TMP_IDX, 1
@@ -71,7 +75,7 @@ TOP:
     SBCO    r0, CONST_PRUCFG, 4, 4
     
     MOV     r0, SHARED_RAM                  ; Set C28 to point to shared RAM
-    MOV     r1, PRU0_CTRL + CTPPR0
+    MOV     r1, PRU1_CTRL + CTPPR1
     SBBO    r0, r1, 0, 4
    
     MOV r2, ADC_BUF_STATUS_EMPTY
@@ -79,6 +83,8 @@ TOP:
    
     LBCO &SAMPLE_COUNTER, CONST_PRUSHAREDRAM, SAMPLE_COUNT_IDX, 4
    
+    SET r30, r30, SYNCB
+
     MOV TMP, 10000
     DELAY_US
   
@@ -86,7 +92,6 @@ TOP:
     SHM_LOOP_TOP:
         MOV r15, ADC_BUF_LEN_SAMPLES 
 
-        CLR r30, r30, SWITCH_0 
         MOV r13, 0 
         SHM_BUF0:
             ; calculate next shm address in r14
@@ -101,7 +106,6 @@ TOP:
             ADD r13, r13, 1 
             QBNE SHM_BUF0, r13, r15
 
-        SET r30, r30, SWITCH_0 
 
         MOV r2, ADC_BUF_STATUS_BUF0
         SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
@@ -136,7 +140,6 @@ TOP:
 
         SBCO r2, CONST_PRUSHAREDRAM, 4, 4
 
-    CLR r30, r30, SWITCH_0              ; clear switch control pin
     MOV r31.b0, 32 + 3
 
     HALT
