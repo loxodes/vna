@@ -75,8 +75,15 @@ if __name__ == '__main__':
     ADC_SPI_MISO = "P8_26"
     ADC_SPI_CLK = "P8_37"
     # spi clk, spi mosi and spi miso 
+
+    # hardcode SYNCB high for now..
+    import Adafruit_BBIO.GPIO as GPIO
+    GPIO.setup("P8.41", GPIO.OUT)
+    GPIO.output("P8.41", GPIO.HIGH)
     
     spi = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     ad9864_init(spi)
+
+    raw_input("press enter to continue..")
 
 

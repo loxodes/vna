@@ -14,7 +14,6 @@ class bitbang_spi:
         GPIO.output(spi_cs, GPIO.HIGH)
 
    def transfer(self, payload, bits = 8):
-        print('sending: {}'.format(hex(payload)))
         GPIO.output(self.spi_cs, GPIO.LOW)
         GPIO.output(self.spi_clk, GPIO.LOW)
 

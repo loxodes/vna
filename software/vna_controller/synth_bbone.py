@@ -168,7 +168,6 @@ class synth_r1:
         self.io_init()
 
         self.set_attenuator(31)
-        self.set_filter_bank(0)
 
         if enable_ref_clk:
             self.clk_init()
@@ -177,7 +176,7 @@ class synth_r1:
 
         self.current_channel = None
         self.current_freq = None
-        self.current_pow = None
+        self.channel_power = 0 
 
     def clk_init(self):
         GPIO.output(self.pins['ref_oe'], GPIO.HIGH)
@@ -276,11 +275,10 @@ class synth_r1:
                 if(freq > fc):
                     fidx = np.mod(i - 1, FILTER_BANK_SIZE)
                     break
-
+        
         GPIO.output(self.pins['filta'], fidx & BIT0)
         GPIO.output(self.pins['filtb'], fidx & BIT1)
         GPIO.output(self.pins['filtc'], fidx & BIT2)
-
         self.current_filter = fidx 
 
     # set synth frequency
@@ -338,8 +336,8 @@ class synth_r1:
             self._set_reg(47, REG47_OUTA_MUX_DIV)
 
         else:
-            n = self._calc_n(f/2, n_step, 1)
-            frac = self._calc_frac(f/2, n, n_step, frac_step, 1)
+            n = self._calc_n(freq/2, n_step, 1)
+            frac = self._calc_frac(freq/2, n, n_step, frac_step, 1)
 
             # enable vco doubler
             self._set_reg(30, REG30_VCO_2X_EN)
@@ -361,6 +359,16 @@ class synth_r1:
         
         # recalibrate VCO
         self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
+        
+        # update filter bank
+        self.set_filter_bank(freq) 
+
+        # update output channel..
+        self.set_pow(self.channel_power)
+
+        # wait for pll lock
+        while not GPIO.input(self.pins['lmx_le']):
+            print('waiting..')
 
     def _set_reg(self, reg, d):
         d = d | LMX_REG_DEFAULTS[reg]
@@ -376,8 +384,11 @@ class synth_r1:
 if __name__ == '__main__':
     synth = synth_r1(SYNTHA_PINS)
     time.sleep(.1)
-    synth.set_freq(2e9)
-#    synth.set_filter_bank(2e9)
-#    synth.set_attenuator(30)
-#    synth.set_pow(0)
-    raw_input('press enter to exit')
+    synth.set_pow(0)
+    synth.set_attenuator(0)
+
+    tstart = time.time()
+    synth.set_freq(3e9)
+    tstop = time.time()
+    print("time: " + str(tstop - tstart))
+    pdb.set_trace()
