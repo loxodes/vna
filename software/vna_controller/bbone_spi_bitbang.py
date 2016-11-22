@@ -29,5 +29,3 @@ class bitbang_spi:
         GPIO.output(self.spi_cs, GPIO.HIGH)
 
         return response
-
-

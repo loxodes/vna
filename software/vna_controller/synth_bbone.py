@@ -87,6 +87,7 @@ LMX_REG_DEFAULTS = [0x0210, 0x0808, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x20
 		    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x00c0, \
 		    0x03fc, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, \
 		    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x00af] 
+
 LMX_REG_DEFAULTS[46] |= REG46_MASH_ORDER_2 | REG46_MASH_EN
 
 MIN_N = 16
@@ -135,7 +136,7 @@ SYNTHB_PINS = {
 	'filta' : 'P9_11', \
 	'filtb' : 'P9_13', \
 	'filtc' : 'P9_15', \
-	'lmx_pow_en' : 'P9_39', \
+	'lmx_pow_en' : 'P9_17', \
 	'lmx_clk' : 'P9_31', \
 	'lmx_ce' : 'P9_23', \
 	'lmx_data' : 'P9_29', \
@@ -221,8 +222,8 @@ class synth_r1:
         self._set_reg(12, 0x7001)
         self._set_reg(11, 0x0018)
         self._set_reg(10, 0x10d8)
-        self._set_reg(40, FRAC_DENOM & 0xffff)
-        self._set_reg(41, (FRAC_DENOM >> 16) & 0xffff)
+        self._set_reg(40, (FRAC_DENOM >> 16) & 0xffff)
+        self._set_reg(41, FRAC_DENOM & 0xffff)
         self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
 
         time.sleep(.1)
@@ -382,13 +383,20 @@ class synth_r1:
         return self.spi.transfer(payload, bits = 24)
 
 if __name__ == '__main__':
-    synth = synth_r1(SYNTHA_PINS)
+    syntha = synth_r1(SYNTHA_PINS)
+    synthb = synth_r1(SYNTHB_PINS)
+
     time.sleep(.1)
-    synth.set_pow(0)
-    synth.set_attenuator(0)
+    syntha.set_pow(0)
+    synthb.set_pow(20)
+
+    syntha.set_attenuator(30)
+    synthb.set_attenuator(0)
 
     tstart = time.time()
-    synth.set_freq(3e9)
+    synthb.set_freq(2.0e9)
+    syntha.set_freq(2.045e9)
+
     tstop = time.time()
     print("time: " + str(tstop - tstart))
     pdb.set_trace()
