@@ -6,6 +6,7 @@
 import time
 import pdb
 from bbone_spi_bitbang import bitbang_spi
+import Adafruit_BBIO.GPIO as GPIO
 
 def ad9864_write_reg(spi, addr, val):
     payload = addr << 9 | val
@@ -74,15 +75,22 @@ if __name__ == '__main__':
     ADC_SPI_MOSI = "P8_35"
     ADC_SPI_MISO = "P8_26"
     ADC_SPI_CLK = "P8_37"
+    MIX_EN = "P8.15"
+    MIX_X2 = "P8.17"
     # spi clk, spi mosi and spi miso 
 
     # hardcode SYNCB high for now..
-    import Adafruit_BBIO.GPIO as GPIO
-    GPIO.setup("P8.41", GPIO.OUT)
-    GPIO.output("P8.41", GPIO.HIGH)
+    #GPIO.setup("P8.41", GPIO.OUT)
+
+    #GPIO.output("P8.41", GPIO.HIGH)
     
     spi = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     ad9864_init(spi)
+
+    #GPIO.setup(MIX_EN, GPIO.OUT)
+    #GPIO.setup(MIX_X2, GPIO.OUT)
+    #GPIO.output(MIX_EN, GPIO.HIGH)
+    #GPIO.output(MIX_X2, GPIO.LOW)
 
     raw_input("press enter to continue..")
 
