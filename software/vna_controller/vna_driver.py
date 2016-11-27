@@ -5,12 +5,15 @@ import struct
 import time
 import skrf as rf
 from skrf.calibration import OnePort
-from synth_driver import ethernet_synth
+from synth_client import zmq_synth 
+from io_client import zmq_io 
 from adc_client import ethernet_pru_adc
 import os
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from scipy.stats import circmean
+
+from vna_io_commands import * 
 
 ADC_RATE = 26e6
 DECIMATION_RATE = 900
@@ -19,10 +22,17 @@ IF_FREQ = 45.000e6
 SWITCH_TRIM = 8 # samples to discard to eliminate switching transient
 
 class eth_vna:
-    def __init__(self, lo_synth, rf_synth, pru_adc):
+    def __init__(self, lo_synth, rf_synth, pru_adc, vna_io):
         self.lo_synth = lo_synth
         self.rf_synth = rf_synth
         self.pru_adc = pru_adc
+        self.vna_io = vna_io
+        
+        self.vna_io.adc_init(ALL_ADCS)
+        self.vna_io.set_switch(SW_DUT_RF, SW_DUT_PORT1)
+        self.vna_io.enable_mixer()
+        self.vna_io.adc_init(ALL_ADC)
+        self.vna_io.sync_adcs()
 
         self.freq = np.float32(0)
 
@@ -158,15 +168,18 @@ class eth_vna:
 
 
 if __name__ == '__main__':
-    synth_rf = ethernet_synth('192.168.1.177', 8888)
-    synth_lo = ethernet_synth('192.168.1.178', 8888)
+    context = zmq.context()
+
+    synth_rf = zmq_synth(context, 'bbone', SYNTH_PORTS['a'])
+    synth_lo = zmq_synth(context, 'bbone', SYNTH_PORTS['b'])
+    vna_io = zmq_io(context, 'bbone', IO_PORT)
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
     fstart = .5e9
     fstop = 5.5e9
     points = 251 
 
-    vna = eth_vna(synth_rf, synth_lo, pru_adc)
+    vna = eth_vna(synth_rf, synth_lo, pru_adc, vna_io)
     vna.slot_calibrate_oneport(fstart, fstop, points)
 
     while True:

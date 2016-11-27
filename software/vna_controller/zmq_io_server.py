@@ -70,8 +70,11 @@ class zmq_io_server:
 
     
     def _set_switch(self, message):
-        freq = float(message[1:])
-        self.synth.set_freq(freq)
+        sw = int(message[SW_IDX])
+        state = int(message[SW_STATE])
+        pin = SW_MAP[sw]
+        GPIO.output(pin, state)
+
         return message[COMMAND_INDEX]
 
     def _set_multiplier(self, message):
@@ -136,19 +139,8 @@ class zmq_io_server:
 
 
 if __name__ == '__main__':
-
-    parser = argparse.ArgumentParser()
-    args = parser.parse_args()
-
     context = zmq.Context()
-    synth_name = args.synth
-    
-    pins = SYNTH_PINS[synth_name]
-    port = SYNTH_PORTS[synth_name]
-
-    synth = synth_bbone.synth_r1(pins)
-
-    synth_server = ethernet_synth(context, synth, port)
+    synth_server = zmq_io_server(context, IO_PORT)
     synth_server.run()
     synth_server.close()
     

@@ -1,10 +1,6 @@
 import zmq
 import numpy as np
 import pdb
-import struct
-import time
-import skrf as rf
-from skrf.calibration import OnePort
 from synth_commands import *
 
 import os
