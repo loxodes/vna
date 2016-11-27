@@ -161,7 +161,6 @@ RF_SW_HIGHFREQ = GPIO.HIGH
 FILTER_BANK_CUTOFFS = [6.0e9, 4.4e9, 3.4e9, 2.25e9, 1.45e9, 1.0e9, 0.63e9, 0.0]
 FILTER_BANK_SIZE = 8
 
-
 class synth_r1:
     def __init__(self, pins, enable_ref_clk = True):
         self.pins = pins
@@ -228,7 +227,7 @@ class synth_r1:
 
         time.sleep(.1)
     
-    def set_pow(self, power):
+    def set_power(self, power):
         self.channel_power = power
 
         if self.current_channel == CHANNELA:
@@ -365,7 +364,7 @@ class synth_r1:
         self.set_filter_bank(freq) 
 
         # update output channel..
-        self.set_pow(self.channel_power)
+        self.set_power(self.channel_power)
 
         # wait for pll lock
         while not GPIO.input(self.pins['lmx_le']):
@@ -387,8 +386,8 @@ if __name__ == '__main__':
     synthb = synth_r1(SYNTHB_PINS)
 
     time.sleep(.1)
-    syntha.set_pow(0)
-    synthb.set_pow(20)
+    syntha.set_power(0)
+    synthb.set_power(20)
 
     syntha.set_attenuator(30)
     synthb.set_attenuator(0)
