@@ -1,18 +1,16 @@
-import socket 
-import numpy as np
 import pdb
-import struct
 import time
+
+import numpy as np
+import matplotlib.pyplot as plt
 import skrf as rf
+
+from scipy.stats import circmean
 from skrf.calibration import OnePort
+
 from synth_client import zmq_synth 
 from io_client import zmq_io 
 from adc_client import ethernet_pru_adc
-import os
-import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
-from scipy.stats import circmean
-
 from vna_io_commands import * 
 
 ADC_RATE = 26e6
@@ -20,6 +18,11 @@ DECIMATION_RATE = 900
 
 IF_FREQ = 45.000e6
 SWITCH_TRIM = 8 # samples to discard to eliminate switching transient
+
+ALL_PORTS = 3
+PORT1 = SW_DUT_PORT1
+PORT2 = SW_DUT_PORT2
+
 
 class eth_vna:
     def __init__(self, lo_synth, rf_synth, pru_adc, vna_io):
@@ -35,88 +38,103 @@ class eth_vna:
         self.vna_io.sync_adcs()
 
         self.freq = np.float32(0)
+   
+    def _fit_freq(self, samples):
+        # TODO: do this from some sort of fitting
+        ref_freq = (ADC_RATE / DECIMATION_RATE) * (np.mean(np.diff(np.unwrap(np.angle(samples)))) / (2 * np.pi)) 
+        return ref_freq
 
-    def _grab_s_raw(self, navg = 1):
-        s11_avg = 0
-         
+    def _goertzel(self, samples, freq, rate = ADC_RATE/DECIMATION_RATE):
+        # generalized goertzel for arbitrary frequencies
+        # see figure 4,  Goertzel algorithm generalized to non-integer multiples of fundamental frequency (Petr Sysel and Pavel Rajmic)
+        # http://asp.eurasipjournals.springeropen.com/articles/10.1186/1687-6180-2012-56
+        # TODO: does this work with complex inputs?
+        N = len(samples)
+        k = N * (freq / rate)
+
+        A = 2 * np.pi * k / N
+        B = 2 * np.cos(A)
+        C = np.exp(-1j * A)
+        D = np.exp(-1j * 2 * np.pi * (k / N) * (N - 1))
+
+        s0 = 0
+        s1 = 0
+        s2 = 0
+
+        for i in range(N-2):
+            s0 = samples[i] + B * s1 - s2
+            s2 = s1
+            s1 = s0
+
+        s0 = samples[N-1] + B * s1 - s2
+        y = s0 - s1 * C
+        y = y * D
+        return y
+ 
+ 
+    def _grab_s_raw(self, navg = 1, rfport = PORT1):
+        self.vna_io.set_switch(SW_DUT_RF, rfport)
+
+        ref_freq = 0
+        s_return_avg = 0
+        s_thru_avg = 0
+
         for i in range(navg):
-            ref, dut = pru_adc.grab_samples(paths = 2, number_of_samples = 256)
-
-            # calculate and apply correction from non-simultaneous sampling
-            ref_freq = (ADC_RATE / DECIMATION_RATE) * (np.mean(np.diff(np.unwrap(np.angle(ref)))) / (2 * np.pi)) 
-            ref_to_dut_tshift = len(ref) * DECIMATION_RATE / ADC_RATE 
-            ref_to_dut_pshift = np.exp(1j * 2 * np.pi * ref_freq * ref_to_dut_tshift)
-            ref *= ref_to_dut_pshift 
-
-            # trim out switching transient
-            ref = ref[SWITCH_TRIM:]
-            dut = dut[SWITCH_TRIM:]
-        
-            # independently fit phase and amplitude?
-            # probably want to do this with goertzel algorithm or something
-            s_mag = np.mean(np.abs(dut)) /  np.mean(np.abs(ref))
-
-            ref_angle = np.unwrap(np.angle(ref))
-            dut_angle = np.unwrap(np.angle(dut))
-            s_angle = circmean(dut_angle - ref_angle)
+            a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 256)
             
-            s11 = s_mag * np.exp(1j * s_angle)
-
-            #ref_windowed = ref * np.hamming(len(ref))
-            #dut_windowed = dut * np.hamming(len(dut))
-
-            #pref, fref = pru_adc.calc_power_spectrum(ref_windowed)
-            #pdut, fdut = pru_adc.calc_power_spectrum(dut_windowed)
-            #fmax_idx = np.argmax(pref) # assume frequency with maximum power in ref path is signal
-
-            #pdb.set_trace()
-            # fit amplitude/phase
-            #a1 = np.fft.fftshift(np.fft.fft(ref, norm='ortho'))[fmax_idx]
-            #b1 = np.fft.fftshift(np.fft.fft(dut, norm='ortho'))[fmax_idx]
-
+            if port == PORT1:
+                ref_freq = self._fit_freq(a1)
+            elif port == PORT2:
+                ref_freq = self._fit_freq(a2)
+            else:
+                print('unrecognized port!?')
+                pdb.set_trace()
             
-            print(' {} s11: {} < {}'.format(i, s_mag, s_angle))
-            if False:
-                plt.subplot(4,1,1)
-                pru_adc.plot_power_spectrum(pref, fref, show_plot = False)
-                plt.subplot(4,1,2)
-                pru_adc.plot_power_spectrum(pdut, fdut, show_plot = False)
-                plt.subplot(4,1,3)
-                plt.plot(dut)
-                plt.plot(ref)
-                plt.subplot(4,1,4)
-                plt.plot(ref_windowed)
-                plt.plot(dut_windowed)
-
-                plt.show()
+            a1_fit = self._goertzel(a1, ref_freq)
+            b1_fit = self._goertzel(b1, ref_freq)
+            a2_fit = self._goertzel(a2, ref_freq)
+            b2_fit = self._goertzel(b2, ref_freq)
             
-                #fs = 26e6 / 900
-                #N = len(dut)
-                #samples = np.append(ref, dut)
-                #f, t, Sxx = spectrogram(samples, fs, nperseg = 4096)
-                #plt.pcolormesh(t, f, Sxx)
-                #plt.show()
-            
-            s11_avg += s11
+            if port == PORT1:
+                s_return_avg += (b1_fit / a1_fit)
+                s_thru_avg += (b1_fit / a2_fit)
+            else:
+                s_return_avg += (b2_fit / a2_fit)
+                s_thru_avg += (b2_fit / a1_fit)
 
+        return s_return_avg/navg, s_thru_avg/navg
 
-        return s11_avg/navg
-
-    def sweep(self, fstart, fstop, points, use_cal = True):
+    def sweep(self, fstart, fstop, points):
         sweep_freqs = np.linspace(fstart, fstop, points)
-        sweep_iq = 1j * np.zeros(points)
+
+        sweep_s11 = 1j * np.zeros(points)
+        sweep_s21 = 1j * np.zeros(points)
+        sweep_s12 = 1j * np.zeros(points)
+        sweep_s22 = 1j * np.zeros(points)
+
         
         for (fidx, f) in enumerate(sweep_freqs):
             self.rf_synth.set_freq(f)
-            self.lo_synth.set_freq(f + IF_FREQ)
+            self.lo_synth.set_freq(f + IF_FRsEQ)
             self.lo_synth.level_pow()
             time.sleep(.05)
+
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
-            s11 = self._grab_s_raw(navg = 4)
-            sweep_iq[fidx] = s11
+
+            s11, s21 = self._grab_s_raw(navg = 4, ports = PORT1)
+            s22, s12 = self._grab_s_raw(navg = 4, ports = PORT2)
+
+            sweep_s11[fidx] = s11
+            sweep_s21[fidx] = s21
+            sweep_s12[fidx] = s12
+            sweep_s22[fidx] = s22
         
-        net = rf.Network(f=sweep_freqs/1e9, s=sweep_iq, z0=50)
-        return net 
+        s11 = rf.Network(f=sweep_freqs/1e9, s=sweep_s11, z0=50)
+        s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
+        s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
+        s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
+
+        return rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
    
     def generate_sdrkits_cal_standard(self, sweep_freqs):
         # generate cal stardard for sdr-kits Female Rosenberger HochFrequenz .. economy SMA SOL cal kit

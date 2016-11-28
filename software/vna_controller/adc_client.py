@@ -39,6 +39,7 @@ class ethernet_pru_adc:
                 
                 t2 = time.time()
                 break
+
                 #print("grabbing samples took {} seconds".format(t2 - t1))
             except:
                 # TODO: figure out why it crashes...
@@ -49,8 +50,16 @@ class ethernet_pru_adc:
                 time.sleep(.4)
 
 
-
-        return np.split(samples, paths)
+        # de-interleave samples.. there is probably a more pythonic way of doing this
+        if paths == 1:
+            return samples
+        elif paths == 2:
+            return samples[0::2], samples[1::2]
+        elif paths == 4:
+            return samples[0::4], samples[1::4], samples[2::4], samples[3::4]
+        else:
+            print('unrecognized number of paths..')
+            pdb.set_trace()
            
     def calc_power_spectrum(self, samples):
         fs = 26e6 / 900 # ad9864 adc clock of 26 MHz, decimation rate of 900
