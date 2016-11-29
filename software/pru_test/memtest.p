@@ -1,21 +1,25 @@
 ; Adc.p: move samples from ad9864 into shared ram
 ; pins:                                  bit 
-;   douta 1 - data output from adc1 - R31 7 
-;   douta 2 - data output from adc2 - R31 5
-;   douta 3 - data output from adc3 - R31 3
-;   douta 4 - data output from adc4 - R31 1
+;   douta 1 - data output from adc1 - R31 1 
+;   douta 2 - data output from adc2 - R31 3
+;   douta 3 - data output from adc3 - R31 5
+;   douta 4 - data output from adc4 - R31 7
 ;   fs      - frame sync            - R31 2
 ;   clkout  - spi clk output        - R31 0
 ;   syncb   - sync input,           - R30 4
 
 #include "adc_shm.h"
 
-#define DOUTA_MASK 0x80
+#define DOUTA_MASK 0x02
 #define FS 2
 #define CLKOUT 0
 ;#define SYNCB 4
 
-#define ADC_VAL r5
+#define ADC_VAL1 r20
+#define ADC_VAL2 r21
+#define ADC_VAL3 r22
+#define ADC_VAL4 r23
+
 #define TMP r6
 #defIne TMP_IDX r10
 #define SAMPLE_COUNTER r12
@@ -35,12 +39,12 @@
 .origin 0
 .entrypoint TOP
 
-; reads ADC, stores result in ADC_VAL (r5)
+; reads ADCs, stores results in ADC_VAL1-4 (r20-23)
 ; uses TMP (r6) and TMP_IDX (r10) registers 
 .macro READADC
     mov TMP_IDX, BITS_PER_SAMPLE 
     mov TMP, 0
-    mov ADC_VAL, 0
+    mov ADC_VAL1, 0
  
     WBS r31, FS
     WBC r31, FS
@@ -48,9 +52,9 @@
     READBIT:
         WBC r31, CLKOUT
         AND TMP, r31, DOUTA_MASK 
-        LSL TMP, TMP, 7 ; .. for now, move douta for adc1 into first bit
-        LSL ADC_VAL, ADC_VAL, 1
-        OR ADC_VAL, ADC_VAL, TMP
+        LSR TMP, TMP, 1; .. for now, move douta for adc1 into first bit
+        LSL ADC_VAL1, ADC_VAL1, 1
+        OR ADC_VAL1, ADC_VAL1, TMP
         SUB TMP_IDX, TMP_IDX, 1
         WBS r31, CLKOUT ; TODO: do I need to do this?
         QBNE READBIT, TMP_IDX, 0
@@ -99,7 +103,7 @@ TOP:
             ADD r14, r14, ADC_BUF_OFFSET 
             
             READADC
-            SBCO ADC_VAL, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL1, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
             ADD r13, r13, 1 
@@ -121,7 +125,7 @@ TOP:
             ; save current sample index to shm buffer
             ; (replace with ADC value..)
             READADC
-            SBCO ADC_VAL, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL1, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
             ADD r13, r13, 1 

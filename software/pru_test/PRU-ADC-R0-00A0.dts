@@ -34,7 +34,6 @@
    // P8.40, 42, 44, 46 -  DOUT, inputs, bits 7, 5, 3, 1
    // P8.45 - CLKOUT, input, bit 0
    // P8.43 - FS, input, bit 2
-   // removed P8.41 - SYNCB, output, bit 4
 
    exclusive-use =  
       "P8.40", "P8.42", "P8.44", "P8.46", "P8.45", "P8.43", "pru1";  
