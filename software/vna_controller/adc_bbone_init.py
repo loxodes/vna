@@ -6,7 +6,14 @@
 import time
 import pdb
 from bbone_spi_bitbang import bitbang_spi
-import Adafruit_BBIO.GPIO as GPIO
+
+ADC_SPI_CS1 = "P8_38" # adc1
+ADC_SPI_CS2 = "P8_36" # adc2
+ADC_SPI_CS3 = "P8_34" # adc3
+ADC_SPI_CS4 = "P8_32" # adc4
+ADC_SPI_MOSI = "P8_35"
+ADC_SPI_MISO = "P8_26"
+ADC_SPI_CLK = "P8_37"
 
 def ad9864_write_reg(spi, addr, val):
     payload = addr << 9 | val
@@ -67,30 +74,15 @@ def ad9864_init(spi):
 
 
 if __name__ == '__main__':
-    # for adc1 on adc_cape
-    ADC_SPI_CS1 = "P8_38" # adc1
-    ADC_SPI_CS2 = "P8_36" # adc2
-    ADC_SPI_CS3 = "P8_34" # adc3
-    ADC_SPI_CS4 = "P8_32" # adc4
-    ADC_SPI_MOSI = "P8_35"
-    ADC_SPI_MISO = "P8_26"
-    ADC_SPI_CLK = "P8_37"
-    MIX_EN = "P8.15"
-    MIX_X2 = "P8.17"
-    # spi clk, spi mosi and spi miso 
+    spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
 
-    # hardcode SYNCB high for now..
-    #GPIO.setup("P8.41", GPIO.OUT)
-
-    #GPIO.output("P8.41", GPIO.HIGH)
-    
-    spi = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-    ad9864_init(spi)
-
-    #GPIO.setup(MIX_EN, GPIO.OUT)
-    #GPIO.setup(MIX_X2, GPIO.OUT)
-    #GPIO.output(MIX_EN, GPIO.HIGH)
-    #GPIO.output(MIX_X2, GPIO.LOW)
+    ad9864_init(spi1)
+    ad9864_init(spi2)
+    ad9864_init(spi3)
+    ad9864_init(spi4)
 
     raw_input("press enter to continue..")
 

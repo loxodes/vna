@@ -1,0 +1,33 @@
+IO_PORT = 10060
+COMMAND_INDEX = 0
+
+VNA_SW_CMD = 's'
+ADC_INIT_CMD = 'a'
+MIX_EN_CMD = 'm'
+MIX_MUL_CMD = 'x'
+ADC_SYNC_CMD = 'b'
+
+CMD_ERR = 'E'
+
+
+MIXER_ENABLE = '1'
+MIXER_DISABLE = '0'
+
+ALL_ADC = 'all'
+ADC1 = '1'
+ADC2 = '2'
+ADC3 = '3'
+ADC4 = '4'
+
+SW_IDX = 1
+SW_STATE = 2
+
+SW_DUT_RF = '0'
+SW_DUT_PORT1 = 0
+SW_DUT_PORT2 = 1
+SW_MULT_1 = '1'
+SW_AUX = '2'
+SW4_0 = '3'
+SW4_1 = '4'
+
+
