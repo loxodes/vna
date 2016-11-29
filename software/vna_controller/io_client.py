@@ -37,7 +37,7 @@ class zmq_io:
 
 if __name__ == '__main__':
     context = zmq.context()
-
+    print('starting...')
     zmq_io = zmq_io(context, 'bbone', IO_PORT)
 
     zmq_io.set_switch(SW_DUT_RF, SW_DUT_PORT1)

@@ -16,20 +16,20 @@ from vna_io_commands import *
 from adc_bbone_init import *
 
 
-MIX_EN = "P8.15"
-MIX_X2 = "P8.17"
+MIX_EN = "P8_15"
+MIX_X2 = "P8_17"
 
-ALC_SW_1_1 = "P8.27"
-ALC_SW_1_2 = "P8.29"
+ALC_SW_1_1 = "P8_27"
+ALC_SW_1_2 = "P8_29"
 
-SW4_0_0 = "P8.28"
-SW4_0_1 = "P8.30"
+SW4_0_0 = "P8_28"
+SW4_0_1 = "P8_30"
 
-SYNCB = "P8.41"
+SYNCB = "P8_41"
 
-SW2_0 = "P8.7"
-SW2_1 = "P8.9"
-SW2_2 = "P8.11"
+SW2_0 = "P8_7"
+SW2_1 = "P8_9"
+SW2_2 = "P8_11"
 
 SW_MAP = {  SW_DUT_RF : SW2_0, \
             SW_MULT_1 : SW2_1, \
