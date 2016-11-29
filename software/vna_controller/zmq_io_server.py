@@ -40,22 +40,29 @@ SW_MAP = {  SW_DUT_RF : SW2_0, \
 
 class zmq_io_server:
     def __init__(self, context, port):
+        self.command_handlers = {\
+            VNA_SW_CMD: self._set_switch, \
+            MIX_EN_CMD: self._enable_mixer, \
+            MIX_MUL_CMD: self._set_multiplier, \
+            ADC_INIT_CMD : self._init_adc, \
+            ADC_SYNC_CMD: self._sync_adc}
+
         # init socket stuff
         self.context = context
-        self.socket = context.socket(zmp.REP)
+        self.socket = context.socket(zmq.REP)
         self.socket.bind("tcp://*:{}".format(str(port)))
 
         # init io stuff
-        GPIO.setup(MIX_EN, GPIO.OUTPUT)
-        GPIO.setup(MIX_X2, GPIO.OUTPUT)
-        GPIO.setup(ALC_SW_1_1, GPIO.OUTPUT)
-        GPIO.setup(ALC_SW_1_2, GPIO.OUTPUT)
-        GPIO.setup(SW4_0_0, GPIO.OUTPUT)
-        GPIO.setup(SW4_0_1, GPIO.OUTPUT)
-        GPIO.setup(SW2_0, GPIO.OUTPUT)
-        GPIO.setup(SW2_1, GPIO.OUTPUT)
-        GPIO.setup(SW2_2, GPIO.OUTPUT)
-        GPIO.setup(SYNCB, GPIO.OUTPUT)
+        GPIO.setup(MIX_EN, GPIO.OUT)
+        GPIO.setup(MIX_X2, GPIO.OUT)
+        GPIO.setup(ALC_SW_1_1, GPIO.OUT)
+        GPIO.setup(ALC_SW_1_2, GPIO.OUT)
+        GPIO.setup(SW4_0_0, GPIO.OUT)
+        GPIO.setup(SW4_0_1, GPIO.OUT)
+        GPIO.setup(SW2_0, GPIO.OUT)
+        GPIO.setup(SW2_1, GPIO.OUT)
+        GPIO.setup(SW2_2, GPIO.OUT)
+        GPIO.setup(SYNCB, GPIO.OUT)
 
         GPIO.output(MIX_EN, GPIO.LOW)
         GPIO.output(MIX_X2, GPIO.LOW)
@@ -115,12 +122,6 @@ class zmq_io_server:
 
         return message[COMMAND_INDEX]
 
-    self.command_handlers = {\
-        VNA_SW_CMD: self._set_switch, \
-        MIX_EN_CMD: self._enable_mixer, \
-        MIX_MUL_CMD: self._set_multiplier, \
-        ADC_INIT_CMD : self._init_adc, \
-        ADC_SYNC_CMD: self._sync_adc}
 
     def run(self):
         while True:

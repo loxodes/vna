@@ -1,6 +1,7 @@
 import zmq
 import argparse
 import pdb
+import numpy as np
 
 import synth_bbone
 from synth_commands import *
@@ -36,13 +37,14 @@ class zmq_synth_server:
         self.synth.set_pow(power)
         return message[COMMAND_INDEX]
 
-    self.command_handlers = {\
-        FREQ_CMD : self._set_freq, \
-        POW_CMD : self._set_power, \
-        FILT_COMMAND : self._set_filter_bank, \
-        ATT_CMD : self._set_attenuator}
 
     def run(self):
+        self.command_handlers = {\
+            FREQ_CMD : self._set_freq, \
+            POW_CMD : self._set_power, \
+            FILT_COMMAND : self._set_filter_bank, \
+            ATT_CMD : self._set_attenuator}
+
         while True:
             message = self.socket.recv()
             command = message[COMMAND_INDEX]
@@ -61,7 +63,7 @@ class zmq_synth_server:
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--synth', help = 'synth (a/b)')
+    parser.add_argument('--synth', help = 'synth (a/b)', default = 'a')
     args = parser.parse_args()
 
     context = zmq.Context()
