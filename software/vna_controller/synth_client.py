@@ -16,7 +16,7 @@ HMC311_7DBM_TABLE_FREQ = [250e6, 500e6, 1e9, 2e9, 2.5e9, 3e9, 3.5e9, 4e9, 5e9, 6
 
 class zmq_synth:
     def __init__(self, context, synth_ip, synth_port):
-        self.sock = context.socket(zma.REQ)
+        self.sock = context.socket(zmq.REQ)
         self.sock.connect("tcp://{}:{}".format(synth_ip, synth_port))
         
         self.freq = np.float32(0)
@@ -51,15 +51,21 @@ class zmq_synth:
         self._eth_cmd(ATT_CMD, att)
 
 if __name__ == '__main__':
-    context = zmq.context()
+    context = zmq.Context()
 
-    LOPORT = SYNTH_PORTS['a']
-    RFPORT = SYNTH_PORTS['b']
+    lo_port = SYNTH_PORTS['a']
+    rf_port = SYNTH_PORTS['b']
 
     RF_IP = 'bbone'
     LO_IP = 'bbone'
+    print('connecting to LO synth')
+    lo_synth = zmq_synth(context, LO_IP, lo_port)
 
-    lo_synth = zmq_synth(context, LO_IP, LO_PORT)
+    print('connected, changing frequency')
     lo_synth.set_freq(2.2e9);
+    lo_synth.set_filt(3.2e9);
+    lo_synth.set_pow(10);
+    lo_synth.set_att(5);
+
 
     pdb.set_trace()
