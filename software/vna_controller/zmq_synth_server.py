@@ -14,27 +14,31 @@ class zmq_synth_server:
     def __init__(self, context, synth, port):
         self.synth = synth
         self.context = context
-        self.socket = context.socket(zmp.REP)
+        self.socket = context.socket(zmq.REP)
         self.socket.bind("tcp://*:{}".format(str(port)))
     
     def _set_freq(self, message):
         freq = float(message[1:])
+        print('setting frequency to {} Hz'.format(freq))
         self.synth.set_freq(freq)
         return message[COMMAND_INDEX]
 
     def _set_filter_bank(self, message):
         freq = float(message[1:])
+        print('setting filter bank for {} GHz'.format(freq/1e9))
         self.synth.set_filter_bank(freq)
         return message[COMMAND_INDEX]
 
     def _set_attenuator(self, message):
-        att = int(message[1:])
-        self.synth.set_atteuator(att)
+        att = float(message[1:])
+        print('attenuator to {} dB'.format(att))
+        self.synth.set_attenuator(att)
         return message[COMMAND_INDEX]
 
     def _set_power(self, message):
         power = int(message[1:])
-        self.synth.set_pow(power)
+        print('power level to {}'.format(power))
+        self.synth.set_power(power)
         return message[COMMAND_INDEX]
 
 
@@ -42,22 +46,25 @@ class zmq_synth_server:
         self.command_handlers = {\
             FREQ_CMD : self._set_freq, \
             POW_CMD : self._set_power, \
-            FILT_COMMAND : self._set_filter_bank, \
+            FILT_CMD : self._set_filter_bank, \
             ATT_CMD : self._set_attenuator}
-
+        print('entering run loop')
         while True:
+            print('waiting for command..')
             message = self.socket.recv()
             command = message[COMMAND_INDEX]
+            print('received {} command, message: {}'.format(command, message))
+
             response = ''
 
-            try:
-                response = self.command_handlers[commands](message)
-
-            except:
+            if command in self.command_handlers:
+                response = self.command_handlers[command](message)
+            
+            else:
                 print('unrecognized command')
                 pdb.set_trace()
             
-            socket.send(response)
+            self.socket.send(response)
 
 
 if __name__ == '__main__':
@@ -73,8 +80,9 @@ if __name__ == '__main__':
     port = SYNTH_PORTS[synth_name]
 
     synth = synth_bbone.synth_r1(pins)
-
-    synth_server = ethernet_synth(context, synth, port)
+    print('initializing synth')
+    synth_server = zmq_synth_server(context, synth, port)
+    print('running zmq server')
     synth_server.run()
     synth_server.close()
     
