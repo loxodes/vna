@@ -10,7 +10,17 @@
 
 #include "adc_shm.h"
 
-#define DOUTA_MASK 0x02
+#define DOUTA1_MASK 0x02
+#define DOUTA2_MASK 0x02
+#define DOUTA3_MASK 0x02
+#define DOUTA4_MASK 0x02
+
+#define A1_SHIFT 1
+#define A2_SHIFT 1
+#define A3_SHIFT 1
+#define A4_SHIFT 1
+
+
 #define FS 2
 #define CLKOUT 0
 ;#define SYNCB 4
@@ -44,17 +54,42 @@
 .macro READADC
     mov TMP_IDX, BITS_PER_SAMPLE 
     mov TMP, 0
+
     mov ADC_VAL1, 0
+    mov ADC_VAL2, 0
+    mov ADC_VAL3, 0
+    mov ADC_VAL4, 0
  
     WBS r31, FS
     WBC r31, FS
 
     READBIT:
         WBC r31, CLKOUT
-        AND TMP, r31, DOUTA_MASK 
-        LSR TMP, TMP, 1; .. for now, move douta for adc1 into first bit
-        LSL ADC_VAL1, ADC_VAL1, 1
+
+        ; read in ADC 1 
+        AND TMP, r31, DOUTA1_MASK 
+        LSR TMP, TMP, A1_SHIFT; move douta for adc1 into first bit
+        LSL ADC_VAL1, ADC_VAL1, 1 
         OR ADC_VAL1, ADC_VAL1, TMP
+
+        ; read in ADC 2
+        AND TMP, r31, DOUTA2_MASK 
+        LSR TMP, TMP, A2_SHIFT
+        LSL ADC_VAL2, ADC_VAL2, 1
+        OR ADC_VAL2, ADC_VAL2, TMP
+
+        ; read in ADC 3
+        AND TMP, r31, DOUTA3_MASK 
+        LSR TMP, TMP, A3_SHIFT
+        LSL ADC_VAL3, ADC_VAL3, 1
+        OR ADC_VAL3, ADC_VAL3, TMP
+
+        ; read in ADC 4
+        AND TMP, r31, DOUTA4_MASK 
+        LSR TMP, TMP, A4_SHIFT
+        LSL ADC_VAL4, ADC_VAL4, 1
+        OR ADC_VAL4, ADC_VAL4, TMP
+
         SUB TMP_IDX, TMP_IDX, 1
         WBS r31, CLKOUT ; TODO: do I need to do this?
         QBNE READBIT, TMP_IDX, 0
@@ -104,9 +139,15 @@ TOP:
             
             READADC
             SBCO ADC_VAL1, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            ADD r14, r14, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL2, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            ADD r14, r14, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL3, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            ADD r14, r14, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL4, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
             
             ; loop ADC_BUF_LEN times..
-            ADD r13, r13, 1 
+            ADD r13, r13, 4 
             QBNE SHM_BUF0, r13, r15
 
 
@@ -122,13 +163,17 @@ TOP:
             LSL r14, r14, 2
             ADD r14, r14, ADC_BUF_OFFSET 
             
-            ; save current sample index to shm buffer
-            ; (replace with ADC value..)
             READADC
             SBCO ADC_VAL1, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
-            
+            ADD r14, r14, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL2, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            ADD r14, r14, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL3, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+            ADD r14, r14, BYTES_PER_SAMPLE 
+            SBCO ADC_VAL4, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
+           
             ; loop ADC_BUF_LEN times..
-            ADD r13, r13, 1 
+            ADD r13, r13, 4 
             QBNE SHM_BUF1, r13, r15
 
      
