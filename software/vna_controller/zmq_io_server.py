@@ -73,14 +73,14 @@ class zmq_io_server:
         GPIO.output(MIX_EN, GPIO.LOW)
         GPIO.output(MIX_X2, GPIO.LOW)
         GPIO.output(SW2_0, GPIO.LOW)
+        GPIO.output(SYNCB, GPIO.HIGH)
 
         print('initalizing ADCs')
-        #self.adc_spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-        #self.adc_spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-        #self.adc_spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-        #self.adc_spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-
-        #self.adc_spis = [self.adc_spi1, self.adc_spi2, self.adc_spi3, self.adc_spi4]
+        self.adc_spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+        self.adc_spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+        self.adc_spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+        self.adc_spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+        self.adc_spis = [self.adc_spi1, self.adc_spi2, self.adc_spi3, self.adc_spi4]
 
         print('init complete')
 
@@ -120,7 +120,7 @@ class zmq_io_server:
             for s in self.adc_spis:
                 ad9864_init(s)
         else:
-            ad9864_init(adc_spis[adc])
+            ad9864_init(self.adc_spis[adc])
             
         return message[COMMAND_INDEX]
 

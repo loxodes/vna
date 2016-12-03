@@ -75,14 +75,8 @@ def ad9864_init(spi):
 
 if __name__ == '__main__':
     spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-    spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-    spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-    spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
 
     ad9864_init(spi1)
-    ad9864_init(spi2)
-    ad9864_init(spi3)
-    ad9864_init(spi4)
 
     raw_input("press enter to continue..")
 
