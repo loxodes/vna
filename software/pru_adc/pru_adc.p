@@ -11,14 +11,14 @@
 #include "adc_shm.h"
 
 #define DOUTA1_MASK 0x02
-#define DOUTA2_MASK 0x02
-#define DOUTA3_MASK 0x02
-#define DOUTA4_MASK 0x02
+#define DOUTA2_MASK 0x08
+#define DOUTA3_MASK 0x20
+#define DOUTA4_MASK 0x80
 
 #define A1_SHIFT 1
-#define A2_SHIFT 1
-#define A3_SHIFT 1
-#define A4_SHIFT 1
+#define A2_SHIFT 3
+#define A3_SHIFT 5
+#define A4_SHIFT 7
 
 
 #define FS 2

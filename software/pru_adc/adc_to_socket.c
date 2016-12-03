@@ -49,13 +49,13 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
   uint32_t i;
   uint32_t sample_idx = 0;
 
+  prussdrv_init();
   printf("init pru..\n");
   if (prussdrv_open(PRU_EVTOUT_0) == -1) {
     printf("prussdrv_open() failed\n");
     return 1;
   }
 
-  prussdrv_init();
 
   tpruss_intc_initdata pruss_intc_initdata = PRUSS_INTC_INITDATA;
   prussdrv_pruintc_init(&pruss_intc_initdata);

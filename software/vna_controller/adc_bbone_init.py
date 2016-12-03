@@ -30,6 +30,7 @@ def ad9864_read_reg(spi, addr):
 
 def ad9864_init(spi):
     ad9864_write_reg(spi, 0x3F, 0x99) # software reset
+    time.sleep(.001)    
     ad9864_write_reg(spi, 0x19, 0x87) # 4-wire SPI, 16 bit I/Q
 
     ad9864_write_reg(spi, 0x00, 0x77) # take ref out of standby
@@ -71,12 +72,29 @@ def ad9864_init(spi):
     # configure SSI
     ad9864_write_reg(spi, 0x1A, 0x07) # (clkout freq = adc clk / 7)
     ad9864_write_reg(spi, 0x18, 0x00) # take fs and clkout out of tristate
+    
+    # restore doutb to tristate
+    ad9864_write_reg(spi, 0x19, 0x07) # disable mosi on doutb 
 
 
 if __name__ == '__main__':
-    spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    import Adafruit_BBIO.GPIO as GPIO
+    SYNCB = "P8_41"
 
+    GPIO.setup(SYNCB, GPIO.OUT)
+    GPIO.output(SYNCB,GPIO.HIGH)
+
+    spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    
+    print("init adc1")
     ad9864_init(spi1)
+
+
+
+    print("init adc2")
+    ad9864_init(spi2)
+
 
     raw_input("press enter to continue..")
 

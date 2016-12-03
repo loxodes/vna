@@ -115,8 +115,7 @@ class zmq_io_server:
 
     def _init_adc(self, message):
         adc = int(message[1:])
-
-        if adc == ALL_ADC:
+        if adc == int(ALL_ADC):
             for s in self.adc_spis:
                 ad9864_init(s)
         else:
@@ -125,7 +124,6 @@ class zmq_io_server:
         return message[COMMAND_INDEX]
 
     def _sync_adc(self, message):
-        GPIO.output(SYNCB,GPIO.LOW)
         GPIO.output(SYNCB,GPIO.HIGH)
         GPIO.output(SYNCB,GPIO.LOW)
 

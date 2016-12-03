@@ -13,7 +13,7 @@ CMD_ERR = 'E'
 MIXER_ENABLE = '1'
 MIXER_DISABLE = '0'
 
-ALL_ADC = 'all'
+ALL_ADC = '9'
 ADC1 = '1'
 ADC2 = '2'
 ADC3 = '3'
