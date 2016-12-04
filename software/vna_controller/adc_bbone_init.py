@@ -31,7 +31,9 @@ def ad9864_read_reg(spi, addr):
 def ad9864_init(spi):
     ad9864_write_reg(spi, 0x3F, 0x99) # software reset
     time.sleep(.001)    
+
     ad9864_write_reg(spi, 0x19, 0x87) # 4-wire SPI, 16 bit I/Q
+    ad9864_write_reg(spi, 0x3B, 0x00) # enable mosi on doutb 
 
     ad9864_write_reg(spi, 0x00, 0x77) # take ref out of standby
 
@@ -73,8 +75,8 @@ def ad9864_init(spi):
     ad9864_write_reg(spi, 0x1A, 0x07) # (clkout freq = adc clk / 7)
     ad9864_write_reg(spi, 0x18, 0x00) # take fs and clkout out of tristate
     
-    # restore doutb to tristate
-    ad9864_write_reg(spi, 0x19, 0x07) # disable mosi on doutb 
+    # set doutb to tristate
+    ad9864_write_reg(spi, 0x3B, 0x08) # disable mosi on doutb 
 
 
 if __name__ == '__main__':
@@ -86,14 +88,20 @@ if __name__ == '__main__':
 
     spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-    
+    spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+   
     print("init adc1")
     ad9864_init(spi1)
 
-
-
     print("init adc2")
     ad9864_init(spi2)
+
+    print("init adc3")
+    ad9864_init(spi3)
+
+    print("init adc4")
+    ad9864_init(spi4)
 
 
     raw_input("press enter to continue..")
