@@ -41,9 +41,9 @@ if __name__ == '__main__':
     zmq_io = zmq_io(context, 'bbone', IO_PORT)
 
     print('setting switch 0 to 0...')
-    zmq_io.set_switch(SW_DUT_RF, SW_DUT_PORT2)
-    zmq_io.enable_mixer()
-    #zmq_io.adc_init(ALL_ADC)
+    #zmq_io.set_switch(SW_DUT_RF, SW_DUT_PORT2)
+    #zmq_io.enable_mixer()
+    zmq_io.adc_init(ALL_ADC)
     zmq_io.sync_adcs()
     
     raw_input('press enter to continue')

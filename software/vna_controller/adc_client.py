@@ -49,7 +49,7 @@ class ethernet_pru_adc:
                 ssh = subprocess.Popen(["ssh", "debian@bbone", "/home/debian/restart_adc_server"])
                 time.sleep(.4)
 
-
+        pdb.set_trace()
         # de-interleave samples.. there is probably a more pythonic way of doing this
         if paths == 1:
             return samples
@@ -78,15 +78,19 @@ class ethernet_pru_adc:
 
 if __name__ == '__main__':
     adc = ethernet_pru_adc('bbone', 10520)
-    path1, path2 = adc.grab_samples(paths=2)
-    series = np.append(path1, path2)
-    path1 = path1 * hamming(len(path1))
-    path2 = path2 * hamming(len(path1))
-    subplot(2,1,1)
-    plt.plot(path1)
-    plt.plot(path2)
-    subplot(2,1,2)
-    plt.plot(series)
+    path1, path2, path3, path4 = adc.grab_samples(paths=4)
+    subplot(4,1,1)
+    plt.plot(np.real(path1))
+    plt.plot(np.imag(path1))
+    subplot(4,1,2)
+    plt.plot(np.real(path2))
+    plt.plot(np.imag(path2))
+    subplot(4,1,3)
+    plt.plot(np.real(path3))
+    plt.plot(np.imag(path3))
+    subplot(4,1,4)
+    plt.plot(np.real(path4))
+    plt.plot(np.imag(path4))
     plt.show()
     #pows, freqs = adc.calc_power_spectrum(path1)
     #adc.plot_power_spectrum(pows, freqs)
