@@ -66,32 +66,33 @@
     READBIT:
         WBC r31, CLKOUT
 
+        LSL ADC_VAL1, ADC_VAL1, 1 
+        LSL ADC_VAL2, ADC_VAL2, 1
+        LSL ADC_VAL3, ADC_VAL3, 1
+        LSL ADC_VAL4, ADC_VAL4, 1
+
         ; read in ADC 1 
         AND TMP, r31, DOUTA1_MASK 
         LSR TMP, TMP, A1_SHIFT; move douta for adc1 into first bit
-        LSL ADC_VAL1, ADC_VAL1, 1 
         OR ADC_VAL1, ADC_VAL1, TMP
 
         ; read in ADC 2
         AND TMP, r31, DOUTA2_MASK 
         LSR TMP, TMP, A2_SHIFT
-        LSL ADC_VAL2, ADC_VAL2, 1
         OR ADC_VAL2, ADC_VAL2, TMP
 
         ; read in ADC 3
         AND TMP, r31, DOUTA3_MASK 
         LSR TMP, TMP, A3_SHIFT
-        LSL ADC_VAL3, ADC_VAL3, 1
         OR ADC_VAL3, ADC_VAL3, TMP
 
         ; read in ADC 4
         AND TMP, r31, DOUTA4_MASK 
         LSR TMP, TMP, A4_SHIFT
-        LSL ADC_VAL4, ADC_VAL4, 1
         OR ADC_VAL4, ADC_VAL4, TMP
 
+        WBS r31, CLKOUT
         SUB TMP_IDX, TMP_IDX, 1
-        WBS r31, CLKOUT ; TODO: do I need to do this?
         QBNE READBIT, TMP_IDX, 0
 .endm
 
