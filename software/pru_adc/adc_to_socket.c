@@ -34,7 +34,7 @@
 // shared memory
 // [ 32 bytes, config/misc ] [ 2048 bytes (512 samples) buffer 0 ] [ 2048 bytes (512 samples) buffer 1 ]
 
-#define PRU_BIN "./memtest.bin"
+#define PRU_BIN "./pru_adc.bin"
 
 static void *sharedMem;
 
@@ -49,12 +49,13 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
   uint32_t i;
   uint32_t sample_idx = 0;
 
-  //printf("init pru..\n");
   prussdrv_init();
+  printf("init pru..\n");
   if (prussdrv_open(PRU_EVTOUT_0) == -1) {
     printf("prussdrv_open() failed\n");
     return 1;
   }
+
 
   tpruss_intc_initdata pruss_intc_initdata = PRUSS_INTC_INITDATA;
   prussdrv_pruintc_init(&pruss_intc_initdata);
@@ -69,7 +70,7 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
 
   if (prussdrv_exec_program(PRU_NUM, PRU_BIN) < 0) {
     fprintf(stderr, "Error loading %s\n", PRU_BIN);
-    exit(-1);
+    return 1;
   }
 
   fprintf(stderr, "loaded adc reader.. waiting for PRU to initialize buffer status\n");
@@ -105,14 +106,15 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
   prussdrv_pru_clear_event(PRU_EVTOUT_0, PRU1_ARM_INTERRUPT);
   prussdrv_pru_disable(PRU_NUM);
   prussdrv_exit();
-   
+
+  return 0;
 }
 
 int main(int argc, char **argv) {
   uint32_t i;
   uint32_t number_of_samples;
   int16_t sample_buffer[2 * MAX_SAMPLE_BUFFER]; 
-
+  uint32_t pru_return;
   int32_t socket_desc , client_sock , c;
   struct sockaddr_in server , client;
 
@@ -146,7 +148,10 @@ int main(int argc, char **argv) {
 
       recv(client_sock, &number_of_samples, sizeof(number_of_samples), MSG_WAITALL);
       
-      grab_samples_pru(number_of_samples, sample_buffer);
+      if(grab_samples_pru(number_of_samples, sample_buffer)) {
+        printf("pru launch failed, exiting..\n");
+        return 1;
+      }
 
       //for(i = 0; i < number_of_samples; i++) {
       //printf("[%d] %d +%dj\n", i, sample_buffer[2*i], sample_buffer[2*i+1]);
