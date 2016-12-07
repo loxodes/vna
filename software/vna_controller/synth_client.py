@@ -64,7 +64,7 @@ if __name__ == '__main__':
     print('connected, changing frequency')
     lo_synth.set_freq(2.2e9);
     lo_synth.set_filt(3.2e9);
-    lo_synth.set_pow(10);
+    lo_synth.set_pow(0);
     lo_synth.set_att(5);
 
 

@@ -28,6 +28,9 @@ def ad9864_read_reg(spi, addr):
 
     return response & 0xFF
 
+def ad9864_tristate_miso(spi):
+    ad9864_write_reg(spi1, 0x3B, 0x08)
+
 def ad9864_init(spi):
     ad9864_write_reg(spi, 0x3F, 0x99) # software reset
     time.sleep(.001)    
@@ -90,7 +93,12 @@ if __name__ == '__main__':
     spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-   
+    
+    ad9864_tristate_miso(spi1)
+    ad9864_tristate_miso(spi2)
+    ad9864_tristate_miso(spi3)
+    ad9864_tristate_miso(spi4)
+    
     print("init adc1")
     ad9864_init(spi1)
 
@@ -103,6 +111,10 @@ if __name__ == '__main__':
     print("init adc4")
     ad9864_init(spi4)
 
+
+    GPIO.output(SYNCB,GPIO.LOW)
+    time.sleep(.05)
+    GPIO.output(SYNCB,GPIO.HIGH)
 
     raw_input("press enter to continue..")
 

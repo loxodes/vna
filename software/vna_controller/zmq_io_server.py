@@ -72,6 +72,7 @@ class zmq_io_server:
         print('setting default values')
         GPIO.output(MIX_EN, GPIO.LOW)
         GPIO.output(MIX_X2, GPIO.LOW)
+
         GPIO.output(SW2_0, GPIO.LOW)
         GPIO.output(SYNCB, GPIO.HIGH)
 
@@ -81,6 +82,9 @@ class zmq_io_server:
         self.adc_spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
         self.adc_spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
         self.adc_spis = [self.adc_spi1, self.adc_spi2, self.adc_spi3, self.adc_spi4]
+
+        for s in self.adc_spis:
+            ad9864_tristate_miso(s)
 
         print('init complete')
 
@@ -126,7 +130,8 @@ class zmq_io_server:
     def _sync_adc(self, message):
         GPIO.output(SYNCB,GPIO.HIGH)
         GPIO.output(SYNCB,GPIO.LOW)
-
+        time.sleep(.05)
+        GPIO.output(SYNCB,GPIO.HIGH)
         return message[COMMAND_INDEX]
 
 

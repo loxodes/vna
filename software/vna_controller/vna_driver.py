@@ -4,6 +4,7 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 import skrf as rf
+import zmq
 
 from scipy.stats import circmean
 from skrf.calibration import OnePort
@@ -12,6 +13,7 @@ from synth_client import zmq_synth
 from io_client import zmq_io 
 from adc_client import ethernet_pru_adc
 from vna_io_commands import * 
+from synth_commands import *
 
 ADC_RATE = 26e6
 DECIMATION_RATE = 900
@@ -31,12 +33,11 @@ class eth_vna:
         self.pru_adc = pru_adc
         self.vna_io = vna_io
         
-        self.vna_io.adc_init(ALL_ADCS)
         self.vna_io.set_switch(SW_DUT_RF, SW_DUT_PORT1)
-        self.vna_io.enable_mixer()
         self.vna_io.adc_init(ALL_ADC)
         self.vna_io.sync_adcs()
 
+        self.vna_io.enable_mixer()
         self.freq = np.float32(0)
    
     def _fit_freq(self, samples):
@@ -48,7 +49,7 @@ class eth_vna:
         # generalized goertzel for arbitrary frequencies
         # see figure 4,  Goertzel algorithm generalized to non-integer multiples of fundamental frequency (Petr Sysel and Pavel Rajmic)
         # http://asp.eurasipjournals.springeropen.com/articles/10.1186/1687-6180-2012-56
-        # TODO: does this work with complex inputs?
+        
         N = len(samples)
         k = N * (freq / rate)
 
@@ -115,14 +116,14 @@ class eth_vna:
         
         for (fidx, f) in enumerate(sweep_freqs):
             self.rf_synth.set_freq(f)
-            self.lo_synth.set_freq(f + IF_FRsEQ)
+            self.lo_synth.set_freq(f + IF_FREQ)
             self.lo_synth.level_pow()
             time.sleep(.05)
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
 
-            s11, s21 = self._grab_s_raw(navg = 4, ports = PORT1)
-            s22, s12 = self._grab_s_raw(navg = 4, ports = PORT2)
+            s11, s21 = self._grab_s_raw(navg = 4, rfport = PORT1)
+            s22, s12 = self._grab_s_raw(navg = 4, rfport = PORT2)
 
             sweep_s11[fidx] = s11
             sweep_s21[fidx] = s21
@@ -136,7 +137,7 @@ class eth_vna:
 
         return rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
    
-    def generate_sdrkits_cal_standard(self, sweep_freqs):
+    def sdrkits_cal_oneport(self, sweep_freqs):
         # generate cal stardard for sdr-kits Female Rosenberger HochFrequenz .. economy SMA SOL cal kit
         # see http://sdr-kits.net/VNWA/Rosenberger_Female_Cal_Standards_rev4.pdf
         # load resistance of 48.76 ohms from box SN678
@@ -148,8 +149,15 @@ class eth_vna:
         sdrkit_load = rf.Network(f=sweep_freqs, s=-.0126*np.ones(points), z0=50) # 48.76 ohms
 
         return [sdrkit_short, sdrkit_open, sdrkit_load]
-    
- 
+
+    def sdrkits_cal_twoport(self, sweep_freqs):
+        oneport = sdrkits_cal_oneport(sweep_freqs)
+
+        media = rf.media.Media(f, 0, 50)
+        sdrkit_thru = media.line(42.43, 'ps', z0 = 50)
+        return [sdrkit_thru, oneport[0], oneport[1], oneport[2]]
+
+
     def ideal_cal_standard(self, sweep_freqs):
         ideal_open = rf.Network(f=sweep_freqs, s=np.ones(points), z0=50)
         ideal_short = rf.Network(f=sweep_freqs, s=-1*np.ones(points), z0=50)
@@ -157,10 +165,9 @@ class eth_vna:
         return  [ideal_short, ideal_open, ideal_load]
     
 
-
     def slot_calibrate_oneport(self, fstart, fstop, points):
         sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
-        cal_kit = self.generate_sdrkits_cal_standard(sweep_freqs)
+        cal_kit = self.sdrkits_cal_oneport(sweep_freqs)
 
         raw_input("connect short, then press enter to continue")
         self.cal_short = self.sweep(fstart, fstop, points)
@@ -176,37 +183,65 @@ class eth_vna:
                 measured = [self.cal_short, self.cal_open, self.cal_load])        
                 
         self.cal_oneport.run()
-        short_caled = self.cal_oneport.apply_cal(self.cal_short)
+ 
+    def slot_calibrate_twoport(self, fstart, fstop, points):
+        sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
+        cal_kit = self.generate_sdrkits_cal_standard(sweep_freqs)
+
+        raw_input("connect short to port 1, then press enter to continue")
+        self.cal_short_p1 = self.sweep(fstart, fstop, points)
+        raw_input("connect load to port 1, then press enter to continue")
+        self.cal_load_p1 = self.sweep(fstart, fstop, points)
+        raw_input("connect open to port 1, then press enter to continue")
+        self.cal_open_p1 = self.sweep(fstart, fstop, points)
+
+        raw_input("connect short to port 2, then press enter to continue")
+        self.cal_short_p2 = self.sweep(fstart, fstop, points)
+        raw_input("connect load to port 2, then press enter to continue")
+        self.cal_load_p2 = self.sweep(fstart, fstop, points)
+        raw_input("connect open to port 2, then press enter to continue")
+        self.cal_open_p2 = self.sweep(fstart, fstop, points)
+
+
+        raw_input("connect thru, then press enter to continue")
+        self.cal_thru = self.sweep(fstart, fstop, points)
+        print('todo: finish writing two port calibration')
+        pdb.set_trace()
+        self.cal_twoport = rf.OnePort(\
+                ideals = cal_kit,\
+                measured = [self.cal_short, self.cal_open, self.cal_load])        
+                
+        self.cal_twoport.run()
     
-    def plot_oneport_sparam(self, fstart, fstop, points):
-        sweep = self.sweep(fstart, fstop, points)
-        sweep_cal = self.cal_oneport.apply_cal(sweep)
-        sweep_cal.plot_s_db()
-        return sweep_cal
+   
+    def plot_sparam(self, sweep):
+        plt.subplot(1,2,1)
+        sweep.plot_s_db()
+        plt.subplot(1,2,2)
+        sweep.plot_s_smith()
+        plt.show()
 
 
 if __name__ == '__main__':
-    context = zmq.context()
+    context = zmq.Context()
 
     synth_rf = zmq_synth(context, 'bbone', SYNTH_PORTS['a'])
     synth_lo = zmq_synth(context, 'bbone', SYNTH_PORTS['b'])
     vna_io = zmq_io(context, 'bbone', IO_PORT)
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
-    fstart = .5e9
-    fstop = 5.5e9
-    points = 251 
+    fstart = 2e9
+    fstop = 5e9
+    points = 16 
 
     vna = eth_vna(synth_rf, synth_lo, pru_adc, vna_io)
     vna.slot_calibrate_oneport(fstart, fstop, points)
 
     while True:
         raw_input("connect dut, then press enter to continue")
-        plt.subplot(1,2,1)
-        sweep_cal = vna.plot_oneport_sparam(fstart, fstop, points)
-        plt.subplot(1,2,2)
-        sweep_cal.plot_s_smith()
-        plt.show()
-
+        sweep = self.sweep(fstart, fstop, points)
+        sweep_cal = self.cal_oneport.apply_cal(sweep)
+        vna.plot_sparam(sweep_cal)
+        
     pdb.set_trace()
 

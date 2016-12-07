@@ -49,7 +49,6 @@ class ethernet_pru_adc:
                 ssh = subprocess.Popen(["ssh", "debian@bbone", "/home/debian/restart_adc_server"])
                 time.sleep(.4)
 
-        pdb.set_trace()
         # de-interleave samples.. there is probably a more pythonic way of doing this
         if paths == 1:
             return samples
