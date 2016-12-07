@@ -48,6 +48,7 @@ class zmq_synth_server:
             POW_CMD : self._set_power, \
             FILT_CMD : self._set_filter_bank, \
             ATT_CMD : self._set_attenuator}
+
         print('entering run loop')
         while True:
             print('waiting for command..')
@@ -84,6 +85,7 @@ if __name__ == '__main__':
     synth_server = zmq_synth_server(context, synth, port)
     print('running zmq server')
     synth_server.run()
+    raw_input('press enter to continue')
     synth_server.close()
     
     context.destroy()

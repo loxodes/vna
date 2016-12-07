@@ -81,16 +81,26 @@ def ad9864_init(spi):
 
 if __name__ == '__main__':
     import Adafruit_BBIO.GPIO as GPIO
+    import time
+
     SYNCB = "P8_41"
+    MIX_EN = "P8_15"
 
     GPIO.setup(SYNCB, GPIO.OUT)
+    GPIO.setup(MIX_EN, GPIO.OUT)
     GPIO.output(SYNCB,GPIO.HIGH)
+    GPIO.output(MIX_EN,GPIO.HIGH)
 
     spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-   
+
+    ad9864_write_reg(spi1, 0x3B, 0x08)
+    ad9864_write_reg(spi2, 0x3B, 0x08)
+    ad9864_write_reg(spi3, 0x3B, 0x08)
+    ad9864_write_reg(spi4, 0x3B, 0x08)
+
     print("init adc1")
     ad9864_init(spi1)
 
@@ -104,6 +114,9 @@ if __name__ == '__main__':
     ad9864_init(spi4)
 
 
+    GPIO.output(SYNCB,GPIO.LOW)
+    time.sleep(.05)
+    GPIO.output(SYNCB,GPIO.HIGH)
     raw_input("press enter to continue..")
 
 
