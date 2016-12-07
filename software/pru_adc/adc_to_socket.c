@@ -28,7 +28,7 @@
 
 #define PRU_NUM      1
 #define PRUSS1_SHARED_DATARAM    4
-#define SAMPLE_PORT 10520
+#define ADC_PORT 10520
 #define MAX_SAMPLE_BUFFER 768000
 
 // shared memory
@@ -124,7 +124,7 @@ int main(int argc, char **argv) {
   setsockopt(socket_desc, SOL_SOCKET, SO_REUSEADDR, &i, sizeof(i));
   server.sin_family = AF_INET;
   server.sin_addr.s_addr = INADDR_ANY;
-  server.sin_port = htons(SAMPLE_PORT);
+  server.sin_port = htons(ADC_PORT);
 
   if( bind(socket_desc, (struct sockaddr *)&server, sizeof(server)) < 0 ) {
     printf("bind failed\n");
