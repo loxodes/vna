@@ -220,7 +220,7 @@ class synth_r1:
         self._set_reg(31, REG31_VCO_DISTB_PD)
         self._set_reg(12, 0x7001)
         self._set_reg(11, 0x0018)
-        self._set_reg(10, 0x10d8)
+        self._set_reg(10, 0x10d8) 
         self._set_reg(40, (FRAC_DENOM >> 16) & 0xffff)
         self._set_reg(41, FRAC_DENOM & 0xffff)
         self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
@@ -258,7 +258,8 @@ class synth_r1:
         GPIO.output(self.pins['att_5'], att_bits & BIT1)
         GPIO.output(self.pins['att_6'], att_bits & BIT0)
         
-        self.curret_att = att_bits * .5
+        self.current_att = att_bits * .5
+        print('setting attenuator to bank to index {}'.format(att_bits)) 
 
     # set filter bank from frequency
     def set_filter_bank(self, freq):
@@ -275,10 +276,18 @@ class synth_r1:
                 if(freq > fc):
                     fidx = np.mod(i - 1, FILTER_BANK_SIZE)
                     break
+        print('setting filter bank to index {}'.format(fidx)) 
         
-        GPIO.output(self.pins['filta'], fidx & BIT0)
-        GPIO.output(self.pins['filtb'], fidx & BIT1)
-        GPIO.output(self.pins['filtc'], fidx & BIT2)
+        # bypass filter bank for synth b, pin P9_15 is busted on my beaglebone..
+        if self.pins['filtc'] == SYNTHB_PINS['filtc']:
+            GPIO.output(self.pins['filta'], GPIO.HIGH)
+            GPIO.output(self.pins['filtb'], GPIO.HIGH)
+            GPIO.output(self.pins['filtc'], GPIO.HIGH)
+        else:
+            GPIO.output(self.pins['filta'], fidx & BIT0)
+            GPIO.output(self.pins['filtb'], fidx & BIT1)
+            GPIO.output(self.pins['filtc'], fidx & BIT2)
+
         self.current_filter = fidx 
 
     # set synth frequency
@@ -335,7 +344,7 @@ class synth_r1:
             self._set_reg(48, REG48_OUTB_MUX_DIV)
             self._set_reg(47, REG47_OUTA_MUX_DIV)
 
-        else:
+        elif freq > F_VCO_MAX:
             n = self._calc_n(freq/2, n_step, 1)
             frac = self._calc_frac(freq/2, n, n_step, frac_step, 1)
 
@@ -351,6 +360,25 @@ class synth_r1:
 
             # enable channel b, bypass filter bank, disable a buffer
             self._set_reg(31, REG31_CHDIV_DIST_PD)
+
+        else:
+            n = self._calc_n(freq, n_step, 1)
+            frac = self._calc_frac(freq, n, n_step, frac_step, 1)
+
+            # disable vco doubler
+            self._set_reg(30, 0)
+
+            # disable output dividers
+            self._set_reg(34, 0)
+            self._set_reg(35, 0)
+            self._set_reg(36, 0)
+            self._set_reg(47, REG47_OUTA_MUX_VCO)
+            self._set_reg(48, REG48_OUTB_MUX_VCO)
+
+            # enable channel b, bypass filter bank, disable a buffer
+            self._set_reg(31, REG31_CHDIV_DIST_PD)
+
+
 
         # load new n and frac registers 
         self._set_reg(38, (n << REG38_PLL_N))
@@ -383,17 +411,17 @@ class synth_r1:
 
 if __name__ == '__main__':
     syntha = synth_r1(SYNTHA_PINS)
-    synthb = synth_r1(SYNTHB_PINS)
+    #synthb = synth_r1(SYNTHB_PINS)
 
     time.sleep(.1)
     syntha.set_power(0)
-    synthb.set_power(20)
+    #synthb.set_power(20)
 
     syntha.set_attenuator(30)
-    synthb.set_attenuator(0)
+    #synthb.set_attenuator(0)
 
     tstart = time.time()
-    synthb.set_freq(2.0e9)
+    #synthb.set_freq(3.0e9)
     syntha.set_freq(2.045e9)
 
     tstop = time.time()

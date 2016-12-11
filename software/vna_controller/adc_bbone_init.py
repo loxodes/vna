@@ -29,7 +29,7 @@ def ad9864_read_reg(spi, addr):
     return response & 0xFF
 
 def ad9864_tristate_miso(spi):
-    ad9864_write_reg(spi1, 0x3B, 0x08)
+    ad9864_write_reg(spi, 0x3B, 0x08)
 
 def ad9864_init(spi):
     ad9864_write_reg(spi, 0x3F, 0x99) # software reset

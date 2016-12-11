@@ -12,7 +12,8 @@ SWITCH_PATH0 = 0
 # table of output power setting vs. frequency for 7 dBm output with a hmc311 following the synth
 # currently done manually..
 HMC311_7DBM_TABLE_POW = [14, 8, 12, 8, 6, 1, 5, 10, 31, 31, 31]
-HMC311_7DBM_TABLE_FREQ = [250e6, 500e6, 1e9, 2e9, 2.5e9, 3e9, 3.5e9, 4e9, 5e9, 6e9, 7e9]
+HMC311_3DBM_TABLE_POW = [10, 5, 5, 3, 2, 0, 0, 10, 10, 10, 10]
+HMC311_TABLE_FREQ = [250e6, 500e6, 1e9, 2e9, 2.5e9, 3e9, 3.5e9, 4e9, 5e9, 6e9, 7e9]
 
 class zmq_synth:
     def __init__(self, context, synth_ip, synth_port):
@@ -43,8 +44,9 @@ class zmq_synth:
     # hacked open-loop amplitude control until power detect board arrives
     # control LO for 7 dBm (optimum power into mixer)
     # leave RF synth uncontrolled, amplitude variation is controlled during calibration
-    def level_pow(self, freqs = HMC311_7DBM_TABLE_FREQ, pows = HMC311_7DBM_TABLE_POW):
+    def level_pow(self, freqs = HMC311_TABLE_FREQ, pows = HMC311_3DBM_TABLE_POW):
         pow_setting = int(np.interp(self.freq, freqs, pows))
+        self.set_att(0)
         self.set_pow(pow_setting) # TODO: this assumes freq < F_VCO_MAX, always picks path 0..
         
     def set_att(self, att):
