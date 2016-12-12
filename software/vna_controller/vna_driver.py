@@ -25,6 +25,8 @@ ALL_PORTS = 3
 PORT1 = SW_DUT_PORT1
 PORT2 = SW_DUT_PORT2
 
+DISABLE = 0 
+ENABLE = 1 
 
 class eth_vna:
     def __init__(self, lo_synth, rf_synth, pru_adc, vna_io):
@@ -32,12 +34,16 @@ class eth_vna:
         self.rf_synth = rf_synth
         self.pru_adc = pru_adc
         self.vna_io = vna_io
-        
+       
+        self.lo_synth.set_att(0)
+        self.rf_synth.set_att(0)
+
         self.vna_io.set_switch(SW_DUT_RF, SW_DUT_PORT1)
         self.vna_io.adc_init(ALL_ADC)
         self.vna_io.sync_adcs()
 
         self.vna_io.enable_mixer()
+        self.vna_io.set_multiplier(status = ENABLE)
         self.freq = np.float32(0)
    
     def _fit_freq(self, samples):
@@ -73,7 +79,7 @@ class eth_vna:
         return y
  
  
-    def _grab_s_raw(self, navg = 1, rfport = PORT1):
+    def _grab_s_raw(self, navg = 4, rfport = PORT1):
         self.vna_io.set_switch(SW_DUT_RF, rfport)
 
         ref_freq = 0
@@ -81,11 +87,28 @@ class eth_vna:
         s_thru_avg = 0
 
         for i in range(navg):
-            a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 256)
-            
-            if port == PORT1:
+            a2, b1, b2, a1 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
+           
+			
+            if False:
+                from pylab import * 
+                subplot(4,1,1)
+                plt.plot(np.real(a1))
+                plt.plot(np.imag(a1))
+                subplot(4,1,2)
+                plt.plot(np.real(b1))
+                plt.plot(np.imag(b1))
+                subplot(4,1,3)
+                plt.plot(np.real(a2))
+                plt.plot(np.imag(a2))
+                subplot(4,1,4)
+                plt.plot(np.real(b2))
+                plt.plot(np.imag(b2))
+                plt.show()
+
+            if rfport == PORT1:
                 ref_freq = self._fit_freq(a1)
-            elif port == PORT2:
+            elif rfport == PORT2:
                 ref_freq = self._fit_freq(a2)
             else:
                 print('unrecognized port!?')
@@ -96,13 +119,13 @@ class eth_vna:
             a2_fit = self._goertzel(a2, ref_freq)
             b2_fit = self._goertzel(b2, ref_freq)
             
-            if port == PORT1:
+            if rfport == PORT1:
                 s_return_avg += (b1_fit / a1_fit)
                 s_thru_avg += (b1_fit / a2_fit)
             else:
                 s_return_avg += (b2_fit / a2_fit)
                 s_thru_avg += (b2_fit / a1_fit)
-
+       
         return s_return_avg/navg, s_thru_avg/navg
 
     def sweep(self, fstart, fstop, points):
@@ -116,14 +139,16 @@ class eth_vna:
         
         for (fidx, f) in enumerate(sweep_freqs):
             self.rf_synth.set_freq(f)
-            self.lo_synth.set_freq(f + IF_FREQ)
+            self.lo_synth.set_freq((f + IF_FREQ)/2)
             self.lo_synth.level_pow()
             time.sleep(.05)
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
 
             s11, s21 = self._grab_s_raw(navg = 4, rfport = PORT1)
-            s22, s12 = self._grab_s_raw(navg = 4, rfport = PORT2)
+            s22, s12 = self._grab_s_raw(navg = 1, rfport = PORT2)
+
+            print('s11: {} '.format(s11))
 
             sweep_s11[fidx] = s11
             sweep_s21[fidx] = s21
@@ -135,7 +160,7 @@ class eth_vna:
         s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
         s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
 
-        return rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
+        return s11#rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
    
     def sdrkits_cal_oneport(self, sweep_freqs):
         # generate cal stardard for sdr-kits Female Rosenberger HochFrequenz .. economy SMA SOL cal kit
@@ -181,7 +206,8 @@ class eth_vna:
         self.cal_oneport = rf.OnePort(\
                 ideals = cal_kit,\
                 measured = [self.cal_short, self.cal_open, self.cal_load])        
-                
+            
+        # IndexError: index 16 is out of bounds for axis 0 with size 16
         self.cal_oneport.run()
  
     def slot_calibrate_twoport(self, fstart, fstop, points):
@@ -231,16 +257,17 @@ if __name__ == '__main__':
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
     fstart = 2e9
-    fstop = 5e9
-    points = 16 
+    fstop = 6e9
+    points = 201
 
-    vna = eth_vna(synth_rf, synth_lo, pru_adc, vna_io)
+
+    vna = eth_vna(synth_lo, synth_rf, pru_adc, vna_io)
     vna.slot_calibrate_oneport(fstart, fstop, points)
 
     while True:
         raw_input("connect dut, then press enter to continue")
-        sweep = self.sweep(fstart, fstop, points)
-        sweep_cal = self.cal_oneport.apply_cal(sweep)
+        sweep = vna.sweep(fstart, fstop, points)
+        sweep_cal = vna.cal_oneport.apply_cal(sweep)
         vna.plot_sparam(sweep_cal)
         
     pdb.set_trace()

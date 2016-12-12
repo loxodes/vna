@@ -46,6 +46,8 @@ class ethernet_pru_adc:
                 import subprocess
                 import sys
                 print('restarting ADC server..')
+                #ssh = subprocess.Popen(["ssh", "debian@bbone", "pkill adc_to_socket"])
+                #time.sleep(.1)
                 ssh = subprocess.Popen(["ssh", "debian@bbone", "/home/debian/restart_adc_server"])
                 time.sleep(.4)
 
