@@ -101,6 +101,8 @@ class zmq_io_server:
         mult_enable = int(message[1:])
 
         if mult_enable:
+
+            print('enabling multiplier')
             GPIO.output(MIX_X2,GPIO.HIGH)
         else:
             GPIO.output(MIX_X2,GPIO.LOW)
@@ -110,6 +112,7 @@ class zmq_io_server:
 
     def _enable_mixer(self, message):
         mixer_enable = int(message[1:])
+        print('enabling mixer')
         if mixer_enable:
             GPIO.output(MIX_EN,GPIO.HIGH)
         else:

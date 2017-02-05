@@ -14,10 +14,10 @@ MIXER_ENABLE = '1'
 MIXER_DISABLE = '0'
 
 ALL_ADC = '9'
-ADC1 = '1'
-ADC2 = '2'
-ADC3 = '3'
-ADC4 = '4'
+ADC1 = '0'
+ADC2 = '1'
+ADC3 = '2'
+ADC4 = '3'
 
 SW_IDX = 1
 SW_STATE = 2

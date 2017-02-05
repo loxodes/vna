@@ -4,7 +4,7 @@
 import time
 import pdb
 import Adafruit_BBIO.GPIO as GPIO
-from bbone_spi_bitbang import bitbang_spi
+from bbone_spi_hwiopy import hwiopy_spi
 import numpy as np
 
 BIT0 = (1 << 0)
@@ -176,6 +176,7 @@ class synth_r1:
 
         self.current_channel = None
         self.current_freq = None
+        self.current_filter = None
         self.channel_power = 0 
 
     def clk_init(self):
@@ -183,7 +184,7 @@ class synth_r1:
 
     def io_init(self):
         # configure spi pins
-        self.spi = bitbang_spi(self.pins['lmx_le'], self.pins['lmx_data'], self.pins['lmx_lock'], self.pins['lmx_clk'])
+        self.spi = hwiopy_spi(self.pins['lmx_le'], self.pins['lmx_data'], self.pins['lmx_lock'], self.pins['lmx_clk'])
         
         # configure gpio pins
         GPIO.setup(self.pins['filta'], GPIO.OUT)
@@ -192,7 +193,8 @@ class synth_r1:
 
         GPIO.setup(self.pins['lmx_pow_en'], GPIO.OUT)
         GPIO.setup(self.pins['lmx_ce'], GPIO.OUT)
-        
+        GPIO.setup(self.pins['lmx_lock'], GPIO.IN)
+
         GPIO.setup(self.pins['ref_oe'], GPIO.OUT)
         GPIO.output(self.pins['ref_oe'], GPIO.LOW)
 
@@ -279,14 +281,15 @@ class synth_r1:
         print('setting filter bank to index {}'.format(fidx)) 
         
         # bypass filter bank for synth b, pin P9_15 is busted on my beaglebone..
-        if self.pins['filtc'] == SYNTHB_PINS['filtc']:
-            GPIO.output(self.pins['filta'], GPIO.HIGH)
-            GPIO.output(self.pins['filtb'], GPIO.HIGH)
-            GPIO.output(self.pins['filtc'], GPIO.HIGH)
-        else:
-            GPIO.output(self.pins['filta'], fidx & BIT0)
-            GPIO.output(self.pins['filtb'], fidx & BIT1)
-            GPIO.output(self.pins['filtc'], fidx & BIT2)
+        if fidx != self.current_filter:
+            if self.pins['filtc'] == SYNTHB_PINS['filtc']:
+                GPIO.output(self.pins['filta'], GPIO.HIGH)
+                GPIO.output(self.pins['filtb'], GPIO.HIGH)
+                GPIO.output(self.pins['filtc'], GPIO.HIGH)
+            else:
+                GPIO.output(self.pins['filta'], fidx & BIT0)
+                GPIO.output(self.pins['filtb'], fidx & BIT1)
+                GPIO.output(self.pins['filtc'], fidx & BIT2)
 
         self.current_filter = fidx 
 
@@ -395,7 +398,7 @@ class synth_r1:
         self.set_power(self.channel_power)
 
         # wait for pll lock
-        while not GPIO.input(self.pins['lmx_le']):
+        while not GPIO.input(self.pins['lmx_lock']):
             print('waiting..')
 
     def _set_reg(self, reg, d):

@@ -52,7 +52,7 @@ class zmq_synth_server:
         print('entering run loop')
         while True:
             print('waiting for command..')
-            message = self.socket.recv()
+            message = self.socket.recv().decode('utf-8') 
             command = message[COMMAND_INDEX]
             print('received {} command, message: {}'.format(command, message))
 
@@ -65,7 +65,7 @@ class zmq_synth_server:
                 print('unrecognized command')
                 pdb.set_trace()
             
-            self.socket.send(response)
+            self.socket.send(response.encode('utf-8'))
 
 
 if __name__ == '__main__':

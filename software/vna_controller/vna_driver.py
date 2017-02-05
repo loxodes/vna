@@ -25,6 +25,8 @@ ALL_PORTS = 3
 PORT1 = SW_DUT_PORT1
 PORT2 = SW_DUT_PORT2
 
+ENABLE = True
+DISABLE = False
 
 class eth_vna:
     def __init__(self, lo_synth, rf_synth, pru_adc, vna_io):
@@ -38,6 +40,8 @@ class eth_vna:
         self.vna_io.sync_adcs()
 
         self.vna_io.enable_mixer()
+        self.vna_io.set_multiplier(DISABLE)
+
         self.freq = np.float32(0)
    
     def _fit_freq(self, samples):
