@@ -38,8 +38,8 @@ class zmq_synth:
         self._eth_cmd(FILT_CMD, f)
 
     def set_pow(self, power):
-        self.channel_power = power
-        self._eth_cmd(POW_CMD, power)
+        self.channel_power = int(power)
+        self._eth_cmd(POW_CMD, int(power))
     
     # hacked open-loop amplitude control until power detect board arrives
     # control LO for 7 dBm (optimum power into mixer)

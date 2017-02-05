@@ -34,26 +34,23 @@ class ethernet_pru_adc:
 
                 sock.sendall(np.uint32(number_of_samples).tostring())
                 samples = np.fromstring(data, dtype=np.int16)
-                samples = samples[0::2] + 1j * samples[1::2]
+                samples = samples[1::2] + 1j * samples[0::2]
                 sock.close()
                 
                 t2 = time.time()
                 break
 
-                #print("grabbing samples took {} seconds".format(t2 - t1))
             except:
-                # TODO: figure out why it crashes...
                 import subprocess
-                import sys
                 print('restarting ADC server..')
                 ssh = subprocess.Popen(["ssh", "debian@bbone", "/home/debian/restart_adc_server"])
-                time.sleep(.4)
+                time.sleep(1)
 
         # de-interleave samples.. there is probably a more pythonic way of doing this
         if paths == 1:
-            return samples
+            return samples[0::4]
         elif paths == 2:
-            return samples[0::2], samples[1::2]
+            return samples[0::4], samples[1::4]
         elif paths == 4:
             return samples[0::4], samples[1::4], samples[2::4], samples[3::4]
         else:
