@@ -42,12 +42,20 @@ class zmq_synth_server:
         return message[COMMAND_INDEX]
 
 
+    def _wait_for_lock(self, message):
+        print('waiting for pll lock')
+        self.synth.wait_for_lock()
+        print('locked!')
+        return message[COMMAND_INDEX]
+
+
     def run(self):
         self.command_handlers = {\
             FREQ_CMD : self._set_freq, \
             POW_CMD : self._set_power, \
             FILT_CMD : self._set_filter_bank, \
-            ATT_CMD : self._set_attenuator}
+            ATT_CMD : self._set_attenuator, \
+            WAIT_CMD : self._wait_for_lock}
 
         print('entering run loop')
         while True:

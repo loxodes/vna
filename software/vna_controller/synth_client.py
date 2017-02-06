@@ -33,6 +33,9 @@ class zmq_synth:
         self.freq = int(f)
         self._eth_cmd(FREQ_CMD, f)
 
+    def wait_for_lock(self):
+        self._eth_cmd(WAIT_CMD, '')
+
     def set_filt(self, f):
         self.freq = int(f)
         self._eth_cmd(FILT_CMD, f)

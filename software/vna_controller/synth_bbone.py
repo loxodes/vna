@@ -397,10 +397,13 @@ class synth_r1:
         # update output channel..
         self.set_power(self.channel_power)
 
+
+    def wait_for_lock(self):
         # wait for pll lock
         while not GPIO.input(self.pins['lmx_lock']):
             print('waiting..')
 
+        
     def _set_reg(self, reg, d):
         d = d | LMX_REG_DEFAULTS[reg]
 

@@ -130,6 +130,10 @@ class eth_vna:
         for (fidx, f) in enumerate(sweep_freqs):
             self.rf_synth.set_freq(f)
             self.lo_synth.set_freq(f + IF_FREQ)
+
+            self.rf_synth.wait_for_lock()
+            self.lo_synth.wait_for_lock()
+
             self.lo_synth.level_pow()
             time.sleep(.05)
 
