@@ -44,7 +44,7 @@ class eth_vna:
         self.vna_io.sync_adcs()
 
         self.vna_io.enable_mixer()
-        self.vna_io.set_multiplier(status = DISABLE)
+        self.vna_io.set_multiplier(status = ENABLE)
         self.freq = np.float32(0)
    
     def _fit_freq(self, samples):
@@ -129,13 +129,17 @@ class eth_vna:
         
         for (fidx, f) in enumerate(sweep_freqs):
             self.rf_synth.set_freq(f)
-            self.lo_synth.set_freq(f + IF_FREQ)
+            self.lo_synth.set_freq((f + IF_FREQ)/2.0)
 
+            self.rf_synth.level_pow()
+            self.lo_synth.level_pow()
+            
             self.rf_synth.wait_for_lock()
             self.lo_synth.wait_for_lock()
 
-            self.lo_synth.level_pow()
-            time.sleep(.05)
+            time.sleep(.005)
+
+            #raw_input('press enter to continue')
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
 
@@ -253,8 +257,8 @@ if __name__ == '__main__':
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
     fstart = 2e9
-    fstop = 5e9
-    points = 151 
+    fstop = 9e9
+    points = 251 
 
 
     vna = eth_vna(synth_lo, synth_rf, pru_adc, vna_io)
