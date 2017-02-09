@@ -6,7 +6,7 @@ import struct
 
 from synth_client import *
 
-SYNTH = 'b'
+SYNTH = 'a'
 IP = 'bbone'
 
 class vna(cmd.Cmd):

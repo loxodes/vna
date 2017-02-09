@@ -1,6 +1,8 @@
 
 SYNTH_PORTS = {'a':10050, 'b':10051}
 COMMAND_INDEX = 0
+RF_CAL = 2
+LO_CAL = 3
 
 FILT_CMD = 'f'
 WAIT_CMD = 'w'

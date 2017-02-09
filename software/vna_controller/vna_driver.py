@@ -28,6 +28,8 @@ PORT2 = SW_DUT_PORT2
 DISABLE = 0 
 ENABLE = 1 
 
+DOUBLER_CUTOFF = 4e9
+
 class eth_vna:
     def __init__(self, lo_synth, rf_synth, pru_adc, vna_io):
         self.lo_synth = lo_synth
@@ -128,16 +130,23 @@ class eth_vna:
         sweep_s22 = 1j * np.zeros(points)
         
         for (fidx, f) in enumerate(sweep_freqs):
+
+            if f > DOUBLER_CUTOFF:
+                self.lo_synth.set_freq((f + IF_FREQ)/2.0)
+                self.vna_io.set_multiplier(status = ENABLE)
+            else:
+                self.lo_synth.set_freq((f + IF_FREQ))
+                self.vna_io.set_multiplier(status = DISABLE)
+
             self.rf_synth.set_freq(f)
-            self.lo_synth.set_freq((f + IF_FREQ)/2.0)
-
-            self.rf_synth.level_pow()
-            self.lo_synth.level_pow()
             
-            self.rf_synth.wait_for_lock()
             self.lo_synth.wait_for_lock()
+            self.rf_synth.wait_for_lock()
 
-            time.sleep(.005)
+            self.lo_synth.level_pow(LO_CAL)
+            self.rf_synth.level_pow(RF_CAL)
+           
+            time.sleep(.05)
 
             #raw_input('press enter to continue')
 
@@ -256,9 +265,10 @@ if __name__ == '__main__':
     vna_io = zmq_io(context, 'bbone', IO_PORT)
     pru_adc = ethernet_pru_adc('bbone', 10520)
 
+
     fstart = 2e9
     fstop = 9e9
-    points = 251 
+    points = 701 
 
 
     vna = eth_vna(synth_lo, synth_rf, pru_adc, vna_io)
