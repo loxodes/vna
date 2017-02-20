@@ -43,7 +43,7 @@ class ethernet_pru_adc:
             except:
                 import subprocess
                 print('restarting ADC server..')
-                ssh = subprocess.Popen(["ssh", "debian@bbone", "/home/debian/restart_adc_server"])
+                ssh = subprocess.Popen(["ssh", "debian@bbb", "/home/debian/restart_adc_server"])
                 time.sleep(1)
 
         # de-interleave samples.. there is probably a more pythonic way of doing this

@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import skrf as rf
 import zmq
 
-from scipy.stats import circmean
 from skrf.calibration import OnePort
 
 from synth_client import zmq_synth 
@@ -48,6 +47,8 @@ class eth_vna:
         self.vna_io.enable_mixer()
         self.vna_io.set_multiplier(status = ENABLE)
         self.freq = np.float32(0)
+
+        self.lo_to_rf_offset_ratio = 1 
    
     def _fit_freq(self, samples):
         # TODO - power weight phase around max frequency, +/- 10 Hz or so?
@@ -82,7 +83,40 @@ class eth_vna:
         y = y * D
         return y
  
+    
+    def align_rf_lo_osc(self, align_freqs = [2e9, 3e9, 4e9]):
+        # estimate offset between RF and LO synths, store result in ppm
+        
+        print('estimating offset between rf and lo reference clocks')
+        self.vna_io.set_multiplier(status = DISABLE)
+        self.vna_io.set_switch(SW_DUT_RF, PORT1)
+
+        offset_ratios = []
+
+        for f in align_freqs:
+
+            self.lo_synth.set_freq((f + IF_FREQ))
+            self.rf_synth.set_freq(f)
  
+            self.lo_synth.wait_for_lock()
+            self.rf_synth.wait_for_lock()
+
+            self.lo_synth.level_pow(LO_CAL)
+            self.rf_synth.level_pow(RF_CAL)
+
+            time.sleep(.05)
+           
+            a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
+
+            offset_freq = self._fit_freq(a1)
+            offset_ppm = 1e6 * (((offset_freq + f + IF_FREQ) / (f + IF_FREQ)) - 1)
+            offset_ratio = (f + IF_FREQ + offset_freq) / (f + IF_FREQ)
+            offset_ratios.append(offset_ratio)
+
+            print('offset of {} ppm at {} Hz'.format(offset_ppm, f))
+
+        self.lo_to_rf_offset_ratio = np.mean(offset_ratios)
+
     def _grab_s_raw(self, navg = 4, rfport = PORT1):
         self.vna_io.set_switch(SW_DUT_RF, rfport)
 
@@ -90,28 +124,35 @@ class eth_vna:
         s_thru_avg = 0
 
         for i in range(navg):
-            b1, a1, b2, a2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
+            a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
            
-            if False:
-                from pylab import * 
-                subplot(4,1,1)
-                title('a1')
+            if True:
+                a1_rms = np.sqrt(np.mean(np.abs(a1)**2))
+                b1_rms = np.sqrt(np.mean(np.abs(b1)**2))
+
+
+                plt.subplot(4,1,1)
+                plt.title('a1, {}'.format(a1_rms))
                 plt.plot(np.real(a1))
                 plt.plot(np.imag(a1))
-                subplot(4,1,2)
-                title('b1')
+                plt.subplot(4,1,2)
+                plt.title('b1, {}'.format(b1_rms))
                 plt.plot(np.real(b1))
                 plt.plot(np.imag(b1))
-                subplot(4,1,3)
-                title('a2')
-                plt.plot(np.real(a2))
-                plt.plot(np.imag(a2))
-                subplot(4,1,4)
-                title('b2')
-                plt.plot(np.real(b2))
-                plt.plot(np.imag(b2))
+                plt.subplot(4,1,3)
+                plt.title('power spectrum')
+                fs = ADC_RATE / DECIMATION_RATE 
+                freqs = np.linspace(-fs/2, fs/2, 400)
+                fpow = [10 * np.log10(np.abs(self._goertzel(a1, f))) for f in freqs]
+                plt.plot(freqs, fpow)
+                plt.subplot(4,1,4)
+                plt.title('b1/a1 ripple')
+                plt.plot(np.real(b1/a1) - np.mean(np.real(b1/a1)))
+                plt.plot(np.imag(b1/a1) - np.mean(np.imag(b1/a1)))
                 plt.show()
-            
+                
+                print('b1/a1: {}'.format(np.mean(b1/a1)))
+
             if rfport == PORT1:
                 s_return_avg += np.mean(b1 / a1)
                 s_thru_avg += np.mean(b1 / a2)
@@ -130,12 +171,11 @@ class eth_vna:
         sweep_s22 = 1j * np.zeros(points)
         
         for (fidx, f) in enumerate(sweep_freqs):
-
             if f > DOUBLER_CUTOFF:
-                self.lo_synth.set_freq((f + IF_FREQ)/2.0)
+                self.lo_synth.set_freq(((f + IF_FREQ) * self.lo_to_rf_offset_ratio )/2.0)
                 self.vna_io.set_multiplier(status = ENABLE)
             else:
-                self.lo_synth.set_freq((f + IF_FREQ))
+                self.lo_synth.set_freq((f + IF_FREQ) * self.lo_to_rf_offset_ratio)
                 self.vna_io.set_multiplier(status = DISABLE)
 
             self.rf_synth.set_freq(f)
@@ -147,7 +187,7 @@ class eth_vna:
             self.rf_synth.level_pow(RF_CAL)
            
             time.sleep(.05)
-
+            
             #raw_input('press enter to continue')
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
@@ -260,18 +300,21 @@ class eth_vna:
 if __name__ == '__main__':
     context = zmq.Context()
 
-    synth_rf = zmq_synth(context, 'bbone', SYNTH_PORTS['a'])
-    synth_lo = zmq_synth(context, 'bbone', SYNTH_PORTS['b'])
-    vna_io = zmq_io(context, 'bbone', IO_PORT)
-    pru_adc = ethernet_pru_adc('bbone', 10520)
+    synth_rf = zmq_synth(context, 'bbb', SYNTH_PORTS['a'])
+    synth_lo = zmq_synth(context, 'bbb', SYNTH_PORTS['b'])
+    vna_io = zmq_io(context, 'bbb', IO_PORT)
+    pru_adc = ethernet_pru_adc('bbb', 10520)
 
 
     fstart = 2e9
     fstop = 9e9
-    points = 701 
+    points = 21 
 
 
     vna = eth_vna(synth_lo, synth_rf, pru_adc, vna_io)
+
+    vna.align_rf_lo_osc()
+
     data_dir = './meas/'
     filename = raw_input('enter a filename: ')
     sweep = vna.sweep(fstart, fstop, points)
