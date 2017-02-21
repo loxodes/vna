@@ -84,38 +84,57 @@ class eth_vna:
         return y
  
     
-    def align_rf_lo_osc(self, align_freqs = [2e9, 3e9, 4e9]):
+    def align_rf_lo_osc(self, align_freq):
         # estimate offset between RF and LO synths, store result in ppm
-        
+        self.lo_to_rf_offset_ratio = 1 
         print('estimating offset between rf and lo reference clocks')
-        self.vna_io.set_multiplier(status = DISABLE)
         self.vna_io.set_switch(SW_DUT_RF, PORT1)
+        
+        rf_freq = align_freq
+        lo_freq = rf_freq + IF_FREQ 
+        doubler = False 
 
-        offset_ratios = []
+        if rf_freq > DOUBLER_CUTOFF:
+            lo_freq = lo_freq / 2.0
+            doubler = True
+            self.vna_io.set_multiplier(status = ENABLE)
+        else:
+            self.vna_io.set_multiplier(status = DISABLE)
 
-        for f in align_freqs:
 
-            self.lo_synth.set_freq((f + IF_FREQ))
-            self.rf_synth.set_freq(f)
- 
-            self.lo_synth.wait_for_lock()
-            self.rf_synth.wait_for_lock()
+        self.lo_synth.set_freq(lo_freq)
+        self.rf_synth.set_freq(rf_freq)
 
-            self.lo_synth.level_pow(LO_CAL)
-            self.rf_synth.level_pow(RF_CAL)
+        self.lo_synth.wait_for_lock()
+        self.rf_synth.wait_for_lock()
 
-            time.sleep(.05)
-           
-            a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
+        self.lo_synth.level_pow(LO_CAL)
+        self.rf_synth.level_pow(RF_CAL)
 
-            offset_freq = self._fit_freq(a1)
-            offset_ppm = 1e6 * (((offset_freq + f + IF_FREQ) / (f + IF_FREQ)) - 1)
-            offset_ratio = (f + IF_FREQ + offset_freq) / (f + IF_FREQ)
-            offset_ratios.append(offset_ratio)
+        time.sleep(.05)
+       
+        a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
+        self.ref_samples = a1 
+        self._update_rf_lo_offset_ratio(lo_freq, doubler)
 
-            print('offset of {} ppm at {} Hz'.format(offset_ppm, f))
 
-        self.lo_to_rf_offset_ratio = np.mean(offset_ratios)
+    def _update_rf_lo_offset_ratio(self, lo_freq, doubler):
+        # calculate the ratio of fref between RF and LO synths
+        offset_freq = self._fit_freq(self.ref_samples) # assume no other strong signals, find frequency error in Hz
+
+        if doubler:
+            lo_freq = lo_freq * 2.0
+
+        offset_freq += lo_freq * (self.lo_to_rf_offset_ratio - 1)
+
+        # calculate the LO oscillator error in PPM for funsies
+        offset_ppm = 1e6 * (((offset_freq + lo_freq) / (lo_freq)) - 1)
+        print('offset of {} ppm with LO at {} Hz'.format(offset_ppm, lo_freq))
+
+        # calculate a ratio to multiply the lo by to correct for the offset
+        offset_ratio = (lo_freq + offset_freq) / (lo_freq)
+        self.lo_to_rf_offset_ratio = offset_ratio
+
 
     def _grab_s_raw(self, navg = 4, rfport = PORT1):
         self.vna_io.set_switch(SW_DUT_RF, rfport)
@@ -126,7 +145,7 @@ class eth_vna:
         for i in range(navg):
             a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
            
-            if True:
+            if False:
                 a1_rms = np.sqrt(np.mean(np.abs(a1)**2))
                 b1_rms = np.sqrt(np.mean(np.abs(b1)**2))
 
@@ -156,28 +175,36 @@ class eth_vna:
             if rfport == PORT1:
                 s_return_avg += np.mean(b1 / a1)
                 s_thru_avg += np.mean(b1 / a2)
+                self.ref_samples = a1
+
             else:
                 s_return_avg += np.mean(b2 / a2)
                 s_thru_avg += np.mean(b2 / a1)
-
+                self.ref_samples = a2
+        
         return s_return_avg/navg, s_thru_avg/navg
 
-    def sweep(self, fstart, fstop, points):
+    def sweep(self, fstart, fstop, points, align_lo = False):
         sweep_freqs = np.linspace(fstart, fstop, points)
 
         sweep_s11 = 1j * np.zeros(points)
         sweep_s21 = 1j * np.zeros(points)
         sweep_s12 = 1j * np.zeros(points)
         sweep_s22 = 1j * np.zeros(points)
-        
+
+
         for (fidx, f) in enumerate(sweep_freqs):
-            if f > DOUBLER_CUTOFF:
-                self.lo_synth.set_freq(((f + IF_FREQ) * self.lo_to_rf_offset_ratio )/2.0)
+            lo_freq = (f + IF_FREQ) * self.lo_to_rf_offset_ratio
+            doubler = False
+
+            if lo_freq > DOUBLER_CUTOFF:
+                lo_freq = lo_freq / 2.0
+                doubler = True
                 self.vna_io.set_multiplier(status = ENABLE)
             else:
-                self.lo_synth.set_freq((f + IF_FREQ) * self.lo_to_rf_offset_ratio)
                 self.vna_io.set_multiplier(status = DISABLE)
 
+            self.lo_synth.set_freq(lo_freq)
             self.rf_synth.set_freq(f)
             
             self.lo_synth.wait_for_lock()
@@ -187,13 +214,16 @@ class eth_vna:
             self.rf_synth.level_pow(RF_CAL)
            
             time.sleep(.05)
-            
+
             #raw_input('press enter to continue')
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
 
             #s11, s21 = self._grab_s_raw(navg = 2, rfport = PORT1)
             s11, s12 = self._grab_s_raw(navg = 1, rfport = PORT1)
+
+            if align_lo:
+                self._update_rf_lo_offset_ratio(lo_freq, doubler)
 
             print('s11: {} , mag {}'.format(s11, abs(s11)))
             
@@ -308,16 +338,15 @@ if __name__ == '__main__':
 
     fstart = 2e9
     fstop = 9e9
-    points = 21 
-
+    points = 141 
 
     vna = eth_vna(synth_lo, synth_rf, pru_adc, vna_io)
 
-    vna.align_rf_lo_osc()
+    vna.align_rf_lo_osc(fstart)
 
     data_dir = './meas/'
     filename = raw_input('enter a filename: ')
-    sweep = vna.sweep(fstart, fstop, points)
+    sweep = vna.sweep(fstart, fstop, points, align_lo = True)
     sweep.write_touchstone(data_dir + filename)
     '''
     vna.slot_calibrate_oneport(fstart, fstop, points)
