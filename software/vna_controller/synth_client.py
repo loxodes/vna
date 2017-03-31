@@ -19,7 +19,7 @@ HMC311_TABLE_FREQ = [250e6, 500e6, 1e9, 2e9, 2.5e9, 3e9, 3.5e9, 4e9, 5e9, 6e9, 7
 
 # table for 0 dBm out of rf synth with hmc311 amp board at output
 RF_TABLE_FREQ = [2e9, 2.5e9, 3e9, 3.5e9, 4e9, 4.5e9, 5e9, 5.5e9, 6e9, 6.5e9, 7e9, 7.5e9, 8e9, 8.5e9, 9e9, 9.5e9, 10e9]
-RF_TABLE_POW =  [0,   0,     0,   0,     0,   5,     6,   12,    12,  16,    14,  20,    20,  20,    20,  20,    20]
+RF_TABLE_POW =  [0,   0,     0,   0,     0,   7,     7,   12,    12,  16,    14,  20,    20,  20,    20,  20,    20]
 RF_TABLE_ATT =  [2.5, 2.5,   6,   3,     0,   0,     0,   0,     0,   0,      0,  0,     0,   0,     0,   0,     0]
 
 class zmq_synth:

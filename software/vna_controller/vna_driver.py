@@ -36,14 +36,19 @@ class eth_vna:
         self.pru_adc = pru_adc
         self.vna_io = vna_io
        
-        self.lo_synth.set_att(0)
-        self.rf_synth.set_att(0)
+        self.lo_synth.set_att(30)
+        self.rf_synth.set_att(30)
+
+        self.vna_io.enable_mixer(status = MIXER_DISABLE)
 
         self.vna_io.set_switch(SW_DUT_RF, SW_DUT_PORT1)
         self.vna_io.adc_init(ADC1)
         self.vna_io.adc_init(ADC2)
+        self.vna_io.adc_init(ADC3)
+        self.vna_io.adc_init(ADC4)
         self.vna_io.sync_adcs()
-
+        
+        raw_input('enable LO clock')
         self.vna_io.enable_mixer()
         self.vna_io.set_multiplier(status = ENABLE)
         self.freq = np.float32(0)
@@ -141,28 +146,37 @@ class eth_vna:
 
         s_return_avg = 0
         s_thru_avg = 0
-
+    
         for i in range(navg):
             a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
            
             if False:
                 a1_rms = np.sqrt(np.mean(np.abs(a1)**2))
+                a2_rms = np.sqrt(np.mean(np.abs(a2)**2))
                 b1_rms = np.sqrt(np.mean(np.abs(b1)**2))
+                b2_rms = np.sqrt(np.mean(np.abs(b2)**2))
 
 
                 plt.subplot(4,1,1)
-                plt.title('a1, {}'.format(a1_rms))
+                plt.title('a1, {}, a2: {}'.format(a1_rms, a2_rms))
                 plt.plot(np.real(a1))
                 plt.plot(np.imag(a1))
+                plt.plot(np.real(a2))
+                plt.plot(np.real(a2))
                 plt.subplot(4,1,2)
-                plt.title('b1, {}'.format(b1_rms))
+
+                plt.title('b1, {}, b2: {}'.format(b1_rms, b2_rms))
                 plt.plot(np.real(b1))
                 plt.plot(np.imag(b1))
+
+                plt.plot(np.imag(b2))
+                plt.plot(np.imag(b2))
                 plt.subplot(4,1,3)
                 plt.title('power spectrum')
                 fs = ADC_RATE / DECIMATION_RATE 
-                freqs = np.linspace(-fs/2, fs/2, 400)
+                freqs = np.linspace(-fs/2, fs/2, 401)
                 fpow = [10 * np.log10(np.abs(self._goertzel(a1, f))) for f in freqs]
+
                 plt.plot(freqs, fpow)
                 plt.subplot(4,1,4)
                 plt.title('b1/a1 ripple')
@@ -170,16 +184,25 @@ class eth_vna:
                 plt.plot(np.imag(b1/a1) - np.mean(np.imag(b1/a1)))
                 plt.show()
                 
-                print('b1/a1: {}'.format(np.mean(b1/a1)))
+                print("    max freq: {}".format(freqs[np.argmax(fpow)]))
+                #pdb.set_trace()
+ 
+            a1 = self._goertzel(a1, 100)
+            a2 = self._goertzel(a2, 100)
+            b1 = self._goertzel(b1, 100)
+            b2 = self._goertzel(b2, 100)
+
+                
+            print('b1/a1: {}'.format(np.mean(b1/a1)))
 
             if rfport == PORT1:
                 s_return_avg += np.mean(b1 / a1)
-                s_thru_avg += np.mean(b1 / a2)
+                s_thru_avg += np.mean(b2 / a1)
                 self.ref_samples = a1
 
             else:
                 s_return_avg += np.mean(b2 / a2)
-                s_thru_avg += np.mean(b2 / a1)
+                s_thru_avg += np.mean(b1 / a2)
                 self.ref_samples = a2
         
         return s_return_avg/navg, s_thru_avg/navg
@@ -213,14 +236,14 @@ class eth_vna:
             self.lo_synth.level_pow(LO_CAL)
             self.rf_synth.level_pow(RF_CAL)
            
-            time.sleep(.05)
+            time.sleep(.01)
 
             #raw_input('press enter to continue')
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
 
-            #s11, s21 = self._grab_s_raw(navg = 2, rfport = PORT1)
-            s11, s12 = self._grab_s_raw(navg = 1, rfport = PORT1)
+            s11, s21 = self._grab_s_raw(navg = 1, rfport = PORT1)
+            s22, s12 = self._grab_s_raw(navg = 1, rfport = PORT2)
 
             if align_lo:
                 self._update_rf_lo_offset_ratio(lo_freq, doubler)
@@ -228,19 +251,16 @@ class eth_vna:
             print('s11: {} , mag {}'.format(s11, abs(s11)))
             
             sweep_s11[fidx] = s11
-            #sweep_s21[fidx] = s21
-            #sweep_s12[fidx] = s12
-            #sweep_s22[fidx] = s22
+            sweep_s21[fidx] = s21
+            sweep_s12[fidx] = s12
+            sweep_s22[fidx] = s22
         
         s11 = rf.Network(f=sweep_freqs/1e9, s=sweep_s11, z0=50)
-        s11.plot_s_db()
-        plt.show()
-        #pdb.set_trace()
-        #s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
-        #s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
-        #s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
+        s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
+        s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
+        s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
 
-        return s11#rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
+        return rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
    
     def sdrkits_cal_oneport(self, sweep_freqs):
         # generate cal stardard for sdr-kits Female Rosenberger HochFrequenz .. economy SMA SOL cal kit
@@ -336,17 +356,19 @@ if __name__ == '__main__':
     pru_adc = ethernet_pru_adc('bbb', 10520)
 
 
-    fstart = 2e9
-    fstop = 9e9
-    points = 141 
+    fstart = 2.00e9
+    fstop = 10.00e9
+    points = 1601 
 
     vna = eth_vna(synth_lo, synth_rf, pru_adc, vna_io)
 
-    vna.align_rf_lo_osc(fstart)
+    #vna.align_rf_lo_osc(fstart)
 
     data_dir = './meas/'
     filename = raw_input('enter a filename: ')
-    sweep = vna.sweep(fstart, fstop, points, align_lo = True)
+    sweep = vna.sweep(fstart, fstop, points, align_lo = False)
+    sweep.plot_s_db()
+    plt.show()
     sweep.write_touchstone(data_dir + filename)
     '''
     vna.slot_calibrate_oneport(fstart, fstop, points)
