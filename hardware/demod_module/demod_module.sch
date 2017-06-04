@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:demod_module-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -927,7 +928,7 @@ F 3 "" H 4000 3200 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED D101
+L LED-RESCUE-demod_module D101
 U 1 1 57BEFCFA
 P 3650 2600
 F 0 "D101" H 3650 2700 50  0000 C CNN

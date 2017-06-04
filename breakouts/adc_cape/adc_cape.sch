@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:adc_cape-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -1422,7 +1423,7 @@ Wire Wire Line
 Text Label 3800 9350 2    60   ~ 0
 ALC_SW_1_2
 $Comp
-L LED D101
+L LED-RESCUE-adc_cape D101
 U 1 1 5810E0DA
 P 8100 9450
 F 0 "D101" H 8100 9550 50  0000 C CNN

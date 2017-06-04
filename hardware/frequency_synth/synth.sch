@@ -499,7 +499,7 @@ MUXout
 Text Label 5050 9750 2    60   ~ 0
 MUXout
 $Comp
-L LED D201
+L LED-RESCUE-frequency_synth D201
 U 1 1 572AD4EF
 P 5400 9750
 F 0 "D201" H 5400 9850 50  0000 C CNN
