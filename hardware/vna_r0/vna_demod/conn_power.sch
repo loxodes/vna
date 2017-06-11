@@ -1,0 +1,300 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:lmx2594
+LIBS:ltc5549
+LIBS:ad9864
+LIBS:conn_sma_2gnd
+LIBS:conn_sma
+LIBS:vna_demod-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 4 8
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text HLabel 9150 1650 0    60   Output ~ 0
+RF_A
+Text HLabel 9150 2850 0    60   Output ~ 0
+RF_B
+Text HLabel 9150 4000 0    60   Output ~ 0
+RF_C
+Text HLabel 9150 5200 0    60   Output ~ 0
+RF_D
+Text HLabel 7300 1600 0    60   Output ~ 0
+SYNTH_REF
+Text HLabel 7300 2800 0    60   Output ~ 0
+IF_REF
+Text HLabel 7300 4000 0    60   Output ~ 0
+ADC_CLK
+$Comp
+L CONN_SMA_2GND U?
+U 1 1 5941518A
+P 10300 1650
+F 0 "U?" H 10000 1850 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 10350 1950 60  0000 C CNN
+F 2 "" H 10300 1650 60  0000 C CNN
+F 3 "" H 10300 1650 60  0000 C CNN
+	1    10300 1650
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5941528F
+P 10250 2200
+F 0 "#PWR?" H 10250 1950 50  0001 C CNN
+F 1 "GND" H 10250 2050 50  0000 C CNN
+F 2 "" H 10250 2200 50  0001 C CNN
+F 3 "" H 10250 2200 50  0001 C CNN
+	1    10250 2200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 2100 10250 2200
+Wire Wire Line
+	10350 2100 10350 2150
+Wire Wire Line
+	10350 2150 10250 2150
+Connection ~ 10250 2150
+Wire Wire Line
+	9900 1650 9150 1650
+$Comp
+L CONN_SMA_2GND U?
+U 1 1 59415357
+P 10300 2850
+F 0 "U?" H 10000 3050 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 10350 3150 60  0000 C CNN
+F 2 "" H 10300 2850 60  0000 C CNN
+F 3 "" H 10300 2850 60  0000 C CNN
+	1    10300 2850
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5941535D
+P 10250 3400
+F 0 "#PWR?" H 10250 3150 50  0001 C CNN
+F 1 "GND" H 10250 3250 50  0000 C CNN
+F 2 "" H 10250 3400 50  0001 C CNN
+F 3 "" H 10250 3400 50  0001 C CNN
+	1    10250 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 3300 10250 3400
+Wire Wire Line
+	10350 3300 10350 3350
+Wire Wire Line
+	10350 3350 10250 3350
+Connection ~ 10250 3350
+Wire Wire Line
+	9900 2850 9150 2850
+$Comp
+L CONN_SMA_2GND U?
+U 1 1 59415448
+P 10300 4000
+F 0 "U?" H 10000 4200 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 10350 4300 60  0000 C CNN
+F 2 "" H 10300 4000 60  0000 C CNN
+F 3 "" H 10300 4000 60  0000 C CNN
+	1    10300 4000
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5941544E
+P 10250 4550
+F 0 "#PWR?" H 10250 4300 50  0001 C CNN
+F 1 "GND" H 10250 4400 50  0000 C CNN
+F 2 "" H 10250 4550 50  0001 C CNN
+F 3 "" H 10250 4550 50  0001 C CNN
+	1    10250 4550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 4450 10250 4550
+Wire Wire Line
+	10350 4450 10350 4500
+Wire Wire Line
+	10350 4500 10250 4500
+Connection ~ 10250 4500
+Wire Wire Line
+	9900 4000 9150 4000
+$Comp
+L CONN_SMA_2GND U?
+U 1 1 59415459
+P 10300 5200
+F 0 "U?" H 10000 5400 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 10350 5500 60  0000 C CNN
+F 2 "" H 10300 5200 60  0000 C CNN
+F 3 "" H 10300 5200 60  0000 C CNN
+	1    10300 5200
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5941545F
+P 10250 5750
+F 0 "#PWR?" H 10250 5500 50  0001 C CNN
+F 1 "GND" H 10250 5600 50  0000 C CNN
+F 2 "" H 10250 5750 50  0001 C CNN
+F 3 "" H 10250 5750 50  0001 C CNN
+	1    10250 5750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 5650 10250 5750
+Wire Wire Line
+	10350 5650 10350 5700
+Wire Wire Line
+	10350 5700 10250 5700
+Connection ~ 10250 5700
+Wire Wire Line
+	9900 5200 9150 5200
+$Comp
+L CONN_SMA U?
+U 1 1 59415668
+P 8050 1600
+F 0 "U?" H 7700 1800 60  0000 C CNN
+F 1 "CONN_SMA" H 7900 1950 60  0000 C CNN
+F 2 "" H 8050 1600 60  0000 C CNN
+F 3 "" H 8050 1600 60  0000 C CNN
+	1    8050 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5941587D
+P 7900 2150
+F 0 "#PWR?" H 7900 1900 50  0001 C CNN
+F 1 "GND" H 7900 2000 50  0000 C CNN
+F 2 "" H 7900 2150 50  0001 C CNN
+F 3 "" H 7900 2150 50  0001 C CNN
+	1    7900 2150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7900 2050 7900 2150
+Wire Wire Line
+	7900 2100 8200 2100
+Wire Wire Line
+	8000 2100 8000 2050
+Connection ~ 7900 2100
+Wire Wire Line
+	8100 2100 8100 2050
+Connection ~ 8000 2100
+Wire Wire Line
+	8200 2100 8200 2050
+Connection ~ 8100 2100
+Wire Wire Line
+	7300 1600 7500 1600
+$Comp
+L CONN_SMA U?
+U 1 1 594159D7
+P 8050 2800
+F 0 "U?" H 7700 3000 60  0000 C CNN
+F 1 "CONN_SMA" H 7900 3150 60  0000 C CNN
+F 2 "" H 8050 2800 60  0000 C CNN
+F 3 "" H 8050 2800 60  0000 C CNN
+	1    8050 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 594159DD
+P 7900 3350
+F 0 "#PWR?" H 7900 3100 50  0001 C CNN
+F 1 "GND" H 7900 3200 50  0000 C CNN
+F 2 "" H 7900 3350 50  0001 C CNN
+F 3 "" H 7900 3350 50  0001 C CNN
+	1    7900 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7900 3250 7900 3350
+Wire Wire Line
+	7900 3300 8200 3300
+Wire Wire Line
+	8000 3300 8000 3250
+Connection ~ 7900 3300
+Wire Wire Line
+	8100 3300 8100 3250
+Connection ~ 8000 3300
+Wire Wire Line
+	8200 3300 8200 3250
+Connection ~ 8100 3300
+Wire Wire Line
+	7300 2800 7500 2800
+$Comp
+L CONN_SMA U?
+U 1 1 59415A6C
+P 8050 4000
+F 0 "U?" H 7700 4200 60  0000 C CNN
+F 1 "CONN_SMA" H 7900 4350 60  0000 C CNN
+F 2 "" H 8050 4000 60  0000 C CNN
+F 3 "" H 8050 4000 60  0000 C CNN
+	1    8050 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 59415A72
+P 7900 4550
+F 0 "#PWR?" H 7900 4300 50  0001 C CNN
+F 1 "GND" H 7900 4400 50  0000 C CNN
+F 2 "" H 7900 4550 50  0001 C CNN
+F 3 "" H 7900 4550 50  0001 C CNN
+	1    7900 4550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7900 4450 7900 4550
+Wire Wire Line
+	7900 4500 8200 4500
+Wire Wire Line
+	8000 4500 8000 4450
+Connection ~ 7900 4500
+Wire Wire Line
+	8100 4500 8100 4450
+Connection ~ 8000 4500
+Wire Wire Line
+	8200 4500 8200 4450
+Connection ~ 8100 4500
+Wire Wire Line
+	7300 4000 7500 4000
+$EndSCHEMATC
