@@ -1,4 +1,4 @@
-update=Sun Jun 11 01:10:38 2017
+update=Sun Jun 11 19:21:27 2017
 version=1
 last_client=kicad
 [pcbnew]
@@ -63,3 +63,7 @@ LibName31=/home/kleinjt/repos/vna/lib/ltc5549
 LibName32=/home/kleinjt/repos/vna/lib/ad9864
 LibName33=/home/kleinjt/repos/vna/lib/conn_sma_2gnd
 LibName34=/home/kleinjt/repos/vna/lib/conn_sma
+LibName35=/home/kleinjt/repos/vna/lib/txco
+LibName36=/home/kleinjt/repos/vna/lib/nb3n551
+LibName37=/home/kleinjt/repos/vna/lib/hmc475
+LibName38=/home/kleinjt/repos/vna/lib/trf37b73

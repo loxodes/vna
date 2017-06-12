@@ -33,6 +33,9 @@ LIBS:maam-011100
 LIBS:pe42521
 LIBS:masw-008322-tr1000
 LIBS:adrf5040
+LIBS:nc7wzu04
+LIBS:ltc2630
+LIBS:ltc2054cs5
 LIBS:vna_rf-cache
 EELAYER 25 0
 EELAYER END
@@ -55,8 +58,6 @@ F0 "rf_synth" 60
 F1 "rf_synth.sch" 60
 F2 "RF_OUT" O R 5450 4050 60 
 F3 "SYNTH_REF" I L 4450 3700 60 
-F4 "GND" I L 4450 4500 60 
-F5 "3V3" I L 4450 4400 60 
 $EndSheet
 $Sheet
 S 6850 3300 1000 1500
@@ -73,4 +74,6 @@ U 593C60A0
 F0 "conn_power" 60
 F1 "conn_power.sch" 60
 $EndSheet
+Wire Wire Line
+	5450 4050 6850 4050
 $EndSCHEMATC

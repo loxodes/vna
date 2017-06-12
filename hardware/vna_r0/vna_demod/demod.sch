@@ -33,12 +33,16 @@ LIBS:ltc5549
 LIBS:ad9864
 LIBS:conn_sma_2gnd
 LIBS:conn_sma
+LIBS:txco
+LIBS:nb3n551
+LIBS:hmc475
+LIBS:trf37b73
 LIBS:vna_demod-cache
 EELAYER 25 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 5 8
+Sheet 3 8
 Title ""
 Date ""
 Rev ""
@@ -360,7 +364,7 @@ F 3 "" H 5050 6150 50  0001 C CNN
 	1    5050 6150
 	1    0    0    -1  
 $EndComp
-Text Label 5200 5700 0    60   ~ 0
+Text Label 5650 5700 0    60   ~ 0
 IFIN
 $Comp
 L C_Small C?
@@ -1802,4 +1806,19 @@ $EndComp
 Wire Wire Line
 	10800 5650 10800 5750
 Connection ~ 10800 5300
+Text Notes 4850 5450 0    60   ~ 0
+IF in is 370 ohms || 1.4 pF
+$Comp
+L C_Small C?
+U 1 1 593FD95B
+P 5300 5700
+F 0 "C?" H 5310 5770 50  0000 L CNN
+F 1 "10 nF" V 5350 5400 50  0000 L CNN
+F 2 "" H 5300 5700 50  0001 C CNN
+F 3 "" H 5300 5700 50  0001 C CNN
+	1    5300 5700
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5650 5700 5400 5700
 $EndSCHEMATC

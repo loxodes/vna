@@ -1,4 +1,4 @@
-update=Sat Jun 10 15:40:54 2017
+update=Sun Jun 11 22:13:21 2017
 version=1
 last_client=kicad
 [pcbnew]
@@ -63,3 +63,6 @@ LibName31=/home/kleinjt/repos/vna/lib/maam-011100
 LibName32=/home/kleinjt/repos/vna/lib/pe42521
 LibName33=/home/kleinjt/repos/vna/lib/masw-008322-tr1000
 LibName34=/home/kleinjt/repos/vna/lib/adrf5040
+LibName35=/home/kleinjt/repos/vna/lib/nc7wzu04
+LibName36=/home/kleinjt/repos/vna/lib/ltc2630
+LibName37=/home/kleinjt/repos/vna/lib/ltc2054cs5

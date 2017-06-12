@@ -33,6 +33,10 @@ LIBS:ltc5549
 LIBS:ad9864
 LIBS:conn_sma_2gnd
 LIBS:conn_sma
+LIBS:txco
+LIBS:nb3n551
+LIBS:hmc475
+LIBS:trf37b73
 LIBS:vna_demod-cache
 EELAYER 25 0
 EELAYER END
@@ -261,6 +265,18 @@ S 1600 6200 1450 2050
 U 5940CD0A
 F0 "clock_distro" 60
 F1 "clock_distro.sch" 60
+F2 "IF_LO_A" I R 3050 6700 60 
+F3 "IF_LO_B" I R 3050 6800 60 
+F4 "IF_LO_C" I R 3050 6900 60 
+F5 "IF_LO_D" I R 3050 7000 60 
+F6 "CLK_A" I R 3050 7250 60 
+F7 "CLK_B" I R 3050 7350 60 
+F8 "CLK_C" I R 3050 7450 60 
+F9 "CLK_D" I R 3050 7550 60 
+F10 "IF_LO_IN" I L 1600 6550 60 
+F11 "ADC_CLK_IN" I L 1600 7300 60 
+F12 "ADC_CLK_EN" I L 1600 7400 60 
+F13 "IF_LO_EN" I L 1600 6650 60 
 $EndSheet
 Wire Wire Line
 	2350 2050 2050 2050
@@ -436,9 +452,9 @@ Text Label 1450 6550 2    60   ~ 0
 IF_REF
 Text Label 1450 6650 2    60   ~ 0
 ADC_CLK
-Text Label 1500 7300 2    60   ~ 0
+Text Label 1450 7300 2    60   ~ 0
 ADC_CLK_EN
-Text Label 1500 7400 2    60   ~ 0
+Text Label 1450 7400 2    60   ~ 0
 IF_REF_EN
 Text Label 11550 4300 0    60   ~ 0
 ADC_CLK_EN
@@ -466,4 +482,28 @@ Text Notes 3150 6550 0    60   ~ 0
 45 MHz or so sine wave, -10 dBm
 Text Notes 1600 8750 0    60   ~ 0
 45 MHz or so sine wave, -10 dBm
+Wire Wire Line
+	3050 6700 3300 6700
+Wire Wire Line
+	3300 6800 3050 6800
+Wire Wire Line
+	3050 6900 3300 6900
+Wire Wire Line
+	3300 7000 3050 7000
+Wire Wire Line
+	3050 7250 3300 7250
+Wire Wire Line
+	3300 7350 3050 7350
+Wire Wire Line
+	3050 7450 3300 7450
+Wire Wire Line
+	3300 7550 3050 7550
+Wire Wire Line
+	1450 6550 1600 6550
+Wire Wire Line
+	1450 6650 1600 6650
+Wire Wire Line
+	1450 7300 1600 7300
+Wire Wire Line
+	1450 7400 1600 7400
 $EndSCHEMATC

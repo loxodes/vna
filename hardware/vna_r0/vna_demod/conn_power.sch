@@ -33,6 +33,10 @@ LIBS:ltc5549
 LIBS:ad9864
 LIBS:conn_sma_2gnd
 LIBS:conn_sma
+LIBS:txco
+LIBS:nb3n551
+LIBS:hmc475
+LIBS:trf37b73
 LIBS:vna_demod-cache
 EELAYER 25 0
 EELAYER END
@@ -297,4 +301,26 @@ Wire Wire Line
 Connection ~ 8100 4500
 Wire Wire Line
 	7300 4000 7500 4000
+$Comp
+L CP_Small C?
+U 1 1 5940338C
+P 5650 5000
+F 0 "C?" H 5660 5070 50  0000 L CNN
+F 1 "22 uF" H 5660 4920 50  0000 L CNN
+F 2 "" H 5650 5000 50  0001 C CNN
+F 3 "" H 5650 5000 50  0001 C CNN
+	1    5650 5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L CP_Small C?
+U 1 1 59403410
+P 6200 5000
+F 0 "C?" H 6210 5070 50  0000 L CNN
+F 1 "22 uF" H 6210 4920 50  0000 L CNN
+F 2 "" H 6200 5000 50  0001 C CNN
+F 3 "" H 6200 5000 50  0001 C CNN
+	1    6200 5000
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
