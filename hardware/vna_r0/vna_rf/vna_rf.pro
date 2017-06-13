@@ -1,4 +1,4 @@
-update=Sun Jun 11 22:13:21 2017
+update=Sun Jun 11 23:59:37 2017
 version=1
 last_client=kicad
 [pcbnew]
@@ -66,3 +66,5 @@ LibName34=/home/kleinjt/repos/vna/lib/adrf5040
 LibName35=/home/kleinjt/repos/vna/lib/nc7wzu04
 LibName36=/home/kleinjt/repos/vna/lib/ltc2630
 LibName37=/home/kleinjt/repos/vna/lib/ltc2054cs5
+LibName38=/home/kleinjt/repos/vna/lib/conn_sma_2gnd
+LibName39=/home/kleinjt/repos/vna/lib/conn_sma

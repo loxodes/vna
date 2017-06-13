@@ -1199,4 +1199,75 @@ Text Label 3950 5350 3    60   ~ 0
 CPOUT
 Wire Wire Line
 	3950 5350 3950 5150
+$Comp
+L LED_Small D?
+U 1 1 593F76AB
+P 6150 5950
+F 0 "D?" H 6100 6075 50  0000 L CNN
+F 1 "LED_Small" H 5975 5850 50  0000 L CNN
+F 2 "" V 6150 5950 50  0001 C CNN
+F 3 "" V 6150 5950 50  0001 C CNN
+	1    6150 5950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 593F7872
+P 6150 6250
+F 0 "R?" H 6180 6270 50  0000 L CNN
+F 1 "1k" H 6180 6210 50  0000 L CNN
+F 2 "" H 6150 6250 50  0001 C CNN
+F 3 "" H 6150 6250 50  0001 C CNN
+	1    6150 6250
+	-1   0    0    1   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 593F7956
+P 6150 6450
+F 0 "#PWR?" H 6150 6200 50  0001 C CNN
+F 1 "GND" H 6150 6300 50  0000 C CNN
+F 2 "" H 6150 6450 50  0001 C CNN
+F 3 "" H 6150 6450 50  0001 C CNN
+	1    6150 6450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 6350 6150 6450
+Wire Wire Line
+	6150 6150 6150 6050
+Wire Wire Line
+	6150 5750 6150 5850
+Text HLabel 5850 7050 2    60   Output ~ 0
+LMX_MUXout
+Text HLabel 5850 7200 2    60   Input ~ 0
+LMX_SDI
+Text HLabel 5850 7350 2    60   Input ~ 0
+LMX_SCK
+Text HLabel 5850 7500 2    60   Input ~ 0
+LMX_CSB
+Text HLabel 5850 7650 2    60   Input ~ 0
+LMX_CE
+Text Label 5650 7500 2    60   ~ 0
+LMX_CSB
+Text Label 5650 7650 2    60   ~ 0
+LMX_CE
+Text Label 5650 7200 2    60   ~ 0
+LMX_SDI
+Text Label 5650 7050 2    60   ~ 0
+LMX_MUXout
+Text Label 6150 5750 1    60   ~ 0
+LMX_MUXout
+Text Label 5650 7350 2    60   ~ 0
+LMX_SCK
+Wire Wire Line
+	5650 7650 5850 7650
+Wire Wire Line
+	5650 7500 5850 7500
+Wire Wire Line
+	5650 7350 5850 7350
+Wire Wire Line
+	5650 7200 5850 7200
+Wire Wire Line
+	5650 7050 5850 7050
 $EndSCHEMATC
