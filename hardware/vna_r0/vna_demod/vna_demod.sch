@@ -590,4 +590,24 @@ Wire Wire Line
 	11350 4950 11550 4950
 Wire Wire Line
 	11550 5050 11350 5050
+Text Label 2050 3200 2    60   ~ 0
+LMX_CE
+Text Label 2050 3100 2    60   ~ 0
+LMX_CSB
+Text Label 2050 2900 2    60   ~ 0
+LMX_SDI
+Text Label 2050 3000 2    60   ~ 0
+LMX_SCK
+Text Label 2050 2750 2    60   ~ 0
+LMX_MUXout
+Wire Wire Line
+	2050 3200 2350 3200
+Wire Wire Line
+	2350 3100 2050 3100
+Wire Wire Line
+	2050 3000 2350 3000
+Wire Wire Line
+	2350 2900 2050 2900
+Wire Wire Line
+	2050 2750 2350 2750
 $EndSCHEMATC
