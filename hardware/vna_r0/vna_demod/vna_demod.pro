@@ -1,4 +1,4 @@
-update=Sun Jun 11 19:21:27 2017
+update=Sun Jun 18 13:17:53 2017
 version=1
 last_client=kicad
 [pcbnew]
@@ -67,3 +67,5 @@ LibName35=/home/kleinjt/repos/vna/lib/txco
 LibName36=/home/kleinjt/repos/vna/lib/nb3n551
 LibName37=/home/kleinjt/repos/vna/lib/hmc475
 LibName38=/home/kleinjt/repos/vna/lib/trf37b73
+LibName39=/home/kleinjt/repos/vna/lib/mounting_hole
+LibName40=/home/kleinjt/repos/vna/lib/mounting_box

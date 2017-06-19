@@ -37,6 +37,8 @@ LIBS:txco
 LIBS:nb3n551
 LIBS:hmc475
 LIBS:trf37b73
+LIBS:mounting_hole
+LIBS:mounting_box
 LIBS:vna_demod-cache
 EELAYER 25 0
 EELAYER END
