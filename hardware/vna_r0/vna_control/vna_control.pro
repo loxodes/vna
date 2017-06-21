@@ -1,4 +1,4 @@
-update=Tue Jun 20 22:23:54 2017
+update=Mon Jun 19 19:08:53 2017
 version=1
 last_client=kicad
 [pcbnew]
@@ -58,14 +58,4 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=/home/kleinjt/repos/vna/lib/lmx2594
-LibName31=/home/kleinjt/repos/vna/lib/maam-011100
-LibName32=/home/kleinjt/repos/vna/lib/pe42521
-LibName33=/home/kleinjt/repos/vna/lib/masw-008322-tr1000
-LibName34=/home/kleinjt/repos/vna/lib/adrf5040
-LibName35=/home/kleinjt/repos/vna/lib/nc7wzu04
-LibName36=/home/kleinjt/repos/vna/lib/ltc2630
-LibName37=/home/kleinjt/repos/vna/lib/ltc2054cs5
-LibName38=/home/kleinjt/repos/vna/lib/conn_sma_2gnd
-LibName39=/home/kleinjt/repos/vna/lib/conn_sma
-LibName40=/home/kleinjt/repos/vna/lib/mounting_hole
+LibName30=/home/kleinjt/repos/vna/lib/ad9577

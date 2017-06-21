@@ -38,6 +38,7 @@ LIBS:ltc2630
 LIBS:ltc2054cs5
 LIBS:conn_sma_2gnd
 LIBS:conn_sma
+LIBS:mounting_hole
 LIBS:vna_rf-cache
 EELAYER 25 0
 EELAYER END
