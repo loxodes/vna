@@ -328,13 +328,13 @@ NoConn ~ 7400 6250
 Wire Wire Line
 	7300 4250 7500 4250
 Text Label 7500 4250 0    60   ~ 0
-SYNCB
+AD_SYNCB
 Text Label 7500 2300 0    60   ~ 0
 AD_SYNCB
 Text Label 7500 6150 0    60   ~ 0
-SYNCB
+AD_SYNCB
 Text Label 7500 8100 0    60   ~ 0
-SYNCB
+AD_SYNCB
 Wire Wire Line
 	7500 8100 7300 8100
 Wire Wire Line
@@ -443,7 +443,7 @@ MIX_EN
 Text Label 11550 3300 0    60   ~ 0
 MIX_X2
 Text Label 11550 5050 0    60   ~ 0
-SYNCB
+AD_SYNCB
 Text Label 11550 4450 0    60   ~ 0
 AD_PE_C
 Text Label 11550 4750 0    60   ~ 0
