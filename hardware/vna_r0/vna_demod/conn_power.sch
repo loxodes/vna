@@ -299,8 +299,6 @@ F 3 "" H 5500 7250 50  0001 C CNN
 	1    5500 7250
 	1    0    0    -1  
 $EndComp
-Text Label 5500 6600 1    60   ~ 0
-MUL_EN
 Text Label 4550 3900 2    60   ~ 0
 MIX_EN
 Text Label 4550 4050 2    60   ~ 0
@@ -846,4 +844,6 @@ F 3 "" H 2000 6800 60  0000 C CNN
 	1    2000 6800
 	1    0    0    -1  
 $EndComp
+Text Label 5500 6600 1    60   ~ 0
+MIX_EN
 $EndSCHEMATC
