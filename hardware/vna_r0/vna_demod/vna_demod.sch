@@ -480,11 +480,11 @@ Text Label 9700 3900 2    60   ~ 0
 ADC_CLK
 Text Label 1450 6550 2    60   ~ 0
 IF_REF
-Text Label 1450 6650 2    60   ~ 0
-ADC_CLK
 Text Label 1450 7300 2    60   ~ 0
-ADC_CLK_EN
+ADC_CLK
 Text Label 1450 7400 2    60   ~ 0
+ADC_CLK_EN
+Text Label 1450 6650 2    60   ~ 0
 IF_REF_EN
 Text Label 11550 3000 0    60   ~ 0
 ADC_CLK_EN

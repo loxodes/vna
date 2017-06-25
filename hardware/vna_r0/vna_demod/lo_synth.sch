@@ -54,13 +54,13 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text HLabel 9050 3000 2    60   Output ~ 0
-LO_A
-Text HLabel 9050 3850 2    60   Output ~ 0
-LO_B
-Text HLabel 9000 4800 2    60   Output ~ 0
-LO_C
 Text HLabel 9050 5650 2    60   Output ~ 0
+LO_A
+Text HLabel 9000 4800 2    60   Output ~ 0
+LO_B
+Text HLabel 9050 3850 2    60   Output ~ 0
+LO_C
+Text HLabel 9050 3000 2    60   Output ~ 0
 LO_D
 $Comp
 L LMX2594 U201
@@ -1272,4 +1272,28 @@ Wire Wire Line
 	5650 7200 5850 7200
 Wire Wire Line
 	5650 7050 5850 7050
+$Comp
+L RF_Shield_Two_Pieces J201
+U 1 1 594EE123
+P 9500 1250
+F 0 "J201" H 9500 1450 50  0000 C CNN
+F 1 "RF_Shield_Two_Pieces" H 9500 1350 50  0000 C CNN
+F 2 "Shielding_Cabinets:Laird_Technologies_BMI-S-209-F_29.36x18.50mm" H 9500 1150 50  0001 C CNN
+F 3 "" H 9500 1150 50  0001 C CNN
+	1    9500 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR041
+U 1 1 594EE3AD
+P 9500 1750
+F 0 "#PWR041" H 9500 1500 50  0001 C CNN
+F 1 "GND" H 9500 1600 50  0000 C CNN
+F 2 "" H 9500 1750 50  0001 C CNN
+F 3 "" H 9500 1750 50  0001 C CNN
+	1    9500 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9500 1750 9500 1650
 $EndSCHEMATC
