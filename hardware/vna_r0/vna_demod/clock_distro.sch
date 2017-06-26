@@ -266,11 +266,11 @@ Text Label 3900 2800 2    60   ~ 0
 Q2
 Text Label 3900 2900 2    60   ~ 0
 Q3
-Text Label 6950 2500 2    60   ~ 0
+Text Label 6950 2800 2    60   ~ 0
 Q1
 Text Label 6950 2650 2    60   ~ 0
 Q2
-Text Label 6950 2800 2    60   ~ 0
+Text Label 6950 2500 2    60   ~ 0
 Q3
 Text Label 6950 2950 2    60   ~ 0
 Q4

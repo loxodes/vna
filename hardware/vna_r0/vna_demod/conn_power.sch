@@ -308,9 +308,9 @@ SYNCB
 Text Label 4600 2450 2    60   ~ 0
 AD_PE_C
 Text Label 4550 2000 2    60   ~ 0
-AD_PD
-Text Label 4550 1850 2    60   ~ 0
 AD_PC
+Text Label 4550 1850 2    60   ~ 0
+AD_PD
 Text Label 4600 3250 2    60   ~ 0
 AD_DOUTA_C
 Text Label 4600 3550 2    60   ~ 0
@@ -583,15 +583,15 @@ Text Label 2750 2500 0    60   ~ 0
 AD_PE_A
 Wire Wire Line
 	2750 2500 2600 2500
-Text Label 2750 2400 0    60   ~ 0
+Text Label 2750 2300 0    60   ~ 0
 AD_DOUTB
 Wire Wire Line
 	2750 2400 2600 2400
-Text Label 1950 2400 2    60   ~ 0
+Text Label 2750 2400 0    60   ~ 0
 AD_PD
 Wire Wire Line
 	1950 2400 2100 2400
-Text Label 2750 2300 0    60   ~ 0
+Text Label 1950 2400 2    60   ~ 0
 AD_PC
 Wire Wire Line
 	2750 2300 2600 2300
