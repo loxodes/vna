@@ -100,7 +100,7 @@ U 1 1 595B1A64
 P 2350 3100
 F 0 "J301" H 2350 3650 50  0000 C CNN
 F 1 "CONN_02X10" V 2350 3100 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x10" H 2350 1900 50  0001 C CNN
+F 2 "Connect:IDC_Header_Straight_20pins" H 2350 1900 50  0001 C CNN
 F 3 "" H 2350 1900 50  0001 C CNN
 	1    2350 3100
 	1    0    0    -1  
@@ -189,7 +189,7 @@ U 1 1 595B24DF
 P 2350 4400
 F 0 "J302" H 2350 4950 50  0000 C CNN
 F 1 "CONN_02X10" V 2350 4400 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x10" H 2350 3200 50  0001 C CNN
+F 2 "Connect:IDC_Header_Straight_20pins" H 2350 3200 50  0001 C CNN
 F 3 "" H 2350 3200 50  0001 C CNN
 	1    2350 4400
 	1    0    0    -1  
@@ -200,7 +200,7 @@ U 1 1 595B2601
 P 2350 6050
 F 0 "J303" H 2350 6600 50  0000 C CNN
 F 1 "CONN_02X10" V 2350 6050 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x10" H 2350 4850 50  0001 C CNN
+F 2 "Connect:IDC_Header_Straight_20pins" H 2350 4850 50  0001 C CNN
 F 3 "" H 2350 4850 50  0001 C CNN
 	1    2350 6050
 	1    0    0    -1  
@@ -843,8 +843,6 @@ Connection ~ 2700 4850
 Connection ~ 2000 4850
 Text HLabel 3750 6100 2    60   Input ~ 0
 3V3_RF_SENSE
-Text Label 9750 5400 1    60   ~ 0
-3V3_RF
 Text HLabel 1300 6150 0    60   Input ~ 0
 3V3_RF
 Wire Wire Line
@@ -1235,4 +1233,19 @@ Connection ~ 8050 5500
 Connection ~ 8150 5300
 Text Notes 7550 4050 0    60   ~ 0
 p68 file:///home/kleinjt/Downloads/BBB_SRM.pdf check pullups against,\nhttp://beagleboard.org/support/bone101
+$Comp
+L +3V3 #PWR081
+U 1 1 595C92A3
+P 9750 5400
+F 0 "#PWR081" H 9750 5250 50  0001 C CNN
+F 1 "+3V3" H 9750 5540 50  0000 C CNN
+F 2 "" H 9750 5400 50  0001 C CNN
+F 3 "" H 9750 5400 50  0001 C CNN
+	1    9750 5400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9750 6100 9750 6150
+Wire Wire Line
+	10100 6100 10100 6150
 $EndSCHEMATC
