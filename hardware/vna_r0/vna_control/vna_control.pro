@@ -1,4 +1,4 @@
-update=Mon Jun 19 19:08:53 2017
+update=Tue Jul  4 13:14:58 2017
 version=1
 last_client=kicad
 [pcbnew]
@@ -59,3 +59,9 @@ LibName27=atmel
 LibName28=contrib
 LibName29=valves
 LibName30=/home/kleinjt/repos/vna/lib/ad9577
+LibName31=/home/kleinjt/repos/vna/lib/conn_sma
+LibName32=/home/kleinjt/repos/vna/lib/conn_sma_2gnd
+LibName33=/home/kleinjt/repos/vna/lib/tps2065d
+LibName34=/home/kleinjt/repos/vna/lib/ltc1983
+LibName35=/home/kleinjt/repos/vna/lib/adp7158
+LibName36=/home/kleinjt/repos/vna/lib/okr_t3-w12-c
