@@ -131,7 +131,7 @@ F 3 "" H 5950 4800 50  0001 C CNN
 	1    5950 4800
 	1    0    0    -1  
 $EndComp
-Text HLabel 5200 4200 0    60   Input ~ 0
+Text HLabel 5200 2950 0    60   Input ~ 0
 SYNTH_REF_A
 $Comp
 L CONN_SMA U302
@@ -155,7 +155,7 @@ F 3 "" H 5950 3550 50  0001 C CNN
 	1    5950 3550
 	1    0    0    -1  
 $EndComp
-Text HLabel 5200 2950 0    60   Input ~ 0
+Text HLabel 5200 4200 0    60   Input ~ 0
 SYNTH_REF_B
 $Comp
 L CONN_SMA U304
@@ -925,9 +925,9 @@ Wire Wire Line
 	8550 6150 8550 6050
 Text Notes 7950 4650 0    60   ~ 0
 5V input
-Text HLabel 10200 1550 2    60   Input ~ 0
+Text HLabel 10200 1450 2    60   Input ~ 0
 3V3_RF_EN
-Text HLabel 10200 1650 2    60   Input ~ 0
+Text HLabel 10200 1550 2    60   Input ~ 0
 3V3_DEMOD_EN
 Text HLabel 10200 1750 2    60   Input ~ 0
 RF_AMP_EN
@@ -980,7 +980,7 @@ Text HLabel 8100 2000 2    60   Input ~ 0
 SDA
 Text HLabel 10200 1350 2    60   Input ~ 0
 PLL_REF_SEL
-Text HLabel 10200 1450 2    60   Input ~ 0
+Text HLabel 10200 1650 2    60   Input ~ 0
 3V3_PLL_EN
 $Comp
 L R_Small R301
@@ -1038,27 +1038,27 @@ Text Label 8100 1700 0    60   ~ 0
 AD_PC
 Text Label 8100 1600 0    60   ~ 0
 AD_PD
-Text Label 10200 2250 0    60   ~ 0
+Text Label 7400 2400 2    60   ~ 0
 AD_DOUTB
-Text Label 8100 1900 0    60   ~ 0
-AD_PE_A
 Text Label 8100 1800 0    60   ~ 0
-AD_PE_B
+AD_PE_A
 Text Label 8100 2300 0    60   ~ 0
+AD_PE_B
+Text Label 8100 1900 0    60   ~ 0
 AD_PE_C
 Text Label 8100 2200 0    60   ~ 0
 AD_PE_D
-Text Label 9500 1750 2    60   ~ 0
+Text Label 10200 2350 0    60   ~ 0
 MIX_EN
-Text Label 9500 1850 2    60   ~ 0
+Text Label 9500 2350 2    60   ~ 0
 MIX_X2
 Wire Wire Line
 	9600 1450 9500 1450
 Wire Wire Line
 	9600 1350 9500 1350
-Text Label 9500 1350 2    60   ~ 0
+Text Label 9500 2450 2    60   ~ 0
 IF_REF_EN
-Text Label 9500 1450 2    60   ~ 0
+Text Label 10200 2450 0    60   ~ 0
 ADC_CLK_EN
 $Comp
 L CONN_02X23 J306
@@ -1081,19 +1081,19 @@ Text Label 2750 1850 2    60   ~ 0
 RF_LMX_SCK
 Text Label 7400 1600 2    60   ~ 0
 RF_LMX_MUXOUT
-Text Label 9500 1550 2    60   ~ 0
+Text Label 7400 1700 2    60   ~ 0
 RF_LMX_CE
-Text Label 7400 2400 2    60   ~ 0
+Text Label 7400 1800 2    60   ~ 0
 RF_PORT_SEL
 Text Label 7400 1900 2    60   ~ 0
 RF_DAC_CS
-Text Label 7400 2300 2    60   ~ 0
+Text Label 7400 2200 2    60   ~ 0
 RF_SW_2
 Text Label 8100 2100 0    60   ~ 0
 RF_DAC_SCK
 Text Label 7400 2100 2    60   ~ 0
 RF_DAC_SDI
-Text Label 7400 2200 2    60   ~ 0
+Text Label 7400 2300 2    60   ~ 0
 RF_SW_1
 Text Label 8100 2400 0    60   ~ 0
 RF_LMX_CS
@@ -1103,9 +1103,9 @@ Text Label 2750 1400 2    60   ~ 0
 DEMOD_LMX_SDI
 Text Label 8100 3100 0    60   ~ 0
 DEMOD_LMX_CS
-Text Label 9500 1650 2    60   ~ 0
+Text Label 7400 3100 2    60   ~ 0
 DEMOD_LMX_CE
-Text Label 7400 1700 2    60   ~ 0
+Text Label 8100 2500 0    60   ~ 0
 DEMOD_LMX_MUXOUT
 NoConn ~ 10200 1950
 NoConn ~ 10200 2050
