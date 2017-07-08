@@ -1,9 +1,9 @@
-(module Crystals_Oscillators_SMD:crystal_FA238-TSX3225 (layer F.Cu) (tedit 53A3CD4A)
+(module vna_footprints:crystal_FA238-TSX3225 (layer F.Cu) (tedit 59611B6A)
   (descr "crystal Epson Toyocom FA-238 and TSX-3225 series")
-  (fp_text reference U1 (at 1.651 -2.3495) (layer F.SilkS)
+  (fp_text reference Y201 (at 0.17 -2.832) (layer F.SilkS)
     (effects (font (size 0.8 0.8) (thickness 0.15)))
   )
-  (fp_text value XCO (at 0.2 2.3) (layer F.SilkS)
+  (fp_text value "26 MHz 7M-26.000MEEQ-T" (at 0.2 2.3) (layer F.SilkS) hide
     (effects (font (size 0.8 0.8) (thickness 0.15)))
   )
   (fp_line (start -1.6 -1.3) (end 1.6 -1.3) (layer F.SilkS) (width 0.15))
