@@ -7,13 +7,13 @@ import time
 import pdb
 from bbone_spi_bitbang import bitbang_spi
 
-ADC_SPI_CS1 = "P8_38" # adc1
-ADC_SPI_CS2 = "P8_36" # adc2
-ADC_SPI_CS3 = "P8_34" # adc3
-ADC_SPI_CS4 = "P8_32" # adc4
-ADC_SPI_MOSI = "P8_35"
-ADC_SPI_MISO = "P8_26"
-ADC_SPI_CLK = "P8_37"
+ADC_SPI_CS1 = "P9_16" # adc1
+ADC_SPI_CS2 = "P9_26" # adc2
+ADC_SPI_CS3 = "P9_18" # adc3
+ADC_SPI_CS4 = "P9_24" # adc4
+ADC_SPI_MOSI = "P9_12"
+ADC_SPI_MISO = "P9_27"
+ADC_SPI_CLK = "P9_14"
 
 def ad9864_write_reg(spi, addr, val):
     payload = addr << 9 | val
@@ -87,7 +87,7 @@ if __name__ == '__main__':
     import time
 
     SYNCB = "P8_41"
-    MIX_EN = "P8_15"
+    MIX_EN = "P8_28"
 
     GPIO.setup(SYNCB, GPIO.OUT)
     GPIO.setup(MIX_EN, GPIO.OUT)

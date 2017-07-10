@@ -16,20 +16,13 @@ from vna_io_commands import *
 from adc_bbone_init import *
 
 
-MIX_EN = "P8_15"
-MIX_X2 = "P8_17"
+MIX_EN = "P8_28"
+MIX_X2 = "P8_27"
+IF_REF_EN = "P8_29"
+ADC_CLK_EN = "P8_30"
 
-ALC_SW_1_1 = "P8_27"
-ALC_SW_1_2 = "P8_29"
-
-SW4_0_0 = "P8_28"
-SW4_0_1 = "P8_30"
-
+SW_PORT_SEL = "P9_15"
 SYNCB = "P8_41"
-
-SW2_0 = "P8_7"
-SW2_1 = "P8_9"
-SW2_2 = "P8_11"
 
 SW_MAP = {  SW_DUT_RF : SW2_0, \
             SW_MULT_1 : SW2_1, \
@@ -60,20 +53,21 @@ class zmq_io_server:
         print('setting up IO')
         GPIO.setup(MIX_EN, GPIO.OUT)
         GPIO.setup(MIX_X2, GPIO.OUT)
-        GPIO.setup(ALC_SW_1_1, GPIO.OUT)
-        GPIO.setup(ALC_SW_1_2, GPIO.OUT)
-        GPIO.setup(SW4_0_0, GPIO.OUT)
-        GPIO.setup(SW4_0_1, GPIO.OUT)
-        GPIO.setup(SW2_0, GPIO.OUT)
-        GPIO.setup(SW2_1, GPIO.OUT)
-        GPIO.setup(SW2_2, GPIO.OUT)
+        GPIO.setup(SW_PORT_SEL, GPIO.OUT)
         GPIO.setup(SYNCB, GPIO.OUT)
+
+        GPIO.setup(IF_REF_EN, GPIO.OUT)
+        GPIO.setup(ADC_CLK_EN, GPIO.OUT)
 
         print('setting default values')
         GPIO.output(MIX_EN, GPIO.LOW)
         GPIO.output(MIX_X2, GPIO.LOW)
 
-        GPIO.output(SW2_0, GPIO.LOW)
+        GPIO.output(ADC_REF_EN, GPIO.LOW)
+        GPIO.output(ADC_CLK_EN, GPIO.HIGH)
+
+        GPIO.output(SW_PORT_SEL, GPIO.LOW)
+
         GPIO.output(SYNCB, GPIO.HIGH)
 
         print('initalizing ADCs')
@@ -90,10 +84,10 @@ class zmq_io_server:
 
     
     def _set_switch(self, message):
-        sw = message[SW_IDX]
+        #sw = message[SW_IDX]
         state = int(message[SW_STATE])
-        pin = SW_MAP[sw]
-        GPIO.output(pin, state)
+        #pin = SW_MAP[sw]
+        GPIO.output(SW_PORT_SEL, state)
 
         return message[COMMAND_INDEX]
 
@@ -121,6 +115,9 @@ class zmq_io_server:
         return message[COMMAND_INDEX]
 
     def _init_adc(self, message):
+        GPIO.output(MIX_EN, GPIO.LOW)
+        GPIO.output(ADC_REF_EN, GPIO.LOW)
+
         adc = int(message[1:])
         if adc == int(ALL_ADC):
             for s in self.adc_spis:
@@ -128,6 +125,7 @@ class zmq_io_server:
         else:
             ad9864_init(self.adc_spis[adc])
             
+        GPIO.output(ADC_REF_EN, GPIO.HIGH)
         return message[COMMAND_INDEX]
 
     def _sync_adc(self, message):

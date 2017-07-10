@@ -1,5 +1,4 @@
-# horrible bit-banged beaglebone driver to control synth r1 boards
-# ported over from energia program, synth_test.ino..
+# horrible bit-banged beaglebone driver to control lmx2594 synths
 
 import time
 import pdb
@@ -93,8 +92,8 @@ LMX_REG_DEFAULTS[46] |= REG46_MASH_ORDER_2 | REG46_MASH_EN
 MIN_N = 16
 FRAC_DENOM = 200000
 PFD = 100e6
-F_VCO_MIN = 3.55e9
-F_VCO_MAX = 7.1e9
+F_VCO_MIN = 7.5e9
+F_VCO_MAX = 15e9
 PRE_N = 2
 ATT_STEP = .5
 
@@ -102,67 +101,45 @@ CHANNELA = 0
 CHANNELB = 1
 
 # TODO: break this out into a better format..
-N_DIV_RATIOS = 11
-div_ratios = [2, 4, 8, 12, 16, 24, 48, 96, 128]
-div1_options = [0, 0, 0, 0, 0, 0, 0,  0,  0]
-div2_options = [0, 1, 2, 4, 8, 4, 4,  8,  8]
-div3_options = [0, 0, 0, 0, 0, 1, 2,  4,  8]
+# division to 6 covers down to 1.25 GHz..
+N_DIV_RATIOS = 3
+div_ratios = [2, 4, 6]
+div1_options = [1, 2, 3]
+div2_options = [1, 1, 1]
+div3_options = [1, 1, 1]
 
 
 
-SYNTHA_PINS = { \
-	'filta' : 'P9_42', \
-	'filtb' : 'P8_39', \
-	'filtc' : 'P8_33', \
-	'lmx_pow_en' : 'P9_41', \
+RF_SYNTH_PINS = { \
 	'lmx_clk' : 'P9_31', \
-	'lmx_ce' : 'P9_28', \
+	'lmx_ce' : 'P9_13', \
 	'lmx_data' : 'P9_29', \
-	'lmx_le' : 'P9_30', \
-	'lmx_lock' : 'P8_13', \
-	'ref_scl' : 'P9_19', \
-	'ref_sda' : 'P9_20', \
-	'ref_oe' : 'P9_26', \
-	'att_1' : 'P9_24', \
-	'att_2' : 'P9_22', \
-	'att_3' : 'P9_18', \
-	'att_4' : 'P9_16', \
-	'att_5' : 'P9_14', \
-	'att_6' : 'P9_12', \
-	'rf_sw' : 'P8_19', \
-	'power_det' : 'P9_40'}
+	'lmx_le' : 'P9_28', \
+	'lmx_lock' : 'P9_11',\
+        'lmx_pow_en' : 'P8_10',\
+        'dac_cs' : 'P9_17',\
+        'dac_data' : 'P9_21',\
+        'dac_sck' : 'P9_22',\
+        'amp_en' : 'P8_16',\
+        '-5v_en' : 'P8_18',\
+        'filta' : 'P9_25',\
+        'filtb' : 'P9_23'}
+
 	
-SYNTHB_PINS = {
-	'filta' : 'P9_11', \
-	'filtb' : 'P9_13', \
-	'filtc' : 'P9_15', \
-	'lmx_pow_en' : 'P9_17', \
+DEMOD_SYNTH_PINS = {
 	'lmx_clk' : 'P9_31', \
-	'lmx_ce' : 'P9_23', \
+	'lmx_ce' : 'P9_41', \
 	'lmx_data' : 'P9_29', \
-	'lmx_le' : 'P9_25', \
-	'lmx_lock' : 'P9_27', \
-	'ref_scl' : 'P9_19', \
-	'ref_sda' : 'P9_20', \
-	'ref_oe' : 'P9_21', \
-	'att_1' : 'P8_18', \
-	'att_2' : 'P8_16', \
-	'att_3' : 'P8_14', \
-	'att_4' : 'P8_12', \
-	'att_5' : 'P8_10', \
-	'att_6' : 'P8_8', \
-	'rf_sw' : 'P8_31', \
-	'power_det' : 'P9_39'}
-
-RF_SW_LOWFREQ = GPIO.LOW
-RF_SW_HIGHFREQ = GPIO.HIGH
+	'lmx_le' : 'P9_42', \
+	'lmx_lock' : 'P9_30',\
+        'lmx_pow_en' : 'P8_12'}
 
 # cutoff frequency of paths through filter bank, in Hz
-FILTER_BANK_CUTOFFS = [6.0e9, 4.4e9, 3.4e9, 2.25e9, 1.45e9, 1.0e9, 0.63e9, 0.0]
-FILTER_BANK_SIZE = 8
+FILTER_BANK_CUTOFFS = [15.0e9, 7.2e9, 4.5e9, 2.50e9]
+FILTER_BANK_SIZE = 4
 
 class synth_r1:
-    def __init__(self, pins, enable_ref_clk = True):
+    def __init__(self, pins, enable_ref_clk = True, rf_board = False):
         self.pins = pins
 
         self.io_init()
@@ -179,41 +156,34 @@ class synth_r1:
         self.current_filter = None
         self.channel_power = 0 
 
-    def clk_init(self):
-        GPIO.output(self.pins['ref_oe'], GPIO.HIGH)
-
     def io_init(self):
         # configure spi pins
         self.spi = hwiopy_spi(self.pins['lmx_le'], self.pins['lmx_data'], self.pins['lmx_lock'], self.pins['lmx_clk'])
-        
-        # configure gpio pins
-        GPIO.setup(self.pins['filta'], GPIO.OUT)
-        GPIO.setup(self.pins['filtb'], GPIO.OUT)
-        GPIO.setup(self.pins['filtc'], GPIO.OUT)
 
+        # configure gpio pins
         GPIO.setup(self.pins['lmx_pow_en'], GPIO.OUT)
         GPIO.setup(self.pins['lmx_ce'], GPIO.OUT)
         GPIO.setup(self.pins['lmx_lock'], GPIO.IN)
 
-        GPIO.setup(self.pins['ref_oe'], GPIO.OUT)
-        GPIO.output(self.pins['ref_oe'], GPIO.LOW)
+        if self.rf_board:
+            GPIO.setup(self.pins['filta'], GPIO.OUT)
+            GPIO.setup(self.pins['filtb'], GPIO.OUT)
 
-        GPIO.setup(self.pins['att_1'], GPIO.OUT)
-        GPIO.setup(self.pins['att_2'], GPIO.OUT)
-        GPIO.setup(self.pins['att_3'], GPIO.OUT)
-        GPIO.setup(self.pins['att_4'], GPIO.OUT)
-        GPIO.setup(self.pins['att_5'], GPIO.OUT)
-        GPIO.setup(self.pins['att_6'], GPIO.OUT)
+            GPIO.setup(self.pins['-5v_en'], GPIO.OUT)
+            GPIO.setup(self.pins['amp_en'], GPIO.OUT)
 
-        GPIO.setup(self.pins['rf_sw'], GPIO.OUT)
+            self.dac_spi = hwiopy_spi(self.pins['dac_cs'], self.pins['dac_data'], None, self.pins['dac_sck'])
     
-        # TODO: setup i2c
-
-        # set sane initial pin values
 
     def lmx_init(self):
         GPIO.output(self.pins['lmx_pow_en'], GPIO.HIGH)
         GPIO.output(self.pins['lmx_ce'], GPIO.HIGH)
+        
+        if self.rf_board:
+            GPIO.output(self.pins['-5v_en'], GPIO.HIGH)
+            time.sleep(.01)
+            GPIO.output(self.pins['amp_en'], GPIO.HIGH)
+
 
         time.sleep(.1)
 
@@ -265,13 +235,11 @@ class synth_r1:
 
     # set filter bank from frequency
     def set_filter_bank(self, freq):
-        fidx = 6
+        fidx = 4
 
         if freq > F_VCO_MAX:
-            GPIO.output(self.pins['rf_sw'], RF_SW_HIGHFREQ)
             self.current_channel = CHANNELB
         else:
-            GPIO.output(self.pins['rf_sw'], RF_SW_LOWFREQ)
             self.current_channel = CHANNELA
 
             for (i, fc) in enumerate(FILTER_BANK_CUTOFFS):
@@ -282,14 +250,8 @@ class synth_r1:
         
         # bypass filter bank for synth b, pin P9_15 is busted on my beaglebone..
         if fidx != self.current_filter:
-            if self.pins['filtc'] == SYNTHB_PINS['filtc']:
-                GPIO.output(self.pins['filta'], GPIO.HIGH)
-                GPIO.output(self.pins['filtb'], GPIO.HIGH)
-                GPIO.output(self.pins['filtc'], GPIO.HIGH)
-            else:
-                GPIO.output(self.pins['filta'], fidx & BIT0)
-                GPIO.output(self.pins['filtb'], fidx & BIT1)
-                GPIO.output(self.pins['filtc'], fidx & BIT2)
+            GPIO.output(self.pins['filta'], fidx & BIT0)
+            GPIO.output(self.pins['filtb'], fidx & BIT1)
 
         self.current_filter = fidx 
 

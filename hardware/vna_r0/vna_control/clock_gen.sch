@@ -1654,4 +1654,6 @@ Wire Wire Line
 	3550 4050 3550 4200
 Wire Wire Line
 	3550 4200 3950 4200
+Text Notes 6300 1550 0    60   ~ 0
+TODO on next rev: move IF synth to OUT0\n(or, use all four outputs to eliminate splitter on rf_demod board)
 $EndSCHEMATC
