@@ -6,41 +6,18 @@ import Adafruit_BBIO.GPIO as GPIO
 from bbone_spi_hwiopy import hwiopy_spi
 import numpy as np
 
-BIT0 = (1 << 0)
-BIT1 = (1 << 1)
-BIT2 = (1 << 2)
-BIT3 = (1 << 3)
-BIT4 = (1 << 4)
-BIT5 = (1 << 5)
-BIT6 = (1 << 6)
-BIT7 = (1 << 7)
-BIT8 = (1 << 8)
-BIT9 = (1 << 9)
-BIT10 = (1 << 10)
-BIT11 = (1 << 11)
-BIT12 = (1 << 12)
-BIT13 = (1 << 13)
-BIT14 = (1 << 14)
-BIT15 = (1 << 15)
-BIT16 = (1 << 16)
-BIT17 = (1 << 17)
-BIT18 = (1 << 18)
-BIT19 = (1 << 19)
-BIT20 = (1 << 20)
-BIT21 = (1 << 21)
-BIT22 = (1 << 22)
-BIT23 = (1 << 23)
+def _bit(n):
+    return (1 << n)
 
-REG0_LD_EN 	= BIT13
-REG0_FCAL_EN 	= BIT3
-REG0_RESET 	= BIT1
-REG0_MUXOUT_SEL = BIT2
+REG0_FCAL_EN 	= _bit(3)
+REG0_RESET 	= _bit(1)
+REG0_MUXOUT_SEL = _bit(2)
+
 REG46_MASH_ORDER_2 = 2
 REG46_MASH_EN 	= BIT5
 REG46_OUTA_PD 	= BIT6
 REG46_OUTB_PD 	= BIT7
 
-REG30_VCO_2X_EN = BIT0
 
 REG38_PLL_N 	= 1
 REG39_PFD_DLY_2 = BIT9
@@ -144,8 +121,6 @@ class synth_r1:
 
         self.io_init()
 
-        self.set_attenuator(31)
-
         if enable_ref_clk:
             self.clk_init()
         
@@ -198,8 +173,11 @@ class synth_r1:
         self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
 
         time.sleep(.1)
-    
+   
+
+
     def set_power(self, power):
+        # TODO: convert to use macom vga/dac..
         self.channel_power = power
 
         if self.current_channel == CHANNELA:
@@ -209,54 +187,32 @@ class synth_r1:
             self._set_reg(46, REG46_OUTA_PD)
 
 
+    # set filter bank from frequency
+    def set_filter_bank(self, freq):
+        # TODO: verify filter indicies
+        fidx = 4
+
+        for (i, fc) in enumerate(FILTER_BANK_CUTOFFS):
+            if(freq > fc):
+                fidx = np.mod(i - 1, FILTER_BANK_SIZE)
+                break
+
+        print('setting filter bank to index {}'.format(fidx)) 
+        if fidx != self.current_filter:
+            GPIO.output(self.pins['filta'], fidx & _bit(0))
+            GPIO.output(self.pins['filtb'], fidx & _bit(1))
+
+        self.current_filter = fidx 
 
     def _calc_n(self, f, n_step, div):
-        # TODO verify floating point stuff..
         return int(f / (n_step / div))
     
     def _calc_frac(self, f, n, n_step, frac_step, div):
         return int((f - n * (n_step / div)) / (frac_step / div))
 
-
-    
-    # set attenuator in dB
-    def set_attenuator(self, att):
-        att_bits = int(att / ATT_STEP)
-
-        GPIO.output(self.pins['att_1'], att_bits & BIT5)
-        GPIO.output(self.pins['att_2'], att_bits & BIT4)
-        GPIO.output(self.pins['att_3'], att_bits & BIT3)
-        GPIO.output(self.pins['att_4'], att_bits & BIT2)
-        GPIO.output(self.pins['att_5'], att_bits & BIT1)
-        GPIO.output(self.pins['att_6'], att_bits & BIT0)
-        
-        self.current_att = att_bits * .5
-        print('setting attenuator to bank to index {}'.format(att_bits)) 
-
-    # set filter bank from frequency
-    def set_filter_bank(self, freq):
-        fidx = 4
-
-        if freq > F_VCO_MAX:
-            self.current_channel = CHANNELB
-        else:
-            self.current_channel = CHANNELA
-
-            for (i, fc) in enumerate(FILTER_BANK_CUTOFFS):
-                if(freq > fc):
-                    fidx = np.mod(i - 1, FILTER_BANK_SIZE)
-                    break
-        print('setting filter bank to index {}'.format(fidx)) 
-        
-        # bypass filter bank for synth b, pin P9_15 is busted on my beaglebone..
-        if fidx != self.current_filter:
-            GPIO.output(self.pins['filta'], fidx & BIT0)
-            GPIO.output(self.pins['filtb'], fidx & BIT1)
-
-        self.current_filter = fidx 
-
     # set synth frequency
     def set_freq(self, freq):
+        # TODO: convert for lmx2594
         self.current_freq = freq
 
         n_step = PFD * PRE_N
@@ -363,7 +319,7 @@ class synth_r1:
     def wait_for_lock(self):
         # wait for pll lock
         while not GPIO.input(self.pins['lmx_lock']):
-            print('waiting..')
+            print('waiting for lock..')
 
         
     def _set_reg(self, reg, d):
@@ -378,20 +334,14 @@ class synth_r1:
         return self.spi.transfer(payload, bits = 24)
 
 if __name__ == '__main__':
-    syntha = synth_r1(SYNTHA_PINS)
-    #synthb = synth_r1(SYNTHB_PINS)
+    rf_synth = synth_r1(RF_SYNTH_PINS)
 
     time.sleep(.1)
-    syntha.set_power(0)
-    #synthb.set_power(20)
-
-    syntha.set_attenuator(30)
-    #synthb.set_attenuator(0)
+    rf_synth.set_power(0)
 
     tstart = time.time()
-    #synthb.set_freq(3.0e9)
-    syntha.set_freq(2.045e9)
-
+    rf_synth.set_freq(2.045e9)
     tstop = time.time()
+
     print("time: " + str(tstop - tstart))
     pdb.set_trace()
