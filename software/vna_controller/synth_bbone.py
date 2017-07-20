@@ -9,52 +9,13 @@ import numpy as np
 def _bit(n):
     return (1 << n)
 
-REG0_FCAL_EN 	= _bit(3)
 REG0_RESET 	= _bit(1)
-REG0_MUXOUT_SEL = _bit(2)
-
-REG46_MASH_ORDER_2 = 2
-REG46_MASH_EN 	= BIT5
-REG46_OUTA_PD 	= BIT6
-REG46_OUTB_PD 	= BIT7
+REG0_MUXOUT_LD_SEL = _bit(2)
+REG0_FCAL_EN 	= _bit(3)
 
 
-REG38_PLL_N 	= 1
-REG39_PFD_DLY_2 = BIT9
 
-REG36_CHDIV_DISTB_EN = BIT11
-REG36_CHDIV_DISTA_EN = BIT10
-REG36_CHDIV_SEG_SEL_1 = BIT4
-REG36_CHDIV_SEG_SEL_12 = BIT5
-REG36_CHDIV_SEG_SEL_123 = BIT6
-REG36_CHDIV_SEG3 = 0
-
-REG35_CHDIV_SEG2 = 9
-REG35_CHDIV_SEG3_EN = BIT8
-REG35_CHDIV_SEG2_EN = BIT7
-REG35_CHDIV_SEG1 = 2 
-REG35_CHDIV_SEG1_EN = BIT1
-
-REG34_CHDIV_EN = BIT5
-
-REG48_OUTB_MUX_VCO = BIT0
-REG48_OUTB_MUX_DIV = 0
-
-REG10_MULT = 7
-REG11_PLL_R = 4
-REG12_PLL_R_PRE = 0
-REG47_OUTB_POW = 0
-REG46_OUTA_POW = 8
-
-REG47_OUTA_MUX_DIV = 0
-REG47_OUTA_MUX_VCO = BIT11
-
-
-REG31_VCO_DISTA_PD = BIT9
-REG31_VCO_DISTB_PD = BIT10
-REG31_CHDIV_DIST_PD = BIT7
-
-
+DEFAULT = 0
 LMX_REG_DEFAULTS = {\
         0:0x00251C, 1:0x010808, 2:0x020500, 3:0x030642, 4:0x040A43, 5:0x0500C8, 6:0x06C802, 7:0x0740B2, \
         8:0x082000, 9:0x091604, 10:0x0A10D8, 11:0x0B0018, 12:0x0C5001, 13:0x0D4000, 14:0x0E1E70, 15:0x0F064F, \
@@ -72,26 +33,23 @@ LMX_REG_DEFAULTS = {\
         104:0x680000, 105:0x690021, 106:0x6A0000, 107:0x6B0000, 108:0x6C0000, 109:0x6D0000, 110:0x6E0000, 111:0x6F0000, \
         112:0x700000}
 
-LMX_REG_DEFAULTS[46] |= REG46_MASH_ORDER_2 | REG46_MASH_EN
+LMX_REG_DEFAULTS[44] |= 2 # set mash order 2
+LMX_REG_DEFAULTS[44] &= (0xffff ^ _bit(5)) # enable fractional mode
 
 MIN_N = 36
-FRAC_DENOM = 200000
-PFD = (85e6 * 2)
+FRAC_DENOM = 170000
+PFD = (85e6)
 F_VCO_MIN = 7.5e9
 F_VCO_MAX = 15e9
-PRE_N = 2
 ATT_STEP = .5
 
 CHANNELA = 0
 CHANNELB = 1
+CHANNEL_BOTH = 2
 
 # TODO: break this out into a better format..
-# division to 6 covers down to 1.25 GHz..
-N_DIV_RATIOS = 3
+# division to 6 covers down to 1.25 GHz, we only need to 2 GHz
 div_ratios = [2, 4, 6]
-div1_options = [1, 2, 3]
-div2_options = [1, 1, 1]
-div3_options = [1, 1, 1]
 
 # set OSCin
 
@@ -172,29 +130,59 @@ class synth_r1:
         time.sleep(.1)
 
         self._set_reg(0, REG0_RESET)
-        self._set_reg(46, REG46_MASH_ORDER_2 | REG46_MASH_EN | REG46_OUTB_PD | (0 << REG46_OUTA_POW))
-        self._set_reg(31, REG31_VCO_DISTB_PD)
-        self._set_reg(12, 0x7001)
-        self._set_reg(11, 0x0018)
-        self._set_reg(10, 0x10d8) 
-        self._set_reg(40, (FRAC_DENOM >> 16) & 0xffff)
-        self._set_reg(41, FRAC_DENOM & 0xffff)
-        self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
+        self._set_reg(0, DEFAULT)
+        
+        # set to fractional, order 2
 
+        # set frac denom
+        self._set_reg(39, FRAC_DENOM & 0xffff)
+        self._set_reg(38, (FRAC_DENOM >> 16) & 0xffff)
+        
+        # no changes to default mult, pll_r, pll_r_pre
+
+        # enable lock detect output, start frequency cal 
+        self._set_reg(0, REG0_MUXOUT_LD_SEL | REG0_FCAL_EN | REG0_MUXOUT_SEL)
+    
         time.sleep(.1)
    
 
 
     def set_power(self, power):
         # TODO: convert to use macom vga/dac..
-        self.channel_power = power
+        # currently just output lmx2594 power units..
 
-        if self.current_channel == CHANNELA:
-            self._set_reg(46, REG46_OUTB_PD | (0x3F & power) << REG46_OUTA_POW)
+        self.channel_power = power & 0x3F
+
+        r44 = 0
+        r45 = 0
+    
+
+        # keep mux for channel A on VCO if we're outputting the vco..
+        if self.current_freq > F_VCO_MIN:
+            r45 = _bit(11) 
+        
+        if self.current_channel == CHANNEL_BOTH:
+            # enable channel A, enable channel B
+            r45 |= self.channel_power  # set channel B power
+            r44 |= self.channel_power << 8 # set channel A power
+
+        elif self.current_channel == CHANNELA:
+            # enable channel A, disable channel B
+            r44 |= _bit(7) # set OUTB_PD
+            r44 |= self.channel_power << 8 # set channel A power
+
+        elif self.current_channel == CHANNELB:
+            # enable channel B, disable channel A
+            r44 |= _bit(6) # set OUTA_PD
+            r45 |= self.channel_power  # set channel B power
+
         else:
-            self._set_reg(47, (0x3F & power) << REG47_OUTB_POW)
-            self._set_reg(46, REG46_OUTA_PD)
+            # disable channels A and B
+            r44 |= _bit(7) # set OUTB_PD
+            r44 |= _bit(6) # set OUTA_PD
 
+        self._set_reg(45, r45)
+        self._set_reg(44, r44)
 
     # set filter bank from frequency
     def set_filter_bank(self, freq):
@@ -212,6 +200,11 @@ class synth_r1:
             GPIO.output(self.pins['filtb'], fidx & _bit(1))
 
         self.current_filter = fidx 
+        
+        if fidx < 2:
+            self.current_channel = CHANNELA
+        else:
+            self.current_channel = CHANNELB
 
     def _calc_n(self, f, n_step, div):
         return int(f / (n_step / div))
@@ -223,105 +216,59 @@ class synth_r1:
     def set_freq(self, freq):
         # TODO: convert for lmx2594
         self.current_freq = freq
-
-        n_step = PFD * PRE_N
+        n_step = PFD
         frac_step = n_step / FRAC_DENOM
         n = MIN_N
 
+        f_vco = 0
         frac = 0
-        div1 = 1
-        div2 = 1
-        div3 = 1
-
+        
         if freq < F_VCO_MIN:
             for div_i in range(N_DIV_RATIOS):
                 if freq > F_VCO_MIN / div_ratios[div_i]:
-                    div1 = div1_options[div_i]
-                    div2 = div2_options[div_i]
-                    div3 = div3_options[div_i]
                     break
 
             n = self._calc_n(freq, n_step, div_ratios[div_i])
             frac = self._calc_frac(freq, n, n_step, frac_step, div_ratios[div_i])
+            f_vco = freq / div_ratios[div_i]
 
-            reg35 = REG35_CHDIV_SEG1_EN
-            reg36 = REG36_CHDIV_DISTA_EN
-        
-
-            if div3 != 0:
-              reg35 |= REG35_CHDIV_SEG2_EN | REG35_CHDIV_SEG3_EN
-              reg35 |= div2_options[div_i] << REG35_CHDIV_SEG2
-              reg35 |= div1_options[div_i] << REG35_CHDIV_SEG1
-
-              reg36 |= div3_options[div_i] << REG36_CHDIV_SEG3
-              reg36 |= REG36_CHDIV_SEG_SEL_123
-
-            elif div2 != 0:
-              reg35 |= REG35_CHDIV_SEG2_EN
-              reg35 |= div2_options[div_i] << REG35_CHDIV_SEG2
-              reg35 |= div1_options[div_i] << REG35_CHDIV_SEG1
-              reg36 |= REG36_CHDIV_SEG_SEL_12
-
-            else:
-              reg35 |= 0
-              reg36 |= REG36_CHDIV_SEG_SEL_1
-
-            self._set_reg(30, 0)
-            self._set_reg(31, REG31_VCO_DISTB_PD)
-            self._set_reg(34, REG34_CHDIV_EN)
-            self._set_reg(35, reg35)
-            self._set_reg(36, reg36)
-            self._set_reg(48, REG48_OUTB_MUX_DIV)
-            self._set_reg(47, REG47_OUTA_MUX_DIV)
-
-        elif freq > F_VCO_MAX:
-            n = self._calc_n(freq/2, n_step, 1)
-            frac = self._calc_frac(freq/2, n, n_step, frac_step, 1)
-
-            # enable vco doubler
-            self._set_reg(30, REG30_VCO_2X_EN)
-
-            # disable output dividers
-            self._set_reg(34, 0)
-            self._set_reg(35, 0)
-            self._set_reg(36, 0)
-            self._set_reg(47, REG47_OUTA_MUX_VCO)
-            self._set_reg(48, REG48_OUTB_MUX_VCO)
-
-            # enable channel b, bypass filter bank, disable a buffer
-            self._set_reg(31, REG31_CHDIV_DIST_PD)
+            self._set_reg(75, div_i << 6) # set vco divider value
+            self._set_reg(46, 0) # set OUTB_MUX to divider
+            self._set_reg(45, self.channel_power) # set OUTA_MUX to divider (preserve channel power) 
 
         else:
             n = self._calc_n(freq, n_step, 1)
             frac = self._calc_frac(freq, n, n_step, frac_step, 1)
+            f_vco = freq
 
-            # disable vco doubler
-            self._set_reg(30, 0)
-
-            # disable output dividers
-            self._set_reg(34, 0)
-            self._set_reg(35, 0)
-            self._set_reg(36, 0)
-            self._set_reg(47, REG47_OUTA_MUX_VCO)
-            self._set_reg(48, REG48_OUTB_MUX_VCO)
-
-            # enable channel b, bypass filter bank, disable a buffer
-            self._set_reg(31, REG31_CHDIV_DIST_PD)
-
+            # set mux to VCO
+            self._set_reg(46, 1) # set OUTB_MUX to vco
+            self._set_reg(45, _bit(11) | self.channel_power) # set OUTA_MUX to vco (preserve channel power)
 
 
         # load new n and frac registers 
-        self._set_reg(38, (n << REG38_PLL_N))
-        self._set_reg(44, (frac >> 16) & 0xFFFF)
-        self._set_reg(45, frac & 0xFFFF)
-        
+        self._set_reg(36, n))
+        self._set_reg(42, (frac >> 16) & 0xFFFF)
+        self._set_reg(43, frac & 0xFFFF)
+
+        # set PFD_DLY_SEL, assuming mash order 2
+        if f_vco < 10e9:
+            self._set_reg(37, 2 << 8)
+        else:
+            self._set_reg(37, 3 << 8)
+
+       
         # recalibrate VCO
         self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
         
-        # update filter bank
-        self.set_filter_bank(freq) 
+        if self.rf_board:
+            # update filter bank, enable only one output channel
+            self.set_filter_bank(freq) 
 
-        # update output channel..
+        else:
+            self.current_channel = CHANNEL_BOTH
+
+        # update output channel
         self.set_power(self.channel_power)
 
 
@@ -345,12 +292,12 @@ class synth_r1:
 if __name__ == '__main__':
     rf_synth = synth_r1(RF_SYNTH_PINS)
 
-    time.sleep(.1)
-    rf_synth.set_power(0)
-
     tstart = time.time()
     rf_synth.set_freq(2.045e9)
     tstop = time.time()
+    
+    rf_synth.set_power(0)
+
 
     print("time: " + str(tstop - tstart))
     pdb.set_trace()
