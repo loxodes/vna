@@ -124,7 +124,9 @@ class synth_r1:
         if self.rf_board:
             GPIO.output(self.pins['-5v_en'], GPIO.HIGH)
             time.sleep(.01)
-            GPIO.output(self.pins['amp_en'], GPIO.HIGH)
+            print('verify that -5V rail is working before enabling 5V rail!')
+            pdb.set_trace()
+            #GPIO.output(self.pins['amp_en'], GPIO.HIGH)
 
 
         time.sleep(.1)
@@ -147,7 +149,7 @@ class synth_r1:
    
 
 
-    def set_power(self, power):
+    def set_power(self, power, vga = -1):
         # TODO: convert to use macom vga/dac..
         # currently just output lmx2594 power units..
 
@@ -184,6 +186,12 @@ class synth_r1:
         self._set_reg(45, r45)
         self._set_reg(44, r44)
 
+        if self.rf_board and vga > 0:
+            DAC_BITS = 10
+            print('TODO: measure dac buffer range, add limits to range of output voltages')
+            pdb.set_trace()
+            self.spi_dac.transfer(vga << (16 - DAC_BITS - 4), bits = 16)
+            
     # set filter bank from frequency
     def set_filter_bank(self, freq):
         # TODO: verify filter indicies
@@ -296,7 +304,7 @@ if __name__ == '__main__':
     rf_synth.set_freq(2.045e9)
     tstop = time.time()
     
-    rf_synth.set_power(0)
+    rf_synth.set_power(0, vga = 0)
 
 
     print("time: " + str(tstop - tstart))
