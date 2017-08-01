@@ -4,6 +4,7 @@ import time
 import pdb
 import Adafruit_BBIO.GPIO as GPIO
 from bbone_spi_hwiopy import hwiopy_spi
+from bbone_spi_bitbang import bitbang_spi
 import numpy as np
 
 def _bit(n):
@@ -60,14 +61,14 @@ RF_SYNTH_PINS = { \
 	'lmx_data' : 'P9_29', \
 	'lmx_le' : 'P9_28', \
 	'lmx_lock' : 'P9_11',\
-        'lmx_pow_en' : 'P8_10',\
-        'dac_cs' : 'P9_17',\
-        'dac_data' : 'P9_21',\
-        'dac_sck' : 'P9_22',\
-        'amp_en' : 'P8_16',\
-        '-5v_en' : 'P8_18',\
-        'filta' : 'P9_25',\
-        'filtb' : 'P9_23'}
+    'lmx_pow_en' : 'P8_10',\
+    'dac_cs' : 'P9_17',\
+    'dac_data' : 'P9_21',\
+    'dac_sck' : 'P9_22',\
+    'amp_en' : 'P8_16',\
+    '-5v_en' : 'P8_18',\
+    'filta' : 'P9_25',\
+    'filtb' : 'P9_23'}
 
 	
 DEMOD_SYNTH_PINS = {
@@ -76,21 +77,18 @@ DEMOD_SYNTH_PINS = {
 	'lmx_data' : 'P9_29', \
 	'lmx_le' : 'P9_42', \
 	'lmx_lock' : 'P9_30',\
-        'lmx_pow_en' : 'P8_12'}
+    'lmx_pow_en' : 'P8_12'}
 
 # cutoff frequency of paths through filter bank, in Hz
 FILTER_BANK_CUTOFFS = [15.0e9, 7.2e9, 4.5e9, 2.50e9]
 FILTER_BANK_SIZE = 4
 
 class synth_r1:
-    def __init__(self, pins, enable_ref_clk = True, rf_board = False):
+    def __init__(self, pins, rf_board = False):
         self.pins = pins
-
+        self.rf_board = rf_board
         self.io_init()
 
-        if enable_ref_clk:
-            self.clk_init()
-        
         self.lmx_init()
 
         self.current_channel = None
@@ -114,7 +112,7 @@ class synth_r1:
             GPIO.setup(self.pins['-5v_en'], GPIO.OUT)
             GPIO.setup(self.pins['amp_en'], GPIO.OUT)
 
-            self.dac_spi = hwiopy_spi(self.pins['dac_cs'], self.pins['dac_data'], None, self.pins['dac_sck'])
+            self.dac_spi = bitbang_spi(self.pins['dac_cs'], self.pins['dac_data'], None, self.pins['dac_sck'])
     
 
     def lmx_init(self):
@@ -125,6 +123,7 @@ class synth_r1:
             GPIO.output(self.pins['-5v_en'], GPIO.HIGH)
             time.sleep(.01)
             GPIO.output(self.pins['amp_en'], GPIO.HIGH)
+
 
 
         time.sleep(.1)
@@ -141,7 +140,7 @@ class synth_r1:
         # no changes to default mult, pll_r, pll_r_pre
 
         # enable lock detect output, start frequency cal 
-        self._set_reg(0, REG0_MUXOUT_LD_SEL | REG0_FCAL_EN | REG0_MUXOUT_SEL)
+        self._set_reg(0, REG0_MUXOUT_LD_SEL | REG0_FCAL_EN)
     
         time.sleep(.1)
    
@@ -224,7 +223,7 @@ class synth_r1:
         frac = 0
         
         if freq < F_VCO_MIN:
-            for div_i in range(N_DIV_RATIOS):
+            for div_i in range(len(div_ratios)):
                 if freq > F_VCO_MIN / div_ratios[div_i]:
                     break
 
@@ -247,7 +246,7 @@ class synth_r1:
 
 
         # load new n and frac registers 
-        self._set_reg(36, n))
+        self._set_reg(36, n)
         self._set_reg(42, (frac >> 16) & 0xFFFF)
         self._set_reg(43, frac & 0xFFFF)
 
@@ -259,7 +258,7 @@ class synth_r1:
 
        
         # recalibrate VCO
-        self._set_reg(0, REG0_LD_EN | REG0_FCAL_EN | REG0_MUXOUT_SEL)
+        self._set_reg(0, REG0_FCAL_EN | REG0_MUXOUT_LD_SEL)
         
         if self.rf_board:
             # update filter bank, enable only one output channel
@@ -290,7 +289,7 @@ class synth_r1:
         return self.spi.transfer(payload, bits = 24)
 
 if __name__ == '__main__':
-    rf_synth = synth_r1(RF_SYNTH_PINS)
+    rf_synth = synth_r1(RF_SYNTH_PINS, rf_board = True)
 
     tstart = time.time()
     rf_synth.set_freq(2.045e9)
