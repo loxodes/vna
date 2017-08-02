@@ -1,6 +1,6 @@
 # converts txt register dump from TICS Pro into a python dictionary
 
-filename = 'lmx2594_default_regs.txt'
+filename = 'lmx2594_400mhz.txt'
 
 regs = []
 
@@ -16,7 +16,7 @@ with open(filename, 'r') as f:
 
 regs.reverse()
 
-print('LMX_DEFAULT_REGS = {', end='')
+print('LMX_REG_DEFAULTS = {', end='')
 
 for i,reg in enumerate(regs):
     if i % REGS_PER_LINE == 0:
