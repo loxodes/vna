@@ -25,7 +25,7 @@ class bitbang_spi:
             GPIO.output(self.spi_mosi, (payload >> (bits - (i + 1))) & 0x01)
             GPIO.output(self.spi_clk, GPIO.HIGH)
 
-            if spi_miso != None:
+            if self.spi_miso != None:
                 response |= GPIO.input(self.spi_miso)
             GPIO.output(self.spi_clk, GPIO.LOW)
 
