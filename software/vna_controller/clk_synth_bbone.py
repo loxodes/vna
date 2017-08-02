@@ -9,23 +9,27 @@
 
 from Adafruit_I2C import Adafruit_I2C
 import Adafruit_BBIO.GPIO as GPIO
+import pdb
+import time
 
 # i2c hooked up to P9 19/20
 CLK_REF_SEL = 'P8_8'
 PLL_POW_EN = 'P8_14'
 
-AD9577_I2C_ADDR = 0x7f
+AD9577_I2C_ADDR = 0x40
 
-class ad577_synth:
+class ad9577_synth:
     def __init__(self):
         self.io_init()
+        time.sleep(.5)
         self.ad9577_init()
 
     def ad9577_init(self):
+        self.i2c = Adafruit_I2C(AD9577_I2C_ADDR)
         self.i2c.write8(0x40, 0x02) # enable i2c, set EnI2C on register C0
 
         self.i2c.write8(0x3A, 0xbf) # power down CH3, CMOS for all outputs on register DR1
-        self.i2c.write8(0x3B, 0x01) # enable refout, se PDRefOut on DR2 to 1
+        self.i2c.write8(0x3B, 0x00) # enable refout, set PDRefOut on DR2 to 0
     
         # fpfd = 26 MHz
         # fout = fpfd * n / (v * d)
@@ -40,10 +44,12 @@ class ad577_synth:
         self.i2c.write8(0x23, 0x8d) # set v1 to 4, d1 to 13 on register ADV0
 
         # configure pll2 (int mode)
-        self.i2c.write8(0x18, 0x05) # set n to 85 in register BF3 (vco of 2210 MHz) 
+        self.i2c.write8(0x1C, 0x05) # set n to 85 in register BF3 (vco of 2210 MHz) 
         self.i2c.write8(0x25, 0x4d) # set v2 to 2, d2 to 13 on register BDV0
 
         # finish configuration
+
+        self.i2c.write8(0x1F, 0x00)
         self.i2c.write8(0x1F, 0x01) # force new acquisition by toggling NewAcq
         self.i2c.write8(0x1F, 0x00)
 
@@ -55,4 +61,7 @@ class ad577_synth:
         GPIO.output(PLL_POW_EN, GPIO.HIGH)
 
 
-        self.i2c = Adafruit_I2C(AD9577_I2C_ADDR)
+
+if __name__ == '__main__':
+    s = ad9577_synth()
+    pdb.set_trace()

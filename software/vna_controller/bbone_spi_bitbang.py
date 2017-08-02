@@ -10,10 +10,11 @@ class bitbang_spi:
         GPIO.setup(spi_cs, GPIO.OUT)
         GPIO.setup(spi_mosi, GPIO.OUT)
         GPIO.setup(spi_clk, GPIO.OUT)
-        GPIO.output(spi_cs, GPIO.HIGH)
         
         if self.spi_miso != None:
             GPIO.setup(spi_miso, GPIO.IN)
+
+        GPIO.output(spi_cs, GPIO.HIGH)
 
    def transfer(self, payload, bits = 8):
         GPIO.output(self.spi_cs, GPIO.LOW)
@@ -25,8 +26,10 @@ class bitbang_spi:
             # data clocked in on clock rising edge
             GPIO.output(self.spi_mosi, (payload >> (bits - (i + 1))) & 0x01)
             GPIO.output(self.spi_clk, GPIO.HIGH)
+
             if self.spi_miso != None:
                 response |= GPIO.input(self.spi_miso)
+
             GPIO.output(self.spi_clk, GPIO.LOW)
 
         GPIO.output(self.spi_cs, GPIO.HIGH)
