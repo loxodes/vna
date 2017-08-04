@@ -15,58 +15,37 @@ REG0_MUXOUT_LD_SEL = _bit(2)
 REG0_FCAL_EN 	= _bit(3)
 
 
-
 DEFAULT = 0
-'''
-LMX_REG_DEFAULTS = {\
-        0:0x00241C, 1:0x010808, 2:0x020500, 3:0x030642, 4:0x040A43, 5:0x0500C8, 6:0x06C802, 7:0x0740B2, \
-        8:0x082000, 9:0x090604, 10:0x0A10D8, 11:0x0B0018, 12:0x0C5001, 13:0x0D4000, 14:0x0E1E70, 15:0x0F064F, \
-        16:0x100080, 17:0x11012C, 18:0x120064, 19:0x1327B7, 20:0x14E048, 21:0x150401, 22:0x160001, 23:0x17007C, \
-        24:0x18071A, 25:0x190624, 26:0x1A0DB0, 27:0x1B0002, 28:0x1C0488, 29:0x1D318C, 30:0x1E318C, 31:0x1F43EC, \
-        32:0x200393, 33:0x211E21, 34:0x220000, 35:0x230004, 36:0x240046, 37:0x250204, 38:0x260000, 39:0x2703E8, \
-        40:0x280000, 41:0x290000, 42:0x2A0000, 43:0x2B0000, 44:0x2C1FA3, 45:0x2DC0DF, 46:0x2E07FC, 47:0x2F0300, \
-        48:0x300300, 49:0x314180, 50:0x320000, 51:0x330080, 52:0x340820, 53:0x350000, 54:0x360000, 55:0x370000, \
-        56:0x380000, 57:0x390020, 58:0x3A8001, 59:0x3B0001, 60:0x3C0000, 61:0x3D00A8, 62:0x3E0322, 63:0x3F0000, \
-        64:0x401388, 65:0x410000, 66:0x4201F4, 67:0x430000, 68:0x4403E8, 69:0x450000, 70:0x46C350, 71:0x470081, \
-        72:0x480001, 73:0x49003F, 74:0x4A0000, 75:0x4B0800, 76:0x4C000C, 77:0x4D0000, 78:0x4E0003, 79:0x4F0000, \
-        80:0x500000, 81:0x510000, 82:0x520000, 83:0x530000, 84:0x540000, 85:0x550000, 86:0x560000, 87:0x570000, \
-        88:0x580000, 89:0x590000, 90:0x5A0000, 91:0x5B0000, 92:0x5C0000, 93:0x5D0000, 94:0x5E0000, 95:0x5F0000, \
-        96:0x600000, 97:0x610888, 98:0x620000, 99:0x630000, 100:0x640000, 101:0x650011, 102:0x660000, 103:0x670000, \
-        104:0x680000, 105:0x690021, 106:0x6A0000, 107:0x6B0000, 108:0x6C0000, 109:0x6D0000, 110:0x6E0000, 111:0x6F0000, \
-        112:0x700000}
-
-#LMX_REG_DEFAULTS[44] |= 2 # set mash order 2
-LMX_REG_DEFAULTS[44] &= (0xffff ^ _bit(5)) # enable fractional mode
-'''
 
 LMX_REG_DEFAULTS = {\
-    0:0x00241C, 1:0x010808, 2:0x020500, 3:0x030642, 4:0x040A43, 5:0x0500C8, 6:0x06C802, 7:0x0740B2, \
-    8:0x082000, 9:0x090604, 10:0x0A10D8, 11:0x0B0018, 12:0x0C5001, 13:0x0D4000, 14:0x0E1E70, 15:0x0F064F, \
-    16:0x100080, 17:0x11012C, 18:0x120064, 19:0x1327B7, 20:0x14E048, 21:0x150401, 22:0x160001, 23:0x17007C, \
-    24:0x18071A, 25:0x190624, 26:0x1A0DB0, 27:0x1B0002, 28:0x1C0488, 29:0x1D318C, 30:0x1E318C, 31:0x1F43EC, \
-    32:0x200393, 33:0x211E21, 34:0x220000, 35:0x230004, 36:0x240070, 37:0x250204, 38:0x260000, 39:0x2703E8, \
-    40:0x280000, 41:0x290000, 42:0x2A0000, 43:0x2B03AD, 44:0x2C1F22, 45:0x2DC8DF, 46:0x2E07FC, 47:0x2F0300, \
-    48:0x300300, 49:0x314180, 50:0x320000, 51:0x330080, 52:0x340820, 53:0x350000, 54:0x360000, 55:0x370000, \
-    56:0x380000, 57:0x390020, 58:0x3A8001, 59:0x3B0000, 60:0x3C0000, 61:0x3D00A8, 62:0x3E0322, 63:0x3F0000, \
-    64:0x401388, 65:0x410000, 66:0x4201F4, 67:0x430000, 68:0x4403E8, 69:0x450000, 70:0x46C350, 71:0x470081, \
-    72:0x480001, 73:0x49003F, 74:0x4A0000, 75:0x4B0980, 76:0x4C000C, 77:0x4D0000, 78:0x4E0003, 79:0x4F0026, \
-    80:0x506666, 81:0x510000, 82:0x521E00, 83:0x530000, 84:0x540001, 85:0x55D300, 86:0x560000, 87:0x570000, \
-    88:0x580000, 89:0x590000, 90:0x5A0000, 91:0x5B0000, 92:0x5C0000, 93:0x5D0000, 94:0x5E0000, 95:0x5F0000, \
-    96:0x600000, 97:0x610888, 98:0x620200, 99:0x630000, 100:0x640000, 101:0x650011, 102:0x663F80, 103:0x670000, \
-    104:0x680000, 105:0x690021, 106:0x6A0000, 107:0x6B0000, 108:0x6C0000, 109:0x6D0000, 110:0x6E0000, 111:0x6F0000, \
-    112:0x700000}
+	0:0x261C, 1:0x0808, 2:0x0500, 3:0x0642, 4:0x0A43, 5:0x00C8, 6:0xC802, 7:0x00B2, \
+	8:0x2000, 9:0x0604, 10:0x10D8, 11:0x0018, 12:0x5001, 13:0x4000, 14:0x1E70, 15:0x064F, \
+	16:0x0080, 17:0x012C, 18:0x0064, 19:0x27B7, 20:0xE048, 21:0x0401, 22:0x0001, 23:0x007C, \
+	24:0x071A, 25:0x0624, 26:0x0DB0, 27:0x0002, 28:0x0488, 29:0x318C, 30:0x318C, 31:0x43EC, \
+	32:0x0393, 33:0x1E21, 34:0x0000, 35:0x0004, 36:0x0070, 37:0x0204, 38:0x0002, 39:0x9810, \
+	40:0x0000, 41:0x0000, 42:0x0002, 43:0x7100, 44:0x0022, 45:0xC8C0, 46:0x07FC, 47:0x0300, \
+	48:0x0300, 49:0x4180, 50:0x0000, 51:0x0080, 52:0x0820, 53:0x0000, 54:0x0000, 55:0x0000, \
+	56:0x0000, 57:0x0020, 58:0x8001, 59:0x0001, 60:0x0100, 61:0x00A8, 62:0x0322, 63:0x0000, \
+	64:0x1388, 65:0x0000, 66:0x01F4, 67:0x0000, 68:0x03E8, 69:0x0000, 70:0xC350, 71:0x0081, \
+	72:0x0001, 73:0x003F, 74:0x0000, 75:0x0980, 76:0x000C, 77:0x0000, 78:0x0003, 79:0x0026, \
+	80:0x6666, 81:0x0000, 82:0x1E00, 83:0x0000, 84:0x0001, 85:0xD300, 86:0x0000, 87:0x0000, \
+	88:0x0000, 89:0x0000, 90:0x0000, 91:0x0000, 92:0x0000, 93:0x0000, 94:0x0000, 95:0x0000, \
+	96:0x0000, 97:0x0888, 98:0x0200, 99:0x0000, 100:0x0000, 101:0x0011, 102:0x3F80, 103:0x0000, \
+	104:0x0000, 105:0x0021, 106:0x0000, 107:0x0000, 108:0x0000, 109:0x0000, 110:0x0000, 111:0x0000, \
+	112:0x0000}
+
 
 
 MIN_N = 36
 FRAC_DENOM = 170000
-PFD = (85e6)
+PFD = 85e6
 F_VCO_MIN = 7.5e9
 F_VCO_MAX = 15e9
-ATT_STEP = .5
 
 CHANNELA = 0
 CHANNELB = 1
 CHANNEL_BOTH = 2
+CHANNEL_NONE = 3
 
 # TODO: break this out into a better format..
 # division to 6 covers down to 1.25 GHz, we only need to 2 GHz
@@ -80,14 +59,14 @@ RF_SYNTH_PINS = { \
 	'lmx_data' : 'P9_29', \
 	'lmx_le' : 'P9_28', \
 	'lmx_lock' : 'P9_11',\
-    'lmx_pow_en' : 'P8_10',\
-    'dac_cs' : 'P9_17',\
-    'dac_data' : 'P9_21',\
-    'dac_sck' : 'P9_22',\
-    'amp_en' : 'P8_16',\
-    '-5v_en' : 'P8_18',\
-    'filta' : 'P9_25',\
-    'filtb' : 'P9_23'}
+        'lmx_pow_en' : 'P8_10',\
+        'dac_cs' : 'P9_17',\
+        'dac_data' : 'P9_21',\
+        'dac_sck' : 'P9_22',\
+        'amp_en' : 'P8_16',\
+        '-5v_en' : 'P8_18',\
+        'filta' : 'P9_25',\
+        'filtb' : 'P9_23'}
 
 	
 DEMOD_SYNTH_PINS = {
@@ -96,7 +75,7 @@ DEMOD_SYNTH_PINS = {
 	'lmx_data' : 'P9_29', \
 	'lmx_le' : 'P9_42', \
 	'lmx_lock' : 'P9_30',\
-    'lmx_pow_en' : 'P8_12'}
+        'lmx_pow_en' : 'P8_12'}
 
 # cutoff frequency of paths through filter bank, in Hz
 FILTER_BANK_CUTOFFS = [15.0e9, 7.2e9, 4.5e9, 2.50e9]
@@ -108,12 +87,13 @@ class synth_r1:
         self.rf_board = rf_board
         self.io_init()
 
+        self.current_channel = CHANNEL_BOTH
+        self.current_freq = F_VCO_MAX
+        self.current_filter = 0 
+        self.channel_power = 0 
+
         self.lmx_init()
 
-        self.current_channel = None
-        self.current_freq = None
-        self.current_filter = None
-        self.channel_power = 0 
 
     def io_init(self):
         # configure spi pins
@@ -136,16 +116,23 @@ class synth_r1:
             GPIO.setup(self.pins['amp_en'], GPIO.OUT)
             GPIO.output(self.pins['amp_en'], GPIO.LOW) # disable 5V rail until DAC is tested, active low
 
+            GPIO.setup(PORT_SEL, GPIO.OUT)
+            GPIO.output(PORT_SEL, GPIO.LOW)
+
+
             self.dac_spi = bitbang_spi(self.pins['dac_cs'], self.pins['dac_data'], None, self.pins['dac_sck'])
     
 
     def lmx_init(self):
         GPIO.output(self.pins['lmx_pow_en'], GPIO.HIGH)
         GPIO.output(self.pins['lmx_ce'], GPIO.HIGH)
-        
+       
+        self.current_channel = CHANNEL_NONE
+
         if self.rf_board:
             time.sleep(.01)
             GPIO.output(self.pins['amp_en'], GPIO.LOW) # disable 5V rail until DAC is tested, active low
+            self.current_filter = 0
 
 
 
@@ -153,27 +140,20 @@ class synth_r1:
 
         self._set_reg(0, REG0_RESET)
         self._set_reg(0, DEFAULT)
-       
+        
+        # load in register values generated by TICS Pro
         for i in range(112,-1,-1):
             self._set_reg(i, DEFAULT)
  
-        # set to fractional, order 2
-        '''
-        # set frac denom
-        self._set_reg(39, FRAC_DENOM & 0xffff)
-        self._set_reg(38, (FRAC_DENOM >> 16) & 0xffff)
-        
-        # no changes to default mult, pll_r, pll_r_pre
-        '''
         # enable lock detect output, start frequency cal 
         self._set_reg(0, REG0_MUXOUT_LD_SEL | REG0_FCAL_EN)
     
         time.sleep(.1)
 
-        GPIO.setup(PORT_SEL, GPIO.OUT)
-        GPIO.output(PORT_SEL, GPIO.LOW)
 
         pdb.set_trace()
+
+        self.set_freq(2e9)
    
 
 
@@ -312,6 +292,10 @@ class synth_r1:
 
         payload = reg << 16
         payload |= (d & 0xffff)
+
+
+        print('setting register {} to {:016b}'.format(reg, d))
+
         self.spi.transfer(payload, bits = 24)
 
     def _read_reg(self, reg):

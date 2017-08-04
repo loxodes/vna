@@ -1,6 +1,6 @@
 # converts txt register dump from TICS Pro into a python dictionary
 
-filename = 'lmx2594_400mhz.txt'
+filename = 'reg_400mhz.txt'
 
 regs = []
 
@@ -10,7 +10,7 @@ with open(filename, 'r') as f:
     for line in f:
         l = line.split()
         reg = l[0][1:]
-        value = l[1]
+        value = '0x' + l[1][4:]
         regs.append((reg, value))
 
 
