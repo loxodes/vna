@@ -95,9 +95,14 @@ FILTER_BANK_CUTOFFS = [15.0e9, 7.2e9, 4.5e9, 2.50e9]
 FILTER_BANK_SIZE = 4
 
 class synth_r1:
-    def __init__(self, pins, rf_board = False):
+    def __init__(self, pins):
         self.pins = pins
-        self.rf_board = rf_board
+
+        if 'filta' in self.pins:
+            self.rf_board = True
+        else:
+            self.rf_board = False
+
         self.io_init()
 
         self.current_channel = CHANNEL_BOTH
@@ -176,8 +181,13 @@ class synth_r1:
         self._set_reg(0, REG0_FCAL_EN) 
         
         pdb.set_trace()
+    
+    def set_power_dac(self, power):
+        # assuming 10 bit ltc2630
+        # send write and update command
+        self.dac_spi.transfer(0x03 << 20 | ((power & 0x3FF) << 6), bits = 24)
 
-    def set_power(self, power):
+    def set_power_lmx(self, power):
         # TODO: convert to use macom vga/dac..
         # currently just output lmx2594 power units..
 
@@ -305,7 +315,7 @@ class synth_r1:
             self.current_channel = CHANNEL_BOTH
 
         # update output channel
-        self.set_power(self.channel_power)
+        self.set_power_lmx(self.channel_power)
 
 
     def wait_for_lock(self):
@@ -331,13 +341,13 @@ class synth_r1:
         return self.spi.transfer(payload, bits = 24)
 
 if __name__ == '__main__':
-    rf_synth = synth_r1(RF_SYNTH_PINS, rf_board = True)
+    rf_synth = synth_r1(RF_SYNTH_PINS)
 
     tstart = time.time()
     rf_synth.set_freq(2.045e9)
     tstop = time.time()
     
-    rf_synth.set_power(0)
+    rf_synth.set_power_lmx(0)
 
 
     print("time: " + str(tstop - tstart))

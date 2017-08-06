@@ -7,7 +7,7 @@ import synth_bbone
 from synth_commands import *
 
 
-SYNTH_PINS = {'a':synth_bbone.SYNTHA_PINS, 'b':synth_bbone.SYNTHB_PINS}
+SYNTH_PINS = {'rf':synth_bbone.RF_SYNTH_PINS, 'demod1':synth_bbone.DEMOD_SYNTH_PINS}
 
 
 class zmq_synth_server:
@@ -38,7 +38,7 @@ class zmq_synth_server:
     def _set_power(self, message):
         power = int(message[1:])
         print('power level to {}'.format(power))
-        self.synth.set_power(power)
+        self.synth.set_power_lmx(power)
         return message[COMMAND_INDEX]
 
 
@@ -79,7 +79,7 @@ class zmq_synth_server:
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--synth', help = 'synth (a/b)', default = 'a')
+    parser.add_argument('--synth', help = 'synth (rf/demod)', default = 'rf')
     args = parser.parse_args()
 
     context = zmq.Context()
