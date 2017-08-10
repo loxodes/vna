@@ -1,6 +1,6 @@
 # Open Hardware Vector Network Analyzer
 I'm developing a proof of concept two port microwave vector network analyzer. The project is under developent.
-(Ongoing documentation and logs are located on a hackaday.io project page.)[https://hackaday.io/project/26213-vector-network-analyzer]
+[Ongoing documentation and logs are located on a hackaday.io project page.](https://hackaday.io/project/26213-vector-network-analyzer)
 
 ## Usage
 This project is still under development, y'all probably don't want to try reproducing it yet.
