@@ -1,12 +1,12 @@
 ; Adc.p: move samples from ad9864 into shared ram
 ; pins:                                  bit 
-;   douta 1 - data output from adc1 - R31 1 
-;   douta 2 - data output from adc2 - R31 3
-;   douta 3 - data output from adc3 - R31 5
-;   douta 4 - data output from adc4 - R31 7
-;   fs      - frame sync            - R31 2
-;   clkout  - spi clk output        - R31 0
-;   syncb   - sync input,           - R30 4
+;   douta 1 - data output from adc1 - R31 1  P8_46
+;   douta 2 - data output from adc2 - R31 3  P8_44
+;   douta 3 - data output from adc3 - R31 5  P8_42
+;   douta 4 - data output from adc4 - R31 7  P8_40
+;   fs      - frame sync            - R31 2  P8_43
+;   clkout  - spi clk output        - R31 0  P8_45
+;   syncb   - sync input,           - R30 4  P8_41
 
 #include "adc_shm.h"
 
