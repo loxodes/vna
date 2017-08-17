@@ -3,8 +3,8 @@
 
 # 26 MHz crystal
 
-# set synth ref to 100 MHz (CMOS, OUT2P and OUT2N)
-# set if clock to 45.01 MHz (CMOS, OUT1N)
+# set synth ref to 85 MHz (CMOS, OUT2P and OUT2N)
+# set if clock to 45 MHz (CMOS, OUT1N)
 # enable ref out buffer 
 
 from Adafruit_I2C import Adafruit_I2C
@@ -64,4 +64,5 @@ class ad9577_synth:
 
 if __name__ == '__main__':
     s = ad9577_synth()
+    #print('TODO: change if synth to 48.25 MHz?)
     pdb.set_trace()

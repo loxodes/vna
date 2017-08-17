@@ -7,7 +7,7 @@ import synth_bbone
 from synth_commands import *
 
 
-SYNTH_PINS = {'rf':synth_bbone.RF_SYNTH_PINS, 'demod1':synth_bbone.DEMOD_SYNTH_PINS}
+SYNTH_PINS = {'rf':synth_bbone.RF_SYNTH_PINS, 'demod':synth_bbone.DEMOD_SYNTH_PINS}
 
 
 class zmq_synth_server:

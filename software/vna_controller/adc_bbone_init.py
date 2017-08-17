@@ -88,21 +88,48 @@ if __name__ == '__main__':
 
     SYNCB = "P8_41"
     MIX_EN = "P8_28"
+    MIX_X2 = "P8_27"
+
+
+    ADC_EN = "P8_30"
+    IF_EN = "P8_29"
+
+
+    V3_EN = "P8_12"
 
     GPIO.setup(SYNCB, GPIO.OUT)
     GPIO.setup(MIX_EN, GPIO.OUT)
+    GPIO.setup(MIX_X2, GPIO.OUT)
+
+    GPIO.setup(ADC_EN, GPIO.OUT)
+    GPIO.setup(IF_EN, GPIO.OUT)
+
+
+    GPIO.setup(V3_EN, GPIO.OUT)
+
+
+    GPIO.output(V3_EN,GPIO.HIGH)
+
     GPIO.output(SYNCB,GPIO.HIGH)
     GPIO.output(MIX_EN,GPIO.HIGH)
+    GPIO.output(MIX_X2,GPIO.LOW)
+
+    GPIO.output(IF_EN,GPIO.LOW)
+    GPIO.output(ADC_EN,GPIO.HIGH)
+
+
+    time.sleep(.5)
+
 
     spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-    #spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-    #spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
+    spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     
     ad9864_tristate_miso(spi1)
     ad9864_tristate_miso(spi2)
-    #ad9864_tristate_miso(spi3)
-    #ad9864_tristate_miso(spi4)
+    ad9864_tristate_miso(spi3)
+    ad9864_tristate_miso(spi4)
     
     print("init adc1")
     ad9864_init(spi1)
@@ -110,14 +137,20 @@ if __name__ == '__main__':
     print("init adc2")
     ad9864_init(spi2)
 
-    #print("init adc3")
-    #ad9864_init(spi3)
+    print("init adc3")
+    ad9864_init(spi3)
 
-    #print("init adc4")
-    #ad9864_init(spi4)
+    print("init adc4")
+    ad9864_init(spi4)
 
 
+
+    time.sleep(.5)
+
+    GPIO.output(SYNCB,GPIO.HIGH)
     GPIO.output(SYNCB,GPIO.LOW)
     time.sleep(.05)
     GPIO.output(SYNCB,GPIO.HIGH)
+    import pdb
+    pdb.set_trace()
     raw_input("press enter to continue..")

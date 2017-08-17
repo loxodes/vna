@@ -17,7 +17,7 @@ from synth_commands import *
 ADC_RATE = 26e6
 DECIMATION_RATE = 900
 
-IF_FREQ = 45.000e6
+IF_FREQ = 48.250e6
 SWITCH_TRIM = 8 # samples to discard to eliminate switching transient
 
 ALL_PORTS = 3

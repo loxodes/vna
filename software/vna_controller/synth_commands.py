@@ -1,5 +1,5 @@
 
-SYNTH_PORTS = {'a':10050, 'b':10051}
+SYNTH_PORTS = {'rf':10050, 'demod':10051}
 COMMAND_INDEX = 0
 RF_CAL = 2
 LO_CAL = 3

@@ -22,22 +22,6 @@ LMX_REG_DEFAULTS = {\
     8:0x2000, 9:0x0604, 10:0x10D8, 11:0x0018, 12:0x5001, 13:0x4000, 14:0x1E70, 15:0x064F, \
     16:0x0080, 17:0x012C, 18:0x0064, 19:0x27B7, 20:0xE048, 21:0x0401, 22:0x0001, 23:0x007C, \
     24:0x071A, 25:0x0624, 26:0x0DB0, 27:0x0002, 28:0x0488, 29:0x318C, 30:0x318C, 31:0x43EC, \
-    32:0x0393, 33:0x1E21, 34:0x0000, 35:0x0004, 36:0x005E, 37:0x0304, 38:0x0002, 39:0x9810, \
-    40:0x0000, 41:0x0000, 42:0x0000, 43:0x0000, 44:0x0023, 45:0xC0C0, 46:0x07FC, 47:0x0300, \
-    48:0x0300, 49:0x4180, 50:0x0000, 51:0x0080, 52:0x0820, 53:0x0000, 54:0x0000, 55:0x0000, \
-    56:0x0000, 57:0x0020, 58:0x8001, 59:0x0001, 60:0x0000, 61:0x00A8, 62:0x0322, 63:0x0000, \
-    64:0x1388, 65:0x0000, 66:0x01F4, 67:0x0000, 68:0x03E8, 69:0x0000, 70:0xC350, 71:0x0081, \
-    72:0x0001, 73:0x003F, 74:0x0000, 75:0x0840, 76:0x000C, 77:0x0000, 78:0x0003, 79:0x0000, \
-    80:0x0000, 81:0x0000, 82:0x0000, 83:0x0000, 84:0x0000, 85:0x0000, 86:0x0000, 87:0x0000, \
-    88:0x0000, 89:0x0000, 90:0x0000, 91:0x0000, 92:0x0000, 93:0x0000, 94:0x0000, 95:0x0000, \
-    96:0x0000, 97:0x0888, 98:0x0000, 99:0x0000, 100:0x0000, 101:0x0011, 102:0x0000, 103:0x0000, \
-    104:0x0000, 105:0x0021, 106:0x0000, 107:0x0000, 108:0x0000, 109:0x0000, 110:0x0000, 111:0x0000, \
-    112:0x0000}
-LMX_REG_DEFAULTS = {\
-    0:0x2614, 1:0x0808, 2:0x0500, 3:0x0642, 4:0x0A43, 5:0x00C8, 6:0xC802, 7:0x00B2, \
-    8:0x2000, 9:0x0604, 10:0x10D8, 11:0x0018, 12:0x5001, 13:0x4000, 14:0x1E70, 15:0x064F, \
-    16:0x0080, 17:0x012C, 18:0x0064, 19:0x27B7, 20:0xE048, 21:0x0401, 22:0x0001, 23:0x007C, \
-    24:0x071A, 25:0x0624, 26:0x0DB0, 27:0x0002, 28:0x0488, 29:0x318C, 30:0x318C, 31:0x43EC, \
     32:0x0393, 33:0x1E21, 34:0x0000, 35:0x0004, 36:0x0000, 37:0x0304, 38:0x0002, 39:0x9810, \
     40:0x0000, 41:0x0000, 42:0x0000, 43:0x0000, 44:0x0023, 45:0xC0C0, 46:0x07FC, 47:0x0300, \
     48:0x0300, 49:0x4180, 50:0x0000, 51:0x0080, 52:0x0820, 53:0x0000, 54:0x0000, 55:0x0000, \
@@ -49,6 +33,7 @@ LMX_REG_DEFAULTS = {\
     96:0x0000, 97:0x0888, 98:0x0000, 99:0x0000, 100:0x0000, 101:0x0011, 102:0x0000, 103:0x0000, \
     104:0x0000, 105:0x0021, 106:0x0000, 107:0x0000, 108:0x0000, 109:0x0000, 110:0x0000, 111:0x0000, \
     112:0x0000}
+
 MIN_N = 36
 FRAC_DENOM = 170000
 PFD = 85e6
@@ -107,7 +92,7 @@ class synth_r1:
 
         self.current_channel = CHANNEL_BOTH
         self.current_freq = F_VCO_MAX
-        self.current_filter = 0 
+        self.current_filter = 0
         self.channel_power = 0 
 
         self.lmx_init()
@@ -115,7 +100,7 @@ class synth_r1:
 
     def io_init(self):
         # configure spi pins
-        self.spi = hwiopy_spi(self.pins['lmx_le'], self.pins['lmx_data'], self.pins['lmx_lock'], self.pins['lmx_clk'])
+        self.spi = bitbang_spi(self.pins['lmx_le'], self.pins['lmx_data'], self.pins['lmx_lock'], self.pins['lmx_clk'])
 
         # configure gpio pins
         GPIO.setup(self.pins['lmx_pow_en'], GPIO.OUT)
@@ -155,6 +140,8 @@ class synth_r1:
         if self.rf_board:
             GPIO.output(self.pins['amp_en'], GPIO.LOW)
             self.current_filter = 0
+        else:
+            self.channel_power = 20 # channel power of 20 produces reasonable LO drive on demod board 
 
         time.sleep(.05)
 
@@ -325,14 +312,12 @@ class synth_r1:
         return self.spi.transfer(payload, bits = 24)
 
 if __name__ == '__main__':
-    rf_synth = synth_r1(RF_SYNTH_PINS)
+    rf_synth = synth_r1(DEMOD_SYNTH_PINS)
 
     tstart = time.time()
-    rf_synth.set_freq(2.045e9)
+    rf_synth.set_freq(2.700001e9 + 65e3 + 6e3)
     tstop = time.time()
     
-    rf_synth.set_power_lmx(0)
-
 
     print("time: " + str(tstop - tstart))
     pdb.set_trace()
