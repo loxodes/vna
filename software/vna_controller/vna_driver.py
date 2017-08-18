@@ -17,7 +17,9 @@ from synth_commands import *
 ADC_RATE = 26e6
 DECIMATION_RATE = 900
 
-IF_FREQ = 48.250e6
+BB_FREQ = 500
+IF_FREQ = 48.25e6 + BB_FREQ
+
 SWITCH_TRIM = 8 # samples to discard to eliminate switching transient
 
 ALL_PORTS = 3
@@ -27,7 +29,7 @@ PORT2 = SW_DUT_PORT2
 DISABLE = 0 
 ENABLE = 1 
 
-DOUBLER_CUTOFF = 4e9
+DOUBLER_CUTOFF = 5e9
 
 class eth_vna:
     def __init__(self, lo_synth, rf_synth, pru_adc, vna_io):
@@ -44,11 +46,11 @@ class eth_vna:
         self.vna_io.set_switch(SW_DUT_RF, SW_DUT_PORT1)
         self.vna_io.adc_init(ADC1)
         self.vna_io.adc_init(ADC2)
-        #self.vna_io.adc_init(ADC3)
-        #self.vna_io.adc_init(ADC4)
+        self.vna_io.adc_init(ADC3)
+        self.vna_io.adc_init(ADC4)
+
         self.vna_io.sync_adcs()
         
-        raw_input('enable LO clock')
         self.vna_io.enable_mixer()
         self.vna_io.set_multiplier(status = ENABLE)
         self.freq = np.float32(0)
@@ -157,21 +159,35 @@ class eth_vna:
                 b2_rms = np.sqrt(np.mean(np.abs(b2)**2))
 
 
-                plt.subplot(3,1,1)
+                plt.subplot(5,1,1)
                 plt.title('a1')
                 plt.plot(np.real(a1))
                 plt.plot(np.imag(a1))
                 plt.legend(['I', 'Q'])
                 plt.ylabel('adc value')
-                plt.subplot(3,1,2)
 
+                plt.subplot(5,1,2)
                 plt.title('b1')
                 plt.plot(np.real(b1))
                 plt.plot(np.imag(b1))
                 plt.legend(['I', 'Q'])
                 plt.ylabel('adc value')
 
-                plt.subplot(3,1,3)
+                plt.subplot(5,1,3)
+                plt.title('a2')
+                plt.plot(np.real(a2))
+                plt.plot(np.imag(a2))
+                plt.legend(['I', 'Q'])
+                plt.ylabel('adc value')
+
+                plt.subplot(5,1,4)
+                plt.title('b2')
+                plt.plot(np.real(b2))
+                plt.plot(np.imag(b2))
+                plt.legend(['I', 'Q'])
+                plt.ylabel('adc value')
+
+                plt.subplot(5,1,5)
                 plt.title('power spectrum')
                 plt.ylabel('power (dB, normalized)')
                 fs = ADC_RATE / DECIMATION_RATE 
@@ -191,10 +207,10 @@ class eth_vna:
                 print("    max freq: {}".format(freqs[np.argmax(fpow)]))
                 #pdb.set_trace()
  
-            a1 = self._goertzel(a1, 100)
-            a2 = self._goertzel(a2, 100)
-            b1 = self._goertzel(b1, 100)
-            b2 = self._goertzel(b2, 100)
+            a1 = self._goertzel(a1, BB_FREQ)
+            a2 = self._goertzel(a2, BB_FREQ)
+            b1 = self._goertzel(b1, BB_FREQ)
+            b2 = self._goertzel(b2, BB_FREQ)
 
                 
             print('b1/a1: {}'.format(np.mean(b1/a1)))
@@ -216,8 +232,8 @@ class eth_vna:
 
         sweep_s11 = 1j * np.zeros(points)
         sweep_s21 = 1j * np.zeros(points)
-        #sweep_s12 = 1j * np.zeros(points)
-        #sweep_s22 = 1j * np.zeros(points)
+        sweep_s12 = 1j * np.zeros(points)
+        sweep_s22 = 1j * np.zeros(points)
 
 
         for (fidx, f) in enumerate(sweep_freqs):
@@ -246,8 +262,8 @@ class eth_vna:
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
 
-            s11, s21 = self._grab_s_raw(navg = 4, rfport = PORT1)
-            #s22, s12 = self._grab_s_raw(navg = navg, rfport = PORT2)
+            s11, s21 = self._grab_s_raw(navg = 1, rfport = PORT2)
+            s22, s12 = self._grab_s_raw(navg = 1, rfport = PORT1)
 
             if align_lo:
                 self._update_rf_lo_offset_ratio(lo_freq, doubler)
@@ -354,8 +370,8 @@ class eth_vna:
 if __name__ == '__main__':
     context = zmq.Context()
 
-    synth_rf = zmq_synth(context, 'bbb', SYNTH_PORTS['a'])
-    synth_lo = zmq_synth(context, 'bbb', SYNTH_PORTS['b'])
+    synth_rf = zmq_synth(context, 'bbb', SYNTH_PORTS['rf'])
+    synth_lo = zmq_synth(context, 'bbb', SYNTH_PORTS['demod'])
     vna_io = zmq_io(context, 'bbb', IO_PORT)
     pru_adc = ethernet_pru_adc('bbb', 10520)
 
