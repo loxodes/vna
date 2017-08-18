@@ -12,23 +12,25 @@ import pdb
 
 import Adafruit_BBIO.GPIO as GPIO
 
+
 from vna_io_commands import *
 from adc_bbone_init import *
-
+from clk_synth_bbone import ad9577_synth
 
 MIX_EN = "P8_28"
 MIX_X2 = "P8_27"
-IF_REF_EN = "P8_29"
+IF_REF_PWRDN = "P8_29"
 ADC_CLK_EN = "P8_30"
+
+V3_EN = "P8_12"
+
+
+
 
 SW_PORT_SEL = "P9_15"
 SYNCB = "P8_41"
 
-SW_MAP = {  SW_DUT_RF : SW2_0, \
-            SW_MULT_1 : SW2_1, \
-            SW_AUX : SW2_2, \
-            SW4_0 : SW4_0_0, \
-            SW4_1 : SW4_0_1}
+SW_MAP = {  SW_DUT_RF : SW_PORT_SEL}
             
 
 class zmq_io_server:
@@ -47,7 +49,9 @@ class zmq_io_server:
         print('binding socket..')
         self.socket.bind("tcp://*:{}".format(str(port)))
         print('binding complete')
-
+        
+        print('initializing reference clocks')
+        synth = ad9577_synth()
 
         # init io stuff
         print('setting up IO')
@@ -55,15 +59,17 @@ class zmq_io_server:
         GPIO.setup(MIX_X2, GPIO.OUT)
         GPIO.setup(SW_PORT_SEL, GPIO.OUT)
         GPIO.setup(SYNCB, GPIO.OUT)
+        GPIO.setup(V3_EN, GPIO.OUT)
 
-        GPIO.setup(IF_REF_EN, GPIO.OUT)
+
+        GPIO.setup(IF_REF_PWRDN, GPIO.OUT)
         GPIO.setup(ADC_CLK_EN, GPIO.OUT)
 
         print('setting default values')
+        GPIO.output(V3_EN,GPIO.HIGH)
         GPIO.output(MIX_EN, GPIO.LOW)
         GPIO.output(MIX_X2, GPIO.LOW)
 
-        GPIO.output(ADC_REF_EN, GPIO.LOW)
         GPIO.output(ADC_CLK_EN, GPIO.HIGH)
 
         GPIO.output(SW_PORT_SEL, GPIO.LOW)
@@ -116,7 +122,7 @@ class zmq_io_server:
 
     def _init_adc(self, message):
         GPIO.output(MIX_EN, GPIO.LOW)
-        GPIO.output(ADC_REF_EN, GPIO.LOW)
+        GPIO.output(IF_REF_PWRDN, GPIO.HIGH)
 
         adc = int(message[1:])
         if adc == int(ALL_ADC):
@@ -125,7 +131,7 @@ class zmq_io_server:
         else:
             ad9864_init(self.adc_spis[adc])
             
-        GPIO.output(ADC_REF_EN, GPIO.HIGH)
+        GPIO.output(IF_REF_PWRDN, GPIO.LOW)
         return message[COMMAND_INDEX]
 
     def _sync_adc(self, message):

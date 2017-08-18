@@ -154,6 +154,13 @@ class synth_r1:
  
         self.set_freq(2.15e9)
 
+    
+    def set_attenuator(self, att):
+        print('TODO: remove calls to this!')
+
+    def set_power(self, pow):
+        print('TODO: remove calls to this!')
+
     def set_power_dac(self, power):
         # assuming 10 bit ltc2630
         # send write and update command
@@ -199,6 +206,8 @@ class synth_r1:
 
         self._set_reg(45, r45)
         self._set_reg(44, r44)
+
+        print('channel power: {}'.format(self.channel_power))
 
     # set filter bank from frequency
     def set_filter_bank(self, freq):

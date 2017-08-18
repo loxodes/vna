@@ -38,7 +38,8 @@ class zmq_synth_server:
     def _set_power(self, message):
         power = int(message[1:])
         print('power level to {}'.format(power))
-        self.synth.set_power_lmx(power)
+        print('TODO: re-enable this command after modifying vna_driver for new revision demod board..')
+        #self.synth.set_power_lmx(power)
         return message[COMMAND_INDEX]
 
 
