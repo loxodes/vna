@@ -155,12 +155,6 @@ class synth_r1:
         self.set_freq(2.15e9)
 
     
-    def set_attenuator(self, att):
-        print('TODO: remove calls to this!')
-
-    def set_power(self, pow):
-        print('TODO: remove calls to this!')
-
     def set_power_dac(self, power):
         # assuming 10 bit ltc2630
         # send write and update command
