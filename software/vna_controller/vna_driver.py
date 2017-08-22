@@ -38,7 +38,6 @@ class eth_vna:
         self.pru_adc = pru_adc
         self.vna_io = vna_io
        
-        self.lo_synth.set_pow_dac(200)
         self.rf_synth.set_pow_dac(200)
 
         self.rf_synth.set_pow_lmx(0)
