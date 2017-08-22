@@ -32,12 +32,12 @@ class zmq_synth_server:
     def _set_power_dac(self, message):
         pow_dac = int(message[1:])
         print('dac to set to '.format(pow_dac))
-        self.synth.set_pow_dac(pow_dac)
+        self.synth.set_power_dac(pow_dac)
         return message[COMMAND_INDEX]
 
     def _set_power_lmx(self, message):
         pow_lmx = int(message[1:])
-        print('lmx power level to {}'.format(power))
+        print('lmx power level to {}'.format(pow_lmx))
         self.synth.set_power_lmx(pow_lmx)
         return message[COMMAND_INDEX]
 
