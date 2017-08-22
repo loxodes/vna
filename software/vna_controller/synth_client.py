@@ -9,18 +9,15 @@ import matplotlib.pyplot as plt
 SWITCH_PATH1 = 1
 SWITCH_PATH0 = 0
 
-# table of output power setting vs. frequency for 7 dBm output with a hmc311 following the synth
-# currently done manually..
-HMC311_7DBM_TABLE_POW = [14, 8, 12, 8, 6, 1, 5, 10, 31, 31, 31]
-HMC311_7DBM_TABLE_ATT = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-HMC311_3DBM_TABLE_POW = [10, 5, 5, 3, 2, 0, 0, 10, 10, 10, 10]
-HMC311_3DBM_TABLE_ATT = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-HMC311_TABLE_FREQ = [250e6, 500e6, 1e9, 2e9, 2.5e9, 3e9, 3.5e9, 4e9, 5e9, 6e9, 7e9]
+# lookup table for -20 dBm at output of vna port on vna rf board
+RF_TABLE_FREQ = [2e9, 2.5e9, 3e9, 3.5e9, 4e9, 4.5e9, 5e9, 5.5e9, 6e9, 6.5e9, 7e9, 7.5e9, 8e9, 8.5e9, 9e9, 9.5e9, 10e9,  10.5e9, 11.0e9, 11.5e9, 12.0e9, 12.5e9, 13.0e9]
+RF_TABLE_LMX =  [0,   0,     0,   0,     0,   0,     0,   0,     0,   0,     2,   0,     1,   7,     31,  15,    11,    5,      3,      3,      6,      14,     11]
+RF_TABLE_DAC =  [155, 155,   145, 185,   210, 145,   130, 155,   50,  0,     0,   20,    0,   0,     0,   0,     0,     0,      0,      0,      0,      0,      0]
 
-# table for 0 dBm out of rf synth with hmc311 amp board at output
-RF_TABLE_FREQ = [2e9, 2.5e9, 3e9, 3.5e9, 4e9, 4.5e9, 5e9, 5.5e9, 6e9, 6.5e9, 7e9, 7.5e9, 8e9, 8.5e9, 9e9, 9.5e9, 10e9]
-RF_TABLE_POW =  [0,   0,     0,   0,     0,   7,     7,   12,    12,  16,    14,  20,    20,  20,    20,  20,    20]
-RF_TABLE_ATT =  [2.5, 2.5,   6,   3,     0,   0,     0,   0,     0,   0,      0,  0,     0,   0,     0,   0,     0]
+
+LO_TABLE_FREQ = [2e9, 14e9]
+LO_TABLE_LMX = [20, 20]
+LO_TABLE_DAC = None
 
 class zmq_synth:
     def __init__(self, context, synth_ip, synth_port):
@@ -47,41 +44,41 @@ class zmq_synth:
         self.freq = int(f)
         self._eth_cmd(FILT_CMD, f)
 
-    def set_pow(self, power):
-        self.channel_power = int(power)
-        self._eth_cmd(POW_CMD, int(power))
-    
-    # hacked open-loop amplitude control until power detect board arrives
-    # control LO for 7 dBm (optimum power into mixer)
-    # leave RF synth uncontrolled, amplitude variation is controlled during calibration
+    def set_pow_lmx(self, power):
+        self._eth_cmd(LMX_POW_CMD, int(power))
+         
+    def set_pow_dac(self, dac):
+        self._eth_cmd(DAC_POW_CMD, int(dac))
+   
+    # hacked open-loop amplitude control...
     def level_pow(self, cal):
-        freqs = HMC311_TABLE_FREQ
-        pows = HMC311_3DBM_TABLE_POW
-        atts = HMC311_3DBM_TABLE_ATT
-
         if cal == LO_CAL:
-            freqs = HMC311_TABLE_FREQ
-            pows = HMC311_3DBM_TABLE_POW
-            atts = HMC311_3DBM_TABLE_ATT
+            freqs = LO_TABLE_FREQ
+            pow_lmx = LO_TABLE_LMX 
+            pow_dac = LO_TABLE_DAC 
             print('LO cal: ')
         
-        if cal == RF_CAL:
+        elif cal == RF_CAL:
             freqs = RF_TABLE_FREQ
-            pows = RF_TABLE_POW 
-            atts = RF_TABLE_ATT
+            pow_lmx = RF_TABLE_LMX
+            pow_dac = RF_TABLE_DAC
             print('RF cal: ')
 
+        else:
+            freqs = None
+            pow_lmx = None
+            pow_dac = None
 
-        pow_setting = int(np.interp(self.freq, freqs, pows))
-        att_setting = int(np.interp(self.freq, freqs, atts))
+        if pow_lmx:
+            pow_setting = int(np.interp(self.freq, freqs, pow_lmx))
+            self.set_pow_lmx(pow_setting)
+            print('pow: {}'.format(pow_setting))
         
-        print('pow: {}, att: {}'.format(pow_setting, att_setting))
-
-        self.set_att(att_setting) 
-        self.set_pow(pow_setting) # TODO: this assumes freq < F_VCO_MAX, always picks path 0..
+        if power_dac:
+            dac_setting = int(np.interp(self.freq, freqs, pow_dac))
+            self.set_pow_dac(dac_setting)
+            print('dac: {}'.format(dac_setting))
         
-    def set_att(self, att):
-        self._eth_cmd(ATT_CMD, att)
 
 if __name__ == '__main__':
     context = zmq.Context()
@@ -96,8 +93,7 @@ if __name__ == '__main__':
 
     print('connected, changing frequency')
     lo_synth.set_freq(2.2e9);
-    lo_synth.set_filt(3.2e9);
-    lo_synth.set_pow(0);
+    lo_synth.level_pow(LO_CAL);
     lo_synth.set_att(5);
 
 
