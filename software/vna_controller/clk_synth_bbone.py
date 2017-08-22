@@ -57,7 +57,7 @@ class ad9577_synth:
         GPIO.setup(CLK_REF_SEL, GPIO.OUT)
         GPIO.setup(PLL_POW_EN, GPIO.OUT)
 
-        GPIO.output(CLK_REF_SEL, GPIO.HIGH) # use crystal 
+        GPIO.output(CLK_REF_SEL, GPIO.HIGH) # HIGH uses crystal, LOW is ext ref, LVCMOS 26 MHz
         GPIO.output(PLL_POW_EN, GPIO.HIGH)
 
 

@@ -321,10 +321,10 @@ class synth_r1:
         return self.spi.transfer(payload, bits = 24)
 
 if __name__ == '__main__':
-    rf_synth = synth_r1(DEMOD_SYNTH_PINS)
+    rf_synth = synth_r1(RF_SYNTH_PINS)
 
     tstart = time.time()
-    rf_synth.set_freq(2.700001e9 + 65e3 + 6e3)
+    rf_synth.set_freq(9e9)
     tstop = time.time()
     
 
