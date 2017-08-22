@@ -29,17 +29,16 @@ class zmq_synth_server:
         self.synth.set_filter_bank(freq)
         return message[COMMAND_INDEX]
 
-    def _set_attenuator(self, message):
-        att = float(message[1:])
-        print('attenuator to {} dB'.format(att))
-        self.synth.set_attenuator(att)
+    def _set_power_dac(self, message):
+        pow_dac = int(message[1:])
+        print('dac to set to '.format(pow_dac))
+        self.synth.set_pow_dac(pow_dac)
         return message[COMMAND_INDEX]
 
-    def _set_power(self, message):
-        power = int(message[1:])
-        print('power level to {}'.format(power))
-        print('TODO: re-enable this command after modifying vna_driver for new revision demod board..')
-        #self.synth.set_power_lmx(power)
+    def _set_power_lmx(self, message):
+        pow_lmx = int(message[1:])
+        print('lmx power level to {}'.format(power))
+        self.synth.set_power_lmx(pow_lmx)
         return message[COMMAND_INDEX]
 
 
@@ -53,9 +52,9 @@ class zmq_synth_server:
     def run(self):
         self.command_handlers = {\
             FREQ_CMD : self._set_freq, \
-            POW_CMD : self._set_power, \
+            LMX_POW_CMD : self._set_power_lmx, \
             FILT_CMD : self._set_filter_bank, \
-            ATT_CMD : self._set_attenuator, \
+            DAC_POW_CMD : self._set_power_dac, \
             WAIT_CMD : self._wait_for_lock}
 
         print('entering run loop')

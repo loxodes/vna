@@ -38,12 +38,16 @@ class eth_vna:
         self.pru_adc = pru_adc
         self.vna_io = vna_io
        
-        self.lo_synth.set_att(30)
-        self.rf_synth.set_att(30)
+        self.lo_synth.set_pow_dac(200)
+        self.rf_synth.set_pow_dac(200)
+
+        self.rf_synth.set_pow_lmx(0)
+        self.rf_synth.set_pow_lmx(0)
 
         self.vna_io.enable_mixer(status = MIXER_DISABLE)
 
         self.vna_io.set_switch(SW_DUT_RF, SW_DUT_PORT1)
+
         self.vna_io.adc_init(ADC1)
         self.vna_io.adc_init(ADC2)
         self.vna_io.adc_init(ADC3)
@@ -52,7 +56,7 @@ class eth_vna:
         self.vna_io.sync_adcs()
         
         self.vna_io.enable_mixer()
-        self.vna_io.set_multiplier(status = ENABLE)
+        self.vna_io.set_multiplier(status = DISABLE)
         self.freq = np.float32(0)
 
         self.lo_to_rf_offset_ratio = 1 
@@ -150,9 +154,9 @@ class eth_vna:
         s_thru_avg = 0
     
         for i in range(navg):
-            a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
+            a2, a1, b2, b1 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
            
-            if True:
+            if False:
                 a1_rms = np.sqrt(np.mean(np.abs(a1)**2))
                 a2_rms = np.sqrt(np.mean(np.abs(a2)**2))
                 b1_rms = np.sqrt(np.mean(np.abs(b1)**2))
@@ -262,8 +266,9 @@ class eth_vna:
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
 
-            s11, s21 = self._grab_s_raw(navg = 1, rfport = PORT2)
-            s22, s12 = self._grab_s_raw(navg = 1, rfport = PORT1)
+            s11, s21 = self._grab_s_raw(navg = 1, rfport = PORT1)
+            pdb.set_trace()
+            s22, s12 = self._grab_s_raw(navg = 1, rfport = PORT2)
 
             if align_lo:
                 self._update_rf_lo_offset_ratio(lo_freq, doubler)
@@ -272,15 +277,15 @@ class eth_vna:
             
             sweep_s11[fidx] = s11
             sweep_s21[fidx] = s21
-            #sweep_s12[fidx] = s12
-            #sweep_s22[fidx] = s22
+            sweep_s12[fidx] = s12
+            sweep_s22[fidx] = s22
         
         s11 = rf.Network(f=sweep_freqs/1e9, s=sweep_s11, z0=50)
-        #s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
-        #s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
-        #s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
+        s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
+        s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
+        s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
 
-        return s11 #rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
+        return rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
    
     def sdrkits_cal_oneport(self, sweep_freqs):
         # generate cal stardard for sdr-kits Female Rosenberger HochFrequenz .. economy SMA SOL cal kit
@@ -377,8 +382,8 @@ if __name__ == '__main__':
 
 
     fstart = 2.00e9
-    fstop = 10.00e9
-    points = 321 
+    fstop = 15.00e9
+    points = 27
 
     vna = eth_vna(synth_lo, synth_rf, pru_adc, vna_io)
 
