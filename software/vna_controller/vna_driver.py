@@ -145,13 +145,13 @@ class eth_vna:
         offset_ratio = (lo_freq + offset_freq) / (lo_freq)
         self.lo_to_rf_offset_ratio = offset_ratio
 
-
     def _grab_s_raw(self, navg = 4, rfport = PORT1):
         self.vna_io.set_switch(SW_DUT_RF, rfport)
 
         s_return_avg = 0
         s_thru_avg = 0
-    
+        sw_term_avg = 0
+
         for i in range(navg):
             a1, a2, b2, b1 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
            
@@ -222,7 +222,8 @@ class eth_vna:
                 print('b1/a1 (goertzel): {}'.format(b1_g/a1_g))
 
                 s_return_avg += np.mean(b1/a1)#(b1_g / a1_g)
-                s_thru_avg += np.mean(b1/a2)#(b2_g / a1_g)
+                s_thru_avg += np.mean(b1/a2)
+                sw_term_avg += np.mean(a2/b1)
 
                 self.ref_samples = a1
 
@@ -230,14 +231,15 @@ class eth_vna:
                 print('b2/a2 (mean)    : {}'.format(np.mean(b2/a2)))
                 print('b2/a2 (goertzel): {}'.format((b2_g/a2_g)))
 
-                s_return_avg += (b2_g / a2_g)
-                s_thru_avg += (b1_g / a2_g)
+                s_return_avg += np.mean(b2/a2)
+                s_thru_avg += np.mean(b1/a2)
+                sw_term_avg += np.mean(a1/b2)
 
                 self.ref_samples = a2
         
-        return s_return_avg/navg, s_thru_avg/navg
+        return s_return_avg/navg, s_thru_avg/navg, sw_term_avg/navg
 
-    def sweep(self, fstart, fstop, points, align_lo = False):
+    def sweep(self, fstart, fstop, points, align_lo = False, sw_terms = False):
         sweep_freqs = np.linspace(fstart, fstop, points)
 
         sweep_s11 = 1j * np.zeros(points)
@@ -245,7 +247,9 @@ class eth_vna:
         sweep_s12 = 1j * np.zeros(points)
         sweep_s22 = 1j * np.zeros(points)
 
-
+        sweep_fwd_sw = 1j * np.zeros(points) 
+        sweep_rev_sw = 1j * np.zeros(points) 
+    
         for (fidx, f) in enumerate(sweep_freqs):
             lo_freq = (f + IF_FREQ) * self.lo_to_rf_offset_ratio
             doubler = False
@@ -272,10 +276,10 @@ class eth_vna:
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
             print('measuring s11, s21')
-            s11, s21 = self._grab_s_raw(navg = 3, rfport = PORT1)
+            s11, s21, fwd_sw = self._grab_s_raw(navg = 3, rfport = PORT1)
 
             #print('measuring s21, s22')
-            #s22, s12 = self._grab_s_raw(navg = 3, rfport = PORT2)
+            #s22, s12, rev_sw = self._grab_s_raw(navg = 3, rfport = PORT2)
 
             if align_lo:
                 self._update_rf_lo_offset_ratio(lo_freq, doubler)
@@ -286,13 +290,20 @@ class eth_vna:
             #sweep_s21[fidx] = s21
             #sweep_s12[fidx] = s12
             #sweep_s22[fidx] = s22
+            #sweep_fwd_sw[fidx] = fwd_sw
+            #sweep_rev_sw[fidx] = rev_sw
         
         s11 = rf.Network(f=sweep_freqs/1e9, s=sweep_s11, z0=50)
-        #s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
-        #s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
-        #s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
+        s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
+        s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
+        s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
 
-        return s11#rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
+        sw_fwd = rf.Network(f=sweep_freqs/1e9, s=sweep_fwd_sw, z0=50)
+        sw_rev = rf.Network(f=sweep_freqs/1e9, s=sweep_rev_sw, z0=50)
+
+        sw_terms = (sw_fwd, sw_rev)
+
+        return rf.network.four_oneports_2_twoport(s11, s12, s21, s22), sw_terms
    
     def sdrkits_cal_oneport(self, sweep_freqs):
         # generate cal stardard for sdr-kits Female Rosenberger HochFrequenz .. economy SMA SOL cal kit
@@ -300,7 +311,7 @@ class eth_vna:
         # load resistance of 48.76 ohms from box SN678
         f = rf.Frequency.from_f(sweep_freqs, unit='GHz') 
         media = rf.media.Media(f, 0, 50)
-        sdrkit_open = media.line(43.78, 'ps', z0 = 50) ** media.open()
+        sdrkit_open = media.line(42.35, 'ps', z0 = 50) ** media.open()
         sdrkit_short = media.line(26.91, 'ps', z0 = 50) ** media.short()
         sdrkit_load = rf.Network(f=sweep_freqs, s=-.0126*np.ones(points), z0=50) # 48.76 ohms, ignore 2 fF parallel cap
 
@@ -310,7 +321,7 @@ class eth_vna:
         oneport = sdrkits_cal_oneport(sweep_freqs)
 
         media = rf.media.Media(f, 0, 50)
-        sdrkit_thru = media.line(42.43, 'ps', z0 = 50)
+        sdrkit_thru = media.line(41.00, 'ps', z0 = 50)
         return [sdrkit_thru, oneport[0], oneport[1], oneport[2]]
 
 
@@ -341,9 +352,8 @@ class eth_vna:
             
         self.cal_oneport.run()
  
-    def slot_calibrate_twoport(self, fstart, fstop, points):
+    def slot_measure_twoport(self, fstart, fstop, points):
         sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
-        cal_kit = self.generate_sdrkits_cal_standard(sweep_freqs)
 
         raw_input("connect short to port 1, then press enter to continue")
         self.cal_short_p1 = self.sweep(fstart, fstop, points)
