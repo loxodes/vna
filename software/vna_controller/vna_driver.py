@@ -153,7 +153,7 @@ class eth_vna:
         s_thru_avg = 0
     
         for i in range(navg):
-            a2, a1, b2, b1 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
+            a1, a2, b2, b1 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
            
             if False:
                 a1_rms = np.sqrt(np.mean(np.abs(a1)**2))
@@ -163,28 +163,29 @@ class eth_vna:
 
 
                 plt.subplot(5,1,1)
-                plt.title('a1')
+                plt.title('a1, {} rms'.format(a1_rms))
                 plt.plot(np.real(a1))
                 plt.plot(np.imag(a1))
                 plt.legend(['I', 'Q'])
                 plt.ylabel('adc value')
 
                 plt.subplot(5,1,2)
-                plt.title('b1')
+                plt.title('b1, {} rms'.format(b1_rms))
+
                 plt.plot(np.real(b1))
                 plt.plot(np.imag(b1))
                 plt.legend(['I', 'Q'])
                 plt.ylabel('adc value')
 
                 plt.subplot(5,1,3)
-                plt.title('a2')
+                plt.title('a2, {} rms'.format(a2_rms))
                 plt.plot(np.real(a2))
                 plt.plot(np.imag(a2))
                 plt.legend(['I', 'Q'])
                 plt.ylabel('adc value')
 
                 plt.subplot(5,1,4)
-                plt.title('b2')
+                plt.title('b2, {} rms'.format(b2_rms))
                 plt.plot(np.real(b2))
                 plt.plot(np.imag(b2))
                 plt.legend(['I', 'Q'])
@@ -210,22 +211,28 @@ class eth_vna:
                 print("    max freq: {}".format(freqs[np.argmax(fpow)]))
                 #pdb.set_trace()
  
-            a1 = self._goertzel(a1, BB_FREQ)
-            a2 = self._goertzel(a2, BB_FREQ)
-            b1 = self._goertzel(b1, BB_FREQ)
-            b2 = self._goertzel(b2, BB_FREQ)
+            a1_g = self._goertzel(a1, BB_FREQ)
+            a2_g = self._goertzel(a2, BB_FREQ)
+            b1_g = self._goertzel(b1, BB_FREQ)
+            b2_g = self._goertzel(b2, BB_FREQ)
 
                 
-            print('b1/a1: {}'.format(np.mean(b1/a1)))
-
             if rfport == PORT1:
-                s_return_avg += np.mean(b1 / a1)
-                s_thru_avg += np.mean(b2 / a1)
+                print('b1/a1 (mean)    : {}'.format(np.mean(b1/a1)))
+                print('b1/a1 (goertzel): {}'.format(b1_g/a1_g))
+
+                s_return_avg += np.mean(b1/a1)#(b1_g / a1_g)
+                s_thru_avg += np.mean(b1/a2)#(b2_g / a1_g)
+
                 self.ref_samples = a1
 
             else:
-                s_return_avg += np.mean(b2 / a2)
-                s_thru_avg += np.mean(b1 / a2)
+                print('b2/a2 (mean)    : {}'.format(np.mean(b2/a2)))
+                print('b2/a2 (goertzel): {}'.format((b2_g/a2_g)))
+
+                s_return_avg += (b2_g / a2_g)
+                s_thru_avg += (b1_g / a2_g)
+
                 self.ref_samples = a2
         
         return s_return_avg/navg, s_thru_avg/navg
@@ -264,10 +271,11 @@ class eth_vna:
             #raw_input('press enter to continue')
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
+            print('measuring s11, s21')
+            s11, s21 = self._grab_s_raw(navg = 3, rfport = PORT1)
 
-            s11, s21 = self._grab_s_raw(navg = 1, rfport = PORT1)
-            pdb.set_trace()
-            s22, s12 = self._grab_s_raw(navg = 1, rfport = PORT2)
+            #print('measuring s21, s22')
+            #s22, s12 = self._grab_s_raw(navg = 3, rfport = PORT2)
 
             if align_lo:
                 self._update_rf_lo_offset_ratio(lo_freq, doubler)
@@ -275,16 +283,16 @@ class eth_vna:
             print('s11: {} , mag {}'.format(s11, abs(s11)))
             
             sweep_s11[fidx] = s11
-            sweep_s21[fidx] = s21
-            sweep_s12[fidx] = s12
-            sweep_s22[fidx] = s22
+            #sweep_s21[fidx] = s21
+            #sweep_s12[fidx] = s12
+            #sweep_s22[fidx] = s22
         
         s11 = rf.Network(f=sweep_freqs/1e9, s=sweep_s11, z0=50)
-        s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
-        s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
-        s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
+        #s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
+        #s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
+        #s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
 
-        return rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
+        return s11#rf.network.four_oneports_2_twoport(s11, s12, s21, s22)
    
     def sdrkits_cal_oneport(self, sweep_freqs):
         # generate cal stardard for sdr-kits Female Rosenberger HochFrequenz .. economy SMA SOL cal kit
@@ -381,8 +389,8 @@ if __name__ == '__main__':
 
 
     fstart = 2.00e9
-    fstop = 15.00e9
-    points = 27
+    fstop = 13.0e9
+    points = 121 
 
     vna = eth_vna(synth_lo, synth_rf, pru_adc, vna_io)
 
@@ -391,7 +399,10 @@ if __name__ == '__main__':
     data_dir = './meas/'
     filename = raw_input('enter a filename: ')
     sweep = vna.sweep(fstart, fstop, points, align_lo = False)
+    plt.subplot(2,1,1)
     sweep.plot_s_db()
+    plt.subplot(2,1,2)
+    sweep.plot_s_smith()
     plt.show()
     sweep.write_touchstone(data_dir + filename)
     '''

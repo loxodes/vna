@@ -34,7 +34,7 @@ class ethernet_pru_adc:
 
                 sock.sendall(np.uint32(number_of_samples).tostring())
                 samples = np.fromstring(data, dtype=np.int16)
-                samples = samples[1::2] + 1j * samples[0::2]
+                samples = 1j * samples[1::2] + samples[0::2]
                 sock.close()
                 
                 t2 = time.time()
@@ -44,6 +44,7 @@ class ethernet_pru_adc:
                 import subprocess
                 print('restarting ADC server..')
                 ssh = subprocess.Popen(["ssh", "debian@bbb", "/home/debian/restart_adc_server"])
+                print('adc connection failed! restarting')
                 time.sleep(1)
 
         # de-interleave samples.. there is probably a more pythonic way of doing this
@@ -73,8 +74,8 @@ class ethernet_pru_adc:
             plt.show()
 
 if __name__ == '__main__':
-    adc = ethernet_pru_adc('bbone', 10520)
-    path1, path2, path3, path4 = adc.grab_samples(paths=4)
+    adc = ethernet_pru_adc('bbb', 10520)
+    path1, path2, path3, path4 = adc.grab_samples(paths=4, number_of_samples = 1024)
     subplot(4,1,1)
     plt.plot(np.real(path1))
     plt.plot(np.imag(path1))
