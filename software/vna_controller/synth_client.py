@@ -15,8 +15,8 @@ RF_TABLE_LMX =  [0,   0,     0,   0,     0,   0,     0,   0,     0,   0,     2, 
 RF_TABLE_DAC =  [155, 155,   145, 185,   210, 145,   130, 155,   50,  0,     0,   20,    0,   0,     0,   0,     0,     0,      0,      0,      0,      0,      0,      0]
 
 
-LO_TABLE_FREQ = [2e9, 14e9]
-LO_TABLE_LMX = [20, 20]
+LO_TABLE_FREQ = [2e9, 16e9]
+LO_TABLE_LMX = [30, 30]
 LO_TABLE_DAC = None
 
 class zmq_synth:
