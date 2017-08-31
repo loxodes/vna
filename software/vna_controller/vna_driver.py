@@ -226,7 +226,7 @@ class eth_vna:
 
                 s_return_avg += np.mean(b1/a1)#(b1_g / a1_g)
                 s_thru_avg += np.mean(b2/a1)
-                sw_term_avg += np.mean(a2/b1)
+                sw_term_avg += np.mean(a2/b2)
 
                 self.ref_samples = a1
 
@@ -236,7 +236,7 @@ class eth_vna:
 
                 s_return_avg += np.mean(b2/a2)
                 s_thru_avg += np.mean(b1/a2)
-                sw_term_avg += np.mean(a1/b2)
+                sw_term_avg += np.mean(a1/b1)
 
                 self.ref_samples = a2
         
@@ -369,7 +369,35 @@ class eth_vna:
 
         sw_fwd.write_touchstone(cal_dir + 'sw_fwd.s1p')
         sw_rev.write_touchstone(cal_dir + 'sw_rev.s1p')
-    
+
+    def measure_lmr16(self, fstart, fstop, points, cal_dir = './cal_twoport/'):
+        sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
+
+        raw_input("connect match match")
+        match_match = self.sweep(fstart, fstop, points)
+        raw_input("connect reflect reflect")
+        reflect_reflect = self.sweep(fstart, fstop, points)
+        raw_input("connect reflect match")
+        reflect_match = self.sweep(fstart, fstop, points)
+        raw_input("connect match reflect")
+        match_reflect = self.sweep(fstart, fstop, points)
+        raw_input("connect thru, then press enter to continue")
+        thru, sw_fwd, sw_rev = self.sweep(fstart, fstop, points, sw_terms = True)
+        
+        raw_input("terminate both ports, then press enter to continue")
+        cal_iso = self.sweep(fstart, fstop, points, sw_terms = True)
+
+
+        match_match.write_touchstone(cal_dir + 'match_match.s2p')
+        reflect_reflect.write_touchstone(cal_dir + 'reflect_reflect.s2p')
+        reflect_match.write_touchstone(cal_dir + 'reflect_match.s2p')
+        match_reflect.write_touchstone(cal_dir + 'match_reflect.s2p')
+        thru.write_touchstone(cal_dir + 'thru_lmr.s2p')
+        cal_iso.write_touchstone(cal_dir + 'iso_lmr.s2p')
+
+        sw_fwd.write_touchstone(cal_dir + 'lmr_sw_fwd.s1p')
+        sw_rev.write_touchstone(cal_dir + 'lmr_sw_rev.s1p')
+   
     def plot_sparam(self, sweep):
         plt.subplot(1,2,1)
         sweep.plot_s_db()
@@ -382,7 +410,8 @@ if __name__ == '__main__':
     context = zmq.Context()
 
     parser = argparse.ArgumentParser(description='Vector network analyzer driver.')
-    parser.add_argument('--cal', action='store_true', help='run two port calibration')
+    parser.add_argument('--cal', action='store_true', help='collect two port calibration sweeps (SLOT)')
+    parser.add_argument('--lmr', action='store_true', help='collect two port calibration sweeps (LMR-16)')
     parser.add_argument('--points', type=int, default=221, help='number of points in sweep')
     parser.add_argument('--fstart', type=float, default=2e9, help='sweep start frequency (Hz)')
     parser.add_argument('--fstop', type=float, default=13e9, help='sweep stop frequency (Hz)')
@@ -401,7 +430,9 @@ if __name__ == '__main__':
 
     if args.cal:
         vna.slot_measure_twoport(fstart, fstop, points)
-    
+    if args.lmr:
+        vna.measure_lmr16(fstart, fstop, points)
+
     else:
         filename = raw_input('enter a filename: ')
         sweep = vna.sweep(fstart, fstop, points, align_lo = False)
