@@ -124,7 +124,7 @@ class eth_vna:
         self.lo_synth.level_pow(LO_CAL)
         self.rf_synth.level_pow(RF_CAL)
 
-        time.sleep(.05)
+        time.sleep(.1)
        
         a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
         self.ref_samples = a1 
@@ -355,7 +355,7 @@ class eth_vna:
         cal_thru, sw_fwd, sw_rev = self.sweep(fstart, fstop, points, sw_terms = True)
         
         raw_input("terminate both ports, then press enter to continue")
-        cal_iso = self.sweep(fstart, fstop, points, sw_terms = True)
+        cal_iso = self.sweep(fstart, fstop, points, sw_terms)
 
         cal_short = rf.network.two_port_reflect(cal_short_p1.s11, cal_short_p2.s22)
         cal_load = rf.network.two_port_reflect(cal_load_p1.s11, cal_load_p2.s22)
@@ -373,27 +373,26 @@ class eth_vna:
     def measure_lmr16(self, fstart, fstop, points, cal_dir = './cal_twoport/'):
         sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
 
-        raw_input("connect match match")
-        match_match = self.sweep(fstart, fstop, points)
         raw_input("connect reflect reflect")
         reflect_reflect = self.sweep(fstart, fstop, points)
+
+        raw_input("connect match match")
+        match_match, sw_fwd, sw_rev = self.sweep(fstart, fstop, points, sw_terms = True)
+
         raw_input("connect reflect match")
         reflect_match = self.sweep(fstart, fstop, points)
+
         raw_input("connect match reflect")
         match_reflect = self.sweep(fstart, fstop, points)
-        raw_input("connect thru, then press enter to continue")
-        thru, sw_fwd, sw_rev = self.sweep(fstart, fstop, points, sw_terms = True)
-        
-        raw_input("terminate both ports, then press enter to continue")
-        cal_iso = self.sweep(fstart, fstop, points, sw_terms = True)
 
+        raw_input("connect thru, then press enter to continue")
+        thru = self.sweep(fstart, fstop, points)
 
         match_match.write_touchstone(cal_dir + 'match_match.s2p')
         reflect_reflect.write_touchstone(cal_dir + 'reflect_reflect.s2p')
         reflect_match.write_touchstone(cal_dir + 'reflect_match.s2p')
         match_reflect.write_touchstone(cal_dir + 'match_reflect.s2p')
         thru.write_touchstone(cal_dir + 'thru_lmr.s2p')
-        cal_iso.write_touchstone(cal_dir + 'iso_lmr.s2p')
 
         sw_fwd.write_touchstone(cal_dir + 'lmr_sw_fwd.s1p')
         sw_rev.write_touchstone(cal_dir + 'lmr_sw_rev.s1p')
