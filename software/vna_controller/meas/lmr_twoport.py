@@ -41,32 +41,33 @@ def plot_error_terms(cal_kit):
     reflection_tracking.plot_s_db()
 
 def main():
-    # load cal measurements 
-    cal_load = rf.Network('../cal_twoport/load.s2p')
-    cal_open = rf.Network('../cal_twoport/open.s2p')
-    cal_short = rf.Network('../cal_twoport/short.s2p')
-    cal_thru = rf.Network('../cal_twoport/thru.s2p')
 
-    cal_iso = rf.Network('../cal_twoport/isolation.s2p')
+    # load cal measurements 
+    lmr_mm = rf.Network('../cal_twoport/match_match.s2p')
+    lmr_mr = rf.Network('../cal_twoport/match_reflect.s2p')
+    lmr_rm = rf.Network('../cal_twoport/reflect_match.s2p')
+    lmr_rr = rf.Network('../cal_twoport/reflect_reflect.s2p')
+
+    lmr_thru = rf.Network('../cal_twoport/thru.s2p')
 
     cal_sw_fwd = rf.Network('../cal_twoport/sw_fwd.s1p')
     cal_sw_rev = rf.Network('../cal_twoport/sw_rev.s1p')
  
-
-    measured_cal = [cal_short, cal_open, cal_load, cal_thru]
+    measured_cal = [lmr_thru, lmr_mm, lmr_rr, lmr_rm, lmr_mr]
     
-    # create ideal cal networks, SLOT calibration
-    ideal_cal = create_sdrkits_ideal(cal_thru.frequency)
+    media = rf.media.Freespace(lmr_thru.frequency)
+    sdrkit_thru = media.line(41.00, 'ps', z0 = 50)  # open - 1.35 ps
 
-    cal = rf.TwelveTerm(ideals = ideal_cal, measured = measured_cal, n_thrus = 1, isolation = cal_iso)
 
-    #cal = rf.EightTerm(ideals = ideal_cal, measured = measured_cal, switch_terms = (cal_sw_rev, cal_sw_fwd))
-
+    cal = rf.calibration.LMR16(measured_cal, [sdrkit_thru], ideal_is_reflect = False, switch_terms = (cal_sw_fwd, cal_sw_rev))
     cal.run()
 
-    barrel = rf.Network('barrel.s2p')
+    barrel = rf.Network('lmr_barrelvat3.s2p')
     barrel_cal = cal.apply_cal(barrel)
     barrel_cal.plot_s_db()
+
+    grid(True)
+    title("$|S|$ of Omni-Spectra 20600-10, 10 dB attenuator") 
 
     show()
     barrel_cal.plot_s_smith()
