@@ -31,6 +31,9 @@
 #define ADC_PORT 10520
 #define MAX_SAMPLE_BUFFER 768000
 
+#define MAX_PRU_RETRYS 5
+
+#define MAX_SHM_READ_ATTEMPTS 100
 // shared memory
 // [ 32 bytes, config/misc ] [ 2048 bytes (512 samples) buffer 0 ] [ 2048 bytes (512 samples) buffer 1 ]
 
@@ -48,6 +51,9 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
   uint8_t target_buffer = 0;
   uint32_t i;
   uint32_t sample_idx = 0;
+  uint32_t shm_read_tries = 0;
+
+  int32_t return_value = 0;
 
   prussdrv_init();
   printf("init pru..\n");
@@ -73,32 +79,21 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
     return 1;
   }
 
-  fprintf(stderr, "loaded adc reader.. waiting for PRU to initialize buffer status\n");
+  //fprintf(stderr, "loaded adc reader.. waiting for PRU to initialize buffer status\n");
 
-  fprintf(stderr, "%d %d: %d\n", target_buffer, ADC_BUF_STATUS_IDX, sharedMem_int[ADC_BUF_STATUS_IDX]);
-  while(sharedMem_int[ADC_BUF_STATUS_IDX] != ADC_BUF_STATUS_EMPTY) {
+  //fprintf(stderr, "%d %d: %d\n", target_buffer, ADC_BUF_STATUS_IDX, sharedMem_int[ADC_BUF_STATUS_IDX]);
+  while(sharedMem_int[ADC_BUF_STATUS_IDX] != ADC_BUF_STATUS_COMPLETE) {
     ;
   }
 
-//  fprintf(stderr, "\nbuffer is ready\n");
+  //fprintf(stderr, "buffer is ready\n");
   uint32_t remaining_samples = nsamples;
 
-  while(remaining_samples > 0) {
-
-    //fprintf(stderr, "%d %d: %d\n", target_buffer, ADC_BUF_STATUS_IDX, sharedMem_int[ADC_BUF_STATUS_IDX]);
-    if(sharedMem_int[ADC_BUF_STATUS_IDX] == target_buffer) {
-        for(i = 0; i < ADC_BUF_LEN_SAMPLES; i++) {
-            uint32_t mem_idx = (ADC_BUF_LEN_SAMPLES * target_buffer + i) * 2;
-            sample_buffer[sample_idx++] = sharedMem_sample[mem_idx];
-            sample_buffer[sample_idx++] = sharedMem_sample[mem_idx+1];
-            //fprintf(stderr, "%d, %d: %d + j%d\n", i, mem_idx, sharedMem_sample[mem_idx], sharedMem_sample[mem_idx+1]);
-        }
-        remaining_samples -= ADC_BUF_LEN_SAMPLES;
-        target_buffer ^= 1;
-        //printf("remaining samples: %d: new target: %d\n", remaining_samples, target_buffer);
-    }
+  for(i = 0; i < nsamples; i++) {
+    uint32_t mem_idx = i * 2;
+    sample_buffer[sample_idx++] = sharedMem_sample[mem_idx];
+    sample_buffer[sample_idx++] = sharedMem_sample[mem_idx+1];
   }
-
 
   prussdrv_pru_wait_event(PRU_EVTOUT_0);
   printf("All done\n");
@@ -107,7 +102,7 @@ int grab_samples_pru(uint32_t nsamples, int16_t *sample_buffer)
   prussdrv_pru_disable(PRU_NUM);
   prussdrv_exit();
 
-  return 0;
+  return return_value;
 }
 
 int main(int argc, char **argv) {
@@ -147,9 +142,18 @@ int main(int argc, char **argv) {
       printf("accepted connection!\n");
 
       recv(client_sock, &number_of_samples, sizeof(number_of_samples), MSG_WAITALL);
-      
-      if(grab_samples_pru(number_of_samples, sample_buffer)) {
-        printf("pru launch failed, exiting..\n");
+
+      for(i = 0; i < MAX_PRU_RETRYS; i++) {
+        if(grab_samples_pru(number_of_samples, sample_buffer) == 0) {
+          break;
+        }
+        printf("pru launch failed, retrying..\n");
+        sleep(.05);
+
+      }
+
+      if(i == MAX_PRU_RETRYS) {
+        printf("exceeded max pru launch retry count, exiting..\n");
         return 1;
       }
 

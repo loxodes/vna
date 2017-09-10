@@ -100,7 +100,7 @@ class synth_r1:
 
     def io_init(self):
         # configure spi pins
-        self.spi = bitbang_spi(self.pins['lmx_le'], self.pins['lmx_data'], self.pins['lmx_lock'], self.pins['lmx_clk'])
+        self.spi = hwiopy_spi(self.pins['lmx_le'], self.pins['lmx_data'], self.pins['lmx_lock'], self.pins['lmx_clk'])
 
         # configure gpio pins
         GPIO.setup(self.pins['lmx_pow_en'], GPIO.OUT)
@@ -315,10 +315,10 @@ class synth_r1:
         return self.spi.transfer(payload, bits = 24)
 
 if __name__ == '__main__':
-    rf_synth = synth_r1(RF_SYNTH_PINS)
+    rf_synth = synth_r1(DEMOD_SYNTH_PINS)
 
     tstart = time.time()
-    rf_synth.set_freq(9e9)
+    rf_synth.set_freq(3e9)
     tstop = time.time()
     
 
