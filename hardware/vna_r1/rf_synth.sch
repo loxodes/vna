@@ -101,7 +101,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 6 8
+Sheet 6 11
 Title ""
 Date ""
 Rev ""

@@ -126,7 +126,7 @@ class eth_vna:
 
         time.sleep(.1)
        
-        a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
+        a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 1024)
         self.ref_samples = a1 
         self._update_rf_lo_offset_ratio(lo_freq, doubler)
 
@@ -148,7 +148,7 @@ class eth_vna:
         offset_ratio = (lo_freq + offset_freq) / (lo_freq)
         self.lo_to_rf_offset_ratio = offset_ratio
 
-    def _grab_s_raw(self, navg = 4, rfport = PORT1):
+    def _grab_s_raw(self, navg = 4, rfport = PORT1, rawplot = False):
         self.vna_io.set_switch(SW_DUT_RF, rfport)
 
         s_return_avg = 0
@@ -156,9 +156,9 @@ class eth_vna:
         sw_term_avg = 0
 
         for i in range(navg):
-            a1, a2, b1, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 2048)
+            a1, a2, b1, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 1024)
            
-            if False:
+            if rawplot:
                 a1_rms = np.sqrt(np.mean(np.abs(a1)**2))
                 a2_rms = np.sqrt(np.mean(np.abs(a2)**2))
                 b1_rms = np.sqrt(np.mean(np.abs(b1)**2))
@@ -198,7 +198,7 @@ class eth_vna:
                 plt.title('power spectrum')
                 plt.ylabel('power (dB, normalized)')
                 fs = ADC_RATE / DECIMATION_RATE 
-                freqs = np.linspace(-fs/2, fs/2, 401)
+                freqs = np.linspace(-fs/2, fs/2, 1601)
                 fpow = np.array([10 * np.log10(np.abs(self._goertzel(a1, f))) for f in freqs])
                 fpow -= np.max(fpow)
 
@@ -214,19 +214,18 @@ class eth_vna:
                 print("    max freq: {}".format(freqs[np.argmax(fpow)]))
                 #pdb.set_trace()
  
-            a1_g = self._goertzel(a1, BB_FREQ)
-            a2_g = self._goertzel(a2, BB_FREQ)
-            b1_g = self._goertzel(b1, BB_FREQ)
-            b2_g = self._goertzel(b2, BB_FREQ)
+            a1_g = self._goertzel(a1, -BB_FREQ - 5)
+            a2_g = self._goertzel(a2, -BB_FREQ - 5)
+            b1_g = self._goertzel(b1, -BB_FREQ - 5)
+            b2_g = self._goertzel(b2, -BB_FREQ - 5)
 
-                
             if rfport == PORT1:
                 print('b1/a1 (mean)    : {}'.format(np.mean(b1/a1)))
                 print('b1/a1 (goertzel): {}'.format(b1_g/a1_g))
 
-                s_return_avg += np.mean(b1/a1)#(b1_g / a1_g)
-                s_thru_avg += np.mean(b2/a1)
-                sw_term_avg += np.mean(a2/b2)
+                s_return_avg += np.mean(b1_g/a1_g)#(b1_g / a1_g)
+                s_thru_avg += np.mean(b2_g/a1_g)
+                sw_term_avg += np.mean(a2_g/b2_g)
 
                 self.ref_samples = a1
 
@@ -234,15 +233,15 @@ class eth_vna:
                 print('b2/a2 (mean)    : {}'.format(np.mean(b2/a2)))
                 print('b2/a2 (goertzel): {}'.format((b2_g/a2_g)))
 
-                s_return_avg += np.mean(b2/a2)
-                s_thru_avg += np.mean(b1/a2)
-                sw_term_avg += np.mean(a1/b1)
+                s_return_avg += np.mean(b2_g/a2_g)
+                s_thru_avg += np.mean(b1_g/a2_g)
+                sw_term_avg += np.mean(a1_g/b1_g)
 
                 self.ref_samples = a2
         
         return s_return_avg/navg, s_thru_avg/navg, sw_term_avg/navg
 
-    def sweep(self, fstart, fstop, points, align_lo = False, sw_terms = False):
+    def sweep(self, fstart, fstop, points, navg = 1, align_lo = False, sw_terms = False, rawplot = False):
         sweep_freqs = np.linspace(fstart, fstop, points)
 
         sweep_s11 = 1j * np.zeros(points)
@@ -254,6 +253,7 @@ class eth_vna:
         sweep_rev_sw = 1j * np.zeros(points) 
     
         for (fidx, f) in enumerate(sweep_freqs):
+            tfstart = time.time()
             lo_freq = (f + IF_FREQ) * self.lo_to_rf_offset_ratio
             doubler = False
 
@@ -267,22 +267,27 @@ class eth_vna:
             self.lo_synth.set_freq(lo_freq)
             self.rf_synth.set_freq(f)
             
+            tfstop = time.time()
+
+            tlevels = time.time()
+            self.lo_synth.level_pow(LO_CAL)
+            self.rf_synth.level_pow(RF_CAL)
+            tlevele = time.time()
+            
             self.lo_synth.wait_for_lock()
             self.rf_synth.wait_for_lock()
 
-            self.lo_synth.level_pow(LO_CAL)
-            self.rf_synth.level_pow(RF_CAL)
-           
-            time.sleep(.01)
-
+            
+            print('freq change time: {} seconds'.format(tfstop - tfstart))
+            print('power level time: {} seconds'.format(tlevele - tlevels))
             #raw_input('press enter to continue')
 
             print('{}/{} measuring {} GHz '.format(fidx, points, f/1e9))
             print('measuring s11, s21')
-            s11, s21, fwd_sw = self._grab_s_raw(navg = 3, rfport = PORT1)
+            s11, s21, fwd_sw = self._grab_s_raw(navg = navg, rfport = PORT1, rawplot = rawplot)
 
-            #print('measuring s21, s22')
-            s22, s12, rev_sw = self._grab_s_raw(navg = 3, rfport = PORT2)
+            print('measuring s21, s22')
+            s22, s12, rev_sw = self._grab_s_raw(navg = navg, rfport = PORT2, rawplot = rawplot)
 
             if align_lo:
                 self._update_rf_lo_offset_ratio(lo_freq, doubler)
@@ -304,7 +309,8 @@ class eth_vna:
         sw_fwd = rf.Network(f=sweep_freqs/1e9, s=sweep_fwd_sw, z0=50)
         sw_rev = rf.Network(f=sweep_freqs/1e9, s=sweep_rev_sw, z0=50)
 
-        
+
+
         if sw_terms:
             return rf.network.four_oneports_2_twoport(s11, s12, s21, s22), sw_fwd, sw_rev
 
@@ -338,34 +344,21 @@ class eth_vna:
 
     def slot_measure_twoport(self, fstart, fstop, points, cal_dir = './cal_twoport/'):
         sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
-        raw_input("connect short to port 1, then press enter to continue")
-        cal_short_p1 = self.sweep(fstart, fstop, points)
-        raw_input("connect load to port 1, then press enter to continue")
-        cal_load_p1 = self.sweep(fstart, fstop, points)
-        raw_input("connect open to port 1, then press enter to continue")
-        cal_open_p1 = self.sweep(fstart, fstop, points)
+        raw_input("connect shorts, then press enter to continue")
+        cal_short = self.sweep(fstart, fstop, points, navg = 4)
+        raw_input("connect loads, then press enter to continue")
+        cal_load = self.sweep(fstart, fstop, points, navg = 4)
+        raw_input("connect opens, then press enter to continue")
+        cal_open = self.sweep(fstart, fstop, points, navg = 4)
 
-        raw_input("connect short to port 2, then press enter to continue")
-        cal_short_p2 = self.sweep(fstart, fstop, points)
-        raw_input("connect load to port 2, then press enter to continue")
-        cal_load_p2 = self.sweep(fstart, fstop, points)
-        raw_input("connect open to port 2, then press enter to continue")
-        cal_open_p2 = self.sweep(fstart, fstop, points)
         raw_input("connect thru, then press enter to continue")
-        cal_thru, sw_fwd, sw_rev = self.sweep(fstart, fstop, points, sw_terms = True)
+        cal_thru, sw_fwd, sw_rev = self.sweep(fstart, fstop, points, sw_terms = True, navg = 4)
         
-        raw_input("terminate both ports, then press enter to continue")
-        cal_iso = self.sweep(fstart, fstop, points, sw_terms)
-
-        cal_short = rf.network.two_port_reflect(cal_short_p1.s11, cal_short_p2.s22)
-        cal_load = rf.network.two_port_reflect(cal_load_p1.s11, cal_load_p2.s22)
-        cal_open = rf.network.two_port_reflect(cal_open_p1.s11, cal_open_p2.s22)
-
         cal_short.write_touchstone(cal_dir + 'short.s2p')
         cal_open.write_touchstone(cal_dir + 'open.s2p')
         cal_load.write_touchstone(cal_dir + 'load.s2p')
         cal_thru.write_touchstone(cal_dir + 'thru.s2p')
-        cal_iso.write_touchstone(cal_dir + 'isolation.s2p')
+        cal_load.write_touchstone(cal_dir + 'isolation.s2p')
 
         sw_fwd.write_touchstone(cal_dir + 'sw_fwd.s1p')
         sw_rev.write_touchstone(cal_dir + 'sw_rev.s1p')
@@ -411,7 +404,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Vector network analyzer driver.')
     parser.add_argument('--cal', action='store_true', help='collect two port calibration sweeps (SLOT)')
     parser.add_argument('--lmr', action='store_true', help='collect two port calibration sweeps (LMR-16)')
+    parser.add_argument('--swterms', action='store_true', help='save switch terns')
+    parser.add_argument('--rawplot', action='store_true', help='plot raw a/b samples')
+
     parser.add_argument('--points', type=int, default=221, help='number of points in sweep')
+    parser.add_argument('--navg', type=int, default=1, help='number averages')
     parser.add_argument('--fstart', type=float, default=2e9, help='sweep start frequency (Hz)')
     parser.add_argument('--fstop', type=float, default=13e9, help='sweep stop frequency (Hz)')
     args = parser.parse_args()
@@ -429,14 +426,18 @@ if __name__ == '__main__':
 
     if args.cal:
         vna.slot_measure_twoport(fstart, fstop, points)
-    if args.lmr:
+    elif args.lmr:
         vna.measure_lmr16(fstart, fstop, points)
-
     else:
         filename = raw_input('enter a filename: ')
-        sweep = vna.sweep(fstart, fstop, points, align_lo = False)
+        tstart = time.time()
+        sweep = vna.sweep(fstart, fstop, points, navg = args.navg, rawplot = args.rawplot)
 
         sweep.write_touchstone(DEFAULT_DATA_DIR + filename)
+
+        tend = time.time()
+
+        print('sweep duration: {}'.format(tend - tstart))
         vna.plot_sparam(sweep)
 
 

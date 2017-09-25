@@ -11,8 +11,8 @@ cal_short = rf.Network('short.s1p')
 #vat3 = rf.Network('vat3.s1p')
 #vat3r = rf.Network('vat3r.s1p')
 #vat3_load = rf.Network('anne_load.s1p')
-anne = rf.Network('rf_port2.s1p')
-barrel = rf.Network('demod_a2.s1p')
+anne = rf.Network('anne.s1p')
+barrel = rf.Network('barrel.s1p')
 
 # create cal kit
 f = rf.frequency.Frequency(cal_load.f[0], cal_load.f[-1], len(cal_load.f), unit='hz')

@@ -1,6 +1,6 @@
 # converts txt register dump from TICS Pro into a python dictionary
 
-filename = 'reg_400mhz.txt'
+filename = '2ghz.txt'
 
 regs = []
 

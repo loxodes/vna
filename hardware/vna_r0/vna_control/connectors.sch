@@ -1253,4 +1253,26 @@ Wire Wire Line
 	10100 1150 10200 1150
 Wire Wire Line
 	10100 1250 10200 1250
+Text Notes 10800 3150 1    60   ~ 0
+gnd
+Text Notes 8900 3250 2    60   ~ 0
+gnd
+Text Notes 9000 2950 3    60   ~ 0
+1.2V
+Text Notes 8900 3300 2    60   ~ 12
+low
+Text Notes 10900 3250 2    60   ~ 12
+low
+Text Notes 11050 3150 2    60   ~ 12
+high
+Text Notes 11050 3050 2    60   ~ 12
+high
+Text Notes 10900 2950 2    60   ~ 12
+low
+Text Notes 8850 3000 2    60   ~ 12
+high
+Text Notes 8850 3100 2    60   ~ 12
+high
+Text Notes 8600 3500 0    60   ~ 12
+TODO - isolate P8-46 to P8-31 with highz buffer chip to avoid fighting boot config resistors
 $EndSCHEMATC

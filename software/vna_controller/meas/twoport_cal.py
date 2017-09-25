@@ -6,16 +6,22 @@ c = 3e8
 
 def create_sdrkits_ideal(skrf_f):
     # create ideal cal kit
+     # load - 70 pH in series with 48.6 ohms
+     # short - 8.073 mm w/ .00873 dB attenuation 
+     # open - 12.7 mm w/ .0127 dB attenuation
+
     media = rf.media.Freespace(skrf_f)
     sdrkit_open = media.line(42.35, 'ps', z0 = 50) ** media.open() # 42.35
     sdrkit_short = media.line(26.91, 'ps', z0 = 50) ** media.short() 
     # TODO: add parallel 2fF capacitance to load?
-    sdrkit_load = rf.Network(f=skrf_f.f, s=(np.ones(len(skrf_f)) * -.0126), z0=50, f_unit = 'Hz')
+    pdb.set_trace()
+    sdrkit_load_p1 = rf.Network(f=skrf_f.f, s=(np.ones(len(skrf_f)) * -.0126 + 1j * 2.525e-12 * skrf_f.f), z0=50, f_unit = 'Hz')
+    sdrkit_load_p2 = rf.Network(f=skrf_f.f, s=(np.ones(len(skrf_f)) * -.005 + 1j * 2.525e-12 * skrf_f.f), z0=50, f_unit = 'Hz')
     sdrkit_thru = media.line(41.00, 'ps', z0 = 50)  # open - 1.35 ps
  
     sdrkit_open = rf.two_port_reflect(sdrkit_open, sdrkit_open)
     sdrkit_short = rf.two_port_reflect(sdrkit_short, sdrkit_short)
-    sdrkit_load = rf.two_port_reflect(sdrkit_load, sdrkit_load)
+    sdrkit_load = rf.two_port_reflect(sdrkit_load_p1, sdrkit_load_p2)
    
     ideals = [sdrkit_short, sdrkit_open, sdrkit_load, sdrkit_thru]
     return ideals
@@ -64,11 +70,19 @@ def main():
 
     cal.run()
 
-    barrel = rf.Network('barrel.s2p')
+    barrel = rf.Network('ustrip.s2p')
+    #e_lpf = rf.Network('/home/kleinjt/vna_presentation/data/e5701c/RAINBOW_LPF_ANNE.S1P')
+
     barrel_cal = cal.apply_cal(barrel)
     barrel_cal.plot_s_db()
+    #e_lpf.plot_s_db()
+
+    grid(True)
+    title("$|S|$ of microstrip test board")
 
     show()
+
+    title("$S$ of HMC311 test board from 2 GHz to 13 GHz") 
     barrel_cal.plot_s_smith()
 
     show()

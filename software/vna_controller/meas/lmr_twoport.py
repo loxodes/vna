@@ -50,8 +50,8 @@ def main():
 
     lmr_thru = rf.Network('../cal_twoport/thru.s2p')
 
-    cal_sw_fwd = rf.Network('../cal_twoport/sw_fwd.s1p')
-    cal_sw_rev = rf.Network('../cal_twoport/sw_rev.s1p')
+    cal_sw_fwd = rf.Network('../cal_twoport/lmr_sw_fwd.s1p')
+    cal_sw_rev = rf.Network('../cal_twoport/lmr_sw_rev.s1p')
  
     measured_cal = [lmr_thru, lmr_mm, lmr_rr, lmr_rm, lmr_mr]
     
@@ -62,7 +62,7 @@ def main():
     cal = rf.calibration.LMR16(measured_cal, [sdrkit_thru], ideal_is_reflect = False, switch_terms = (cal_sw_fwd, cal_sw_rev))
     cal.run()
 
-    barrel = rf.Network('lmr_barrelvat3.s2p')
+    barrel = rf.Network('lmr_barrel.s2p')
     barrel_cal = cal.apply_cal(barrel)
     barrel_cal.plot_s_db()
 

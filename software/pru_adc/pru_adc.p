@@ -117,18 +117,25 @@ TOP:
     MOV     r0, SHARED_RAM                  ; Set C28 to point to shared RAM
     MOV     r1, PRU1_CTRL + CTPPR0
     SBBO    r0, r1, 0, 4
-   
+
+
     MOV r2, ADC_BUF_STATUS_EMPTY
     SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
-   
-    LBCO &SAMPLE_COUNTER, CONST_PRUSHAREDRAM, SAMPLE_COUNT_IDX, 4
-   
 
-    MOV TMP, 10000
-    DELAY_US
-  
+    BURST:
+        MOV r2, ADC_BUF_STATUS_EMPTY
+        SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
+       
+        ; wait for SHARED[ADC_BUF_START_IDX] == ADC_START_BURST 
 
-    SHM_LOOP_TOP:
+
+        LBCO &SAMPLE_COUNTER, CONST_PRUSHAREDRAM, SAMPLE_COUNT_IDX, 4
+       
+
+        MOV TMP, 10000
+        DELAY_US
+      
+
         MOV r15, ADC_BUF_LEN_SAMPLES 
 
         MOV r13, 0 
@@ -151,46 +158,11 @@ TOP:
             ADD r13, r13, 4 
             QBNE SHM_BUF0, r13, r15
 
-
-        MOV r2, ADC_BUF_STATUS_BUF0
+        MOV r2, ADC_BUF_STATUS_COMPLETE
         SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
 
-        MOV r13, 0 
-
-        SHM_BUF1:
-            ; calculate next shm address in r14
-            MOV r14, r13
-            ADD r14, r14, r15 ; target buffer 1
-            LSL r14, r14, 2
-            ADD r14, r14, ADC_BUF_OFFSET 
-            
-            READADC
-            SBCO ADC_VAL1, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
-            ADD r14, r14, BYTES_PER_SAMPLE 
-            SBCO ADC_VAL2, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
-            ADD r14, r14, BYTES_PER_SAMPLE 
-            SBCO ADC_VAL3, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
-            ADD r14, r14, BYTES_PER_SAMPLE 
-            SBCO ADC_VAL4, CONST_PRUSHAREDRAM, r14, BYTES_PER_SAMPLE 
-           
-            ; loop ADC_BUF_LEN times..
-            ADD r13, r13, 4 
-            QBNE SHM_BUF1, r13, r15
-
-     
-
-        MOV r2, ADC_BUF_STATUS_BUF1
-        SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
-
-        SUB SAMPLE_COUNTER, SAMPLE_COUNTER, r15 
-        SUB SAMPLE_COUNTER, SAMPLE_COUNTER, r15 
-
-        QBNE SHM_LOOP_TOP, SAMPLE_COUNTER, 0
-
-        SBCO r2, CONST_PRUSHAREDRAM, 4, 4
-
-    MOV r2, ADC_BUF_STATUS_COMPLETE
-    SBCO r2, CONST_PRUSHAREDRAM, ADC_BUF_STATUS_IDX, 4
+        
+        
 
     MOV r31.b0, 32 + 3
 

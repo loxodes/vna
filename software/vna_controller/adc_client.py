@@ -10,7 +10,7 @@ class ethernet_pru_adc:
         self.adc_addr = adc_addr
         self.adc_port = adc_port
 
-    def grab_samples(self, paths = 2, number_of_samples = 2048):
+    def grab_samples(self, paths = 2, number_of_samples = 512):
         while True:
             try:
                 t1 =  time.time()
@@ -46,7 +46,8 @@ class ethernet_pru_adc:
                 ssh = subprocess.Popen(["ssh", "debian@bbb", "/home/debian/restart_adc_server"])
                 print('adc connection failed! restarting')
                 time.sleep(1)
-
+        
+        print('grabbing samples took: {} seconds'.format(t2 - t1))
         # de-interleave samples.. there is probably a more pythonic way of doing this
         if paths == 1:
             return samples[0::4]
@@ -75,7 +76,8 @@ class ethernet_pru_adc:
 
 if __name__ == '__main__':
     adc = ethernet_pru_adc('bbb', 10520)
-    path1, path2, path3, path4 = adc.grab_samples(paths=4, number_of_samples = 1024)
+    for i in range(100):
+        path1, path2, path3, path4 = adc.grab_samples(paths=4, number_of_samples = 1024)
     subplot(4,1,1)
     plt.plot(np.real(path1))
     plt.plot(np.imag(path1))
