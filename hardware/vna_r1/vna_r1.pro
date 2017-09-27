@@ -1,4 +1,4 @@
-update=Sat Sep 23 21:16:56 2017
+update=Tue Sep 26 20:04:08 2017
 version=1
 last_client=kicad
 [pcbnew]
@@ -126,3 +126,6 @@ LibName94=/home/kleinjt/repos/vna/lib/75451
 LibName95=/home/kleinjt/repos/vna/lib/74xx1g14
 LibName96=/home/kleinjt/repos/vna/lib/74hc04_full
 LibName97=/home/kleinjt/repos/vna/lib/74hc04
+LibName98=/home/kleinjt/repos/vna/lib/vdd_rf
+LibName99=/home/kleinjt/repos/vna/lib/vdd_lo
+LibName100=/home/kleinjt/repos/vna/lib/vdd_clk
