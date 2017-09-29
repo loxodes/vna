@@ -104,7 +104,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 7 11
+Sheet 5 12
 Title ""
 Date ""
 Rev ""
@@ -147,9 +147,9 @@ F 3 "" H 8000 2850 60  0000 C CNN
 	1    8700 2300
 	1    0    0    -1  
 $EndComp
-Text HLabel 10550 2250 2    60   Output ~ 0
+Text HLabel 10550 2250 2    60   BiDi ~ 0
 PORT2
-Text HLabel 10650 6850 2    60   Output ~ 0
+Text HLabel 10650 6850 2    60   BiDi ~ 0
 PORT1
 Text HLabel 7550 4900 0    60   Input ~ 0
 RFIN
@@ -765,7 +765,7 @@ F 3 "" H 9850 2950 50  0001 C CNN
 	1    9850 2950
 	0    1    -1   0   
 $EndComp
-Text HLabel 10600 2950 2    60   Output ~ 0
+Text HLabel 10600 2950 2    60   Input ~ 0
 PORT2_BIAS
 Wire Wire Line
 	7550 4900 8150 4900
@@ -1004,7 +1004,7 @@ Wire Wire Line
 Wire Wire Line
 	10300 3350 10300 2700
 Connection ~ 10300 2950
-Text HLabel 10650 6100 2    60   Output ~ 0
+Text HLabel 10650 6100 2    60   Input ~ 0
 PORT1_BIAS
 Connection ~ 10450 6100
 $Comp

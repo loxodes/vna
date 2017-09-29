@@ -104,7 +104,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 11 11
+Sheet 10 12
 Title ""
 Date ""
 Rev ""
@@ -1835,7 +1835,7 @@ ADC_CLK_B
 Text HLabel 11650 9050 0    60   Output ~ 0
 ADC_CLK_C
 Text HLabel 14150 8950 2    60   Output ~ 0
-ADC_CLK_D'
+ADC_CLK_D
 $Comp
 L NB3N551 U?
 U 1 1 59CD3FB0
