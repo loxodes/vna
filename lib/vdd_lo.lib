@@ -1,0 +1,18 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# VDD_LO
+#
+DEF VDD_LO #SUPPLY 0 40 N N 1 L P
+F0 "#SUPPLY" 0 0 45 H I L BNN
+F1 "VDD_LO" 0 150 45 H V L BNN
+F2 "" 0 0 60 H I C CNN
+F3 "" 0 0 60 H I C CNN
+DRAW
+P 2 1 0 0 0 -100 0 0 N
+C 0 50 50 1 1 0 N
+X USB_DC ~ 0 -100 100 U 40 40 1 1 W N
+ENDDRAW
+ENDDEF
+#
+#End Library

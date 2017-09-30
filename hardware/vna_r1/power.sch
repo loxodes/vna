@@ -104,7 +104,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 11 12
+Sheet 10 12
 Title ""
 Date ""
 Rev ""
@@ -1418,4 +1418,6 @@ F 3 "" H 1500 7650 60  0001 C CNN
 	1    1500 7650
 	0    -1   -1   0   
 $EndComp
+Text Notes 13550 3300 0    60   ~ 0
+switch to lower cost LTC2054CS5?
 $EndSCHEMATC
