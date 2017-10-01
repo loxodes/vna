@@ -312,7 +312,7 @@ U 1 1 59CF6781
 P 2950 4550
 F 0 "RV101" V 2775 4550 50  0000 C CNN
 F 1 "POT" V 2850 4550 50  0000 C CNN
-F 2 "Potentiometers:Potentiometer_Bourns_3296W_3-8Zoll_Inline_ScrewUp" H 2950 4550 50  0001 C CNN
+F 2 "SMD_Packages:POT_SMD" H 2950 4550 50  0001 C CNN
 F 3 "" H 2950 4550 50  0001 C CNN
 	1    2950 4550
 	1    0    0    -1  
@@ -323,7 +323,7 @@ U 1 1 59CF695D
 P 3600 4550
 F 0 "JP101" H 3650 4450 50  0000 L CNN
 F 1 "Jumper_NC_Dual" H 3600 4650 50  0000 C BNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x03" H 3600 4550 50  0001 C CNN
+F 2 "vna_footprints:JMP_3" H 3600 4550 50  0001 C CNN
 F 3 "" H 3600 4550 50  0001 C CNN
 	1    3600 4550
 	1    0    0    -1  
