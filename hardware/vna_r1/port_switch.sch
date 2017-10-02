@@ -104,7 +104,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 5 12
+Sheet 5 13
 Title ""
 Date ""
 Rev ""
@@ -1155,7 +1155,7 @@ Wire Wire Line
 Connection ~ 8650 3000
 Text Label 8750 700  1    60   ~ 0
 PORT_SEL
-Text Notes 11150 5050 0    60   ~ 0
+Text Notes 11150 5050 0    118  ~ 24
 TODO: swap control inputs into MASW...
 Text Label 4100 2850 2    60   ~ 0
 SW_V1
