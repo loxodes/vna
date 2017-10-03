@@ -104,7 +104,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A1 33110 23386
 encoding utf-8
-Sheet 2 13
+Sheet 13 13
 Title ""
 Date ""
 Rev ""
@@ -2023,7 +2023,7 @@ Text Notes 6450 5450 0    60   ~ 0
 150 mA MAX
 Text Notes 20900 17450 0    60   ~ 0
 max 54 mA
-Text Notes 17100 6050 0    60   ~ 0
+Text Notes 16700 6500 0    60   ~ 0
 typ 80 mA
 $Comp
 L VDD_CLK #SUPPLY?
@@ -3517,21 +3517,21 @@ Wire Wire Line
 	9000 14900 9000 15150
 Wire Wire Line
 	6400 15000 8250 15000
-Text HLabel 16100 7650 2    60   Output ~ 0
+Text HLabel 16800 6900 2    60   Output ~ 0
 PLL_REF_SEL
-Text HLabel 16100 7750 2    60   Output ~ 0
+Text HLabel 16800 7000 2    60   Output ~ 0
 3V3_RF_EN
-Text HLabel 16100 7850 2    60   Output ~ 0
+Text HLabel 16800 7100 2    60   Output ~ 0
 3V3_DEMOD_EN
-Text HLabel 16100 7950 2    60   Output ~ 0
+Text HLabel 16800 7200 2    60   Output ~ 0
 3V3_PLL_EN
-Text HLabel 16100 8050 2    60   Output ~ 0
+Text HLabel 16800 7300 2    60   Output ~ 0
 RF_AMP_EN
-Text HLabel 16100 8150 2    60   Output ~ 0
+Text HLabel 16800 7400 2    60   Output ~ 0
 -5V_EN
-Text HLabel 16100 7250 2    60   Output ~ 0
+Text HLabel 16800 6650 2    60   Output ~ 0
 MIX_X2
-Text HLabel 16100 7350 2    60   Output ~ 0
+Text HLabel 16800 6750 2    60   Output ~ 0
 MIX_EN
 Text HLabel 10350 14200 2    60   Input ~ 0
 AD_DOUTD
@@ -3541,7 +3541,7 @@ Text HLabel 10350 14400 2    60   Input ~ 0
 AD_DOUTB
 Text HLabel 10350 14500 2    60   Input ~ 0
 AD_DOUTA
-Text HLabel 16100 8250 2    60   Output ~ 0
+Text HLabel 16800 7500 2    60   Output ~ 0
 AD_SYNCB
 Text HLabel 10350 14600 2    60   Input ~ 0
 AD_FS
@@ -3563,8 +3563,8 @@ Wire Wire Line
 	10150 14700 10350 14700
 Wire Wire Line
 	10150 14800 10350 14800
-Text Notes 10350 14800 0    60   ~ 0
-TODO - AUX PRU INPUT?\n
+Text Notes 10450 14800 0    60   ~ 0
+TODO - AUX PRU OUTPUT\n
 Wire Wire Line
 	6400 15100 8250 15100
 Wire Wire Line
@@ -3915,104 +3915,145 @@ NoConn ~ 8250 15900
 NoConn ~ 8250 16000
 NoConn ~ 8250 16100
 NoConn ~ 8250 16200
-Text Notes 15750 8600 0    60   ~ 0
+Text Notes 16500 7700 0    60   ~ 0
 TODO: connect SPI to PRU0 pins
-Text HLabel 16050 9500 2    60   Output ~ 0
+Text HLabel 15050 12950 2    60   Output ~ 0
 PORT_SEL
-Text HLabel 16050 9600 2    60   Output ~ 0
+Text HLabel 16800 8450 2    60   Output ~ 0
 PLL_REF_SEL
-Text HLabel 16050 9700 2    60   Output ~ 0
+Text HLabel 16800 8550 2    60   Output ~ 0
 PLL_REF_SEL
-Text HLabel 16050 9800 2    60   Output ~ 0
+Text HLabel 16800 8650 2    60   Output ~ 0
 RF_FILT_SW_1
-Text HLabel 16050 9900 2    60   Output ~ 0
+Text HLabel 16800 8750 2    60   Output ~ 0
 RF_FILT_SW_2
-Text HLabel 16050 10000 2    60   Output ~ 0
+Text HLabel 16800 8850 2    60   Output ~ 0
 RF_SYNTH_CE
-Text HLabel 16050 10100 2    60   Output ~ 0
+Text HLabel 16800 8950 2    60   Output ~ 0
 RF_SYNTH_CS
-Text HLabel 16050 10300 2    60   Output ~ 0
+Text HLabel 16800 9150 2    60   Output ~ 0
 SPI_CLK
-Text HLabel 16050 10400 2    60   Output ~ 0
+Text HLabel 16800 9250 2    60   Output ~ 0
 SPI_SDI
-Text HLabel 16050 10500 2    60   Output ~ 0
+Text HLabel 16800 9350 2    60   Output ~ 0
 RF_SYNTH_LOCK
-Text HLabel 16050 10650 2    60   BiDi ~ 0
+Text HLabel 16800 9500 2    60   BiDi ~ 0
 SCL
-Text HLabel 16050 10750 2    60   BiDi ~ 0
+Text HLabel 16800 9600 2    60   BiDi ~ 0
 SDA
-Text HLabel 16050 11000 2    60   Output ~ 0
+Text HLabel 16800 9850 2    60   Output ~ 0
 AD_PE_C
-Text HLabel 16050 10900 2    60   Output ~ 0
+Text HLabel 16800 9750 2    60   Output ~ 0
 AD_PE_D
-Text HLabel 16050 11100 2    60   Output ~ 0
+Text HLabel 16800 9950 2    60   Output ~ 0
 AD_PE_B
-Text HLabel 16050 11200 2    60   Output ~ 0
+Text HLabel 16800 10050 2    60   Output ~ 0
 AD_PE_A
-Text HLabel 16050 11350 2    60   Input ~ 0
+Text HLabel 16800 10200 2    60   Input ~ 0
 AD_DOUT_B
-Text HLabel 16050 11450 2    60   Output ~ 0
+Text HLabel 16800 10300 2    60   Output ~ 0
 AD_PD
-Text HLabel 16050 11550 2    60   Output ~ 0
+Text HLabel 16800 10400 2    60   Output ~ 0
 AD_PC
-Text HLabel 16050 11700 2    60   Output ~ 0
+Text HLabel 16800 10550 2    60   Output ~ 0
 AD_SYNCB
-Text HLabel 16050 11800 2    60   Input ~ 0
+Text HLabel 16800 10650 2    60   Input ~ 0
 AD_FS
-Text HLabel 16050 11900 2    60   Input ~ 0
+Text HLabel 16800 10750 2    60   Input ~ 0
 AD_CLKOUT
-Text HLabel 16050 12100 2    60   Input ~ 0
+Text HLabel 16800 10950 2    60   Input ~ 0
 AD_DOUTA
-Text HLabel 16050 12200 2    60   Input ~ 0
+Text HLabel 16800 11050 2    60   Input ~ 0
 AD_DOUTB
-Text HLabel 16050 12300 2    60   Input ~ 0
+Text HLabel 16800 11150 2    60   Input ~ 0
 AD_DOUTC
-Text HLabel 16050 12400 2    60   Input ~ 0
+Text HLabel 16800 11250 2    60   Input ~ 0
 AD_DOUTD
-Text HLabel 16050 12600 2    60   Output ~ 0
+Text HLabel 16800 11450 2    60   Output ~ 0
 PANEL_POWER_LED
-Text HLabel 16050 12700 2    60   Output ~ 0
+Text HLabel 16800 11550 2    60   Output ~ 0
 PANEL_PORT1_LED
-Text HLabel 16050 12800 2    60   Output ~ 0
+Text HLabel 16800 11650 2    60   Output ~ 0
 PANEL_PORT2_LED
-Text HLabel 16150 13850 2    60   BiDi ~ 0
+Text HLabel 16800 13200 2    60   BiDi ~ 0
 EXT_IO_0
-Text HLabel 16150 13950 2    60   BiDi ~ 0
+Text HLabel 16800 13300 2    60   BiDi ~ 0
 EXT_IO_1
-Text HLabel 16150 14050 2    60   BiDi ~ 0
+Text HLabel 16800 13400 2    60   BiDi ~ 0
 EXT_IO_2
-Text HLabel 16150 14150 2    60   BiDi ~ 0
+Text HLabel 16800 13500 2    60   BiDi ~ 0
 EXT_IO_3
-Text HLabel 16150 14300 2    60   BiDi ~ 0
+Text HLabel 16800 13650 2    60   BiDi ~ 0
 EXT_SPI_CS1
-Text HLabel 16150 14400 2    60   BiDi ~ 0
+Text HLabel 16800 13750 2    60   BiDi ~ 0
 EXT_SPI_CS0
-Text HLabel 16150 14550 2    60   BiDi ~ 0
+Text HLabel 16800 13900 2    60   BiDi ~ 0
 EXT_SPI_CLK
-Text HLabel 16150 14650 2    60   BiDi ~ 0
+Text HLabel 16800 14000 2    60   BiDi ~ 0
 EXT_SPI_MISO
-Text HLabel 16150 14750 2    60   BiDi ~ 0
+Text HLabel 16800 14100 2    60   BiDi ~ 0
 EXT_SPI_MOSI
-Text HLabel 16150 14900 2    60   BiDi ~ 0
+Text HLabel 16800 14250 2    60   BiDi ~ 0
 EXT_UART_MTX
-Text HLabel 16150 15000 2    60   BiDi ~ 0
+Text HLabel 16800 14350 2    60   BiDi ~ 0
 EXT_UART_MRX
-Text HLabel 16150 15100 2    60   BiDi ~ 0
+Text HLabel 16800 14450 2    60   BiDi ~ 0
 EXT_UART_CTS
-Text HLabel 16150 15200 2    60   BiDi ~ 0
+Text HLabel 16800 14550 2    60   BiDi ~ 0
 EXT_UART_RTS
-Text HLabel 16150 13700 2    60   BiDi ~ 0
+Text HLabel 16800 13050 2    60   BiDi ~ 0
 EXT_AIN0
-Text HLabel 16150 13600 2    60   BiDi ~ 0
+Text HLabel 16800 12950 2    60   BiDi ~ 0
 EXT_AIN1
-Text Notes 15200 13500 0    60   ~ 0
+Text Notes 15850 12850 0    60   ~ 0
 header for external upconverter, switches, etc..
-Text HLabel 16050 9300 2    60   Output ~ 0
+Text HLabel 16800 8150 2    60   Output ~ 0
 RF_DAC_CS
-Text HLabel 16050 9100 2    60   Output ~ 0
+Text HLabel 16800 8000 2    60   Output ~ 0
 LO_SYNTH_LOCK
-Text HLabel 16050 9000 2    60   Output ~ 0
+Text HLabel 16800 7900 2    60   Output ~ 0
 LO_SYNTH_CE
-Text HLabel 16050 8900 2    60   Output ~ 0
+Text HLabel 16800 7800 2    60   Output ~ 0
 LO_SYNTH_CS
+Text Label 14250 12950 2    60   ~ 0
+PORT_SEL_PRU
+Text Label 14250 13200 2    60   ~ 0
+PORT_SEL_GPIO
+$Comp
+L R_Small R?
+U 1 1 59D66328
+P 14500 12950
+F 0 "R?" H 14530 12970 50  0000 L CNN
+F 1 "JMP" H 14530 12910 50  0000 L CNN
+F 2 "" H 14500 12950 50  0001 C CNN
+F 3 "" H 14500 12950 50  0001 C CNN
+	1    14500 12950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 59D6678E
+P 14500 13200
+F 0 "R?" H 14530 13220 50  0000 L CNN
+F 1 "JMP" H 14530 13160 50  0000 L CNN
+F 2 "" H 14500 13200 50  0001 C CNN
+F 3 "" H 14500 13200 50  0001 C CNN
+	1    14500 13200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	14250 12950 14400 12950
+Wire Wire Line
+	14250 13200 14400 13200
+Wire Wire Line
+	14600 13200 14750 13200
+Wire Wire Line
+	14750 13200 14750 12950
+Wire Wire Line
+	14600 12950 15050 12950
+Connection ~ 14750 12950
+Text Label 14350 10050 0    60   ~ 0
+PORT_SEL_GPIO
+Text Notes 16600 14500 1    60   ~ 12
+TODO: connect some to PRU io...
 $EndSCHEMATC
