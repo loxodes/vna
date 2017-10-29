@@ -1070,4 +1070,6 @@ Wire Wire Line
 	3550 10750 3750 10750
 Wire Wire Line
 	3550 10850 3750 10850
+Text Notes 4200 750  0    118  ~ 0
+microwave vector network analyzer
 $EndSCHEMATC
