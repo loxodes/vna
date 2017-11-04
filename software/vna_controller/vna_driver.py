@@ -156,7 +156,7 @@ class eth_vna:
         sw_term_avg = 0
 
         for i in range(navg):
-            a1, a2, b1, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 1024)
+            a1, a2, b2, b1 = pru_adc.grab_samples(paths = 4, number_of_samples = 1024)
            
             if rawplot:
                 a1_rms = np.sqrt(np.mean(np.abs(a1)**2))
@@ -342,17 +342,50 @@ class eth_vna:
 
         return [sdrkit_short, sdrkit_open, sdrkit_load, sdrkit_thru]
 
-    def slot_measure_twoport(self, fstart, fstop, points, cal_dir = './cal_twoport/'):
+    def slot_measure_twoport(self, fstart, fstop, points, simultaneous = False, cal_dir = './cal_twoport/', navg = 4):
         sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
-        raw_input("connect shorts, then press enter to continue")
-        cal_short = self.sweep(fstart, fstop, points, navg = 4)
-        raw_input("connect loads, then press enter to continue")
-        cal_load = self.sweep(fstart, fstop, points, navg = 4)
-        raw_input("connect opens, then press enter to continue")
-        cal_open = self.sweep(fstart, fstop, points, navg = 4)
+
+        cal_short = None
+        cal_load = None
+        cal_open = None
+    
+        if simultaneous:
+            raw_input("connect shorts, then press enter to continue")
+            cal_short = self.sweep(fstart, fstop, points, navg = navg)
+            raw_input("connect loads, then press enter to continue")
+            cal_load = self.sweep(fstart, fstop, points, navg = navg)
+            raw_input("connect opens, then press enter to continue")
+            cal_open = self.sweep(fstart, fstop, points, navg = navg)
+        else:
+            def sweep_oneport(fstart, fstop, points, navg, port):
+                sw =  self.sweep(fstart, fstop, points, navg = navg)
+                return rf.Network(f = sw.f/1e9, z0 = sw.z0, s = sw.s[:, port, port])
+
+            raw_input("connect short to port 1, then press enter to continue")
+            cal_short_1 = sweep_oneport(fstart, fstop, points, navg, 0)
+            raw_input("connect short to port 2, then press enter to continue")
+            cal_short_2 = sweep_oneport(fstart, fstop, points, navg, 1)
+
+            raw_input("connect load to port 1, then press enter to continue")
+            cal_load_1 = sweep_oneport(fstart, fstop, points, navg, 0)
+            raw_input("connect load to port 2, then press enter to continue")
+            cal_load_2 = sweep_oneport(fstart, fstop, points, navg, 1)
+
+            raw_input("connect open to port 1, then press enter to continue")
+            cal_open_1 = sweep_oneport(fstart, fstop, points, navg, 0)
+            raw_input("connect open to port 2, then press enter to continue")
+            cal_open_2 = sweep_oneport(fstart, fstop, points, navg, 1)
+
+            # TODO: untangle units on frequency foor two port reflect, does not preserve GHz
+            # todo: add additional thru for type N, then use chopinhalf to deembed n to sma adapters?
+            cal_short = rf.two_port_reflect(cal_short_1, cal_short_2)
+            cal_load = rf.two_port_reflect(cal_load_1, cal_load_2)
+            cal_open = rf.two_port_reflect(cal_open_1, cal_open_2)
+
+
 
         raw_input("connect thru, then press enter to continue")
-        cal_thru, sw_fwd, sw_rev = self.sweep(fstart, fstop, points, sw_terms = True, navg = 4)
+        cal_thru, sw_fwd, sw_rev = self.sweep(fstart, fstop, points, sw_terms = True, navg = navg)
         
         cal_short.write_touchstone(cal_dir + 'short.s2p')
         cal_open.write_touchstone(cal_dir + 'open.s2p')
@@ -406,7 +439,7 @@ if __name__ == '__main__':
     parser.add_argument('--lmr', action='store_true', help='collect two port calibration sweeps (LMR-16)')
     parser.add_argument('--swterms', action='store_true', help='save switch terns')
     parser.add_argument('--rawplot', action='store_true', help='plot raw a/b samples')
-
+    parser.add_argument('--simultaneous', action='store_true', help='collect SOLT cal measurements from both ports simultaneously')
     parser.add_argument('--points', type=int, default=221, help='number of points in sweep')
     parser.add_argument('--navg', type=int, default=1, help='number averages')
     parser.add_argument('--fstart', type=float, default=2e9, help='sweep start frequency (Hz)')
@@ -425,7 +458,7 @@ if __name__ == '__main__':
     points = args.points
 
     if args.cal:
-        vna.slot_measure_twoport(fstart, fstop, points)
+        vna.slot_measure_twoport(fstart, fstop, points, simultaneous = args.simultaneous)
     elif args.lmr:
         vna.measure_lmr16(fstart, fstop, points)
     else:
