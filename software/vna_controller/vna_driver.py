@@ -342,6 +342,10 @@ class eth_vna:
 
         return [sdrkit_short, sdrkit_open, sdrkit_load, sdrkit_thru]
 
+    def _sweep_oneport(self, fstart, fstop, points, navg, port):
+        sw =  self.sweep(fstart, fstop, points, navg = navg)
+        return rf.Network(f = sw.f/1e9, z0 = sw.z0, s = sw.s[:, port, port])
+
     def slot_measure_twoport(self, fstart, fstop, points, simultaneous = False, cal_dir = './cal_twoport/', navg = 4):
         sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
 
@@ -357,24 +361,21 @@ class eth_vna:
             raw_input("connect opens, then press enter to continue")
             cal_open = self.sweep(fstart, fstop, points, navg = navg)
         else:
-            def sweep_oneport(fstart, fstop, points, navg, port):
-                sw =  self.sweep(fstart, fstop, points, navg = navg)
-                return rf.Network(f = sw.f/1e9, z0 = sw.z0, s = sw.s[:, port, port])
 
             raw_input("connect short to port 1, then press enter to continue")
-            cal_short_1 = sweep_oneport(fstart, fstop, points, navg, 0)
+            cal_short_1 = self.sweep_oneport(fstart, fstop, points, navg, 0)
             raw_input("connect short to port 2, then press enter to continue")
-            cal_short_2 = sweep_oneport(fstart, fstop, points, navg, 1)
+            cal_short_2 = self.sweep_oneport(fstart, fstop, points, navg, 1)
 
             raw_input("connect load to port 1, then press enter to continue")
-            cal_load_1 = sweep_oneport(fstart, fstop, points, navg, 0)
+            cal_load_1 = self.sweep_oneport(fstart, fstop, points, navg, 0)
             raw_input("connect load to port 2, then press enter to continue")
-            cal_load_2 = sweep_oneport(fstart, fstop, points, navg, 1)
+            cal_load_2 = self.sweep_oneport(fstart, fstop, points, navg, 1)
 
             raw_input("connect open to port 1, then press enter to continue")
-            cal_open_1 = sweep_oneport(fstart, fstop, points, navg, 0)
+            cal_open_1 = self.sweep_oneport(fstart, fstop, points, navg, 0)
             raw_input("connect open to port 2, then press enter to continue")
-            cal_open_2 = sweep_oneport(fstart, fstop, points, navg, 1)
+            cal_open_2 = self.sweep_oneport(fstart, fstop, points, navg, 1)
 
             # TODO: untangle units on frequency foor two port reflect, does not preserve GHz
             # todo: add additional thru for type N, then use chopinhalf to deembed n to sma adapters?
@@ -422,7 +423,27 @@ class eth_vna:
 
         sw_fwd.write_touchstone(cal_dir + 'lmr_sw_fwd.s1p')
         sw_rev.write_touchstone(cal_dir + 'lmr_sw_rev.s1p')
+ 
+    def measure_trl(self, fstart, fstop, points, cal_dir = './cal_twoport/'):
+        sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
+
+        raw_input("connect reflect to port one")
+        reflect_1 = self._sweep_oneport(fstart, fstop, points, 0)
+        raw_input("connect reflect to port two")
+        reflect_2 = self._sweep_oneport(fstart, fstop, points, 1)
+        trl_reflect = rf.two_port_reflect(reflect_1, reflect_2)
+
+        raw_input("connect thru")
+        trl_thru = self.sweep(fstart, fstop, points)
+
+        raw_input("connect line")
+        trl_line = self.sweep(fstart, fstop, points)
+
+        trl_reflect.write_touchstone(cal_dir + 'trl_reflect.s2p')
+        trl_thru.write_touchstone(cal_dir + 'trl_thru.s2p')
+        trl_line.write_touchstone(cal_dir + 'trl_line.s2p')
    
+  
     def plot_sparam(self, sweep):
         plt.subplot(1,2,1)
         sweep.plot_s_db()
@@ -436,6 +457,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Vector network analyzer driver.')
     parser.add_argument('--cal', action='store_true', help='collect two port calibration sweeps (SLOT)')
+    parser.add_argument('--trl', action='store_true', help='collect TRL calibration sweeps')
     parser.add_argument('--lmr', action='store_true', help='collect two port calibration sweeps (LMR-16)')
     parser.add_argument('--swterms', action='store_true', help='save switch terns')
     parser.add_argument('--rawplot', action='store_true', help='plot raw a/b samples')
@@ -461,6 +483,9 @@ if __name__ == '__main__':
         vna.slot_measure_twoport(fstart, fstop, points, simultaneous = args.simultaneous)
     elif args.lmr:
         vna.measure_lmr16(fstart, fstop, points)
+    elif args.trl:
+        vna.measure_trl(fstart, fstop, points)
+
     else:
         filename = raw_input('enter a filename: ')
         tstart = time.time()
