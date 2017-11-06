@@ -1,6 +1,7 @@
 from pylab import *
 import skrf as rf
 import pdb
+import argparse
 c = 3e8
 
 
@@ -14,7 +15,6 @@ def create_sdrkits_ideal(skrf_f):
     sdrkit_open = media.line(42.35, 'ps', z0 = 50) ** media.open() # 42.35
     sdrkit_short = media.line(26.91, 'ps', z0 = 50) ** media.short() 
     # TODO: add parallel 2fF capacitance to load?
-    pdb.set_trace()
     sdrkit_load_p1 = rf.Network(f=skrf_f.f, s=(np.ones(len(skrf_f)) * -.0126 + 1j * 2.525e-12 * skrf_f.f), z0=50, f_unit = 'Hz')
     sdrkit_load_p2 = rf.Network(f=skrf_f.f, s=(np.ones(len(skrf_f)) * -.005 + 1j * 2.525e-12 * skrf_f.f), z0=50, f_unit = 'Hz')
     sdrkit_thru = media.line(41.00, 'ps', z0 = 50)  # open - 1.35 ps
@@ -80,46 +80,73 @@ def plot_error_terms(cal_kit):
     reflection_tracking.plot_s_db()
 
 def main():
-    # load cal measurements 
-    cal_load = rf.Network('../cal_twoport/load.s2p')
-    cal_open = rf.Network('../cal_twoport/open.s2p')
-    cal_short = rf.Network('../cal_twoport/short.s2p')
-    cal_thru = rf.Network('../cal_twoport/thru.s2p')
+    parser = argparse.ArgumentParser(description='two port VNA calibration script.')
 
-    cal_iso = rf.Network('../cal_twoport/isolation.s2p')
+    parser.add_argument('--solt', action='store_true', help='apply SOLT calibration')
+    parser.add_argument('--trl', action='store_true', help='apply TRL calibration')
+    parser.add_argument('filename', help='s2p file to process') 
 
-    cal_sw_fwd = rf.Network('../cal_twoport/sw_fwd.s1p')
-    cal_sw_rev = rf.Network('../cal_twoport/sw_rev.s1p')
- 
+    #parser.add_argument('--title', type=string, default='$|S|$', help='plot title')
 
-    measured_cal = [cal_short, cal_open, cal_load, cal_thru]
+
+    args = parser.parse_args()
     
-    # create ideal cal networks, SLOT calibration
-    ideal_cal = create_kirkby(cal_thru.frequency)#create_sdrkits_ideal(cal_thru.frequency)
+    cal = None
 
-    cal = rf.TwelveTerm(ideals = ideal_cal, measured = measured_cal, n_thrus = 1, isolation = cal_iso)
+    if args.solt:
+        # load cal measurements 
+        cal_load = rf.Network('../cal_twoport/load.s2p')
+        cal_open = rf.Network('../cal_twoport/open.s2p')
+        cal_short = rf.Network('../cal_twoport/short.s2p')
+        cal_thru = rf.Network('../cal_twoport/thru.s2p')
 
-    #cal = rf.EightTerm(ideals = ideal_cal, measured = measured_cal, switch_terms = (cal_sw_rev, cal_sw_fwd))
+        cal_iso = rf.Network('../cal_twoport/isolation.s2p')
+
+        cal_sw_fwd = rf.Network('../cal_twoport/sw_fwd.s1p')
+        cal_sw_rev = rf.Network('../cal_twoport/sw_rev.s1p')
+     
+
+        measured_cal = [cal_short, cal_open, cal_load, cal_thru]
+        
+        # create ideal cal networks, SLOT calibration
+        ideal_cal = create_kirkby(cal_thru.frequency)#create_sdrkits_ideal(cal_thru.frequency)
+
+        cal = rf.TwelveTerm(ideals = ideal_cal, measured = measured_cal, n_thrus = 1, isolation = cal_iso)
+
+        #cal = rf.EightTerm(ideals = ideal_cal, measured = measured_cal, switch_terms = (cal_sw_rev, cal_sw_fwd))
+
+    elif args.trl:
+        cal_reflect = rf.Network('../cal_twoport/trl_reflect.s2p')
+        cal_thru = rf.Network('../cal_twoport/trl_thru.s2p')
+        cal_line = rf.Network('../cal_twoport/trl_line.s2p')
+
+        cal_sw_fwd = rf.Network('../cal_twoport/trl_sw_fwd.s1p')
+        cal_sw_rev = rf.Network('../cal_twoport/trl_sw_rev.s1p')
+     
+        measured_cal = [cal_thru, cal_reflect, cal_line]
+        pdb.set_trace()
+        media = rf.media.Freespace(cal_reflect.frequency)
+        ideal_open = media.open() # TODO: simulate reflect to estimate ideal behavior.. openems?
+
+        ideal_cal = [None, ideal_open, None]
+        cal = rf.TRL(measured = measured_cal, ideals = ideal_cal, estimate_line = True, switch_terms = (cal_sw_rev, cal_sw_fwd))
+
+    else:
+        print('no cal type selected..')
+
 
     cal.run()
 
-    barrel = rf.Network('8493A_thru.s2p')
-    #e_lpf = rf.Network('/home/kleinjt/vna_presentation/data/e5701c/RAINBOW_LPF_ANNE.S1P')
-
-    barrel_cal = cal.apply_cal(barrel)
-    barrel_cal.plot_s_db()
-    #e_lpf.plot_s_db()
+    plot_s2p_file(args.filename, cal, show = False)
 
     grid(True)
-    title("$|S|$ of microstrip test board")
+    #title("$|S|$ of microstrip test board")
+
+    #show()
+    #title("$S$ of HMC311 test board from 2 GHz to 13 GHz") 
+    #barrel_cal.plot_s_smith()
 
     show()
-
-    title("$S$ of HMC311 test board from 2 GHz to 13 GHz") 
-    barrel_cal.plot_s_smith()
-
-    show()
-    pdb.set_trace()
 
 if __name__ == '__main__':
     main()

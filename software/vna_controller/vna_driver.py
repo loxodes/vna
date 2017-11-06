@@ -424,24 +424,28 @@ class eth_vna:
         sw_fwd.write_touchstone(cal_dir + 'lmr_sw_fwd.s1p')
         sw_rev.write_touchstone(cal_dir + 'lmr_sw_rev.s1p')
  
-    def measure_trl(self, fstart, fstop, points, cal_dir = './cal_twoport/'):
+    def measure_trl(self, fstart, fstop, points, cal_dir = './cal_twoport/', navg = 4):
         sweep_freqs = np.linspace(fstart, fstop, points) / 1e9
 
         raw_input("connect reflect to port one")
-        reflect_1 = self._sweep_oneport(fstart, fstop, points, 0)
+        reflect_1 = self._sweep_oneport(fstart, fstop, points, navg, 0)
         raw_input("connect reflect to port two")
-        reflect_2 = self._sweep_oneport(fstart, fstop, points, 1)
+        reflect_2 = self._sweep_oneport(fstart, fstop, points, navg, 1)
         trl_reflect = rf.two_port_reflect(reflect_1, reflect_2)
 
         raw_input("connect thru")
-        trl_thru = self.sweep(fstart, fstop, points)
+        trl_thru, sw_fwd, sw_rev = self.sweep(fstart, fstop, points, navg = navg, sw_terms = True)
 
         raw_input("connect line")
-        trl_line = self.sweep(fstart, fstop, points)
+        trl_line = self.sweep(fstart, fstop, points, navg = navg)
 
         trl_reflect.write_touchstone(cal_dir + 'trl_reflect.s2p')
         trl_thru.write_touchstone(cal_dir + 'trl_thru.s2p')
         trl_line.write_touchstone(cal_dir + 'trl_line.s2p')
+
+        sw_fwd.write_touchstone(cal_dir + 'trl_sw_fwd.s1p')
+        sw_rev.write_touchstone(cal_dir + 'trl_sw_rev.s1p')
+
    
   
     def plot_sparam(self, sweep):
