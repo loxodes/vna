@@ -30,7 +30,7 @@ PORT2 = SW_DUT_PORT2
 DISABLE = 0 
 ENABLE = 1 
 
-DOUBLER_CUTOFF = 5e9
+DOUBLER_CUTOFF = 4e9
 
 DEFAULT_DATA_DIR = './meas/'
 
@@ -150,13 +150,12 @@ class eth_vna:
 
     def _grab_s_raw(self, navg = 4, rfport = PORT1, rawplot = False):
         self.vna_io.set_switch(SW_DUT_RF, rfport)
-
         s_return_avg = 0
         s_thru_avg = 0
         sw_term_avg = 0
 
         for i in range(navg):
-            a1, a2, b2, b1 = pru_adc.grab_samples(paths = 4, number_of_samples = 1024)
+            a1, a2, b1, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 1024)
            
             if rawplot:
                 a1_rms = np.sqrt(np.mean(np.abs(a1)**2))
@@ -223,7 +222,7 @@ class eth_vna:
                 print('b1/a1 (mean)    : {}'.format(np.mean(b1/a1)))
                 print('b1/a1 (goertzel): {}'.format(b1_g/a1_g))
 
-                s_return_avg += np.mean(b1_g/a1_g)#(b1_g / a1_g)
+                s_return_avg += np.mean(b1_g/a1_g)
                 s_thru_avg += np.mean(b2_g/a1_g)
                 sw_term_avg += np.mean(a2_g/b2_g)
 
@@ -439,9 +438,14 @@ class eth_vna:
         raw_input("connect line")
         trl_line = self.sweep(fstart, fstop, points, navg = navg)
 
+        raw_input("connect verification")
+        trl_verification = self.sweep(fstart, fstop, points, navg = navg)
+
         trl_reflect.write_touchstone(cal_dir + 'trl_reflect.s2p')
         trl_thru.write_touchstone(cal_dir + 'trl_thru.s2p')
         trl_line.write_touchstone(cal_dir + 'trl_line.s2p')
+
+        trl_verification.write_touchstone(cal_dir + 'trl_line_15mm.s2p')
 
         sw_fwd.write_touchstone(cal_dir + 'trl_sw_fwd.s1p')
         sw_rev.write_touchstone(cal_dir + 'trl_sw_rev.s1p')
@@ -466,7 +470,7 @@ if __name__ == '__main__':
     parser.add_argument('--swterms', action='store_true', help='save switch terns')
     parser.add_argument('--rawplot', action='store_true', help='plot raw a/b samples')
     parser.add_argument('--simultaneous', action='store_true', help='collect SOLT cal measurements from both ports simultaneously')
-    parser.add_argument('--points', type=int, default=221, help='number of points in sweep')
+    parser.add_argument('--points', type=int, default=441, help='number of points in sweep')
     parser.add_argument('--navg', type=int, default=1, help='number averages')
     parser.add_argument('--fstart', type=float, default=2e9, help='sweep start frequency (Hz)')
     parser.add_argument('--fstop', type=float, default=13e9, help='sweep stop frequency (Hz)')

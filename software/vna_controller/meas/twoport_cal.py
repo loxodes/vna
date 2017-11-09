@@ -11,7 +11,7 @@ def create_sdrkits_ideal(skrf_f):
      # short - 8.073 mm w/ .00873 dB attenuation 
      # open - 12.7 mm w/ .0127 dB attenuation
 
-    media = rf.media.Freespace(skrf_f)
+    media = rf.media.DefinedGammaZ0(skrf_f, z0 = 50)
     sdrkit_open = media.line(42.35, 'ps', z0 = 50) ** media.open() # 42.35
     sdrkit_short = media.line(26.91, 'ps', z0 = 50) ** media.short() 
     # TODO: add parallel 2fF capacitance to load?
@@ -27,7 +27,7 @@ def create_sdrkits_ideal(skrf_f):
     return ideals
 
 def create_kirkby(skrf_f):
-    media = rf.media.Freespace(skrf_f)
+    media = rf.media.DefinedGammaZ0(skrf_f, z0 = 50)
 
     def calc_c(f, c):
         # see http://literature.cdn.keysight.com/litweb/pdf/5989-4840EN.pdf 
@@ -61,12 +61,15 @@ def create_kirkby(skrf_f):
     
 
 
-def plot_s2p_file(filename, cal_kit = None, show = True):
+def plot_s2p_file(filename, cal_kit = None, show = True, smith = False):
     s2p = rf.Network(filename)
     if cal_kit:
         s2p = cal_kit.apply_cal(s2p)
-
-    s2p.plot_s_db()
+    
+    if smith:
+        s2p.plot_s_smith()
+    else:
+        s2p.plot_s_db()
 
     if show:
         plt.show()
@@ -86,7 +89,7 @@ def main():
     parser.add_argument('--trl', action='store_true', help='apply TRL calibration')
     parser.add_argument('filename', help='s2p file to process') 
 
-    #parser.add_argument('--title', type=string, default='$|S|$', help='plot title')
+    parser.add_argument('--title', default='$|S|$', help='plot title')
 
 
     args = parser.parse_args()
@@ -124,8 +127,7 @@ def main():
         cal_sw_rev = rf.Network('../cal_twoport/trl_sw_rev.s1p')
      
         measured_cal = [cal_thru, cal_reflect, cal_line]
-        pdb.set_trace()
-        media = rf.media.Freespace(cal_reflect.frequency)
+        media = rf.media.DefinedGammaZ0(cal_reflect.frequency, z0 = 50)
         ideal_open = media.open() # TODO: simulate reflect to estimate ideal behavior.. openems?
 
         ideal_cal = [None, ideal_open, None]
@@ -136,17 +138,45 @@ def main():
 
 
     cal.run()
-
+    show()
+    subplot(2,1,1)
     plot_s2p_file(args.filename, cal, show = False)
 
+    subplot(2,1,2)
+    plot_s2p_file(args.filename, cal, show = False, smith = True)
+    
     grid(True)
-    #title("$|S|$ of microstrip test board")
-
-    #show()
-    #title("$S$ of HMC311 test board from 2 GHz to 13 GHz") 
-    #barrel_cal.plot_s_smith()
+    title(args.title)
 
     show()
+
+    plot_coefs(cal, cal_line.f)
+    pdb.set_trace()
+   
+
+def plot_coefs(cal, f):
+    subplot(2,1,1)
+    plot(f, 20 * log10(abs(cal.coefs['forward directivity'])))
+    plot(f, 20 * log10(abs(cal.coefs['reverse directivity'])))
+
+    plot(f, 20 * log10(abs(cal.coefs['forward reflection tracking'])))
+    plot(f, 20 * log10(abs(cal.coefs['reverse reflection tracking'])))
+
+    plot(f, 20 * log10(abs(cal.coefs['k'])))
+    legend(['fwd directivity', 'rev directivity', 'fwd reflection', 'rev reflection', 'k'])
+
+    subplot(2,1,2)
+    plot(f, 20 * log10(abs(cal.coefs['reverse isolation'])))
+    plot(f, 20 * log10(abs(cal.coefs['forward isolation'])))
+
+    plot(f, 20 * log10(abs(cal.coefs['forward switch term'])))
+    plot(f, 20 * log10(abs(cal.coefs['reverse switch term'])))
+
+    plot(f, 20 * log10(abs(cal.coefs['forward source match'])))
+    plot(f, 20 * log10(abs(cal.coefs['reverse source match'])))
+    legend(['fwd iso', 'rev iso', 'fwd sw', 'rev sw', 'fwd match', 'rev match'])
+    show()
+
 
 if __name__ == '__main__':
     main()
