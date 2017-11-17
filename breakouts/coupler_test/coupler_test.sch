@@ -33,6 +33,7 @@ LIBS:contrib
 LIBS:valves
 LIBS:resistive_bridge
 LIBS:conn_sma_2gnd
+LIBS:coupler_test-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -151,68 +152,6 @@ $EndComp
 Wire Wire Line
 	6050 2150 6050 3350
 $Comp
-L R_Small R102
-U 1 1 5A0E2BD4
-P 6400 3250
-F 0 "R102" H 6430 3270 50  0000 L CNN
-F 1 "R_Small" H 6430 3210 50  0000 L CNN
-F 2 "Resistors_SMD:R_0603" H 6400 3250 50  0001 C CNN
-F 3 "" H 6400 3250 50  0001 C CNN
-	1    6400 3250
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	6300 3250 6200 3250
-Wire Wire Line
-	6200 2900 6200 3350
-$Comp
-L GND #PWR04
-U 1 1 5A0E2C96
-P 6550 3250
-F 0 "#PWR04" H 6550 3000 50  0001 C CNN
-F 1 "GND" H 6550 3100 50  0000 C CNN
-F 2 "" H 6550 3250 50  0001 C CNN
-F 3 "" H 6550 3250 50  0001 C CNN
-	1    6550 3250
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	6550 3250 6500 3250
-$Comp
-L R_Small R101
-U 1 1 5A0E2CF9
-P 6200 2800
-F 0 "R101" H 6230 2820 50  0000 L CNN
-F 1 "R_Small" H 6230 2760 50  0000 L CNN
-F 2 "Resistors_SMD:R_0402" H 6200 2800 50  0001 C CNN
-F 3 "" H 6200 2800 50  0001 C CNN
-	1    6200 2800
-	1    0    0    -1  
-$EndComp
-Connection ~ 6200 3250
-Wire Wire Line
-	6050 2600 6350 2600
-Wire Wire Line
-	6200 2600 6200 2700
-Connection ~ 6050 2600
-$Comp
-L R_Small R103
-U 1 1 5A0E2DC5
-P 6450 2600
-F 0 "R103" H 6480 2620 50  0000 L CNN
-F 1 "R_Small" H 6480 2560 50  0000 L CNN
-F 2 "Resistors_SMD:R_0402" H 6450 2600 50  0001 C CNN
-F 3 "" H 6450 2600 50  0001 C CNN
-	1    6450 2600
-	0    -1   -1   0   
-$EndComp
-Connection ~ 6200 2600
-Wire Wire Line
-	6550 2600 6800 2600
-Wire Wire Line
-	6800 2600 6800 3800
-Connection ~ 6800 3800
-$Comp
 L GND #PWR?
 U 1 1 5A0E304C
 P 6600 1750
@@ -232,4 +171,5 @@ Wire Wire Line
 Wire Wire Line
 	6550 1750 6600 1750
 Connection ~ 6550 1750
+NoConn ~ 6200 3350
 $EndSCHEMATC
