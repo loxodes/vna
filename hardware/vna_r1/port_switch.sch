@@ -104,7 +104,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 5 13
+Sheet 4 13
 Title ""
 Date ""
 Rev ""
@@ -1125,7 +1125,7 @@ Wire Wire Line
 Text Notes 3350 1650 0    60   ~ 0
 PORT_SEL SW_V1 SW_V2\n3V3      -5V    0V\n0V	        0V  -5V
 Text Notes 10100 5000 0    60   ~ 0
-PORT_SEL MASW\n3V3      RF2\n0V 	     RF1
+PORT_SEL MASW\n3V3      RF1\n0V 	     RF2
 Text Notes 9850 1750 0    60   ~ 0
 PORT_SEL U304\n3V3     RF1 -> RFC\n0V 	     RF2 -> RFC
 Text Notes 9800 7550 0    60   ~ 0
@@ -1155,8 +1155,6 @@ Wire Wire Line
 Connection ~ 8650 3000
 Text Label 8750 700  1    60   ~ 0
 PORT_SEL
-Text Notes 11150 5050 0    118  ~ 24
-TODO: swap control inputs into MASW...
 Text Label 4100 2850 2    60   ~ 0
 SW_V1
 $Comp
