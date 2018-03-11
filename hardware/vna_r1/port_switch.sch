@@ -104,7 +104,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 4 13
+Sheet 4 11
 Title ""
 Date ""
 Rev ""
@@ -1260,4 +1260,6 @@ F 3 "" H 7550 7050 60  0001 C CNN
 	1    7550 7050
 	0    -1   -1   0   
 $EndComp
+Text Notes 9200 9000 0    118  ~ 24
+replace with adrf5020?
 $EndSCHEMATC
