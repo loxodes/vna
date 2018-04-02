@@ -1,0 +1,194 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:conn_sma_2gnd
+LIBS:trl_line-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L CONN_SMA_2GND U101
+U 1 1 59B4A05A
+P 2600 3850
+F 0 "U101" H 2300 4050 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 2650 4150 60  0000 C CNN
+F 2 "vna_footprints:SMA_901-10512_6p7MIL_FR408_CPW_LAUNCH" H 2600 3850 60  0001 C CNN
+F 3 "" H 2600 3850 60  0000 C CNN
+	1    2600 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_SMA_2GND U102
+U 1 1 59B4A095
+P 4300 3850
+F 0 "U102" H 4000 4050 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 4350 4150 60  0000 C CNN
+F 2 "vna_footprints:SMA_901-10512_6p7MIL_FR408_CPW_LAUNCH" H 4300 3850 60  0001 C CNN
+F 3 "" H 4300 3850 60  0000 C CNN
+	1    4300 3850
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND #PWR01
+U 1 1 59B4A10C
+P 2600 4400
+F 0 "#PWR01" H 2600 4150 50  0001 C CNN
+F 1 "GND" H 2600 4250 50  0000 C CNN
+F 2 "" H 2600 4400 50  0001 C CNN
+F 3 "" H 2600 4400 50  0001 C CNN
+	1    2600 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2550 4300 2550 4350
+Wire Wire Line
+	2550 4350 2650 4350
+Wire Wire Line
+	2600 4350 2600 4400
+Wire Wire Line
+	2650 4350 2650 4300
+Connection ~ 2600 4350
+$Comp
+L GND #PWR02
+U 1 1 59B4A147
+P 4300 4400
+F 0 "#PWR02" H 4300 4150 50  0001 C CNN
+F 1 "GND" H 4300 4250 50  0000 C CNN
+F 2 "" H 4300 4400 50  0001 C CNN
+F 3 "" H 4300 4400 50  0001 C CNN
+	1    4300 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4250 4300 4250 4350
+Wire Wire Line
+	4250 4350 4350 4350
+Wire Wire Line
+	4350 4350 4350 4300
+Wire Wire Line
+	4300 4350 4300 4400
+Connection ~ 4300 4350
+Wire Wire Line
+	3000 3850 3900 3850
+$Comp
+L L_Small L101
+U 1 1 5AC19047
+P 3450 3550
+F 0 "L101" H 3480 3590 50  0000 L CNN
+F 1 "L_Small" H 3480 3510 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 3450 3550 50  0001 C CNN
+F 3 "" H 3450 3550 50  0001 C CNN
+	1    3450 3550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 3650 3450 3850
+Connection ~ 3450 3850
+Wire Wire Line
+	3450 2800 3450 3450
+$Comp
+L C_Small C102
+U 1 1 5AC190DB
+P 3650 3250
+F 0 "C102" H 3660 3320 50  0000 L CNN
+F 1 "C_Small" H 3660 3170 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" H 3650 3250 50  0001 C CNN
+F 3 "" H 3650 3250 50  0001 C CNN
+	1    3650 3250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR03
+U 1 1 5AC1913C
+P 3850 3250
+F 0 "#PWR03" H 3850 3000 50  0001 C CNN
+F 1 "GND" H 3850 3100 50  0000 C CNN
+F 2 "" H 3850 3250 50  0001 C CNN
+F 3 "" H 3850 3250 50  0001 C CNN
+	1    3850 3250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3850 3250 3750 3250
+Wire Wire Line
+	3550 3250 3450 3250
+Connection ~ 3450 3250
+$Comp
+L C_Small C101
+U 1 1 5AC191EC
+P 3650 2850
+F 0 "C101" H 3660 2920 50  0000 L CNN
+F 1 "C_Small" H 3660 2770 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" H 3650 2850 50  0001 C CNN
+F 3 "" H 3650 2850 50  0001 C CNN
+	1    3650 2850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR04
+U 1 1 5AC1921B
+P 3850 2850
+F 0 "#PWR04" H 3850 2600 50  0001 C CNN
+F 1 "GND" H 3850 2700 50  0000 C CNN
+F 2 "" H 3850 2850 50  0001 C CNN
+F 3 "" H 3850 2850 50  0001 C CNN
+	1    3850 2850
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3850 2850 3750 2850
+Wire Wire Line
+	3450 2850 3550 2850
+Wire Wire Line
+	3450 2550 3450 2850
+Connection ~ 3450 2800
+$Comp
+L TEST TP101
+U 1 1 5AC192C4
+P 3450 2550
+F 0 "TP101" H 3450 2850 50  0000 C BNN
+F 1 "TEST" H 3450 2800 50  0000 C CNN
+F 2 "vna_footprints:TP07R" H 3450 2550 50  0001 C CNN
+F 3 "" H 3450 2550 50  0001 C CNN
+	1    3450 2550
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
