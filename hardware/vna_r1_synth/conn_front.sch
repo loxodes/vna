@@ -123,15 +123,15 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text HLabel 5450 1600 0    60   Input ~ 0
+Text HLabel 4900 1600 0    60   Input ~ 0
 PORT_1
-Text HLabel 5450 2700 0    60   Input ~ 0
+Text HLabel 4900 2700 0    60   Input ~ 0
 PORT_2
-Text HLabel 5500 4100 0    60   Input ~ 0
+Text HLabel 4950 4100 0    60   Input ~ 0
 LO_1
-Text HLabel 5500 6500 0    60   Input ~ 0
+Text HLabel 4950 6500 0    60   Input ~ 0
 LO_2
-Text HLabel 5500 5200 0    60   Input ~ 0
+Text HLabel 4950 5200 0    60   Input ~ 0
 AUX_OUT
 $Comp
 L CONN_SMA_2GND U?
@@ -155,17 +155,6 @@ F 3 "" H 6050 2150 50  0001 C CNN
 	1    6050 2150
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6000 2050 6000 2100
-Wire Wire Line
-	6000 2100 6100 2100
-Wire Wire Line
-	6100 2100 6100 2050
-Wire Wire Line
-	6050 2100 6050 2150
-Connection ~ 6050 2100
-Wire Wire Line
-	5450 1600 5650 1600
 $Comp
 L CONN_SMA_2GND U?
 U 1 1 5ABBB801
@@ -188,17 +177,6 @@ F 3 "" H 6050 3250 50  0001 C CNN
 	1    6050 3250
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6000 3150 6000 3200
-Wire Wire Line
-	6000 3200 6100 3200
-Wire Wire Line
-	6100 3200 6100 3150
-Wire Wire Line
-	6050 3200 6050 3250
-Connection ~ 6050 3200
-Wire Wire Line
-	5450 2700 5650 2700
 $Comp
 L CONN_SMA_2GND U?
 U 1 1 5ABBB8EC
@@ -221,17 +199,6 @@ F 3 "" H 6100 4650 50  0001 C CNN
 	1    6100 4650
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6050 4550 6050 4600
-Wire Wire Line
-	6050 4600 6150 4600
-Wire Wire Line
-	6150 4600 6150 4550
-Wire Wire Line
-	6100 4600 6100 4650
-Connection ~ 6100 4600
-Wire Wire Line
-	5500 4100 5700 4100
 $Comp
 L CONN_SMA_2GND U?
 U 1 1 5ABBB8FF
@@ -254,17 +221,6 @@ F 3 "" H 6100 5750 50  0001 C CNN
 	1    6100 5750
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6050 5650 6050 5700
-Wire Wire Line
-	6050 5700 6150 5700
-Wire Wire Line
-	6150 5700 6150 5650
-Wire Wire Line
-	6100 5700 6100 5750
-Connection ~ 6100 5700
-Wire Wire Line
-	5500 5200 5700 5200
 $Comp
 L CONN_SMA_2GND U?
 U 1 1 5ABBBAAA
@@ -287,6 +243,83 @@ F 3 "" H 6100 7050 50  0001 C CNN
 	1    6100 7050
 	1    0    0    -1  
 $EndComp
+$Comp
+L C_Small C?
+U 1 1 5AC32053
+P 5200 4100
+F 0 "C?" H 5210 4170 50  0000 L CNN
+F 1 "C_Small" H 5210 4020 50  0000 L CNN
+F 2 "" H 5200 4100 50  0001 C CNN
+F 3 "" H 5200 4100 50  0001 C CNN
+	1    5200 4100
+	0    1    1    0   
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5AC32137
+P 5200 5200
+F 0 "C?" H 5210 5270 50  0000 L CNN
+F 1 "C_Small" H 5210 5120 50  0000 L CNN
+F 2 "" H 5200 5200 50  0001 C CNN
+F 3 "" H 5200 5200 50  0001 C CNN
+	1    5200 5200
+	0    1    1    0   
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5AC32269
+P 5200 6500
+F 0 "C?" H 5210 6570 50  0000 L CNN
+F 1 "C_Small" H 5210 6420 50  0000 L CNN
+F 2 "" H 5200 6500 50  0001 C CNN
+F 3 "" H 5200 6500 50  0001 C CNN
+	1    5200 6500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6000 2050 6000 2100
+Wire Wire Line
+	6000 2100 6100 2100
+Wire Wire Line
+	6100 2100 6100 2050
+Wire Wire Line
+	6050 2100 6050 2150
+Connection ~ 6050 2100
+Wire Wire Line
+	5300 1600 5650 1600
+Wire Wire Line
+	6000 3150 6000 3200
+Wire Wire Line
+	6000 3200 6100 3200
+Wire Wire Line
+	6100 3200 6100 3150
+Wire Wire Line
+	6050 3200 6050 3250
+Connection ~ 6050 3200
+Wire Wire Line
+	5300 2700 5650 2700
+Wire Wire Line
+	6050 4550 6050 4600
+Wire Wire Line
+	6050 4600 6150 4600
+Wire Wire Line
+	6150 4600 6150 4550
+Wire Wire Line
+	6100 4600 6100 4650
+Connection ~ 6100 4600
+Wire Wire Line
+	5300 4100 5700 4100
+Wire Wire Line
+	6050 5650 6050 5700
+Wire Wire Line
+	6050 5700 6150 5700
+Wire Wire Line
+	6150 5700 6150 5650
+Wire Wire Line
+	6100 5700 6100 5750
+Connection ~ 6100 5700
+Wire Wire Line
+	5300 5200 5700 5200
 Wire Wire Line
 	6050 6950 6050 7000
 Wire Wire Line
@@ -297,7 +330,37 @@ Wire Wire Line
 	6100 7000 6100 7050
 Connection ~ 6100 7000
 Wire Wire Line
-	5500 6500 5700 6500
-Text Notes 4700 1100 0    60   ~ 0
-PORTS 1 and 2 are DC coupled to 0V
+	5300 6500 5700 6500
+Wire Wire Line
+	4900 1600 5100 1600
+Wire Wire Line
+	5100 2700 4900 2700
+Wire Wire Line
+	4950 4100 5100 4100
+Wire Wire Line
+	5100 5200 4950 5200
+Wire Wire Line
+	5100 6500 4950 6500
+$Comp
+L C_Small C?
+U 1 1 5AC31626
+P 5200 2700
+F 0 "C?" H 5210 2770 50  0000 L CNN
+F 1 "C_Small" H 5210 2620 50  0000 L CNN
+F 2 "" H 5200 2700 50  0001 C CNN
+F 3 "" H 5200 2700 50  0001 C CNN
+	1    5200 2700
+	0    1    1    0   
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5AC31536
+P 5200 1600
+F 0 "C?" H 5210 1670 50  0000 L CNN
+F 1 "C_Small" H 5210 1520 50  0000 L CNN
+F 2 "" H 5200 1600 50  0001 C CNN
+F 3 "" H 5200 1600 50  0001 C CNN
+	1    5200 1600
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
