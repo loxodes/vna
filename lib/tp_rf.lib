@@ -1,0 +1,18 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# TP_RF
+#
+DEF ~TP_RF TP 0 40 Y Y 1 F N
+F0 "TP" -200 150 60 V V C CNN
+F1 "TP_RF" -200 -100 60 V I C CNN
+F2 "" 0 100 60 H I C CNN
+F3 "" 0 100 60 H I C CNN
+DRAW
+S -100 200 100 -250 0 1 0 N
+X RF 1 0 400 200 D 50 50 1 1 B
+X GND 2 0 -450 200 U 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
+#End Library

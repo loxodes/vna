@@ -1,0 +1,428 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:74lvc1g32
+LIBS:lm27762
+LIBS:74lvc1g00
+LIBS:adrf5020
+LIBS:tps2051
+LIBS:resistive_bridge
+LIBS:lm2776
+LIBS:max810
+LIBS:vdd_clk
+LIBS:vdd_lo
+LIBS:vdd_rf
+LIBS:lan8710a
+LIBS:ad9577
+LIBS:okr_t3-w12-c
+LIBS:adp7158
+LIBS:maam-011100
+LIBS:ltc2054cs5
+LIBS:ltc2630
+LIBS:trf37b73
+LIBS:nc7wzu04
+LIBS:adrf5040
+LIBS:lmx2594
+LIBS:tps255xx
+LIBS:tps2065d
+LIBS:masw-008322-tr1000
+LIBS:max510
+LIBS:pe42541
+LIBS:txco
+LIBS:tps793
+LIBS:tpd4s012
+LIBS:tcm-63ax+
+LIBS:sn74lvc1g07
+LIBS:scbd-16-63
+LIBS:rf_crossbar
+LIBS:pwr_splitter
+LIBS:pe43705
+LIBS:pe42540
+LIBS:pe42521
+LIBS:pcm2900
+LIBS:nc7sv74kbx
+LIBS:nb3n551
+LIBS:mounting_hole
+LIBS:mounting_box
+LIBS:mga-82563
+LIBS:max2605
+LIBS:maam-011101
+LIBS:ltc5596
+LIBS:ltc5549
+LIBS:ltc2323
+LIBS:ltc1983
+LIBS:ltc1566-1
+LIBS:lt1819
+LIBS:lt1567
+LIBS:lmx2592
+LIBS:lmk61e2
+LIBS:hmc629
+LIBS:hmc525
+LIBS:hmc475
+LIBS:hmc424
+LIBS:hmc321
+LIBS:hmc311sc70
+LIBS:conn_sma_2gnd
+LIBS:conn_sma
+LIBS:conn_microsd
+LIBS:cmm0511-qt-0g0t
+LIBS:cat102
+LIBS:boosterpack_ti
+LIBS:ammp-6120
+LIBS:adm7150
+LIBS:adl5902
+LIBS:adl5380
+LIBS:adf4355-3
+LIBS:ad9864
+LIBS:75451
+LIBS:74xx1g14
+LIBS:74hc04_full
+LIBS:74hc04
+LIBS:sky65013-70lf
+LIBS:pat0510s-c-xdb-t10
+LIBS:tp_rf
+LIBS:vna_r1_demod-cache
+EELAYER 25 0
+EELAYER END
+$Descr A3 16535 11693
+encoding utf-8
+Sheet 1 3
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L resistive_bridge U?
+U 1 1 5AC59F4F
+P 8400 2000
+F 0 "U?" H 7700 2400 60  0000 C CNN
+F 1 "resistive_bridge" H 7950 2500 60  0000 C CNN
+F 2 "" H 8700 2000 60  0001 C CNN
+F 3 "" H 8700 2000 60  0001 C CNN
+	1    8400 2000
+	1    0    0    1   
+$EndComp
+$Comp
+L resistive_bridge U?
+U 1 1 5AC59F69
+P 11250 2000
+F 0 "U?" H 10550 2400 60  0000 C CNN
+F 1 "resistive_bridge" H 10800 2500 60  0000 C CNN
+F 2 "" H 11550 2000 60  0001 C CNN
+F 3 "" H 11550 2000 60  0001 C CNN
+	1    11250 2000
+	-1   0    0    1   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5AC5A052
+P 8400 1450
+F 0 "#PWR?" H 8400 1200 50  0001 C CNN
+F 1 "GND" H 8400 1300 50  0000 C CNN
+F 2 "" H 8400 1450 50  0001 C CNN
+F 3 "" H 8400 1450 50  0001 C CNN
+	1    8400 1450
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8400 1450 8400 1550
+$Comp
+L GND #PWR?
+U 1 1 5AC5A076
+P 11250 1450
+F 0 "#PWR?" H 11250 1200 50  0001 C CNN
+F 1 "GND" H 11250 1300 50  0000 C CNN
+F 2 "" H 11250 1450 50  0001 C CNN
+F 3 "" H 11250 1450 50  0001 C CNN
+	1    11250 1450
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	11250 1450 11250 1550
+Wire Wire Line
+	9300 2000 10350 2000
+$Comp
+L CONN_SMA_2GND U?
+U 1 1 5AC5A11C
+P 6650 2000
+F 0 "U?" H 6350 2200 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 6700 2300 60  0000 C CNN
+F 2 "" H 6650 2000 60  0000 C CNN
+F 3 "" H 6650 2000 60  0000 C CNN
+	1    6650 2000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7050 2000 7500 2000
+$Comp
+L CONN_SMA_2GND U?
+U 1 1 5AC5A1DE
+P 13400 2000
+F 0 "U?" H 13100 2200 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 13450 2300 60  0000 C CNN
+F 2 "" H 13400 2000 60  0000 C CNN
+F 3 "" H 13400 2000 60  0000 C CNN
+	1    13400 2000
+	-1   0    0    -1  
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5AC5A2C2
+P 12600 2000
+F 0 "C?" H 12610 2070 50  0000 L CNN
+F 1 "C_Small" H 12610 1920 50  0000 L CNN
+F 2 "" H 12600 2000 50  0001 C CNN
+F 3 "" H 12600 2000 50  0001 C CNN
+	1    12600 2000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	12700 2000 13000 2000
+Wire Wire Line
+	12500 2000 12150 2000
+$Comp
+L C_Small C?
+U 1 1 5AC5A8C5
+P 8700 2950
+F 0 "C?" H 8710 3020 50  0000 L CNN
+F 1 "C_Small" H 8710 2870 50  0000 L CNN
+F 2 "" H 8700 2950 50  0001 C CNN
+F 3 "" H 8700 2950 50  0001 C CNN
+	1    8700 2950
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8700 2850 8700 2450
+$Comp
+L C_Small C?
+U 1 1 5AC5A9FE
+P 10950 2950
+F 0 "C?" H 10960 3020 50  0000 L CNN
+F 1 "C_Small" H 10960 2870 50  0000 L CNN
+F 2 "" H 10950 2950 50  0001 C CNN
+F 3 "" H 10950 2950 50  0001 C CNN
+	1    10950 2950
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	10950 2850 10950 2450
+Wire Wire Line
+	10950 3050 10950 3500
+$Comp
+L GND #PWR?
+U 1 1 5AC5ACE4
+P 6650 2550
+F 0 "#PWR?" H 6650 2300 50  0001 C CNN
+F 1 "GND" H 6650 2400 50  0000 C CNN
+F 2 "" H 6650 2550 50  0001 C CNN
+F 3 "" H 6650 2550 50  0001 C CNN
+	1    6650 2550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6600 2450 6600 2500
+Wire Wire Line
+	6600 2500 6700 2500
+Wire Wire Line
+	6700 2500 6700 2450
+Wire Wire Line
+	6650 2500 6650 2550
+Connection ~ 6650 2500
+$Comp
+L GND #PWR?
+U 1 1 5AC5AD6F
+P 13400 2550
+F 0 "#PWR?" H 13400 2300 50  0001 C CNN
+F 1 "GND" H 13400 2400 50  0000 C CNN
+F 2 "" H 13400 2550 50  0001 C CNN
+F 3 "" H 13400 2550 50  0001 C CNN
+	1    13400 2550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	13350 2450 13350 2500
+Wire Wire Line
+	13350 2500 13450 2500
+Wire Wire Line
+	13450 2500 13450 2450
+Wire Wire Line
+	13400 2500 13400 2550
+Connection ~ 13400 2500
+$Comp
+L PWR_SPLITTER U?
+U 1 1 5AC5AF45
+P 9650 9450
+F 0 "U?" H 9250 9850 60  0000 C CNN
+F 1 "PWR_SPLITTER" H 9500 9950 60  0000 C CNN
+F 2 "" H 9650 9450 60  0000 C CNN
+F 3 "" H 9650 9450 60  0000 C CNN
+	1    9650 9450
+	0    -1   -1   0   
+$EndComp
+Text Notes 9950 9550 0    60   ~ 0
+7 dBm
+Text Notes 8850 2750 0    60   ~ 0
+add fixed attenuator?
+$Comp
+L C_Small C?
+U 1 1 5AC5D18A
+P 8650 8300
+F 0 "C?" H 8660 8370 50  0000 L CNN
+F 1 "C_Small" H 8660 8220 50  0000 L CNN
+F 2 "" H 8650 8300 50  0001 C CNN
+F 3 "" H 8650 8300 50  0001 C CNN
+	1    8650 8300
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_SMA_2GND U?
+U 1 1 5AC5D36E
+P 9650 10700
+F 0 "U?" H 9350 10900 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 9700 11000 60  0000 C CNN
+F 2 "" H 9650 10700 60  0000 C CNN
+F 3 "" H 9650 10700 60  0000 C CNN
+	1    9650 10700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5AC5D374
+P 10200 10700
+F 0 "#PWR?" H 10200 10450 50  0001 C CNN
+F 1 "GND" H 10200 10550 50  0000 C CNN
+F 2 "" H 10200 10700 50  0001 C CNN
+F 3 "" H 10200 10700 50  0001 C CNN
+	1    10200 10700
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	10100 10750 10150 10750
+Wire Wire Line
+	10150 10750 10150 10650
+Wire Wire Line
+	10150 10650 10100 10650
+Wire Wire Line
+	10150 10700 10200 10700
+Connection ~ 10150 10700
+Wire Wire Line
+	9650 10050 9650 10300
+Wire Wire Line
+	9500 8700 9500 8900
+Wire Wire Line
+	8450 8700 9500 8700
+Wire Wire Line
+	8650 8700 8650 8400
+Wire Wire Line
+	8650 8200 8650 8000
+$Comp
+L TP_RF TP?
+U 1 1 5AC5ED57
+P 9850 1500
+F 0 "TP?" V 9650 1650 60  0000 C CNN
+F 1 "TP_RF" V 9650 1400 60  0001 C CNN
+F 2 "" H 9850 1600 60  0001 C CNN
+F 3 "" H 9850 1600 60  0001 C CNN
+	1    9850 1500
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9850 1900 9850 2000
+Connection ~ 9850 2000
+$Comp
+L GND #PWR?
+U 1 1 5AC5F131
+P 9850 950
+F 0 "#PWR?" H 9850 700 50  0001 C CNN
+F 1 "GND" H 9850 800 50  0000 C CNN
+F 2 "" H 9850 950 50  0001 C CNN
+F 3 "" H 9850 950 50  0001 C CNN
+	1    9850 950 
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9850 950  9850 1050
+$Comp
+L TP_RF TP?
+U 1 1 5AC5F40E
+P 8050 8700
+F 0 "TP?" V 7850 8850 60  0000 C CNN
+F 1 "TP_RF" V 7850 8600 60  0001 C CNN
+F 2 "" H 8050 8800 60  0001 C CNN
+F 3 "" H 8050 8800 60  0001 C CNN
+	1    8050 8700
+	0    1    1    0   
+$EndComp
+Connection ~ 8650 8700
+$Comp
+L GND #PWR?
+U 1 1 5AC5F600
+P 7500 8700
+F 0 "#PWR?" H 7500 8450 50  0001 C CNN
+F 1 "GND" H 7500 8550 50  0000 C CNN
+F 2 "" H 7500 8700 50  0001 C CNN
+F 3 "" H 7500 8700 50  0001 C CNN
+	1    7500 8700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7500 8700 7600 8700
+$Comp
+L 74HC244 U?
+U 1 1 5AC61826
+P 2750 8750
+F 0 "U?" H 2850 9400 50  0000 L CNN
+F 1 "74HC244" H 2800 8100 50  0000 L CNN
+F 2 "" H 2750 8750 50  0000 C CNN
+F 3 "" H 2750 8750 50  0000 C CNN
+	1    2750 8750
+	1    0    0    -1  
+$EndComp
+$Sheet
+S 8300 4000 1150 2650
+U 5AC62E41
+F0 "demod_a" 60
+F1 "demod.sch" 60
+$EndSheet
+$Sheet
+S 10450 4050 1150 2650
+U 5AC63047
+F0 "demod_b" 60
+F1 "demod.sch" 60
+$EndSheet
+$EndSCHEMATC
