@@ -1,0 +1,9 @@
+(module vna_footprints:VIA_OSH4LAYER_MIN (layer F.Cu) (tedit 5ACEE0C2)
+  (fp_text reference REF** (at 0 -2.5) (layer F.SilkS) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value VIA_OSH4LAYER_MIN (at 0 -1.2) (layer F.Fab) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (pad 1 thru_hole circle (at 0 0) (size 0.55 0.55) (drill 0.35) (layers *.Cu))
+)
