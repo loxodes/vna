@@ -1,4 +1,4 @@
-update=Wed Apr  4 21:39:09 2018
+update=Sun Apr 15 17:19:12 2018
 version=1
 last_client=kicad
 [pcbnew]
@@ -141,3 +141,4 @@ LibName109=/home/kleinjt/repos/vna/lib/74hc04
 LibName110=/home/kleinjt/repos/vna/lib/sky65013-70lf
 LibName111=/home/kleinjt/repos/vna/lib/pat0510s-c-xdb-t10
 LibName112=/home/kleinjt/repos/vna/lib/tp_rf
+LibName113=/home/kleinjt/repos/vna/lib/hmc65xlp2e

@@ -111,6 +111,7 @@ LIBS:74hc04
 LIBS:sky65013-70lf
 LIBS:pat0510s-c-xdb-t10
 LIBS:tp_rf
+LIBS:hmc65xlp2e
 LIBS:vna_r1_demod-cache
 EELAYER 25 0
 EELAYER END
