@@ -187,8 +187,7 @@ S 1650 1100 1900 1700
 U 59C603DE
 F0 "power" 60
 F1 "power.sch" 60
-F4 "3V3_PLL_EN" I L 1650 1900 60 
-F5 "3V3_PLL_SENSE" I R 3550 2600 60 
+F2 "3V3_PLL_EN" I L 1650 1900 60 
 $EndSheet
 Text Label 14350 8350 0    60   ~ 0
 SYNTH_REF_AP
@@ -365,16 +364,12 @@ Text Label 14350 5850 0    60   ~ 0
 RF_FILT_SW_1
 Text Label 14350 7100 0    60   ~ 0
 RF_FILT_SW_2
-Text Label 3750 2600 0    60   ~ 0
-3V3_PLL_SENSE
 Text Label 14350 5650 0    60   ~ 0
 RF_-5V_EN
 Text Label 14350 5750 0    60   ~ 0
 RF_AMP_EN
 Text Label 14350 5950 0    60   ~ 0
 RF_3V3_EN
-Text Label 1450 1800 2    60   ~ 0
-3V3_DEMOD_EN
 Text Label 1450 1900 2    60   ~ 0
 3V3_PLL_EN
 Text Label 1500 4350 2    60   ~ 0
@@ -551,11 +546,7 @@ EXT_SPI_MOSI
 Text Label 14900 3050 2    60   ~ 0
 EXT_SPI_CLK
 Wire Wire Line
-	1450 1800 1650 1800
-Wire Wire Line
 	1450 1900 1650 1900
-Wire Wire Line
-	3550 2600 3750 2600
 Wire Wire Line
 	11150 9700 12500 9700
 Wire Wire Line

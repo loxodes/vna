@@ -29,11 +29,11 @@ X GND 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# resistive_bridge
+# resistive_bridge-RESCUE-coupler_test
 #
-DEF resistive_bridge U 0 40 Y Y 1 F N
+DEF resistive_bridge-RESCUE-coupler_test U 0 40 Y Y 1 F N
 F0 "U" -700 400 60 H V C CNN
-F1 "resistive_bridge" -450 500 60 H V C CNN
+F1 "resistive_bridge-RESCUE-coupler_test" -450 500 60 H V C CNN
 F2 "" 300 0 60 H I C CNN
 F3 "" 300 0 60 H I C CNN
 DRAW

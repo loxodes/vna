@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:coupler_test-rescue
 LIBS:power
 LIBS:device
 LIBS:switches
@@ -49,7 +50,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L resistive_bridge U102
+L resistive_bridge-RESCUE-coupler_test U102
 U 1 1 5A0E270D
 P 5750 3800
 F 0 "U102" H 5050 4200 60  0000 C CNN
