@@ -848,7 +848,7 @@ microwave vector network analyzer control board
 Text Label 3750 9850 0    60   ~ 0
 EXT_UART_MRX
 Text Label 3750 9950 0    60   ~ 0
-EXT_UART_MRX
+EXT_UART_MTX
 Wire Wire Line
 	3550 9850 3750 9850
 Wire Wire Line
@@ -856,7 +856,7 @@ Wire Wire Line
 Text Label 14900 1600 2    60   ~ 0
 EXT_UART_MRX
 Text Label 14900 1700 2    60   ~ 0
-EXT_UART_MRX
+EXT_UART_MTX
 Wire Wire Line
 	14900 1600 15050 1600
 Wire Wire Line
