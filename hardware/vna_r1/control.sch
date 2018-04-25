@@ -3968,4 +3968,6 @@ F 3 "" H 10000 3800 60  0001 C CNN
 	1    10000 3800
 	1    0    0    -1  
 $EndComp
+Text HLabel 14150 7950 2    60   Output ~ 0
+LO_BUF_AMP_EN
 $EndSCHEMATC

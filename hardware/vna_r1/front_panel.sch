@@ -816,7 +816,7 @@ Wire Wire Line
 Wire Wire Line
 	3000 5700 3550 5700
 Text HLabel 4600 5600 2    60   Input ~ 0
-LO_AMP_EN
+LO_BUF_AMP_EN
 Wire Wire Line
 	4600 5700 4050 5700
 Wire Wire Line
@@ -899,7 +899,7 @@ Wire Wire Line
 Wire Wire Line
 	3000 6800 3550 6800
 Text HLabel 4600 6700 2    60   Input ~ 0
-LO_AMP_EN
+LO_BUF_AMP_EN
 Wire Wire Line
 	4600 6800 4050 6800
 Wire Wire Line
