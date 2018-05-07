@@ -990,6 +990,12 @@ Text Label 1500 8300 2    60   ~ 0
 LO_BUF_AMP_EN
 Wire Wire Line
 	1650 8300 1500 8300
-Text Notes 4200 1300 0    118  ~ 0
-TODO: add series termination resistors to high speed inputs
+Text Notes 9750 2750 0    60   ~ 0
+20 mA/each
+Text Notes 13100 750  0    60   ~ 0
+2 A
+Text Notes 5650 5000 0    60   ~ 0
+500 mA
+Text Notes 2650 3000 0    60   ~ 0
+2 A
 $EndSCHEMATC

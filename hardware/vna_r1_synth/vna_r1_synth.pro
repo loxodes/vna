@@ -1,4 +1,4 @@
-update=Tue Mar 27 21:09:36 2018
+update=Sun May  6 17:05:21 2018
 version=1
 last_client=kicad
 [pcbnew]
@@ -138,3 +138,4 @@ LibName106=/home/kleinjt/repos/vna/lib/74hc04
 LibName107=/home/kleinjt/repos/vna/lib/lm27762
 LibName108=/home/kleinjt/repos/vna/lib/74lvc1g00
 LibName109=/home/kleinjt/repos/vna/lib/74lvc1g32
+LibName110=/home/kleinjt/repos/vna/lib/ld39100

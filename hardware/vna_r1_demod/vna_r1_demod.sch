@@ -112,6 +112,7 @@ LIBS:sky65013-70lf
 LIBS:pat0510s-c-xdb-t10
 LIBS:tp_rf
 LIBS:hmc65xlp2e
+LIBS:ld39100
 LIBS:vna_r1_demod-cache
 EELAYER 25 0
 EELAYER END
@@ -249,4 +250,8 @@ Wire Wire Line
 	14600 5500 14700 5500
 Wire Wire Line
 	14600 5600 14700 5600
+Text Notes 9750 3600 0    60   ~ 0
+200 mA
+Text Notes 14300 3600 0    60   ~ 0
+200 mA
 $EndSCHEMATC
