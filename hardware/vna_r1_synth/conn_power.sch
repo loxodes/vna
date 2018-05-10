@@ -1428,4 +1428,8 @@ Wire Wire Line
 	3950 9000 4050 9000
 NoConn ~ 3450 9000
 NoConn ~ 3950 8800
+Text Notes 3000 9050 0    60   ~ 0
+-5V_EN\n
+Text Notes 4050 8800 0    60   ~ 0
+FILT_SW
 $EndSCHEMATC
