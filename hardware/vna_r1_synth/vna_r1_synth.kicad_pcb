@@ -316,7 +316,7 @@
       (net 5 GND))
   )
 
-  (module vna_footprints:ADRF5020BCCZN (layer F.Cu) (tedit 5AF900B1) (tstamp 5AD1CDEE)
+  (module vna_footprints:ADRF5020BCCZN (layer F.Cu) (tedit 5AF91223) (tstamp 5AD1CDEE)
     (at 106 107)
     (path /5AB907D6/5AB9090D)
     (fp_text reference U403 (at 2.5 -0.5 90) (layer F.SilkS)
@@ -326,7 +326,7 @@
       (effects (font (size 0.7 0.7) (thickness 0.15)))
     )
     (fp_line (start -1.6 -1.2) (end -1.2 -1.6) (layer F.SilkS) (width 0.15))
-    (fp_text user "Copyright 2016 Accelerated Designs. All rights reserved." (at 0 0) (layer Cmts.User)
+    (fp_text user "Copyright 2016 Accelerated Designs. All rights reserved." (at 0 0) (layer Cmts.User) hide
       (effects (font (size 0.127 0.127) (thickness 0.002)))
     )
     (fp_line (start -1.5 -0.23) (end -0.23 -1.5) (layer Dwgs.User) (width 0.1524))
