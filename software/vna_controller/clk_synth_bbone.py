@@ -11,10 +11,11 @@ from Adafruit_I2C import Adafruit_I2C
 import Adafruit_BBIO.GPIO as GPIO
 import pdb
 import time
+from vna_pins_r1 import PINS 
 
 # i2c hooked up to P9 19/20
-CLK_REF_SEL = 'P8_8'
-PLL_POW_EN = 'P8_14'
+CLK_REF_SEL = PINS.PLL_REF_SEL
+PLL_POW_EN = PINS.PLL_3V3_EN 
 
 AD9577_I2C_ADDR = 0x40
 

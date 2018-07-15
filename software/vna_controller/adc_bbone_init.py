@@ -6,14 +6,15 @@
 import time
 import pdb
 from bbone_spi_bitbang import bitbang_spi
+from vna_r1_pins import PINS
 
-ADC_SPI_CS1 = "P9_16" # adc1
-ADC_SPI_CS2 = "P9_26" # adc2
-ADC_SPI_CS3 = "P9_18" # adc3
-ADC_SPI_CS4 = "P9_24" # adc4
-ADC_SPI_MOSI = "P9_12"
-ADC_SPI_MISO = "P9_27"
-ADC_SPI_CLK = "P9_14"
+ADC_SPI_CS1 = PINS.AD_PE_A # adc1
+ADC_SPI_CS2 = PINS.AD_PE_B # adc2
+ADC_SPI_CS3 = PINS.AD_PE_C # adc3
+ADC_SPI_CS4 = PINS.AD_PE_D # adc4
+ADC_SPI_MOSI = PINS.AD_PD
+ADC_SPI_MISO = PINS.AD_DOUTB
+ADC_SPI_CLK = PINS.AD_PC
 
 def ad9864_write_reg(spi, addr, val):
     payload = addr << 9 | val
@@ -86,36 +87,17 @@ if __name__ == '__main__':
     import Adafruit_BBIO.GPIO as GPIO
     import time
 
-    SYNCB = "P8_41"
-    MIX_EN = "P8_28"
-    MIX_X2 = "P8_27"
-
-
-    ADC_EN = "P8_30"
-    IF_EN = "P8_29"
-
-
-    V3_EN = "P8_12"
+    SYNCB = PINS.AD_SYNCB
+    V3_EN = PINS.PLL_3V3_EN
 
     GPIO.setup(SYNCB, GPIO.OUT)
-    GPIO.setup(MIX_EN, GPIO.OUT)
-    GPIO.setup(MIX_X2, GPIO.OUT)
-
-    GPIO.setup(ADC_EN, GPIO.OUT)
-    GPIO.setup(IF_EN, GPIO.OUT)
-
 
     GPIO.setup(V3_EN, GPIO.OUT)
 
 
     GPIO.output(V3_EN,GPIO.HIGH)
-
     GPIO.output(SYNCB,GPIO.HIGH)
-    GPIO.output(MIX_EN,GPIO.HIGH)
-    GPIO.output(MIX_X2,GPIO.LOW)
 
-    GPIO.output(IF_EN,GPIO.LOW)
-    GPIO.output(ADC_EN,GPIO.HIGH)
 
 
     time.sleep(.5)
