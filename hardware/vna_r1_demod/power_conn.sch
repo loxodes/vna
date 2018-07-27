@@ -697,8 +697,6 @@ F 3 "" H 4700 5800 50  0001 C CNN
 	1    4700 5800
 	1    0    0    -1  
 $EndComp
-Text Notes 7600 2200 0    60   ~ 0
-TODO: regulate down to 4 V
 $Comp
 L GND #PWR073
 U 1 1 5AF0E7BE
@@ -727,7 +725,7 @@ L LD39100 U403
 U 1 1 5AEF9CC5
 P 8550 3000
 F 0 "U403" H 8150 3300 60  0000 C CNN
-F 1 "LD39100" H 8300 3400 60  0000 C CNN
+F 1 "LD39100PUR" H 8300 3400 60  0000 C CNN
 F 2 "Housings_DFN_QFN:DFN-6-1EP_3x3mm_Pitch0.95mm" H 8550 3000 60  0001 C CNN
 F 3 "" H 8550 3000 60  0001 C CNN
 	1    8550 3000
@@ -1109,8 +1107,8 @@ Text Label 7550 2900 2    60   ~ 0
 LO_AMP_EN
 Wire Wire Line
 	7550 2900 8050 2900
-Text Notes 9600 2300 0    60   ~ 0
-Vout = .8 * (1 + R407 / R408)  ~= 4 V
+Text Notes 8950 2050 0    60   ~ 0
+Vout = .8 * (1 + R407 / R408)   = about 4 V
 $Comp
 L R_Small R407
 U 1 1 5AEFC882
