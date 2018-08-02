@@ -1,0 +1,191 @@
+#SPDX-License-Identifier: GPL-2.0
+/* Derived from Octavo Systems reference design, 
+ * https://octavosystems.com/app_notes/osd335x-design-tutorial/osd335x-lesson-2-minimal-linux-boot/linux-device-tree/ 
+ * https://octavosystems.com/app_notes/osd335x-design-tutorial/osd335x-lesson-2-minimal-linux-boot/linux-device-tree-overlay/
+ * Copyright (C) 2018 Octavo Systems LLC - http://www.octavosystems.com/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+/ {
+
+	fragment@0 {
+		target = <&am33xx_pinmux>;
+		__overlay__ {
+    
+
+        
+    rf_synth_ctrl_pins: pinmux_rf_synth {
+        pinctrl-single,pins = <
+            AM33XX_IOPAD(0x097c, PIN_OUTPUT | MUX_MODE7) /* RF_AMP_EN */
+            AM33XX_IOPAD(0x0968, PIN_OUTPUT | MUX_MODE7) /* RF_3V3_EN */
+            AM33XX_IOPAD(0x09B4, PIN_OUTPUT | MUX_MODE7) /* RF_M5V_EN */
+            AM33XX_IOPAD(0x0808, PIN_OUTPUT | MUX_MODE7) /* RF_FILT_SW_1 */
+            AM33XX_IOPAD(0x09a8, PIN_OUTPUT | MUX_MODE7) /* RF_SPI_CLK */
+            AM33XX_IOPAD(0x09ac, PIN_OUTPUT | MUX_MODE7) /* RF_SPI_SDI */
+            AM33XX_IOPAD(0x0994, PIN_OUTPUT | MUX_MODE7) /* RF_SPI_CS */
+            AM33XX_IOPAD(0x0810, PIN_OUTPUT | MUX_MODE7) /* RF_SPI_CE */
+            AM33XX_IOPAD(0x0814, PIN_INPUT  | MUX_MODE7) /* RF_SPI_LOCK */
+            AM33XX_IOPAD(0x099c, PIN_OUTPUT | MUX_MODE7) /* RF_DAC_CS */
+            AM33XX_IOPAD(0x08bc, PIN_OUTPUT | MUX_MODE5) /* RF_SEL_PRU */
+            AM33XX_IOPAD(0x0898, PIN_OUTPUT | MUX_MODE7) /* PORT_SEL_GPIO */
+        >;
+    };
+
+    lo_synth_ctrl_pins: pinmux_lo_synth {
+        pinctrl-single,pins = <
+            AM33XX_IOPAD(0x09b0, PIN_OUTPUT | MUX_MODE7) /* LO_AMP_EN */
+            AM33XX_IOPAD(0x0878, PIN_OUTPUT | MUX_MODE7) /* LO_3V3_EN */
+            AM33XX_IOPAD(0x0800, PIN_OUTPUT | MUX_MODE7) /* LO_M5V_EN */
+            AM33XX_IOPAD(0x080c, PIN_OUTPUT | MUX_MODE7) /* RF_FILT_SW_2 */
+            AM33XX_IOPAD(0x09a0, PIN_OUTPUT | MUX_MODE7) /* LO_SPI_CLK */
+            AM33XX_IOPAD(0x09a4, PIN_OUTPUT | MUX_MODE7) /* LO_SPI_SDI */
+            AM33XX_IOPAD(0x0998, PIN_OUTPUT | MUX_MODE7) /* LO_SPI_CS */
+            AM33XX_IOPAD(0x0818, PIN_OUTPUT | MUX_MODE7) /* LO_SPI_CE */
+            AM33XX_IOPAD(0x081c, PIN_INPUT  | MUX_MODE7) /* LO_SPI_LOCK */
+            AM33XX_IOPAD(0x0874, PIN_OUTPUT | MUX_MODE7) /* LO_DAC_CS */
+            AM33XX_IOPAD(0x0870, PIN_OUTPUT | MUX_MODE7) /* LO_PORT_SEL */
+           
+        >;
+    };
+
+    demod_ctrl_pins: pinmux_demod {
+        pinctrl-single,pins = <
+            AM33XX_IOPAD(0x0844, PIN_OUTPUT | MUX_MODE7) /* MIX_EN */
+            AM33XX_IOPAD(0x086c, PIN_OUTPUT | MUX_MODE7) /* LO_BUF_AMP_EN */
+            AM33XX_IOPAD(0x096c, PIN_OUTPUT | MUX_MODE7) /* MIX_X2 */
+            AM33XX_IOPAD(0x0964, PIN_OUTPUT | MUX_MODE7) /* EXT_DEMOD_3V3_EN */
+           
+        >;
+    };
+
+    misc_ctrl_pins: pinmux_misc {
+        pinctrl-single,pins = <
+            AM33XX_IOPAD(0x08b0, PIN_OUTPUT | MUX_MODE6) /* EXT_TRIG */
+            AM33XX_IOPAD(0x08e4, PIN_OUTPUT | MUX_MODE7) /* TP1307 */
+            AM33XX_IOPAD(0x083c, PIN_OUTPUT | MUX_MODE7) /* TP1308 */
+            AM33XX_IOPAD(0x089c, PIN_OUTPUT | MUX_MODE7) /* EEPROM_WP */
+           
+        >;
+    };
+
+
+    adc_clk_ctrl_pins: pinmux_adc_clk {
+        pinctrl-single,pins = <
+            AM33XX_IOPAD(0x08a0, PIN_INPUT | MUX_MODE6) /* AD_DOUTD */
+            AM33XX_IOPAD(0x08a4, PIN_INPUT | MUX_MODE6) /* AD_DOUTC */
+            AM33XX_IOPAD(0x08a8, PIN_INPUT | MUX_MODE6) /* AD_DOUTB */
+            AM33XX_IOPAD(0x08ac, PIN_INPUT | MUX_MODE6) /* AD_DOUTA */
+            AM33XX_IOPAD(0x08b0, PIN_INPUT | MUX_MODE6) /* AD_FS */
+            AM33XX_IOPAD(0x08b4, PIN_INPUT | MUX_MODE6) /* AD_CLKOUT */
+
+            AM33XX_IOPAD(0x0834, PIN_OUTPUT | MUX_MODE7) /* AD_PC */
+            AM33XX_IOPAD(0x0838, PIN_OUTPUT | MUX_MODE7) /* AD_PD */
+            AM33XX_IOPAD(0x083c, PIN_INPUT  | MUX_MODE7) /* AD_DOUTB */
+            AM33XX_IOPAD(0x0820, PIN_OUTPUT | MUX_MODE7) /* AD_SYNCB */
+            AM33XX_IOPAD(0x0824, PIN_OUTPUT | MUX_MODE7) /* AD_PE_D */
+            AM33XX_IOPAD(0x0828, PIN_OUTPUT | MUX_MODE7) /* AD_PE_C */
+            AM33XX_IOPAD(0x082c, PIN_OUTPUT | MUX_MODE7) /* AD_PE_B */
+            AM33XX_IOPAD(0x0830, PIN_OUTPUT | MUX_MODE7) /* AD_PE_A */
+
+            /*AM33XX_IOPAD(0x0984, PIN_INPUT_PULLUP | MUX_MODE3 ) /* I2C1_SCL/UART1_TXD */
+    		/*AM33XX_IOPAD(0x0980, PIN_INPUT_PULLUP | MUX_MODE3 ) /* I2C1_SDA/UART1_TXD */
+
+            AM33XX_IOPAD(0x0804, PIN_OUTPUT | MUX_MODE7) /* PLL_REF_SEL */
+            AM33XX_IOPAD(0x0978, PIN_OUTPUT | MUX_MODE7) /* PLL_3V3_EN */
+       
+        >;
+    };
+
+
+
+    i2c1_pins: pinmux_i2c1 {
+        pinctrl-single,pins = <
+            AM33XX_IOPAD(0x0984, PIN_INPUT_PULLUP | MUX_MODE3 ) /* I2C1_SCL/UART1_TXD */
+    	    AM33XX_IOPAD(0x0980, PIN_INPUT_PULLUP | MUX_MODE3 ) /* I2C1_SDA/UART1_TXD */
+
+		>;
+    };
+
+
+    spi0_pins: pinmux_spi0 {
+        pinctrl-single,pins = <
+		    AM33XX_IOPAD(0x0950, PIN_INPUT | MUX_MODE0 ) /* (A17) spi0_sclk.spi0_sclk */
+            AM33XX_IOPAD(0x0954, PIN_INPUT | MUX_MODE0 ) /* (B17) spi0_d0.spi0_d0 */
+			AM33XX_IOPAD(0x0958, PIN_INPUT | MUX_MODE0 ) /* (B16) spi0_d1.spi0_d1 */
+            AM33XX_IOPAD(0x095c, PIN_INPUT | MUX_MODE0 ) /* (A16) spi0_cs0.spi0_cs0 */
+	    >;
+    };
+
+	}; /*overlay*/
+
+	}; /*fragment0*/
+
+
+	fragment@1 {
+
+		target = <&i2c1>;
+		__overlay__ {
+
+			status = "okay";
+      pinctrl-names = "default";
+      pinctrl-0 = <&i2c1_pins>;
+
+
+      /* Add device tree bindings
+       * for your I2C1 device here.
+       *
+       */
+
+		};
+	};
+
+
+  fragment@2 {
+
+		target = <&spi0>;
+		__overlay__ {
+
+			status = "okay";
+      pinctrl-names = "default";
+      pinctrl-0 = <&spi0_pins>;
+
+			/* Add device tree bindings
+       * for your SPI device here.
+       *
+       */
+
+
+		};
+	};
+
+
+  fragment@3 {
+
+		target = <&uart0>;
+		__overlay__ {
+
+			status = "okay";
+      pinctrl-names = "default";
+      pinctrl-0 = <&uart0_pins>;
+
+			/* Add device tree bindings
+       * for your UART device here.
+       *
+       */
+
+
+		};
+	};
+
+
+};
