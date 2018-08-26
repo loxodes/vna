@@ -10,6 +10,10 @@ class GPIO:
         GPIO_offset = [0x44307000, 0x4804c000, 0x481ac000, 0x481ae000]
         GPIO_size = 0xfff
         self.gpio_mem = []
+
+        self.HIGH = True
+        self.LOW = False
+
         with open("/dev/mem", "r+b" ) as f:
                 for offset in GPIO_offset:
                         self.gpio_mem.append(mmap(f.fileno(), GPIO_size, offset=offset))
@@ -66,7 +70,10 @@ class GPIO:
         print(reg)
         value = reg & (1 << pin)
         return bool(value) 
-
+    
+    def __del__(self):
+        for bank in self.gpio_mem:
+            bank.close()
 
 if __name__ == "__main__":
 
@@ -86,5 +93,4 @@ if __name__ == "__main__":
 
 
     except KeyboardInterrupt:
-        for bank in gpio.gpio_mem:
-            bank.close()
+        del gpio

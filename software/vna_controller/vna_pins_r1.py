@@ -17,7 +17,7 @@ class PINS(object):
     
     ### EXT
     EXT_UART_MTX = (0,15)
-    EXT_UART_MRX = (0,10)
+    EXT_UART_MRX = (1,10)
     EXT_AIN0 = 'AIN5'
     EXT_AIN1 = 'AIN6'
     # EXT_SPI_CLK, SPI0_SCLK
