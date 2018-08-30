@@ -14,7 +14,7 @@ class bitbang_spi:
         self.gpio.set_output(spi_clk)
         
         if self.spi_miso != None:
-            self.gpio.set_input(spi_clk)
+            self.gpio.set_input(spi_miso)
         
         self.gpio.set_value(spi_cs, self.gpio.HIGH)
 
@@ -30,10 +30,10 @@ class bitbang_spi:
             self.gpio.set_value(self.spi_clk, self.gpio.HIGH)
 
             if self.spi_miso != None:
-                response |= read_value(self.spi_miso)
+                response |= self.gpio.read_value(self.spi_miso)
 
             self.gpio.set_value(self.spi_clk, self.gpio.LOW)
 
-        self.gpio.set_value(spi_cs, self.gpio.HIGH)
+        self.gpio.set_value(self.spi_cs, self.gpio.HIGH)
 
         return response

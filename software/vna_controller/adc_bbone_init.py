@@ -6,7 +6,7 @@
 import time
 import pdb
 from bbone_spi_bitbang import bitbang_spi
-from vna_r1_pins import PINS
+from vna_pins_r1 import PINS
 
 ADC_SPI_CS1 = PINS.AD_PE_A # adc1
 ADC_SPI_CS2 = PINS.AD_PE_B # adc2
@@ -15,6 +15,8 @@ ADC_SPI_CS4 = PINS.AD_PE_D # adc4
 ADC_SPI_MOSI = PINS.AD_PD
 ADC_SPI_MISO = PINS.AD_DOUTB
 ADC_SPI_CLK = PINS.AD_PC
+
+ADC_CLK_EN = PINS.ADC_CLK_EN
 
 def ad9864_write_reg(spi, addr, val):
     payload = addr << 9 | val
@@ -93,23 +95,26 @@ if __name__ == '__main__':
 
     gpio.set_output(SYNCB)
     gpio.set_output(V3_EN)
+    gpio.set_output(ADC_CLK_EN)
 
     
     gpio.set_value(V3_EN, gpio.HIGH)
     gpio.set_value(SYNCB, gpio.HIGH)
-
+    gpio.set_value(ADC_CLK_EN, gpio.HIGH)
+    
+    print("SYNCB HIGH")
     time.sleep(.5)
 
     spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi2 = bitbang_spi(ADC_SPI_CS2, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi3 = bitbang_spi(ADC_SPI_CS3, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
     spi4 = bitbang_spi(ADC_SPI_CS4, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
-    
+   
     ad9864_tristate_miso(spi1)
     ad9864_tristate_miso(spi2)
     ad9864_tristate_miso(spi3)
     ad9864_tristate_miso(spi4)
-    
+   
     print("init adc1")
     ad9864_init(spi1)
 
