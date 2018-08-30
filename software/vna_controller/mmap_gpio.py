@@ -7,7 +7,7 @@ import time, struct
 
 class GPIO:
     def __init__(self):
-        GPIO_offset = [0x44307000, 0x4804c000, 0x481ac000, 0x481ae000]
+        GPIO_offset = [0x44e07000, 0x4804c000, 0x481ac000, 0x481ae000]
         GPIO_size = 0xfff
         self.gpio_mem = []
 
@@ -27,7 +27,6 @@ class GPIO:
         
         if mask:
             reg = self._read_reg(port, offset)
-
         self.gpio_mem[port][offset:offset+4] = struct.pack("<L", reg & ~(1 << bit))
 
     def _set_bit(self, port, offset, bit, mask = True):
@@ -67,7 +66,6 @@ class GPIO:
         pin = gpio[1]
         GPIO_DATAIN = 0x138
         reg = self._read_reg(port, GPIO_DATAIN)
-        print(reg)
         value = reg & (1 << pin)
         return bool(value) 
     
