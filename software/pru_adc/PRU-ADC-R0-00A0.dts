@@ -1,69 +1,38 @@
-// This DTS overlay sets up one input and one output pin for use by  
- // PRU0 via its Enhanced GPIO mode, which will let us access those pins  
- // by writing to R30 bit 15 or reading from R31 bit 14.  
+// Compile with dtb-rebuilder
    
- // Save this file wherever you want (but I recommend /lib/firmware), as  
- // "PRU-GPIO-EXAMPLE-00A0.dts".
-   
- // Compile with:
- // dtc -O dtb -I dts -o /lib/firmware/PRU-GPIO-EXAMPLE-00A0.dtbo -b 0 -@ PRU-GPIO-EXAMPLE-00A0.dts  
-   
- // You'll have to reboot, after which you can do this as root to activate it:  
- // echo PRU-GPIO-EXAMPLE > /sys/devices/bone_capemgr.?/slots  
- 
- /dts-v1/;  
- /plugin/;  
- 
- / {  
-   // This determines which boards can use this DTS overlay  
-   compatible = "ti,beaglebone", "ti,beaglebone-green", "ti,beaglebone-black";  
-   
-   // I think part-number is supposed to correspond with the filename,  
-   // so we'd save this as "PRU-GPIO-EXAMPLE-00A0.dts".  
-   part-number = "PRU-ADC-R0";  
-   
-   // This always seems to be 00A0, and all the .dtbo files in /lib/firmware  
-   // seem to be named foo-00A0.dtbo, but then are loaded without that suffix.  So
-   // for foo-00A0.dtbo we'd do 'echo foo > /sys/devices/bone_capemgr.?/slots'
-   version = "00A0";
-   
-   // List the pins and resources we'll be using. This table:  
-   // http://elinux.org/Ti_AM33XX_PRUSSv2#Beaglebone_PRU_connections_and_modes  
-   // shows which pins can be used with PRU0 and PRU1 for input and output via  
-   // registers R31 and R30.  
-   // P8.40, 42, 44, 46 -  DOUT, inputs, bits 7, 5, 3, 1
-   // P8.45 - CLKOUT, input, bit 0
-   // P8.43 - FS, input, bit 2
+/dts-v1/;  
+/plugin/;  
 
-   exclusive-use =  
-      "P8.40", "P8.42", "P8.44", "P8.46", "P8.45", "P8.43", "pru1";  
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+/ {  
+   // AD_DOUTD - pru1 r31 bit 0
+   // AD_DOUTC - pru1 r31 bit 1
+   // AD_DOUTB - pru1 r31 bit 2
+   // AD_DOUTA - pru1 r31 bit 3
+    
+   // AD_FS     - pru1 r31 bit 4
+   // AD_CLKOUT - pru1 r31 bit 5
+
+   // RF_SEL_PRU - pru1 r30 bit 7
+   // exclusive-use = "P8_45", "P8_46", "P8_43", "P8_44", P8_41", "P8_42", "P8_40", "pru1";  
    
    fragment@0 {  
     target = <&am33xx_pinmux>;  
-    __overlay__ {  
-      example_pins: pinmux_pru_pru_pins {  
+    __overlay__ {
+        example_pins: pinmux_pru_pru_pins {
    
-       // The offset and mode for pins P8_11 and P8_16 also come from the table linked above.
-       //  
-       // That table gives offset 0x34 for P8_11, and 0x38 for P8_16.
-       // It also shows us we want pinmux mode 6 for P8_11 in output mode,  
-       // and again pinmux mode 6 for P8_16 in input mode.
-       // 
-       // Table 9-60 in the TRM: http://www.ti.com/lit/ug/spruh73l/spruh73l.pdf  
-       // helps us calculate the rest of the configuration value.  
-       //  
-       // For P8_11, the other fields are all 0, so the value is just 0x06.  
-       //  
-       // For P8_16, we want it to be an input, so we also set bit 5, yielding  
-       // a value of 0x26. We could also set bits 3 and 4 to enable a pullup  
-       // or pulldown.  
-       pinctrl-single,pins = <  
-         0x0bc 0x26
-         0x0b4 0x26
-         0x0ac 0x26
-         0x0a4 0x26
-         0x0a0 0x26
-         0x0a8 0x26
+        pinctrl-single,pins = <
+            AM33XX_IOPAD(0x08a0, PIN_INPUT | MUX_MODE6) /* AD_DOUTD */
+            AM33XX_IOPAD(0x08a4, PIN_INPUT | MUX_MODE6) /* AD_DOUTC */
+            AM33XX_IOPAD(0x08a8, PIN_INPUT | MUX_MODE6) /* AD_DOUTB */
+            AM33XX_IOPAD(0x08ac, PIN_INPUT | MUX_MODE6) /* AD_DOUTA */
+            AM33XX_IOPAD(0x08b0, PIN_INPUT | MUX_MODE6) /* AD_FS */
+            AM33XX_IOPAD(0x08b4, PIN_INPUT | MUX_MODE6) /* AD_CLKOUT */
+            AM33XX_IOPAD(0x08bc, PIN_OUTPUT | MUX_MODE5) /* RF_SEL_PRU */
+
        >;  
       };  
     };  
