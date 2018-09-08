@@ -10,51 +10,43 @@ class ethernet_pru_adc:
         self.adc_addr = adc_addr
         self.adc_port = adc_port
 
-    def grab_samples(self, paths = 2, number_of_samples = 512):
-        while True:
-            try:
-                t1 =  time.time()
-                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                sock.settimeout(5)
-                server_address = (self.adc_addr, self.adc_port)
+    def grab_samples(self, paths = 2, number_of_samples = 128):
+        t1 =  time.time()
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(5)
+        server_address = (self.adc_addr, self.adc_port)
 
-                sock.connect(server_address)
+        sock.connect(server_address)
 
-                sock.sendall(np.uint32(number_of_samples).tostring())
+        sock.sendall(np.uint32(number_of_samples).tostring())
 
-                adc_buff_size = np.fromstring(sock.recv(4), dtype=np.uint32)[0]
+        adc_buff_size = np.fromstring(sock.recv(4), dtype=np.uint32)[0]
+        print("adc buffer size: {}".format(adc_buff_size))
+        remaining_samples = 4*number_of_samples 
+        data = ''
+        while(remaining_samples > 0):
+            adc_buffer = sock.recv(adc_buff_size * 4, socket.MSG_WAITALL)
+            print('received {} of {} bytes'.format(len(adc_buffer), adc_buff_size * 4))
+            data += adc_buffer
+            remaining_samples -= len(adc_buffer) / 4
 
-                remaining_samples = number_of_samples 
-                data = ''
-                while(remaining_samples > 0):
-                    adc_buffer = sock.recv(adc_buff_size * 4, socket.MSG_WAITALL)
-                    #print('received {} of {} bytes'.format(len(adc_buffer), adc_buff_size * 4))
-                    data += adc_buffer
-                    remaining_samples -= len(adc_buffer) / 4
+        sock.sendall(np.uint32(number_of_samples).tostring())
+        sock.close()
 
-                sock.sendall(np.uint32(number_of_samples).tostring())
-                samples = np.fromstring(data, dtype=np.int16)
-                samples = 1j * samples[1::2] + samples[0::2]
-                sock.close()
-                
-                t2 = time.time()
-                break
+        samples = np.fromstring(data, dtype=np.int16)
 
-            except:
-                import subprocess
-                print('restarting ADC server..')
-                ssh = subprocess.Popen(["ssh", "debian@bbb", "/home/debian/restart_adc_server"])
-                print('adc connection failed! restarting')
-                time.sleep(1)
+        samples = 1j * samples[1::2] + samples[0::2]
+        t2 = time.time()
         
         print('grabbing samples took: {} seconds'.format(t2 - t1))
+        print("number_of_samples: {}".format(number_of_samples))
         # de-interleave samples.. there is probably a more pythonic way of doing this
         if paths == 1:
-            return samples[0::4]
+            return samples
         elif paths == 2:
-            return samples[0::4], samples[1::4]
+            return samples[0:number_of_samples], samples[number_of_samples:]
         elif paths == 4:
-            return samples[0::4], samples[1::4], samples[2::4], samples[3::4]
+            return samples[0:number_of_samples], samples[number_of_samples:2*number_of_samples], samples[2*number_of_samples:3*number_of_samples], samples[3*number_of_samples:]
         else:
             print('unrecognized number of paths..')
             pdb.set_trace()
@@ -76,8 +68,8 @@ class ethernet_pru_adc:
 
 if __name__ == '__main__':
     adc = ethernet_pru_adc('bbb', 10520)
-    for i in range(100):
-        path1, path2, path3, path4 = adc.grab_samples(paths=4, number_of_samples = 1024)
+    for i in range(1):
+        path1, path2, path3, path4 = adc.grab_samples(paths=4, number_of_samples = 96)
     subplot(4,1,1)
     plt.plot(np.real(path1))
     plt.plot(np.imag(path1))
