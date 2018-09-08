@@ -135,6 +135,3 @@ if __name__ == '__main__':
     gpio.set_value(SYNCB, gpio.LOW)
     time.sleep(.05)
     gpio.set_value(SYNCB, gpio.HIGH)
-    import pdb
-    pdb.set_trace()
-    raw_input("press enter to continue..")

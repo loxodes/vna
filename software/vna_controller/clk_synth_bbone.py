@@ -31,6 +31,8 @@ class ad9577_synth:
 
         self.i2c.write8(0x3A, 0x3f) # enable CH2 and CH3, CMOS for all outputs on register DR1
         self.i2c.write8(0x3B, 0x00) # enable refout, set PDRefOut on DR2 to 0
+
+        self.i2c.write8(0x11, 0x03) # power down CH0 and CH1
     
         # fpfd = 26 MHz
         # fout = fpfd * n / (v * d)
