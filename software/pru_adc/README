@@ -1,10 +1,12 @@
-PRU code for reading AD9864 ADC (under development)
+The PRU initialization code, makefile, and headers are from following example: 
+Beaglebone-PRU-RPMsg-HelloWorld
+https://github.com/RoSchmi/Beaglebone-PRU-RPMsg-HelloWorld
+Code in this directory is licensed GPL v3.0
 
-tested on beaglebone green, running Debian 7.11, Linux beaglebone 3.8.13-bone80
+sudo make clean        // (to delete the old executable files)
 
-see:
-http://www.righto.com/2016/08/pru-tips-understanding-beaglebones.html
-http://www.embedded-things.com/bbb/understanding-bbb-pru-shared-memory-access/
-https://groups.google.com/forum/#!topic/beagleboard/0a4tszlq2y0
+sudo make install -B   // (to compile and install the programs for PRU0 and PRU1)
 
+sudo make -B           // (to compile the Linux user space program)
 
+sudo ./adc_to_socket   // (to start the Linux user space program)
