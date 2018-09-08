@@ -12,16 +12,14 @@ Testing with two port measurements out to 13 GHz is in progress.
 
 ## Hardware Design
 See `breakouts` and `hardware` for various modules developed for the network analyzer.
+![picture of VNA R1](./doc/vna_r1_ctrl.jpg)
 ![picture of VNA](./doc/vna_picture.jpg)
-
-All 4 layer PCBs are routed assuming OSH Park's 4 layer stackup (http://docs.oshpark.com/services/four-layer/) with FR-408 and 6.7 mil prepreg height. 
-All layouts/schematics are created in KiCad 4
 
 ## Software Design
 See the `software` directory for scraps of software written for testing VNA modules. 
 
 ## License
-All work is under a MIT license.
+Unless otherwise noted, all work is under a MIT license.
 
 ## Contact
 Feel free to contact me at arcticmicrowave@gmail.com or loxodes in #rhlug on irc.freenode.net
