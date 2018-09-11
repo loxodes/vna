@@ -29,7 +29,7 @@ class ad9577_synth:
         self.i2c = I2C.Device(AD9577_I2C_ADDR, 1)
         self.i2c.write8(0x40, 0x02) # enable i2c, set EnI2C on register C0
 
-        self.i2c.write8(0x3A, 0x3f) # enable CH2 and CH3, CMOS for all outputs on register DR1
+        self.i2c.write8(0x3A, 0x0f) # enable CH2 and CH3, LVDS on CH2 and CH3, CMOS for CH0 and CH1 on register DR1
         self.i2c.write8(0x3B, 0x00) # enable refout, set PDRefOut on DR2 to 0
 
         self.i2c.write8(0x11, 0x03) # power down CH0 and CH1
