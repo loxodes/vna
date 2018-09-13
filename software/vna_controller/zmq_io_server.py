@@ -10,25 +10,18 @@ import zmq
 import argparse
 import pdb
 
-import Adafruit_BBIO.GPIO as GPIO
-
-
+from mmap_gpio import GPIO
+from vna_pins_r1 import PINS
 from vna_io_commands import *
 from adc_bbone_init import *
 from clk_synth_bbone import ad9577_synth
 
-MIX_EN = "P8_28"
-MIX_X2 = "P8_27"
-IF_REF_PWRDN = "P8_29"
-ADC_CLK_EN = "P8_30"
-
-V3_EN = "P8_12"
-
-
-
-
-SW_PORT_SEL = "P9_15"
-SYNCB = "P8_41"
+MIX_EN = PINS.MIX_EN
+MIX_X2 = PINS.MIX_X2
+ADC_CLK_EN = PINS.ADC_CLK_EN
+V3_EN = PINS.PLL_3V3_EN
+SW_PORT_SEL = PINS.PORT_SEL_PRU
+SYNCB = PINS.AD_SYNCB
 
 SW_MAP = {  SW_DUT_RF : SW_PORT_SEL}
             
@@ -51,30 +44,28 @@ class zmq_io_server:
         print('binding complete')
         
         print('initializing reference clocks')
-        synth = ad9577_synth()
+        self.synth = ad9577_synth()
+        self.synth.lo_powerdown()
 
         # init io stuff
+        self.gpio = GPIO()
         print('setting up IO')
-        GPIO.setup(MIX_EN, GPIO.OUT)
-        GPIO.setup(MIX_X2, GPIO.OUT)
-        GPIO.setup(SW_PORT_SEL, GPIO.OUT)
-        GPIO.setup(SYNCB, GPIO.OUT)
-        GPIO.setup(V3_EN, GPIO.OUT)
-
-
-        GPIO.setup(IF_REF_PWRDN, GPIO.OUT)
-        GPIO.setup(ADC_CLK_EN, GPIO.OUT)
+        self.gpio.set_output(V3_EN)
+        self.gpio.set_output(MIX_EN)
+        self.gpio.set_output(MIX_X2)
+        self.gpio.set_output(SW_PORT_SEL)
+        self.gpio.set_output(ADC_CLK_EN)
 
         print('setting default values')
-        GPIO.output(V3_EN,GPIO.HIGH)
-        GPIO.output(MIX_EN, GPIO.LOW)
-        GPIO.output(MIX_X2, GPIO.LOW)
+        self.gpio.set_value(V3_EN, self.gpio.HIGH)
+        self.gpio.set_value(MIX_EN, self.gpio.LOW)
+        self.gpio.set_value(MIX_X2, self.gpio.LOW)
 
-        GPIO.output(ADC_CLK_EN, GPIO.HIGH)
+        self.gpio.set_value(ADC_CLK_EN, self.gpio.HIGH)
 
-        GPIO.output(SW_PORT_SEL, GPIO.LOW)
+        self.gpio.set_value(SYNCB, self.gpio.HIGH)
 
-        GPIO.output(SYNCB, GPIO.HIGH)
+        self.gpio.set_value(SW_PORT_SEL, self.gpio.HIGH)
 
         print('initalizing ADCs')
         self.adc_spi1 = bitbang_spi(ADC_SPI_CS1, ADC_SPI_MOSI, ADC_SPI_MISO, ADC_SPI_CLK)
@@ -85,15 +76,14 @@ class zmq_io_server:
 
         for s in self.adc_spis:
             ad9864_tristate_miso(s)
-
+        
         print('init complete')
-
     
     def _set_switch(self, message):
         #sw = message[SW_IDX]
         state = int(message[SW_STATE])
         #pin = SW_MAP[sw]
-        GPIO.output(SW_PORT_SEL, state)
+        self.gpio.set_value(SW_PORT_SEL, state)
 
         return message[COMMAND_INDEX]
 
@@ -103,9 +93,9 @@ class zmq_io_server:
         if mult_enable:
 
             print('enabling multiplier')
-            GPIO.output(MIX_X2,GPIO.HIGH)
+            self.gpio.set_value(MIX_X2,self.gpio.HIGH)
         else:
-            GPIO.output(MIX_X2,GPIO.LOW)
+            self.gpio.set_value(MIX_X2,self.gpio.LOW)
        
         return message[COMMAND_INDEX]
 
@@ -114,31 +104,33 @@ class zmq_io_server:
         mixer_enable = int(message[1:])
         print('enabling mixer')
         if mixer_enable:
-            GPIO.output(MIX_EN,GPIO.HIGH)
+            self.gpio.set_value(MIX_EN,self.gpio.HIGH)
         else:
-            GPIO.output(MIX_EN,GPIO.LOW)
+            self.gpio.set_value(MIX_EN,self.gpio.LOW)
 
         return message[COMMAND_INDEX]
 
     def _init_adc(self, message):
-        GPIO.output(MIX_EN, GPIO.LOW)
-        GPIO.output(IF_REF_PWRDN, GPIO.HIGH)
+        self.gpio.set_value(MIX_EN, self.gpio.LOW)
+        self.synth.lo_powerdown() 
 
+        time.sleep(.15) 
         adc = int(message[1:])
         if adc == int(ALL_ADC):
             for s in self.adc_spis:
                 ad9864_init(s)
         else:
             ad9864_init(self.adc_spis[adc])
-            
-        GPIO.output(IF_REF_PWRDN, GPIO.LOW)
+        
+        time.sleep(.05) 
+        self.synth.lo_powerup() 
         return message[COMMAND_INDEX]
 
     def _sync_adc(self, message):
-        GPIO.output(SYNCB,GPIO.HIGH)
-        GPIO.output(SYNCB,GPIO.LOW)
+        self.gpio.set_value(SYNCB,self.gpio.HIGH)
+        self.gpio.set_value(SYNCB,self.gpio.LOW)
         time.sleep(.05)
-        GPIO.output(SYNCB,GPIO.HIGH)
+        self.gpio.set_value(SYNCB,self.gpio.HIGH)
         return message[COMMAND_INDEX]
 
 

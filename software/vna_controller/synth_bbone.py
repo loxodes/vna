@@ -14,7 +14,6 @@ REG0_RESET 	= _bit(1)
 REG0_POWERDOWN 	= _bit(0)
 REG0_FCAL_EN = _bit(3)
 
-
 DEFAULT = 0
 
 LMX_REG_DEFAULTS = {\
@@ -37,7 +36,8 @@ LMX_REG_DEFAULTS = {\
 MIN_N = 36
 FRAC_DENOM = 170000
 PFD = 85e6
-F_VCO_MIN = 7.5e9
+F_VCO_MIN = 7.51e9
+# power is ~6 dB lower when f == F_VCO_MIN..?
 F_VCO_MAX = 15e9
 
 CHANNELA = 0
@@ -61,7 +61,8 @@ RF_SYNTH_PINS = { \
     'dac_data' : PINS.RF_SPI_SDI,\
     'dac_sck' : PINS.RF_SPI_CLK,\
     'amp_en' : PINS.RF_AMP_EN,\
-    '-5v_en' : PINS.RF_M5V_EN}
+    '-5v_en' : PINS.RF_M5V_EN,
+    'rf_board' : True}
 	
 DEMOD_SYNTH_PINS = {
 	'lmx_clk' : PINS.LO_SPI_CLK, \
@@ -74,7 +75,8 @@ DEMOD_SYNTH_PINS = {
     'dac_data' : PINS.LO_SPI_SDI,\
     'dac_sck' : PINS.LO_SPI_CLK,\
     'amp_en' : PINS.LO_AMP_EN,\
-    '-5v_en' : PINS.LO_M5V_EN}
+    '-5v_en' : PINS.LO_M5V_EN,
+    'rf_board' : False}
 
 # cutoff frequency of paths through filter bank, in Hz
 FILTER_BANK_CUTOFFS = [15.0e9, 7.2e9, 4.5e9, 2.50e9]
@@ -83,20 +85,15 @@ FILTER_BANK_SIZE = 4
 class synth_r1:
     def __init__(self, pins):
         self.pins = pins
-
-        if 'filta' in self.pins:
-            self.rf_board = True
-        else:
-            self.rf_board = False
-            print("not an RF board..")
+        self.rf_board = pins['rf_board']
 
         self.io_init()
 
         self.current_channel = CHANNEL_BOTH
         self.current_freq = F_VCO_MAX
         self.current_filter = 0
-        self.channel_power = 0 
-
+        self.channel_power = 0
+ 
         self.lmx_init()
 
 
@@ -111,17 +108,15 @@ class synth_r1:
 
         self.gpio.set_output(self.pins['lmx_ce'])
         #GPIO.setup(self.pins['lmx_lock'], GPIO.IN)
-
+        
         if self.rf_board:
-            self.gpio.set_output(self.pins['-5v_en'])
-            self.gpio.set_value(self.pins['-5v_en'], self.gpio.HIGH)
-
-            self.gpio.set_output(self.pins['amp_en'])
-            # TODO: disable 5V rail until DAC is tested, active low
-            self.gpio.set_output(self.pins['amp_en'], self.gpio.HIGH) 
 
             self.dac_spi = bitbang_spi(self.pins['dac_cs'], self.pins['dac_data'], None, self.pins['dac_sck'])
-            self.set_power_dac(500)
+            self.set_power_dac(000)
+            self.gpio.set_output(self.pins['amp_en'])
+            self.gpio.set_value(self.pins['amp_en'], self.gpio.LOW) 
+
+            
 
         time.sleep(.1)
     
@@ -133,11 +128,7 @@ class synth_r1:
        
         self.current_channel = CHANNEL_NONE
 
-        if self.rf_board:
-            self.gpio.set_value(self.pins['amp_en'], self.gpio.LOW)
-            self.current_filter = 0
-        else:
-            self.channel_power = 20 # channel power of 20 produces reasonable LO drive on demod board 
+        self.channel_power = 50 # channel power of 20 produces reasonable LO drive on demod board 
 
         time.sleep(.05)
 
@@ -283,7 +274,7 @@ class synth_r1:
         
         if self.rf_board:
             # update filter bank, enable only one output channel
-            self.set_filter_bank(freq) 
+            self.current_channel = CHANNELA
 
         else:
             self.current_channel = CHANNEL_BOTH
@@ -314,15 +305,15 @@ class synth_r1:
         return self.spi.transfer(payload, bits = 24)
 
 if __name__ == '__main__':
-    synth = synth_r1(DEMOD_SYNTH_PINS)
+    synth = synth_r1(RF_SYNTH_PINS, rf_board = True)
     #while(True):
     #    synth.lmx_powerdown()
     #    time.sleep(.01)
     tstart = time.time()
-    synth.set_freq(12.3e9)
+    synth.set_freq(12.6e9)
     synth.wait_for_lock()
     tstop = time.time()
     
 
-    #print("time: " + str(tstop - tstart))
-    #pdb.set_trace()
+    print("time: " + str(tstop - tstart))
+    pdb.set_trace()

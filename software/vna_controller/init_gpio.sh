@@ -6,7 +6,9 @@ config-pin P8_44 pruin
 config-pin P8_43 pruin
 config-pin P8_42 pruin
 config-pin P8_41 pruin
-config-pin P8_40 pruout
+#config-pin P8_40 pruout
+config-pin P8_40 gpio
+
 # manually enable 3V3 PLL and RF 3V3 EN, because setting them with mmap_gpio is broken...? probably something related to i2c2?
 
 #if [ -e /sys/class/gpio/gpio12 ]

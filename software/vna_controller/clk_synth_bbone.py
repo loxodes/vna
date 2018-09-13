@@ -56,7 +56,13 @@ class ad9577_synth:
         self.i2c.write8(0x1F, 0x00)
         self.i2c.write8(0x1F, 0x01) # force new acquisition by toggling NewAcq
         self.i2c.write8(0x1F, 0x00)
+    
+    def lo_powerdown(self):
+        self.i2c.write8(0x11, 0x03) # power down CH0 and CH1
 
+    def lo_powerup(self):
+        self.i2c.write8(0x11, 0x00) # enable CH0 and CH1
+    
     def io_init(self):
         gpio = GPIO()
         gpio.set_output(CLK_REF_SEL)
