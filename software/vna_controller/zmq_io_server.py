@@ -22,7 +22,8 @@ ADC_CLK_EN = PINS.ADC_CLK_EN
 V3_EN = PINS.PLL_3V3_EN
 SW_PORT_SEL = PINS.PORT_SEL_PRU
 SYNCB = PINS.AD_SYNCB
-
+DEMOD_3V3_EN = PINS.EXT_DEMOD_3V3_EN
+LO_BUF_AMP_EN = PINS.LO_BUF_AMP_EN
 SW_MAP = {  SW_DUT_RF : SW_PORT_SEL}
             
 
@@ -51,15 +52,19 @@ class zmq_io_server:
         self.gpio = GPIO()
         print('setting up IO')
         self.gpio.set_output(V3_EN)
+        self.gpio.set_output(DEMOD_3V3_EN)
         self.gpio.set_output(MIX_EN)
         self.gpio.set_output(MIX_X2)
         self.gpio.set_output(SW_PORT_SEL)
         self.gpio.set_output(ADC_CLK_EN)
+        self.gpio.set_output(LO_BUF_AMP_EN)
 
         print('setting default values')
         self.gpio.set_value(V3_EN, self.gpio.HIGH)
+        self.gpio.set_value(DEMOD_3V3_EN, self.gpio.HIGH)
         self.gpio.set_value(MIX_EN, self.gpio.LOW)
         self.gpio.set_value(MIX_X2, self.gpio.LOW)
+        self.gpio.set_value(LO_BUF_AMP_EN, self.gpio.LOW)
 
         self.gpio.set_value(ADC_CLK_EN, self.gpio.HIGH)
 
@@ -105,8 +110,10 @@ class zmq_io_server:
         print('enabling mixer')
         if mixer_enable:
             self.gpio.set_value(MIX_EN,self.gpio.HIGH)
+            self.gpio.set_value(LO_BUF_AMP_EN, self.gpio.HIGH)
         else:
             self.gpio.set_value(MIX_EN,self.gpio.LOW)
+            self.gpio.set_value(LO_BUF_AMP_EN, self.gpio.LOW)
 
         return message[COMMAND_INDEX]
 
@@ -114,7 +121,7 @@ class zmq_io_server:
         self.gpio.set_value(MIX_EN, self.gpio.LOW)
         self.synth.lo_powerdown() 
 
-        time.sleep(.15) 
+        time.sleep(.45) 
         adc = int(message[1:])
         if adc == int(ALL_ADC):
             for s in self.adc_spis:
