@@ -44,30 +44,33 @@ class zmq_io_server:
         self.socket.bind("tcp://*:{}".format(str(port)))
         print('binding complete')
         
+        # init io stuff
+        self.gpio = GPIO()
+
+        print('bringing up 3.3V rail')
+        self.gpio.set_output(V3_EN)
+        self.gpio.set_value(V3_EN, self.gpio.HIGH)
+
         print('initializing reference clocks')
         self.synth = ad9577_synth()
         self.synth.lo_powerdown()
 
-        # init io stuff
-        self.gpio = GPIO()
         print('setting up IO')
-        self.gpio.set_output(V3_EN)
         self.gpio.set_output(DEMOD_3V3_EN)
         self.gpio.set_output(MIX_EN)
         self.gpio.set_output(MIX_X2)
         self.gpio.set_output(SW_PORT_SEL)
         self.gpio.set_output(ADC_CLK_EN)
         self.gpio.set_output(LO_BUF_AMP_EN)
+        self.gpio.set_output(SYNCB)
 
         print('setting default values')
-        self.gpio.set_value(V3_EN, self.gpio.HIGH)
         self.gpio.set_value(DEMOD_3V3_EN, self.gpio.HIGH)
         self.gpio.set_value(MIX_EN, self.gpio.LOW)
         self.gpio.set_value(MIX_X2, self.gpio.LOW)
         self.gpio.set_value(LO_BUF_AMP_EN, self.gpio.LOW)
 
         self.gpio.set_value(ADC_CLK_EN, self.gpio.HIGH)
-
         self.gpio.set_value(SYNCB, self.gpio.HIGH)
 
         self.gpio.set_value(SW_PORT_SEL, self.gpio.HIGH)
