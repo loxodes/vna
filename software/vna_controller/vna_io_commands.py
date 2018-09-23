@@ -6,6 +6,7 @@ ADC_INIT_CMD = 'a'
 MIX_EN_CMD = 'm'
 MIX_MUL_CMD = 'x'
 ADC_SYNC_CMD = 'b'
+ADC_ATTEN_CMD = 'n'
 
 CMD_ERR = 'E'
 

@@ -34,6 +34,13 @@ def ad9864_read_reg(spi, addr):
 def ad9864_tristate_miso(spi):
     ad9864_write_reg(spi, 0x3B, 0x08)
 
+def ad9864_set_attenuation(spi, fixed = False):
+    if fixed:
+        # set fixed attenuation
+        ad9864_write_reg(spi, 0x03, 0x80)
+    else:
+        ad9864_write_reg(spi, 0x03, 0x00)
+
 def ad9864_init(spi):
     ad9864_write_reg(spi, 0x3F, 0x99) # software reset
     time.sleep(.001)    
@@ -64,6 +71,13 @@ def ad9864_init(spi):
 
     ad9864_write_reg(spi, 0x38, 0x00)
     ad9864_write_reg(spi, 0x3E, 0x00)
+
+
+    # readback tuning values
+    print('CAPL1 (coarse): {}'.format(ad9864_read_reg(spi, 0x1D)))
+    print('CAPL0   (fine): {}'.format(ad9864_read_reg(spi, 0x1E)))
+    print('CAPR          : {}'.format(ad9864_read_reg(spi, 0x1F)))
+
 
     # lo synth configuration, set LO to 48.25 MHz
     ad9864_write_reg(spi, 0x00, 0x30) # enable everything but ck..

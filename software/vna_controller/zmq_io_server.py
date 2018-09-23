@@ -34,7 +34,8 @@ class zmq_io_server:
             MIX_EN_CMD: self._enable_mixer, \
             MIX_MUL_CMD: self._set_multiplier, \
             ADC_INIT_CMD : self._init_adc, \
-            ADC_SYNC_CMD: self._sync_adc}
+            ADC_SYNC_CMD: self._sync_adc,\
+            ADC_ATTEN_CMD : self._attenuate_adc}
 
         # init socket stuff
         self.context = context
@@ -134,6 +135,19 @@ class zmq_io_server:
         
         time.sleep(.05) 
         self.synth.lo_powerup() 
+        return message[COMMAND_INDEX]
+    
+
+    def _attenuate_adc(self, message):
+        adc = int(message[1:2])
+        state = int(message[2:3])
+         
+        if adc == int(ALL_ADC):
+            for s in self.adc_spis:
+                ad9864_set_attenuation(s, state)
+        else:
+            ad9864_set_attenuation(self.adc_spis[adc], state)
+
         return message[COMMAND_INDEX]
 
     def _sync_adc(self, message):
