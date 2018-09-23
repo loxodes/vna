@@ -35,6 +35,9 @@ class zmq_io:
     def sync_adcs(self):
         self._eth_cmd(ADC_SYNC_CMD, payload = '')
 
+    def adc_attenuate(self, adc, state):
+        self._eth_cmd(ADC_ATTEN_CMD, str(adc) + str(state))
+
 if __name__ == '__main__':
     context = zmq.Context()
     print('starting...')
@@ -45,7 +48,7 @@ if __name__ == '__main__':
     #zmq_io.enable_mixer()
     zmq_io.adc_init(ALL_ADC)
     zmq_io.sync_adcs()
-    
+    zmq_io.adc_attenuate(ALL_ADC, 0) 
     raw_input('press enter to continue')
     context.destroy()
 

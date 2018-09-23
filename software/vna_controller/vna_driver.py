@@ -56,7 +56,9 @@ class eth_vna:
         self.vna_io.adc_init(ADC4)
 
         self.vna_io.sync_adcs()
-        
+
+        self.vna_io.adc_attenuate(ALL_ADC, True) 
+
         self.vna_io.enable_mixer()
         self.vna_io.set_multiplier(status = DISABLE)
         self.freq = np.float32(0)
@@ -124,9 +126,9 @@ class eth_vna:
         self.lo_synth.level_pow(LO_CAL)
         self.rf_synth.level_pow(RF_CAL)
 
-        time.sleep(.1)
+        time.sleep(.5)
        
-        a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 1024)
+        a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 96)
         self.ref_samples = a1 
         self._update_rf_lo_offset_ratio(lo_freq, doubler)
 
@@ -155,7 +157,7 @@ class eth_vna:
         sw_term_avg = 0
 
         for i in range(navg):
-            a1, a2, b1, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 1024)
+            a1, b1, a2, b2 = pru_adc.grab_samples(paths = 4, number_of_samples = 96)
            
             if rawplot:
                 a1_rms = np.sqrt(np.mean(np.abs(a1)**2))
@@ -218,7 +220,7 @@ class eth_vna:
             b1_g = self._goertzel(b1, -BB_FREQ - 5)
             b2_g = self._goertzel(b2, -BB_FREQ - 5)
 
-            if rfport == PORT1:
+            if rfport == PORT2:
                 print('b1/a1 (mean)    : {}'.format(np.mean(b1/a1)))
                 print('b1/a1 (goertzel): {}'.format(b1_g/a1_g))
 
@@ -470,16 +472,16 @@ if __name__ == '__main__':
     parser.add_argument('--swterms', action='store_true', help='save switch terns')
     parser.add_argument('--rawplot', action='store_true', help='plot raw a/b samples')
     parser.add_argument('--simultaneous', action='store_true', help='collect SOLT cal measurements from both ports simultaneously')
-    parser.add_argument('--points', type=int, default=441, help='number of points in sweep')
-    parser.add_argument('--navg', type=int, default=1, help='number averages')
+    parser.add_argument('--points', type=int, default=221, help='number of points in sweep')
+    parser.add_argument('--navg', type=int, default=4, help='number averages')
     parser.add_argument('--fstart', type=float, default=2e9, help='sweep start frequency (Hz)')
-    parser.add_argument('--fstop', type=float, default=13e9, help='sweep stop frequency (Hz)')
+    parser.add_argument('--fstop', type=float, default=14e9, help='sweep stop frequency (Hz)')
     args = parser.parse_args()
 
 
+    vna_io = zmq_io(context, 'bbb', IO_PORT)
     synth_rf = zmq_synth(context, 'bbb', SYNTH_PORTS['rf'])
     synth_lo = zmq_synth(context, 'bbb', SYNTH_PORTS['demod'])
-    vna_io = zmq_io(context, 'bbb', IO_PORT)
     pru_adc = ethernet_pru_adc('bbb', 10520)
     vna = eth_vna(synth_lo, synth_rf, pru_adc, vna_io)
 
