@@ -10,13 +10,13 @@ SWITCH_PATH1 = 1
 SWITCH_PATH0 = 0
 
 # lookup table for -20 dBm at output of vna port on vna rf board
-RF_TABLE_FREQ = [2e9, 2.5e9, 3e9, 3.5e9, 4e9, 4.5e9, 5e9, 5.5e9, 6e9, 6.5e9, 7e9, 7.5e9, 8e9, 8.5e9, 9e9, 9.5e9, 10e9,  10.5e9, 11.0e9, 11.5e9, 12.0e9, 12.5e9, 13.0e9, 15.0e9]
-RF_TABLE_LMX =  [0,   0,     0,   0,     0,   0,     0,   0,     0,   0,     2,   0,     1,   7,     31,  15,    11,    5,      3,      3,      6,      14,     11,     20]
-RF_TABLE_DAC =  [155, 155,   145, 185,   210, 145,   130, 155,   50,  0,     0,   20,    0,   0,     0,   0,     0,     0,      0,      0,      0,      0,      0,      0]
+RF_TABLE_FREQ = [2e9,2.5e9,3e9,3.5e9,4e9,4.5e9,5e9,5.5e9,6e9,6.5e9,7e9,7.5e9,8e9,8.5e9,9e9,9.5e9,10e9,10.5e9,11.0e9,11.5e9,12.0e9,12.5e9,13.0e9,13.5e9,14e9]
+RF_TABLE_LMX =  [6,  6,    7,  7,    8,  10,   20, 25,   30, 50,   50, 50,   50, 50,   50, 50,   50,  50,    50,    50,    50,    50,    50,    50,    50]
+RF_TABLE_DAC =  [0,  0,    0,  0,    0,  0,     0,   0,     0,   0,     0,   0,     0,   0,     0,   0,     0,     0,      0,      0,      0,      0,      0,      0,      0]
 
 
 LO_TABLE_FREQ = [2e9, 16e9]
-LO_TABLE_LMX = [30, 30]
+LO_TABLE_LMX = [50, 50]
 LO_TABLE_DAC = None
 
 class zmq_synth:
@@ -72,12 +72,14 @@ class zmq_synth:
         if pow_lmx:
             pow_setting = int(np.interp(self.freq, freqs, pow_lmx))
             self.set_pow_lmx(pow_setting)
+            pdb.set_trace()
             print('pow: {}'.format(pow_setting))
         
         if pow_dac:
             dac_setting = int(np.interp(self.freq, freqs, pow_dac))
-            self.set_pow_dac(dac_setting)
+            #self.set_pow_dac(dac_setting)
             print('dac: {}'.format(dac_setting))
+            print('bypassing DAC power leveling..')
         
 
 if __name__ == '__main__':

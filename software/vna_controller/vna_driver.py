@@ -57,7 +57,7 @@ class eth_vna:
 
         self.vna_io.sync_adcs()
 
-        self.vna_io.adc_attenuate(ALL_ADC, True) 
+        self.vna_io.adc_attenuate(ALL_ADC, 1) 
 
         self.vna_io.enable_mixer()
         self.vna_io.set_multiplier(status = DISABLE)
@@ -220,7 +220,7 @@ class eth_vna:
             b1_g = self._goertzel(b1, -BB_FREQ - 5)
             b2_g = self._goertzel(b2, -BB_FREQ - 5)
 
-            if rfport == PORT2:
+            if rfport == PORT1:
                 print('b1/a1 (mean)    : {}'.format(np.mean(b1/a1)))
                 print('b1/a1 (goertzel): {}'.format(b1_g/a1_g))
 
@@ -473,7 +473,7 @@ if __name__ == '__main__':
     parser.add_argument('--rawplot', action='store_true', help='plot raw a/b samples')
     parser.add_argument('--simultaneous', action='store_true', help='collect SOLT cal measurements from both ports simultaneously')
     parser.add_argument('--points', type=int, default=221, help='number of points in sweep')
-    parser.add_argument('--navg', type=int, default=4, help='number averages')
+    parser.add_argument('--navg', type=int, default=1, help='number averages')
     parser.add_argument('--fstart', type=float, default=2e9, help='sweep start frequency (Hz)')
     parser.add_argument('--fstop', type=float, default=14e9, help='sweep stop frequency (Hz)')
     args = parser.parse_args()
