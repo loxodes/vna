@@ -72,7 +72,6 @@ class zmq_synth:
         if pow_lmx:
             pow_setting = int(np.interp(self.freq, freqs, pow_lmx))
             self.set_pow_lmx(pow_setting)
-            pdb.set_trace()
             print('pow: {}'.format(pow_setting))
         
         if pow_dac:

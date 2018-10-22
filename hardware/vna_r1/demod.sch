@@ -1,106 +1,6 @@
-EESchema Schematic File Version 2
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-LIBS:PocketBeagle
-LIBS:txco
-LIBS:trf37b73
-LIBS:tps2065d
-LIBS:tps2051
-LIBS:tps793
-LIBS:tps255xx
-LIBS:tpd4s012
-LIBS:tcm-63ax+
-LIBS:sn74lvc1g07
-LIBS:scbd-16-63
-LIBS:rf_crossbar
-LIBS:pwr_splitter
-LIBS:pe43705
-LIBS:pe42541
-LIBS:pe42540
-LIBS:pe42521
-LIBS:pcm2900
-LIBS:okr_t3-w12-c
-LIBS:nc7wzu04
-LIBS:nc7sv74kbx
-LIBS:nb3n551
-LIBS:mounting_hole
-LIBS:mounting_box
-LIBS:mga-82563
-LIBS:max2605
-LIBS:max510
-LIBS:masw-008322-tr1000
-LIBS:maam-011101
-LIBS:maam-011100
-LIBS:ltc5596
-LIBS:ltc5549
-LIBS:ltc2630
-LIBS:ltc2323
-LIBS:ltc2054cs5
-LIBS:ltc1983
-LIBS:ltc1566-1
-LIBS:lt1819
-LIBS:lt1567
-LIBS:lmx2594
-LIBS:lmx2592
-LIBS:lmk61e2
-LIBS:lan8710a
-LIBS:hmc629
-LIBS:hmc525
-LIBS:hmc475
-LIBS:hmc424
-LIBS:hmc321
-LIBS:hmc311sc70
-LIBS:conn_sma_2gnd
-LIBS:conn_sma
-LIBS:conn_microsd
-LIBS:cmm0511-qt-0g0t
-LIBS:cat102
-LIBS:boosterpack_ti
-LIBS:ammp-6120
-LIBS:adrf5040
-LIBS:adp7158
-LIBS:adm7150
-LIBS:adl5902
-LIBS:adl5380
-LIBS:adf4355-3
-LIBS:ad9864
-LIBS:ad9577
-LIBS:75451
-LIBS:74xx1g14
-LIBS:74hc04_full
-LIBS:74hc04
-LIBS:vdd_rf
-LIBS:vdd_lo
-LIBS:vdd_clk
+EESchema Schematic File Version 4
 LIBS:vna_r1-cache
-EELAYER 25 0
+EELAYER 26 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
@@ -119,7 +19,7 @@ IF_LO_REF
 Text HLabel 10900 5100 2    60   Input ~ 0
 ADC_CLK
 $Comp
-L ad9864 U502
+L ad9864:ad9864 U502
 U 1 1 593C9F63
 P 8550 6700
 AR Path="/59C75528/593C9F63" Ref="U502"  Part="1" 
@@ -134,7 +34,7 @@ F 3 "" H 8550 6700 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R504
+L device:R_Small R504
 U 1 1 593CFC51
 P 4800 5700
 AR Path="/59C75528/593CFC51" Ref="R504"  Part="1" 
@@ -149,7 +49,7 @@ F 3 "" H 4800 5700 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R_Small R501
+L device:R_Small R501
 U 1 1 593CFD2F
 P 4500 5950
 AR Path="/59C75528/593CFD2F" Ref="R501"  Part="1" 
@@ -164,7 +64,7 @@ F 3 "" H 4500 5950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R505
+L device:R_Small R505
 U 1 1 593CFD88
 P 5050 5950
 AR Path="/59C75528/593CFD88" Ref="R505"  Part="1" 
@@ -179,7 +79,7 @@ F 3 "" H 5050 5950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR201
+L power:GND #PWR201
 U 1 1 593CFE6B
 P 4500 6150
 AR Path="/59C75528/593CFE6B" Ref="#PWR201"  Part="1" 
@@ -194,7 +94,7 @@ F 3 "" H 4500 6150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR202
+L power:GND #PWR202
 U 1 1 593CFF0C
 P 5050 6150
 AR Path="/59C75528/593CFF0C" Ref="#PWR202"  Part="1" 
@@ -211,7 +111,7 @@ $EndComp
 Text Label 5650 5700 0    60   ~ 0
 IFIN
 $Comp
-L C_Small C504
+L device:C_Small C504
 U 1 1 593D00F3
 P 4500 5400
 AR Path="/59C75528/593D00F3" Ref="C504"  Part="1" 
@@ -226,7 +126,7 @@ F 3 "" H 4500 5400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L R_Small R507
+L device:R_Small R507
 U 1 1 593D094B
 P 7750 8050
 AR Path="/59C75528/593D094B" Ref="R507"  Part="1" 
@@ -241,7 +141,7 @@ F 3 "" H 7750 8050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR214
+L power:GND #PWR214
 U 1 1 593D0B51
 P 7750 8300
 AR Path="/59C75528/593D0B51" Ref="#PWR214"  Part="1" 
@@ -256,7 +156,7 @@ F 3 "" H 7750 8300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C516
+L device:C_Small C516
 U 1 1 593D0CE0
 P 7200 7600
 AR Path="/59C75528/593D0CE0" Ref="C516"  Part="1" 
@@ -271,7 +171,7 @@ F 3 "" H 7200 7600 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C_Small C514
+L device:C_Small C514
 U 1 1 593D0DD3
 P 7000 7900
 AR Path="/59C75528/593D0DD3" Ref="C514"  Part="1" 
@@ -286,7 +186,7 @@ F 3 "" H 7000 7900 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C517
+L device:C_Small C517
 U 1 1 593D0FF4
 P 7400 7900
 AR Path="/59C75528/593D0FF4" Ref="C517"  Part="1" 
@@ -301,7 +201,7 @@ F 3 "" H 7400 7900 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR211
+L power:GND #PWR211
 U 1 1 593D114F
 P 7400 8100
 AR Path="/59C75528/593D114F" Ref="#PWR211"  Part="1" 
@@ -316,7 +216,7 @@ F 3 "" H 7400 8100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR208
+L power:GND #PWR208
 U 1 1 593D11D9
 P 7000 8100
 AR Path="/59C75528/593D11D9" Ref="#PWR208"  Part="1" 
@@ -331,7 +231,7 @@ F 3 "" H 7000 8100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR210
+L power:GND #PWR210
 U 1 1 593D12FE
 P 7400 7050
 AR Path="/59C75528/593D12FE" Ref="#PWR210"  Part="1" 
@@ -346,7 +246,7 @@ F 3 "" H 7400 7050 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR221
+L power:GND #PWR221
 U 1 1 593D138E
 P 8300 7850
 AR Path="/59C75528/593D138E" Ref="#PWR221"  Part="1" 
@@ -361,7 +261,7 @@ F 3 "" H 8300 7850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR225
+L power:GND #PWR225
 U 1 1 593D1443
 P 8500 7850
 AR Path="/59C75528/593D1443" Ref="#PWR225"  Part="1" 
@@ -376,7 +276,7 @@ F 3 "" H 8500 7850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR232
+L power:GND #PWR232
 U 1 1 593D1568
 P 8900 7850
 AR Path="/59C75528/593D1568" Ref="#PWR232"  Part="1" 
@@ -391,7 +291,7 @@ F 3 "" H 8900 7850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR236
+L power:GND #PWR236
 U 1 1 593D16D7
 P 9200 7850
 AR Path="/59C75528/593D16D7" Ref="#PWR236"  Part="1" 
@@ -406,7 +306,7 @@ F 3 "" H 9200 7850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR240
+L power:GND #PWR240
 U 1 1 593D176E
 P 9700 6550
 AR Path="/59C75528/593D176E" Ref="#PWR240"  Part="1" 
@@ -421,7 +321,7 @@ F 3 "" H 9700 6550 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR239
+L power:GND #PWR239
 U 1 1 593D1882
 P 9700 6350
 AR Path="/59C75528/593D1882" Ref="#PWR239"  Part="1" 
@@ -436,7 +336,7 @@ F 3 "" H 9700 6350 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR238
+L power:GND #PWR238
 U 1 1 593D192F
 P 9700 6150
 AR Path="/59C75528/593D192F" Ref="#PWR238"  Part="1" 
@@ -451,7 +351,7 @@ F 3 "" H 9700 6150 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR209
+L power:GND #PWR209
 U 1 1 593D1A1C
 P 7400 6350
 AR Path="/59C75528/593D1A1C" Ref="#PWR209"  Part="1" 
@@ -466,7 +366,7 @@ F 3 "" H 7400 6350 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR234
+L power:GND #PWR234
 U 1 1 593D1B36
 P 9100 5500
 AR Path="/59C75528/593D1B36" Ref="#PWR234"  Part="1" 
@@ -481,7 +381,7 @@ F 3 "" H 9100 5500 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR220
+L power:GND #PWR220
 U 1 1 593D1C50
 P 8300 5500
 AR Path="/59C75528/593D1C50" Ref="#PWR220"  Part="1" 
@@ -512,7 +412,7 @@ AD_FS
 Text HLabel 10600 6450 2    60   Input ~ 0
 AD_SYNCB
 $Comp
-L R_Small R511
+L device:R_Small R511
 U 1 1 593D2B97
 P 10250 6450
 AR Path="/59C75528/593D2B97" Ref="R511"  Part="1" 
@@ -529,7 +429,7 @@ $EndComp
 Text HLabel 12900 6950 2    60   Input ~ 0
 AD_CLKOUT
 $Comp
-L C_Small C527
+L device:C_Small C527
 U 1 1 593D4900
 P 8800 8400
 AR Path="/59C75528/593D4900" Ref="C527"  Part="1" 
@@ -544,7 +444,7 @@ F 3 "" H 8800 8400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR230
+L power:GND #PWR230
 U 1 1 59F5FA5A
 P 8800 8600
 AR Path="/59C75528/59F5FA5A" Ref="#PWR230"  Part="1" 
@@ -559,7 +459,7 @@ F 3 "" H 8800 8600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C521
+L device:C_Small C521
 U 1 1 593D4F4E
 P 8300 8600
 AR Path="/59C75528/593D4F4E" Ref="C521"  Part="1" 
@@ -575,7 +475,7 @@ F 3 "" H 8300 8600 50  0001 C CNN
 $EndComp
 NoConn ~ 8200 7750
 $Comp
-L C_Small C519
+L device:C_Small C519
 U 1 1 593D5272
 P 8000 8600
 AR Path="/59C75528/593D5272" Ref="C519"  Part="1" 
@@ -590,7 +490,7 @@ F 3 "" H 8000 8600 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR216
+L power:GND #PWR216
 U 1 1 593D5866
 P 8000 8800
 AR Path="/59C75528/593D5866" Ref="#PWR216"  Part="1" 
@@ -605,7 +505,7 @@ F 3 "" H 8000 8800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR223
+L power:GND #PWR223
 U 1 1 593D58C8
 P 8300 8800
 AR Path="/59C75528/593D58C8" Ref="#PWR223"  Part="1" 
@@ -622,7 +522,7 @@ $EndComp
 Text Label 8600 8050 3    60   ~ 0
 CLKP
 $Comp
-L L_Small L504
+L device:L_Small L504
 U 1 1 593D6410
 P 10600 7150
 AR Path="/59C75528/593D6410" Ref="L504"  Part="1" 
@@ -637,7 +537,7 @@ F 3 "" H 10600 7150 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C_Small C532
+L device:C_Small C532
 U 1 1 593D675C
 P 10100 7400
 AR Path="/59C75528/593D675C" Ref="C532"  Part="1" 
@@ -652,7 +552,7 @@ F 3 "" H 10100 7400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C533
+L device:C_Small C533
 U 1 1 593D6805
 P 10400 7400
 AR Path="/59C75528/593D6805" Ref="C533"  Part="1" 
@@ -667,7 +567,7 @@ F 3 "" H 10400 7400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR242
+L power:GND #PWR242
 U 1 1 593D6FA9
 P 10100 7550
 AR Path="/59C75528/593D6FA9" Ref="#PWR242"  Part="1" 
@@ -682,7 +582,7 @@ F 3 "" H 10100 7550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR243
+L power:GND #PWR243
 U 1 1 593D7014
 P 10400 7550
 AR Path="/59C75528/593D7014" Ref="#PWR243"  Part="1" 
@@ -704,7 +604,7 @@ Text Label 10300 5300 2    60   ~ 0
 CLKP
 NoConn ~ 9000 5650
 $Comp
-L C_Small C520
+L device:C_Small C520
 U 1 1 593D8868
 P 8200 5150
 AR Path="/59C75528/593D8868" Ref="C520"  Part="1" 
@@ -719,7 +619,7 @@ F 3 "" H 8200 5150 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR219
+L power:GND #PWR219
 U 1 1 593D8B29
 P 8200 4850
 AR Path="/59C75528/593D8B29" Ref="#PWR219"  Part="1" 
@@ -734,7 +634,7 @@ F 3 "" H 8200 4850 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C518
+L device:C_Small C518
 U 1 1 593D8C69
 P 7750 4900
 AR Path="/59C75528/593D8C69" Ref="C518"  Part="1" 
@@ -749,7 +649,7 @@ F 3 "" H 7750 4900 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR213
+L power:GND #PWR213
 U 1 1 593D8F35
 P 7750 5050
 AR Path="/59C75528/593D8F35" Ref="#PWR213"  Part="1" 
@@ -764,7 +664,7 @@ F 3 "" H 7750 5050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R506
+L device:R_Small R506
 U 1 1 593D919D
 P 6800 5450
 AR Path="/59C75528/593D919D" Ref="R506"  Part="1" 
@@ -779,7 +679,7 @@ F 3 "" H 6800 5450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L L_Small L502
+L device:L_Small L502
 U 1 1 593D96D4
 P 6650 5700
 AR Path="/59C75528/593D96D4" Ref="L502"  Part="1" 
@@ -794,7 +694,7 @@ F 3 "" H 6650 5700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L L_Small L503
+L device:L_Small L503
 U 1 1 593D9916
 P 6950 5700
 AR Path="/59C75528/593D9916" Ref="L503"  Part="1" 
@@ -809,7 +709,7 @@ F 3 "" H 6950 5700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C512
+L device:C_Small C512
 U 1 1 593DA6C4
 P 6800 5950
 AR Path="/59C75528/593DA6C4" Ref="C512"  Part="1" 
@@ -824,7 +724,7 @@ F 3 "" H 6800 5950 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C_Small C511
+L device:C_Small C511
 U 1 1 593DAACF
 P 6650 6300
 AR Path="/59C75528/593DAACF" Ref="C511"  Part="1" 
@@ -839,7 +739,7 @@ F 3 "" H 6650 6300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C513
+L device:C_Small C513
 U 1 1 593DAB6E
 P 6950 6300
 AR Path="/59C75528/593DAB6E" Ref="C513"  Part="1" 
@@ -854,7 +754,7 @@ F 3 "" H 6950 6300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR204
+L power:GND #PWR204
 U 1 1 593DC09E
 P 6150 7000
 AR Path="/59C75528/593DC09E" Ref="#PWR204"  Part="1" 
@@ -869,7 +769,7 @@ F 3 "" H 6150 7000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C515
+L device:C_Small C515
 U 1 1 593DC355
 P 7150 6750
 AR Path="/59C75528/593DC355" Ref="C515"  Part="1" 
@@ -884,7 +784,7 @@ F 3 "" H 7150 6750 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR207
+L power:GND #PWR207
 U 1 1 593DC62B
 P 6950 6850
 AR Path="/59C75528/593DC62B" Ref="#PWR207"  Part="1" 
@@ -899,7 +799,7 @@ F 3 "" H 6950 6850 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C510
+L device:C_Small C510
 U 1 1 593DC9A2
 P 6500 7150
 AR Path="/59C75528/593DC9A2" Ref="C510"  Part="1" 
@@ -914,7 +814,7 @@ F 3 "" H 6500 7150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR206
+L power:GND #PWR206
 U 1 1 593DCA4D
 P 6500 7350
 AR Path="/59C75528/593DCA4D" Ref="#PWR206"  Part="1" 
@@ -929,7 +829,7 @@ F 3 "" H 6500 7350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C522
+L device:C_Small C522
 U 1 1 593DDB04
 P 8400 5150
 AR Path="/59C75528/593DDB04" Ref="C522"  Part="1" 
@@ -944,7 +844,7 @@ F 3 "" H 8400 5150 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR224
+L power:GND #PWR224
 U 1 1 593DDFBC
 P 8400 4850
 AR Path="/59C75528/593DDFBC" Ref="#PWR224"  Part="1" 
@@ -959,7 +859,7 @@ F 3 "" H 8400 4850 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C524
+L device:C_Small C524
 U 1 1 593DE4CD
 P 8600 5150
 AR Path="/59C75528/593DE4CD" Ref="C524"  Part="1" 
@@ -974,7 +874,7 @@ F 3 "" H 8600 5150 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR226
+L power:GND #PWR226
 U 1 1 593DE6DC
 P 8600 4850
 AR Path="/59C75528/593DE6DC" Ref="#PWR226"  Part="1" 
@@ -989,7 +889,7 @@ F 3 "" H 8600 4850 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C523
+L device:C_Small C523
 U 1 1 593DEB41
 P 8500 4350
 AR Path="/59C75528/593DEB41" Ref="C523"  Part="1" 
@@ -1004,7 +904,7 @@ F 3 "" H 8500 4350 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C526
+L device:C_Small C526
 U 1 1 593DFF6B
 P 8700 5400
 AR Path="/59C75528/593DFF6B" Ref="C526"  Part="1" 
@@ -1019,7 +919,7 @@ F 3 "" H 8700 5400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C525
+L device:C_Small C525
 U 1 1 593E08B9
 P 8700 4350
 AR Path="/59C75528/593E08B9" Ref="C525"  Part="1" 
@@ -1034,7 +934,7 @@ F 3 "" H 8700 4350 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR227
+L power:GND #PWR227
 U 1 1 593E0ABF
 P 8700 4500
 AR Path="/59C75528/593E0ABF" Ref="#PWR227"  Part="1" 
@@ -1049,7 +949,7 @@ F 3 "" H 8700 4500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C528
+L device:C_Small C528
 U 1 1 593E0F93
 P 9050 4350
 AR Path="/59C75528/593E0F93" Ref="C528"  Part="1" 
@@ -1064,7 +964,7 @@ F 3 "" H 9050 4350 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR233
+L power:GND #PWR233
 U 1 1 593E104E
 P 9050 4500
 AR Path="/59C75528/593E104E" Ref="#PWR233"  Part="1" 
@@ -1081,7 +981,7 @@ $EndComp
 Text Notes 10100 4750 0    60   ~ 0
 FREF, square wave, 7.5V/us min
 $Comp
-L C_Small C535
+L device:C_Small C535
 U 1 1 593D7B28
 P 10550 5300
 AR Path="/59C75528/593D7B28" Ref="C535"  Part="1" 
@@ -1096,7 +996,7 @@ F 3 "" H 10550 5300 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R_Small R512
+L device:R_Small R512
 U 1 1 59451622
 P 10550 4950
 AR Path="/59C75528/59451622" Ref="R512"  Part="1" 
@@ -1111,7 +1011,7 @@ F 3 "" H 10550 4950 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L R_Small R513
+L device:R_Small R513
 U 1 1 59451953
 P 10800 5550
 AR Path="/59C75528/59451953" Ref="R513"  Part="1" 
@@ -1126,7 +1026,7 @@ F 3 "" H 10800 5550 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR245
+L power:GND #PWR245
 U 1 1 59451C3B
 P 10800 5750
 AR Path="/59C75528/59451C3B" Ref="#PWR245"  Part="1" 
@@ -1143,7 +1043,7 @@ $EndComp
 Text Notes 5000 5350 0    60   ~ 0
 IF in is 370 ohms || 1.4 pF
 $Comp
-L C_Small C508
+L device:C_Small C508
 U 1 1 593FD95B
 P 5300 5700
 AR Path="/59C75528/593FD95B" Ref="C508"  Part="1" 
@@ -1158,7 +1058,7 @@ F 3 "" H 5300 5700 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L GND #PWR228
+L power:GND #PWR228
 U 1 1 594AF1DE
 P 8700 5000
 AR Path="/59C75528/594AF1DE" Ref="#PWR228"  Part="1" 
@@ -1173,7 +1073,7 @@ F 3 "" H 8700 5000 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C531
+L device:C_Small C531
 U 1 1 59CDF318
 P 9750 8700
 AR Path="/59C75528/59CDF318" Ref="C531"  Part="1" 
@@ -1188,7 +1088,7 @@ F 3 "" H 9750 8700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C530
+L device:C_Small C530
 U 1 1 59CDF990
 P 9450 8700
 AR Path="/59C75528/59CDF990" Ref="C530"  Part="1" 
@@ -1203,7 +1103,7 @@ F 3 "" H 9450 8700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C529
+L device:C_Small C529
 U 1 1 59CDFA5E
 P 9150 8700
 AR Path="/59C75528/59CDFA5E" Ref="C529"  Part="1" 
@@ -1218,7 +1118,7 @@ F 3 "" H 9150 8700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR241
+L power:GND #PWR241
 U 1 1 59CDFB27
 P 9750 8850
 AR Path="/59C75528/59CDFB27" Ref="#PWR241"  Part="1" 
@@ -1233,7 +1133,7 @@ F 3 "" H 9750 8850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR237
+L power:GND #PWR237
 U 1 1 59CDFDF5
 P 9450 8900
 AR Path="/59C75528/59CDFDF5" Ref="#PWR237"  Part="1" 
@@ -1248,7 +1148,7 @@ F 3 "" H 9450 8900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR235
+L power:GND #PWR235
 U 1 1 59CDFEB1
 P 9150 8900
 AR Path="/59C75528/59CDFEB1" Ref="#PWR235"  Part="1" 
@@ -1555,7 +1455,7 @@ Wire Wire Line
 Wire Wire Line
 	9450 8800 9450 8900
 $Comp
-L RESISTOR.NETWORK-_4_ RN501
+L PocketBeagle:RESISTOR.NETWORK-_4_ RN501
 U 1 1 59CE18B8
 P 10850 8100
 AR Path="/59C75528/59CE18B8" Ref="RN501"  Part="1" 
@@ -1576,7 +1476,7 @@ Wire Wire Line
 Wire Wire Line
 	11150 7900 11050 7900
 $Comp
-L RESISTOR.NETWORK-_4_ RN502
+L PocketBeagle:RESISTOR.NETWORK-_4_ RN502
 U 1 1 59CE2C61
 P 12550 6850
 AR Path="/59C75528/59CE2C61" Ref="RN502"  Part="1" 
@@ -1599,7 +1499,7 @@ Wire Wire Line
 Wire Wire Line
 	12900 6950 12750 6950
 $Comp
-L C_Small C536
+L device:C_Small C536
 U 1 1 59CE457B
 P 11450 7350
 AR Path="/59C75528/59CE457B" Ref="C536"  Part="1" 
@@ -1614,7 +1514,7 @@ F 3 "" H 11450 7350 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C537
+L device:C_Small C537
 U 1 1 59CE4B6A
 P 11650 7350
 AR Path="/59C75528/59CE4B6A" Ref="C537"  Part="1" 
@@ -1629,7 +1529,7 @@ F 3 "" H 11650 7350 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C538
+L device:C_Small C538
 U 1 1 59CE4C2A
 P 11850 7350
 AR Path="/59C75528/59CE4C2A" Ref="C538"  Part="1" 
@@ -1644,7 +1544,7 @@ F 3 "" H 11850 7350 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L C_Small C539
+L device:C_Small C539
 U 1 1 59CE4DA2
 P 12050 7350
 AR Path="/59C75528/59CE4DA2" Ref="C539"  Part="1" 
@@ -1671,7 +1571,7 @@ Connection ~ 11850 6750
 Connection ~ 11650 6850
 Connection ~ 11450 6950
 $Comp
-L GND #PWR247
+L power:GND #PWR247
 U 1 1 59CE570D
 P 11450 7550
 AR Path="/59C75528/59CE570D" Ref="#PWR247"  Part="1" 
@@ -1686,7 +1586,7 @@ F 3 "" H 11450 7550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR248
+L power:GND #PWR248
 U 1 1 59CE57C6
 P 11650 7550
 AR Path="/59C75528/59CE57C6" Ref="#PWR248"  Part="1" 
@@ -1701,7 +1601,7 @@ F 3 "" H 11650 7550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR249
+L power:GND #PWR249
 U 1 1 59CE587F
 P 11850 7550
 AR Path="/59C75528/59CE587F" Ref="#PWR249"  Part="1" 
@@ -1716,7 +1616,7 @@ F 3 "" H 11850 7550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR250
+L power:GND #PWR250
 U 1 1 59CE5938
 P 12050 7550
 AR Path="/59C75528/59CE5938" Ref="#PWR250"  Part="1" 
@@ -1739,7 +1639,7 @@ Wire Wire Line
 Wire Wire Line
 	11450 7450 11450 7550
 $Comp
-L C_Small C534
+L device:C_Small C534
 U 1 1 59CE67DA
 P 10450 6200
 AR Path="/59C75528/59CE67DA" Ref="C534"  Part="1" 
@@ -1754,7 +1654,7 @@ F 3 "" H 10450 6200 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR244
+L power:GND #PWR244
 U 1 1 59CE68DB
 P 10450 6000
 AR Path="/59C75528/59CE68DB" Ref="#PWR244"  Part="1" 
@@ -1774,7 +1674,7 @@ Wire Wire Line
 	10450 6300 10450 6450
 Connection ~ 10450 6450
 $Comp
-L R_Small R510
+L device:R_Small R510
 U 1 1 59CC5039
 P 8500 3400
 AR Path="/59C75528/59CC5039" Ref="R510"  Part="1" 
@@ -1791,7 +1691,7 @@ $EndComp
 Wire Wire Line
 	8500 3050 8500 3300
 $Comp
-L R_Small R508
+L device:R_Small R508
 U 1 1 59CC53B8
 P 8250 3200
 AR Path="/59C75528/59CC53B8" Ref="R508"  Part="1" 
@@ -1806,7 +1706,7 @@ F 3 "" H 8250 3200 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L R_Small R509
+L device:R_Small R509
 U 1 1 59CC5493
 P 8250 3650
 AR Path="/59C75528/59CC5493" Ref="R509"  Part="1" 
@@ -1821,7 +1721,7 @@ F 3 "" H 8250 3650 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR218
+L power:GND #PWR218
 U 1 1 59CC5571
 P 8050 3650
 AR Path="/59C75528/59CC5571" Ref="#PWR218"  Part="1" 
@@ -1838,7 +1738,7 @@ $EndComp
 Wire Wire Line
 	8050 3650 8150 3650
 $Comp
-L GND #PWR217
+L power:GND #PWR217
 U 1 1 59CC575B
 P 8050 3200
 AR Path="/59C75528/59CC575B" Ref="#PWR217"  Part="1" 
@@ -1865,7 +1765,7 @@ TODO: attenuate IF LO for about -6 dBm input
 Text HLabel 4500 4950 1    60   Input ~ 0
 RF_IN
 $Comp
-L +3V3 #PWR315
+L power:+3V3 #PWR315
 U 1 1 5ACC5AD4
 P 8000 8400
 AR Path="/59CB0B92/5ACC5AD4" Ref="#PWR315"  Part="1" 
@@ -1880,7 +1780,7 @@ F 3 "" H 8000 8400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3 #PWR322
+L power:+3V3 #PWR322
 U 1 1 5ACC5BAE
 P 8300 8400
 AR Path="/59CB0B92/5ACC5BAE" Ref="#PWR322"  Part="1" 
@@ -1895,7 +1795,7 @@ F 3 "" H 8300 8400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3 #PWR346
+L power:+3V3 #PWR346
 U 1 1 5ACC5C4F
 P 10800 7150
 AR Path="/59CB0B92/5ACC5C4F" Ref="#PWR346"  Part="1" 
@@ -1910,7 +1810,7 @@ F 3 "" H 10800 7150 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L +3V3 #PWR329
+L power:+3V3 #PWR329
 U 1 1 5ACC5F7B
 P 8800 4050
 AR Path="/59CB0B92/5ACC5F7B" Ref="#PWR329"  Part="1" 
@@ -1925,7 +1825,7 @@ F 3 "" H 8800 4050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3 #PWR331
+L power:+3V3 #PWR331
 U 1 1 5ACC65AA
 P 8900 4050
 AR Path="/59CB0B92/5ACC65AA" Ref="#PWR331"  Part="1" 
@@ -1940,7 +1840,7 @@ F 3 "" H 8900 4050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3 #PWR312
+L power:+3V3 #PWR312
 U 1 1 5ACC6872
 P 7750 4650
 AR Path="/59CB0B92/5ACC6872" Ref="#PWR312"  Part="1" 
@@ -1955,7 +1855,7 @@ F 3 "" H 7750 4650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3 #PWR305
+L power:+3V3 #PWR305
 U 1 1 5ACC6B46
 P 6500 6950
 AR Path="/59CB0B92/5ACC6B46" Ref="#PWR305"  Part="1" 
@@ -1979,7 +1879,7 @@ Wire Wire Line
 	6150 6650 7500 6650
 Connection ~ 6150 6650
 $Comp
-L +3V3 #PWR203
+L power:+3V3 #PWR203
 U 1 1 5AEF69BC
 P 6150 6600
 AR Path="/59C75528/5AEF69BC" Ref="#PWR203"  Part="1" 
@@ -1994,7 +1894,7 @@ F 3 "" H 6150 6600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C509
+L device:C_Small C509
 U 1 1 593DBDE4
 P 6150 6800
 AR Path="/59C75528/593DBDE4" Ref="C509"  Part="1" 
