@@ -27,7 +27,7 @@ def create_sdrkits_ideal(skrf_f):
     return ideals
 
 def create_kirkby(skrf_f):
-    media = rf.media.DefinedGammaZ0(skrf_f, z0 = 50)
+    media = rf.media.Freespace(frequency = skrf_f, z0 = 50)
 
     def calc_c(f, c):
         # see http://literature.cdn.keysight.com/litweb/pdf/5989-4840EN.pdf 
@@ -45,17 +45,19 @@ def create_kirkby(skrf_f):
     # female short, delay 0 ps, 2.2 G Ohms/s
     # female thru, 80.084 ps, 3 G Ohms/s
 
-    pdb.set_trace()
+    #pdb.set_trace()
     kirkby_open = rf.Network(f=skrf_f.f, s=open_s, z0 = 50, f_unit = 'Hz')
-    kirkby_short = media.short()
-    kirkby_load = rf.Network(f=skrf_f.f, s=np.zeros(len(skrf_f)), z0=50, f_unit = 'Hz')
-    kirkby_thru = media.line(80.084, 'ps', z0 = 50) # todo: add offset loss, 3 G Ohms/s?
+    kirkby_short = rf.Network(f=skrf_f.f, s=-1 * np.ones(len(skrf_f)), z0=50, f_unit = 'Hz')
+    kirkby_load = rf.Network(f=skrf_f.f, s=1e-7 * np.ones(len(skrf_f)), z0=50, f_unit = 'Hz')
+    kirkby_thru = media.line(.024, 'm', z0 = 50) # todo: add offset loss, 3 G Ohms/s?
 
     kirkby_open = rf.two_port_reflect(kirkby_open)
     kirkby_short = rf.two_port_reflect(kirkby_short)
     kirkby_load = rf.two_port_reflect(kirkby_load)
-
-
+    kirkby_open.write_touchstone('kirkby_open.s2p')
+    kirkby_short.write_touchstone('kirkby_short.s2p')
+    kirkby_load.write_touchstone('kirkby_load.s2p')
+    kirkby_thru.write_touchstone('kirkby_thru.s2p')
     ideals = [kirkby_short, kirkby_open, kirkby_load, kirkby_thru]
     return ideals
     
@@ -112,11 +114,11 @@ def main():
         measured_cal = [cal_short, cal_open, cal_load, cal_thru]
         
         # create ideal cal networks, SLOT calibration
-        ideal_cal = create_kirkby(cal_thru.frequency)#create_sdrkits_ideal(cal_thru.frequency)
+        ideal_cal = create_kirkby(cal_thru.frequency)#
+        #ideal_cal = create_sdrkits_ideal(cal_thru.frequency)
+        #cal = rf.TwelveTerm(ideals = ideal_cal, measured = measured_cal, n_thrus = 1, isolation = cal_iso)
 
-        cal = rf.TwelveTerm(ideals = ideal_cal, measured = measured_cal, n_thrus = 1, isolation = cal_iso)
-
-        #cal = rf.EightTerm(ideals = ideal_cal, measured = measured_cal, switch_terms = (cal_sw_rev, cal_sw_fwd))
+        cal = rf.EightTerm(ideals = ideal_cal, measured = measured_cal, switch_terms = (cal_sw_rev, cal_sw_fwd))
 
     elif args.trl:
         cal_reflect = rf.Network('../cal_twoport/trl_reflect.s2p')
@@ -139,19 +141,19 @@ def main():
 
     cal.run()
     show()
-    subplot(2,1,1)
+#    subplot(2,1,1)
     plot_s2p_file(args.filename, cal, show = False)
-
-    subplot(2,1,2)
-    plot_s2p_file(args.filename, cal, show = False, smith = True)
-    
     grid(True)
     title(args.title)
+
+#    subplot(2,1,2)
+#    plot_s2p_file(args.filename, cal, show = False, smith = True)
+    
 
     show()
 
     plot_coefs(cal, cal_line.f)
-    pdb.set_trace()
+    #pdb.set_trace()
    
 
 def plot_coefs(cal, f):
