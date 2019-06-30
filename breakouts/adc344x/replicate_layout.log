@@ -1,0 +1,70 @@
+06-28 19:43:02 replicate_layout.action_replicate_layout 125:Replicate layout plugin version: 21 started
+06-28 19:43:02 replicate_layout.action_replicate_layout 157:Preparing replicator with T501 as a reference
+06-28 19:43:02 replicate_layout.replicatelayout 193:getting project hierarchy from schematics
+06-28 19:43:02 replicate_layout.replicatelayout 195:Project hierarchy looks like:
+{'5D118031': ['adc_frontendA', '/home/kleinjt/repos/vna_mm/breakouts/adc344x/adc_frontend_A.sch'], '5D11FB80': ['adc_frontend_B', '/home/kleinjt/repos/vna_mm/breakouts/adc344x/adc_frontend_A.sch'], '5D1217D4': ['adc_frontend_C', '/home/kleinjt/repos/vna_mm/breakouts/adc344x/adc_frontend_A.sch'], '5D1217E8': ['adc_frontend_D', '/home/kleinjt/repos/vna_mm/breakouts/adc344x/adc_frontend_A.sch']}
+06-28 19:43:02 replicate_layout.replicatelayout 203:getting a list of all footprints on board
+06-28 19:43:02 replicate_layout.action_replicate_layout 183:Pivot footprint is 'T501'
+Located on:['adc_frontend_D']
+With filenames:['adc_frontend_A.sch']
+With sheet_id:['adc_frontend_D']
+06-28 19:43:02 replicate_layout.action_replicate_layout 187:Corresponding footprints are 
+[('T501', ['adc_frontend_D']), ('T201', ['adc_frontendA']), ('T301', ['adc_frontend_B']), ('T401', ['adc_frontend_C'])]
+06-28 19:43:02 replicate_layout.action_replicate_layout 200:Showing dialog
+06-28 19:43:02 replicate_layout.replicatelayout 230:construcing a list of sheets suitable for replication on level:'adc_frontend_D', file:'adc_frontend_A.sch'
+06-28 19:43:02 replicate_layout.replicatelayout 237:Sheet ids up to the level:['adc_frontend_D']
+06-28 19:43:02 replicate_layout.replicatelayout 241:Footprints on the sheets:
+['T501', 'T201', 'T301', 'T401']
+06-28 19:43:02 replicate_layout.replicatelayout 244:Footprints raw sheet ids:
+['/5D1217E8/5DC5B696', '/5D118031/5DC5B696', '/5D11FB80/5DC5B696', '/5D1217D4/5DC5B696']
+06-28 19:43:02 replicate_layout.replicatelayout 260:All sheets to replicate:
+[['adc_frontend_D'], ['adc_frontendA'], ['adc_frontend_B'], ['adc_frontend_C']]
+06-28 19:43:02 replicate_layout.replicatelayout 265:All sheets to replicate sorted:
+[['adc_frontendA'], ['adc_frontend_B'], ['adc_frontend_C'], ['adc_frontend_D']]
+06-28 19:43:02 replicate_layout.replicatelayout 271:All sheets to replicate sorted and without pivot_sheet:
+[['adc_frontendA'], ['adc_frontend_B'], ['adc_frontend_C']]
+06-28 19:43:04 replicate_layout.replicatelayout 230:construcing a list of sheets suitable for replication on level:'adc_frontend_D', file:'adc_frontend_A.sch'
+06-28 19:43:04 replicate_layout.replicatelayout 237:Sheet ids up to the level:['adc_frontend_D']
+06-28 19:43:04 replicate_layout.replicatelayout 241:Footprints on the sheets:
+['T501', 'T201', 'T301', 'T401']
+06-28 19:43:04 replicate_layout.replicatelayout 244:Footprints raw sheet ids:
+['/5D1217E8/5DC5B696', '/5D118031/5DC5B696', '/5D11FB80/5DC5B696', '/5D1217D4/5DC5B696']
+06-28 19:43:04 replicate_layout.replicatelayout 260:All sheets to replicate:
+[['adc_frontend_D'], ['adc_frontendA'], ['adc_frontend_B'], ['adc_frontend_C']]
+06-28 19:43:04 replicate_layout.replicatelayout 265:All sheets to replicate sorted:
+[['adc_frontendA'], ['adc_frontend_B'], ['adc_frontend_C'], ['adc_frontend_D']]
+06-28 19:43:04 replicate_layout.replicatelayout 271:All sheets to replicate sorted and without pivot_sheet:
+[['adc_frontendA'], ['adc_frontend_B'], ['adc_frontend_C']]
+06-28 19:43:04 replicate_layout.action_replicate_layout 229:Replicating layout
+06-28 19:43:04 replicate_layout.replicatelayout 993:Starting replication of sheets: [['adc_frontendA'], ['adc_frontend_B'], ['adc_frontend_C']]
+on level: ['adc_frontend_D']
+with tracks=True, zone=True, text=True, containing=True, remov=False
+06-28 19:43:04 replicate_layout.replicatelayout 526:Getting the list of pivot footprints
+06-28 19:43:04 replicate_layout.replicatelayout 529:Getting the list of all the remaining footprints
+06-28 19:43:04 replicate_layout.replicatelayout 532:Getting nets local to pivot footprints
+06-28 19:43:04 replicate_layout.replicatelayout 535:Getting pivot bounding box
+06-28 19:43:04 replicate_layout.replicatelayout 538:Getting pivot tracks
+06-28 19:43:04 replicate_layout.replicatelayout 541:Getting pivot zones
+06-28 19:43:04 replicate_layout.replicatelayout 544:Getting pivot text items
+06-28 19:43:04 replicate_layout.replicatelayout 547:Getting pivot text items
+06-28 19:43:04 replicate_layout.replicatelayout 551:Replicating footprints
+06-28 19:43:04 replicate_layout.replicatelayout 553:Replicating footprints on sheet ['adc_frontendA']
+06-28 19:43:04 replicate_layout.replicatelayout 553:Replicating footprints on sheet ['adc_frontend_B']
+06-28 19:43:04 replicate_layout.replicatelayout 553:Replicating footprints on sheet ['adc_frontend_C']
+06-28 19:43:04 replicate_layout.replicatelayout 661:Replicating tracks
+06-28 19:43:04 replicate_layout.replicatelayout 663:Replicating tracks on sheet ['adc_frontendA']
+06-28 19:43:04 replicate_layout.replicatelayout 663:Replicating tracks on sheet ['adc_frontend_B']
+06-28 19:43:04 replicate_layout.replicatelayout 663:Replicating tracks on sheet ['adc_frontend_C']
+06-28 19:43:04 replicate_layout.replicatelayout 759:Replicating zones
+06-28 19:43:04 replicate_layout.replicatelayout 762:Replicating zones on sheet ['adc_frontendA']
+06-28 19:43:04 replicate_layout.replicatelayout 762:Replicating zones on sheet ['adc_frontend_B']
+06-28 19:43:04 replicate_layout.replicatelayout 762:Replicating zones on sheet ['adc_frontend_C']
+06-28 19:43:04 replicate_layout.replicatelayout 859:Replicating text
+06-28 19:43:04 replicate_layout.replicatelayout 862:Replicating text on sheet ['adc_frontendA']
+06-28 19:43:04 replicate_layout.replicatelayout 862:Replicating text on sheet ['adc_frontend_B']
+06-28 19:43:04 replicate_layout.replicatelayout 862:Replicating text on sheet ['adc_frontend_C']
+06-28 19:43:04 replicate_layout.replicatelayout 880:Replicating drawings
+06-28 19:43:04 replicate_layout.replicatelayout 882:Replicating drawings on sheet ['adc_frontendA']
+06-28 19:43:04 replicate_layout.replicatelayout 882:Replicating drawings on sheet ['adc_frontend_B']
+06-28 19:43:04 replicate_layout.replicatelayout 882:Replicating drawings on sheet ['adc_frontend_C']
+06-28 19:43:04 replicate_layout.action_replicate_layout 239:Replication complete

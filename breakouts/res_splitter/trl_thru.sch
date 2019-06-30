@@ -1,0 +1,123 @@
+EESchema Schematic File Version 4
+LIBS:trl_thru-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Connector:Conn_Coaxial J102
+U 1 1 5D055FC0
+P 3700 3700
+F 0 "J102" H 3800 3675 50  0000 L CNN
+F 1 "Conn_Coaxial" H 3800 3584 50  0000 L CNN
+F 2 "vna_mm:sw_edge_oshpark_4layer" H 3700 3700 50  0001 C CNN
+F 3 " ~" H 3700 3700 50  0001 C CNN
+	1    3700 3700
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:Conn_Coaxial J101
+U 1 1 5D056133
+P 3700 1550
+F 0 "J101" H 3628 1788 50  0000 C CNN
+F 1 "Conn_Coaxial" H 3628 1697 50  0000 C CNN
+F 2 "vna_mm:sw_edge_oshpark_4layer" H 3700 1550 50  0001 C CNN
+F 3 " ~" H 3700 1550 50  0001 C CNN
+	1    3700 1550
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5D0566EA
+P 3450 1550
+F 0 "#PWR0101" H 3450 1300 50  0001 C CNN
+F 1 "GND" H 3455 1377 50  0000 C CNN
+F 2 "" H 3450 1550 50  0001 C CNN
+F 3 "" H 3450 1550 50  0001 C CNN
+	1    3450 1550
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 5D056B57
+P 3450 3700
+F 0 "#PWR0102" H 3450 3450 50  0001 C CNN
+F 1 "GND" H 3455 3527 50  0000 C CNN
+F 2 "" H 3450 3700 50  0001 C CNN
+F 3 "" H 3450 3700 50  0001 C CNN
+	1    3450 3700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3500 1550 3450 1550
+Wire Wire Line
+	3500 3700 3450 3700
+$Comp
+L Connector:Conn_Coaxial J103
+U 1 1 5D05DE2C
+P 5400 2650
+F 0 "J103" H 5500 2625 50  0000 L CNN
+F 1 "Conn_Coaxial" H 5500 2534 50  0000 L CNN
+F 2 "vna_mm:sw_edge_oshpark_4layer" H 5400 2650 50  0001 C CNN
+F 3 " ~" H 5400 2650 50  0001 C CNN
+	1    5400 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 5D05DE32
+P 5400 2900
+F 0 "#PWR0103" H 5400 2650 50  0001 C CNN
+F 1 "GND" H 5405 2727 50  0000 C CNN
+F 2 "" H 5400 2900 50  0001 C CNN
+F 3 "" H 5400 2900 50  0001 C CNN
+	1    5400 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5400 2850 5400 2900
+$Comp
+L vna_mm:RESISTIVE_SPLITTER RN101
+U 1 1 5D05EC63
+P 4450 2650
+F 0 "RN101" V 4429 2878 50  0000 L CNN
+F 1 "RESISTIVE_SPLITTER" V 4520 2878 50  0000 L CNN
+F 2 "vna_mm:PDR06380" H 4300 2650 50  0001 C CNN
+F 3 "" H 4300 2650 50  0001 C CNN
+	1    4450 2650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3700 1750 3700 2550
+Wire Wire Line
+	3700 2550 4100 2550
+Wire Wire Line
+	4100 2750 3700 2750
+Wire Wire Line
+	3700 2750 3700 3500
+Wire Wire Line
+	4750 2650 5200 2650
+$Comp
+L power:GND #PWR0104
+U 1 1 5D05FD63
+P 4450 2350
+F 0 "#PWR0104" H 4450 2100 50  0001 C CNN
+F 1 "GND" H 4455 2177 50  0000 C CNN
+F 2 "" H 4450 2350 50  0001 C CNN
+F 3 "" H 4450 2350 50  0001 C CNN
+	1    4450 2350
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4450 2400 4450 2350
+$EndSCHEMATC

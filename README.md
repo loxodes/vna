@@ -22,4 +22,4 @@ See the `software` directory for scraps of software written for testing VNA modu
 Unless otherwise noted, all work is under a MIT license.
 
 ## Contact
-Feel free to contact me at arcticmicrowave@gmail.com or loxodes in #rhlug on irc.freenode.net
+Feel free to contact me at arcticmicrowave@gmail.com or loxodes on irc.freenode.net
