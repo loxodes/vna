@@ -1,4 +1,4 @@
-(module SF2921-61345 (layer F.Cu) (tedit 5BD14B21)
+(module SF2921-61345 (layer F.Cu) (tedit 5BD14DFA)
   (fp_text reference REF** (at -2.25 3.4) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.15)))
   )
@@ -13,6 +13,6 @@
     (clearance 0.95))
   (pad 2 thru_hole circle (at 3.58 0) (size 3 3) (drill 1.7) (layers *.Cu *.Mask))
   (pad 2 thru_hole circle (at -3.58 0) (size 3 3) (drill 1.7) (layers *.Cu *.Mask))
-  (pad 1 smd rect (at 0 -1.3) (size 0.34 2.6) (layers F.Cu)
+  (pad 1 smd rect (at 0 -1.3) (size 0.38 2.6) (layers F.Cu)
     (clearance 0.5))
 )

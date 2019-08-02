@@ -223,7 +223,7 @@ class eth_vna:
             if rfport == PORT1:
                 print('b1/a1 (mean)    : {}'.format(np.mean(b1/a1)))
                 print('b1/a1 (goertzel): {}'.format(b1_g/a1_g))
-
+                print('a1: {}, b1: {}, b2: {}'.format(abs(a1_g), abs(b1_g), abs(b2_g)))
                 s_return_avg += np.mean(b1_g/a1_g)
                 s_thru_avg += np.mean(b2_g/a1_g)
                 sw_term_avg += np.mean(a2_g/b2_g)
@@ -233,7 +233,7 @@ class eth_vna:
             else:
                 print('b2/a2 (mean)    : {}'.format(np.mean(b2/a2)))
                 print('b2/a2 (goertzel): {}'.format((b2_g/a2_g)))
-
+                print('a2: {}, b2: {}, b1: {}'.format(abs(a2_g), abs(b2_g), abs(b1_g)))
                 s_return_avg += np.mean(b2_g/a2_g)
                 s_thru_avg += np.mean(b1_g/a2_g)
                 sw_term_avg += np.mean(a1_g/b1_g)
@@ -290,22 +290,21 @@ class eth_vna:
             print('measuring s21, s22')
             s22, s12, rev_sw = self._grab_s_raw(navg = navg, rfport = PORT2, rawplot = rawplot)
 
-            if align_lo:
-                self._update_rf_lo_offset_ratio(lo_freq, doubler)
-
             print('s11: {} , mag {}'.format(s11, abs(s11)))
+            print('s22: {} , mag {}'.format(s22, abs(s22)))
+            print('s21: {} , mag {}'.format(s21, abs(s21)))
+            print('s12: {} , mag {}'.format(s12, abs(s12)))
             
             sweep_s11[fidx] = s11
-            sweep_s21[fidx] = s21
             sweep_s12[fidx] = s12
+            sweep_s21[fidx] = s21
             sweep_s22[fidx] = s22
             sweep_fwd_sw[fidx] = fwd_sw
             sweep_rev_sw[fidx] = rev_sw
-        
         s11 = rf.Network(f=sweep_freqs/1e9, s=sweep_s11, z0=50)
+        s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
         s21 = rf.Network(f=sweep_freqs/1e9, s=sweep_s21, z0=50)
         s22 = rf.Network(f=sweep_freqs/1e9, s=sweep_s22, z0=50)
-        s12 = rf.Network(f=sweep_freqs/1e9, s=sweep_s12, z0=50)
 
         sw_fwd = rf.Network(f=sweep_freqs/1e9, s=sweep_fwd_sw, z0=50)
         sw_rev = rf.Network(f=sweep_freqs/1e9, s=sweep_rev_sw, z0=50)
@@ -364,19 +363,19 @@ class eth_vna:
         else:
 
             raw_input("connect short to port 1, then press enter to continue")
-            cal_short_1 = self.sweep_oneport(fstart, fstop, points, navg, 0)
+            cal_short_1 = self._sweep_oneport(fstart, fstop, points, navg, 0)
             raw_input("connect short to port 2, then press enter to continue")
-            cal_short_2 = self.sweep_oneport(fstart, fstop, points, navg, 1)
+            cal_short_2 = self._sweep_oneport(fstart, fstop, points, navg, 1)
 
             raw_input("connect load to port 1, then press enter to continue")
-            cal_load_1 = self.sweep_oneport(fstart, fstop, points, navg, 0)
+            cal_load_1 = self._sweep_oneport(fstart, fstop, points, navg, 0)
             raw_input("connect load to port 2, then press enter to continue")
-            cal_load_2 = self.sweep_oneport(fstart, fstop, points, navg, 1)
+            cal_load_2 = self._sweep_oneport(fstart, fstop, points, navg, 1)
 
             raw_input("connect open to port 1, then press enter to continue")
-            cal_open_1 = self.sweep_oneport(fstart, fstop, points, navg, 0)
+            cal_open_1 = self._sweep_oneport(fstart, fstop, points, navg, 0)
             raw_input("connect open to port 2, then press enter to continue")
-            cal_open_2 = self.sweep_oneport(fstart, fstop, points, navg, 1)
+            cal_open_2 = self._sweep_oneport(fstart, fstop, points, navg, 1)
 
             # TODO: untangle units on frequency foor two port reflect, does not preserve GHz
             # todo: add additional thru for type N, then use chopinhalf to deembed n to sma adapters?
@@ -472,10 +471,10 @@ if __name__ == '__main__':
     parser.add_argument('--swterms', action='store_true', help='save switch terns')
     parser.add_argument('--rawplot', action='store_true', help='plot raw a/b samples')
     parser.add_argument('--simultaneous', action='store_true', help='collect SOLT cal measurements from both ports simultaneously')
-    parser.add_argument('--points', type=int, default=221, help='number of points in sweep')
+    parser.add_argument('--points', type=int, default=261, help='number of points in sweep')
     parser.add_argument('--navg', type=int, default=1, help='number averages')
     parser.add_argument('--fstart', type=float, default=2e9, help='sweep start frequency (Hz)')
-    parser.add_argument('--fstop', type=float, default=14e9, help='sweep stop frequency (Hz)')
+    parser.add_argument('--fstop', type=float, default=15e9, help='sweep stop frequency (Hz)')
     args = parser.parse_args()
 
 
