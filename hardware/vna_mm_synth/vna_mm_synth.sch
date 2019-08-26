@@ -1,0 +1,433 @@
+EESchema Schematic File Version 4
+LIBS:vna_mm_synth-cache
+EELAYER 30 0
+EELAYER END
+$Descr B 17000 11000
+encoding utf-8
+Sheet 1 11
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Sheet
+S 600  2950 1950 3350
+U 5AB8DC0D
+F0 "conn_power" 60
+F1 "conn_power.sch" 60
+F2 "SYNTH_REF_P" I R 2550 3300 60 
+F3 "SYNTH_REF_N" I R 2550 3400 60 
+F4 "SDI" O R 2550 4250 60 
+F5 "SCK" O R 2550 4350 60 
+F6 "LMX_CS" O R 2550 4450 60 
+F7 "DAC_CS" O R 2550 5500 60 
+F8 "LMX_CE" O R 2550 4550 60 
+F9 "LMX_LCK" I R 2550 4150 60 
+$EndSheet
+$Sheet
+S 14850 2700 1000 4700
+U 5AB93A34
+F0 "conn_front" 60
+F1 "conn_front.sch" 60
+F2 "SYNTH_OUT" I L 14850 3150 50 
+F3 "SYNC" I L 14850 4150 50 
+$EndSheet
+Wire Wire Line
+	2550 3300 3250 3300
+Wire Wire Line
+	2550 3400 3250 3400
+Wire Wire Line
+	2550 4150 3250 4150
+Wire Wire Line
+	2550 4250 3250 4250
+Wire Wire Line
+	2550 4350 3250 4350
+Wire Wire Line
+	2550 4450 3250 4450
+Wire Wire Line
+	2550 4550 3250 4550
+Text Label 2800 4350 0    60   ~ 0
+SPI_SCK
+Text Label 2800 4250 0    60   ~ 0
+SPI_SDI
+Wire Wire Line
+	2550 5500 2800 5500
+Text Label 2800 5500 0    60   ~ 0
+DAC_CS
+$Sheet
+S 3250 2900 2200 2050
+U 5AB89181
+F0 "synth" 60
+F1 "synth.sch" 60
+F2 "SYNTH_A" O R 5450 3200 60 
+F3 "SYNTH_B" O R 5450 3400 60 
+F4 "SYNTH_C" O R 5450 3600 60 
+F5 "SYNTH_D" O R 5450 3800 60 
+F6 "SYNTH_REF_P" I L 3250 3300 60 
+F7 "LMX_CSB" I L 3250 4450 60 
+F8 "LMX_CE" I L 3250 4550 60 
+F9 "SYNTH_REF_N" I L 3250 3400 60 
+F10 "LMX_MUXout" O L 3250 4150 60 
+F11 "LMX_SDI" I L 3250 4250 60 
+F12 "LMX_SCK" I L 3250 4350 60 
+$EndSheet
+$Sheet
+S 7850 2700 1800 1050
+U 5D2856B6
+F0 "lowband" 50
+F1 "lowband.sch" 50
+F2 "LOWBAND_VAMP" I L 7850 2850 50 
+F3 "LOWBAND_RFOUT" O R 9650 3150 50 
+F4 "LOWBAND_RFIN_P" I L 7850 3200 50 
+F5 "LOWBAND_RFIN_N" I L 7850 3400 50 
+$EndSheet
+$Sheet
+S 7850 4150 1800 1000
+U 5D28573D
+F0 "midband" 50
+F1 "midband.sch" 50
+F2 "MIDBAND_RFOUT" O R 9650 4650 50 
+F3 "MIDBAND_RFIN" I L 7850 4650 50 
+F4 "MIDBAND_VAMP" I L 7850 4250 50 
+$EndSheet
+$Sheet
+S 7850 5550 1800 1200
+U 5D2857A9
+F0 "highband" 50
+F1 "highband.sch" 50
+F2 "HIGHBAND_VX2" I L 7850 5700 50 
+F3 "HIGHBAND_RFOUT" O R 9650 6150 50 
+F4 "HIGHBAND_RFIN" I L 7850 6150 50 
+$EndSheet
+Text Notes 3200 2450 0    118  ~ 0
+goals:\n400 MHz to 26.5 GHz (29 GHz)\n-15 dBc 2nd order harmonics\n-25 dBc 3rd order harmonics\n-15 to 0 dBm output power +/- 1 dB at room\nsettling time >1 ms to 90% amplitude\nphase sync with external reference\nBOM >$1000/each\nenclosure\nice40 fpga controlled?
+Wire Wire Line
+	7850 6150 6200 6150
+Wire Wire Line
+	6200 6150 6200 3800
+Wire Wire Line
+	5450 3800 6200 3800
+Wire Wire Line
+	6600 3600 6600 4650
+Wire Wire Line
+	6600 4650 7850 4650
+Wire Wire Line
+	5450 3600 6600 3600
+Wire Wire Line
+	5450 3400 7850 3400
+Wire Wire Line
+	5450 3200 7850 3200
+Wire Wire Line
+	9650 3150 10400 3150
+Wire Wire Line
+	9650 4650 10400 4650
+Wire Wire Line
+	9650 6150 10400 6150
+$Sheet
+S 12650 2700 1450 4550
+U 5D3801E2
+F0 "level_control" 50
+F1 "level_control.sch" 50
+F2 "LEVEL_RFIN" I L 12650 3150 50 
+F3 "LEVEL_RFOUT" O R 14100 3150 50 
+F4 "VdetA" O L 12650 6050 50 
+F5 "VdetB" O L 12650 6150 50 
+F6 "VcA" O L 12650 6400 50 
+F7 "VcB" O L 12650 6500 50 
+F8 "SERIN" I L 12650 6800 50 
+F9 "CLK" I L 12650 6900 50 
+F10 "LE" I L 12650 7000 50 
+F11 "SEROUT" O L 12650 7100 50 
+$EndSheet
+Text Notes 10900 2300 0    118  ~ 0
+$200
+Text Notes 12950 2300 0    118  ~ 0
+$200
+Text Notes 14900 2250 0    118  ~ 0
+$100
+Text Notes 8400 2450 0    118  ~ 0
+$100
+Text Notes 3850 2750 0    118  ~ 0
+$100
+Text Notes 1250 2750 0    118  ~ 0
+$100
+Text Notes 12050 1900 0    50   ~ 10
+TODO: CHECK DC BLOCK
+Wire Wire Line
+	14100 3150 14850 3150
+Wire Wire Line
+	14850 4150 14700 4150
+Text Label 14700 4150 2    50   ~ 0
+SYNC
+Wire Wire Line
+	5450 8300 5550 8300
+Wire Wire Line
+	5450 8400 5550 8400
+Wire Wire Line
+	5450 8500 5550 8500
+Text Label 5550 8300 0    50   ~ 0
+LOWBAND_VAMP
+Text Label 5550 8400 0    50   ~ 0
+MIDIBAND_VAMP
+Text Label 5550 8500 0    50   ~ 0
+HIGHBAND_VX2
+Text Label 9100 8300 0    50   ~ 0
+AMP_VC_A
+Text Label 9100 9350 0    50   ~ 0
+AMP_VC_B
+Text Label 7750 2850 2    50   ~ 0
+LOWBAND_VAMP
+Wire Wire Line
+	7750 2850 7850 2850
+Text Label 7750 4250 2    50   ~ 0
+MIDIBAND_VAMP
+Wire Wire Line
+	7750 4250 7850 4250
+Text Label 7750 5700 2    50   ~ 0
+HIGHBAND_VX2
+Wire Wire Line
+	7750 5700 7850 5700
+Text Label 12550 6400 2    50   ~ 0
+AMP_VC_A
+Wire Wire Line
+	12550 6400 12650 6400
+Text Label 12550 6500 2    50   ~ 0
+AMP_VC_B
+Wire Wire Line
+	12550 6500 12650 6500
+Wire Wire Line
+	12650 6050 12550 6050
+Wire Wire Line
+	12650 6150 12550 6150
+Text Label 12550 6050 2    50   ~ 0
+VDET_A
+Text Label 12550 6150 2    50   ~ 0
+VDET_B
+Wire Wire Line
+	12650 6800 12550 6800
+Text Label 12550 6800 2    50   ~ 0
+ATT_SERIN
+Text Label 12550 6900 2    50   ~ 0
+ATT_CLK
+Text Label 12550 7000 2    50   ~ 0
+ATT_LE
+Text Label 12550 7100 2    50   ~ 0
+ATT_SEROUT
+Wire Wire Line
+	11900 3150 12650 3150
+Wire Wire Line
+	12550 6900 12650 6900
+Wire Wire Line
+	12550 7000 12650 7000
+Wire Wire Line
+	12550 7100 12650 7100
+Text Label 3600 6400 2    50   ~ 0
+ATT_SERIN
+Text Label 3600 6500 2    50   ~ 0
+ATT_CLK
+Text Label 3600 6600 2    50   ~ 0
+ATT_LE
+Text Label 3600 6700 2    50   ~ 0
+ATT_SEROUT
+Wire Wire Line
+	10400 6700 10300 6700
+Wire Wire Line
+	10400 6800 10300 6800
+Wire Wire Line
+	10300 7000 10400 7000
+Wire Wire Line
+	10400 7100 10300 7100
+Wire Wire Line
+	10400 7300 10300 7300
+Text Label 10300 6700 2    50   ~ 0
+SW1_V1
+Text Label 10300 6800 2    50   ~ 0
+SW1_V2
+Text Label 10300 7000 2    50   ~ 0
+SW2_V1
+$Sheet
+S 10400 2700 1500 5400
+U 5D285892
+F0 "filter_bank" 50
+F1 "bandselect_att.sch" 50
+F2 "SW_RFOUT" O R 11900 3150 50 
+F3 "SW_HIGH_RFIN" I L 10400 6150 50 
+F4 "SW_LOW_RFIN" I L 10400 3150 50 
+F5 "SW_MID_RFIN" I L 10400 4650 50 
+F6 "SW3_HIGH_SEL" I L 10400 7300 50 
+F7 "X2_FEED_RFOUT" O R 11900 7850 50 
+F8 "SW2_V1" I L 10400 7000 50 
+F9 "SW2_V2" I L 10400 7100 50 
+F10 "SW1_V1" I L 10400 6700 50 
+F11 "SW1_V2" I L 10400 6800 50 
+$EndSheet
+Text Label 10300 7100 2    50   ~ 0
+SW2_V2
+Text Label 10300 7300 2    50   ~ 0
+SW3_HIGH_SEL
+Text Label 3600 6800 2    50   ~ 0
+SW1_V1
+Text Label 3600 6900 2    50   ~ 0
+SW1_V2
+Text Label 3600 7000 2    50   ~ 0
+SW2_V1
+Text Label 3600 7100 2    50   ~ 0
+SW2_V2
+Text Label 3600 7200 2    50   ~ 0
+SW3_HIGH_SEL
+$Sheet
+S 7100 7900 1750 1800
+U 5D8E086E
+F0 "amp_vc_controlA" 50
+F1 "amp_vc_control.sch" 50
+F2 "AMP_VC_OUT_A" O R 8850 8300 50 
+F3 "AMP_~SYNC" I L 7100 8300 50 
+F4 "AMP_~CLR" I L 7100 8400 50 
+F5 "AMP_~LDAC" I L 7100 8500 50 
+F6 "AMP_SCLK" I L 7100 8600 50 
+F7 "AMP_DIN" I L 7100 8700 50 
+F8 "AMP_VC_OUT_B" O R 8850 9350 50 
+$EndSheet
+Wire Wire Line
+	8850 8300 9100 8300
+Wire Wire Line
+	8850 9350 9100 9350
+$Sheet
+S 3250 7900 2200 1800
+U 5D4AD94E
+F0 "power" 50
+F1 "amp_bias.sch" 50
+F2 "LOWBAND_VAMP" O R 5450 8300 50 
+F3 "MIDBAND_VAMP" O R 5450 8400 50 
+F4 "HIGHBAND_VX2" O R 5450 8500 50 
+F5 "PGOOD_3V8" O L 3250 8100 50 
+F6 "PGOOD_5V5" O L 3250 8200 50 
+F7 "3V8_EN" I L 3250 8350 50 
+F8 "5V5_EN" I L 3250 8450 50 
+F9 "M5V_EN" I L 3250 8750 50 
+F10 "M3_5V_EN" I L 3250 8850 50 
+F11 "M2_5V_EN" I L 3250 8950 50 
+F12 "LOWBAND_EN" I L 3250 9200 50 
+F13 "MIDBAND_EN" I L 3250 9300 50 
+F14 "HIGHBAND_EN" I L 3250 9400 50 
+F15 "VSS_EN" I L 3250 8550 50 
+F16 "3V3_EN" I L 3250 8650 50 
+F17 "5V_EN" I L 3250 9050 50 
+$EndSheet
+Wire Wire Line
+	7100 8300 6950 8300
+Wire Wire Line
+	7100 8400 6950 8400
+Text Label 6950 8300 2    50   ~ 0
+AMP_~SYNC
+Text Label 6950 8400 2    50   ~ 0
+AMP_~CLR
+Text Label 6950 8500 2    50   ~ 0
+AMP_~LDAC
+Text Label 6950 8600 2    50   ~ 0
+AMP_SCLK
+Text Label 6950 8700 2    50   ~ 0
+AMP_DIN
+Wire Wire Line
+	6950 8500 7100 8500
+Wire Wire Line
+	6950 8600 7100 8600
+Wire Wire Line
+	6950 8700 7100 8700
+Wire Wire Line
+	3250 8100 3150 8100
+Text Label 3150 8100 2    50   ~ 0
+PGOOD_3V8
+Text Label 3150 8200 2    50   ~ 0
+PGOOD_5V5
+Wire Wire Line
+	3150 8200 3250 8200
+Text Label 3150 8350 2    50   ~ 0
+3V8_EN
+Text Label 3150 8450 2    50   ~ 0
+5V5_EN
+Wire Wire Line
+	3150 8350 3250 8350
+Wire Wire Line
+	3150 8450 3250 8450
+Text Label 3150 8550 2    50   ~ 0
+VSS_EN
+Wire Wire Line
+	3150 8550 3250 8550
+Text Label 3150 8650 2    50   ~ 0
+3V3_EN
+Wire Wire Line
+	3150 8650 3250 8650
+Text Label 3150 8750 2    50   ~ 0
+M5V_EN
+Wire Wire Line
+	3150 8750 3250 8750
+Text Label 3150 8850 2    50   ~ 0
+M3_5V_EN
+Wire Wire Line
+	3150 8850 3250 8850
+Text Label 3150 8950 2    50   ~ 0
+M2_5V_EN
+Wire Wire Line
+	3150 8950 3250 8950
+Text Label 3150 9050 2    50   ~ 0
+5V_EN
+Wire Wire Line
+	3150 9050 3250 9050
+Text Label 3150 9200 2    50   ~ 0
+LOWBAND_EN
+Wire Wire Line
+	3150 9200 3250 9200
+Wire Wire Line
+	3150 9300 3250 9300
+Wire Wire Line
+	3150 9400 3250 9400
+Text Label 3150 9300 2    50   ~ 0
+MIDBAND_EN
+Text Label 3150 9400 2    50   ~ 0
+HIGHBAND_EN
+Text Label 4200 6000 2    50   ~ 0
+PGOOD_3V8
+Text Label 4200 6100 2    50   ~ 0
+PGOOD_5V5
+Text Label 4200 6200 2    50   ~ 0
+3V8_EN
+Text Label 4200 6300 2    50   ~ 0
+5V5_EN
+Text Label 4200 6400 2    50   ~ 0
+VSS_EN
+Text Label 4200 6500 2    50   ~ 0
+3V3_EN
+Text Label 4200 6600 2    50   ~ 0
+M5V_EN
+Text Label 4200 6700 2    50   ~ 0
+M3_5V_EN
+Text Label 4200 6800 2    50   ~ 0
+M2_5V_EN
+Text Label 4200 6900 2    50   ~ 0
+5V_EN
+Text Label 4200 7000 2    50   ~ 0
+LOWBAND_EN
+Text Label 4200 7100 2    50   ~ 0
+MIDBAND_EN
+Text Label 4200 7200 2    50   ~ 0
+HIGHBAND_EN
+Text Label 4200 5500 2    50   ~ 0
+AMP_~SYNC
+Text Label 4200 5600 2    50   ~ 0
+AMP_~CLR
+Text Label 4200 5700 2    50   ~ 0
+AMP_~LDAC
+Text Label 4200 5800 2    50   ~ 0
+AMP_SCLK
+Text Label 4200 5900 2    50   ~ 0
+AMP_DIN
+Text Notes 3950 7700 0    118  ~ 0
+$100
+Text Notes 7450 7650 0    118  ~ 0
+$20
+$EndSCHEMATC

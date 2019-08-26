@@ -1,0 +1,117 @@
+EESchema Schematic File Version 4
+LIBS:vna_mm_synth-cache
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 3 11
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text HLabel 4900 1600 0    60   Input ~ 0
+SYNTH_OUT
+Text HLabel 4900 2700 0    60   Input ~ 0
+SYNC
+$Comp
+L conn_sma_2gnd:CONN_SMA_2GND U501
+U 1 1 5AB94261
+P 6050 1600
+F 0 "U501" H 5750 1800 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 6100 1900 60  0000 C CNN
+F 2 "vna_footprints:SMA_901-10512_6p7MIL_FR408_CPW_LAUNCH" H 6050 1600 60  0001 C CNN
+F 3 "" H 6050 1600 60  0000 C CNN
+	1    6050 1600
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR077
+U 1 1 5AB94285
+P 6050 2150
+F 0 "#PWR077" H 6050 1900 50  0001 C CNN
+F 1 "GND" H 6050 2000 50  0000 C CNN
+F 2 "" H 6050 2150 50  0001 C CNN
+F 3 "" H 6050 2150 50  0001 C CNN
+	1    6050 2150
+	1    0    0    -1  
+$EndComp
+$Comp
+L conn_sma_2gnd:CONN_SMA_2GND U502
+U 1 1 5ABBB801
+P 6050 2700
+F 0 "U502" H 5750 2900 60  0000 C CNN
+F 1 "CONN_SMA_2GND" H 6100 3000 60  0000 C CNN
+F 2 "vna_footprints:SMA_901-10512_6p7MIL_FR408_CPW_LAUNCH" H 6050 2700 60  0001 C CNN
+F 3 "" H 6050 2700 60  0000 C CNN
+	1    6050 2700
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR078
+U 1 1 5ABBB807
+P 6050 3250
+F 0 "#PWR078" H 6050 3000 50  0001 C CNN
+F 1 "GND" H 6050 3100 50  0000 C CNN
+F 2 "" H 6050 3250 50  0001 C CNN
+F 3 "" H 6050 3250 50  0001 C CNN
+	1    6050 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6000 2050 6000 2100
+Wire Wire Line
+	6000 2100 6050 2100
+Wire Wire Line
+	6100 2100 6100 2050
+Wire Wire Line
+	6050 2100 6050 2150
+Connection ~ 6050 2100
+Wire Wire Line
+	5300 1600 5650 1600
+Wire Wire Line
+	6000 3150 6000 3200
+Wire Wire Line
+	6000 3200 6050 3200
+Wire Wire Line
+	6100 3200 6100 3150
+Wire Wire Line
+	6050 3200 6050 3250
+Connection ~ 6050 3200
+Wire Wire Line
+	5300 2700 5650 2700
+Wire Wire Line
+	4900 1600 5100 1600
+Wire Wire Line
+	5100 2700 4900 2700
+$Comp
+L device:C_Small C502
+U 1 1 5AC31626
+P 5200 2700
+F 0 "C502" H 5210 2770 50  0000 L CNN
+F 1 "10 pF" H 5210 2620 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0201" H 5200 2700 50  0001 C CNN
+F 3 "" H 5200 2700 50  0001 C CNN
+	1    5200 2700
+	0    1    1    0   
+$EndComp
+$Comp
+L device:C_Small C501
+U 1 1 5AC31536
+P 5200 1600
+F 0 "C501" H 5210 1670 50  0000 L CNN
+F 1 "10 pF" H 5210 1520 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0201" H 5200 1600 50  0001 C CNN
+F 3 "" H 5200 1600 50  0001 C CNN
+	1    5200 1600
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6050 2100 6100 2100
+Wire Wire Line
+	6050 3200 6100 3200
+$EndSCHEMATC
