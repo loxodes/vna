@@ -1,4 +1,4 @@
-3507366763194397
+3508934073385397
 Air_Coils_SML_NEOSID
 Neosid_Air-Coil_SML_1turn_HDM0131A
 Neosid, Air-Coil, SML, 1turn, HDM0131A,
@@ -16330,6 +16330,13 @@ DC- 40 GHz Flip Chip Resistive Divider
 0
 6
 4
+v
+QFN-28_EP_6x5_Pitch0.5mm
+
+
+0
+44
+29
 v
 QFN-56_EP_8x8_Pitch0.5mm
 
