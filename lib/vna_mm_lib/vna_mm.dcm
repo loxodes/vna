@@ -1,0 +1,108 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ADP7158
+D 2 A, Ultralow Noise, High PSRR, RF Linear Regulator
+K LDO regulator
+F https://www.analog.com/media/en/technical-documentation/data-sheets/ADP7158.pdf
+$ENDCMP
+#
+$CMP ADRF5040
+F https://www.analog.com/media/en/technical-documentation/data-sheets/ADRF5040.pdf
+$ENDCMP
+#
+$CMP ADRF5730
+D 0.5 dB LSB, 6-Bit, Silicon Digital Attenuator, 100 MHz to 40 GHz
+K attenuator
+F https://www.analog.com/media/en/technical-documentation/data-sheets/ADRF5730.pdf
+$ENDCMP
+#
+$CMP DAC7563SDSCR
+D DACxx6x Dual 16-, 14-, 12-Bit, Low-Power, Buffered, Voltage-Output DACs With 2.5-V, 4-PPM/°C Internal Reference
+K DAC
+F http://www.ti.com/lit/ds/symlink/dac7562.pdf
+$ENDCMP
+#
+$CMP HMC576LC3B
+D SMT GaAs MMIC x2 ACTIVE FREQUENCY MULTIPLIER, 18 - 29 GHz OUTPUT
+F https://www.analog.com/media/en/technical-documentation/data-sheets/hmc576.pdf
+$ENDCMP
+#
+$CMP HMC65XLP2E
+D WIDEBAND FIXED ATTENUATOR FAMILY, DC - 25 GHz
+K attenuator
+$ENDCMP
+#
+$CMP LM71CIMF
+D LM71/LM71-Q1 SPI/MICROWIRE 13-Bit Plus Sign Temperature Sensor
+K temperature sensor
+F http://www.ti.com/lit/ds/symlink/lm71.pdf
+$ENDCMP
+#
+$CMP LTC2937
+D Programmable Six Channel Sequencer and Voltage Supervisor with EEPROM
+K Sequencer
+F https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2937.pdf
+$ENDCMP
+#
+$CMP LTM4622A
+D Dual Ultrathin 2A or Single 4A Step-Down DC/DC µModule Regulator
+K DC/DC µModule Regulator
+F https://www.analog.com/media/en/technical-documentation/data-sheets/ltm4622a.pdf
+$ENDCMP
+#
+$CMP MAAL-011129
+D Low Noise Amplifier 18 - 31.5 GHz
+K LNA amplifier
+F https://cdn.macom.com/datasheets/MAAL-011129.pdf
+$ENDCMP
+#
+$CMP MAAM-011101
+D Broadband General Purpose Amplifier 4 - 20 GHz
+F https://cdn.macom.com/datasheets/MAAM-011101.pdf
+$ENDCMP
+#
+$CMP MAAM-011109
+D Wideband Amplifier 10 MHz - 40 GHz
+K https://cdn.macom.com/datasheets/MAAM-011109.pdf
+$ENDCMP
+#
+$CMP MAAM-011206
+D Broadband Darlington Amplifier DC - 15 GH
+F https://cdn.macom.com/datasheets/MAAM-011206.pdf
+$ENDCMP
+#
+$CMP MABA-011082
+D 1:1 Transformer Balun 5 - 8000 MHz
+K transformer balun
+F https://cdn.macom.com/datasheets/MABA-011082.pdf
+$ENDCMP
+#
+$CMP NCP692
+F https://www.onsemi.com/pub/Collateral/NCP690-D.PDF
+$ENDCMP
+#
+$CMP PE42543
+D RF Switch, SP4T, 9 kHz to 18 GHz, 1.2 to 3.2 dB IL, 25 to 55 dB Isolation, 30 dBm Pwr Rating, QFN
+K SP4T
+F https://www.psemi.com/pdf/datasheets/pe42543ds.pdf
+$ENDCMP
+#
+$CMP TPS22918
+D TPS22918 5.5-V, 2-A, 52-mΩ On-Resistance Load Switch
+K switch
+F http://www.ti.com/lit/ds/symlink/tps22918.pdf
+$ENDCMP
+#
+$CMP TPS72301DB
+D TPS723xx 200mA Low-Noise, High-PSRR Negative Output Low-Dropout Linear Regulators
+K Linear Regulators LDO
+F http://www.ti.com/lit/ds/symlink/tps723.pdf
+$ENDCMP
+#
+$CMP TS5A23166
+D TS5A23166 0.9-Ω Dual-SPST Analog Switch
+K switch
+F http://www.ti.com/lit/ds/symlink/ts5a23166.pdf
+$ENDCMP
+#
+#End Doc Library
