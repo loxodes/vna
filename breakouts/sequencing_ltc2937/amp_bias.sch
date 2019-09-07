@@ -2679,8 +2679,6 @@ Text HLabel 2850 8200 0    50   Input ~ 0
 PMIC_SCL
 Text HLabel 2850 8300 0    50   Input ~ 0
 ALERTB
-NoConn ~ 4250 9000
-NoConn ~ 4250 9200
 $Comp
 L Device:C_Small C?
 U 1 1 5DF49375
@@ -3610,4 +3608,76 @@ F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADP7158
 	1    12250 4350
 	1    0    0    -1  
 $EndComp
+$Comp
+L Device:R_Small R?
+U 1 1 5D7ADCC1
+P 3200 8950
+AR Path="/5AB8DC0D/5D7ADCC1" Ref="R?"  Part="1" 
+AR Path="/5D4AD94E/5D7ADCC1" Ref="R?"  Part="1" 
+AR Path="/5D7545B9/5D7ADCC1" Ref="R252"  Part="1" 
+F 0 "R252" H 3230 8970 50  0000 L CNN
+F 1 "DNI" H 3230 8910 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 3200 8950 50  0001 C CNN
+F 3 "" H 3200 8950 50  0001 C CNN
+	1    3200 8950
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5D7ADCC7
+P 3000 8950
+AR Path="/5AB8DC0D/5D7ADCC7" Ref="#PWR?"  Part="1" 
+AR Path="/5D4AD94E/5D7ADCC7" Ref="#PWR?"  Part="1" 
+AR Path="/5D7545B9/5D7ADCC7" Ref="#PWR0239"  Part="1" 
+F 0 "#PWR0239" H 3000 8700 50  0001 C CNN
+F 1 "GND" H 3000 8800 50  0000 C CNN
+F 2 "" H 3000 8950 50  0001 C CNN
+F 3 "" H 3000 8950 50  0001 C CNN
+	1    3000 8950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3000 8950 3100 8950
+Wire Wire Line
+	3300 8950 3500 8950
+$Comp
+L Device:R_Small R?
+U 1 1 5D7E6E73
+P 3200 9150
+AR Path="/5AB8DC0D/5D7E6E73" Ref="R?"  Part="1" 
+AR Path="/5D4AD94E/5D7E6E73" Ref="R?"  Part="1" 
+AR Path="/5D7545B9/5D7E6E73" Ref="R253"  Part="1" 
+F 0 "R253" H 3230 9170 50  0000 L CNN
+F 1 "DNI" H 3230 9110 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 3200 9150 50  0001 C CNN
+F 3 "" H 3200 9150 50  0001 C CNN
+	1    3200 9150
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5D7E6E79
+P 3000 9150
+AR Path="/5AB8DC0D/5D7E6E79" Ref="#PWR?"  Part="1" 
+AR Path="/5D4AD94E/5D7E6E79" Ref="#PWR?"  Part="1" 
+AR Path="/5D7545B9/5D7E6E79" Ref="#PWR0240"  Part="1" 
+F 0 "#PWR0240" H 3000 8900 50  0001 C CNN
+F 1 "GND" H 3000 9000 50  0000 C CNN
+F 2 "" H 3000 9150 50  0001 C CNN
+F 3 "" H 3000 9150 50  0001 C CNN
+	1    3000 9150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3000 9150 3100 9150
+Wire Wire Line
+	3300 9150 3500 9150
+Wire Wire Line
+	3500 9150 3500 9200
+Wire Wire Line
+	3500 9200 4250 9200
+Wire Wire Line
+	3500 8950 3500 9000
+Wire Wire Line
+	3500 9000 4250 9000
 $EndSCHEMATC
