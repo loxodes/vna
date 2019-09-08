@@ -1,4 +1,4 @@
-3491644078706520
+3508937748373615
 Air_Coils_SML_NEOSID
 Neosid_Air-Coil_SML_1turn_HDM0131A
 Neosid, Air-Coil, SML, 1turn, HDM0131A,
@@ -83,76 +83,6 @@ Neosid, Air-Coil, SML, 6turn, HAM0631A,
 0
 2
 2
-balloon_footprints
-36-1050-ND_Keystone_1050TR
-
-
-0
-2
-2
-balloon_footprints
-0900PC15J0013E
-
-
-0
-10
-10
-balloon_footprints
-APAES915R6460C16-T
-
-
-0
-1
-1
-balloon_footprints
-CONN_MICROMATCH_10
-
-
-0
-10
-10
-balloon_footprints
-Crystal_4-SMD_2.5x2mm
-
-
-0
-4
-4
-balloon_footprints
-DIP-4__300
-6 pins DIL package, round pads
-DIL
-0
-4
-4
-balloon_footprints
-ISM300
-
-
-0
-18
-18
-balloon_footprints
-MICROUSB_sm
-
-
-0
-9
-5
-balloon_footprints
-MS5540C
-
-
-0
-8
-8
-balloon_footprints
-U.FL-COAX
-
-
-0
-3
-3
 Buttons_Switches_SMD
 SW_SP3T_PCM13
 Ultraminiature Surface Mount Slide Switch
@@ -462,19 +392,19 @@ SWITCH DEV
 5
 5
 Buttons_Switches_ThroughHole
-SW_Tactile_SPST_Angled
-tactile switch SPST right angle, 1825027-2
-tactile switch SPST angled 1825027-2
-0
-4
-2
-Buttons_Switches_ThroughHole
 SW_TH_Tactile_Omron_B3F-10xx
 SW_TH_Tactile_Omron_B3F-10xx
 Omron B3F-10xx
 0
 4
 4
+Buttons_Switches_ThroughHole
+SW_Tactile_SPST_Angled
+tactile switch SPST right angle, 1825027-2
+tactile switch SPST angled 1825027-2
+0
+4
+2
 Buzzers_Beepers
 BUZZER
 
@@ -497,13 +427,6 @@ Kingstate, KCG0601,
 2
 2
 Buzzers_Beepers
-MagneticBuzzer_ProjectsUnlimited_AI-4228-TWT-R
-Buzzer, Elektromagnetic Beeper, Summer, 3-28V-DC,
-Projects Unlimited, AI-4228-TWT-R,
-0
-2
-2
-Buzzers_Beepers
 MagneticBuzzer_ProSignal_ABI-009-RC
 Buzzer, Elektromagnetic Beeper, Summer, 6V-DC,
 Pro Signal, ABI-009-RC,
@@ -521,6 +444,13 @@ Buzzers_Beepers
 MagneticBuzzer_ProSignal_ABT-410-RC
 Buzzer, Elektromagnetic Beeper, Summer, 1,5V-DC,
 Pro Signal, ABT-410-RC,
+0
+2
+2
+Buzzers_Beepers
+MagneticBuzzer_ProjectsUnlimited_AI-4228-TWT-R
+Buzzer, Elektromagnetic Beeper, Summer, 3-28V-DC,
+Projects Unlimited, AI-4228-TWT-R,
 0
 2
 2
@@ -1687,6 +1617,13 @@ Choke, Drossel, WE-PDF, Handsoldering, Wuerth, SMD,
 2
 2
 Choke_Toroid_ThroughHole
+Autotransformer_Toroid_Horizontal_1Tap_Diameter14mm_Amidon-T50
+Choke, Inductance, Autotransformer, Toroid, horizontal, laying, 1 Tap, Diameter 14mm, Amidon T50,
+Choke, Inductance, Autotransformer, Toroid, horizontal, laying, 1 Tap, Diameter 14mm, Amidon T50,
+0
+3
+3
+Choke_Toroid_ThroughHole
 Autotransformer_Toroid_horizontal_1Tap_Diameter9mm_Amidon-T30
 Autotransformer, Toroid, horizontal, laying, 1 Tap, Diameter 9mm, Amidon T30,
 Autotransformer, Toroid, horizontal, laying, 1 Tap, Diameter 9mm, Amidon T30,
@@ -1704,13 +1641,6 @@ Choke_Toroid_ThroughHole
 Autotransformer_Toroid_horizontal_1Tap_Diameter12-5mm_Amidon-T44
 Autotransformer, Toroid, horizontal, laying, 1 Tap, Diameter 12,5mm, Amidon T44,
 Autotransformer, Toroid, horizontal, laying, 1 Tap, Diameter 12,5mm, Amidon T44,
-0
-3
-3
-Choke_Toroid_ThroughHole
-Autotransformer_Toroid_Horizontal_1Tap_Diameter14mm_Amidon-T50
-Choke, Inductance, Autotransformer, Toroid, horizontal, laying, 1 Tap, Diameter 14mm, Amidon T50,
-Choke, Inductance, Autotransformer, Toroid, horizontal, laying, 1 Tap, Diameter 14mm, Amidon T50,
 0
 3
 3
@@ -1806,27 +1736,6 @@ SELF INDUCTOR
 3
 2
 Choke_Toroid_ThroughHole
-Transformer_Toroid_horizontal_Diameter9mm_Amidon-T30
-Transformer, Toroid, horizontal, laying, Diameter 9mm, Amidon, T30,
-Transformer, Toroid, horizontal, laying, Diameter 9mm, Amidon, T30,
-0
-4
-4
-Choke_Toroid_ThroughHole
-Transformer_Toroid_horizontal_Diameter10-5mm_Amidon-T37
-Transformer, Toroid, horizontal, laying, Diameter 10,5mm, Amidon T37,
-Transformer, Toroid, horizontal, laying, Diameter 10,5mm, Amidon T37,
-0
-4
-4
-Choke_Toroid_ThroughHole
-Transformer_Toroid_horizontal_Diameter12-5mm_Amidon-T44
-Transformer, Toroid, horizontal, laying, Diameter 12,5mm, Amidon T44,
-Transformer, Toroid, horizontal, laying, Diameter 12,5mm, Amidon T44,
-0
-4
-4
-Choke_Toroid_ThroughHole
 Transformer_Toroid_Horizontal_Diameter14mm_Amidon-T50
 Transformer, Toroid, horizontal, laying, Diameter 14mm, Amidon T50,
 Transformer, Toroid, horizontal, laying, Diameter 14mm, Amidon T50,
@@ -1834,12 +1743,12 @@ Transformer, Toroid, horizontal, laying, Diameter 14mm, Amidon T50,
 4
 4
 Choke_Toroid_ThroughHole
-Transformer_Toroid_horizontal_Diameter18mm
-
-
+Transformer_Toroid_Tapped_Horizontal_Diameter14mm_Amidon-T50
+Transformer, Toroid, tapped, horizontal, laying, Diameter 14mm, Amidon T50,
+Transformer, Toroid, tapped, horizontal, laying, Diameter 14mm, Amidon T50,
 0
-5
-4
+6
+6
 Choke_Toroid_ThroughHole
 Transformer_Toroid_Tapped_horizontal_Diameter9mm_Amidon-T30
 Transformer, Toroid, tapped, horizontal, laying, Diameter 9mm, Amidon, T30,
@@ -1862,12 +1771,33 @@ Transformer, Toroid, tapped, horizontal, laying, Diameter 12,5mm, Amidon, T44,
 6
 6
 Choke_Toroid_ThroughHole
-Transformer_Toroid_Tapped_Horizontal_Diameter14mm_Amidon-T50
-Transformer, Toroid, tapped, horizontal, laying, Diameter 14mm, Amidon T50,
-Transformer, Toroid, tapped, horizontal, laying, Diameter 14mm, Amidon T50,
+Transformer_Toroid_horizontal_Diameter9mm_Amidon-T30
+Transformer, Toroid, horizontal, laying, Diameter 9mm, Amidon, T30,
+Transformer, Toroid, horizontal, laying, Diameter 9mm, Amidon, T30,
 0
-6
-6
+4
+4
+Choke_Toroid_ThroughHole
+Transformer_Toroid_horizontal_Diameter10-5mm_Amidon-T37
+Transformer, Toroid, horizontal, laying, Diameter 10,5mm, Amidon T37,
+Transformer, Toroid, horizontal, laying, Diameter 10,5mm, Amidon T37,
+0
+4
+4
+Choke_Toroid_ThroughHole
+Transformer_Toroid_horizontal_Diameter12-5mm_Amidon-T44
+Transformer, Toroid, horizontal, laying, Diameter 12,5mm, Amidon T44,
+Transformer, Toroid, horizontal, laying, Diameter 12,5mm, Amidon T44,
+0
+4
+4
+Choke_Toroid_ThroughHole
+Transformer_Toroid_horizontal_Diameter18mm
+
+
+0
+5
+4
 Connect
 1pin
 module 1 pin (ou trou mecanique de percage)
@@ -1904,6 +1834,27 @@ CONNECTOR
 4
 4
 Connect
+BARREL_JACK
+DC Barrel Jack
+Power Jack
+0
+3
+3
+Connect
+BUSPCI
+Connecteur Bus PCI
+PCI CONN
+0
+240
+120
+Connect
+BUS_AT
+Connecteur Bus AT ISA 16 bits
+CONN BUS ISA
+0
+98
+98
+Connect
 Banana_Jack_1Pin
 Single banana socket, footprint - 6mm drill
 banana socket
@@ -1924,97 +1875,6 @@ banana socket
 0
 3
 3
-Connect
-BARREL_JACK
-DC Barrel Jack
-Power Jack
-0
-3
-3
-Connect
-bnc
-
-
-0
-2
-2
-Connect
-bnc-ci
-
-
-0
-5
-2
-Connect
-bornier2
-Bornier d'alimentation 2 pins
-DEV
-0
-2
-2
-Connect
-bornier3
-Bornier d'alimentation 3 pins
-DEV
-0
-3
-3
-Connect
-bornier4
-Bornier d'alimentation 4 pins
-DEV
-0
-4
-4
-Connect
-bornier5
-Bornier d'alimentation 4 pins
-DEV
-0
-5
-5
-Connect
-bornier6
-Bornier d'alimentation 4 pins
-DEV
-0
-6
-6
-Connect
-BUSPCI
-Connecteur Bus PCI
-PCI CONN
-0
-240
-120
-Connect
-BUS_AT
-Connecteur Bus AT ISA 16 bits
-CONN BUS ISA
-0
-98
-98
-Connect
-c64abfd
-Connecteur DIN Europe 64 contatcts Femelle Droit
-CONN DIN
-0
-66
-66
-Connect
-c64abmd
-Connecteur DIN Europe 64 contacts Male Droit
-CONN DIN
-0
-66
-66
-Connect
-c64acfd
-Connecteur DIN Europe 96 contacts AC femelle droit
-CONN DIN
-0
-66
-66
 Connect
 C96ABCFD
 Connecteur DIN Europe 96 contacts ABC male droit
@@ -2226,20 +2086,6 @@ FMC LPC VITA
 162
 160
 Connect
-GoldTek_SCP20GR11
-GoldTek SCP20GR11
-CONN GoldTek SCP20GR11
-0
-20
-20
-Connect
-GoldTek_SCP20GS11
-GoldTek SCP20GS11
-CONN GoldTek SCP20GS11
-0
-20
-20
-Connect
 GS2
 Pontet Goute de soudure
 
@@ -2289,75 +2135,26 @@ GTK2400-V2
 2
 2
 Connect
+GoldTek_SCP20GR11
+GoldTek SCP20GR11
+CONN GoldTek SCP20GR11
+0
+20
+20
+Connect
+GoldTek_SCP20GS11
+GoldTek SCP20GS11
+CONN GoldTek SCP20GS11
+0
+20
+20
+Connect
 HE10-10C
 Connecteur HE10 10 contacts couche
 CONN HE10
 0
 12
 11
-Connect
-he10-10d
-Connecteur HE10 10 contacts droit
-CONN HE10
-0
-12
-10
-Connect
-he10-14c
-Connecteur HE10 14 contacts couche
-CONN HE10
-0
-16
-15
-Connect
-he10-14d
-Connecteur HE10 14 contacts droit
-CONN HE10
-0
-16
-15
-Connect
-he10-16c
-Connecteur HE10 16 contacts couche
-CONN HE10
-0
-18
-17
-Connect
-he10-16d
-Connecteur HE10 16 contacts droit
-CONN HE10
-0
-18
-17
-Connect
-he10-20c
-Connecteur HE10 20 contacts couche
-CONN HE10
-0
-22
-21
-Connect
-he10-26c
-Connecteur HE10 26 contacts couche
-CONN HE10
-0
-28
-27
-Connect
-he10-34c
-Connecteur HE10 34 contacts couche
-CONN HE10
-0
-36
-35
-Connect
-he10-40c
-Connecteur HE10 40 contacts couche
-CONN HE10
-0
-42
-41
 Connect
 HE10_20D
 Connecteur HE10 20 contacts droit
@@ -2820,6 +2617,139 @@ XLR5MC
 0
 8
 5
+Connect
+bnc
+
+
+0
+2
+2
+Connect
+bnc-ci
+
+
+0
+5
+2
+Connect
+bornier2
+Bornier d'alimentation 2 pins
+DEV
+0
+2
+2
+Connect
+bornier3
+Bornier d'alimentation 3 pins
+DEV
+0
+3
+3
+Connect
+bornier4
+Bornier d'alimentation 4 pins
+DEV
+0
+4
+4
+Connect
+bornier5
+Bornier d'alimentation 4 pins
+DEV
+0
+5
+5
+Connect
+bornier6
+Bornier d'alimentation 4 pins
+DEV
+0
+6
+6
+Connect
+c64abfd
+Connecteur DIN Europe 64 contatcts Femelle Droit
+CONN DIN
+0
+66
+66
+Connect
+c64abmd
+Connecteur DIN Europe 64 contacts Male Droit
+CONN DIN
+0
+66
+66
+Connect
+c64acfd
+Connecteur DIN Europe 96 contacts AC femelle droit
+CONN DIN
+0
+66
+66
+Connect
+he10-10d
+Connecteur HE10 10 contacts droit
+CONN HE10
+0
+12
+10
+Connect
+he10-14c
+Connecteur HE10 14 contacts couche
+CONN HE10
+0
+16
+15
+Connect
+he10-14d
+Connecteur HE10 14 contacts droit
+CONN HE10
+0
+16
+15
+Connect
+he10-16c
+Connecteur HE10 16 contacts couche
+CONN HE10
+0
+18
+17
+Connect
+he10-16d
+Connecteur HE10 16 contacts droit
+CONN HE10
+0
+18
+17
+Connect
+he10-20c
+Connecteur HE10 20 contacts couche
+CONN HE10
+0
+22
+21
+Connect
+he10-26c
+Connecteur HE10 26 contacts couche
+CONN HE10
+0
+28
+27
+Connect
+he10-34c
+Connecteur HE10 34 contacts couche
+CONN HE10
+0
+36
+35
+Connect
+he10-40c
+Connecteur HE10 40 contacts couche
+CONN HE10
+0
+42
+41
 Connectors_JST_PH
 Connectors_JST_B2B-PH-K
 JST PH series connector, B2B-PH-K
@@ -3997,13 +3927,6 @@ Molex PicoBlade 1.25mm shrouded header. Vertical, SMD. 15 ways
 17
 15
 Converters_DCDC_ACDC
-ACDC-Converter_Traco-TMLM-04
-ACDC-Converter, TRACO, TMLM Series 04,
-ACDC-Converter, TRACO, TMLM Series 04,
-0
-7
-7
-Converters_DCDC_ACDC
 ACDC-Converter_TRACO-TMLM-05
 ACDC-Converter, TRACO TMLM 05,
 ACDC-Converter, TRACO TMLM 05,
@@ -4017,6 +3940,20 @@ ACDC-Converter, TRACO TMLM 10, TRACO TMLM 20,
 0
 4
 4
+Converters_DCDC_ACDC
+ACDC-Converter_Traco-TMLM-04
+ACDC-Converter, TRACO, TMLM Series 04,
+ACDC-Converter, TRACO, TMLM Series 04,
+0
+7
+7
+Converters_DCDC_ACDC
+DCDC-CONV_ST_GS-R400V-2_Obsolete
+DCDC-Converter,  ST, GS-R400V/2, Obsolete, RevA, 24Mar2011,
+DCDC-Converter,  ST, GS-R400V/2, Obsolete, RevA, 24Mar2011,
+0
+5
+5
 Converters_DCDC_ACDC
 DCDC-Conv_BOTHHAND_CF-Serie
 DCDC-Converter, BOTHHAND, Type CF-Serie,  RevA, 28Mar2011
@@ -4060,13 +3997,6 @@ Recom DCDC R-78
 3
 3
 Converters_DCDC_ACDC
-DCDC-CONV_ST_GS-R400V-2_Obsolete
-DCDC-Converter,  ST, GS-R400V/2, Obsolete, RevA, 24Mar2011,
-DCDC-Converter,  ST, GS-R400V/2, Obsolete, RevA, 24Mar2011,
-0
-5
-5
-Converters_DCDC_ACDC
 DCDC-Conv_TRACO_TED-1212_Single_9-18VDCto12VDC160mA
 DCDC-Converter, TRACO, TED-1212, Single output, 9-18VDC to 12VDC 160m, RevA
 DCDC-Converter, TRACO, TED-1212, Single output, 9-18VDC to 12VDC 160m, RevA
@@ -4109,13 +4039,6 @@ DCDC-Converter, Traco, TME05xx, TME12xx, RevA, 27Mar2011,
 4
 4
 Converters_DCDC_ACDC
-DCDC-Conv_Traco_TME24xx
-DCDC-Converter, Traco, TME24xx,  RevA, 27Mar2011,
-DCDC-Converter, Traco, TME24xx,  RevA, 27Mar2011,
-0
-4
-4
-Converters_DCDC_ACDC
 DCDC-Conv_TRACO_TMH-xxxx_Dual
 DCDC-Converter, TRACO, TMH-xxxx, Dual output, RevA, 27Mar2011
 DCDC-Converter, TRACO, TMH-xxxx, Dual output, RevA, 27Mar2011
@@ -4143,6 +4066,13 @@ DCDC-Converter, TRACO, TMH-xxxx, Single output, RevB, 06Apr2011
 0
 4
 4
+Converters_DCDC_ACDC
+DCDC-Conv_Traco_TME24xx
+DCDC-Converter, Traco, TME24xx,  RevA, 27Mar2011,
+DCDC-Converter, Traco, TME24xx,  RevA, 27Mar2011,
+0
+4
+4
 Crystals
 ABM3
 Abracon Miniature Ceramic Smd Crystal http://www.abracon.com/Resonators/abm3.pdf
@@ -4150,13 +4080,6 @@ smd crystal
 0
 2
 2
-Crystals
-crystal_FA238-TSX3225
-crystal Epson Toyocom FA-238 and TSX-3225 series
-
-0
-4
-3
 Crystals
 Crystal_FOX-FE_SMD
 Crystal, Quarz, FE, SMD, Vendor Fox,
@@ -4352,6 +4275,13 @@ Murata CSTCC8M00G53-R0; 8MHz resonator, SMD, 0.5+0.3%; Farnell (Element 14) #117
 resonator
 0
 3
+3
+Crystals
+crystal_FA238-TSX3225
+crystal Epson Toyocom FA-238 and TSX-3225 series
+
+0
+4
 3
 Diodes_SMD
 D-Pak_TO252AA
@@ -4669,16 +4599,16 @@ Diode, TO-247, TO-218, TOP-3 , horizontal, 1=Anode,  2= Kathode,
 3
 3
 Diodes_ThroughHole
-Diode_TO-247_Horizontal_largePads
-Diode, TO-247, TO-218, TOP-3 , horizontal,  large Pads, 1=Anode,  2= Kathode,
-Diode, TO-247, TO-218, TOP-3 , horizontal,  large Pads, 1=Anode,  2= Kathode,
+Diode_TO-247_Horizontal_MountFromLS
+Diode, TO-247, TO-218, TOP-3, horizontal,  mounted from  LS, 1=Anode,  2= Kathode,
+Diode, TO-247, TO-218, TOP-3, horizontal,  mounted from  LS, 1=Anode,  2= Kathode,
 0
 3
 3
 Diodes_ThroughHole
-Diode_TO-247_Horizontal_MountFromLS
-Diode, TO-247, TO-218, TOP-3, horizontal,  mounted from  LS, 1=Anode,  2= Kathode,
-Diode, TO-247, TO-218, TOP-3, horizontal,  mounted from  LS, 1=Anode,  2= Kathode,
+Diode_TO-247_Horizontal_largePads
+Diode, TO-247, TO-218, TOP-3 , horizontal,  large Pads, 1=Anode,  2= Kathode,
+Diode, TO-247, TO-218, TOP-3 , horizontal,  large Pads, 1=Anode,  2= Kathode,
 0
 3
 3
@@ -5334,44 +5264,23 @@ marker
 1
 1
 Fiducials
-Fiducial_classic_big_CopperBottom_Type1
-Fiducial, Classical, Big, Copper Bottom, Typ 1, Passermarke,
-Fiducial, Classical, Big, Copper Bottom, Typ 1, Passermarke, Passermarke,
+Fiducial_Modern_CopperBottom
+Fiducial, Modern, Copper Bottom, Passermarke,
+Fiducial, Modern, Copper Bottom, Passermarke,
 0
 1
 0
 Fiducials
-Fiducial_classic_big_CopperBottom_Type2
-Fiducial, Classical, Big, Copper Bottom, Typ 2, Passermarke,
-Fiducial, Classical, Big, Copper Bottom, Typ 2, Passermarke, Passermarke,
+Fiducial_Modern_CopperTop
+Fiducial, Modern, Copper Top, Passermarke,
+Fiducial, Modern, Copper Top, Passermarke,
 0
 1
 0
 Fiducials
-Fiducial_classic_big_CopperTop_Type1
-Fiducial, Classical, Big, Copper Top, Typ 1, Passermarke,
-Fiducial, Classical, Big, Copper Top, Typ 1, Passermarke,
-0
-1
-0
-Fiducials
-Fiducial_classic_big_CopperTop_Type2
-Fiducial, Classical, Big, Copper Top, Typ 2, Passermarke,
-Fiducial, Classical, Big, Copper Top, Typ 2, Passermarke,
-0
-1
-0
-Fiducials
-Fiducial_classic_big_SilkscreenTop_Type1
-Fiducial, Classical, Big, Silkscreen Top, Typ 1, Passermarke,
-Fiducial, Classical, Big, Silkscreen Top, Typ 1, Passermarke,
-0
-1
-0
-Fiducials
-Fiducial_classic_big_SilkscreenTop_Type2
-Fiducial, Classical, Big, Silkscreen Top, Typ 2, Passermarke,
-Fiducial, Classical, Big, Silkscreen Top, Typ 2, Passermarke,
+Fiducial_Modern_SilkscreenTop
+Fiducial, Modern, Silkscreen Top, Passermarke,
+Fiducial, Modern, Silkscreen Top, Passermarke,
 0
 1
 0
@@ -5418,23 +5327,44 @@ Fiducial, Classical, Small, Silkscreen Top, Typ 2, Passermarke,
 1
 0
 Fiducials
-Fiducial_Modern_CopperBottom
-Fiducial, Modern, Copper Bottom, Passermarke,
-Fiducial, Modern, Copper Bottom, Passermarke,
+Fiducial_classic_big_CopperBottom_Type1
+Fiducial, Classical, Big, Copper Bottom, Typ 1, Passermarke,
+Fiducial, Classical, Big, Copper Bottom, Typ 1, Passermarke, Passermarke,
 0
 1
 0
 Fiducials
-Fiducial_Modern_CopperTop
-Fiducial, Modern, Copper Top, Passermarke,
-Fiducial, Modern, Copper Top, Passermarke,
+Fiducial_classic_big_CopperBottom_Type2
+Fiducial, Classical, Big, Copper Bottom, Typ 2, Passermarke,
+Fiducial, Classical, Big, Copper Bottom, Typ 2, Passermarke, Passermarke,
 0
 1
 0
 Fiducials
-Fiducial_Modern_SilkscreenTop
-Fiducial, Modern, Silkscreen Top, Passermarke,
-Fiducial, Modern, Silkscreen Top, Passermarke,
+Fiducial_classic_big_CopperTop_Type1
+Fiducial, Classical, Big, Copper Top, Typ 1, Passermarke,
+Fiducial, Classical, Big, Copper Top, Typ 1, Passermarke,
+0
+1
+0
+Fiducials
+Fiducial_classic_big_CopperTop_Type2
+Fiducial, Classical, Big, Copper Top, Typ 2, Passermarke,
+Fiducial, Classical, Big, Copper Top, Typ 2, Passermarke,
+0
+1
+0
+Fiducials
+Fiducial_classic_big_SilkscreenTop_Type1
+Fiducial, Classical, Big, Silkscreen Top, Typ 1, Passermarke,
+Fiducial, Classical, Big, Silkscreen Top, Typ 1, Passermarke,
+0
+1
+0
+Fiducials
+Fiducial_classic_big_SilkscreenTop_Type2
+Fiducial, Classical, Big, Silkscreen Top, Typ 2, Passermarke,
+Fiducial, Classical, Big, Silkscreen Top, Typ 2, Passermarke,
 0
 1
 0
@@ -5445,6 +5375,13 @@ Neosid, Double Helical Filter, Type10E, through hole,
 0
 12
 9
+Filters_HF_Coils_NEOSID
+Neosid_HF-Coil_SMF5-1_SMD
+Neosid, HF-Coil, SMF5.1, SMD.
+Neosid, HF-Coil, SMF5.1, SMD,
+0
+6
+6
 Filters_HF_Coils_NEOSID
 Neosid_HF-Coil_Series5-1k
 Neosid, HF-Coil, Serie 5.1k, Spulenbausatz
@@ -5472,13 +5409,6 @@ Neosid, HF-Coil, Serie 10.1, Spulenbausatz,
 Neosid, HF-Coil, Serie 10.1, Spulenbausatz,
 0
 7
-6
-Filters_HF_Coils_NEOSID
-Neosid_HF-Coil_SMF5-1_SMD
-Neosid, HF-Coil, SMF5.1, SMD.
-Neosid, HF-Coil, SMF5.1, SMD,
-0
-6
 6
 Filters_HF_Coils_NEOSID
 Neosid_HF-Coil_Type7-1E
@@ -5515,90 +5445,6 @@ Neosid, Triple Helical Filter, Type10E, through hole,
 0
 19
 13
-footprints
-DB15MC
-Connecteur DB15 MALE couche
-CONN DB15
-0
-17
-15
-footprints
-DFN-10-1EP_3x3mm_Pitch0.5mm
-10-Lead Plastic Dual Flat, No Lead Package (MF) - 3x3x0.9 mm Body [DFN] (see Microchip Packaging Specification 00000049BS.pdf)
-DFN 0.5
-0
-14
-11
-footprints
-dfn8_s-pwson-n8
-DFN8 2x2, 0.5P; CASE 506CN (see ON Semiconductor 506CN.PDF)
-DFN 0.5
-0
-10
-9
-footprints
-header_th_0705430002
-Through hole pin header
-pin header
-0
-3
-3
-footprints
-QFN-20-1EP_4x4mm_Pitch0.5mm
-20-Lead Plastic Quad Flat, No Lead Package (ML) - 4x4x0.9 mm Body [QFN]; (see Microchip Packaging Specification 00000049BS.pdf)
-QFN 0.5
-0
-24
-21
-footprints
-SM-22
-
-
-0
-5
-5
-footprints
-SMA_5-1814832-1
-
-
-0
-5
-5
-footprints
-SMA_rightangle
-
-
-0
-5
-5
-footprints
-SOT23_1B2E3C
-Module CMS SOT23 Transistore EBC
-CMS SOT
-0
-3
-3
-footprints
-TO252-5
-
-
-0
-6
-5
-footprints
-xxSAxxxx
-
-
-0
-6
-6
-footprints
-YY161
-
-
-0
-8
-8
 Fuse_Holders_and_Fuses
 BladeFuse-CarType
 
@@ -5610,76 +5456,6 @@ Fuse_Holders_and_Fuses
 BladeFuse-Mini
 
 
-0
-2
-2
-Fuse_Holders_and_Fuses
-Fuseholder5x20_Horizontal_closed_Bulgin_FX0457
-Fuseholder, 5x20, closed, horizontal, Bulgin, FX0457, Sicherungshalter,
-Fuseholder, 5x20, closed, horizontal, Bulgin, FX0457, Sicherungshalter,
-0
-2
-2
-Fuse_Holders_and_Fuses
-Fuseholder5x20_horiz_open_inline_Type-I
-Fuseholder, 5x20, open, horizontal, Type-I, Inline,
-Fuseholder, 5x20, open, horizontal, Type-I, Inline, Sicherungshalter, offen,
-0
-4
-2
-Fuse_Holders_and_Fuses
-Fuseholder5x20_horiz_open_lateral_Type-II
-Fuseholder, 5x20, open, horizontal, Type-II, lateral,
-Fuseholder, 5x20, open, horizontal, Type-II, lateral, Sicherungshalter, offen,
-0
-4
-2
-Fuse_Holders_and_Fuses
-Fuseholder5x20_horiz_open_Schurter_0031_8201
-http://www.schurter.com/var/schurter/storage/ilcatalogue/files/document/datasheet/en/pdf/typ_OGN.pdf
-Fuseholder horizontal open 5x20 Schurter 0031.8201
-0
-2
-2
-Fuse_Holders_and_Fuses
-Fuseholder5x20_horiz_open_universal_Type-III
-Fuseholder, 5x20, open, horizontal, Type-III, universal, inline, lateral,
-Fuseholder, 5x20, open, horizontal, Type-III, universal, inline, lateral, Sicherungshalter, offen,
-0
-8
-2
-Fuse_Holders_and_Fuses
-Fuseholder5x20_horiz_SemiClosed_Casing10x25mm
-Fuseholder, 5x20, Semi closed, horizontal, Casing 10x25mm,
-Fuseholder, 5x20, Semi closed, horizontal, Casing 10x25mm, Sicherungshalter, halbgeschlossen,
-0
-2
-2
-Fuse_Holders_and_Fuses
-Fuseholder5x20_vert_closed_Bulgin_FX0456
-Fuseholder, 5x20, closed, vertical, Bulgin, FX0456
-Fuseholder, 5x20, closed, vertical, Bulgin, FX0456, Sicherungshalter,
-0
-6
-3
-Fuse_Holders_and_Fuses
-Fuseholder6x32_Horiz_Open_Schurter0031-8002
-Fuseholder, horizontal, open, 6x32, Schurter, 0031.8002,
-Fuseholder, horizontal, open, 6x32, Schurter, 0031.8002, Sicherungshalter,
-0
-2
-2
-Fuse_Holders_and_Fuses
-Fuseholder_ATO_Blade_littlefuse_Pudenz_2_Pin
-
-Fuseholder ATO Blade littlefuse Pudenz 2 Pin
-0
-3
-2
-Fuse_Holders_and_Fuses
-Fuseholder_Fuse_TR5_Littlefuse-No560_No460
-Fuse, Fuseholder, TR5, Littlefuse/Wickmann, No. 460, No560,
-Fuse, Fuseholder, TR5, Littlefuse/Wickmann, No. 460, No560,
 0
 2
 2
@@ -5715,6 +5491,76 @@ Fuse_Holders_and_Fuses
 Fuse_TE5_Littlefuse-395Series
 Fuse, TE5, Littlefuse/Wickmann, No. 460, No560,
 Fuse, TE5, Littlefuse/Wickmann, No. 460, No560,
+0
+2
+2
+Fuse_Holders_and_Fuses
+Fuseholder5x20_Horizontal_closed_Bulgin_FX0457
+Fuseholder, 5x20, closed, horizontal, Bulgin, FX0457, Sicherungshalter,
+Fuseholder, 5x20, closed, horizontal, Bulgin, FX0457, Sicherungshalter,
+0
+2
+2
+Fuse_Holders_and_Fuses
+Fuseholder5x20_horiz_SemiClosed_Casing10x25mm
+Fuseholder, 5x20, Semi closed, horizontal, Casing 10x25mm,
+Fuseholder, 5x20, Semi closed, horizontal, Casing 10x25mm, Sicherungshalter, halbgeschlossen,
+0
+2
+2
+Fuse_Holders_and_Fuses
+Fuseholder5x20_horiz_open_Schurter_0031_8201
+http://www.schurter.com/var/schurter/storage/ilcatalogue/files/document/datasheet/en/pdf/typ_OGN.pdf
+Fuseholder horizontal open 5x20 Schurter 0031.8201
+0
+2
+2
+Fuse_Holders_and_Fuses
+Fuseholder5x20_horiz_open_inline_Type-I
+Fuseholder, 5x20, open, horizontal, Type-I, Inline,
+Fuseholder, 5x20, open, horizontal, Type-I, Inline, Sicherungshalter, offen,
+0
+4
+2
+Fuse_Holders_and_Fuses
+Fuseholder5x20_horiz_open_lateral_Type-II
+Fuseholder, 5x20, open, horizontal, Type-II, lateral,
+Fuseholder, 5x20, open, horizontal, Type-II, lateral, Sicherungshalter, offen,
+0
+4
+2
+Fuse_Holders_and_Fuses
+Fuseholder5x20_horiz_open_universal_Type-III
+Fuseholder, 5x20, open, horizontal, Type-III, universal, inline, lateral,
+Fuseholder, 5x20, open, horizontal, Type-III, universal, inline, lateral, Sicherungshalter, offen,
+0
+8
+2
+Fuse_Holders_and_Fuses
+Fuseholder5x20_vert_closed_Bulgin_FX0456
+Fuseholder, 5x20, closed, vertical, Bulgin, FX0456
+Fuseholder, 5x20, closed, vertical, Bulgin, FX0456, Sicherungshalter,
+0
+6
+3
+Fuse_Holders_and_Fuses
+Fuseholder6x32_Horiz_Open_Schurter0031-8002
+Fuseholder, horizontal, open, 6x32, Schurter, 0031.8002,
+Fuseholder, horizontal, open, 6x32, Schurter, 0031.8002, Sicherungshalter,
+0
+2
+2
+Fuse_Holders_and_Fuses
+Fuseholder_ATO_Blade_littlefuse_Pudenz_2_Pin
+
+Fuseholder ATO Blade littlefuse Pudenz 2 Pin
+0
+3
+2
+Fuse_Holders_and_Fuses
+Fuseholder_Fuse_TR5_Littlefuse-No560_No460
+Fuse, Fuseholder, TR5, Littlefuse/Wickmann, No. 460, No560,
+Fuse, Fuseholder, TR5, Littlefuse/Wickmann, No. 460, No560,
 0
 2
 2
@@ -7286,328 +7132,6 @@ SSOP 0.75
 0
 56
 56
-Inductors
-Inductor_1212
-
-
-0
-2
-2
-Inductors
-INDUCTOR_V
-Inductor (vertical)
-INDUCTOR
-0
-2
-2
-Inductors
-NR4018
-http://www.yuden.co.jp/productdata/catalog/en/wound04_e.pdf
-
-0
-2
-2
-Inductors
-NR4018_HandSoldering
-http://www.yuden.co.jp/productdata/catalog/en/wound04_e.pdf
-
-0
-2
-2
-Inductors
-SELF-WE-PD-XXL
-SELF- WE-PD-XXL
-
-0
-2
-2
-Inductors
-SELF-WE-PD3S
-SELF WE-PD3S
-
-0
-2
-2
-Inductors
-SELF-WE-TPC_M
-SELF WE-TPC/M
-
-0
-2
-2
-Inductors
-SELF1408
-Self Ferrite 14 - 08
-SELF
-0
-7
-3
-Inductors
-SELF1418
-Self Ferrite 14 - 18
-SELF
-0
-10
-4
-Inductors
-self_cms_we-pd3
-
-
-0
-2
-2
-Inductors
-self_cms_we-tpc_XL
-SELF WE-PD3L
-
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_MA-Bs75
-Neosid, Inductor, Bs75, Festinduktivitaet, Through hole, magneticaly shielded,
-Neosid, Inductor, Bs75, Festinduktivitaet, Through hole, magneticaly shielded,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Ms42
-Neosid, Power Inductor, Ms42, SMD, Festinduktivitaet,
-Neosid, Power Inductor, Ms42, SMD, Festinduktivitaet,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Ms50
-Neosid, Power Inductor, Ms50, SMD, Festinduktivitaet,
-Neosid, Power Inductor, Ms50, SMD, Festinduktivitaet,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Ms50T
-Neosid, Power Inductor, Ms50T, SMD, Festinduktivitaet,  high temperature,
-Neosid, Power Inductor, Ms50T, SMD, Festinduktivitaet, high temperature,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Ms85
-Neosid, Ms85, Ms85T, SMD Inductor, Festinduktivitaet, SMD,
-Neosid, Ms85, Ms85T, SMD Inductor, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Ms95
-Neosid,Inductor,Ms95, Ms95a, Ms95T, Festinduktivitaet, SMD,
-Neosid,Inductor,Ms95, Ms95a, Ms95T, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_NE-CBP11E-N
-Neosid, Inductor, NE-CBP11E-N, Festinduktivitaet, Through hole,
-Neosid, Inductor, NE-CBP11E-N, Festinduktivitaet, Through hole,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_NE-CPB07E
-Neosid, Power Inductor, NE-CPB07E, through hole, Festinduktivitaet,
-Neosid, Power Inductor, NE-CPB07E, through hole, Festinduktivitaet,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Sd8
-Neosid, Inductor, Sd8, Festinduktivitaet, Through hole,
-Neosid, Inductor, Sd8, Festinduktivitaet, Through hole,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Sd12k-style1
-Neosid, Inductor, Sd12k-style1, Festinduktivitaet, Through hole,
-Neosid, Inductor, Sd12k-style1, Festinduktivitaet, Through hole,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Sd12k-style2
-Neosid, Inductor, Sd12k-style2, Festinduktivitaet, Through hole,
-Neosid, Inductor, Sd12k-style2, Festinduktivitaet, Through hole,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Sd12k-style3
-Neosid, Inductor, Sd12k-style3, Festinduktivitaet, Through hole,
-Neosid, Inductor, Sd12k-style3, Festinduktivitaet, Through hole,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Sd14
-Neosid, Inductor, Sd14, Festinduktivitaet, Through hole,
-Neosid, Inductor, Sd14, Festinduktivitaet, Through hole,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_Sd75
-Neosid, Inductor, Sd75, Festinduktivitaet, Through hole,
-Neosid, Inductor, Sd75, Festinduktivitaet, Through hole,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-NE29_SMD1008
-Neosid, Inductor, SM-NE29, SMD1008, Festinduktivitaet, SMD,
-Neosid, Inductor, SM-NE29, SMD1008, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-NE30_SMD1210
-Neosid, Inductor, SM-NE30, SMD1210, Festinduktivitaet, SMD,
-Neosid, Inductor, SM-NE30, SMD1210, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-NE45_SMD1812
-Neosid, SM-Ne45, (1812), SMD Chip Inductor, Festinduktivitaet,
-Neosid, SM-Ne45, (1812), SMD Chip Inductor, Festinduktivitaet,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-NE56_SMD2220
-Neosid, Inductor, SM-NE56, SMD2220, Festinduktivitaet, SMD,
-Neosid, Inductor, SM-NE56, SMD2220, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-NE95H
-Neosid, Inductor,SM-NE95H, Festinduktivitaet, SMD,
-Neosid, Inductor,SM-NE95H, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-NE127
-Neosid, Inductor, SM-NE127, Festinduktivitaet, SMD,
-Neosid, Inductor, SM-NE127, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-NE150
-Neosid, Inductor, SM-NE150, Festinduktivitaet, SMD,
-Neosid, Inductor, SM-NE150, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-PIC0512H
-Neosid, Inductor, PIC0512H, Power Inductor, Festinduktivitaet, SMD,
-Neosid, Inductor, PIC0512H, Power Inductor, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-PIC0602H
-Neosid, Power Inductor, SM-PIC0602H, Festinduktivitaet, SMD,
-Neosid, Power Inductor, SM-PIC0602H, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-PIC0612H
-Neosid, Power Inductor, SM-PIC0612H, Festinduktivitaet, SMD,
-Neosid, Power Inductor, SM-PIC0612H, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM-PIC1004H
-Neosid, Inductor, SM-PIC1004H, Festinduktivitaet, SMD,
-Neosid, Inductor, SM-PIC1004H, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM0603CG
-Neosid, Inductor, SM0603CG, Festinduktivitaet, SMD,
-Neosid, Inductor, SM0603CG, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SM1206
-Neosid, Inductor, SM1206, Festinduktivitaet, SMD,
-Neosid, Inductor, SM1206, Festinduktivitaet, SMD,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SMS-ME3010
-Neosid, Inductor, SMS-ME3010, Festinduktivitaet, SMD, magnetically shielded,
-Neosid, Inductor, SMS-ME3010, Festinduktivitaet, SMD, magnetically shielded,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SMS-ME3015
-Neosid, Power Inductor, SMS-ME3015, Festinduktivitaet, SMD, magnetically shielded,
-Neosid, Power Inductor, SMS-ME3015, Festinduktivitaet, SMD, magnetically shielded,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SMs42
-Neosid, Inductor, SMs42, Festinduktivitaet, SMD, magneticaly shielded,
-Neosid, Inductor, SMs42, Festinduktivitaet, SMD, magneticaly shielded,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SMs50
-Neosid, Inductor, SMs50, Festinduktivitaet, SMD, magneticaly shielded,
-Neosid, Inductor, SMs50, Festinduktivitaet, SMD, magneticaly shielded,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SMs85
-Neosid, Inductor, SMs85, Festinduktivitaet, SMD, magnetically shielded,
-Neosid, Inductor, SMs85, Festinduktivitaet, SMD, magnetically shielded,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SMs95
-Neosid, Inductor, SMs95, Festinduktivitaet, SMD, magnetically shielded,
-Neosid, Inductor, SMs95, Festinduktivitaet, SMD, magnetically shielded,
-0
-2
-2
-Inductors_NEOSID
-Neosid_Inductor_SMs95p
-Neosid, Inductor, SMs95p, Festinduktivitaet, SMD, magnetically shielded,
-Neosid, Inductor, SMs95p, Festinduktivitaet, SMD, magnetically shielded,
-0
-2
-2
-Inductors_NEOSID
-Neosid_MicroCoil_Inductor_Ms36-L
-Neosid, Micro Coil, Inductor, Ms36-L, SMD, Festinduktivitaet, anti clockwise,
-Neosid, Micro Coil, Inductor, Ms36-L, SMD, Festinduktivitaet, anti clockwise,
-0
-2
-2
 IR-DirectFETs
 IR-directFET_L8-Outline_Names
 IR-directFET, L8-Outline, Pads with Names,
@@ -7769,6 +7293,419 @@ IR directFRT, ST-Outline, Pads numbered,
 0
 7
 6
+Inductors
+INDUCTOR_V
+Inductor (vertical)
+INDUCTOR
+0
+2
+2
+Inductors
+Inductor_1212
+
+
+0
+2
+2
+Inductors
+NR4018
+http://www.yuden.co.jp/productdata/catalog/en/wound04_e.pdf
+
+0
+2
+2
+Inductors
+NR4018_HandSoldering
+http://www.yuden.co.jp/productdata/catalog/en/wound04_e.pdf
+
+0
+2
+2
+Inductors
+SELF-WE-PD-XXL
+SELF- WE-PD-XXL
+
+0
+2
+2
+Inductors
+SELF-WE-PD3S
+SELF WE-PD3S
+
+0
+2
+2
+Inductors
+SELF-WE-TPC_M
+SELF WE-TPC/M
+
+0
+2
+2
+Inductors
+SELF1408
+Self Ferrite 14 - 08
+SELF
+0
+7
+3
+Inductors
+SELF1418
+Self Ferrite 14 - 18
+SELF
+0
+10
+4
+Inductors
+self_cms_we-pd3
+
+
+0
+2
+2
+Inductors
+self_cms_we-tpc_XL
+SELF WE-PD3L
+
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_MA-Bs75
+Neosid, Inductor, Bs75, Festinduktivitaet, Through hole, magneticaly shielded,
+Neosid, Inductor, Bs75, Festinduktivitaet, Through hole, magneticaly shielded,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Ms42
+Neosid, Power Inductor, Ms42, SMD, Festinduktivitaet,
+Neosid, Power Inductor, Ms42, SMD, Festinduktivitaet,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Ms50
+Neosid, Power Inductor, Ms50, SMD, Festinduktivitaet,
+Neosid, Power Inductor, Ms50, SMD, Festinduktivitaet,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Ms50T
+Neosid, Power Inductor, Ms50T, SMD, Festinduktivitaet,  high temperature,
+Neosid, Power Inductor, Ms50T, SMD, Festinduktivitaet, high temperature,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Ms85
+Neosid, Ms85, Ms85T, SMD Inductor, Festinduktivitaet, SMD,
+Neosid, Ms85, Ms85T, SMD Inductor, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Ms95
+Neosid,Inductor,Ms95, Ms95a, Ms95T, Festinduktivitaet, SMD,
+Neosid,Inductor,Ms95, Ms95a, Ms95T, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_NE-CBP11E-N
+Neosid, Inductor, NE-CBP11E-N, Festinduktivitaet, Through hole,
+Neosid, Inductor, NE-CBP11E-N, Festinduktivitaet, Through hole,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_NE-CPB07E
+Neosid, Power Inductor, NE-CPB07E, through hole, Festinduktivitaet,
+Neosid, Power Inductor, NE-CPB07E, through hole, Festinduktivitaet,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-NE29_SMD1008
+Neosid, Inductor, SM-NE29, SMD1008, Festinduktivitaet, SMD,
+Neosid, Inductor, SM-NE29, SMD1008, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-NE30_SMD1210
+Neosid, Inductor, SM-NE30, SMD1210, Festinduktivitaet, SMD,
+Neosid, Inductor, SM-NE30, SMD1210, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-NE45_SMD1812
+Neosid, SM-Ne45, (1812), SMD Chip Inductor, Festinduktivitaet,
+Neosid, SM-Ne45, (1812), SMD Chip Inductor, Festinduktivitaet,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-NE56_SMD2220
+Neosid, Inductor, SM-NE56, SMD2220, Festinduktivitaet, SMD,
+Neosid, Inductor, SM-NE56, SMD2220, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-NE95H
+Neosid, Inductor,SM-NE95H, Festinduktivitaet, SMD,
+Neosid, Inductor,SM-NE95H, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-NE127
+Neosid, Inductor, SM-NE127, Festinduktivitaet, SMD,
+Neosid, Inductor, SM-NE127, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-NE150
+Neosid, Inductor, SM-NE150, Festinduktivitaet, SMD,
+Neosid, Inductor, SM-NE150, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-PIC0512H
+Neosid, Inductor, PIC0512H, Power Inductor, Festinduktivitaet, SMD,
+Neosid, Inductor, PIC0512H, Power Inductor, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-PIC0602H
+Neosid, Power Inductor, SM-PIC0602H, Festinduktivitaet, SMD,
+Neosid, Power Inductor, SM-PIC0602H, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-PIC0612H
+Neosid, Power Inductor, SM-PIC0612H, Festinduktivitaet, SMD,
+Neosid, Power Inductor, SM-PIC0612H, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM-PIC1004H
+Neosid, Inductor, SM-PIC1004H, Festinduktivitaet, SMD,
+Neosid, Inductor, SM-PIC1004H, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM0603CG
+Neosid, Inductor, SM0603CG, Festinduktivitaet, SMD,
+Neosid, Inductor, SM0603CG, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SM1206
+Neosid, Inductor, SM1206, Festinduktivitaet, SMD,
+Neosid, Inductor, SM1206, Festinduktivitaet, SMD,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SMS-ME3010
+Neosid, Inductor, SMS-ME3010, Festinduktivitaet, SMD, magnetically shielded,
+Neosid, Inductor, SMS-ME3010, Festinduktivitaet, SMD, magnetically shielded,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SMS-ME3015
+Neosid, Power Inductor, SMS-ME3015, Festinduktivitaet, SMD, magnetically shielded,
+Neosid, Power Inductor, SMS-ME3015, Festinduktivitaet, SMD, magnetically shielded,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SMs42
+Neosid, Inductor, SMs42, Festinduktivitaet, SMD, magneticaly shielded,
+Neosid, Inductor, SMs42, Festinduktivitaet, SMD, magneticaly shielded,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SMs50
+Neosid, Inductor, SMs50, Festinduktivitaet, SMD, magneticaly shielded,
+Neosid, Inductor, SMs50, Festinduktivitaet, SMD, magneticaly shielded,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SMs85
+Neosid, Inductor, SMs85, Festinduktivitaet, SMD, magnetically shielded,
+Neosid, Inductor, SMs85, Festinduktivitaet, SMD, magnetically shielded,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SMs95
+Neosid, Inductor, SMs95, Festinduktivitaet, SMD, magnetically shielded,
+Neosid, Inductor, SMs95, Festinduktivitaet, SMD, magnetically shielded,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_SMs95p
+Neosid, Inductor, SMs95p, Festinduktivitaet, SMD, magnetically shielded,
+Neosid, Inductor, SMs95p, Festinduktivitaet, SMD, magnetically shielded,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Sd8
+Neosid, Inductor, Sd8, Festinduktivitaet, Through hole,
+Neosid, Inductor, Sd8, Festinduktivitaet, Through hole,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Sd12k-style1
+Neosid, Inductor, Sd12k-style1, Festinduktivitaet, Through hole,
+Neosid, Inductor, Sd12k-style1, Festinduktivitaet, Through hole,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Sd12k-style2
+Neosid, Inductor, Sd12k-style2, Festinduktivitaet, Through hole,
+Neosid, Inductor, Sd12k-style2, Festinduktivitaet, Through hole,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Sd12k-style3
+Neosid, Inductor, Sd12k-style3, Festinduktivitaet, Through hole,
+Neosid, Inductor, Sd12k-style3, Festinduktivitaet, Through hole,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Sd14
+Neosid, Inductor, Sd14, Festinduktivitaet, Through hole,
+Neosid, Inductor, Sd14, Festinduktivitaet, Through hole,
+0
+2
+2
+Inductors_NEOSID
+Neosid_Inductor_Sd75
+Neosid, Inductor, Sd75, Festinduktivitaet, Through hole,
+Neosid, Inductor, Sd75, Festinduktivitaet, Through hole,
+0
+2
+2
+Inductors_NEOSID
+Neosid_MicroCoil_Inductor_Ms36-L
+Neosid, Micro Coil, Inductor, Ms36-L, SMD, Festinduktivitaet, anti clockwise,
+Neosid, Micro Coil, Inductor, Ms36-L, SMD, Festinduktivitaet, anti clockwise,
+0
+2
+2
+LEDs
+LED-3MM
+LED 3mm round vertical
+LED  3mm round vertical
+0
+2
+2
+LEDs
+LED-5MM
+LED 5mm round vertical
+LED 5mm round vertical
+0
+2
+2
+LEDs
+LED-5MM-3
+3-lead LED 5mm - Lead pitch 100mil (2,54mm)
+LED led 5mm 5MM 100mil 2.54mm 3-lead
+0
+3
+3
+LEDs
+LED-8MM
+LED 8mm - Lead pitch 100mil (2,54mm)
+LED led 8mm 8MM 100mil 2.54mm
+0
+2
+2
+LEDs
+LED-10MM
+LED 10mm - Lead pitch 100mil (2,54mm)
+LED led 10mm 10MM 100mil 2.54mm
+0
+2
+2
+LEDs
+LED-L1T2_LUMILEDS
+http://www.lumileds.com/uploads/438/DS133-pdf
+LUMILEDS LUXEON TX L1T2 LED
+0
+3
+3
+LEDs
+LED-RGB-5MM_Common_Cathode
+5mm common cathode RGB LED
+RGB LED 5mm Common Cathode
+0
+4
+4
+LEDs
+LED-XP-G_CREE
+http://www.cree.com/~/media/Files/Cree/LED%20Components%20and%20Modules/XLamp/Data%20and%20Binning/XLampXPG.pdf
+LED XP-G CREE
+0
+3
+3
+LEDs
+LED_0603
+LED 0603 smd package
+LED led 0603 SMD smd SMT smt smdled SMDLED smtled SMTLED
+0
+2
+2
+LEDs
+LED_0805
+LED 0805 smd package
+LED 0805 SMD
+0
+2
+2
+LEDs
+LED_1206
+LED 1206 smd package
+LED1206 SMD
+0
+2
+2
+LEDs
+LED_RGB_Getian_GT-P6PRGB4303
+https://www.gme.sk/img/cache/doc/518/177/vykonova-led-getian-gt-p6prgb4303-datasheet-1.pdf
+LED RGB 
+0
+7
+7
+LEDs
+LED_RGB_PLLC-6
+RGB LED PLLC-6
+RGB LED PLLC-6
+0
+6
+6
 Labels
 Label_Apfelgelee_40x20mm
 
@@ -7916,132 +7853,6 @@ Label_WD-40_10x20mm_02072010
 0
 0
 0
-LEDs
-LED-3MM
-LED 3mm round vertical
-LED  3mm round vertical
-0
-2
-2
-LEDs
-LED-5MM
-LED 5mm round vertical
-LED 5mm round vertical
-0
-2
-2
-LEDs
-LED-5MM-3
-3-lead LED 5mm - Lead pitch 100mil (2,54mm)
-LED led 5mm 5MM 100mil 2.54mm 3-lead
-0
-3
-3
-LEDs
-LED-8MM
-LED 8mm - Lead pitch 100mil (2,54mm)
-LED led 8mm 8MM 100mil 2.54mm
-0
-2
-2
-LEDs
-LED-10MM
-LED 10mm - Lead pitch 100mil (2,54mm)
-LED led 10mm 10MM 100mil 2.54mm
-0
-2
-2
-LEDs
-LED-L1T2_LUMILEDS
-http://www.lumileds.com/uploads/438/DS133-pdf
-LUMILEDS LUXEON TX L1T2 LED
-0
-3
-3
-LEDs
-LED-RGB-5MM_Common_Cathode
-5mm common cathode RGB LED
-RGB LED 5mm Common Cathode
-0
-4
-4
-LEDs
-LED-XP-G_CREE
-http://www.cree.com/~/media/Files/Cree/LED%20Components%20and%20Modules/XLamp/Data%20and%20Binning/XLampXPG.pdf
-LED XP-G CREE
-0
-3
-3
-LEDs
-LED_0603
-LED 0603 smd package
-LED led 0603 SMD smd SMT smt smdled SMDLED smtled SMTLED
-0
-2
-2
-LEDs
-LED_0805
-LED 0805 smd package
-LED 0805 SMD
-0
-2
-2
-LEDs
-LED_1206
-LED 1206 smd package
-LED1206 SMD
-0
-2
-2
-LEDs
-LED_RGB_Getian_GT-P6PRGB4303
-https://www.gme.sk/img/cache/doc/518/177/vykonova-led-getian-gt-p6prgb4303-datasheet-1.pdf
-LED RGB 
-0
-7
-7
-LEDs
-LED_RGB_PLLC-6
-RGB LED PLLC-6
-RGB LED PLLC-6
-0
-6
-6
-lib
-gunter
-
-
-0
-0
-0
-lib
-gunter_inverse
-
-
-0
-0
-0
-lib
-MICROUSB_sm
-
-
-0
-9
-5
-lib
-SJ1-351X-SMT
-
-
-0
-7
-7
-lib
-U.FL-COAX
-
-
-0
-3
-3
 Measurement_Points
 Measurement_Point_Round-SMD-Pad_Big
 Mesurement Point, Round, SMD Pad, DM 3mm,
@@ -8707,97 +8518,6 @@ NF-Transformer, ETAL P3356,
 0
 4
 4
-Oddities
-Dummy_Empty
-Only empty Dummy to give satsfaction to DRC
-Only empty Dummy to give satsfaction to DRC
-0
-0
-0
-Oddities
-NetTie-I
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-0
-2
-2
-Oddities
-NetTie-II
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
-0
-3
-3
-Oddities
-NetTie-III
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between The Pads by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
-0
-4
-4
-Oddities
-NetTie-III_Connected
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-0
-4
-4
-Oddities
-NetTie-III_Connected_SMD
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-0
-4
-4
-Oddities
-NetTie-III_SMD
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
-0
-4
-4
-Oddities
-NetTie-II_Connected
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-0
-3
-3
-Oddities
-NetTie-II_Connected_SMD
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-0
-3
-3
-Oddities
-NetTie-II_SMD
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
-0
-3
-3
-Oddities
-NetTie-I_Connected
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC.
-0
-2
-2
-Oddities
-NetTie-I_Connected_SMD
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC.
-0
-2
-2
-Oddities
-NetTie-I_SMD
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
-0
-2
-2
 Opto-Devices
 FIBEROPTIC-RX_AGILENT_HFBR-252x
 Fiberoptic RX, Receiver, AGILENT, Versatile Link, HFBR-252x
@@ -10332,13 +10052,6 @@ Potentiometer, Trimmer, RM-065
 3
 3
 Potentiometers
-Potentiometer_VishaySpectrol-Econtrim-Type36k
-Potentiometer, Trimmer, Spectrol Type 36k, Econtrim, Rev A, 02 Aug 2010,
-Potentiometer, Trimmer, Spectrol Type 36k, Econtrim, Rev A, 02 Aug 2010,
-0
-3
-3
-Potentiometers
 Potentiometer_VishaySpectrol-Econtrim-Type36M
 Potentiometer, Trimmer, Spectrol Type 36M, Econtrim, Rev A, 02 Aug 2010,
 Potentiometer, Trimmer, Spectrol Type 36M, Econtrim, Rev A, 02 Aug 2010,
@@ -10367,14 +10080,14 @@ Potentiometer, Trimmer, Spectrol Type 36X, Econtrim, Rev A, 02 Aug 2010,
 3
 3
 Potentiometers
-Potentiometer_WirePads
-Potentiometer, Wire Pads only, RevA, 30 July 2010,
-Potentiometer, Wire Pads only, RevA, 30 July 2010,
+Potentiometer_VishaySpectrol-Econtrim-Type36k
+Potentiometer, Trimmer, Spectrol Type 36k, Econtrim, Rev A, 02 Aug 2010,
+Potentiometer, Trimmer, Spectrol Type 36k, Econtrim, Rev A, 02 Aug 2010,
 0
 3
 3
 Potentiometers
-Potentiometer_WirePads_largePads
+Potentiometer_WirePads
 Potentiometer, Wire Pads only, RevA, 30 July 2010,
 Potentiometer, Wire Pads only, RevA, 30 July 2010,
 0
@@ -10387,27 +10100,13 @@ Potentiometer, Wire Pads only, small, RevA, 02 Aug 2010,
 0
 3
 3
-Power_Integrations
-eDIP-12
-eDIP-12 Flat Package with Heatsink Tab
-Power Integrations V Package
+Potentiometers
+Potentiometer_WirePads_largePads
+Potentiometer, Wire Pads only, RevA, 30 July 2010,
+Potentiometer, Wire Pads only, RevA, 30 July 2010,
 0
-12
-12
-Power_Integrations
-eSIP-7C
-eSIP-7C Vertical Flat Package with Heatsink Tab
-Power Integrations E Package
-0
-6
-6
-Power_Integrations
-eSIP-7F
-eSIP-7F Flat Package with Heatsink Tab
-Power Integrations L Package
-0
-6
-6
+3
+3
 Power_Integrations
 PDIP-8
 PDIP-8 Standard 300mil 8pin Dual In Line Package
@@ -10506,76 +10205,27 @@ Power Integration R Package
 0
 7
 7
-probe_footprints
-142-0721-882_sma_cutout
-
-
+Power_Integrations
+eDIP-12
+eDIP-12 Flat Package with Heatsink Tab
+Power Integrations V Package
 0
-3
-3
-probe_footprints
-1590B
-
-
+12
+12
+Power_Integrations
+eSIP-7C
+eSIP-7C Vertical Flat Package with Heatsink Tab
+Power Integrations E Package
 0
-4
-1
-probe_footprints
-732511150_sma
-
-
+6
+6
+Power_Integrations
+eSIP-7F
+eSIP-7F Flat Package with Heatsink Tab
+Power Integrations L Package
 0
-5
-5
-probe_footprints
-732511150_sma_thin
-
-
-0
-5
-5
-probe_footprints
-732512200_SMA
-
-
-0
-5
-5
-probe_footprints
-cinch_banana_jack
-Single banana socket, footprint - 6mm drill
-banana socket
-0
-1
-1
-probe_footprints
-LS_T776_BOTTOM_LED
-
-
-0
-3
-3
-probe_footprints
-sot86
-
-
-0
-4
-4
-probe_footprints
-via_0p6mmpad_0p4mmdrill
-
-
-0
-1
-1
-probe_footprints
-WE-HCI-7050
-
-
-0
-2
-2
+6
+6
 Relays_ThroughHole
 Relay_DPDT_IM0(3,6,7)NS
 IM Signal Relay, DPDT, IM0(3,6,7)NS, narrow footprint
@@ -11157,342 +10807,6 @@ Resistor, SMD, universal, 0805 to 2512, Hand soldering,
 0
 2
 2
-sensornode
-0896BM15A0001E
-
-
-0
-6
-6
-sensornode
-1555CF22
-
-
-0
-0
-0
-sensornode
-ANT1204LL05R0915A
-
-
-0
-2
-2
-sensornode
-BC2AAPC
-
-
-0
-2
-2
-sensornode
-CAP_POL_6p60mm
-
-
-0
-2
-2
-sensornode
-cat
-
-
-0
-0
-0
-sensornode
-CHS-08TA
-
-
-0
-16
-16
-sensornode
-CONN_MSPJTAG
-
-
-0
-14
-14
-sensornode
-gps_radionova
-
-
-0
-28
-28
-sensornode
-gunter
-
-
-0
-0
-0
-sensornode
-JMP_HDR
-
-
-0
-3
-3
-sensornode
-LPPB061NGCN-RC
-
-
-0
-6
-6
-sensornode
-NT2016SA
-
-
-0
-4
-4
-sensornode
-Pomona 3754
-
-
-0
-0
-0
-sensornode
-PTS820J20MSMTRLFS
-
-
-0
-6
-6
-sensornode
-S01-50250500
-
-
-0
-18
-18
-sensornode
-ST_LGA_14
-
-
-0
-14
-14
-sensornode
-TSSOP_38_Pitch0.65mm
-38
-
-0
-38
-38
-sensornode
-U.FL-COAX
-
-
-0
-3
-3
-Shielding_Cabinets
-Laird_Technologies_97-2002_25.40x25.40mm
-Laird Technologies 97-2002 EZ PEEL Shielding Cabinet One Piece SMD 25.40x25.40mm
-Shielding Cabinet
-0
-8
-1
-Shielding_Cabinets
-Laird_Technologies_97-2003_12.70x13.37mm
-Laird Technologies 97-2003 EZ PEEL Shielding Cabinet One Piece SMD 12.70x13.37mm
-Shielding Cabinet
-0
-8
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-101_13.66x12.70mm
-Laird Technologies BMI-S-101 Shielding Cabinet One Piece SMD 13.66x12.70mm
-Shielding Cabinet
-0
-16
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-102_16.50x16.50mm
-Laird Technologies BMI-S-102 Shielding Cabinet One Piece SMD 16.50x16.50mm
-Shielding Cabinet
-0
-16
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-103_26.21x26.21mm
-Laird Technologies BMI-S-103 Shielding Cabinet One Piece SMD 26.21x26.21mm
-Shielding Cabinet
-0
-24
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-104_32.00x32.00mm
-Laird Technologies BMI-S-104 Shielding Cabinet One Piece SMD 32.00x32.00mm
-Shielding Cabinet
-0
-28
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-105_38.10x25.40mm
-Laird Technologies BMI-S-105 Shielding Cabinet One Piece SMD 38.10x25.40mm
-Shielding Cabinet
-0
-28
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-106_36.83x33.68mm
-Laird Technologies BMI-S-106 Shielding Cabinet One Piece SMD 36.83x33.68mm
-Shielding Cabinet
-0
-28
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-107_44.37x44.37mm
-Laird Technologies BMI-S-107 Shielding Cabinet One Piece SMD 44.37x44.37mm
-Shielding Cabinet
-0
-36
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-201-F_13.66x12.70mm
-Laird Technologies BMI-S-201-F Shielding Cabinet Two Piece SMD 13.66x12.70mm
-Shielding Cabinet
-0
-16
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-202-F_16.50x16.50mm
-Laird Technologies BMI-S-202-F Shielding Cabinet Two Piece SMD 16.50x16.50mm
-Shielding Cabinet
-0
-16
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-203-F_26.21x26.21mm
-Laird Technologies BMI-S-203-F Shielding Cabinet Two Piece SMD 26.21x26.21mm
-Shielding Cabinet
-0
-24
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-204-F_32.00x32.00mm
-Laird Technologies BMI-S-204-F Shielding Cabinet Two Piece SMD 32.00x32.00mm
-Shielding Cabinet
-0
-28
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-205-F_38.10x25.40mm
-Laird Technologies BMI-S-205-F Shielding Cabinet Two Piece SMD 38.10x25.40mm
-Shielding Cabinet
-0
-28
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-206-F_36.83x33.68mm
-Laird Technologies BMI-S-206-F Shielding Cabinet Two Piece SMD 36.83x33.68mm
-Shielding Cabinet
-0
-28
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-207-F_44.37x44.37mm
-Laird Technologies BMI-S-207-F Shielding Cabinet Two Piece SMD 44.37x44.37mm
-Shielding Cabinet
-0
-36
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-208-F_39.60x39.60mm
-Laird Technologies BMI-S-208-F Shielding Cabinet Two Piece SMD 39.60x39.60mm
-Shielding Cabinet
-0
-32
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-209-F_29.36x18.50mm
-Laird Technologies BMI-S-209-F Shielding Cabinet Two Piece SMD 29.36x18.50mm
-Shielding Cabinet
-0
-20
-1
-Shielding_Cabinets
-Laird_Technologies_BMI-S-210-F_44.00x30.50mm
-Laird Technologies BMI-S-210-F Shielding Cabinet Two Piece SMD 44.00x30.50mm
-Shielding Cabinet
-0
-32
-1
-Shielding_Cabinets
-Würth_36103205_20x20mm
-WE-SHC Shielding Cabinet SMD 20x20mm
-Shielding Cabinet
-0
-20
-1
-Shielding_Cabinets
-Würth_36103255_25x25mm
-WE-SHC Shielding Cabinet SMD 25x25mm
-Shielding Cabinet
-0
-24
-1
-Shielding_Cabinets
-Würth_36103305_30x30mm
-WE-SHC Shielding Cabinet SMD 30x30mm
-Shielding Cabinet
-0
-28
-1
-Shielding_Cabinets
-Würth_36103505_50x50mm
-WE-SHC Shielding Cabinet SMD 50x50mm
-Shielding Cabinet
-0
-44
-1
-Shielding_Cabinets
-Würth_36103605_60x60mm
-WE-SHC Shielding Cabinet SMD 60x60mm
-Shielding Cabinet
-0
-52
-1
-Shielding_Cabinets
-Würth_36503205_20x20mm
-WE-SHC Shielding Cabinet THT 21x21mm
-Shielding Cabinet
-0
-16
-1
-Shielding_Cabinets
-Würth_36503255_25x25mm
-WE-SHC Shielding Cabinet THT 26x26mm
-Shielding Cabinet
-0
-20
-1
-Shielding_Cabinets
-Würth_36503305_30x30mm
-WE-SHC Shielding Cabinet THT 31x31mm
-Shielding Cabinet
-0
-24
-1
-Shielding_Cabinets
-Würth_36503505_50x50mm
-WE-SHC Shielding Cabinet THT 51x51mm
-Shielding Cabinet
-0
-40
-1
-Shielding_Cabinets
-Würth_36503605_60x60mm
-WE-SHC Shielding Cabinet THT 61x61mm
-Shielding Cabinet
-0
-48
-1
 SMD_Packages
 1Pin
 module 1 pin (ou trou mecanique de percage)
@@ -11732,13 +11046,6 @@ CMS POT
 3
 3
 SMD_Packages
-powermite3
-PowerMite3
-
-0
-3
-3
-SMD_Packages
 PQFP-112
 module cms PQFP 112 pins
 PQFP CMS
@@ -11746,16 +11053,16 @@ PQFP CMS
 112
 112
 SMD_Packages
-PQFP-132_i386
-Module SPECIAL upro Intel 386EX
-
+PQFP-132_M
+Module CMS Pqfp 132 pins
+CMS PQFP
 0
 132
 132
 SMD_Packages
-PQFP-132_M
-Module CMS Pqfp 132 pins
-CMS PQFP
+PQFP-132_i386
+Module SPECIAL upro Intel 386EX
+
 0
 132
 132
@@ -11962,524 +11269,216 @@ CMS VQFP
 0
 240
 240
-Sockets
-20TEX-ELL300
-Support Dil TEXTOOL 20 pins, pads elliptiques, e=300 mils
-DEV
-0
-22
-21
-Sockets
-20TEX300
-Support Dil TEXTOOL 20 pins, pads ronds, e=300 mils
-DEV
-0
-22
-21
-Sockets
-24tex300
-Support Dil TEXTOOL 24 pins, pads ronds, e=300 mils
-DEV
-0
-26
-25
-Sockets
-24TEXT-Ell300
-Support Dil TEXTOOL 24 pins, pads elliptiques, e=300 mils
-DEV
-0
-26
-25
-Sockets
-28TEX-Ell600
-Support TEXTOOL Dil 26 pins, pads elliptiques, e=600 mils
-DEV
-0
-30
-29
-Sockets
-28tex600
-Support TEXTOOL Dil 26 pins, pads ronds, e=600 mils
-DEV
-0
-30
-29
-Sockets
-40tex-Ell600
-Support TEXTOOL Dil 40 pins, pads elliptiques, e=600 mils
-DEV
-0
-42
-41
-Sockets
-40tex600
-Support TEXTOOL Dil 40 pins, pads ronds, e=600 mils
-DEV
-0
-42
-41
-Sockets
-80188
-Module specifique pour 80188, pads ronds
+SMD_Packages
+powermite3
+PowerMite3
 
 0
-68
-68
-Sockets
-ADSP2100
-Support pour ADSP 2100, pads ronds
-
-0
-101
-101
-Sockets
-H08
-Module boitier metalique H 8 pins
-DEV
+3
+3
+Shielding_Cabinets
+Laird_Technologies_97-2002_25.40x25.40mm
+Laird Technologies 97-2002 EZ PEEL Shielding Cabinet One Piece SMD 25.40x25.40mm
+Shielding Cabinet
 0
 8
+1
+Shielding_Cabinets
+Laird_Technologies_97-2003_12.70x13.37mm
+Laird Technologies 97-2003 EZ PEEL Shielding Cabinet One Piece SMD 12.70x13.37mm
+Shielding Cabinet
+0
 8
-Sockets
-PGA15X15
-Module modele pour PGA 15 x 15 pins, pads ronds
-PGA
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-101_13.66x12.70mm
+Laird Technologies BMI-S-101 Shielding Cabinet One Piece SMD 13.66x12.70mm
+Shielding Cabinet
 0
-225
-225
-Sockets
-PGA16X16
-Support modele pour PGA 16 x 16 pins, pads ronds
-PGA
+16
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-102_16.50x16.50mm
+Laird Technologies BMI-S-102 Shielding Cabinet One Piece SMD 16.50x16.50mm
+Shielding Cabinet
 0
-256
-256
-Sockets
-PGA18X18
-Support modele pour PGA 18 x 18 pins, pads ronds
-PGA
-0
-324
-324
-Sockets
-PGA84
-Support PGA 84 pins
-PGA
-0
-84
-84
-Sockets
-PGA120
-Support PGA 120 pins
-PGA
-0
-120
-120
-Sockets
-PGA144
-Module PGA 144 pins, pads ronds
-PGA
-0
-145
-145
-Sockets
-PGA156
-Support PGA 156 pins, pads ronds
-PGA
-0
-156
-156
-Sockets
-PGA224
-Support PGA 224 pins
-PGA
-0
-224
-224
-Sockets
-PLCC28
-Support Plcc 28 pins, pads ronds
-PLCC
-0
-28
-28
-Sockets
-PLCC32
-Socket PLCC 32 pins,  round pads
-PLCC
-0
-32
-32
-Sockets
-PLCC44
-Support Plcc 44 pins, pads ronds
-PLCC
-0
-44
-44
-Sockets
-PLCC52
-Support Plcc 52 pins, pads ronds
-PLCC
-0
-52
-52
-Sockets
-PLCC68
-Support Plcc 68 pins, pads ronds
-PLCC
-0
-68
-68
-Sockets
-PLCC84
-Support Plcc 84 pins, pads ronds
-PLCC
-0
-84
-84
-Sockets
-SDCARD-REVERSE
-
-
-0
-18
-18
-Sockets
-SIM72
-Support 72 pins pour barettes SIMM 32 bits
-SIMM
-0
-75
-72
-Sockets
-SIMM
-Support pour barettes SIMM 9 bits
-SIMM
-0
-32
-32
-Sockets
-Socket_SODIMM_DDR1-2_TE_1612618
-DDR 1&2 SODIMM Memory Socket - TE P/N 1612618
-DDR RAM SODIMM
-0
-202
-200
-Sockets
-Socket_SODIMM_DDR1-2_TE_1612618_Debug
-DDR 1&2 SODIMM Memory Socket - TE P/N 1612618
-DDR RAM SODIMM
-0
-202
-200
-Sockets
-Socket_SODIMM_DDR3_TE_2013289
-DDR 3 SODIMM Memory Socket - TE P/N 2013289
-DDR RAM SODIMM
-0
-206
-204
-Sockets
-Socket_SODIMM_DDR3_TE_2013289_Debug
-DDR 3 SODIMM Memory Socket - TE P/N 2013289
-DDR RAM SODIMM
-0
-206
-204
-Sockets
-SUPPORT_SO8_ZIF
-Module Dil 8 pins, pads elliptiques
-DIL
-0
-9
-8
-Sockets
-zip20
-Module ZIP 20 pins
-ZIP
-0
-20
-20
-Sockets
-zip24
-Module ZIP 24 pins
-ZIP
+16
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-103_26.21x26.21mm
+Laird Technologies BMI-S-103 Shielding Cabinet One Piece SMD 26.21x26.21mm
+Shielding Cabinet
 0
 24
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-104_32.00x32.00mm
+Laird Technologies BMI-S-104 Shielding Cabinet One Piece SMD 32.00x32.00mm
+Shielding Cabinet
+0
+28
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-105_38.10x25.40mm
+Laird Technologies BMI-S-105 Shielding Cabinet One Piece SMD 38.10x25.40mm
+Shielding Cabinet
+0
+28
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-106_36.83x33.68mm
+Laird Technologies BMI-S-106 Shielding Cabinet One Piece SMD 36.83x33.68mm
+Shielding Cabinet
+0
+28
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-107_44.37x44.37mm
+Laird Technologies BMI-S-107 Shielding Cabinet One Piece SMD 44.37x44.37mm
+Shielding Cabinet
+0
+36
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-201-F_13.66x12.70mm
+Laird Technologies BMI-S-201-F Shielding Cabinet Two Piece SMD 13.66x12.70mm
+Shielding Cabinet
+0
+16
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-202-F_16.50x16.50mm
+Laird Technologies BMI-S-202-F Shielding Cabinet Two Piece SMD 16.50x16.50mm
+Shielding Cabinet
+0
+16
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-203-F_26.21x26.21mm
+Laird Technologies BMI-S-203-F Shielding Cabinet Two Piece SMD 26.21x26.21mm
+Shielding Cabinet
+0
 24
-Sockets
-zip28
-Module ZIP 28 pins
-ZIP
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-204-F_32.00x32.00mm
+Laird Technologies BMI-S-204-F Shielding Cabinet Two Piece SMD 32.00x32.00mm
+Shielding Cabinet
 0
 28
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-205-F_38.10x25.40mm
+Laird Technologies BMI-S-205-F Shielding Cabinet Two Piece SMD 38.10x25.40mm
+Shielding Cabinet
+0
 28
-Sockets_BNC
-BNC_Socket_TYCO-AMP
-BNC Socket TYCO AMP
-BNC Socket TYCO AMP
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-206-F_36.83x33.68mm
+Laird Technologies BMI-S-206-F Shielding Cabinet Two Piece SMD 36.83x33.68mm
+Shielding Cabinet
 0
-4
-2
-Sockets_BNC
-BNC_Socket_TYCO-AMP_LargePads
-BNC Socket TYCO AMP
-BNC Socket TYCO AMP
+28
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-207-F_44.37x44.37mm
+Laird Technologies BMI-S-207-F Shielding Cabinet Two Piece SMD 44.37x44.37mm
+Shielding Cabinet
 0
-4
-2
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_2PinHorizontal
-Mini Universal Mate-N-Lok Socket, 2 Pin, Horizontal,
-Mini Universal Mate-N-Lok Socket, 2 Pin, Horizontal,
+36
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-208-F_39.60x39.60mm
+Laird Technologies BMI-S-208-F Shielding Cabinet Two Piece SMD 39.60x39.60mm
+Shielding Cabinet
 0
-2
-2
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_2PinHorizontal_BigPads
-Mini Universal Mate-N-Lok Socket, 2 Pin, Horizontal, Big Pads,
-Mini Universal Mate-N-Lok Socket, 2 Pin, Horizontal, Big Pads,
+32
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-209-F_29.36x18.50mm
+Laird Technologies BMI-S-209-F Shielding Cabinet Two Piece SMD 29.36x18.50mm
+Shielding Cabinet
 0
-2
-2
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_2PinVertical
-Mini Universal Mate-N-Lok Socket, 2 Pin, Vertical,
-Mini Universal Mate-N-Lok Socket, 2 Pin, Vertical,
+20
+1
+Shielding_Cabinets
+Laird_Technologies_BMI-S-210-F_44.00x30.50mm
+Laird Technologies BMI-S-210-F Shielding Cabinet Two Piece SMD 44.00x30.50mm
+Shielding Cabinet
 0
-2
-2
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_2PinVertical_BigPads
-Mini Universal Mate-N-Lok Socket, 2 Pin, Vertical, Big Pads,
-Mini Universal Mate-N-Lok Socket, 2 Pin, Vertical, Big Pads,
+32
+1
+Shielding_Cabinets
+Würth_36103205_20x20mm
+WE-SHC Shielding Cabinet SMD 20x20mm
+Shielding Cabinet
 0
-2
-2
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_3PinVertical
-Mini Universal Mate-N-Lok Socket, 3 Pin, Vertical,
-Mini Universal Mate-N-Lok Socket, 3 Pin, Vertical,
+20
+1
+Shielding_Cabinets
+Würth_36103255_25x25mm
+WE-SHC Shielding Cabinet SMD 25x25mm
+Shielding Cabinet
 0
-3
-3
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_3PinVertical_BigPads
-Mini Universal Mate-N-Lok Socket, 3 Pin, Vertical, Big Pads,
-Mini Universal Mate-N-Lok Socket, 3 Pin, Vertical, Big Pads,
+24
+1
+Shielding_Cabinets
+Würth_36103305_30x30mm
+WE-SHC Shielding Cabinet SMD 30x30mm
+Shielding Cabinet
 0
-3
-3
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_4PinHorizontal
-Mini Universal Mate-N-Lok, 4Pin, Horizontal,
-Mini Universal Mate-N-Lok, 4Pin, Horizontal,
+28
+1
+Shielding_Cabinets
+Würth_36103505_50x50mm
+WE-SHC Shielding Cabinet SMD 50x50mm
+Shielding Cabinet
 0
-4
-4
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_4PinHorizontal_BigPads
-Mini Universal Mate-N-Lok, 4Pin, Horizontal, Big Pads,
-Mini Universal Mate-N-Lok, 4Pin, Horizontal, Big Pads,
+44
+1
+Shielding_Cabinets
+Würth_36103605_60x60mm
+WE-SHC Shielding Cabinet SMD 60x60mm
+Shielding Cabinet
 0
-4
-4
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_4PinVertical
-Mini Universal Mate-N-Lok, 4Pin, Vertical,
-Mini Universal Mate-N-Lok, 4Pin, Vertical,
+52
+1
+Shielding_Cabinets
+Würth_36503205_20x20mm
+WE-SHC Shielding Cabinet THT 21x21mm
+Shielding Cabinet
 0
-4
-4
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_4PinVertical_BigPads
-Mini Universal Mate-N-Lok, 4Pin, Vertical, Big Pads,
-Mini Universal Mate-N-Lok, 4Pin, Vertical, Big Pads,
+16
+1
+Shielding_Cabinets
+Würth_36503255_25x25mm
+WE-SHC Shielding Cabinet THT 26x26mm
+Shielding Cabinet
 0
-4
-4
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_6PinHorizontal
-Mini Universal Mate-N-Lok Socket, 6Pin, Horizontal,
-Mini Universal Mate-N-Lok Socket, 6Pin, Horizontal,
+20
+1
+Shielding_Cabinets
+Würth_36503305_30x30mm
+WE-SHC Shielding Cabinet THT 31x31mm
+Shielding Cabinet
 0
-6
-6
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_6PinHorizontal_BigPads
-Mini Universal Mate-N-Lok Socket, 6Pin, Horizontal, Big Pads,
-Mini Universal Mate-N-Lok Socket, 6Pin, Horizontal, Big Pads,
+24
+1
+Shielding_Cabinets
+Würth_36503505_50x50mm
+WE-SHC Shielding Cabinet THT 51x51mm
+Shielding Cabinet
 0
-6
-6
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_6PinVertical
-Mini Universal Mate-N-Lok Socket, 6Pin, Vertical,
-Mini Universal Mate-N-Lok Socket, 6Pin, Vertical,
+40
+1
+Shielding_Cabinets
+Würth_36503605_60x60mm
+WE-SHC Shielding Cabinet THT 61x61mm
+Shielding Cabinet
 0
-6
-6
-Sockets_Mini-Universal
-MiniUniversalMate-N-LokSocket_6PinVertical_BigPads
-Mini Universal Mate-N-Lok Socket, 6Pin, Vertical, Big Pads,
-Mini Universal Mate-N-Lok Socket, 6Pin, Vertical, Big Pads,
-0
-6
-6
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM2-54mm_Lock_2pin_straight
-Socket, MOLEX, KK, RM 2.54mm, Lock, 2pin, straight,
-Socket, MOLEX, KK, RM 2.54mm, Lock, 2pin, straight,
-0
-2
-2
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM2-54mm_Lock_3pin_straight
-Socket, MOLEX, KK, RM 2.54mm, Lock, 3pin, straight,
-Socket, MOLEX, KK, RM 2.54mm, Lock, 3pin, straight,
-0
-3
-3
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM2-54mm_Lock_4pin_straight
-Socket, MOLEX, KK, RM 2.54mm, Lock, 4pin, straight,
-Socket, MOLEX, KK, RM 2.54mm, Lock, 4pin, straight,
-0
-4
-4
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM2-54mm_Lock_5pin_straight
-Socket, MOLEX, KK, RM 2.54mm, Lock, 5pin, straight,
-Socket, MOLEX, KK, RM 2.54mm, Lock, 5pin, straight,
-0
-5
-5
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM2-54mm_Lock_6pin_straight
-Socket, MOLEX, KK, RM 2.54mm, Lock, 6pin, straight,
-Socket, MOLEX, KK, RM 2.54mm, Lock, 6pin, straight,
-0
-6
-6
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM3-96mm_Lock_2pin_straight
-Socket, MOLEX, KK, RM 3.96mm, Lock, 2pin, straight,
-Socket, MOLEX, KK, RM 3.96mm, Lock, 2pin, straight,
-0
-2
-2
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM3-96mm_Lock_3pin_straight
-Socket, MOLEX, KK, RM 3.96mm, Lock, 3pin, straight,
-Socket, MOLEX, KK, RM 3.96mm, Lock, 3pin, straight,
-0
-3
-3
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM3-96mm_Lock_4pin_straight
-Socket, MOLEX, KK, RM 3.96mm, Lock, 4pin, straight,
-Socket, MOLEX, KK, RM 3.96mm, Lock, 4pin, straight,
-0
-4
-4
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM3-96mm_Lock_5pin_straight
-Socket, MOLEX, KK, RM 3.96mm, Lock, 5pin, straight,
-Socket, MOLEX, KK, RM 3.96mm, Lock, 5pin, straight,
-0
-5
-5
-Sockets_MOLEX_KK-System
-Socket_MOLEX-KK-RM3-96mm_Lock_6pin_straight
-Socket, MOLEX, KK, RM 3.96mm, Lock, 6pin, straight,
-Socket, MOLEX, KK, RM 3.96mm, Lock, 6pin, straight,
-0
-6
-6
-Sockets_WAGO734
-WAGO_734_2pin_Straight
-WAGO, Serie 734, Socket, Stiftleiste, 2 polig, 2 pin, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 2 polig, 2 pin, straight, gerade, Date 05Jul2010,
-0
-2
-2
-Sockets_WAGO734
-WAGO_734_2pin_Straight_RuggedPads
-WAGO, Serie 734, Socket, Stiftleiste, 2 polig, 2 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 2 polig, 2 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-0
-2
-2
-Sockets_WAGO734
-WAGO_734_3pin_Straight
-WAGO, Serie 734, Socket, Stiftleiste, 3 polig, 3 pin, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 3 polig, 3 pin, straight, gerade, Date 05Jul2010,
-0
-3
-3
-Sockets_WAGO734
-WAGO_734_3pin_Straight_RuggedPads
-WAGO, Serie 734, Socket, Stiftleiste, 3 polig, 3 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 3 polig, 3 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-0
-3
-3
-Sockets_WAGO734
-WAGO_734_4pin_Straight
-WAGO, Serie 734, Socket, Stiftleiste, 4 polig, 4 pin, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 4 polig, 4 pin, straight, gerade, Date 05Jul2010,
-0
-4
-4
-Sockets_WAGO734
-WAGO_734_4pin_Straight_RuggedPads
-WAGO, Serie 734, Socket, Stiftleiste, 4 polig, 4 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 4 polig, 4 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-0
-4
-4
-Sockets_WAGO734
-WAGO_734_5pin_Straight
-WAGO, Serie 734, Socket, Stiftleiste, 5 polig, 5 pin, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 5 polig, 5 pin, straight, gerade, Date 05Jul2010,
-0
-5
-5
-Sockets_WAGO734
-WAGO_734_5pin_Straight_RuggedPads
-WAGO, Serie 734, Socket, Stiftleiste, 5 polig, 5 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 5 polig, 5 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-0
-5
-5
-Sockets_WAGO734
-WAGO_734_6pin_Straight
-WAGO, Serie 734, Socket, Stiftleiste, 6 polig, 6 pin, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 6 polig, 6 pin, straight, gerade, Date 05Jul2010,
-0
-6
-6
-Sockets_WAGO734
-WAGO_734_6pin_Straight_RuggedPads
-WAGO, Serie 734, Socket, Stiftleiste, 6 polig, 6 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 6 polig, 6 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-0
-6
-6
-Sockets_WAGO734
-WAGO_734_12Pin_Straight
-WAGO, Serie 734, Socket, Stiftleiste, 12 polig, 12 pin, straight, gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 12 polig, 12 pin, straight, gerade, Date 05Jul2010,
-0
-12
-12
-Sockets_WAGO734
-WAGO_734_12Pin_Straight_RuggedPads
-WAGO, Serie 734, Socket, Stiftleiste, 12 polig, 12 pin, rugged Pads, straight,  gerade, Date 05Jul2010,
-WAGO, Serie 734, Socket, Stiftleiste, 12 polig, 12 pin, rugged Pads, straight, gerade, Date 05Jul2010,
-0
-12
-12
+48
+1
 Socket_Strips
 Socket_Strip_Angled_1x01
 Through hole socket strip
@@ -13600,6 +12599,524 @@ socket strip
 0
 80
 80
+Sockets
+20TEX-ELL300
+Support Dil TEXTOOL 20 pins, pads elliptiques, e=300 mils
+DEV
+0
+22
+21
+Sockets
+20TEX300
+Support Dil TEXTOOL 20 pins, pads ronds, e=300 mils
+DEV
+0
+22
+21
+Sockets
+24TEXT-Ell300
+Support Dil TEXTOOL 24 pins, pads elliptiques, e=300 mils
+DEV
+0
+26
+25
+Sockets
+24tex300
+Support Dil TEXTOOL 24 pins, pads ronds, e=300 mils
+DEV
+0
+26
+25
+Sockets
+28TEX-Ell600
+Support TEXTOOL Dil 26 pins, pads elliptiques, e=600 mils
+DEV
+0
+30
+29
+Sockets
+28tex600
+Support TEXTOOL Dil 26 pins, pads ronds, e=600 mils
+DEV
+0
+30
+29
+Sockets
+40tex-Ell600
+Support TEXTOOL Dil 40 pins, pads elliptiques, e=600 mils
+DEV
+0
+42
+41
+Sockets
+40tex600
+Support TEXTOOL Dil 40 pins, pads ronds, e=600 mils
+DEV
+0
+42
+41
+Sockets
+80188
+Module specifique pour 80188, pads ronds
+
+0
+68
+68
+Sockets
+ADSP2100
+Support pour ADSP 2100, pads ronds
+
+0
+101
+101
+Sockets
+H08
+Module boitier metalique H 8 pins
+DEV
+0
+8
+8
+Sockets
+PGA15X15
+Module modele pour PGA 15 x 15 pins, pads ronds
+PGA
+0
+225
+225
+Sockets
+PGA16X16
+Support modele pour PGA 16 x 16 pins, pads ronds
+PGA
+0
+256
+256
+Sockets
+PGA18X18
+Support modele pour PGA 18 x 18 pins, pads ronds
+PGA
+0
+324
+324
+Sockets
+PGA84
+Support PGA 84 pins
+PGA
+0
+84
+84
+Sockets
+PGA120
+Support PGA 120 pins
+PGA
+0
+120
+120
+Sockets
+PGA144
+Module PGA 144 pins, pads ronds
+PGA
+0
+145
+145
+Sockets
+PGA156
+Support PGA 156 pins, pads ronds
+PGA
+0
+156
+156
+Sockets
+PGA224
+Support PGA 224 pins
+PGA
+0
+224
+224
+Sockets
+PLCC28
+Support Plcc 28 pins, pads ronds
+PLCC
+0
+28
+28
+Sockets
+PLCC32
+Socket PLCC 32 pins,  round pads
+PLCC
+0
+32
+32
+Sockets
+PLCC44
+Support Plcc 44 pins, pads ronds
+PLCC
+0
+44
+44
+Sockets
+PLCC52
+Support Plcc 52 pins, pads ronds
+PLCC
+0
+52
+52
+Sockets
+PLCC68
+Support Plcc 68 pins, pads ronds
+PLCC
+0
+68
+68
+Sockets
+PLCC84
+Support Plcc 84 pins, pads ronds
+PLCC
+0
+84
+84
+Sockets
+SDCARD-REVERSE
+
+
+0
+18
+18
+Sockets
+SIM72
+Support 72 pins pour barettes SIMM 32 bits
+SIMM
+0
+75
+72
+Sockets
+SIMM
+Support pour barettes SIMM 9 bits
+SIMM
+0
+32
+32
+Sockets
+SUPPORT_SO8_ZIF
+Module Dil 8 pins, pads elliptiques
+DIL
+0
+9
+8
+Sockets
+Socket_SODIMM_DDR1-2_TE_1612618
+DDR 1&2 SODIMM Memory Socket - TE P/N 1612618
+DDR RAM SODIMM
+0
+202
+200
+Sockets
+Socket_SODIMM_DDR1-2_TE_1612618_Debug
+DDR 1&2 SODIMM Memory Socket - TE P/N 1612618
+DDR RAM SODIMM
+0
+202
+200
+Sockets
+Socket_SODIMM_DDR3_TE_2013289
+DDR 3 SODIMM Memory Socket - TE P/N 2013289
+DDR RAM SODIMM
+0
+206
+204
+Sockets
+Socket_SODIMM_DDR3_TE_2013289_Debug
+DDR 3 SODIMM Memory Socket - TE P/N 2013289
+DDR RAM SODIMM
+0
+206
+204
+Sockets
+zip20
+Module ZIP 20 pins
+ZIP
+0
+20
+20
+Sockets
+zip24
+Module ZIP 24 pins
+ZIP
+0
+24
+24
+Sockets
+zip28
+Module ZIP 28 pins
+ZIP
+0
+28
+28
+Sockets_BNC
+BNC_Socket_TYCO-AMP
+BNC Socket TYCO AMP
+BNC Socket TYCO AMP
+0
+4
+2
+Sockets_BNC
+BNC_Socket_TYCO-AMP_LargePads
+BNC Socket TYCO AMP
+BNC Socket TYCO AMP
+0
+4
+2
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM2-54mm_Lock_2pin_straight
+Socket, MOLEX, KK, RM 2.54mm, Lock, 2pin, straight,
+Socket, MOLEX, KK, RM 2.54mm, Lock, 2pin, straight,
+0
+2
+2
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM2-54mm_Lock_3pin_straight
+Socket, MOLEX, KK, RM 2.54mm, Lock, 3pin, straight,
+Socket, MOLEX, KK, RM 2.54mm, Lock, 3pin, straight,
+0
+3
+3
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM2-54mm_Lock_4pin_straight
+Socket, MOLEX, KK, RM 2.54mm, Lock, 4pin, straight,
+Socket, MOLEX, KK, RM 2.54mm, Lock, 4pin, straight,
+0
+4
+4
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM2-54mm_Lock_5pin_straight
+Socket, MOLEX, KK, RM 2.54mm, Lock, 5pin, straight,
+Socket, MOLEX, KK, RM 2.54mm, Lock, 5pin, straight,
+0
+5
+5
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM2-54mm_Lock_6pin_straight
+Socket, MOLEX, KK, RM 2.54mm, Lock, 6pin, straight,
+Socket, MOLEX, KK, RM 2.54mm, Lock, 6pin, straight,
+0
+6
+6
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM3-96mm_Lock_2pin_straight
+Socket, MOLEX, KK, RM 3.96mm, Lock, 2pin, straight,
+Socket, MOLEX, KK, RM 3.96mm, Lock, 2pin, straight,
+0
+2
+2
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM3-96mm_Lock_3pin_straight
+Socket, MOLEX, KK, RM 3.96mm, Lock, 3pin, straight,
+Socket, MOLEX, KK, RM 3.96mm, Lock, 3pin, straight,
+0
+3
+3
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM3-96mm_Lock_4pin_straight
+Socket, MOLEX, KK, RM 3.96mm, Lock, 4pin, straight,
+Socket, MOLEX, KK, RM 3.96mm, Lock, 4pin, straight,
+0
+4
+4
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM3-96mm_Lock_5pin_straight
+Socket, MOLEX, KK, RM 3.96mm, Lock, 5pin, straight,
+Socket, MOLEX, KK, RM 3.96mm, Lock, 5pin, straight,
+0
+5
+5
+Sockets_MOLEX_KK-System
+Socket_MOLEX-KK-RM3-96mm_Lock_6pin_straight
+Socket, MOLEX, KK, RM 3.96mm, Lock, 6pin, straight,
+Socket, MOLEX, KK, RM 3.96mm, Lock, 6pin, straight,
+0
+6
+6
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_2PinHorizontal
+Mini Universal Mate-N-Lok Socket, 2 Pin, Horizontal,
+Mini Universal Mate-N-Lok Socket, 2 Pin, Horizontal,
+0
+2
+2
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_2PinHorizontal_BigPads
+Mini Universal Mate-N-Lok Socket, 2 Pin, Horizontal, Big Pads,
+Mini Universal Mate-N-Lok Socket, 2 Pin, Horizontal, Big Pads,
+0
+2
+2
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_2PinVertical
+Mini Universal Mate-N-Lok Socket, 2 Pin, Vertical,
+Mini Universal Mate-N-Lok Socket, 2 Pin, Vertical,
+0
+2
+2
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_2PinVertical_BigPads
+Mini Universal Mate-N-Lok Socket, 2 Pin, Vertical, Big Pads,
+Mini Universal Mate-N-Lok Socket, 2 Pin, Vertical, Big Pads,
+0
+2
+2
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_3PinVertical
+Mini Universal Mate-N-Lok Socket, 3 Pin, Vertical,
+Mini Universal Mate-N-Lok Socket, 3 Pin, Vertical,
+0
+3
+3
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_3PinVertical_BigPads
+Mini Universal Mate-N-Lok Socket, 3 Pin, Vertical, Big Pads,
+Mini Universal Mate-N-Lok Socket, 3 Pin, Vertical, Big Pads,
+0
+3
+3
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_4PinHorizontal
+Mini Universal Mate-N-Lok, 4Pin, Horizontal,
+Mini Universal Mate-N-Lok, 4Pin, Horizontal,
+0
+4
+4
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_4PinHorizontal_BigPads
+Mini Universal Mate-N-Lok, 4Pin, Horizontal, Big Pads,
+Mini Universal Mate-N-Lok, 4Pin, Horizontal, Big Pads,
+0
+4
+4
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_4PinVertical
+Mini Universal Mate-N-Lok, 4Pin, Vertical,
+Mini Universal Mate-N-Lok, 4Pin, Vertical,
+0
+4
+4
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_4PinVertical_BigPads
+Mini Universal Mate-N-Lok, 4Pin, Vertical, Big Pads,
+Mini Universal Mate-N-Lok, 4Pin, Vertical, Big Pads,
+0
+4
+4
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_6PinHorizontal
+Mini Universal Mate-N-Lok Socket, 6Pin, Horizontal,
+Mini Universal Mate-N-Lok Socket, 6Pin, Horizontal,
+0
+6
+6
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_6PinHorizontal_BigPads
+Mini Universal Mate-N-Lok Socket, 6Pin, Horizontal, Big Pads,
+Mini Universal Mate-N-Lok Socket, 6Pin, Horizontal, Big Pads,
+0
+6
+6
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_6PinVertical
+Mini Universal Mate-N-Lok Socket, 6Pin, Vertical,
+Mini Universal Mate-N-Lok Socket, 6Pin, Vertical,
+0
+6
+6
+Sockets_Mini-Universal
+MiniUniversalMate-N-LokSocket_6PinVertical_BigPads
+Mini Universal Mate-N-Lok Socket, 6Pin, Vertical, Big Pads,
+Mini Universal Mate-N-Lok Socket, 6Pin, Vertical, Big Pads,
+0
+6
+6
+Sockets_WAGO734
+WAGO_734_2pin_Straight
+WAGO, Serie 734, Socket, Stiftleiste, 2 polig, 2 pin, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 2 polig, 2 pin, straight, gerade, Date 05Jul2010,
+0
+2
+2
+Sockets_WAGO734
+WAGO_734_2pin_Straight_RuggedPads
+WAGO, Serie 734, Socket, Stiftleiste, 2 polig, 2 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 2 polig, 2 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+0
+2
+2
+Sockets_WAGO734
+WAGO_734_3pin_Straight
+WAGO, Serie 734, Socket, Stiftleiste, 3 polig, 3 pin, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 3 polig, 3 pin, straight, gerade, Date 05Jul2010,
+0
+3
+3
+Sockets_WAGO734
+WAGO_734_3pin_Straight_RuggedPads
+WAGO, Serie 734, Socket, Stiftleiste, 3 polig, 3 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 3 polig, 3 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+0
+3
+3
+Sockets_WAGO734
+WAGO_734_4pin_Straight
+WAGO, Serie 734, Socket, Stiftleiste, 4 polig, 4 pin, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 4 polig, 4 pin, straight, gerade, Date 05Jul2010,
+0
+4
+4
+Sockets_WAGO734
+WAGO_734_4pin_Straight_RuggedPads
+WAGO, Serie 734, Socket, Stiftleiste, 4 polig, 4 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 4 polig, 4 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+0
+4
+4
+Sockets_WAGO734
+WAGO_734_5pin_Straight
+WAGO, Serie 734, Socket, Stiftleiste, 5 polig, 5 pin, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 5 polig, 5 pin, straight, gerade, Date 05Jul2010,
+0
+5
+5
+Sockets_WAGO734
+WAGO_734_5pin_Straight_RuggedPads
+WAGO, Serie 734, Socket, Stiftleiste, 5 polig, 5 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 5 polig, 5 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+0
+5
+5
+Sockets_WAGO734
+WAGO_734_6pin_Straight
+WAGO, Serie 734, Socket, Stiftleiste, 6 polig, 6 pin, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 6 polig, 6 pin, straight, gerade, Date 05Jul2010,
+0
+6
+6
+Sockets_WAGO734
+WAGO_734_6pin_Straight_RuggedPads
+WAGO, Serie 734, Socket, Stiftleiste, 6 polig, 6 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 6 polig, 6 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+0
+6
+6
+Sockets_WAGO734
+WAGO_734_12Pin_Straight
+WAGO, Serie 734, Socket, Stiftleiste, 12 polig, 12 pin, straight, gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 12 polig, 12 pin, straight, gerade, Date 05Jul2010,
+0
+12
+12
+Sockets_WAGO734
+WAGO_734_12Pin_Straight_RuggedPads
+WAGO, Serie 734, Socket, Stiftleiste, 12 polig, 12 pin, rugged Pads, straight,  gerade, Date 05Jul2010,
+WAGO, Serie 734, Socket, Stiftleiste, 12 polig, 12 pin, rugged Pads, straight, gerade, Date 05Jul2010,
+0
+12
+12
 Symbols
 Symbol_Attention_CopperTop_Big
 Symbol, Attention, Copper Top, Big,
@@ -13790,13 +13307,6 @@ Symbol, HighVoltage, Type1, Copper Top, Big,
 0
 0
 Symbols
-Symbol_Highvoltage_Type1_CopperTop_Small
-Symbol, Highvoltage, Type 1, Copper Top, Small,
-Symbol, Highvoltage, Type 1, Copper Top, Small,
-0
-0
-0
-Symbols
 Symbol_HighVoltage_Type2_CopperTop_Big
 Symbol, HighVoltage, Type2, Copper Top, Big,
 Symbol, HighVoltage, Type2, Copper Top, Big,
@@ -13804,16 +13314,23 @@ Symbol, HighVoltage, Type2, Copper Top, Big,
 0
 0
 Symbols
-Symbol_Highvoltage_Type2_CopperTop_Small
-Symbol, Highvoltage, Type 2, Copper Top, Small,
-Symbol, Highvoltage, Type 2, Copper Top, Small,
+Symbol_HighVoltage_Type2_CopperTop_VerySmall
+Symbol, High Voltage, Type 2, Copper Top, Very Small,
+Symbol, High Voltage, Type 2, Copper Top, Very Small,
 0
 0
 0
 Symbols
-Symbol_HighVoltage_Type2_CopperTop_VerySmall
-Symbol, High Voltage, Type 2, Copper Top, Very Small,
-Symbol, High Voltage, Type 2, Copper Top, Very Small,
+Symbol_Highvoltage_Type1_CopperTop_Small
+Symbol, Highvoltage, Type 1, Copper Top, Small,
+Symbol, Highvoltage, Type 1, Copper Top, Small,
+0
+0
+0
+Symbols
+Symbol_Highvoltage_Type2_CopperTop_Small
+Symbol, Highvoltage, Type 2, Copper Top, Small,
+Symbol, Highvoltage, Type 2, Copper Top, Small,
 0
 0
 0
@@ -13852,510 +13369,6 @@ Symbol, OSHW-Logo, Silk Screen, BIG
 0
 0
 0
-synth_footprints
-1748LP18A075
-
-
-0
-4
-3
-synth_footprints
-3550LP14A300
-
-
-0
-6
-3
-synth_footprints
-5515LP15A730
-
-
-0
-8
-3
-synth_footprints
-LGA_32
-UH Package; 32-Lead Plastic QFN (5mm x 5mm); (see Linear Technology QFN_32_05-08-1693.pdf)
-QFN 0.5
-0
-36
-33
-synth_footprints
-RFBPF3225180C07B1U
-
-
-0
-3
-3
-synth_footprints
-SMA_901-10512_6p7MIL_FR408_CPW_LAUNCH
-
-
-0
-31
-3
-synth_footprints
-VIA_OSH4LAYER_MIN
-
-
-0
-1
-1
-synth_footprints
-X0060L5050AHF
-
-
-0
-6
-6
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-2pol
-2-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-2
-2
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-3pol
-3-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-3
-3
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-4pol
-4-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-4
-4
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-5pol
-5-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-5
-5
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-6pol
-6-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-6
-6
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-7pol
-7-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-7
-7
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-8pol
-8-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-8
-8
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-9pol
-9-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-9
-9
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-10pol
-10-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-10
-10
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-11pol
-11-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-11
-11
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-12pol
-12-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-12
-12
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-13pol
-13-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-13
-13
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-14pol
-14-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-14
-14
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-15pol
-15-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-15
-15
-Terminal_Blocks
-TerminalBlock_Pheonix_MKDS1.5-16pol
-16-way 5mm pitch terminal block, Phoenix MKDS series
-
-0
-16
-16
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_2pol
-2-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-2
-2
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_3pol
-3-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-3
-3
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_4pol
-4-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-4
-4
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_5pol
-5-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-5
-5
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_6pol
-6-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-6
-6
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_7pol
-7-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-7
-7
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_8pol
-8-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-8
-8
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_9pol
-9-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-9
-9
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_10pol
-10-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-10
-10
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_11pol
-11-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-11
-11
-Terminal_Blocks
-TerminalBlock_Pheonix_MPT-2.54mm_12pol
-12-way 2.54mm pitch terminal block, Phoenix MPT series
-
-0
-12
-12
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_2pol
-2-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-2
-2
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_3pol
-3-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-3
-3
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_4pol
-4-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-4
-4
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_5pol
-5-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-5
-5
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_6pol
-6-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-6
-6
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_7pol
-7-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-7
-7
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_8pol
-8-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-8
-8
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_9pol
-9-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-9
-9
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_10pol
-10-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-10
-10
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_11pol
-11-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-11
-11
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_12pol
-12-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-12
-12
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_13pol
-13-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-13
-13
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_14pol
-14-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-14
-14
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_15pol
-15-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-15
-15
-Terminal_Blocks
-TerminalBlock_Pheonix_PT-3.5mm_16pol
-16-way 3.5mm pitch terminal block, Phoenix PT series
-
-0
-16
-16
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_1pol
-WAGO-Series 236, 2Stift, 1pol, RM 5mm,
-WAGO-Series 236, 2Stift, 1pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-2
-1
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_2pol
-WAGO-Series 236, 2Stift, 2pol, RM 5mm,
-WAGO-Series 236, 2Stift, 2pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-4
-2
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_3pol
-WAGO-Series 236, 2Stift, 3pol, RM 5mm,
-WAGO-Series 236, 2Stift, 3pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-6
-3
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_4pol
-WAGO-Series 236, 2Stift, 4pol, RM 5mm,
-WAGO-Series 236, 2Stift, 4pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-8
-4
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_5pol
-WAGO-Series 236, 2Stift, 5pol, RM 5mm,
-WAGO-Series 236, 2Stift, 5pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-10
-5
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_6pol
-WAGO-Series 236, 2Stift, 6pol, RM 5mm,
-WAGO-Series 236, 2Stift, 6pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-12
-6
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_7pol
-WAGO-Series 236, 2Stift, 7pol, RM 5mm,
-WAGO-Series 236, 2Stift, 7pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-14
-7
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_8pol
-WAGO-Series 236, 2Stift, 8pol, RM 5mm,
-WAGO-Series 236, 2Stift, 8pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-16
-8
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_9pol
-WAGO-Series 236, 2Stift, 9pol, RM 5mm,
-WAGO-Series 236, 2Stift, 9pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-18
-9
-Terminal_Blocks
-TerminalBlock_WAGO-236_2Stift_RM5mm_10pol
-WAGO-Series 236, 2Stift, 10pol, RM 5mm,
-WAGO-Series 236, 2Stift, 10pol, RM 5mm, Anreibare Leiterplattenklemme
-0
-20
-10
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_1pol
-
-
-0
-2
-1
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_2pol
-
-
-0
-4
-2
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_3pol
-
-
-0
-6
-3
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_4pol
-
-
-0
-8
-4
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_5pol
-
-
-0
-10
-5
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_6pol
-
-
-0
-12
-6
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_7pol
-
-
-0
-14
-7
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_8pol
-
-
-0
-16
-8
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_9pol
-
-
-0
-18
-9
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM5mm_10pol
-
-
-0
-20
-10
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM7.5mm_1pol
-
-
-0
-2
-1
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM7.5mm_2pol
-
-
-0
-4
-2
-Terminal_Blocks
-TerminalBlock_WAGO-804_RM7.5mm_3pol
-
-
-0
-6
-3
 TO_SOT_Packages_SMD
 PowerMacro_M234_NoHole
 
@@ -14980,13 +13993,6 @@ Transistor FET GDS TO-247 TO-218 TOP-3
 3
 3
 TO_SOT_Packages_THT
-TO-247_Horizontal_Neutral123_largePads
-Transistor FET TO-247 TO-218 TOP-3, 1=Gate 2=Drain 3=Source, lying horizontal, Front upward, large Pads
-Transistor FET GDS TO-247 TO-218 TOP-3 large Pads
-0
-3
-3
-TO_SOT_Packages_THT
 TO-247_Horizontal_Neutral123_MountFromLS
 Transistor FET TO-247 TO-218 TOP-3 lying horizontal, mounted from LS, 1=Gate 2=Drain 3=Source
 Transistor FET TO-247 TO-218 TOP-3 , LS mounted, GDS
@@ -15015,6 +14021,13 @@ Transistor FET TO-247 TO-218 TOP-3, GDS, large Pads
 3
 3
 TO_SOT_Packages_THT
+TO-247_Horizontal_Neutral123_largePads
+Transistor FET TO-247 TO-218 TOP-3, 1=Gate 2=Drain 3=Source, lying horizontal, Front upward, large Pads
+Transistor FET GDS TO-247 TO-218 TOP-3 large Pads
+0
+3
+3
+TO_SOT_Packages_THT
 TO-247_PadsOnly_Neutral123
 TO-247, Neutral, Pads Only,
 TO-247, Neutral, Pads Only,
@@ -15024,13 +14037,6 @@ TO-247, Neutral, Pads Only,
 TO_SOT_Packages_THT
 TO-247_Vertical_Neutral123
 TO-247 TO-218 TOP-3 FET 1=Gate 2=Drain 3=Source Vertical
-Transistor FET TO-247 TO-218 TOP-3 Vertical
-0
-3
-3
-TO_SOT_Packages_THT
-TO-247_Vertical_Neutral123_largePads
-TO-247 TO-218 TOP-3 FET 1=Gate 2=Drain 3=Source Vertical, large Pads
 Transistor FET TO-247 TO-218 TOP-3 Vertical
 0
 3
@@ -15046,6 +14052,13 @@ TO_SOT_Packages_THT
 TO-247_Vertical_Neutral123_MountedFromLS_largePads
 TO-247 TO-218 TOP-3 FET 1=Gate 2=Drain 3=Source, Vertical, Mounted from LS, large Pads,
 Transistor FET TO-247 TO-218 TOP-3 Vertical, LS, large Pads
+0
+3
+3
+TO_SOT_Packages_THT
+TO-247_Vertical_Neutral123_largePads
+TO-247 TO-218 TOP-3 FET 1=Gate 2=Drain 3=Source Vertical, large Pads
+Transistor FET TO-247 TO-218 TOP-3 Vertical
 0
 3
 3
@@ -15069,6 +14082,454 @@ Transistor TO38
 TO38
 0
 3
+3
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-2pol
+2-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+2
+2
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-3pol
+3-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+3
+3
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-4pol
+4-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+4
+4
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-5pol
+5-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+5
+5
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-6pol
+6-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+6
+6
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-7pol
+7-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+7
+7
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-8pol
+8-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+8
+8
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-9pol
+9-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+9
+9
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-10pol
+10-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+10
+10
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-11pol
+11-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+11
+11
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-12pol
+12-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+12
+12
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-13pol
+13-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+13
+13
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-14pol
+14-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+14
+14
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-15pol
+15-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+15
+15
+Terminal_Blocks
+TerminalBlock_Pheonix_MKDS1.5-16pol
+16-way 5mm pitch terminal block, Phoenix MKDS series
+
+0
+16
+16
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_2pol
+2-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+2
+2
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_3pol
+3-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+3
+3
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_4pol
+4-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+4
+4
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_5pol
+5-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+5
+5
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_6pol
+6-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+6
+6
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_7pol
+7-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+7
+7
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_8pol
+8-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+8
+8
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_9pol
+9-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+9
+9
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_10pol
+10-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+10
+10
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_11pol
+11-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+11
+11
+Terminal_Blocks
+TerminalBlock_Pheonix_MPT-2.54mm_12pol
+12-way 2.54mm pitch terminal block, Phoenix MPT series
+
+0
+12
+12
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_2pol
+2-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+2
+2
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_3pol
+3-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+3
+3
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_4pol
+4-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+4
+4
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_5pol
+5-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+5
+5
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_6pol
+6-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+6
+6
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_7pol
+7-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+7
+7
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_8pol
+8-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+8
+8
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_9pol
+9-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+9
+9
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_10pol
+10-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+10
+10
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_11pol
+11-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+11
+11
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_12pol
+12-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+12
+12
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_13pol
+13-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+13
+13
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_14pol
+14-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+14
+14
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_15pol
+15-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+15
+15
+Terminal_Blocks
+TerminalBlock_Pheonix_PT-3.5mm_16pol
+16-way 3.5mm pitch terminal block, Phoenix PT series
+
+0
+16
+16
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_1pol
+WAGO-Series 236, 2Stift, 1pol, RM 5mm,
+WAGO-Series 236, 2Stift, 1pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+2
+1
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_2pol
+WAGO-Series 236, 2Stift, 2pol, RM 5mm,
+WAGO-Series 236, 2Stift, 2pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+4
+2
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_3pol
+WAGO-Series 236, 2Stift, 3pol, RM 5mm,
+WAGO-Series 236, 2Stift, 3pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+6
+3
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_4pol
+WAGO-Series 236, 2Stift, 4pol, RM 5mm,
+WAGO-Series 236, 2Stift, 4pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+8
+4
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_5pol
+WAGO-Series 236, 2Stift, 5pol, RM 5mm,
+WAGO-Series 236, 2Stift, 5pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+10
+5
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_6pol
+WAGO-Series 236, 2Stift, 6pol, RM 5mm,
+WAGO-Series 236, 2Stift, 6pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+12
+6
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_7pol
+WAGO-Series 236, 2Stift, 7pol, RM 5mm,
+WAGO-Series 236, 2Stift, 7pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+14
+7
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_8pol
+WAGO-Series 236, 2Stift, 8pol, RM 5mm,
+WAGO-Series 236, 2Stift, 8pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+16
+8
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_9pol
+WAGO-Series 236, 2Stift, 9pol, RM 5mm,
+WAGO-Series 236, 2Stift, 9pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+18
+9
+Terminal_Blocks
+TerminalBlock_WAGO-236_2Stift_RM5mm_10pol
+WAGO-Series 236, 2Stift, 10pol, RM 5mm,
+WAGO-Series 236, 2Stift, 10pol, RM 5mm, Anreibare Leiterplattenklemme
+0
+20
+10
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_1pol
+
+
+0
+2
+1
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_2pol
+
+
+0
+4
+2
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_3pol
+
+
+0
+6
+3
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_4pol
+
+
+0
+8
+4
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_5pol
+
+
+0
+10
+5
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_6pol
+
+
+0
+12
+6
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_7pol
+
+
+0
+14
+7
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_8pol
+
+
+0
+16
+8
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_9pol
+
+
+0
+18
+9
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM5mm_10pol
+
+
+0
+20
+10
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM7.5mm_1pol
+
+
+0
+2
+1
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM7.5mm_2pol
+
+
+0
+4
+2
+Terminal_Blocks
+TerminalBlock_WAGO-804_RM7.5mm_3pol
+
+
+0
+6
 3
 Transformers_CHK
 Trafo_CHK-EI30-2VA_1xSec
@@ -16022,475 +15483,6 @@ varistor SIOV
 0
 2
 2
-vna_footprints
-5LEAD_BALUN_4p83mm_3p3mm
-
-
-0
-6
-5
-vna_footprints
-8QFN_5mm
-
-
-0
-15
-9
-vna_footprints
-142-0721-882_sma_cutout
-
-
-0
-3
-3
-vna_footprints
-1810LP07A200
-
-
-0
-4
-3
-vna_footprints
-3221-40-0100-00_conn40
-
-
-0
-40
-40
-vna_footprints
-3550LP14A300
-
-
-0
-6
-3
-vna_footprints
-5515LP15A730
-
-
-0
-9
-4
-vna_footprints
-10067847_u_sd
-
-
-0
-13
-9
-vna_footprints
-732511150_sma
-
-
-0
-5
-5
-vna_footprints
-732511150_sma_thin
-
-
-0
-5
-5
-vna_footprints
-732511150_sma_thin_twopin
-
-
-0
-5
-2
-vna_footprints
-732512200_SMA
-
-
-0
-5
-5
-vna_footprints
-734120110_ufl_umc
-
-
-0
-4
-3
-vna_footprints
-ADRF5020BCCZN
-
-
-0
-24
-21
-vna_footprints
-ATC506WLS
-
-
-0
-2
-2
-vna_footprints
-ATC550L
-
-
-0
-2
-2
-vna_footprints
-BARREL_JACK
-DC Barrel Jack
-Power Jack
-0
-3
-3
-vna_footprints
-BMI-S-103
-
-
-0
-20
-1
-vna_footprints
-BMI-S-103-NOSIDES
-
-
-0
-14
-1
-vna_footprints
-cat
-
-
-0
-0
-0
-vna_footprints
-crystal_FA238-TSX3225
-crystal Epson Toyocom FA-238 and TSX-3225 series
-
-0
-4
-4
-vna_footprints
-DB15MC
-Connecteur DB15 MALE couche
-CONN DB15
-0
-17
-15
-vna_footprints
-DFN-8-1EP_2x2mm_Pitch0.5mm
-DFN8 2x2, 0.5P; CASE 506CN (see ON Semiconductor 506CN.PDF)
-DFN 0.5
-0
-10
-9
-vna_footprints
-DRILL_32p25mil
-
-
-0
-1
-1
-vna_footprints
-DV75D
-
-
-0
-4
-4
-vna_footprints
-ECS-96SMF
-
-
-0
-5
-3
-vna_footprints
-FV1206
-
-
-0
-4
-3
-vna_footprints
-FV1206-1
-
-
-0
-6
-3
-vna_footprints
-FV1206-1_p35mm_ustrip
-
-
-0
-6
-3
-vna_footprints
-FV1206-4
-
-
-0
-4
-3
-vna_footprints
-FV1206-narrow
-
-
-0
-4
-3
-vna_footprints
-JMP_3
-
-
-0
-3
-3
-vna_footprints
-LFCSP_WQ_32
-
-
-0
-33
-33
-vna_footprints
-LGA_32
-UH Package; 32-Lead Plastic QFN (5mm x 5mm); (see Linear Technology QFN_32_05-08-1693.pdf)
-QFN 0.5
-0
-36
-33
-vna_footprints
-OKRT3_C72
-
-
-0
-5
-5
-vna_footprints
-PAT0510S
-
-
-0
-5
-4
-vna_footprints
-POMONA_2400BOX
-
-
-0
-0
-0
-vna_footprints
-PS1608
-
-
-0
-5
-4
-vna_footprints
-QFM8
-
-
-0
-8
-8
-vna_footprints
-QFN-32-1EP_5x5mm_PE_Pitch0.5mm
-UH Package; 32-Lead Plastic QFN (5mm x 5mm); (see Linear Technology QFN_32_05-08-1693.pdf)
-QFN 0.5
-0
-36
-33
-vna_footprints
-QFN_12_3mm2mm
-
-
-0
-13
-13
-vna_footprints
-resistive_bridge
-
-
-0
-69
-5
-vna_footprints
-resistive_bridge_osh_fr408_ustrip
-
-
-0
-69
-5
-vna_footprints
-resistive_bridge_osh_fr408_ustrip_mirrored
-
-
-0
-69
-5
-vna_footprints
-RN0804
-
-
-0
-8
-8
-vna_footprints
-S01-50200300
-
-
-0
-18
-18
-vna_footprints
-S01-50250500
-
-
-0
-18
-18
-vna_footprints
-SF2921-61345
-
-
-0
-4
-2
-vna_footprints
-SMA_901-10512_6p7MIL_FR408_CPW_LAUNCH
-
-
-0
-31
-3
-vna_footprints
-SMA_901-10512_30MIL_OSHFR408_CPW_LAUNCH
-
-
-0
-7
-3
-vna_footprints
-SMA_901-10512_30MIL_RT6002_CPW_LAUNCH
-
-
-0
-9
-3
-vna_footprints
-SMA_901-10512_30MIL_RT6002_CPW_LAUNCH_NOPAD
-
-
-0
-7
-3
-vna_footprints
-SMA_CPW_1MM_.2MM
-
-
-0
-4
-3
-vna_footprints
-snail
-
-
-0
-0
-0
-vna_footprints
-TCM1-63AX+
-
-
-0
-6
-6
-vna_footprints
-TDFN6
-
-
-0
-7
-7
-vna_footprints
-ti_booster40
-Through hole pin header
-pin header
-0
-40
-40
-vna_footprints
-TP-P20B
-
-
-0
-2
-2
-vna_footprints
-TP07R
-TEST PAD
-TEST PAD
-0
-1
-1
-vna_footprints
-TURRET_MILLMAX_2101
-
-
-0
-1
-1
-vna_footprints
-US8
-
-
-0
-8
-8
-vna_footprints
-VIA_OSH4LAYER_MIN
-
-
-0
-1
-1
-vna_footprints
-VIA_p35mm_p55mm
-
-
-0
-1
-1
-vna_footprints
-WSON-12-1EP_3x2mm_Pitch0.5mm
-WSON-12 http://www.ti.com/lit/ds/symlink/lm27762.pdf
-WSON-12
-0
-15
-13
-vna_mm
-FPC07182
-
-
-0
-0
-0
-vna_mm
-LC3B
-UD Package; 12-Lead Plastic QFN (3mm x 3mm); (see Linear Technology QFN_12_ 05-08-1855.pdf)
-QFN 0.5
-0
-16
-13
-vna_mm
-sw_edge_oshpark_4layer
-
-
-0
-23
-2
 Wire_Connections_Bridges
 WireConnection_0.80mmDrill
 WireConnection with 0.8mm drill
@@ -16667,13 +15659,6 @@ SolderWirePad_4xInline_1mmDrill
 4
 1
 Wire_Pads
-SolderWirePad_4xinLine_2-5mmDrill
-
-
-0
-4
-1
-Wire_Pads
 SolderWirePad_4xInline_2mmDrill
 
 
@@ -16723,6 +15708,13 @@ SolderWirePad_4xSquare_2mmDrill
 4
 1
 Wire_Pads
+SolderWirePad_4xinLine_2-5mmDrill
+
+
+0
+4
+1
+Wire_Pads
 SolderWirePad_single_0-8mmDrill
 
 
@@ -16764,3 +15756,1088 @@ SolderWirePad_single_2mmDrill
 0
 1
 1
+balloon_footprints
+36-1050-ND_Keystone_1050TR
+
+
+0
+2
+2
+balloon_footprints
+0900PC15J0013E
+
+
+0
+10
+10
+balloon_footprints
+APAES915R6460C16-T
+
+
+0
+1
+1
+balloon_footprints
+CONN_MICROMATCH_10
+
+
+0
+10
+10
+balloon_footprints
+Crystal_4-SMD_2.5x2mm
+
+
+0
+4
+4
+balloon_footprints
+DIP-4__300
+6 pins DIL package, round pads
+DIL
+0
+4
+4
+balloon_footprints
+ISM300
+
+
+0
+18
+18
+balloon_footprints
+MICROUSB_sm
+
+
+0
+9
+5
+balloon_footprints
+MS5540C
+
+
+0
+8
+8
+balloon_footprints
+U.FL-COAX
+
+
+0
+3
+3
+footprints
+DB15MC
+Connecteur DB15 MALE couche
+CONN DB15
+0
+17
+15
+footprints
+DFN-10-1EP_3x3mm_Pitch0.5mm
+10-Lead Plastic Dual Flat, No Lead Package (MF) - 3x3x0.9 mm Body [DFN] (see Microchip Packaging Specification 00000049BS.pdf)
+DFN 0.5
+0
+14
+11
+footprints
+QFN-20-1EP_4x4mm_Pitch0.5mm
+20-Lead Plastic Quad Flat, No Lead Package (ML) - 4x4x0.9 mm Body [QFN]; (see Microchip Packaging Specification 00000049BS.pdf)
+QFN 0.5
+0
+24
+21
+footprints
+SM-22
+
+
+0
+5
+5
+footprints
+SMA_5-1814832-1
+
+
+0
+5
+5
+footprints
+SMA_rightangle
+
+
+0
+5
+5
+footprints
+SOT23_1B2E3C
+Module CMS SOT23 Transistore EBC
+CMS SOT
+0
+3
+3
+footprints
+TO252-5
+
+
+0
+6
+5
+footprints
+YY161
+
+
+0
+8
+8
+footprints
+dfn8_s-pwson-n8
+DFN8 2x2, 0.5P; CASE 506CN (see ON Semiconductor 506CN.PDF)
+DFN 0.5
+0
+10
+9
+footprints
+header_th_0705430002
+Through hole pin header
+pin header
+0
+3
+3
+footprints
+xxSAxxxx
+
+
+0
+6
+6
+lib
+MICROUSB_sm
+
+
+0
+9
+5
+lib
+SJ1-351X-SMT
+
+
+0
+7
+7
+lib
+U.FL-COAX
+
+
+0
+3
+3
+lib
+gunter
+
+
+0
+0
+0
+lib
+gunter_inverse
+
+
+0
+0
+0
+mm
+Dummy_Empty
+Only empty Dummy to give satsfaction to DRC
+Only empty Dummy to give satsfaction to DRC
+0
+0
+0
+mm
+NetTie-I
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+0
+2
+2
+mm
+NetTie-II
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
+0
+3
+3
+mm
+NetTie-III
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between The Pads by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
+0
+4
+4
+mm
+NetTie-III_Connected
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+0
+4
+4
+mm
+NetTie-III_Connected_SMD
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+0
+4
+4
+mm
+NetTie-III_SMD
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
+0
+4
+4
+mm
+NetTie-II_Connected
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+0
+3
+3
+mm
+NetTie-II_Connected_SMD
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+0
+3
+3
+mm
+NetTie-II_SMD
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between the pads by yourself.
+0
+3
+3
+mm
+NetTie-I_Connected
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC.
+0
+2
+2
+mm
+NetTie-I_Connected_SMD
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC.
+0
+2
+2
+mm
+NetTie-I_SMD
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+Just a "Net tie" as an more or less elegant way to connect two different nets without disturbing ERC and DRC. Make connection between 1 and 2 by yourself.
+0
+2
+2
+probe_footprints
+142-0721-882_sma_cutout
+
+
+0
+3
+3
+probe_footprints
+1590B
+
+
+0
+4
+1
+probe_footprints
+732511150_sma
+
+
+0
+5
+5
+probe_footprints
+732511150_sma_thin
+
+
+0
+5
+5
+probe_footprints
+732512200_SMA
+
+
+0
+5
+5
+probe_footprints
+LS_T776_BOTTOM_LED
+
+
+0
+3
+3
+probe_footprints
+WE-HCI-7050
+
+
+0
+2
+2
+probe_footprints
+cinch_banana_jack
+Single banana socket, footprint - 6mm drill
+banana socket
+0
+1
+1
+probe_footprints
+sot86
+
+
+0
+4
+4
+probe_footprints
+via_0p6mmpad_0p4mmdrill
+
+
+0
+1
+1
+sensornode
+0896BM15A0001E
+
+
+0
+6
+6
+sensornode
+1555CF22
+
+
+0
+0
+0
+sensornode
+ANT1204LL05R0915A
+
+
+0
+2
+2
+sensornode
+BC2AAPC
+
+
+0
+2
+2
+sensornode
+CAP_POL_6p60mm
+
+
+0
+2
+2
+sensornode
+CHS-08TA
+
+
+0
+16
+16
+sensornode
+CONN_MSPJTAG
+
+
+0
+14
+14
+sensornode
+JMP_HDR
+
+
+0
+3
+3
+sensornode
+LPPB061NGCN-RC
+
+
+0
+6
+6
+sensornode
+NT2016SA
+
+
+0
+4
+4
+sensornode
+PTS820J20MSMTRLFS
+
+
+0
+6
+6
+sensornode
+Pomona 3754
+
+
+0
+0
+0
+sensornode
+S01-50250500
+
+
+0
+18
+18
+sensornode
+ST_LGA_14
+
+
+0
+14
+14
+sensornode
+TSSOP_38_Pitch0.65mm
+38
+
+0
+38
+38
+sensornode
+U.FL-COAX
+
+
+0
+3
+3
+sensornode
+cat
+
+
+0
+0
+0
+sensornode
+gps_radionova
+
+
+0
+28
+28
+sensornode
+gunter
+
+
+0
+0
+0
+synth_footprints
+1748LP18A075
+
+
+0
+4
+3
+synth_footprints
+3550LP14A300
+
+
+0
+6
+3
+synth_footprints
+5515LP15A730
+
+
+0
+8
+3
+synth_footprints
+LGA_32
+UH Package; 32-Lead Plastic QFN (5mm x 5mm); (see Linear Technology QFN_32_05-08-1693.pdf)
+QFN 0.5
+0
+36
+33
+synth_footprints
+RFBPF3225180C07B1U
+
+
+0
+3
+3
+synth_footprints
+SMA_901-10512_6p7MIL_FR408_CPW_LAUNCH
+
+
+0
+31
+3
+synth_footprints
+VIA_OSH4LAYER_MIN
+
+
+0
+1
+1
+synth_footprints
+X0060L5050AHF
+
+
+0
+6
+6
+vna_footprints
+5LEAD_BALUN_4p83mm_3p3mm
+
+
+0
+6
+5
+vna_footprints
+8QFN_5mm
+
+
+0
+15
+9
+vna_footprints
+142-0721-882_sma_cutout
+
+
+0
+3
+3
+vna_footprints
+1810LP07A200
+
+
+0
+4
+3
+vna_footprints
+3221-40-0100-00_conn40
+
+
+0
+40
+40
+vna_footprints
+3550LP14A300
+
+
+0
+6
+3
+vna_footprints
+5515LP15A730
+
+
+0
+9
+4
+vna_footprints
+10067847_u_sd
+
+
+0
+13
+9
+vna_footprints
+732511150_sma
+
+
+0
+5
+5
+vna_footprints
+732511150_sma_thin
+
+
+0
+5
+5
+vna_footprints
+732511150_sma_thin_twopin
+
+
+0
+5
+2
+vna_footprints
+732512200_SMA
+
+
+0
+5
+2
+vna_footprints
+734120110_ufl_umc
+
+
+0
+4
+3
+vna_footprints
+ADRF5020BCCZN
+
+
+0
+24
+21
+vna_footprints
+ATC506WLS
+
+
+0
+2
+2
+vna_footprints
+ATC550L
+
+
+0
+2
+2
+vna_footprints
+BARREL_JACK
+DC Barrel Jack
+Power Jack
+0
+3
+3
+vna_footprints
+BMI-S-103
+
+
+0
+20
+1
+vna_footprints
+BMI-S-103-NOSIDES
+
+
+0
+14
+1
+vna_footprints
+DB15MC
+Connecteur DB15 MALE couche
+CONN DB15
+0
+17
+15
+vna_footprints
+DFN-8-1EP_2x2mm_Pitch0.5mm
+DFN8 2x2, 0.5P; CASE 506CN (see ON Semiconductor 506CN.PDF)
+DFN 0.5
+0
+10
+9
+vna_footprints
+DRILL_32p25mil
+
+
+0
+1
+1
+vna_footprints
+DV75D
+
+
+0
+4
+4
+vna_footprints
+ECS-96SMF
+
+
+0
+5
+3
+vna_footprints
+FV1206
+
+
+0
+4
+3
+vna_footprints
+FV1206-1
+
+
+0
+6
+3
+vna_footprints
+FV1206-1_p35mm_ustrip
+
+
+0
+6
+3
+vna_footprints
+FV1206-4
+
+
+0
+4
+3
+vna_footprints
+FV1206-narrow
+
+
+0
+4
+3
+vna_footprints
+JMP_3
+
+
+0
+3
+3
+vna_footprints
+LFCSP_WQ_32
+
+
+0
+33
+33
+vna_footprints
+LGA_32
+UH Package; 32-Lead Plastic QFN (5mm x 5mm); (see Linear Technology QFN_32_05-08-1693.pdf)
+QFN 0.5
+0
+36
+33
+vna_footprints
+OKRT3_C72
+
+
+0
+5
+5
+vna_footprints
+PAT0510S
+
+
+0
+5
+4
+vna_footprints
+POMONA_2400BOX
+
+
+0
+0
+0
+vna_footprints
+PS1608
+
+
+0
+5
+4
+vna_footprints
+QFM8
+
+
+0
+8
+8
+vna_footprints
+QFN-32-1EP_5x5mm_PE_Pitch0.5mm
+UH Package; 32-Lead Plastic QFN (5mm x 5mm); (see Linear Technology QFN_32_05-08-1693.pdf)
+QFN 0.5
+0
+36
+33
+vna_footprints
+QFN_12_3mm2mm
+
+
+0
+13
+13
+vna_footprints
+RN0804
+
+
+0
+8
+8
+vna_footprints
+S01-50200300
+
+
+0
+18
+18
+vna_footprints
+S01-50250500
+
+
+0
+18
+18
+vna_footprints
+SF2921-61345
+
+
+0
+4
+2
+vna_footprints
+SMA_901-10512_6p7MIL_FR408_CPW_LAUNCH
+
+
+0
+31
+3
+vna_footprints
+SMA_901-10512_30MIL_OSHFR408_CPW_LAUNCH
+
+
+0
+7
+3
+vna_footprints
+SMA_901-10512_30MIL_RT6002_CPW_LAUNCH
+
+
+0
+9
+3
+vna_footprints
+SMA_901-10512_30MIL_RT6002_CPW_LAUNCH_NOPAD
+
+
+0
+7
+3
+vna_footprints
+SMA_CPW_1MM_.2MM
+
+
+0
+4
+3
+vna_footprints
+TCM1-63AX+
+
+
+0
+6
+6
+vna_footprints
+TDFN6
+
+
+0
+7
+7
+vna_footprints
+TP-P20B
+
+
+0
+2
+2
+vna_footprints
+TP07R
+TEST PAD
+TEST PAD
+0
+1
+1
+vna_footprints
+TURRET_MILLMAX_2101
+
+
+0
+1
+1
+vna_footprints
+US8
+
+
+0
+8
+8
+vna_footprints
+VIA_OSH4LAYER_MIN
+
+
+0
+1
+1
+vna_footprints
+VIA_p35mm_p55mm
+
+
+0
+1
+1
+vna_footprints
+VSSOP8
+
+
+0
+0
+0
+vna_footprints
+WSON-12-1EP_3x2mm_Pitch0.5mm
+WSON-12 http://www.ti.com/lit/ds/symlink/lm27762.pdf
+WSON-12
+0
+15
+13
+vna_footprints
+cat
+
+
+0
+0
+0
+vna_footprints
+crystal_FA238-TSX3225
+crystal Epson Toyocom FA-238 and TSX-3225 series
+
+0
+4
+4
+vna_footprints
+resistive_bridge
+
+
+0
+69
+5
+vna_footprints
+resistive_bridge_osh_fr408_ustrip
+
+
+0
+69
+5
+vna_footprints
+resistive_bridge_osh_fr408_ustrip_mirrored
+
+
+0
+69
+5
+vna_footprints
+snail
+
+
+0
+0
+0
+vna_footprints
+ti_booster40
+Through hole pin header
+pin header
+0
+40
+40
+vna_mm
+BGA-25_5x5_6.35x6.35mm
+
+
+0
+25
+25
+vna_mm
+FPC07182
+
+
+0
+0
+0
+vna_mm
+LC3B
+UD Package; 12-Lead Plastic QFN (3mm x 3mm); (see Linear Technology QFN_12_ 05-08-1855.pdf)
+QFN 0.5
+0
+16
+13
+vna_mm
+MACOM_LGA9
+
+
+0
+18
+10
+vna_mm
+PDR06380
+DC- 40 GHz Flip Chip Resistive Divider
+
+0
+6
+4
+vna_mm
+QFN-28_EP_6x5_Pitch0.5mm
+
+
+0
+44
+29
+vna_mm
+QFN-56_EP_8x8_Pitch0.5mm
+
+
+0
+72
+57
+vna_mm
+RFSW__PE42543A-X
+
+
+0
+33
+30
+vna_mm
+VSSOP-8
+
+
+0
+8
+8
+vna_mm
+p41mm_miter
+
+
+0
+2
+2
+vna_mm
+sw_edge_oshpark_4layer
+
+
+0
+23
+2
+vna_mm
+transformer_3p81_3p81
+
+
+0
+0
+0
+vna_mm
+uModule_BGA-25_5x5_6.35x6.35mm
+
+
+0
+25
+25
