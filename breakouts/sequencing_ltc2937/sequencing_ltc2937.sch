@@ -37,6 +37,7 @@ F16 "RSTB" O L 5200 2600 50
 F17 "FAULTB" O L 5200 2700 50 
 F18 "ON" I L 5200 2800 50 
 F19 "PMIC_SCL" I L 5200 2250 50 
+F20 "PMIC_3V3" O L 5200 3400 50 
 $EndSheet
 $Comp
 L Connector_Generic:Conn_01x01 J119
@@ -536,55 +537,10 @@ F 3 "" H 8650 5700 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	8650 5700 8650 5550
-Text Label 9450 2100 1    50   ~ 0
-PGOOD_ALL
-Wire Wire Line
-	9450 2250 9450 2100
-$Comp
-L Connector_Generic:Conn_01x01 J108
-U 1 1 5D77AF00
-P 9450 2450
-F 0 "J108" V 9414 2362 50  0000 R CNN
-F 1 "PGOOD" V 9323 2362 50  0000 R CNN
-F 2 "vna_footprints:TURRET_MILLMAX_2101" H 9450 2450 50  0001 C CNN
-F 3 "~" H 9450 2450 50  0001 C CNN
-	1    9450 2450
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	8950 2250 8950 2100
-$Comp
-L Connector_Generic:Conn_01x01 J105
-U 1 1 5D77B877
-P 8950 2450
-F 0 "J105" V 8914 2362 50  0000 R CNN
-F 1 "PGOOD" V 8823 2362 50  0000 R CNN
-F 2 "vna_footprints:TURRET_MILLMAX_2101" H 8950 2450 50  0001 C CNN
-F 3 "~" H 8950 2450 50  0001 C CNN
-	1    8950 2450
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	8450 2250 8450 2100
-$Comp
-L Connector_Generic:Conn_01x01 J102
-U 1 1 5D77C21E
-P 8450 2450
-F 0 "J102" V 8414 2362 50  0000 R CNN
-F 1 "PGOOD" V 8323 2362 50  0000 R CNN
-F 2 "vna_footprints:TURRET_MILLMAX_2101" H 8450 2450 50  0001 C CNN
-F 3 "~" H 8450 2450 50  0001 C CNN
-	1    8450 2450
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	7300 1650 7150 1650
 Wire Wire Line
 	7300 1750 7150 1750
-Text Label 8450 2100 1    50   ~ 0
-PGOOD_3V8
-Text Label 8950 2100 1    50   ~ 0
-PGOOD_5V5
 $Comp
 L power:+3V8 #PWR?
 U 1 1 5D785F88
@@ -1156,11 +1112,11 @@ Text Label 7300 1750 0    50   ~ 0
 PGOOD_5V5
 Text Label 7300 1650 0    50   ~ 0
 PGOOD_3V8
-Text Label 3450 6650 0    50   ~ 0
-PGOOD_ALL
-Text Label 3450 6550 0    50   ~ 0
-PGOOD_5V5
 Text Label 3450 6450 0    50   ~ 0
+PGOOD_ALL
+Text Label 3450 6650 0    50   ~ 0
+PGOOD_5V5
+Text Label 3450 6550 0    50   ~ 0
 PGOOD_3V8
 $Comp
 L Connector_Generic:Conn_02x10_Odd_Even J101
@@ -1516,17 +1472,6 @@ $EndComp
 Wire Wire Line
 	1600 7300 1600 7400
 $Comp
-L power:+3V8 #PWR0242
-U 1 1 5DB05CE7
-P 1600 6050
-F 0 "#PWR0242" H 1600 5900 50  0001 C CNN
-F 1 "+3V8" H 1615 6223 50  0000 C CNN
-F 2 "" H 1600 6050 50  0001 C CNN
-F 3 "" H 1600 6050 50  0001 C CNN
-	1    1600 6050
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector:TestPoint TP104
 U 1 1 5DB0EEC5
 P 2250 6800
@@ -1597,8 +1542,14 @@ Wire Wire Line
 Wire Wire Line
 	1200 6100 1600 6100
 Wire Wire Line
-	1600 6100 1600 6050
-Wire Wire Line
 	1600 6100 1600 6500
-Connection ~ 1600 6100
+Text Label 5100 3400 2    50   ~ 0
+PMIC_3V3
+Wire Wire Line
+	5100 3400 5200 3400
+Text Label 1050 6100 2    50   ~ 0
+PMIC_3V3
+Wire Wire Line
+	1050 6100 1200 6100
+Connection ~ 1200 6100
 $EndSCHEMATC

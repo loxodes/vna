@@ -3667,4 +3667,10 @@ Wire Wire Line
 	3500 9000 4250 9000
 Wire Wire Line
 	13550 8850 14150 8850
+Text Label 6350 5850 2    50   ~ 0
+PMIC_3V3
+Text HLabel 6550 5850 2    50   Output ~ 0
+PMIC_3V3
+Wire Wire Line
+	6550 5850 6350 5850
 $EndSCHEMATC
