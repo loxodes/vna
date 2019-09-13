@@ -1,4 +1,4 @@
-(kicad_pcb (version 20171130) (host pcbnew "(5.1.2-194-gf11d95044)")
+(kicad_pcb (version 20171130) (host pcbnew "(5.1.4-57-g19064b680)")
 
   (general
     (thickness 1.6)
@@ -156,6 +156,19 @@
     (add_net "Net-(R205-Pad1)")
     (add_net "Net-(R207-Pad1)")
     (add_net "Net-(R209-Pad1)")
+  )
+
+  (module vna_footprints:TURRET_MILLMAX_2101 (layer F.Cu) (tedit 5D75DD65) (tstamp 5D621BF0)
+    (at 143 102)
+    (path /5D62C7DB)
+    (fp_text reference J103 (at -2.5 3.5 90) (layer F.SilkS)
+      (effects (font (size 0.7 0.7) (thickness 0.15)))
+    )
+    (fp_text value Conn_01x01 (at 0 -3.3) (layer F.Fab)
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 2 2) (drill 1.4) (layers *.Cu *.Mask)
+      (net 1 +5VP))
   )
 
   (module vna_footprints:cat (layer B.Cu) (tedit 0) (tstamp 5D626D66)
@@ -971,19 +984,6 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
     )
-  )
-
-  (module vna_footprints:TURRET_MILLMAX_2101 (layer F.Cu) (tedit 5ACECEFF) (tstamp 5D621BF0)
-    (at 143 102)
-    (path /5D62C7DB)
-    (fp_text reference J103 (at -2.5 3.5 90) (layer F.SilkS)
-      (effects (font (size 0.7 0.7) (thickness 0.15)))
-    )
-    (fp_text value Conn_01x01 (at 0 -3.3) (layer F.Fab)
-      (effects (font (size 1 1) (thickness 0.15)))
-    )
-    (pad 1 thru_hole circle (at 0 0) (size 2 2) (drill 1.35) (layers *.Cu *.Mask)
-      (net 1 +5VP))
   )
 
   (module vna_footprints:TURRET_MILLMAX_2101 (layer F.Cu) (tedit 5ACECEFF) (tstamp 5D621BF5)

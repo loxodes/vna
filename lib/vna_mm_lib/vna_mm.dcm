@@ -1,5 +1,11 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP ADMV8416
+D 7 GHz to 16 GHz, Tunable Band-Pass Filter
+K Filter
+F https://www.analog.com/media/en/technical-documentation/data-sheets/ADMV8416.pdf
+$ENDCMP
+#
 $CMP ADP7158
 D 2 A, Ultralow Noise, High PSRR, RF Linear Regulator
 K LDO regulator
