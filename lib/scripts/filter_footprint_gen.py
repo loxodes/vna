@@ -1,10 +1,8 @@
 # uses kicadfpwriter from https://github.com/dlharmon/pyopenems
 import kicadfpwriter
+import numpy as np
 
 def gen_stepped_lpf(name, pad_w, seg_widths, seg_lengths):
-    # wh - width of high impedance segment
-    # wl - width of low impedance segment
-    # add pad
     g = kicadfpwriter.Generator(name)
 
     x = 0
@@ -40,9 +38,8 @@ def gen_siw_bpf(name, pad_w, siw_w, siw_l, taper_w, taper_l, via_w, via_d, via_s
     # taper_l, length of linear taper
     # via_w, center to center distance between via rows
     # via_d, via diameter
-    # via_s, via to via spacing along a row
+    # via_s, via to via spacing along a row (will be rounded down for integer number of vias along siw_l)
     g = kicadfpwriter.Generator(name)
-
     
     # create pad 1
     g.add_pad("1",pad_w/2.,0,pad_w,pad_w)
@@ -82,7 +79,12 @@ def gen_siw_bpf(name, pad_w, siw_w, siw_l, taper_w, taper_l, via_w, via_d, via_s
     g.add_pad("2",x-pad_w/2.,0,pad_w,pad_w)
 
     # create ground vias
-    # TODO: create vias..
+    n_vias = np.ceil(siw_l / via_s)
+    via_locations = np.linspace(taper_l, taper_l + siw_l, n_vias)
+
+    for via_x in via_locations:
+        g.add_pad("3", via_x, via_w/2., shape="cir", diameter=via_d+.254, drill=via_d)
+        g.add_pad("3", via_x, -via_w/2., shape="cir", diameter=via_d+.254, drill=via_d)
 
 
     fp = g.finish()
@@ -91,20 +93,20 @@ def gen_siw_bpf(name, pad_w, siw_w, siw_l, taper_w, taper_l, via_w, via_d, via_s
 
     
 def main():
-    wh = .5
-    wl = 3
-    wz = 1
+    wh = .18
+    wl = 1.964
+    wz = .54
 
-    lpf_8ghz_l = [1,2,1]
-    lpf_8ghz_w = [wl, wz, wl]
+    lpf_8ghz_l = np.array([105, 73.2, 144.49, 73.2, 105])*.0254
+    lpf_8ghz_w = [wl, wz, wl, wz, wl]
     gen_stepped_lpf('stepped_lpf_8ghz_ro4350_10mil', wz, lpf_8ghz_w, lpf_8ghz_l)
 
-    lpf_20ghz_l = [1,2,1]
-    lpf_20ghz_w = [wl, wz, wl]
+    lpf_20ghz_l = np.array([32, 30, 46, 30.7, 46, 30.7, 46, 30, 32])*.0254
+    lpf_20ghz_w = [wl, wz, wl, wz, wl, wz, wl, wz, wl]
     gen_stepped_lpf('stepped_lpf_20ghz_ro4350_10mil', wz, lpf_20ghz_w, lpf_20ghz_l)
 
 
-    gen_siw_bpf('band_x2_siw_ro4350_10mil', wz, 5.75, 20, 3, 5, 5.25, .254, 1)
+    gen_siw_bpf('band_x2_siw_ro4350_10mil', wz, 5.75, 20.0, 3.0, 5.0, 5.25, .254, 1.0)
 
 
 if __name__ == '__main__':
