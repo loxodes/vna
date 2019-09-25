@@ -98,16 +98,35 @@ def main():
     wz = .54
 
     lpf_8ghz_l = np.array([105, 73.2, 144.49, 73.2, 105])*.0254
-    lpf_8ghz_w = [wl, wz, wl, wz, wl]
+    lpf_8ghz_w = [wl, wh, wl, wh, wl]
     gen_stepped_lpf('stepped_lpf_8ghz_ro4350_10mil', wz, lpf_8ghz_w, lpf_8ghz_l)
 
     lpf_20ghz_l = np.array([32, 30, 46, 30.7, 46, 30.7, 46, 30, 32])*.0254
-    lpf_20ghz_w = [wl, wz, wl, wz, wl, wz, wl, wz, wl]
+    lpf_20ghz_w = [wl, wh, wl, wh, wl, wh, wl, wh, wl]
     gen_stepped_lpf('stepped_lpf_20ghz_ro4350_10mil', wz, lpf_20ghz_w, lpf_20ghz_l)
 
 
-    gen_siw_bpf('band_x2_siw_ro4350_10mil', wz, 5.75, 20.0, 3.0, 5.0, 5.25, .254, 1.0)
+    gen_siw_bpf('band_x2_siw_ro4350_10mil', wz, 5.75, 20.0, 2.5, 5.0, 5.25, .254, 1.0)
+    
+    # fr408, oshpark
+    wz = .41
+    wh = 6.78 * .0254
+    wl = 62.4 * .0254
 
+    lpf_8ghz_l = np.array([82.1,80.4,116.7,80.4,82.1])*.0254
+    lpf_8ghz_w = [wl, wh, wl, wh, wl]
+    gen_stepped_lpf('stepped_lpf_8ghz_fr408', wz, lpf_8ghz_w, lpf_8ghz_l)
+
+    wh = 5.25 * .0254
+    wl = 77.8 * .0254
+    lpf_20ghz_l = np.array([26,23.5,38.2,24.3,38.2,23.5,26])*.0254
+    lpf_20ghz_w = [wl, wh, wl, wh, wl, wh, wl]
+    gen_stepped_lpf('stepped_lpf_20ghz_fr408', wz, lpf_20ghz_w, lpf_20ghz_l)
+   
+    gen_siw_bpf('band_x2_siw_fr408_6p7mil', wz, 6.25, 20.0, 2.5, 5.0, 5.75, .254, 1.0)
+
+
+    #gen_siw_bpf('siw_6ghz_fr408_6p7mil', wz, 6.25, 20.0, 2.5, 5.0, 5.75, .254, 1.0)
 
 if __name__ == '__main__':
     main()

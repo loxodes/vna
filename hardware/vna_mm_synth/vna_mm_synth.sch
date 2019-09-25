@@ -74,6 +74,8 @@ F9 "SYNTH_REF_N" I L 6950 3300 60
 F10 "LMX_MUXout" O L 6950 4050 60 
 F11 "LMX_SDI" I L 6950 4150 60 
 F12 "LMX_SCK" I L 6950 4250 60 
+F13 "SYNC" I L 6950 3950 50 
+F14 "VTUNE_TLM" O R 9150 4650 50 
 $EndSheet
 $Sheet
 S 11550 2600 1800 1050
@@ -104,7 +106,7 @@ F3 "HIGHBAND_RFOUT" O R 13350 6050 50
 F4 "HIGHBAND_RFIN" I L 11550 6050 50 
 $EndSheet
 Text Notes 6900 2350 0    118  ~ 0
-goals:\n400 MHz to 26.5 GHz (29 GHz)\n-15 dBc 2nd order harmonics\n-25 dBc 3rd order harmonics\n-15 to 0 dBm output power +/- 1 dB at room\nsettling time >1 ms to 90% amplitude\nphase sync with external reference\nBOM >$1000/each\nenclosure\nice40 fpga controlled?
+goals:\n100 MHz to 26.5 GHz (29 GHz goal)\n-15 dBc 2nd order harmonics\n-25 dBc 3rd order harmonics\n-15 to 0 dBm output power +/- 1 dB at room\nsettling time >1 ms to 90% amplitude\nphase sync with external reference\nBOM >$1000/each\nenclosure\nice40 fpga controlled?
 Wire Wire Line
 	11550 6050 10750 6050
 Wire Wire Line
@@ -223,13 +225,13 @@ Wire Wire Line
 	16250 6900 16350 6900
 Wire Wire Line
 	16250 7000 16350 7000
-Text Label 7900 5950 2    50   ~ 0
+Text Label 7900 5900 2    50   ~ 0
 ATT_SERIN
-Text Label 7900 6050 2    50   ~ 0
+Text Label 7900 6000 2    50   ~ 0
 ATT_CLK
-Text Label 7900 6150 2    50   ~ 0
+Text Label 7900 6100 2    50   ~ 0
 ATT_LE
-Text Label 7900 6250 2    50   ~ 0
+Text Label 7900 6200 2    50   ~ 0
 ATT_SEROUT
 Wire Wire Line
 	14100 6600 14000 6600
@@ -270,15 +272,15 @@ Text Label 14000 7000 2    50   ~ 0
 SW2_V2
 Text Label 14000 7200 2    50   ~ 0
 SW3_HIGH_SEL
-Text Label 7900 6450 2    50   ~ 0
+Text Label 7900 6400 2    50   ~ 0
 SW1_V1
-Text Label 7900 6550 2    50   ~ 0
+Text Label 7900 6500 2    50   ~ 0
 SW1_V2
-Text Label 7900 6650 2    50   ~ 0
+Text Label 7900 6600 2    50   ~ 0
 SW2_V1
-Text Label 7900 6750 2    50   ~ 0
+Text Label 7900 6700 2    50   ~ 0
 SW2_V2
-Text Label 7900 6850 2    50   ~ 0
+Text Label 7900 6800 2    50   ~ 0
 SW3_HIGH_SEL
 $Sheet
 S 10750 8750 1750 1800
@@ -372,23 +374,23 @@ Text Label 6850 9450 2    50   ~ 0
 MIDBAND_EN
 Text Label 6850 9550 2    50   ~ 0
 HIGHBAND_EN
-Text Label 7900 5400 2    50   ~ 0
+Text Label 7900 5350 2    50   ~ 0
 AMP_~SYNC
-Text Label 7900 5500 2    50   ~ 0
+Text Label 7900 5450 2    50   ~ 0
 AMP_~CLR
-Text Label 7900 5600 2    50   ~ 0
+Text Label 7900 5550 2    50   ~ 0
 AMP_~LDAC
-Text Label 7900 5700 2    50   ~ 0
+Text Label 7900 5650 2    50   ~ 0
 AMP_SCLK
-Text Label 7900 5800 2    50   ~ 0
+Text Label 7900 5750 2    50   ~ 0
 AMP_DIN
 Text Notes 7650 7600 0    118  ~ 0
 $100
 Text Notes 11100 8500 0    118  ~ 0
 $20
-Text Label 7900 7000 2    50   ~ 0
+Text Label 7900 6950 2    50   ~ 0
 VDET_A
-Text Label 7900 7100 2    50   ~ 0
+Text Label 7900 7050 2    50   ~ 0
 VDET_B
 Text Label 10600 9850 2    50   ~ 0
 VC_A_EN

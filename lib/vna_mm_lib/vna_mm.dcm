@@ -36,6 +36,7 @@ $ENDCMP
 $CMP HMC65XLP2E
 D WIDEBAND FIXED ATTENUATOR FAMILY, DC - 25 GHz
 K attenuator
+F https://www.analog.com/media/en/technical-documentation/data-sheets/hmc652lp2-hmc655lp2.pdf
 $ENDCMP
 #
 $CMP LM71CIMF
