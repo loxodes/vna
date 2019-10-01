@@ -74,7 +74,8 @@ K https://cdn.macom.com/datasheets/MAAM-011109.pdf
 $ENDCMP
 #
 $CMP MAAM-011206
-D Broadband Darlington Amplifier DC - 15 GH
+D Broadband Darlington Amplifier DC - 15 GHz
+K amplifier
 F https://cdn.macom.com/datasheets/MAAM-011206.pdf
 $ENDCMP
 #
