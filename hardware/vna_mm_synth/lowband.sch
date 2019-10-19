@@ -74,7 +74,7 @@ AR Path="/5D2B3268" Ref="U503"  Part="1"
 AR Path="/5D2856B6/5D2B3268" Ref="U503"  Part="1" 
 F 0 "U503" H 5950 5200 60  0000 L CNN
 F 1 "MAAM-011206" H 5950 5100 60  0000 L CNN
-F 2 "" H 6100 4700 60  0001 C CNN
+F 2 "vna_mm:TDFN6" H 6100 4700 60  0001 C CNN
 F 3 "https://cdn.macom.com/datasheets/MAAM-011206.pdf" H 5950 5081 60  0001 C CNN
 	1    5950 4800
 	1    0    0    -1  
@@ -179,7 +179,7 @@ U 1 1 5D2C18C2
 P 6150 3000
 F 0 "R501" V 5954 3000 50  0000 C CNN
 F 1 "7.5k" V 6045 3000 50  0000 C CNN
-F 2 "" H 6150 3000 50  0001 C CNN
+F 2 "Resistors_SMD:R_0402" H 6150 3000 50  0001 C CNN
 F 3 "~" H 6150 3000 50  0001 C CNN
 	1    6150 3000
 	0    1    1    0   
@@ -315,7 +315,7 @@ U 1 1 5D2D9325
 P 8600 4900
 F 0 "U504" H 8600 5267 50  0000 C CNN
 F 1 "PAT1220-C-0DB" H 8600 5176 50  0000 C CNN
-F 2 "RF_Converter:RF_Attenuator_Susumu_PAT1220" H 8600 4900 50  0001 C CNN
+F 2 "vna_mm:PAT0510S" H 8600 4900 50  0001 C CNN
 F 3 "https://www.susumu.co.jp/common/pdf/n_catalog_partition16_en.pdf" H 8350 5150 50  0001 C CNN
 	1    8600 4900
 	1    0    0    -1  

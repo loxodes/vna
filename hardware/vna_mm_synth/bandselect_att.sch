@@ -300,13 +300,13 @@ Text HLabel 15600 8050 0    60   Input ~ 0
 SW3_HIGH_SEL
 Text HLabel 17800 9200 3    60   Input ~ 0
 SW_HIGH_RFIN
-Text HLabel 2700 2950 0    60   Input ~ 0
+Text HLabel 4600 2750 0    60   Input ~ 0
 SW_LOW_RFIN
 Text HLabel 2500 6750 0    60   Input ~ 0
 SW_MID_RFIN
 Text HLabel 6500 6900 2    50   Output ~ 0
 X2_FEED_RFOUT
-Text Notes 2300 2800 0    50   ~ 0
+Text Notes 4200 2600 0    50   ~ 0
 LPF, 8 GHz
 Text Notes 10300 10550 0    50   ~ 0
 SIW waveguidie cutoff filter, 18-26.5 GHz
@@ -337,7 +337,7 @@ U 1 1 5D326B11
 P 12250 6300
 F 0 "U903" H 13000 7000 50  0000 C CNN
 F 1 "PE42543" H 12900 7100 50  0000 C CNN
-F 2 "" H 12250 6300 50  0001 C CNN
+F 2 "vna_mm:RFSW__PE42543A-X" H 12250 6300 50  0001 C CNN
 F 3 "https://www.psemi.com/pdf/datasheets/pe42543ds.pdf" H 12250 6300 50  0001 C CNN
 	1    12250 6300
 	-1   0    0    -1  
@@ -597,7 +597,7 @@ U 1 1 5D55EE36
 P 13800 6300
 F 0 "FL902" H 13800 6615 50  0000 C CNN
 F 1 "low_pass_filter" H 13800 6524 50  0000 C CNN
-F 2 "" H 13700 6450 50  0001 C CNN
+F 2 "vna_footprints:stepped_lpf_20ghz_fr408" H 13700 6450 50  0001 C CNN
 F 3 "" H 13700 6450 50  0001 C CNN
 	1    13800 6300
 	1    0    0    -1  
@@ -631,30 +631,30 @@ Wire Wire Line
 	11700 6450 11550 6450
 Text Label 11550 6450 2    50   ~ 0
 LOW_FILT
-Text Label 4200 2950 0    50   ~ 0
+Text Label 6100 2750 0    50   ~ 0
 LOW_FILT
 Wire Wire Line
-	4200 2950 4000 2950
+	6100 2750 5900 2750
 $Comp
 L power:GND #PWR0905
 U 1 1 5D5CD5D0
-P 3400 3450
-F 0 "#PWR0905" H 3400 3200 50  0001 C CNN
-F 1 "GND" H 3400 3300 50  0000 C CNN
-F 2 "" H 3400 3450 50  0001 C CNN
-F 3 "" H 3400 3450 50  0001 C CNN
-	1    3400 3450
+P 5300 3250
+F 0 "#PWR0905" H 5300 3000 50  0001 C CNN
+F 1 "GND" H 5300 3100 50  0000 C CNN
+F 2 "" H 5300 3250 50  0001 C CNN
+F 3 "" H 5300 3250 50  0001 C CNN
+	1    5300 3250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3400 3400 3400 3450
+	5300 3200 5300 3250
 $Comp
 L vna_mm:PE42543 U902
 U 1 1 5D5FFF3A
 P 5800 6750
 F 0 "U902" H 6550 7450 50  0000 C CNN
 F 1 "PE42543" H 6450 7550 50  0000 C CNN
-F 2 "" H 5800 6750 50  0001 C CNN
+F 2 "vna_mm:RFSW__PE42543A-X" H 5800 6750 50  0001 C CNN
 F 3 "https://www.psemi.com/pdf/datasheets/pe42543ds.pdf" H 5800 6750 50  0001 C CNN
 	1    5800 6750
 	1    0    0    -1  
@@ -913,7 +913,7 @@ Wire Wire Line
 Text Label 6500 6700 0    50   ~ 0
 MID
 Wire Wire Line
-	2700 2950 2800 2950
+	4600 2750 4700 2750
 $Comp
 L power:+3.3VP #PWR0930
 U 1 1 5D56277A
@@ -928,12 +928,12 @@ $EndComp
 $Comp
 L synth_lib:low_pass_filter FL901
 U 1 1 5D33146F
-P 3400 2950
-F 0 "FL901" H 3400 3265 50  0000 C CNN
-F 1 "low_pass_filter" H 3400 3174 50  0000 C CNN
-F 2 "" H 3300 3100 50  0001 C CNN
-F 3 "" H 3300 3100 50  0001 C CNN
-	1    3400 2950
+P 5300 2750
+F 0 "FL901" H 5300 3065 50  0000 C CNN
+F 1 "low_pass_filter" H 5300 2974 50  0000 C CNN
+F 2 "vna_footprints:stepped_lpf_8ghz_fr408" H 5200 2900 50  0001 C CNN
+F 3 "" H 5200 2900 50  0001 C CNN
+	1    5300 2750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1220,12 +1220,10 @@ Wire Wire Line
 Connection ~ 2700 8600
 Wire Wire Line
 	2700 8600 2700 9250
-Text HLabel 2500 7000 0    60   Input ~ 0
+Text HLabel 1050 7000 0    60   Input ~ 0
 FILT_VCTL
 Text HLabel 2500 7100 0    60   Input ~ 0
 FILT_VTUNE
-Wire Wire Line
-	2500 7000 2800 7000
 Wire Wire Line
 	2500 7100 2800 7100
 Text HLabel 11550 6250 0    50   Input ~ 0
@@ -1403,4 +1401,50 @@ F 3 "~" H 3650 5400 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 NoConn ~ 6500 6800
+$Comp
+L device:R_Small R903
+U 1 1 5E1ED397
+P 1250 7000
+F 0 "R903" V 1054 7000 50  0000 C CNN
+F 1 "TBD" V 1145 7000 50  0000 C CNN
+F 2 "Resistors_SMD:R_0402" H 1250 7000 60  0001 C CNN
+F 3 "" H 1250 7000 60  0000 C CNN
+	1    1250 7000
+	0    1    1    0   
+$EndComp
+$Comp
+L device:R_Small R904
+U 1 1 5E1ED777
+P 1500 7250
+F 0 "R904" H 1559 7296 50  0000 L CNN
+F 1 "TBD" H 1559 7205 50  0000 L CNN
+F 2 "Resistors_SMD:R_0402" H 1500 7250 60  0001 C CNN
+F 3 "" H 1500 7250 60  0000 C CNN
+	1    1500 7250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5E1EDAA9
+P 1500 7450
+F 0 "#PWR0101" H 1500 7200 50  0001 C CNN
+F 1 "GND" H 1500 7300 50  0000 C CNN
+F 2 "" H 1500 7450 50  0001 C CNN
+F 3 "" H 1500 7450 50  0001 C CNN
+	1    1500 7450
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	1350 7000 1500 7000
+Wire Wire Line
+	1500 7150 1500 7000
+Connection ~ 1500 7000
+Wire Wire Line
+	1500 7000 2800 7000
+Wire Wire Line
+	1150 7000 1050 7000
+Wire Wire Line
+	1500 7450 1500 7350
+Text Notes 3250 7700 0    50   ~ 0
+SEQUENCE:\n1 - VDD/VEE\n2 - VCTL\n3 - VTUNE
 $EndSCHEMATC

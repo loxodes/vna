@@ -3606,7 +3606,7 @@ F 2 "Housings_DFN_QFN:DFN-10-1EP_3x3mm_Pitch0.5mm" H 12250 4350 60  0001 C CNN
 F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADP7158.pdf" H 12250 4350 60  0001 C CNN
 F 4 "ADP7158ACPZ-3.3-R7CT-ND‎" H 12250 4350 50  0001 C CNN "DIST_PN"
 	1    12250 4350
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:R_Small R?
