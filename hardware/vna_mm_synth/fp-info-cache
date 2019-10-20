@@ -1,4 +1,4 @@
-3529394195450615
+3527822735886615
 Air_Coils_SML_NEOSID
 Neosid_Air-Coil_SML_1turn_HDM0131A
 Neosid, Air-Coil, SML, 1turn, HDM0131A,
@@ -16815,17 +16815,10 @@ QFN 0.5
 13
 vna_mm
 LGA-24_EP_4x4_Pitch0.5mm
-
-
+24-Terminal Land Grid Array [LGA], 4 mm × 4 mm Body and 0.75 mm Package Height
+LGA24
 0
 40
-25
-vna_mm
-LGA24_ADI
-
-
-0
-74
 25
 vna_mm
 LP2E_DFN6_2x2mm_Pitch0.60mm

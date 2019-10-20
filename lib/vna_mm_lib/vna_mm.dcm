@@ -45,6 +45,12 @@ K temperature sensor
 F http://www.ti.com/lit/ds/symlink/lm71.pdf
 $ENDCMP
 #
+$CMP LT3494
+D Micropower Low Noise Boost Converters with Output Disconnect
+K regulator
+F https://www.analog.com/media/en/technical-documentation/data-sheets/3494fb.pdf
+$ENDCMP
+#
 $CMP LTC2937
 D Programmable Six Channel Sequencer and Voltage Supervisor with EEPROM
 K Sequencer

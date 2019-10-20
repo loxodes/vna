@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 2 11
+Sheet 2 12
 Title ""
 Date ""
 Rev ""
@@ -37,31 +37,7 @@ F 3 "" H 10300 6800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text HLabel 11100 6250 2    60   Input ~ 0
-SYNTH_REF_P
-$Comp
-L conn_sma_2gnd:CONN_SMA_2GND U204
-U 1 1 5AB949C1
-P 10300 7450
-F 0 "U204" H 10000 7650 60  0000 C CNN
-F 1 "CONN_SMA_2GND" H 10350 7750 60  0000 C CNN
-F 2 "vna_footprints:734120110_ufl_umc" H 10300 7450 60  0001 C CNN
-F 3 "" H 10300 7450 60  0000 C CNN
-	1    10300 7450
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0228
-U 1 1 5AB949C7
-P 10300 8000
-F 0 "#PWR0228" H 10300 7750 50  0001 C CNN
-F 1 "GND" H 10300 7850 50  0000 C CNN
-F 2 "" H 10300 8000 50  0001 C CNN
-F 3 "" H 10300 8000 50  0001 C CNN
-	1    10300 8000
-	1    0    0    -1  
-$EndComp
-Text HLabel 11100 7450 2    60   Input ~ 0
-SYNTH_REF_N
+EXT_CLK
 Text Label 4550 6250 0    60   ~ 0
 3V3_DEMOD_ENABLE
 Text HLabel 8500 6150 2    60   Input ~ 0
@@ -145,17 +121,6 @@ Wire Wire Line
 Connection ~ 10300 6750
 Wire Wire Line
 	11100 6250 10700 6250
-Wire Wire Line
-	10250 7900 10250 7950
-Wire Wire Line
-	10250 7950 10300 7950
-Wire Wire Line
-	10350 7950 10350 7900
-Wire Wire Line
-	10300 7950 10300 8000
-Connection ~ 10300 7950
-Wire Wire Line
-	11100 7450 10700 7450
 Wire Wire Line
 	8250 6150 8500 6150
 Wire Wire Line
@@ -694,8 +659,6 @@ Wire Wire Line
 Wire Wire Line
 	10300 6750 10350 6750
 Wire Wire Line
-	10300 7950 10350 7950
-Wire Wire Line
 	7750 5250 7750 5850
 Wire Wire Line
 	7200 7150 7200 7250
@@ -954,4 +917,6 @@ F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT244.pdf" H 7750 66
 $EndComp
 Wire Wire Line
 	7750 7450 7750 7500
+Text Notes 4200 9500 0    197  ~ 0
+Use Cypress EZ-PD for 9V input?
 $EndSCHEMATC
