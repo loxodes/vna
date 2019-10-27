@@ -104,8 +104,8 @@ F2 "HIGHBAND_VX2" I L 11550 5600 50
 F3 "HIGHBAND_RFOUT" O R 13350 6050 50 
 F4 "HIGHBAND_RFIN" I L 11550 6050 50 
 $EndSheet
-Text Notes 6900 2350 0    118  ~ 0
-goals:\n100 MHz to 26.5 GHz (29 GHz goal)\n-15 dBc 2nd order harmonics\n-25 dBc 3rd order harmonics\n-15 to 0 dBm output power +/- 1 dB at room\nsettling time >1 ms to 90% amplitude\nphase sync with external reference\nBOM >$1000/each\nenclosure\nice40 fpga controlled?
+Text Notes 1300 10450 0    118  ~ 0
+goals:\n100 MHz to 26.5 GHz (29 GHz goal)\n-15 dBc 2nd order harmonics\n-25 dBc 3rd order harmonics\n-15 to 0 dBm output power +/- 1 dB at room\nsettling time >1 ms to 90% amplitude\nphase sync with external reference\nBOM >$1000/each\nenclosure\nfpga controlled?\noption for USB-PD powered?
 Wire Wire Line
 	11550 6050 10750 6050
 Wire Wire Line
@@ -451,4 +451,8 @@ Text Label 10600 10300 2    50   ~ 0
 FILT_~LDAC
 Text Label 7900 7200 2    50   ~ 0
 FILT_~LDAC
+Text Label 6800 3950 2    50   ~ 0
+SYNC
+Wire Wire Line
+	6800 3950 6950 3950
 $EndSCHEMATC

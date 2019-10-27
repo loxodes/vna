@@ -28,6 +28,18 @@ K DAC
 F http://www.ti.com/lit/ds/symlink/dac7562.pdf
 $ENDCMP
 #
+$CMP DOCAT
+D Surface Mount Oven Stabilized Oscillator
+K OCXO oscillator
+F http://www.conwin.com/datasheets/cx/cx275.pdf
+$ENDCMP
+#
+$CMP HMC1031
+D 0.1 MHz to 500 MHz Clock Generator with Integer N PLL
+K pll
+F https://www.analog.com/media/en/technical-documentation/data-sheets/hmc1031.pdf
+$ENDCMP
+#
 $CMP HMC576LC3B
 D SMT GaAs MMIC x2 ACTIVE FREQUENCY MULTIPLIER, 18 - 29 GHz OUTPUT
 F https://www.analog.com/media/en/technical-documentation/data-sheets/hmc576.pdf
