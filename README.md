@@ -4,11 +4,7 @@ I'm developing a proof of concept two port microwave vector network analyzer. Th
 
 ## Usage
 This project is still under development, y'all probably don't want to try reproducing it yet.
-Testing with two port measurements out to 13 GHz is in progress.
-
-![|S11|](./doc/lpf_plot.png)
-
-![S11 Smith](./doc/lpf_smith.png)
+Two port measurements to 14 GHz work, a redesign for operation out to 26.5 GHz is in progress.
 
 ## Hardware Design
 See `breakouts` and `hardware` for various modules developed for the network analyzer.
