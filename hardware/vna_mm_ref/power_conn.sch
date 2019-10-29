@@ -14,6 +14,243 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text Notes 4600 2750 0    50   ~ 0
-TODO: high low noise 3.3V supply\nmaybe 2.5V for 100 MHz outputs\nmaybe separate supply for coils\ninput ESD protection, buffering
+Text Notes 1800 3350 0    50   ~ 0
+input ESD/overvoltage/reverse polarity protection\ndigital logic buffering
+$Comp
+L vna_mm:ADP7156 U?
+U 1 1 5DB8CEC6
+P 5350 3800
+F 0 "U?" H 5350 4287 60  0000 C CNN
+F 1 "ADP7156" H 5350 4181 60  0000 C CNN
+F 2 "Housings_DFN_QFN:DFN-10-1EP_3x3mm_Pitch0.5mm" H 5050 4450 60  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADP7156.pdf" H 5350 3800 60  0001 C CNN
+	1    5350 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0169
+U 1 1 5DB8DD83
+P 5350 4800
+F 0 "#PWR0169" H 5350 4550 50  0001 C CNN
+F 1 "GND" H 5355 4627 50  0000 C CNN
+F 2 "" H 5350 4800 50  0001 C CNN
+F 3 "" H 5350 4800 50  0001 C CNN
+	1    5350 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 4700 5350 4800
+$Comp
+L power:VPP #PWR0170
+U 1 1 5DB942F2
+P 4500 3150
+F 0 "#PWR0170" H 4500 3000 50  0001 C CNN
+F 1 "VPP" H 4515 3323 50  0000 C CNN
+F 2 "" H 4500 3150 50  0001 C CNN
+F 3 "" H 4500 3150 50  0001 C CNN
+	1    4500 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR0171
+U 1 1 5DB94879
+P 8050 3350
+F 0 "#PWR0171" H 8050 3200 50  0001 C CNN
+F 1 "+3V3" H 8065 3523 50  0000 C CNN
+F 2 "" H 8050 3350 50  0001 C CNN
+F 3 "" H 8050 3350 50  0001 C CNN
+	1    8050 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5DB95942
+P 4350 4500
+F 0 "C?" H 4442 4546 50  0000 L CNN
+F 1 "C_Small" H 4442 4455 50  0000 L CNN
+F 2 "" H 4350 4500 50  0001 C CNN
+F 3 "~" H 4350 4500 50  0001 C CNN
+	1    4350 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0172
+U 1 1 5DB95DAB
+P 4350 4800
+F 0 "#PWR0172" H 4350 4550 50  0001 C CNN
+F 1 "GND" H 4355 4627 50  0000 C CNN
+F 2 "" H 4350 4800 50  0001 C CNN
+F 3 "" H 4350 4800 50  0001 C CNN
+	1    4350 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 4800 4350 4600
+Wire Wire Line
+	4350 4400 4350 4200
+Wire Wire Line
+	4350 4200 4750 4200
+$Comp
+L Device:C_Small C?
+U 1 1 5DB96609
+P 6250 4500
+F 0 "C?" H 6342 4546 50  0000 L CNN
+F 1 "C_Small" H 6342 4455 50  0000 L CNN
+F 2 "" H 6250 4500 50  0001 C CNN
+F 3 "~" H 6250 4500 50  0001 C CNN
+	1    6250 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0173
+U 1 1 5DB96D67
+P 6250 4800
+F 0 "#PWR0173" H 6250 4550 50  0001 C CNN
+F 1 "GND" H 6255 4627 50  0000 C CNN
+F 2 "" H 6250 4800 50  0001 C CNN
+F 3 "" H 6250 4800 50  0001 C CNN
+	1    6250 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6250 4600 6250 4800
+$Comp
+L Device:C_Small C?
+U 1 1 5DB982E3
+P 3800 4500
+F 0 "C?" H 3892 4546 50  0000 L CNN
+F 1 "C_Small" H 3892 4455 50  0000 L CNN
+F 2 "" H 3800 4500 50  0001 C CNN
+F 3 "~" H 3800 4500 50  0001 C CNN
+	1    3800 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DB98A3F
+P 3800 4800
+F 0 "#PWR?" H 3800 4550 50  0001 C CNN
+F 1 "GND" H 3805 4627 50  0000 C CNN
+F 2 "" H 3800 4800 50  0001 C CNN
+F 3 "" H 3800 4800 50  0001 C CNN
+	1    3800 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3800 4600 3800 4800
+Wire Wire Line
+	4750 4050 3800 4050
+Wire Wire Line
+	3800 4050 3800 4400
+$Comp
+L Device:R_Small R?
+U 1 1 5DB9966B
+P 3150 3900
+F 0 "R?" V 2954 3900 50  0000 C CNN
+F 1 "100k" V 3045 3900 50  0000 C CNN
+F 2 "" H 3150 3900 50  0001 C CNN
+F 3 "~" H 3150 3900 50  0001 C CNN
+	1    3150 3900
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Small R?
+U 1 1 5DB99BAF
+P 3350 4200
+F 0 "R?" H 3409 4246 50  0000 L CNN
+F 1 "100k" H 3409 4155 50  0000 L CNN
+F 2 "" H 3350 4200 50  0001 C CNN
+F 3 "~" H 3350 4200 50  0001 C CNN
+	1    3350 4200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 3900 3350 3900
+Wire Wire Line
+	3350 4100 3350 3900
+Connection ~ 3350 3900
+Wire Wire Line
+	3350 3900 4750 3900
+$Comp
+L power:GND #PWR?
+U 1 1 5DB9A81E
+P 3350 4800
+F 0 "#PWR?" H 3350 4550 50  0001 C CNN
+F 1 "GND" H 3355 4627 50  0000 C CNN
+F 2 "" H 3350 4800 50  0001 C CNN
+F 3 "" H 3350 4800 50  0001 C CNN
+	1    3350 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3350 4300 3350 4800
+Wire Wire Line
+	5950 4050 6250 4050
+Wire Wire Line
+	6250 4050 6250 4200
+Wire Wire Line
+	5950 4200 6250 4200
+Connection ~ 6250 4200
+Wire Wire Line
+	6250 4200 6250 4400
+Wire Wire Line
+	5950 3900 6100 3900
+Wire Wire Line
+	6100 3900 6100 3700
+Wire Wire Line
+	6100 3600 5950 3600
+Wire Wire Line
+	5950 3700 6100 3700
+Connection ~ 6100 3700
+Wire Wire Line
+	6100 3700 6100 3600
+Wire Wire Line
+	6100 3600 6850 3600
+Connection ~ 6100 3600
+$Comp
+L Device:L_Small L?
+U 1 1 5DB9D61B
+P 7050 3600
+F 0 "L?" V 7235 3600 50  0000 C CNN
+F 1 "L_Small" V 7144 3600 50  0000 C CNN
+F 2 "" H 7050 3600 50  0001 C CNN
+F 3 "~" H 7050 3600 50  0001 C CNN
+	1    7050 3600
+	0    -1   -1   0   
+$EndComp
+Text Notes 6950 3350 0    50   ~ 0
+1A max, 500 mA typical
+$Comp
+L Device:C_Small C?
+U 1 1 5DB9F560
+P 6700 3850
+F 0 "C?" H 6792 3896 50  0000 L CNN
+F 1 "C_Small" H 6792 3805 50  0000 L CNN
+F 2 "" H 6700 3850 50  0001 C CNN
+F 3 "~" H 6700 3850 50  0001 C CNN
+	1    6700 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5DBA01AC
+P 4150 3400
+F 0 "C?" H 4242 3446 50  0000 L CNN
+F 1 "C_Small" H 4242 3355 50  0000 L CNN
+F 2 "" H 4150 3400 50  0001 C CNN
+F 3 "~" H 4150 3400 50  0001 C CNN
+	1    4150 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74HC244 U?
+U 1 1 5DBA0FB3
+P 3400 1950
+F 0 "U?" H 3400 2931 50  0000 C CNN
+F 1 "74HC244" H 3400 2840 50  0000 C CNN
+F 2 "" H 3400 1950 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT244.pdf" H 3400 1950 50  0001 C CNN
+	1    3400 1950
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

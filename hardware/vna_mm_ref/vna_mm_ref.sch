@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 Text Notes 4650 1200 0    50   ~ 0
-Goals:\n10 MHz input or internal OCXO\nthree 100 MHz outputs, one 10 MHz output\nenclosure & 3D model\nphase noise that doesn't limit the TI LMX2595\n 
+Goals:\n10 MHz input or internal OCXO\nthree 100 MHz outputs, one 10 MHz output\nenclosure & 3D model\nphase noise that doesn't limit the TI LMX2595\nsmt test points for loop filter reponse
 $Sheet
 S 7200 1750 1250 2900
 U 5DBF0563
@@ -52,12 +52,16 @@ U 5DC45DA8
 F0 "power_conn" 50
 F1 "power_conn.sch" 50
 $EndSheet
-Text Notes 3100 1600 0    50   ~ 0
-8.5 mm zheight
+Text Notes 2900 1600 0    50   ~ 0
+8.5 mm zheight, 850 mA peak, 400 mA typical
 Text Notes 5200 1600 0    50   ~ 0
-5.5 mm zheight
+5.5 mm zheight, 40 mA
 Wire Wire Line
 	4350 3000 5200 3000
 Wire Wire Line
 	6450 3000 7200 3000
+Text Notes 7250 1600 0    50   ~ 0
+40 mA
+Text Notes 3350 5250 0    50   ~ 0
+3.3V, peak 1A, 500 mA typical
 $EndSCHEMATC
