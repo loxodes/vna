@@ -22,23 +22,42 @@ U 5DBF0563
 F0 "output_buffer" 50
 F1 "output_buffer.sch" 50
 F2 "REF_100MHZ_IN" I L 7200 3000 50 
+F3 "FILTA" I L 7200 4350 50 
+F4 "FILTB" I L 7200 4450 50 
+F5 "SD1_100MHZ" I L 7200 4150 50 
+F6 "SD2_100MHZ" I L 7200 4250 50 
 $EndSheet
 $Sheet
 S 5200 1750 1250 2900
 U 5DC1A65E
 F0 "synth_100MHz" 50
 F1 "synth_100MHz.sch" 50
+F2 "100MHZ_OUT" O R 6450 3000 50 
+F3 "10MHZ_IN" I L 5200 3000 50 
+F4 "PLL_EN" I L 5200 4350 50 
+F5 "LKD" O R 6450 4350 50 
 $EndSheet
 $Sheet
 S 3100 1750 1250 2900
 U 5DC3C92E
 F0 "ref_sel" 50
 F1 "ref_sel.sch" 50
+F2 "10MHZ_OUT" O R 4350 3000 50 
+F3 "INT_REF_EN" I L 3100 4450 50 
+F4 "REF_SEL" I L 3100 4350 50 
 $EndSheet
 $Sheet
-S 2750 5550 1950 1600
+S 3100 5350 1950 1600
 U 5DC45DA8
 F0 "power_conn" 50
 F1 "power_conn.sch" 50
 $EndSheet
+Text Notes 3100 1600 0    50   ~ 0
+8.5 mm zheight
+Text Notes 5200 1600 0    50   ~ 0
+5.5 mm zheight
+Wire Wire Line
+	4350 3000 5200 3000
+Wire Wire Line
+	6450 3000 7200 3000
 $EndSCHEMATC

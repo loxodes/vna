@@ -1,5 +1,11 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP 1-1462051-1
+D RELAY RF SPDT 2A 3V
+K SPDT RF Relay
+F https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-98000&DocType=SS&DocLang=EN
+$ENDCMP
+#
 $CMP ADMV8416
 D 7 GHz to 16 GHz, Tunable Band-Pass Filter
 K Filter
@@ -32,6 +38,12 @@ $CMP DOCAT
 D Surface Mount Oven Stabilized Oscillator
 K OCXO oscillator
 F http://www.conwin.com/datasheets/cx/cx275.pdf
+$ENDCMP
+#
+$CMP DRV8833C
+D Dual H-Bridge Motor Driver, WQFN-16
+K H-bridge motor driver
+F http://www.ti.com/lit/ds/symlink/drv8833.pdf
 $ENDCMP
 #
 $CMP HMC1031

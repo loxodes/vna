@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 4
+Sheet 1 5
 Title ""
 Date ""
 Rev ""
@@ -16,77 +16,48 @@ Comment4 ""
 $EndDescr
 Text Notes 4650 1200 0    50   ~ 0
 Goals:\n10 MHz input or internal OCXO\nthree 100 MHz outputs, one 10 MHz output\nenclosure & 3D model\nphase noise that doesn't limit the TI LMX2595\n 
-$Comp
-L Connector:Conn_Coaxial J?
-U 1 1 5DB6AE76
-P 5450 5350
-F 0 "J?" H 5378 5588 50  0000 C CNN
-F 1 "Conn_Coaxial" H 5378 5497 50  0000 C CNN
-F 2 "" H 5450 5350 50  0001 C CNN
-F 3 " ~" H 5450 5350 50  0001 C CNN
-	1    5450 5350
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5DB6AE7C
-P 5450 5650
-F 0 "#PWR?" H 5450 5400 50  0001 C CNN
-F 1 "GND" H 5455 5477 50  0000 C CNN
-F 2 "" H 5450 5650 50  0001 C CNN
-F 3 "" H 5450 5650 50  0001 C CNN
-	1    5450 5650
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	5450 5550 5450 5650
-$Comp
-L Connector:Conn_Coaxial J?
-U 1 1 5DB6AE83
-P 5450 6850
-F 0 "J?" H 5378 7088 50  0000 C CNN
-F 1 "Conn_Coaxial" H 5378 6997 50  0000 C CNN
-F 2 "" H 5450 6850 50  0001 C CNN
-F 3 " ~" H 5450 6850 50  0001 C CNN
-	1    5450 6850
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5DB6AE89
-P 5450 7150
-F 0 "#PWR?" H 5450 6900 50  0001 C CNN
-F 1 "GND" H 5455 6977 50  0000 C CNN
-F 2 "" H 5450 7150 50  0001 C CNN
-F 3 "" H 5450 7150 50  0001 C CNN
-	1    5450 7150
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	5450 7050 5450 7150
 $Sheet
 S 7200 1750 1250 2900
 U 5DBF0563
 F0 "output_buffer" 50
 F1 "output_buffer.sch" 50
 F2 "REF_100MHZ_IN" I L 7200 3000 50 
+F3 "FILTA" I L 7200 4350 50 
+F4 "FILTB" I L 7200 4450 50 
+F5 "SD1_100MHZ" I L 7200 4150 50 
+F6 "SD2_100MHZ" I L 7200 4250 50 
 $EndSheet
 $Sheet
 S 5200 1750 1250 2900
 U 5DC1A65E
 F0 "synth_100MHz" 50
 F1 "synth_100MHz.sch" 50
+F2 "100MHZ_OUT" O R 6450 3000 50 
+F3 "10MHZ_IN" I L 5200 3000 50 
+F4 "PLL_EN" I L 5200 4350 50 
+F5 "LKD" O R 6450 4350 50 
 $EndSheet
 $Sheet
 S 3100 1750 1250 2900
 U 5DC3C92E
 F0 "ref_sel" 50
 F1 "ref_sel.sch" 50
+F2 "10MHZ_OUT" O R 4350 3000 50 
+F3 "INT_REF_EN" I L 3100 4450 50 
+F4 "REF_SEL" I L 3100 4350 50 
 $EndSheet
 $Sheet
-S 2750 5550 1950 1600
+S 3100 5350 1950 1600
 U 5DC45DA8
 F0 "power_conn" 50
 F1 "power_conn.sch" 50
 $EndSheet
+Text Notes 3100 1600 0    50   ~ 0
+8.5 mm zheight
+Text Notes 5200 1600 0    50   ~ 0
+5.5 mm zheight
+Wire Wire Line
+	4350 3000 5200 3000
+Wire Wire Line
+	6450 3000 7200 3000
 $EndSCHEMATC
