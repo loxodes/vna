@@ -940,10 +940,6 @@ Wire Wire Line
 	11800 4750 12050 4750
 Wire Wire Line
 	12050 4750 12050 4500
-Text HLabel 10900 4850 0    50   Input ~ 0
-FILTA
-Text HLabel 10900 4950 0    50   Input ~ 0
-FILTB
 Text HLabel 10300 5150 0    50   Input ~ 0
 SD1_10MHZ
 Text HLabel 10300 5250 0    50   Input ~ 0
@@ -1556,4 +1552,41 @@ Wire Wire Line
 Connection ~ 1800 4350
 Wire Wire Line
 	1800 4350 1950 4350
+Text HLabel 10900 4950 0    50   Input ~ 0
+FILTB
+Text HLabel 10900 4850 0    50   Input ~ 0
+FILTA
+$Comp
+L Device:C_Small C?
+U 1 1 5DBDC8BB
+P 6550 1550
+AR Path="/5DBDC8BB" Ref="C?"  Part="1" 
+AR Path="/5DC3C92E/5DBDC8BB" Ref="C?"  Part="1" 
+F 0 "C?" H 6642 1596 50  0000 L CNN
+F 1 "10 uF" H 6642 1505 50  0000 L CNN
+F 2 "" H 6550 1550 50  0001 C CNN
+F 3 "~" H 6550 1550 50  0001 C CNN
+	1    6550 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DBDCC12
+P 6550 1750
+AR Path="/5DBDCC12" Ref="#PWR?"  Part="1" 
+AR Path="/5DC3C92E/5DBDCC12" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6550 1500 50  0001 C CNN
+F 1 "GND" H 6555 1577 50  0000 C CNN
+F 2 "" H 6550 1750 50  0001 C CNN
+F 3 "" H 6550 1750 50  0001 C CNN
+	1    6550 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5950 1350 6550 1350
+Wire Wire Line
+	6550 1350 6550 1450
+Connection ~ 5950 1350
+Wire Wire Line
+	6550 1650 6550 1750
 $EndSCHEMATC
