@@ -43,7 +43,6 @@ U 5DC3C92E
 F0 "ref_sel" 50
 F1 "ref_sel.sch" 50
 F2 "10MHZ_OUT" O R 4350 3000 50 
-F3 "INT_REF_EN" I L 3100 4450 50 
 F4 "REF_SEL" I L 3100 4350 50 
 F5 "FILTA" I L 3100 4200 50 
 F6 "FILTB" I L 3100 4100 50 
@@ -108,10 +107,6 @@ Text Label 2850 3650 2    50   ~ 0
 RELAY_EN
 Text Label 2850 4350 2    50   ~ 0
 REF_SEL
-Text Label 2850 4450 2    50   ~ 0
-INT_REF_EN
-Wire Wire Line
-	2850 4450 3100 4450
 Wire Wire Line
 	2850 4350 3100 4350
 Wire Wire Line

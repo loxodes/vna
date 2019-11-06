@@ -22,7 +22,7 @@ AR Path="/5DC43248" Ref="U?"  Part="1"
 AR Path="/5DC3C92E/5DC43248" Ref="U?"  Part="1" 
 F 0 "U?" H 2450 9400 50  0000 L CNN
 F 1 "DOCAT050F-010.0M" H 2450 9300 50  0000 L CNN
-F 2 "" H 3300 8900 50  0001 C CNN
+F 2 "vna_mm:DOCAT_9.1x14.1mm" H 3300 8900 50  0001 C CNN
 F 3 "http://www.conwin.com/datasheets/cx/cx275.pdf" H 3300 8900 50  0001 C CNN
 	1    3300 8900
 	1    0    0    -1  
@@ -69,51 +69,6 @@ F 3 "" H 1400 4850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L vna_mm:TPS22918 U?
-U 1 1 5DC43262
-P 2300 7200
-AR Path="/5DC43262" Ref="U?"  Part="1" 
-AR Path="/5DC3C92E/5DC43262" Ref="U?"  Part="1" 
-F 0 "U?" H 2300 7665 50  0000 C CNN
-F 1 "TPS22918" H 2300 7574 50  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23-6" H 2250 7750 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tps22918.pdf" H 2300 7500 50  0001 C CNN
-	1    2300 7200
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5DC43268
-P 2300 7800
-AR Path="/5DC43268" Ref="#PWR?"  Part="1" 
-AR Path="/5DC3C92E/5DC43268" Ref="#PWR0136"  Part="1" 
-F 0 "#PWR0136" H 2300 7550 50  0001 C CNN
-F 1 "GND" H 2305 7627 50  0000 C CNN
-F 2 "" H 2300 7800 50  0001 C CNN
-F 3 "" H 2300 7800 50  0001 C CNN
-	1    2300 7800
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2300 7700 2300 7800
-$Comp
-L power:+3V3 #PWR?
-U 1 1 5DC4326F
-P 1450 6850
-AR Path="/5DC4326F" Ref="#PWR?"  Part="1" 
-AR Path="/5DC3C92E/5DC4326F" Ref="#PWR0137"  Part="1" 
-F 0 "#PWR0137" H 1450 6700 50  0001 C CNN
-F 1 "+3V3" H 1465 7023 50  0000 C CNN
-F 2 "" H 1450 6850 50  0001 C CNN
-F 3 "" H 1450 6850 50  0001 C CNN
-	1    1450 6850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1850 7000 1450 7000
-Wire Wire Line
-	1450 7000 1450 6850
-$Comp
 L Device:C_Small C?
 U 1 1 5DC43277
 P 3700 8000
@@ -152,8 +107,6 @@ F 3 "~" H 4700 8000 50  0001 C CNN
 	1    4700 8000
 	1    0    0    -1  
 $EndComp
-NoConn ~ 2750 7400
-NoConn ~ 2750 7200
 $Comp
 L Device:L_Small L?
 U 1 1 5DC4328B
@@ -197,10 +150,6 @@ F 3 "" H 4200 8150 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	4200 8150 4200 8100
-Text Notes 2800 6900 0    50   ~ 0
-760 mA turn on,\n340 mA steady state
-Wire Wire Line
-	2750 7000 3300 7000
 Wire Wire Line
 	3300 7000 3300 7450
 Wire Wire Line
@@ -237,29 +186,6 @@ Wire Wire Line
 Wire Wire Line
 	4700 7800 4700 7900
 Connection ~ 4200 7800
-Wire Wire Line
-	1850 7400 1450 7400
-$Comp
-L Device:R_Small R?
-U 1 1 5DC432B5
-P 1450 7200
-AR Path="/5DC432B5" Ref="R?"  Part="1" 
-AR Path="/5DC3C92E/5DC432B5" Ref="R?"  Part="1" 
-F 0 "R?" H 1509 7246 50  0000 L CNN
-F 1 "10k" H 1509 7155 50  0000 L CNN
-F 2 "" H 1450 7200 50  0001 C CNN
-F 3 "~" H 1450 7200 50  0001 C CNN
-	1    1450 7200
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1450 7300 1450 7400
-Wire Wire Line
-	1450 7100 1450 7000
-Connection ~ 1450 7000
-Wire Wire Line
-	1450 7400 1350 7400
-Connection ~ 1450 7400
 $Comp
 L Device:C_Small C?
 U 1 1 5DC432C1
@@ -277,8 +203,6 @@ Wire Wire Line
 	1600 4350 1800 4350
 Text HLabel 13200 4500 2    50   Output ~ 0
 10MHZ_OUT
-Text HLabel 1350 7400 0    50   Input ~ 0
-INT_REF_EN
 $Comp
 L Connector:Conn_Coaxial J?
 U 1 1 5DC47C83
@@ -1135,8 +1059,6 @@ Wire Wire Line
 	5350 8900 5350 4550
 Wire Wire Line
 	5350 4550 6450 4550
-Wire Wire Line
-	4600 8900 5350 8900
 $Comp
 L Device:R_Small R?
 U 1 1 5DC2DC84
@@ -1311,20 +1233,6 @@ Wire Wire Line
 Wire Wire Line
 	4800 1350 4800 1450
 Connection ~ 5150 1350
-$Comp
-L Device:L_Small L?
-U 1 1 5DCC5711
-P 5250 1100
-AR Path="/5DCC5711" Ref="L?"  Part="1" 
-AR Path="/5DBF0563/5DCC5711" Ref="L?"  Part="1" 
-AR Path="/5DC3C92E/5DCC5711" Ref="L?"  Part="1" 
-F 0 "L?" H 5298 1146 50  0000 L CNN
-F 1 "L_Small" H 5298 1055 50  0000 L CNN
-F 2 "" H 5250 1100 50  0001 C CNN
-F 3 "~" H 5250 1100 50  0001 C CNN
-	1    5250 1100
-	1    0    0    1   
-$EndComp
 Wire Wire Line
 	5250 1000 5250 850 
 Wire Wire Line
@@ -1339,19 +1247,6 @@ Wire Wire Line
 Connection ~ 5200 850 
 Wire Wire Line
 	5200 850  5150 850 
-$Comp
-L power:+3V3 #PWR?
-U 1 1 5DCDD4F5
-P 5200 750
-AR Path="/5DCDD4F5" Ref="#PWR?"  Part="1" 
-AR Path="/5DC3C92E/5DCDD4F5" Ref="#PWR0163"  Part="1" 
-F 0 "#PWR0163" H 5200 600 50  0001 C CNN
-F 1 "+3V3" H 5215 923 50  0000 C CNN
-F 2 "" H 5200 750 50  0001 C CNN
-F 3 "" H 5200 750 50  0001 C CNN
-	1    5200 750 
-	1    0    0    -1  
-$EndComp
 Text HLabel 3050 2500 0    50   Input ~ 0
 RELAY_EN
 $Comp
@@ -1386,19 +1281,6 @@ F 3 "" H 3850 3300 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3850 3200 3850 3300
-$Comp
-L power:+3V3 #PWR?
-U 1 1 5DD1C5A7
-P 3850 2850
-AR Path="/5DD1C5A7" Ref="#PWR?"  Part="1" 
-AR Path="/5DC3C92E/5DD1C5A7" Ref="#PWR0165"  Part="1" 
-F 0 "#PWR0165" H 3850 2700 50  0001 C CNN
-F 1 "+3V3" H 3865 3023 50  0000 C CNN
-F 2 "" H 3850 2850 50  0001 C CNN
-F 3 "" H 3850 2850 50  0001 C CNN
-	1    3850 2850
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	3850 3000 3850 2850
 Wire Wire Line
@@ -1589,4 +1471,82 @@ Wire Wire Line
 Connection ~ 5950 1350
 Wire Wire Line
 	6550 1650 6550 1750
+$Comp
+L Device:C_Small C?
+U 1 1 5DC3501E
+P 5350 9450
+AR Path="/5DC3501E" Ref="C?"  Part="1" 
+AR Path="/5DBF0563/5DC3501E" Ref="C?"  Part="1" 
+AR Path="/5DC3C92E/5DC3501E" Ref="C?"  Part="1" 
+F 0 "C?" V 5579 9450 50  0000 C CNN
+F 1 "15 pF" V 5488 9450 50  0000 C CNN
+F 2 "" H 5350 9450 50  0001 C CNN
+F 3 "~" H 5350 9450 50  0001 C CNN
+	1    5350 9450
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DC354FE
+P 5350 9650
+AR Path="/5DC354FE" Ref="#PWR?"  Part="1" 
+AR Path="/5DC3C92E/5DC354FE" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5350 9400 50  0001 C CNN
+F 1 "GND" H 5355 9477 50  0000 C CNN
+F 2 "" H 5350 9650 50  0001 C CNN
+F 3 "" H 5350 9650 50  0001 C CNN
+	1    5350 9650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 9550 5350 9650
+Wire Wire Line
+	5350 9350 5350 8900
+Connection ~ 5350 8900
+Wire Wire Line
+	4600 8900 5350 8900
+$Comp
+L power:+3.3VP #PWR?
+U 1 1 5DCAC1EC
+P 3300 7000
+F 0 "#PWR?" H 3450 6950 50  0001 C CNN
+F 1 "+3.3VP" H 3320 7143 50  0000 C CNN
+F 2 "" H 3300 7000 50  0001 C CNN
+F 3 "" H 3300 7000 50  0001 C CNN
+	1    3300 7000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+4V #PWR?
+U 1 1 5DD1FA50
+P 5200 750
+F 0 "#PWR?" H 5200 600 50  0001 C CNN
+F 1 "+4V" H 5215 923 50  0000 C CNN
+F 2 "" H 5200 750 50  0001 C CNN
+F 3 "" H 5200 750 50  0001 C CNN
+	1    5200 750 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+4V #PWR?
+U 1 1 5DD275CE
+P 3850 2850
+F 0 "#PWR?" H 3850 2700 50  0001 C CNN
+F 1 "+4V" H 3865 3023 50  0000 C CNN
+F 2 "" H 3850 2850 50  0001 C CNN
+F 3 "" H 3850 2850 50  0001 C CNN
+	1    3850 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D_Small D?
+U 1 1 5DD55E56
+P 5250 1100
+F 0 "D?" V 5296 1032 50  0000 R CNN
+F 1 "D_Small" V 5205 1032 50  0000 R CNN
+F 2 "" V 5250 1100 50  0001 C CNN
+F 3 "~" V 5250 1100 50  0001 C CNN
+	1    5250 1100
+	0    -1   -1   0   
+$EndComp
 $EndSCHEMATC
