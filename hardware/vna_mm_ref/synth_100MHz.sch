@@ -63,8 +63,8 @@ U 1 1 5DC274A9
 P 2950 3800
 AR Path="/5DC274A9" Ref="R?"  Part="1" 
 AR Path="/5DC1A65E/5DC274A9" Ref="R?"  Part="1" 
-F 0 "R?" V 3050 3850 50  0000 C CNN
-F 1 "0" V 3050 3700 50  0000 C CNN
+F 0 "R?" V 3050 3900 50  0000 C CNN
+F 1 "10k" V 3050 3750 50  0000 C CNN
 F 2 "" H 2950 3800 50  0001 C CNN
 F 3 "~" H 2950 3800 50  0001 C CNN
 	1    2950 3800
@@ -291,7 +291,7 @@ P 3700 2350
 AR Path="/5DC2751A" Ref="L?"  Part="1" 
 AR Path="/5DC1A65E/5DC2751A" Ref="L?"  Part="1" 
 F 0 "L?" H 3748 2396 50  0000 L CNN
-F 1 "L_Small" H 3748 2305 50  0000 L CNN
+F 1 "BLM15AG102SZ1D" H 3748 2305 50  0000 L CNN
 F 2 "" H 3700 2350 50  0001 C CNN
 F 3 "~" H 3700 2350 50  0001 C CNN
 	1    3700 2350
@@ -424,7 +424,7 @@ P 7050 2450
 AR Path="/5DC2755A" Ref="L?"  Part="1" 
 AR Path="/5DC1A65E/5DC2755A" Ref="L?"  Part="1" 
 F 0 "L?" H 7098 2496 50  0000 L CNN
-F 1 "L_Small" H 7098 2405 50  0000 L CNN
+F 1 "BLM15AG102SZ1D" H 7098 2405 50  0000 L CNN
 F 2 "" H 7050 2450 50  0001 C CNN
 F 3 "~" H 7050 2450 50  0001 C CNN
 	1    7050 2450
@@ -669,15 +669,6 @@ Wire Wire Line
 	4350 3900 4450 3900
 Wire Wire Line
 	3050 3800 3150 3800
-Wire Wire Line
-	3150 3900 2750 3900
-Wire Wire Line
-	2750 3900 2750 3800
-Wire Wire Line
-	2750 3800 2850 3800
-Wire Wire Line
-	2650 3900 2750 3900
-Connection ~ 2750 3900
 Text HLabel 8800 3600 2    50   Output ~ 0
 100MHZ_OUT
 Wire Wire Line
@@ -699,8 +690,6 @@ F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/hmc1031
 	1    3700 3700
 	1    0    0    -1  
 $EndComp
-Text HLabel 2650 3900 0    50   Input ~ 0
-PLL_EN
 Text HLabel 4450 3900 2    50   Output ~ 0
 LKD
 Wire Wire Line
@@ -744,4 +733,53 @@ Wire Wire Line
 	1900 3600 3150 3600
 Text Notes 5050 4750 0    50   ~ 0
 VCOIN input region is 5 dBm to -15 dBm
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5DED131B
+P 2800 4000
+AR Path="/5DED131B" Ref="#PWR?"  Part="1" 
+AR Path="/5DC1A65E/5DED131B" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 2800 3850 50  0001 C CNN
+F 1 "+3V3" H 2815 4173 50  0000 C CNN
+F 2 "" H 2800 4000 50  0001 C CNN
+F 3 "" H 2800 4000 50  0001 C CNN
+	1    2800 4000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R_Small R?
+U 1 1 5DED19AB
+P 2950 4000
+AR Path="/5DED19AB" Ref="R?"  Part="1" 
+AR Path="/5DC1A65E/5DED19AB" Ref="R?"  Part="1" 
+F 0 "R?" V 2850 3850 50  0000 L CNN
+F 1 "10k" V 2850 4000 50  0000 L CNN
+F 2 "" H 2950 4000 50  0001 C CNN
+F 3 "~" H 2950 4000 50  0001 C CNN
+	1    2950 4000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2850 4000 2800 4000
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5DED581B
+P 2800 3800
+AR Path="/5DED581B" Ref="#PWR?"  Part="1" 
+AR Path="/5DC1A65E/5DED581B" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 2800 3650 50  0001 C CNN
+F 1 "+3V3" H 2815 3973 50  0000 C CNN
+F 2 "" H 2800 3800 50  0001 C CNN
+F 3 "" H 2800 3800 50  0001 C CNN
+	1    2800 3800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2800 3800 2850 3800
+Wire Wire Line
+	3050 4000 3100 4000
+Wire Wire Line
+	3100 4000 3100 3900
+Wire Wire Line
+	3100 3900 3150 3900
 $EndSCHEMATC

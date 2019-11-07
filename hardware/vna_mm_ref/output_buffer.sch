@@ -14,32 +14,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L Connector:Conn_Coaxial J?
-U 1 1 5DBFE6BF
-P 7150 4700
-AR Path="/5DBFE6BF" Ref="J?"  Part="1" 
-AR Path="/5DBF0563/5DBFE6BF" Ref="J?"  Part="1" 
-F 0 "J?" H 7078 4938 50  0000 C CNN
-F 1 "Conn_Coaxial" H 7078 4847 50  0000 C CNN
-F 2 "" H 7150 4700 50  0001 C CNN
-F 3 " ~" H 7150 4700 50  0001 C CNN
-	1    7150 4700
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5DBFE6C5
-P 7150 5050
-AR Path="/5DBFE6C5" Ref="#PWR?"  Part="1" 
-AR Path="/5DBF0563/5DBFE6C5" Ref="#PWR0101"  Part="1" 
-F 0 "#PWR0101" H 7150 4800 50  0001 C CNN
-F 1 "GND" H 7155 4877 50  0000 C CNN
-F 2 "" H 7150 5050 50  0001 C CNN
-F 3 "" H 7150 5050 50  0001 C CNN
-	1    7150 5050
-	-1   0    0    -1  
-$EndComp
 Text Notes 3600 5200 0    50   ~ 0
 TODO: DOES THIS WORK WITH THE OUTPUT IMPEDANCE?\nSEE SHEET 23 OF LT6957 FOR CMOS DRIVING\n- IS THE SIGNAL LEVEL GOOD?\n- WHAT MATCHING IS NEEDED ON THE VCXO OUTPUT?
 $Comp
@@ -141,7 +115,7 @@ P 5150 1650
 AR Path="/5DBFE6F9" Ref="L?"  Part="1" 
 AR Path="/5DBF0563/5DBFE6F9" Ref="L?"  Part="1" 
 F 0 "L?" H 5198 1696 50  0000 L CNN
-F 1 "L_Small" H 5198 1605 50  0000 L CNN
+F 1 "BLM15AG102SZ1D" H 5198 1605 50  0000 L CNN
 F 2 "" H 5150 1650 50  0001 C CNN
 F 3 "~" H 5150 1650 50  0001 C CNN
 	1    5150 1650
@@ -243,7 +217,7 @@ Wire Wire Line
 Wire Wire Line
 	4600 4250 4600 4150
 Connection ~ 4600 4150
-Text Notes 5650 1700 0    50   ~ 0
+Text Notes 5550 1550 0    50   ~ 0
 LMX2595 reference input is 2Vpp max,AC coupled
 Text Notes 5350 1350 0    50   ~ 0
 30 mA
@@ -316,7 +290,7 @@ P 5250 1650
 AR Path="/5DBFE74E" Ref="L?"  Part="1" 
 AR Path="/5DBF0563/5DBFE74E" Ref="L?"  Part="1" 
 F 0 "L?" H 5298 1696 50  0000 L CNN
-F 1 "L_Small" H 5298 1605 50  0000 L CNN
+F 1 "BLM15AG102SZ1D" H 5298 1605 50  0000 L CNN
 F 2 "" H 5250 1650 50  0001 C CNN
 F 3 "~" H 5250 1650 50  0001 C CNN
 	1    5250 1650
@@ -514,60 +488,38 @@ F 3 "~" H 6100 4700 50  0001 C CNN
 	1    6100 4700
 	0    -1   -1   0   
 $EndComp
-$Comp
-L Device:C_Small C?
-U 1 1 5DBFE7B6
-P 6500 4700
-AR Path="/5DBFE7B6" Ref="C?"  Part="1" 
-AR Path="/5DBF0563/5DBFE7B6" Ref="C?"  Part="1" 
-F 0 "C?" H 6592 4746 50  0000 L CNN
-F 1 "JMP" H 6592 4655 50  0000 L CNN
-F 2 "" H 6500 4700 50  0001 C CNN
-F 3 "~" H 6500 4700 50  0001 C CNN
-	1    6500 4700
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	6000 4700 5800 4700
 Wire Wire Line
 	5800 3850 5550 3850
 Wire Wire Line
 	6200 4700 6300 4700
-Text Notes 7450 3650 0    50   ~ 0
-TODO: ADD BPF FILTER TO OUTPUT?\nADD ESD PROTECTION?
-Wire Wire Line
-	6950 4700 6600 4700
-Wire Wire Line
-	7150 4900 7150 5050
 Wire Wire Line
 	6300 4800 6300 4700
-Connection ~ 6300 4700
-Wire Wire Line
-	6300 4700 6400 4700
 $Comp
 L Connector:Conn_Coaxial J?
 U 1 1 5DBFE7CD
-P 7150 3400
+P 8600 3400
 AR Path="/5DBFE7CD" Ref="J?"  Part="1" 
 AR Path="/5DBF0563/5DBFE7CD" Ref="J?"  Part="1" 
-F 0 "J?" H 7078 3638 50  0000 C CNN
-F 1 "Conn_Coaxial" H 7078 3547 50  0000 C CNN
-F 2 "" H 7150 3400 50  0001 C CNN
-F 3 " ~" H 7150 3400 50  0001 C CNN
-	1    7150 3400
+F 0 "J?" H 8528 3638 50  0000 C CNN
+F 1 "Conn_Coaxial" H 8528 3547 50  0000 C CNN
+F 2 "" H 8600 3400 50  0001 C CNN
+F 3 " ~" H 8600 3400 50  0001 C CNN
+	1    8600 3400
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 5DBFE7D3
-P 7150 3750
+P 8600 3850
 AR Path="/5DBFE7D3" Ref="#PWR?"  Part="1" 
 AR Path="/5DBF0563/5DBFE7D3" Ref="#PWR0114"  Part="1" 
-F 0 "#PWR0114" H 7150 3500 50  0001 C CNN
-F 1 "GND" H 7155 3577 50  0000 C CNN
-F 2 "" H 7150 3750 50  0001 C CNN
-F 3 "" H 7150 3750 50  0001 C CNN
-	1    7150 3750
+F 0 "#PWR0114" H 8600 3600 50  0001 C CNN
+F 1 "GND" H 8605 3677 50  0000 C CNN
+F 2 "" H 8600 3850 50  0001 C CNN
+F 3 "" H 8600 3850 50  0001 C CNN
+	1    8600 3850
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -596,25 +548,10 @@ F 3 "~" H 6100 3400 50  0001 C CNN
 	1    6100 3400
 	0    -1   -1   0   
 $EndComp
-$Comp
-L Device:C_Small C?
-U 1 1 5DBFE7E5
-P 6500 3400
-AR Path="/5DBFE7E5" Ref="C?"  Part="1" 
-AR Path="/5DBF0563/5DBFE7E5" Ref="C?"  Part="1" 
-F 0 "C?" H 6592 3446 50  0000 L CNN
-F 1 "JMP" H 6592 3355 50  0000 L CNN
-F 2 "" H 6500 3400 50  0001 C CNN
-F 3 "~" H 6500 3400 50  0001 C CNN
-	1    6500 3400
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	6000 3400 5800 3400
 Wire Wire Line
 	6200 3400 6300 3400
-Wire Wire Line
-	6950 3400 6600 3400
 $Comp
 L power:GND #PWR?
 U 1 1 5DBFE7EE
@@ -629,14 +566,10 @@ F 3 "" H 6300 4050 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	7150 3600 7150 3750
-Wire Wire Line
 	6300 4050 6300 4000
 Wire Wire Line
 	6300 3500 6300 3400
 Connection ~ 6300 3400
-Wire Wire Line
-	6300 3400 6400 3400
 Wire Wire Line
 	5550 3650 5800 3650
 Wire Wire Line
@@ -760,4 +693,306 @@ F 3 "~" H 6300 5200 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6300 5100 6300 5000
+Text Notes 6300 1350 0    50   ~ 0
+TODO: PROVIDE SEPARATE 2.5V REGULATOR FOR VDD?
+$Comp
+L Device:D_TVS D?
+U 1 1 5DC53785
+P 8000 3650
+F 0 "D?" V 7954 3729 50  0000 L CNN
+F 1 "TPD1E04U04" V 8045 3729 50  0000 L CNN
+F 2 "" H 8000 3650 50  0001 C CNN
+F 3 "~" H 8000 3650 50  0001 C CNN
+	1    8000 3650
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DC5418E
+P 8000 3850
+AR Path="/5DC5418E" Ref="#PWR?"  Part="1" 
+AR Path="/5DBF0563/5DC5418E" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 8000 3600 50  0001 C CNN
+F 1 "GND" H 8005 3677 50  0000 C CNN
+F 2 "" H 8000 3850 50  0001 C CNN
+F 3 "" H 8000 3850 50  0001 C CNN
+	1    8000 3850
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5DC635F4
+P 6650 3400
+AR Path="/5DC635F4" Ref="C?"  Part="1" 
+AR Path="/5DC3C92E/5DC635F4" Ref="C?"  Part="1" 
+AR Path="/5DBF0563/5DC635F4" Ref="C?"  Part="1" 
+F 0 "C?" V 6400 3400 50  0000 C CNN
+F 1 "4.5 pF" V 6500 3450 50  0000 C CNN
+F 2 "" H 6650 3400 50  0001 C CNN
+F 3 "~" H 6650 3400 50  0001 C CNN
+	1    6650 3400
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5DC635FA
+P 7300 3650
+AR Path="/5DC635FA" Ref="C?"  Part="1" 
+AR Path="/5DC3C92E/5DC635FA" Ref="C?"  Part="1" 
+AR Path="/5DBF0563/5DC635FA" Ref="C?"  Part="1" 
+F 0 "C?" V 7071 3650 50  0000 C CNN
+F 1 "TBD" V 7162 3650 50  0000 C CNN
+F 2 "" H 7300 3650 50  0001 C CNN
+F 3 "~" H 7300 3650 50  0001 C CNN
+	1    7300 3650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:L_Small L?
+U 1 1 5DC63600
+P 7050 3400
+AR Path="/5DC63600" Ref="L?"  Part="1" 
+AR Path="/5DBF0563/5DC63600" Ref="L?"  Part="1" 
+AR Path="/5DC3C92E/5DC63600" Ref="L?"  Part="1" 
+F 0 "L?" V 7300 3300 50  0000 L CNN
+F 1 "TBD" V 7200 3300 50  0000 L CNN
+F 2 "" H 7050 3400 50  0001 C CNN
+F 3 "~" H 7050 3400 50  0001 C CNN
+	1    7050 3400
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:L_Small L?
+U 1 1 5DC63606
+P 7600 3650
+AR Path="/5DC63606" Ref="L?"  Part="1" 
+AR Path="/5DBF0563/5DC63606" Ref="L?"  Part="1" 
+AR Path="/5DC3C92E/5DC63606" Ref="L?"  Part="1" 
+F 0 "L?" H 7648 3696 50  0000 L CNN
+F 1 "TBD" H 7648 3605 50  0000 L CNN
+F 2 "" H 7600 3650 50  0001 C CNN
+F 3 "~" H 7600 3650 50  0001 C CNN
+	1    7600 3650
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DC6360C
+P 7300 3850
+AR Path="/5DC6360C" Ref="#PWR?"  Part="1" 
+AR Path="/5DC3C92E/5DC6360C" Ref="#PWR?"  Part="1" 
+AR Path="/5DBF0563/5DC6360C" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 7300 3600 50  0001 C CNN
+F 1 "GND" H 7305 3677 50  0000 C CNN
+F 2 "" H 7300 3850 50  0001 C CNN
+F 3 "" H 7300 3850 50  0001 C CNN
+	1    7300 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 3850 7300 3750
+$Comp
+L power:GND #PWR?
+U 1 1 5DC63613
+P 7600 3850
+AR Path="/5DC63613" Ref="#PWR?"  Part="1" 
+AR Path="/5DC3C92E/5DC63613" Ref="#PWR?"  Part="1" 
+AR Path="/5DBF0563/5DC63613" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 7600 3600 50  0001 C CNN
+F 1 "GND" H 7605 3677 50  0000 C CNN
+F 2 "" H 7600 3850 50  0001 C CNN
+F 3 "" H 7600 3850 50  0001 C CNN
+	1    7600 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7600 3750 7600 3850
+Wire Wire Line
+	7150 3400 7300 3400
+Wire Wire Line
+	7600 3550 7600 3400
+Connection ~ 7600 3400
+Wire Wire Line
+	7300 3550 7300 3400
+Connection ~ 7300 3400
+Wire Wire Line
+	7300 3400 7600 3400
+Wire Wire Line
+	6750 3400 6950 3400
+Wire Wire Line
+	7600 3400 8000 3400
+Wire Wire Line
+	8000 3500 8000 3400
+Wire Wire Line
+	8000 3800 8000 3850
+Connection ~ 8000 3400
+Wire Wire Line
+	8600 3600 8600 3850
+Wire Wire Line
+	6300 3400 6550 3400
+$Comp
+L Connector:Conn_Coaxial J?
+U 1 1 5DC92B00
+P 8600 4700
+AR Path="/5DC92B00" Ref="J?"  Part="1" 
+AR Path="/5DBF0563/5DC92B00" Ref="J?"  Part="1" 
+F 0 "J?" H 8528 4938 50  0000 C CNN
+F 1 "Conn_Coaxial" H 8528 4847 50  0000 C CNN
+F 2 "" H 8600 4700 50  0001 C CNN
+F 3 " ~" H 8600 4700 50  0001 C CNN
+	1    8600 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DC92B06
+P 8600 5150
+AR Path="/5DC92B06" Ref="#PWR?"  Part="1" 
+AR Path="/5DBF0563/5DC92B06" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 8600 4900 50  0001 C CNN
+F 1 "GND" H 8605 4977 50  0000 C CNN
+F 2 "" H 8600 5150 50  0001 C CNN
+F 3 "" H 8600 5150 50  0001 C CNN
+	1    8600 5150
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:D_TVS D?
+U 1 1 5DC92B0C
+P 8000 4950
+F 0 "D?" V 7954 5029 50  0000 L CNN
+F 1 "TPD1E04U04" V 8045 5029 50  0000 L CNN
+F 2 "" H 8000 4950 50  0001 C CNN
+F 3 "~" H 8000 4950 50  0001 C CNN
+	1    8000 4950
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DC92B12
+P 8000 5150
+AR Path="/5DC92B12" Ref="#PWR?"  Part="1" 
+AR Path="/5DBF0563/5DC92B12" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 8000 4900 50  0001 C CNN
+F 1 "GND" H 8005 4977 50  0000 C CNN
+F 2 "" H 8000 5150 50  0001 C CNN
+F 3 "" H 8000 5150 50  0001 C CNN
+	1    8000 5150
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5DC92B18
+P 6650 4700
+AR Path="/5DC92B18" Ref="C?"  Part="1" 
+AR Path="/5DC3C92E/5DC92B18" Ref="C?"  Part="1" 
+AR Path="/5DBF0563/5DC92B18" Ref="C?"  Part="1" 
+F 0 "C?" V 6400 4700 50  0000 C CNN
+F 1 "4.5 pF" V 6500 4750 50  0000 C CNN
+F 2 "" H 6650 4700 50  0001 C CNN
+F 3 "~" H 6650 4700 50  0001 C CNN
+	1    6650 4700
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5DC92B1E
+P 7300 4950
+AR Path="/5DC92B1E" Ref="C?"  Part="1" 
+AR Path="/5DC3C92E/5DC92B1E" Ref="C?"  Part="1" 
+AR Path="/5DBF0563/5DC92B1E" Ref="C?"  Part="1" 
+F 0 "C?" V 7071 4950 50  0000 C CNN
+F 1 "TBD" V 7162 4950 50  0000 C CNN
+F 2 "" H 7300 4950 50  0001 C CNN
+F 3 "~" H 7300 4950 50  0001 C CNN
+	1    7300 4950
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:L_Small L?
+U 1 1 5DC92B24
+P 7050 4700
+AR Path="/5DC92B24" Ref="L?"  Part="1" 
+AR Path="/5DBF0563/5DC92B24" Ref="L?"  Part="1" 
+AR Path="/5DC3C92E/5DC92B24" Ref="L?"  Part="1" 
+F 0 "L?" V 7300 4600 50  0000 L CNN
+F 1 "TBD" V 7200 4600 50  0000 L CNN
+F 2 "" H 7050 4700 50  0001 C CNN
+F 3 "~" H 7050 4700 50  0001 C CNN
+	1    7050 4700
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:L_Small L?
+U 1 1 5DC92B2A
+P 7600 4950
+AR Path="/5DC92B2A" Ref="L?"  Part="1" 
+AR Path="/5DBF0563/5DC92B2A" Ref="L?"  Part="1" 
+AR Path="/5DC3C92E/5DC92B2A" Ref="L?"  Part="1" 
+F 0 "L?" H 7648 4996 50  0000 L CNN
+F 1 "TBD" H 7648 4905 50  0000 L CNN
+F 2 "" H 7600 4950 50  0001 C CNN
+F 3 "~" H 7600 4950 50  0001 C CNN
+	1    7600 4950
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DC92B30
+P 7300 5150
+AR Path="/5DC92B30" Ref="#PWR?"  Part="1" 
+AR Path="/5DC3C92E/5DC92B30" Ref="#PWR?"  Part="1" 
+AR Path="/5DBF0563/5DC92B30" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 7300 4900 50  0001 C CNN
+F 1 "GND" H 7305 4977 50  0000 C CNN
+F 2 "" H 7300 5150 50  0001 C CNN
+F 3 "" H 7300 5150 50  0001 C CNN
+	1    7300 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 5150 7300 5050
+$Comp
+L power:GND #PWR?
+U 1 1 5DC92B37
+P 7600 5150
+AR Path="/5DC92B37" Ref="#PWR?"  Part="1" 
+AR Path="/5DC3C92E/5DC92B37" Ref="#PWR?"  Part="1" 
+AR Path="/5DBF0563/5DC92B37" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 7600 4900 50  0001 C CNN
+F 1 "GND" H 7605 4977 50  0000 C CNN
+F 2 "" H 7600 5150 50  0001 C CNN
+F 3 "" H 7600 5150 50  0001 C CNN
+	1    7600 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7600 5050 7600 5150
+Wire Wire Line
+	7150 4700 7300 4700
+Wire Wire Line
+	7600 4850 7600 4700
+Connection ~ 7600 4700
+Wire Wire Line
+	7300 4850 7300 4700
+Connection ~ 7300 4700
+Wire Wire Line
+	7300 4700 7600 4700
+Wire Wire Line
+	6750 4700 6950 4700
+Wire Wire Line
+	7600 4700 8000 4700
+Wire Wire Line
+	8000 4800 8000 4700
+Wire Wire Line
+	8000 5100 8000 5150
+Connection ~ 8000 4700
+Wire Wire Line
+	8600 4900 8600 5150
+Wire Wire Line
+	6300 4700 6550 4700
+Wire Wire Line
+	8000 4700 8400 4700
+Wire Wire Line
+	8000 3400 8400 3400
 $EndSCHEMATC
