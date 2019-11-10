@@ -30,19 +30,6 @@ $EndComp
 Wire Wire Line
 	3700 4300 3700 4400
 $Comp
-L Oscillator:ABLNO X?
-U 1 1 5DC2749C
-P 7050 3600
-AR Path="/5DC2749C" Ref="X?"  Part="1" 
-AR Path="/5DC1A65E/5DC2749C" Ref="X301"  Part="1" 
-F 0 "X301" H 6550 4000 50  0000 L CNN
-F 1 "ABLNO-V-100.000MHZ" H 6100 3900 50  0000 L CNN
-F 2 "Oscillator:Oscillator_SMD_Abracon_ABLNO" H 7050 3250 50  0001 C CNN
-F 3 "https://abracon.com/Precisiontiming/ABLNO.pdf" H 6850 3700 50  0001 C CNN
-	1    7050 3600
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR?
 U 1 1 5DC274A2
 P 7050 4000
@@ -70,7 +57,7 @@ F 3 "~" H 2950 3800 50  0001 C CNN
 	1    2950 3800
 	0    -1   -1   0   
 $EndComp
-Text Notes 4550 3500 0    50   ~ 0
+Text Notes 5600 2900 0    50   ~ 0
 USE LOW LEAKAGE MLCC CAPS
 $Comp
 L Device:C_Small C?
@@ -300,14 +287,14 @@ $EndComp
 $Comp
 L Device:C_Small C?
 U 1 1 5DC27520
-P 5100 2800
+P 4100 2800
 AR Path="/5DC27520" Ref="C?"  Part="1" 
 AR Path="/5DC1A65E/5DC27520" Ref="C304"  Part="1" 
-F 0 "C304" H 5192 2846 50  0000 L CNN
-F 1 "100 pF" H 5192 2755 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 5100 2800 50  0001 C CNN
-F 3 "~" H 5100 2800 50  0001 C CNN
-	1    5100 2800
+F 0 "C304" H 4192 2846 50  0000 L CNN
+F 1 "100 pF" H 4192 2755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 4100 2800 50  0001 C CNN
+F 3 "~" H 4100 2800 50  0001 C CNN
+	1    4100 2800
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -326,14 +313,14 @@ $EndComp
 $Comp
 L Device:C_Small C?
 U 1 1 5DC2752C
-P 4100 2800
+P 5100 2800
 AR Path="/5DC2752C" Ref="C?"  Part="1" 
 AR Path="/5DC1A65E/5DC2752C" Ref="C301"  Part="1" 
-F 0 "C301" H 4192 2846 50  0000 L CNN
-F 1 "2.2 uF" H 4192 2755 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 4100 2800 50  0001 C CNN
-F 3 "~" H 4100 2800 50  0001 C CNN
-	1    4100 2800
+F 0 "C301" H 5192 2846 50  0000 L CNN
+F 1 "2.2 uF" H 5192 2755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 5100 2800 50  0001 C CNN
+F 3 "~" H 5100 2800 50  0001 C CNN
+	1    5100 2800
 	1    0    0    -1  
 $EndComp
 Text Notes 7150 2150 0    50   ~ 0
@@ -433,14 +420,14 @@ $EndComp
 $Comp
 L Device:C_Small C?
 U 1 1 5DC27560
-P 8450 2900
+P 7450 2900
 AR Path="/5DC27560" Ref="C?"  Part="1" 
 AR Path="/5DC1A65E/5DC27560" Ref="C311"  Part="1" 
-F 0 "C311" H 8542 2946 50  0000 L CNN
-F 1 "100 pF" H 8542 2855 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 8450 2900 50  0001 C CNN
-F 3 "~" H 8450 2900 50  0001 C CNN
-	1    8450 2900
+F 0 "C311" H 7542 2946 50  0000 L CNN
+F 1 "100 pF" H 7542 2855 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 7450 2900 50  0001 C CNN
+F 3 "~" H 7450 2900 50  0001 C CNN
+	1    7450 2900
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -459,14 +446,14 @@ $EndComp
 $Comp
 L Device:C_Small C?
 U 1 1 5DC2756C
-P 7450 2900
+P 8450 2900
 AR Path="/5DC2756C" Ref="C?"  Part="1" 
 AR Path="/5DC1A65E/5DC2756C" Ref="C308"  Part="1" 
-F 0 "C308" H 7542 2946 50  0000 L CNN
-F 1 "2.2 uF" H 7542 2855 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric" H 7450 2900 50  0001 C CNN
-F 3 "~" H 7450 2900 50  0001 C CNN
-	1    7450 2900
+F 0 "C308" H 8542 2946 50  0000 L CNN
+F 1 "2.2 uF" H 8542 2855 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 8450 2900 50  0001 C CNN
+F 3 "~" H 8450 2900 50  0001 C CNN
+	1    8450 2900
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -681,7 +668,7 @@ AR Path="/5DC2748F" Ref="U?"  Part="1"
 AR Path="/5DC1A65E/5DC2748F" Ref="U301"  Part="1" 
 F 0 "U301" H 3250 4250 50  0000 C CNN
 F 1 "HMC1031" H 3350 4150 50  0000 C CNN
-F 2 "Housings_SSOP:MSOP-8_3x3mm_Pitch0.65mm" H 2700 4300 50  0001 C CNN
+F 2 "Package_SO:MSOP-8_3x3mm_P0.65mm" H 2700 4300 50  0001 C CNN
 F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/hmc1031.pdf" H 3650 4600 50  0001 C CNN
 	1    3700 3700
 	1    0    0    -1  
@@ -730,19 +717,6 @@ Wire Wire Line
 Text Notes 5050 4750 0    50   ~ 0
 VCOIN input region is 0.2 to 1.5 Vpp
 $Comp
-L power:+3V3 #PWR?
-U 1 1 5DED131B
-P 2800 4000
-AR Path="/5DED131B" Ref="#PWR?"  Part="1" 
-AR Path="/5DC1A65E/5DED131B" Ref="#PWR0303"  Part="1" 
-F 0 "#PWR0303" H 2800 3850 50  0001 C CNN
-F 1 "+3V3" H 2815 4173 50  0000 C CNN
-F 2 "" H 2800 4000 50  0001 C CNN
-F 3 "" H 2800 4000 50  0001 C CNN
-	1    2800 4000
-	0    -1   -1   0   
-$EndComp
-$Comp
 L Device:R_Small R?
 U 1 1 5DED19AB
 P 2950 4000
@@ -755,23 +729,6 @@ F 3 "~" H 2950 4000 50  0001 C CNN
 	1    2950 4000
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	2850 4000 2800 4000
-$Comp
-L power:+3V3 #PWR?
-U 1 1 5DED581B
-P 2800 3800
-AR Path="/5DED581B" Ref="#PWR?"  Part="1" 
-AR Path="/5DC1A65E/5DED581B" Ref="#PWR0302"  Part="1" 
-F 0 "#PWR0302" H 2800 3650 50  0001 C CNN
-F 1 "+3V3" H 2815 3973 50  0000 C CNN
-F 2 "" H 2800 3800 50  0001 C CNN
-F 3 "" H 2800 3800 50  0001 C CNN
-	1    2800 3800
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	2800 3800 2850 3800
 Wire Wire Line
 	3050 4000 3100 4000
 Wire Wire Line
@@ -786,4 +743,58 @@ Text Notes 5050 4850 0    50   ~ 0
 Target 0.5 Vpp
 Wire Wire Line
 	7450 3600 8000 3600
+Wire Wire Line
+	2600 3800 2600 4000
+Wire Wire Line
+	2600 4000 2850 4000
+Wire Wire Line
+	2600 3800 2850 3800
+Wire Wire Line
+	2600 3800 2500 3800
+Connection ~ 2600 3800
+Text HLabel 2500 3800 0    50   Input ~ 0
+PLL_EN
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5DF116B9
+P 6200 3550
+AR Path="/5DC45DA8/5DF116B9" Ref="TP?"  Part="1" 
+AR Path="/5DC1A65E/5DF116B9" Ref="TP302"  Part="1" 
+F 0 "TP302" H 6258 3668 50  0000 L CNN
+F 1 "VCTRL" H 6258 3577 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Keystone_5015_Micro-Minature" H 6400 3550 50  0001 C CNN
+F 3 "~" H 6400 3550 50  0001 C CNN
+	1    6200 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5DF12DC8
+P 5400 3550
+AR Path="/5DC45DA8/5DF12DC8" Ref="TP?"  Part="1" 
+AR Path="/5DC1A65E/5DF12DC8" Ref="TP301"  Part="1" 
+F 0 "TP301" H 5458 3668 50  0000 L CNN
+F 1 "CP" H 5458 3577 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Keystone_5015_Micro-Minature" H 5600 3550 50  0001 C CNN
+F 3 "~" H 5600 3550 50  0001 C CNN
+	1    5400 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Oscillator:ABLNO X?
+U 1 1 5DC2749C
+P 7050 3600
+AR Path="/5DC2749C" Ref="X?"  Part="1" 
+AR Path="/5DC1A65E/5DC2749C" Ref="X301"  Part="1" 
+F 0 "X301" H 6050 4050 50  0000 L CNN
+F 1 "ABLNO-V-100.000MHZ" H 6050 3950 50  0000 L CNN
+F 2 "Oscillator:Oscillator_SMD_Abracon_ABLNO" H 7050 3250 50  0001 C CNN
+F 3 "https://abracon.com/Precisiontiming/ABLNO.pdf" H 6850 3700 50  0001 C CNN
+	1    7050 3600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5400 3550 5400 3600
+Wire Wire Line
+	6200 3550 6200 3600
 $EndSCHEMATC

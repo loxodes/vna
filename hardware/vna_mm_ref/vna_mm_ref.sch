@@ -34,8 +34,8 @@ F0 "synth_100MHz" 50
 F1 "synth_100MHz.sch" 50
 F2 "100MHZ_OUT" O R 6450 3000 50 
 F3 "10MHZ_IN" I L 5200 3000 50 
-F4 "PLL_EN" I L 5200 4350 50 
-F5 "LKD" O R 6450 3950 50 
+F4 "LKD" O R 6450 3950 50 
+F5 "PLL_EN" I L 5200 4350 50 
 $EndSheet
 $Sheet
 S 3100 1750 1250 2900
@@ -78,10 +78,6 @@ Wire Wire Line
 	6450 3000 7200 3000
 Text Notes 7250 1600 0    50   ~ 0
 40 mA
-Wire Wire Line
-	5200 4350 5050 4350
-Text Label 5050 4350 2    50   ~ 0
-PLL_EN
 Text Label 6550 3950 0    50   ~ 0
 LKD
 Wire Wire Line
@@ -174,4 +170,8 @@ Wire Wire Line
 	5050 5900 5200 5900
 Wire Wire Line
 	5050 5800 5200 5800
+Wire Wire Line
+	5200 4350 5050 4350
+Text Label 5050 4350 2    50   ~ 0
+PLL_EN
 $EndSCHEMATC

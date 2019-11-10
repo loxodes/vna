@@ -296,7 +296,7 @@ drive with 2-6 dBm for saturation\n-4 to 0 dBm for linear region
 Text HLabel 1700 3450 0    50   Input ~ 0
 HIGHBAND_RFIN
 $Comp
-L synth_lib:band_pass_filter FL701
+L vna_mm_synth-rescue:band_pass_filter-synth_lib FL701
 U 1 1 5D6E0AEA
 P 6350 3450
 F 0 "FL701" H 6350 3765 50  0000 C CNN

@@ -592,7 +592,7 @@ Wire Wire Line
 Wire Wire Line
 	12200 5100 12200 5500
 $Comp
-L synth_lib:low_pass_filter FL902
+L vna_mm_synth-rescue:low_pass_filter-synth_lib FL902
 U 1 1 5D55EE36
 P 13800 6300
 F 0 "FL902" H 13800 6615 50  0000 C CNN
@@ -926,7 +926,7 @@ F 3 "" H 16450 7950 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L synth_lib:low_pass_filter FL901
+L vna_mm_synth-rescue:low_pass_filter-synth_lib FL901
 U 1 1 5D33146F
 P 5300 2750
 F 0 "FL901" H 5300 3065 50  0000 C CNN
