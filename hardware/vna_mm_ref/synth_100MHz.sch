@@ -752,8 +752,6 @@ Wire Wire Line
 Wire Wire Line
 	2600 3800 2500 3800
 Connection ~ 2600 3800
-Text HLabel 2500 3800 0    50   Input ~ 0
-PLL_EN
 $Comp
 L Connector:TestPoint TP?
 U 1 1 5DF116B9
@@ -797,4 +795,17 @@ Wire Wire Line
 	5400 3550 5400 3600
 Wire Wire Line
 	6200 3550 6200 3600
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5DF96849
+P 2500 3800
+AR Path="/5DF96849" Ref="#PWR?"  Part="1" 
+AR Path="/5DC1A65E/5DF96849" Ref="#PWR0121"  Part="1" 
+F 0 "#PWR0121" H 2500 3650 50  0001 C CNN
+F 1 "+3V3" H 2515 3973 50  0000 C CNN
+F 2 "" H 2500 3800 50  0001 C CNN
+F 3 "" H 2500 3800 50  0001 C CNN
+	1    2500 3800
+	0    -1   -1   0   
+$EndComp
 $EndSCHEMATC
