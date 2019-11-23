@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 Text Notes 4650 1200 0    50   ~ 0
-Goals:\n10 MHz input or internal OCXO\nthree 100 MHz outputs, one 10 MHz output\nenclosure & 3D model\nphase noise that doesn't limit the TI LMX2595\nsmt test points for loop filter reponse
+Goals:\n10 MHz input or internal OCXO\ntwo 100 MHz outputs, one 10 MHz output\nenclosure & 3D model\nphase noise that doesn't limit the TI LMX2595\nsmt test points for loop filter reponse
 $Sheet
 S 7200 1750 1250 2900
 U 5DBF0563
