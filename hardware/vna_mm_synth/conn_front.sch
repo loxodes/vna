@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 12
+Sheet 3 11
 Title ""
 Date ""
 Rev ""
@@ -49,23 +49,23 @@ Wire Wire Line
 Wire Wire Line
 	5100 2700 4900 2700
 $Comp
-L device:C_Small C302
+L Device:C_Small C302
 U 1 1 5AC31626
 P 5200 2700
 F 0 "C302" H 5210 2770 50  0000 L CNN
 F 1 "10 pF" H 5210 2620 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0402" H 5200 2700 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 5200 2700 50  0001 C CNN
 F 3 "" H 5200 2700 50  0001 C CNN
 	1    5200 2700
 	0    1    1    0   
 $EndComp
 $Comp
-L device:C_Small C301
+L Device:C_Small C301
 U 1 1 5AC31536
 P 5200 1600
 F 0 "C301" H 5210 1670 50  0000 L CNN
 F 1 "10 pF" H 5210 1520 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0402" H 5200 1600 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 5200 1600 50  0001 C CNN
 F 3 "" H 5200 1600 50  0001 C CNN
 	1    5200 1600
 	0    1    1    0   

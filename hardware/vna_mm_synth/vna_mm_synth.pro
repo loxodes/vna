@@ -1,4 +1,4 @@
-update=Tue Aug 27 22:19:47 2019
+update=Wed Dec  4 22:41:15 2019
 version=1
 last_client=kicad
 [cvpcb]
@@ -15,14 +15,14 @@ PageLayoutDescrFile=
 PlotDirectoryName=
 SubpartIdSeparator=0
 SubpartFirstId=65
-NetFmtName=
+NetFmtName=Pcbnew
 SpiceAjustPassiveValues=0
 LabSize=50
 ERC_TestSimilarLabels=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
-LastNetListRead=
+LastNetListRead=vna_mm_synth.net
 CopperLayerCount=6
 BoardThickness=1.6
 AllowMicroVias=0

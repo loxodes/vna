@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr C 22000 17000
 encoding utf-8
-Sheet 1 12
+Sheet 1 11
 Title ""
 Date ""
 Rev ""
@@ -423,14 +423,6 @@ Text Label 9300 4650 0    50   ~ 0
 VTUNE_TLM
 Text Label 7900 6300 2    50   ~ 0
 VTUNE_TLM
-$Sheet
-S 4300 2950 1950 800 
-U 5DB13A27
-F0 "ref_filt" 50
-F1 "ref_gen.sch" 50
-F2 "REF_CLK_P" O R 6250 3200 50 
-F3 "REF_CLK_N" O R 6250 3300 50 
-$EndSheet
 Wire Wire Line
 	12500 10300 12750 10300
 Text Label 12750 10300 0    50   ~ 0
