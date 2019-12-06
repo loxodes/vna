@@ -753,10 +753,10 @@ Wire Wire Line
 Text Notes 4200 9500 0    197  ~ 0
 Use Cypress EZ-PD for 9V input?
 $Comp
-L 74xx:74HC244 U?
+L 74xx:74HC244 U201
 U 1 1 5DF0D107
 P 7750 6650
-F 0 "U?" H 7750 7631 50  0000 C CNN
+F 0 "U201" H 7750 7631 50  0000 C CNN
 F 1 "74HC244" H 7750 7540 50  0000 C CNN
 F 2 "" H 7750 6650 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT244.pdf" H 7750 6650 50  0001 C CNN
@@ -764,12 +764,12 @@ F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT244.pdf" H 7750 66
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_Coaxial J?
+L Connector:Conn_Coaxial J202
 U 1 1 5DF110B4
 P 10500 6250
-F 0 "J?" H 10428 6488 50  0000 C CNN
+F 0 "J202" H 10428 6488 50  0000 C CNN
 F 1 "Conn_Coaxial" H 10428 6397 50  0000 C CNN
-F 2 "" H 10500 6250 50  0001 C CNN
+F 2 "Connector_Coaxial:SMA_Amphenol_132289_EdgeMount" H 10500 6250 50  0001 C CNN
 F 3 " ~" H 10500 6250 50  0001 C CNN
 	1    10500 6250
 	-1   0    0    -1  

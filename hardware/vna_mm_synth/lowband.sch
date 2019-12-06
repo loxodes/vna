@@ -341,7 +341,7 @@ U 1 1 5D2E3F13
 P 2500 5650
 F 0 "U502" H 2500 6017 50  0000 C CNN
 F 1 "PAT1220-C-0DB" H 2500 5926 50  0000 C CNN
-F 2 "RF_Converter:RF_Attenuator_Susumu_PAT1220" H 2500 5650 50  0001 C CNN
+F 2 "vna_mm:PAT0510S" H 2500 5650 50  0001 C CNN
 F 3 "https://www.susumu.co.jp/common/pdf/n_catalog_partition16_en.pdf" H 2250 5900 50  0001 C CNN
 	1    2500 5650
 	1    0    0    -1  
@@ -352,7 +352,7 @@ U 1 1 5D2F0F18
 P 2500 4650
 F 0 "U501" H 2500 5017 50  0000 C CNN
 F 1 "PAT1220-C-0DB" H 2500 4926 50  0000 C CNN
-F 2 "RF_Converter:RF_Attenuator_Susumu_PAT1220" H 2500 4650 50  0001 C CNN
+F 2 "vna_mm:PAT0510S" H 2500 4650 50  0001 C CNN
 F 3 "https://www.susumu.co.jp/common/pdf/n_catalog_partition16_en.pdf" H 2250 4900 50  0001 C CNN
 	1    2500 4650
 	1    0    0    -1  

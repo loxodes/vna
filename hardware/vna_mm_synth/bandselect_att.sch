@@ -300,13 +300,13 @@ Text HLabel 15600 8050 0    60   Input ~ 0
 SW3_HIGH_SEL
 Text HLabel 17800 9200 3    60   Input ~ 0
 SW_HIGH_RFIN
-Text HLabel 4600 2750 0    60   Input ~ 0
+Text HLabel 2000 10250 0    60   Input ~ 0
 SW_LOW_RFIN
 Text HLabel 2500 6750 0    60   Input ~ 0
 SW_MID_RFIN
 Text HLabel 6500 6900 2    50   Output ~ 0
 X2_FEED_RFOUT
-Text Notes 4200 2600 0    50   ~ 0
+Text Notes 1600 10100 0    50   ~ 0
 LPF, 8 GHz
 Text Notes 10300 10550 0    50   ~ 0
 SIW waveguidie cutoff filter, 18-26.5 GHz
@@ -625,29 +625,19 @@ Text Notes 13100 5800 0    50   ~ 0
 NO DC BLOCK REQUIRED IF VDC = 0V
 Wire Wire Line
 	11700 6250 11550 6250
-Wire Wire Line
-	11700 6350 11550 6350
-Wire Wire Line
-	11700 6450 11550 6450
-Text Label 11550 6450 2    50   ~ 0
-LOW_FILT
-Text Label 6100 2750 0    50   ~ 0
-LOW_FILT
-Wire Wire Line
-	6100 2750 5900 2750
 $Comp
 L power:GND #PWR0905
 U 1 1 5D5CD5D0
-P 5300 3250
-F 0 "#PWR0905" H 5300 3000 50  0001 C CNN
-F 1 "GND" H 5300 3100 50  0000 C CNN
-F 2 "" H 5300 3250 50  0001 C CNN
-F 3 "" H 5300 3250 50  0001 C CNN
-	1    5300 3250
+P 2700 10750
+F 0 "#PWR0905" H 2700 10500 50  0001 C CNN
+F 1 "GND" H 2700 10600 50  0000 C CNN
+F 2 "" H 2700 10750 50  0001 C CNN
+F 3 "" H 2700 10750 50  0001 C CNN
+	1    2700 10750
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5300 3200 5300 3250
+	2700 10700 2700 10750
 $Comp
 L vna_mm:PE42543 U902
 U 1 1 5D5FFF3A
@@ -905,15 +895,11 @@ Wire Wire Line
 Text Notes 4700 4800 2    50   ~ 0
 NO DC BLOCK REQUIRED IF VDC = 0V
 Wire Wire Line
-	6350 6700 6500 6700
-Wire Wire Line
 	6350 6800 6500 6800
 Wire Wire Line
 	6350 6900 6500 6900
-Text Label 6500 6700 0    50   ~ 0
-MID
 Wire Wire Line
-	4600 2750 4700 2750
+	2000 10250 2100 10250
 $Comp
 L power:+3.3VP #PWR0930
 U 1 1 5D56277A
@@ -928,12 +914,12 @@ $EndComp
 $Comp
 L vna_mm:low_pass_filter FL901
 U 1 1 5D33146F
-P 5300 2750
-F 0 "FL901" H 5300 3065 50  0000 C CNN
-F 1 "low_pass_filter" H 5300 2974 50  0000 C CNN
-F 2 "vna_footprints:stepped_lpf_8ghz_fr408" H 5200 2900 50  0001 C CNN
-F 3 "" H 5200 2900 50  0001 C CNN
-	1    5300 2750
+P 2700 10250
+F 0 "FL901" H 2700 10565 50  0000 C CNN
+F 1 "low_pass_filter" H 2700 10474 50  0000 C CNN
+F 2 "vna_footprints:stepped_lpf_8ghz_fr408" H 2600 10400 50  0001 C CNN
+F 3 "" H 2600 10400 50  0001 C CNN
+	1    2700 10250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -981,8 +967,6 @@ Wire Wire Line
 	7050 5400 7550 5400
 Wire Wire Line
 	6350 6600 7050 6600
-Text Label 11550 6350 2    50   ~ 0
-MID
 $Comp
 L Connector:Conn_Coaxial J902
 U 1 1 5D8BF13A
@@ -1447,4 +1431,16 @@ Wire Wire Line
 	1500 7450 1500 7350
 Text Notes 3250 7700 0    50   ~ 0
 SEQUENCE:\n1 - VDD/VEE\n2 - VCTL\n3 - VTUNE
+Wire Wire Line
+	8150 6700 8150 6350
+Wire Wire Line
+	8150 6350 11700 6350
+Wire Wire Line
+	6350 6700 8150 6700
+Wire Wire Line
+	9400 6450 11700 6450
+Wire Wire Line
+	9400 6450 9400 10250
+Wire Wire Line
+	3300 10250 9400 10250
 $EndSCHEMATC
