@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:vna_mm_synth-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -20,7 +19,7 @@ U 1 1 5D2A9E51
 P 3750 5000
 F 0 "T501" H 3750 5515 50  0000 C CNN
 F 1 "MABA-011082" H 3750 5424 50  0000 C CNN
-F 2 "" H 3650 5900 50  0001 C CNN
+F 2 "vna_mm:transformer_3p81_3p81" H 3650 5900 50  0001 C CNN
 F 3 "https://cdn.macom.com/datasheets/MABA-011082.pdf" H 3650 5900 50  0001 C CNN
 	1    3750 5000
 	-1   0    0    -1  

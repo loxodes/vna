@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:vna_mm_synth-cache
 EELAYER 30 0
 EELAYER END
 $Descr A2 23386 16535
@@ -3780,7 +3779,7 @@ U 1 1 5DBB38C9
 P 7000 13950
 F 0 "U1112" H 6450 14450 50  0000 L CNN
 F 1 "LT3494" H 6450 14350 50  0000 L CNN
-F 2 "" H 6500 14450 50  0001 C CNN
+F 2 "Package_DFN_QFN:DFN-8-1EP_2x3mm_P0.5mm_EP0.61x2.2mm" H 6500 14450 50  0001 C CNN
 F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/3494fb.pdf" H 6500 14450 50  0001 C CNN
 	1    7000 13950
 	1    0    0    -1  

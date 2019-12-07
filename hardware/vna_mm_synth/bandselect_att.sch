@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:vna_mm_synth-cache
 EELAYER 30 0
 EELAYER END
 $Descr A2 23386 16535
@@ -928,7 +927,7 @@ U 1 1 5D7E7E85
 P 3500 7650
 F 0 "U901" H 2900 9150 50  0000 C CNN
 F 1 "ADMV8416" H 3050 9050 50  0000 C CNN
-F 2 "Housings_DFN_QFN:QFN-40-1EP_6x6mm_Pitch0.5mm" H 1900 8800 50  0001 C CNN
+F 2 "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm_EP4.6x4.6mm" H 1900 8800 50  0001 C CNN
 F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADMV8416.pdf" H 2550 8900 50  0001 C CNN
 	1    3500 7650
 	1    0    0    -1  

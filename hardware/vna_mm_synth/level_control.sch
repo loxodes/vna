@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:vna_mm_synth-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -31,7 +30,7 @@ U 1 1 5D305975
 P 3250 4000
 F 0 "U801" H 2150 4750 50  0000 L CNN
 F 1 "ADRF5730" H 2150 4850 50  0000 L CNN
-F 2 "" H 3200 3700 50  0001 C CNN
+F 2 "vna_mm:LGA-24_EP_4x4_Pitch0.5mm" H 3200 3700 50  0001 C CNN
 F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADRF5730.pdf" H 3200 3700 50  0001 C CNN
 	1    3250 4000
 	1    0    0    -1  
