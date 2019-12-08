@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 10 11
+Sheet 9 12
 Title ""
 Date ""
 Rev ""
@@ -311,7 +311,7 @@ U 1 1 5D593B5A
 P 4050 3250
 F 0 "U1001" H 3250 3850 50  0000 L CNN
 F 1 "DAC7563SDSCR" H 3250 3950 50  0000 L CNN
-F 2 "" H 4450 3400 50  0001 C CNN
+F 2 "vna_mm:DFN-10_PWSON_N10_3x3mm_P0.5mm_EP1.05x2.55mm" H 4450 3400 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/dac7562.pdf" H 4450 3400 50  0001 C CNN
 	1    4050 3250
 	1    0    0    -1  
@@ -1434,7 +1434,7 @@ U 1 1 5E09880E
 P 4200 8000
 F 0 "U1005" H 3400 8600 50  0000 L CNN
 F 1 "DAC7563SDSCR" H 3400 8700 50  0000 L CNN
-F 2 "" H 4600 8150 50  0001 C CNN
+F 2 "vna_mm:DFN-10_PWSON_N10_3x3mm_P0.5mm_EP1.05x2.55mm" H 4600 8150 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/dac7562.pdf" H 4600 8150 50  0001 C CNN
 	1    4200 8000
 	1    0    0    -1  

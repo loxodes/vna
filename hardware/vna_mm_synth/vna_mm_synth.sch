@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr C 22000 17000
 encoding utf-8
-Sheet 1 11
+Sheet 1 12
 Title ""
 Date ""
 Rev ""
@@ -103,7 +103,7 @@ F2 "HIGHBAND_VX2" I L 11550 5600 50
 F3 "HIGHBAND_RFOUT" O R 13350 6050 50 
 F4 "HIGHBAND_RFIN" I L 11550 6050 50 
 $EndSheet
-Text Notes 1300 10450 0    118  ~ 0
+Text Notes 1550 10900 0    118  ~ 0
 goals:\n100 MHz to 26.5 GHz (29 GHz goal)\n-15 dBc 2nd order harmonics\n-25 dBc 3rd order harmonics\n-15 to 0 dBm output power +/- 1 dB at room\nsettling time >1 ms to 90% amplitude\nphase sync with external reference\nBOM >$1000/each\nenclosure\nfpga controlled?\noption for USB-PD powered?
 Wire Wire Line
 	11550 6050 10750 6050
@@ -125,25 +125,7 @@ Wire Wire Line
 	13350 4550 14100 4550
 Wire Wire Line
 	13350 6050 14100 6050
-$Sheet
-S 16350 2600 1450 4550
-U 5D3801E2
-F0 "level_control" 50
-F1 "level_control.sch" 50
-F2 "LEVEL_RFIN" I L 16350 3050 50 
-F3 "LEVEL_RFOUT" O R 17800 3050 50 
-F4 "VdetA" O L 16350 5950 50 
-F5 "VdetB" O L 16350 6050 50 
-F6 "VcA" O L 16350 6300 50 
-F7 "VcB" O L 16350 6400 50 
-F8 "SERIN" I L 16350 6700 50 
-F9 "CLK" I L 16350 6800 50 
-F10 "LE" I L 16350 6900 50 
-F11 "SEROUT" O L 16350 7000 50 
-$EndSheet
 Text Notes 14600 2200 0    118  ~ 0
-$200
-Text Notes 16650 2200 0    118  ~ 0
 $200
 Text Notes 18600 2150 0    118  ~ 0
 $100
@@ -155,8 +137,6 @@ Text Notes 4950 2650 0    118  ~ 0
 $100
 Text Notes 15750 1800 0    50   ~ 10
 TODO: CHECK DC BLOCK
-Wire Wire Line
-	17800 3050 18550 3050
 Wire Wire Line
 	18550 4050 18400 4050
 Text Label 18400 4050 2    50   ~ 0
@@ -215,8 +195,6 @@ Text Label 16250 6900 2    50   ~ 0
 ATT_LE
 Text Label 16250 7000 2    50   ~ 0
 ATT_SEROUT
-Wire Wire Line
-	15600 3050 16350 3050
 Wire Wire Line
 	16250 6800 16350 6800
 Wire Wire Line
@@ -444,4 +422,32 @@ Wire Wire Line
 	6800 3950 6950 3950
 Text Label 7900 5250 2    50   ~ 0
 FILT_~SYNC
+Wire Wire Line
+	15600 3050 16350 3050
+Wire Wire Line
+	17800 3050 18550 3050
+Text Notes 16650 2200 0    118  ~ 0
+$200
+$Sheet
+S 16350 2600 1450 4550
+U 5D3801E2
+F0 "level_control" 50
+F1 "level_control.sch" 50
+F2 "LEVEL_RFIN" I L 16350 3050 50 
+F3 "LEVEL_RFOUT" O R 17800 3050 50 
+F4 "VdetA" O L 16350 5950 50 
+F5 "VdetB" O L 16350 6050 50 
+F6 "VcA" O L 16350 6300 50 
+F7 "VcB" O L 16350 6400 50 
+F8 "SERIN" I L 16350 6700 50 
+F9 "CLK" I L 16350 6800 50 
+F10 "LE" I L 16350 6900 50 
+F11 "SEROUT" O L 16350 7000 50 
+$EndSheet
+$Sheet
+S 1850 6550 3350 1800
+U 5DECADF2
+F0 "input_protection" 50
+F1 "input_protection.sch" 50
+$EndSheet
 $EndSCHEMATC

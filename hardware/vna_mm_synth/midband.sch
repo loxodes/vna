@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 11
+Sheet 6 12
 Title ""
 Date ""
 Rev ""
@@ -204,8 +204,6 @@ MIDBAND_RFIN
 Wire Wire Line
 	6050 3250 6050 2700
 Connection ~ 6050 3250
-Text HLabel 6050 2700 1    50   Input ~ 0
-MIDBAND_VAMP
 Wire Wire Line
 	3800 4400 5050 4400
 Text Notes 2350 3900 0    50   ~ 0
@@ -259,4 +257,6 @@ Wire Wire Line
 	3200 4950 3300 4950
 Wire Wire Line
 	3300 4950 3300 5000
+Text HLabel 6050 2700 1    50   Input ~ 0
+MIDBAND_VAMP
 $EndSCHEMATC
