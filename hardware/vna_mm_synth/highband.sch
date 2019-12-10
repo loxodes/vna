@@ -300,7 +300,7 @@ U 1 1 5D6E0AEA
 P 6350 3450
 F 0 "FL701" H 6350 3765 50  0000 C CNN
 F 1 "band_pass_filter" H 6350 3674 50  0000 C CNN
-F 2 "vna_footprints:band_x2_siw_fr408_6p7mil" H 6250 3600 50  0001 C CNN
+F 2 "vna_mm:band_x2_siw_fr408_6p7mil" H 6250 3600 50  0001 C CNN
 F 3 "" H 6250 3600 50  0001 C CNN
 	1    6350 3450
 	1    0    0    -1  

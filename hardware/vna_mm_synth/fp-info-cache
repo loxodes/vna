@@ -1,4 +1,4 @@
-16962594931860592
+16967320905811497
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -75275,7 +75275,7 @@ DFN-10_PWSON_N10_3x3mm_P0.5mm_EP1.05x2.55mm
 10-Lead Plastic Dual Flat, No Lead Package (MF) - 3x3x0.9 mm Body [DFN] (see Microchip Packaging Specification 00000049BS.pdf)
 DFN 0.5
 0
-15
+17
 11
 vna_mm
 DOCAT_9.1x14.1mm
@@ -75390,6 +75390,13 @@ VSSOP-8
 8
 8
 vna_mm
+band_x2_siw_fr408_6p7mil
+
+
+0
+42
+3
+vna_mm
 cat
 
 
@@ -75398,6 +75405,20 @@ cat
 0
 vna_mm
 p41mm_miter
+
+
+0
+2
+2
+vna_mm
+stepped_lpf_8ghz_fr408
+
+
+0
+2
+2
+vna_mm
+stepped_lpf_20ghz_fr408
 
 
 0
@@ -75422,8 +75443,8 @@ transformer_3p81_3p81
 
 
 0
-0
-0
+6
+6
 vna_mm
 uModule_BGA-25_5x5_6.35x6.35mm
 
