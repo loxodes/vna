@@ -1,10 +1,9 @@
-EESchema Schematic File Version 4
-LIBS:vna_mm_synth-cache
+EESchema Schematic File Version 5
 EELAYER 30 0
 EELAYER END
 $Descr A2 23386 16535
 encoding utf-8
-Sheet 8 13
+Sheet 7 13
 Title ""
 Date ""
 Rev ""
@@ -13,6 +12,11 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
 $EndDescr
 Text HLabel 21300 8150 2    60   Output ~ 0
 SW_RFOUT

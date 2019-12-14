@@ -7,8 +7,7 @@ DEF 74xx_74HC244 U 0 20 Y Y 1 F N
 F0 "U" -300 650 50 H V C CNN
 F1 "74xx_74HC244" -300 -650 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-ALIAS 74HCT244 74AHC244 74AHCT244
+F3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT244.pdf" 0 0 50 H I C CNN
 $FPLIST
  TSSOP*4.4x6.5mm*P0.65mm*
  SSOP*4.4x6.5mm*P0.65mm*
@@ -39,39 +38,13 @@ X 2Y3 9 500 -200 200 L 50 50 1 0 T
 ENDDRAW
 ENDDEF
 #
-# Analog_ADC_ADS1115IDGS
-#
-DEF Analog_ADC_ADS1115IDGS U 0 20 Y Y 1 F N
-F0 "U" 100 550 50 H V C CNN
-F1 "Analog_ADC_ADS1115IDGS" 300 450 50 H V C CNN
-F2 "Package_SO:TSSOP-10_3x3mm_P0.5mm" 0 -500 50 H I C CNN
-F3 "" -50 -900 50 H I C CNN
-ALIAS ADS1115IDGS
-$FPLIST
- TSSOP*3x3mm*P0.5mm*
-$ENDFPLIST
-DRAW
-S -300 400 300 -300 0 1 10 f
-X ADDR 1 400 -200 100 L 50 50 1 1 I
-X SCL 10 400 0 100 L 50 50 1 1 I
-X ALERT/RDY 2 400 200 100 L 50 50 1 1 O
-X GND 3 0 -400 100 U 50 50 1 1 W
-X AIN0 4 -400 100 100 R 50 50 1 1 I
-X AIN1 5 -400 0 100 R 50 50 1 1 I
-X AIN2 6 -400 -100 100 R 50 50 1 1 I
-X AIN3 7 -400 -200 100 R 50 50 1 1 I
-X VDD 8 0 500 100 D 50 50 1 1 W
-X SDA 9 400 -100 100 L 50 50 1 1 B
-ENDDRAW
-ENDDEF
-#
 # Connector_Conn_Coaxial
 #
 DEF Connector_Conn_Coaxial J 0 40 Y N 1 F N
 F0 "J" 10 120 50 H V C CNN
 F1 "Connector_Conn_Coaxial" 115 0 50 V V C CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 " ~" 0 0 50 H I C CNN
 $FPLIST
  *BNC*
  *SMA*
@@ -96,7 +69,7 @@ DEF Connector_Generic_Conn_02x10_Odd_Even J 0 40 Y N 1 F N
 F0 "J" 50 500 50 H V C CNN
 F1 "Connector_Generic_Conn_02x10_Odd_Even" 50 -600 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "~" 0 0 50 H I C CNN
 $FPLIST
  Connector*:*_2x??_*
 $ENDFPLIST
@@ -151,7 +124,7 @@ DEF Connector_TestPoint TP 0 30 N N 1 F N
 F0 "TP" 0 270 50 H V C CNN
 F1 "Connector_TestPoint" 0 200 50 H V C CNN
 F2 "" 200 0 50 H I C CNN
-F3 "" 200 0 50 H I C CNN
+F3 "~" 200 0 50 H I C CNN
 $FPLIST
  Pin*
  Test*
@@ -168,7 +141,7 @@ DEF Device_CP1 C 0 10 N N 1 F N
 F0 "C" 25 100 50 H V L CNN
 F1 "Device_CP1" 25 -100 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "~" 0 0 50 H I C CNN
 $FPLIST
  CP_*
 $ENDFPLIST
@@ -188,7 +161,7 @@ DEF Device_CP_Small C 0 10 N N 1 F N
 F0 "C" 10 70 50 H V L CNN
 F1 "Device_CP_Small" 10 -80 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "~" 0 0 50 H I C CNN
 $FPLIST
  CP_*
 $ENDFPLIST
@@ -208,7 +181,7 @@ DEF Device_C_Small C 0 10 N N 1 F N
 F0 "C" 10 70 50 H V L CNN
 F1 "Device_C_Small" 10 -80 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "~" 0 0 50 H I C CNN
 $FPLIST
  C_*
 $ENDFPLIST
@@ -226,7 +199,7 @@ DEF Device_D_TVS D 0 40 N N 1 F N
 F0 "D" 0 100 50 H V C CNN
 F1 "Device_D_TVS" 0 -100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "~" 0 0 50 H I C CNN
 $FPLIST
  TO-???*
  *_Diode_*
@@ -249,7 +222,7 @@ DEF Device_LED_Small D 0 10 N N 1 F N
 F0 "D" -50 125 50 H V L CNN
 F1 "Device_LED_Small" -175 -100 50 H V L CNN
 F2 "" 0 0 50 V I C CNN
-F3 "" 0 0 50 V I C CNN
+F3 "~" 0 0 50 V I C CNN
 $FPLIST
  LED*
  LED_SMD:*
@@ -272,7 +245,7 @@ DEF Device_L_Small L 0 10 N N 1 F N
 F0 "L" 30 40 50 H V L CNN
 F1 "Device_L_Small" 30 -40 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "~" 0 0 50 H I C CNN
 $FPLIST
  Choke_*
  *Coil*
@@ -295,7 +268,7 @@ DEF Device_Opamp_Dual_Generic U 0 20 Y Y 3 L N
 F0 "U" 0 200 50 H V L CNN
 F1 "Device_Opamp_Dual_Generic" 0 -200 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "~" 0 0 50 H I C CNN
 $FPLIST
  SOIC*3.9x4.9mm*P1.27mm*
  DIP*W7.62mm*
@@ -325,7 +298,7 @@ DEF Device_R_Small R 0 10 N N 1 F N
 F0 "R" 30 20 50 H V L CNN
 F1 "Device_R_Small" 30 -40 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "~" 0 0 50 H I C CNN
 $FPLIST
  R_*
 $ENDFPLIST
@@ -342,7 +315,7 @@ DEF Mechanical_MountingHole_Pad H 0 40 N N 1 F N
 F0 "H" 0 250 50 H V C CNN
 F1 "Mechanical_MountingHole_Pad" 0 175 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "~" 0 0 50 H I C CNN
 $FPLIST
  MountingHole*Pad*
 $ENDFPLIST
@@ -358,8 +331,7 @@ DEF Power_Management_LTC4365DDB U 0 40 Y Y 1 F N
 F0 "U" -300 350 50 H V L CNN
 F1 "Power_Management_LTC4365DDB" 50 350 50 H V L CNN
 F2 "Package_DFN_QFN:DFN-8-1EP_2x3mm_P0.5mm_EP0.61x2.2mm" 0 -500 50 H I C CNN
-F3 "" 0 100 50 H I C CNN
-ALIAS LTC4365DDB-1
+F3 "https://www.analog.com/media/en/technical-documentation/data-sheets/4365fa.pdf" 0 100 50 H I C CNN
 $FPLIST
  DFN*1EP*2x3mm*P0.5mm*
 $ENDFPLIST
@@ -383,8 +355,7 @@ DEF RF_PAT1220-C-0DB U 0 20 Y Y 1 F N
 F0 "U" -250 250 50 H V C CNN
 F1 "RF_PAT1220-C-0DB" 200 250 50 H V C CNN
 F2 "RF_Converter:RF_Attenuator_Susumu_PAT1220" 0 0 50 H I C CNN
-F3 "" -250 250 50 H I C CNN
-ALIAS PAT1220-C-1DB PAT1220-C-2DB PAT1220-C-3DB PAT1220-C-4DB PAT1220-C-5DB PAT1220-C-6DB PAT1220-C-7DB PAT1220-C-8DB PAT1220-C-9DB PAT1220-C-10DB
+F3 "https://www.susumu.co.jp/common/pdf/n_catalog_partition16_en.pdf" -250 250 50 H I C CNN
 $FPLIST
  RF*Attenuator*Susumu*PAT1220*
 $ENDFPLIST
@@ -413,7 +384,7 @@ DEF Regulator_SwitchedCapacitor_LM2776 U 0 20 Y Y 1 F N
 F0 "U" -250 250 50 H V C CNN
 F1 "Regulator_SwitchedCapacitor_LM2776" 50 250 50 H V L CNN
 F2 "Package_TO_SOT_SMD:SOT-23-6" 50 -350 50 H I L CNN
-F3 "" -1850 1250 50 H I C CNN
+F3 "http://www.ti.com/lit/ds/symlink/lm2776.pdf" -1850 1250 50 H I C CNN
 $FPLIST
  SOT?23*
 $ENDFPLIST
@@ -434,8 +405,7 @@ DEF Sensor_Temperature_LM73 U 0 40 Y Y 1 F N
 F0 "U" -500 450 50 H V L CNN
 F1 "Sensor_Temperature_LM73" -500 350 50 H V L CNN
 F2 "Package_TO_SOT_SMD:SOT-23-6" 450 350 50 H I L CNN
-F3 "" -400 450 50 H I C CNN
-ALIAS LM73-1
+F3 "http://www.ti.com/lit/ds/symlink/lm73.pdf" -400 450 50 H I C CNN
 $FPLIST
  SOT?23*
 $ENDFPLIST
@@ -466,8 +436,7 @@ DEF Transistor_FET_FDS6890A Q 0 20 Y N 2 F N
 F0 "Q" 200 75 50 H V L CNN
 F1 "Transistor_FET_FDS6890A" 200 0 50 H V L CNN
 F2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" 200 -75 50 H I L CIN
-F3 "" 0 0 50 H I L CNN
-ALIAS FDS6892A FDS6898A FDS9926A STS2DNE60 FDS6930A FDS6930B
+F3 "http://www.fairchildsemi.com/ds/FD/FDS6890A.pdf" 0 0 50 H I L CNN
 $FPLIST
  SOIC*3.9x4.9mm*P1.27mm*
 $ENDFPLIST
@@ -533,7 +502,6 @@ F0 "#PWR" 0 -150 50 H I C CNN
 F1 "power_+3V3" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
-ALIAS +3.3V
 DRAW
 P 2 0 1 0 -30 50 0 100 N
 P 2 0 1 0 0 0 0 100 N
@@ -719,7 +687,7 @@ DEF vna_mm_ADMV8416 U 0 40 Y Y 1 F N
 F0 "U" -950 1250 50 H V C CNN
 F1 "vna_mm_ADMV8416" -800 1350 50 H V C CNN
 F2 "Housings_DFN_QFN:QFN-40-1EP_6x6mm_Pitch0.5mm" -1600 1150 50 H I C CNN
-F3 "" -950 1250 50 H I C CNN
+F3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADMV8416.pdf" -950 1250 50 H I C CNN
 DRAW
 S -500 1150 500 -1300 0 1 0 N
 X NC 1 -700 250 200 R 50 50 1 1 W
@@ -772,7 +740,7 @@ DEF vna_mm_ADP7158 U 0 40 Y Y 1 F N
 F0 "U" -450 450 60 H V C CNN
 F1 "vna_mm_ADP7158" -350 550 60 H V C CNN
 F2 "Housings_DFN_QFN:DFN-10-1EP_3x3mm_Pitch0.5mm" 0 0 60 H I C CNN
-F3 "" 0 0 60 H I C CNN
+F3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADP7158.pdf" 0 0 60 H I C CNN
 DRAW
 S -400 300 400 -450 0 1 0 N
 X VOUT 1 -600 200 200 R 50 50 1 1 w
@@ -828,7 +796,7 @@ DEF vna_mm_ADRF5730 U 0 40 Y Y 1 F N
 F0 "U" -1000 750 50 H V C CNN
 F1 "vna_mm_ADRF5730" -850 850 50 H V C CNN
 F2 "vna_mm:LGA-24_EP_4x4_Pitch0.5mm" -50 -300 50 H I C CNN
-F3 "" -50 -300 50 H I C CNN
+F3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADRF5730.pdf" -50 -300 50 H I C CNN
 DRAW
 S -800 650 800 -650 0 1 0 N
 P 2 0 1 0 -400 0 -500 0 N
@@ -874,7 +842,7 @@ DEF vna_mm_DAC7563SDSCR U 0 40 Y Y 1 F N
 F0 "U" 300 650 50 H V C CNN
 F1 "vna_mm_DAC7563SDSCR" 550 750 50 H V C CNN
 F2 "Housings_DFN_QFN:DFN-10-1EP_3x3mm_Pitch0.5mm" 400 150 50 H I C CNN
-F3 "" 400 150 50 H I C CNN
+F3 "http://www.ti.com/lit/ds/symlink/dac7562.pdf" 400 150 50 H I C CNN
 DRAW
 S -350 500 350 -450 0 1 0 N
 X VoutA 1 550 100 200 L 50 50 1 1 O
@@ -897,7 +865,7 @@ DEF vna_mm_HMC576LC3B U 0 40 Y Y 1 F N
 F0 "U" -800 600 50 H V C CNN
 F1 "vna_mm_HMC576LC3B" -575 500 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "https://www.analog.com/media/en/technical-documentation/data-sheets/hmc576.pdf" 0 0 50 H I C CNN
 DRAW
 T 0 -25 0 100 0 0 0 X2 Normal 0 C C
 S -550 -300 500 400 0 0 0 N
@@ -923,7 +891,7 @@ DEF vna_mm_HMC65XLP2E ATT 0 40 Y Y 1 F N
 F0 "ATT" -250 350 60 H V C CNN
 F1 "vna_mm_HMC65XLP2E" -50 450 60 H V C CNN
 F2 "vna_mm:LP2E_DFN6_2x2mm_Pitch0.60mm" -300 200 60 H I C CNN
-F3 "" 0 0 60 H I C CNN
+F3 "https://www.analog.com/media/en/technical-documentation/data-sheets/hmc652lp2-hmc655lp2.pdf" 0 0 60 H I C CNN
 DRAW
 S -300 100 300 -300 0 1 0 N
 X GND 1 -100 -500 200 U 50 50 1 1 W
@@ -995,7 +963,7 @@ DEF vna_mm_LT3494 U 0 40 Y Y 1 F N
 F0 "U" -550 450 50 H V C CNN
 F1 "vna_mm_LT3494" -450 550 50 H V C CNN
 F2 "" -500 500 50 H I C CNN
-F3 "" -500 500 50 H I C CNN
+F3 "https://www.analog.com/media/en/technical-documentation/data-sheets/3494fb.pdf" -500 500 50 H I C CNN
 DRAW
 S -400 300 400 -300 0 1 0 N
 X SW 1 -100 500 200 D 50 50 1 1 O
@@ -1016,7 +984,7 @@ DEF vna_mm_LTC2937 U 0 40 Y Y 1 F N
 F0 "U" -600 900 50 H V C CNN
 F1 "vna_mm_LTC2937" -500 1000 50 H V C CNN
 F2 "vna_mm:QFN-28_EP_6x5_Pitch0.5mm" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2937.pdf" 0 0 50 H I C CNN
 DRAW
 S -600 750 600 -750 0 1 0 N
 X MARGB 1 -800 250 200 R 50 50 1 1 I
@@ -1057,7 +1025,7 @@ DEF vna_mm_LTM4622A U 0 40 Y Y 1 F N
 F0 "U" -1050 1200 50 H V C CNN
 F1 "vna_mm_LTM4622A" -900 1300 50 H V C CNN
 F2 "vna_mm:BGA-25_5x5_6.35x6.35mm" -950 1100 50 H I C CNN
-F3 "" 100 -300 50 H I C CNN
+F3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ltm4622a.pdf" 100 -300 50 H I C CNN
 DRAW
 S -550 1050 550 -1050 0 1 0 N
 X VOUT2 A1 750 400 200 L 50 50 1 1 w
@@ -1094,7 +1062,7 @@ DEF vna_mm_MAAM-011101 U 0 40 Y Y 1 F N
 F0 "U" 0 300 60 H V C CNN
 F1 "vna_mm_MAAM-011101" 0 400 60 H V C CNN
 F2 "" 150 -100 60 H V C CNN
-F3 "" 150 -100 60 H V C CNN
+F3 "https://cdn.macom.com/datasheets/MAAM-011101.pdf" 150 -100 60 H V C CNN
 DRAW
 S -250 200 250 -250 0 1 0 N
 X RFout 1 -450 100 200 R 50 50 1 1 O
@@ -1138,7 +1106,7 @@ DEF vna_mm_MAAM-011206 U 0 40 Y Y 1 F N
 F0 "U" -800 350 60 H V C CNN
 F1 "vna_mm_MAAM-011206" -500 450 60 H V C CNN
 F2 "vna_mm:TDFN6" -600 550 60 H V C CNN
-F3 "" 150 -100 60 H I C CNN
+F3 "https://cdn.macom.com/datasheets/MAAM-011206.pdf" 150 -100 60 H I C CNN
 DRAW
 S -250 200 250 -250 0 1 0 N
 X RFout 1 450 0 200 L 50 50 1 1 O
@@ -1157,7 +1125,7 @@ DEF vna_mm_MABA-011082 T 0 40 Y Y 1 F N
 F0 "T" 0 500 50 H V C CNN
 F1 "vna_mm_MABA-011082" 0 400 50 H V C CNN
 F2 "" -100 900 50 H I C CNN
-F3 "" -100 900 50 H I C CNN
+F3 "https://cdn.macom.com/datasheets/MABA-011082.pdf" -100 900 50 H I C CNN
 DRAW
 A -100 -150 50 899 1 1 1 0 N -100 -100 -50 -150
 A -100 -150 50 -1 -899 1 1 0 N -50 -150 -100 -199
@@ -1193,7 +1161,7 @@ DEF vna_mm_NCP692 U 0 40 Y Y 1 F N
 F0 "U" -300 300 50 H V C CNN
 F1 "vna_mm_NCP692" -200 400 50 H V C CNN
 F2 "Housings_DFN_QFN:DFN-6-1EP_3x3mm_Pitch0.95mm" -650 700 50 H I C CNN
-F3 "" 0 50 50 H I C CNN
+F3 "https://www.onsemi.com/pub/Collateral/NCP690-D.PDF" 0 50 50 H I C CNN
 DRAW
 S -300 200 300 -450 0 1 0 N
 X VIN 1 -500 100 200 R 50 50 1 1 W
@@ -1212,7 +1180,7 @@ DEF vna_mm_PE42543 U 0 40 Y Y 1 F N
 F0 "U" -700 700 50 H V C CNN
 F1 "vna_mm_PE42543" -550 800 50 H V C CNN
 F2 "v:RFSW__PE42543A-X" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
+F3 "https://www.psemi.com/pdf/datasheets/pe42543ds.pdf" 0 0 50 H I C CNN
 DRAW
 S -350 600 350 -1700 0 1 0 N
 P 2 0 1 0 50 -150 150 -150 N
@@ -1259,7 +1227,7 @@ DEF vna_mm_TPS22918 U 0 40 Y Y 1 F N
 F0 "U" -200 350 50 H V C CNN
 F1 "vna_mm_TPS22918" -50 450 50 H V C CNN
 F2 "TO_SOT_Packages_SMD:SOT-23-6" -50 550 50 H I C CNN
-F3 "" 0 300 50 H I C CNN
+F3 "http://www.ti.com/lit/ds/symlink/tps22918.pdf" 0 300 50 H I C CNN
 DRAW
 S -250 300 250 -300 0 1 0 N
 X Vin 1 -450 200 200 R 50 50 1 1 W
@@ -1277,7 +1245,7 @@ DEF vna_mm_TPS72301DB U 0 40 Y Y 1 F N
 F0 "U" -300 300 50 H V C CNN
 F1 "vna_mm_TPS72301DB" -100 400 50 H V C CNN
 F2 "TO_SOT_Packages_SMD:SOT-23-5" 0 500 50 H I C CNN
-F3 "" 0 100 50 H I C CNN
+F3 "http://www.ti.com/lit/ds/symlink/tps723.pdf" 0 100 50 H I C CNN
 DRAW
 S -250 200 250 -400 0 1 0 N
 X GND 1 0 -600 200 U 50 50 1 1 W
@@ -1294,7 +1262,7 @@ DEF vna_mm_TS5A23166 U 0 40 Y Y 1 F N
 F0 "U" -550 500 50 H V C CNN
 F1 "vna_mm_TS5A23166" -400 600 50 H V C CNN
 F2 "v:VSSOP-8" 0 200 50 H V C CNN
-F3 "" 0 200 50 H I C CNN
+F3 "http://www.ti.com/lit/ds/symlink/ts5a23166.pdf" 0 200 50 H I C CNN
 DRAW
 S -350 400 350 -400 0 1 0 N
 X NO1 1 550 200 200 L 50 50 1 1 B
@@ -1305,6 +1273,55 @@ X NO2 5 550 -150 200 L 50 50 1 1 B
 X COM2 6 -550 -100 200 R 50 50 1 1 B
 X IN1 7 -550 100 200 R 50 50 1 1 I
 X V+ 8 0 600 200 D 50 50 1 1 W
+ENDDRAW
+ENDDEF
+#
+# vna_mm_VEMI65AB-HCI
+#
+DEF vna_mm_VEMI65AB-HCI U 0 40 Y Y 1 F N
+F0 "U" -150 400 50 H V C CNN
+F1 "vna_mm_VEMI65AB-HCI" 100 500 50 H V C CNN
+F2 "" 50 -200 50 H I C CNN
+F3 "" 50 -200 50 H I C CNN
+DRAW
+S -150 350 150 -350 0 1 0 N
+S -100 -200 100 -300 0 1 0 N
+S -100 -100 100 -200 0 1 0 N
+S -100 0 100 -100 0 1 0 N
+S -100 100 100 0 0 1 0 N
+S -100 200 100 100 0 1 0 N
+S -100 300 100 200 0 1 0 N
+P 2 0 1 0 -150 -250 -100 -250 N
+P 2 0 1 0 -150 -150 -100 -150 N
+P 2 0 1 0 -150 -50 -100 -50 N
+P 2 0 1 0 -150 50 -100 50 N
+P 2 0 1 0 -150 150 -100 150 N
+P 2 0 1 0 -150 250 -100 250 N
+P 2 0 1 0 100 -250 150 -250 N
+P 2 0 1 0 100 -150 150 -150 N
+P 2 0 1 0 100 -50 150 -50 N
+P 2 0 1 0 100 50 150 50 N
+P 2 0 1 0 100 150 150 150 N
+P 2 0 1 0 100 250 150 250 N
+P 3 0 1 0 -50 -200 50 -250 50 -300 N
+P 3 0 1 0 -50 -100 50 -150 50 -200 N
+P 3 0 1 0 -50 0 50 -50 50 -100 N
+P 3 0 1 0 -50 100 50 50 50 0 N
+P 3 0 1 0 -50 200 50 150 50 100 N
+P 3 0 1 0 -50 300 50 250 50 200 N
+X ~ 1 -350 250 200 R 50 50 1 1 B
+X ~ 10 350 50 200 L 50 50 1 1 B
+X ~ 11 350 150 200 L 50 50 1 1 B
+X ~ 12 350 250 200 L 50 50 1 1 B
+X ~ 13 0 -550 200 U 50 50 1 1 B
+X ~ 2 -350 150 200 R 50 50 1 1 B
+X ~ 3 -350 50 200 R 50 50 1 1 B
+X ~ 4 -350 -50 200 R 50 50 1 1 B
+X ~ 5 -350 -150 200 R 50 50 1 1 B
+X ~ 6 -350 -250 200 R 50 50 1 1 B
+X ~ 7 350 -250 200 L 50 50 1 1 B
+X ~ 8 350 -150 200 L 50 50 1 1 B
+X ~ 9 350 -50 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #

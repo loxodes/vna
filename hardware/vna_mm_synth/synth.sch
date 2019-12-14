@@ -1,10 +1,9 @@
-EESchema Schematic File Version 4
-LIBS:vna_mm_synth-cache
+EESchema Schematic File Version 5
 EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 4 13
+Sheet 3 13
 Title ""
 Date ""
 Rev ""
@@ -13,6 +12,11 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
 $EndDescr
 Text HLabel 10000 3200 2    60   Output ~ 0
 SYNTH_A
@@ -738,154 +742,12 @@ Wire Wire Line
 	10800 1750 10800 1650
 Wire Wire Line
 	10800 1350 10800 1450
-Text HLabel 9550 1550 2    60   Output ~ 0
-LMX_MUXout
-Text HLabel 9550 1650 2    60   Input ~ 0
-LMX_SDI
-Text HLabel 9550 1750 2    60   Input ~ 0
-LMX_SCK
-Text HLabel 9500 750  2    60   Input ~ 0
+Text HLabel 9000 1850 2    60   Input ~ 0
 LMX_CSB
-Text HLabel 9550 1850 2    60   Input ~ 0
-LMX_CE
-Text Label 7900 750  2    60   ~ 0
+Text Label 8100 1850 2    60   ~ 0
 CSB
-Text Label 8050 1850 2    60   ~ 0
-CE
-Text Label 8050 1650 2    60   ~ 0
-SDI
-Text Label 8050 1550 2    60   ~ 0
-MUXout
 Text Label 10800 1350 1    60   ~ 0
 MUXout
-Text Label 8050 1750 2    60   ~ 0
-SCK
-Wire Wire Line
-	9250 1850 9550 1850
-Wire Wire Line
-	7900 750  8100 750 
-Wire Wire Line
-	9250 1750 9550 1750
-Wire Wire Line
-	9250 1650 9550 1650
-Wire Wire Line
-	9250 1550 9550 1550
-$Comp
-L Device:C_Small C431
-U 1 1 59CF693A
-P 8800 2050
-F 0 "C431" V 8750 1800 50  0000 L CNN
-F 1 "10 pF" V 8850 1800 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 8800 2050 50  0001 C CNN
-F 3 "" H 8800 2050 50  0001 C CNN
-	1    8800 2050
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C430
-U 1 1 59CF7767
-P 8600 2050
-F 0 "C430" V 8550 1800 50  0000 L CNN
-F 1 "10 pF" V 8650 1800 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 8600 2050 50  0001 C CNN
-F 3 "" H 8600 2050 50  0001 C CNN
-	1    8600 2050
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C429
-U 1 1 59CF77F9
-P 8400 2050
-F 0 "C429" V 8350 1800 50  0000 L CNN
-F 1 "10 pF" V 8450 1800 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 8400 2050 50  0001 C CNN
-F 3 "" H 8400 2050 50  0001 C CNN
-	1    8400 2050
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C426
-U 1 1 59CF7915
-P 8200 2050
-F 0 "C426" V 8150 1800 50  0000 L CNN
-F 1 "10 pF" V 8250 1800 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 8200 2050 50  0001 C CNN
-F 3 "" H 8200 2050 50  0001 C CNN
-	1    8200 2050
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0450
-U 1 1 59CF7A47
-P 8800 2400
-F 0 "#PWR0450" H 8800 2150 50  0001 C CNN
-F 1 "GND" H 8800 2250 50  0000 C CNN
-F 2 "" H 8800 2400 50  0001 C CNN
-F 3 "" H 8800 2400 50  0001 C CNN
-	1    8800 2400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8800 2150 8800 2400
-$Comp
-L power:GND #PWR0448
-U 1 1 59CF7CFE
-P 8600 2400
-F 0 "#PWR0448" H 8600 2150 50  0001 C CNN
-F 1 "GND" H 8600 2250 50  0000 C CNN
-F 2 "" H 8600 2400 50  0001 C CNN
-F 3 "" H 8600 2400 50  0001 C CNN
-	1    8600 2400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8600 2150 8600 2400
-$Comp
-L power:GND #PWR0447
-U 1 1 59CF81C5
-P 8400 2400
-F 0 "#PWR0447" H 8400 2150 50  0001 C CNN
-F 1 "GND" H 8400 2250 50  0000 C CNN
-F 2 "" H 8400 2400 50  0001 C CNN
-F 3 "" H 8400 2400 50  0001 C CNN
-	1    8400 2400
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0446
-U 1 1 59CF82D6
-P 8200 2400
-F 0 "#PWR0446" H 8200 2150 50  0001 C CNN
-F 1 "GND" H 8200 2250 50  0000 C CNN
-F 2 "" H 8200 2400 50  0001 C CNN
-F 3 "" H 8200 2400 50  0001 C CNN
-	1    8200 2400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8200 2150 8200 2400
-Wire Wire Line
-	8050 1850 8200 1850
-Wire Wire Line
-	8050 1750 8400 1750
-Wire Wire Line
-	8050 1650 8600 1650
-Wire Wire Line
-	8050 1550 8800 1550
-Wire Wire Line
-	8200 1950 8200 1850
-Connection ~ 8200 1850
-Wire Wire Line
-	8400 1950 8400 1750
-Connection ~ 8400 1750
-Wire Wire Line
-	8400 2150 8400 2400
-Wire Wire Line
-	8600 1950 8600 1650
-Connection ~ 8600 1650
-Wire Wire Line
-	8800 1950 8800 1550
-Connection ~ 8800 1550
 $Comp
 L power:GND #PWR0445
 U 1 1 593E6BE2
@@ -942,90 +804,6 @@ Wire Wire Line
 Wire Wire Line
 	3150 4500 3150 3550
 Connection ~ 2400 4500
-$Comp
-L Device:R_Small R415
-U 1 1 5A9D445F
-P 8550 750
-F 0 "R415" H 8580 770 50  0000 L CNN
-F 1 "51" H 8580 710 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 8550 750 50  0001 C CNN
-F 3 "" H 8550 750 50  0001 C CNN
-	1    8550 750 
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:C_Small C425
-U 1 1 5A9D459C
-P 8100 950
-F 0 "C425" V 8050 700 50  0000 L CNN
-F 1 "10 pF" V 8150 700 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 8100 950 50  0001 C CNN
-F 3 "" H 8100 950 50  0001 C CNN
-	1    8100 950 
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9500 750  8650 750 
-$Comp
-L power:GND #PWR0443
-U 1 1 5A9D4B16
-P 8100 1150
-F 0 "#PWR0443" H 8100 900 50  0001 C CNN
-F 1 "GND" H 8100 1000 50  0000 C CNN
-F 2 "" H 8100 1150 50  0001 C CNN
-F 3 "" H 8100 1150 50  0001 C CNN
-	1    8100 1150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8100 1050 8100 1150
-Wire Wire Line
-	8100 850  8100 750 
-Connection ~ 8100 750 
-$Comp
-L Device:R_Small R421
-U 1 1 5AB89E77
-P 9150 1550
-F 0 "R421" V 9200 1650 50  0000 L CNN
-F 1 "22" V 9200 1350 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 9150 1550 50  0001 C CNN
-F 3 "" H 9150 1550 50  0001 C CNN
-	1    9150 1550
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:R_Small R422
-U 1 1 5AB89F3B
-P 9150 1650
-F 0 "R422" V 9200 1750 50  0000 L CNN
-F 1 "22" V 9200 1450 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 9150 1650 50  0001 C CNN
-F 3 "" H 9150 1650 50  0001 C CNN
-	1    9150 1650
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:R_Small R423
-U 1 1 5AB89FDA
-P 9150 1750
-F 0 "R423" V 9200 1850 50  0000 L CNN
-F 1 "22" V 9200 1550 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 9150 1750 50  0001 C CNN
-F 3 "" H 9150 1750 50  0001 C CNN
-	1    9150 1750
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:R_Small R424
-U 1 1 5AB8A07E
-P 9150 1850
-F 0 "R424" V 9200 1950 50  0000 L CNN
-F 1 "22" V 9200 1650 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 9150 1850 50  0001 C CNN
-F 3 "" H 9150 1850 50  0001 C CNN
-	1    9150 1850
-	0    -1   -1   0   
-$EndComp
 $Comp
 L power:+3V3 #PWR0404
 U 1 1 5ABB857A
@@ -1167,14 +945,6 @@ Wire Wire Line
 Wire Wire Line
 	8600 5500 10050 5500
 Wire Wire Line
-	8200 1850 9050 1850
-Wire Wire Line
-	8400 1750 9050 1750
-Wire Wire Line
-	8600 1650 9050 1650
-Wire Wire Line
-	8800 1550 9050 1550
-Wire Wire Line
 	4400 4950 4400 5000
 Wire Wire Line
 	2400 4100 2600 4100
@@ -1182,8 +952,6 @@ Wire Wire Line
 	2400 4500 2400 4650
 Wire Wire Line
 	2400 4500 2600 4500
-Wire Wire Line
-	8100 750  8450 750 
 Text HLabel 2100 3150 0    50   Input ~ 0
 SYNC
 Wire Wire Line
@@ -1891,4 +1659,64 @@ Wire Wire Line
 	4100 4200 4100 4650
 Wire Wire Line
 	2850 2950 3000 2950
+$Comp
+L vna_mm:VEMI65AB-HCI U?
+U 1 1 5DF5F523
+P 8550 2100
+F 0 "U?" H 8550 2615 50  0000 C CNN
+F 1 "VEMI65AB-HCI" H 8550 2524 50  0000 C CNN
+F 2 "" H 8600 1900 50  0001 C CNN
+F 3 "" H 8600 1900 50  0001 C CNN
+	1    8550 2100
+	1    0    0    -1  
+$EndComp
+Text Label 8100 2250 2    60   ~ 0
+SCK
+Text Label 8100 2050 2    60   ~ 0
+MUXout
+Text Label 8100 2150 2    60   ~ 0
+SDI
+Text Label 8100 2350 2    60   ~ 0
+CE
+Text HLabel 9000 2350 2    60   Input ~ 0
+LMX_CE
+Text HLabel 9000 2250 2    60   Input ~ 0
+LMX_SCK
+Text HLabel 9000 2150 2    60   Input ~ 0
+LMX_SDI
+Text HLabel 9000 2050 2    60   Output ~ 0
+LMX_MUXout
+Wire Wire Line
+	8100 2050 8200 2050
+Wire Wire Line
+	8100 2150 8200 2150
+Wire Wire Line
+	8100 2250 8200 2250
+Wire Wire Line
+	8100 2350 8200 2350
+Wire Wire Line
+	8900 2050 9000 2050
+Wire Wire Line
+	8900 2150 9000 2150
+Wire Wire Line
+	8900 2250 9000 2250
+Wire Wire Line
+	8900 2350 9000 2350
+$Comp
+L power:GND #PWR?
+U 1 1 5E0124D8
+P 8550 2650
+F 0 "#PWR?" H 8550 2400 50  0001 C CNN
+F 1 "GND" H 8550 2500 50  0000 C CNN
+F 2 "" H 8550 2650 50  0001 C CNN
+F 3 "" H 8550 2650 50  0001 C CNN
+	1    8550 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8100 1850 8200 1850
+Wire Wire Line
+	9000 1850 8900 1850
+NoConn ~ 8200 1950
+NoConn ~ 8900 1950
 $EndSCHEMATC
