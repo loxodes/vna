@@ -131,6 +131,10 @@ K SP4T
 F https://www.psemi.com/pdf/datasheets/pe42543ds.pdf
 $ENDCMP
 #
+$CMP SYZYGY-STD
+D Symbol from https://github.com/gregdavill/ButterStick/
+$ENDCMP
+#
 $CMP TPS22918
 D TPS22918 5.5-V, 2-A, 52-mΩ On-Resistance Load Switch
 K switch

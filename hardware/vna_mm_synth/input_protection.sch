@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 12 13
+Sheet 11 13
 Title ""
 Date ""
 Rev ""
@@ -73,20 +73,6 @@ Wire Wire Line
 	5100 4500 5150 4500
 Text Notes 6150 2950 0    50   ~ 0
 1.5A MAX
-$Comp
-L power:+4V #PWR?
-U 1 1 5DEFF4AA
-P 6750 2800
-AR Path="/5DC45DA8/5DEFF4AA" Ref="#PWR?"  Part="1" 
-AR Path="/5DEECA69/5DEFF4AA" Ref="#PWR?"  Part="1" 
-AR Path="/5DECADF2/5DEFF4AA" Ref="#PWR01211"  Part="1" 
-F 0 "#PWR01211" H 6750 2650 50  0001 C CNN
-F 1 "+4V" H 6765 2973 50  0000 C CNN
-F 2 "" H 6750 2800 50  0001 C CNN
-F 3 "" H 6750 2800 50  0001 C CNN
-	1    6750 2800
-	1    0    0    -1  
-$EndComp
 Text Notes 2800 2400 0    50   ~ 0
 4V +/- 5% input, 1.5A
 $Comp
@@ -565,4 +551,15 @@ Wire Wire Line
 	5650 4600 5650 4950
 Text Notes 4650 1950 0    118  ~ 0
 TODO: change for 9V input!
+$Comp
+L power:+9V #PWR0106
+U 1 1 5DF88C97
+P 6750 2800
+F 0 "#PWR0106" H 6750 2650 50  0001 C CNN
+F 1 "+9V" H 6765 2973 50  0000 C CNN
+F 2 "" H 6750 2800 50  0001 C CNN
+F 3 "" H 6750 2800 50  0001 C CNN
+	1    6750 2800
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

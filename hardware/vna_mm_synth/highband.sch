@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 7 13
+Sheet 6 13
 Title ""
 Date ""
 Rev ""
@@ -22,8 +22,8 @@ $Comp
 L vna_mm:HMC576LC3B U701
 U 1 1 5D285A07
 P 4850 3450
-F 0 "U701" H 5500 3800 50  0000 L CNN
-F 1 "HMC576LC3B" H 5500 3700 50  0000 L CNN
+F 0 "U701" H 3700 3900 50  0000 L CNN
+F 1 "HMC576LC3B" H 3700 3800 50  0000 L CNN
 F 2 "vna_mm:LC3B" H 4850 3450 50  0001 C CNN
 F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/hmc576.pdf" H 4850 3450 50  0001 C CNN
 	1    4850 3450

@@ -73,7 +73,7 @@ F2 "HIGHBAND_VX2" I L 11550 5600 50
 F3 "HIGHBAND_RFOUT" O R 13350 6050 50 
 F4 "HIGHBAND_RFIN" I L 11550 6050 50 
 $EndSheet
-Text Notes 1150 11250 0    118  ~ 0
+Text Notes 1800 12050 0    118  ~ 0
 goals:\n100 MHz to 26.5 GHz (29 GHz goal)\n-15 dBc 2nd order harmonics\n-25 dBc 3rd order harmonics\n-15 to 0 dBm output power +/- 1 dB at room\nsettling time >1 ms to 90% amplitude\nphase sync with external reference\nBOM >$1000/each\nenclosure\nfpga controlled?\noption for USB-PD powered?
 Wire Wire Line
 	11550 6050 10750 6050
@@ -367,7 +367,7 @@ F10 "LE" I L 16350 6900 50
 F11 "SEROUT" O L 16350 7000 50 
 $EndSheet
 $Sheet
-S 1350 7200 3350 1800
+S 1850 7450 3350 1800
 U 5DECADF2
 F0 "input_protection" 50
 F1 "input_protection.sch" 50
@@ -463,81 +463,171 @@ NoConn ~ 6850 9200
 NoConn ~ 6800 3300
 Wire Wire Line
 	3850 3200 6950 3200
-Text Label 5100 6300 0    50   ~ 0
+Text Label 4050 6100 0    50   ~ 0
 LOWBAND_EN
-Text Label 5100 6400 0    50   ~ 0
+Text Label 4050 6200 0    50   ~ 0
 MIDBAND_EN
-Text Label 5100 6500 0    50   ~ 0
+Text Label 4050 6300 0    50   ~ 0
 HIGHBAND_EN
-Text Label 5100 5800 0    50   ~ 0
+Text Label 4050 5650 0    50   ~ 0
 PGOOD_9V
-Text Label 5100 6900 0    50   ~ 0
+Text Label 4050 6700 0    50   ~ 0
 SDA
-Text Label 5100 7000 0    50   ~ 0
+Text Label 4050 6800 0    50   ~ 0
 SCL
-Text Label 5100 5900 0    50   ~ 0
+Text Label 4050 5750 0    50   ~ 0
 ALERTB
-Text Label 5100 6000 0    50   ~ 0
+Text Label 4050 5850 0    50   ~ 0
 WP
-Text Label 5100 6200 0    50   ~ 0
+Text Label 4050 6000 0    50   ~ 0
 POW_ON
-Text Label 5150 4000 0    50   ~ 0
+Text Label 4050 3900 0    50   ~ 0
 PLL_SDI
-Text Label 5150 4100 0    50   ~ 0
+Text Label 4050 4000 0    50   ~ 0
 PLL_SCK
-Text Label 5150 4200 0    50   ~ 0
+Text Label 4050 4100 0    50   ~ 0
 PLL_CSB
-Text Label 5100 4400 0    50   ~ 0
+Text Label 4050 4200 0    50   ~ 0
 PLL_CE
-Text Label 5150 3900 0    50   ~ 0
+Text Label 4050 3800 0    50   ~ 0
 PLL_SDO
-Text Label 5100 5300 0    50   ~ 0
+Text Label 4050 5150 0    50   ~ 0
 SW1_V1
-Text Label 5100 5400 0    50   ~ 0
+Text Label 4050 5250 0    50   ~ 0
 SW1_V2
-Text Label 5100 5500 0    50   ~ 0
+Text Label 4050 5350 0    50   ~ 0
 SW2_V1
-Text Label 5100 5600 0    50   ~ 0
+Text Label 4050 5450 0    50   ~ 0
 SW2_V2
-Text Label 5100 5700 0    50   ~ 0
+Text Label 4050 5550 0    50   ~ 0
 SW3_HIGH_SEL
-Text Label 5100 5100 0    50   ~ 0
+Text Label 4050 5000 0    50   ~ 0
 FILT_BANDSEL
-Text Label 5150 3500 0    50   ~ 0
+Text Label 4050 3350 0    50   ~ 0
 ATT_SDI
-Text Label 5150 3600 0    50   ~ 0
+Text Label 4050 3450 0    50   ~ 0
 ATT_SCK
-Text Label 5150 3700 0    50   ~ 0
+Text Label 4050 3550 0    50   ~ 0
 ATT_LE
-Text Label 5150 3800 0    50   ~ 0
+Text Label 4050 3650 0    50   ~ 0
 ATT_SDO
-Text Label 5100 4500 0    50   ~ 0
+Text Label 4050 4400 0    50   ~ 0
 AMP_~SYNC
-Text Label 5100 4600 0    50   ~ 0
+Text Label 4050 4500 0    50   ~ 0
 AMP_~CLR
-Text Label 5100 4700 0    50   ~ 0
+Text Label 4050 4600 0    50   ~ 0
 AMP_~LDAC
-Text Label 5100 4800 0    50   ~ 0
+Text Label 4050 4700 0    50   ~ 0
 AMP_SCK
-Text Label 5100 4900 0    50   ~ 0
+Text Label 4050 4800 0    50   ~ 0
 AMP_SDI
-Text Label 5100 6600 0    50   ~ 0
+Text Label 4050 6400 0    50   ~ 0
 VC_A_EN
-Text Label 5100 6700 0    50   ~ 0
+Text Label 4050 6500 0    50   ~ 0
 VC_B_EN
-Text Label 5100 5000 0    50   ~ 0
+Text Label 4050 4900 0    50   ~ 0
 FILT_~SYNC
 $Sheet
-S 1900 2950 1950 3350
+S 1900 2950 1950 4000
 U 5AB8DC0D
 F0 "conn_power" 60
 F1 "conn_power.sch" 60
-F2 "SDI" O R 3850 4250 60 
-F3 "SCK" O R 3850 4350 60 
-F4 "LMX_CS" O R 3850 4450 60 
-F5 "DAC_CS" O R 3850 5500 60 
-F6 "LMX_CE" O R 3850 4550 60 
-F7 "LMX_LCK" I R 3850 4150 60 
-F8 "EXT_CLK" I R 3850 3200 50 
+F2 "EXT_CLK" I R 3850 3200 50 
+F3 "ATT_SDI" O R 3850 3350 50 
+F4 "ATT_SCK" O R 3850 3450 50 
+F5 "ATT_LE" O R 3850 3550 50 
+F6 "ATT_SDO" I R 3850 3650 50 
+F7 "PLL_CE" O R 3850 4200 50 
+F8 "PLL_SCK" O R 3850 4000 50 
+F9 "PLL_SDI" O R 3850 3900 50 
+F10 "PLL_SDO" I R 3850 3800 50 
+F11 "PLL_CSB" O R 3850 4100 50 
+F12 "AMP_~SYNC" O R 3850 4400 50 
+F13 "AMP_~CLR" O R 3850 4500 50 
+F14 "AMP_~LDAC" O R 3850 4600 50 
+F15 "AMP_SCK" O R 3850 4700 50 
+F16 "AMP_SDI" O R 3850 4800 50 
+F17 "FILT_~SYNC" O R 3850 4900 50 
+F18 "FILT_BANDSEL" O R 3850 5000 50 
+F19 "SW1_V1" O R 3850 5150 50 
+F20 "SW1_V2" O R 3850 5250 50 
+F21 "SW2_V1" O R 3850 5350 50 
+F22 "SW2_V2" O R 3850 5450 50 
+F23 "SW3_HIGH_SEL" O R 3850 5550 50 
+F24 "SEQ_PGOOD_9V" I R 3850 5650 50 
+F25 "SEQ_ALERTB" I R 3850 5750 50 
+F26 "SEQ_WP" O R 3850 5850 50 
+F27 "SEQ_POW_ON" O R 3850 6000 50 
+F28 "LOWBAND_EN" O R 3850 6100 50 
+F29 "MIDBAND_EN" O R 3850 6200 50 
+F30 "HIGHBAND_EN" O R 3850 6300 50 
+F31 "VC_A_EN" O R 3850 6400 50 
+F32 "VC_B_EN" O R 3850 6500 50 
+F33 "SDA" O R 3850 6700 50 
+F34 "SCL" O R 3850 6800 50 
 $EndSheet
+Wire Wire Line
+	3850 3350 4050 3350
+Wire Wire Line
+	3850 3450 4050 3450
+Wire Wire Line
+	3850 3550 4050 3550
+Wire Wire Line
+	3850 3650 4050 3650
+Wire Wire Line
+	3850 3800 4050 3800
+Wire Wire Line
+	3850 3900 4050 3900
+Wire Wire Line
+	3850 4000 4050 4000
+Wire Wire Line
+	3850 4100 4050 4100
+Wire Wire Line
+	3850 4200 4050 4200
+Wire Wire Line
+	3850 4400 4050 4400
+Wire Wire Line
+	3850 4500 4050 4500
+Wire Wire Line
+	3850 4600 4050 4600
+Wire Wire Line
+	3850 4700 4050 4700
+Wire Wire Line
+	3850 4800 4050 4800
+Wire Wire Line
+	3850 4900 4050 4900
+Wire Wire Line
+	3850 5000 4050 5000
+Wire Wire Line
+	3850 5150 4050 5150
+Wire Wire Line
+	3850 5250 4050 5250
+Wire Wire Line
+	3850 5350 4050 5350
+Wire Wire Line
+	3850 5450 4050 5450
+Wire Wire Line
+	3850 5550 4050 5550
+Wire Wire Line
+	3850 5650 4050 5650
+Wire Wire Line
+	3850 5750 4050 5750
+Wire Wire Line
+	3850 5850 4050 5850
+Wire Wire Line
+	3850 6000 4050 6000
+Wire Wire Line
+	3850 6100 4050 6100
+Wire Wire Line
+	3850 6200 4050 6200
+Wire Wire Line
+	3850 6300 4050 6300
+Wire Wire Line
+	3850 6400 4050 6400
+Wire Wire Line
+	3850 6500 4050 6500
+Wire Wire Line
+	3850 6700 4050 6700
+Wire Wire Line
+	3850 6800 4050 6800
 $EndSCHEMATC
