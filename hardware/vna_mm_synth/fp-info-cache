@@ -1,4 +1,4 @@
-16955840087476355
+16957416736855355
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin{space}Battery{space}Holder,{space}BX0036,{space}Battery{space}Type{space}C{space}(https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -75312,6 +75312,13 @@ SF2921-61345
 0
 11
 2
+vna_mm
+SYZYGY_standard_carrier
+Footprint{space}from{space}https://github.com/gregdavill/ButterStick/
+
+0
+46
+41
 vna_mm
 TDFN6
 
