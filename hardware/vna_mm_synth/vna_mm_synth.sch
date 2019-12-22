@@ -95,16 +95,6 @@ Wire Wire Line
 	13350 4550 14100 4550
 Wire Wire Line
 	13350 6050 14100 6050
-Text Notes 14600 2200 0    118  ~ 0
-$200
-Text Notes 18600 2150 0    118  ~ 0
-$100
-Text Notes 12100 2350 0    118  ~ 0
-$100
-Text Notes 7550 2650 0    118  ~ 0
-$100
-Text Notes 15750 1800 0    50   ~ 10
-TODO: CHECK DC BLOCK
 Wire Wire Line
 	18550 4050 18400 4050
 Text Label 18400 4050 2    50   ~ 0
@@ -293,10 +283,6 @@ Text Label 6850 9450 2    50   ~ 0
 MIDBAND_EN
 Text Label 6850 9550 2    50   ~ 0
 HIGHBAND_EN
-Text Notes 7650 7600 0    118  ~ 0
-$100
-Text Notes 11100 8500 0    118  ~ 0
-$20
 Text Label 10600 9850 2    50   ~ 0
 MAAM_VC_EN
 Wire Wire Line
@@ -341,8 +327,6 @@ Wire Wire Line
 	15600 3050 16350 3050
 Wire Wire Line
 	17800 3050 18550 3050
-Text Notes 16650 2200 0    118  ~ 0
-$200
 $Sheet
 S 16350 2600 1450 4550
 U 5D3801E2
@@ -608,4 +592,6 @@ F32 "EXT_CLK_N" I R 3850 3100 50
 $EndSheet
 Wire Wire Line
 	3850 3100 6950 3100
+Text Notes 15750 1800 0    50   ~ 10
+TODO: CHECK DC BLOCK
 $EndSCHEMATC
