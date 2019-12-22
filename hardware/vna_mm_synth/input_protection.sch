@@ -550,7 +550,7 @@ Wire Wire Line
 Wire Wire Line
 	5650 4600 5650 4950
 Text Notes 4650 1950 0    118  ~ 0
-TODO: change for 9V input!
+TODO: change resistors for 9V input!
 $Comp
 L power:+9V #PWR01111
 U 1 1 5DF88C97
@@ -562,4 +562,6 @@ F 3 "" H 6750 2800 50  0001 C CNN
 	1    6750 2800
 	1    0    0    -1  
 $EndComp
+Text Notes 4650 2200 0    118  ~ 0
+TODO: CHECK CURRENT RATING ON INDUCTOR
 $EndSCHEMATC
