@@ -1,4 +1,4 @@
-EESchema Schematic File Version 5
+EESchema Schematic File Version 4
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -12,11 +12,6 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
-Comment5 ""
-Comment6 ""
-Comment7 ""
-Comment8 ""
-Comment9 ""
 $EndDescr
 $Comp
 L vna_mm:MAAM-011109 U1003
@@ -831,4 +826,6 @@ Wire Wire Line
 	3200 2450 3200 3150
 NoConn ~ 1250 2350
 NoConn ~ 1950 2350
+Text Notes 5750 1800 0    118  ~ 0
+TODO: INSERT BLM18BB471 FERRITE PRIOR TO 100 NF BYPASS CAP PER DATASHEET
 $EndSCHEMATC

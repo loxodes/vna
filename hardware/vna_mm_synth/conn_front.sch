@@ -1,4 +1,4 @@
-EESchema Schematic File Version 5
+EESchema Schematic File Version 4
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -12,11 +12,6 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
-Comment5 ""
-Comment6 ""
-Comment7 ""
-Comment8 ""
-Comment9 ""
 $EndDescr
 Text HLabel 4900 1600 0    60   Input ~ 0
 SYNTH_OUT
@@ -53,22 +48,11 @@ Wire Wire Line
 Wire Wire Line
 	5100 2700 4900 2700
 $Comp
-L Device:C_Small C202
-U 1 1 5AC31626
-P 5200 2700
-F 0 "C202" H 5210 2770 50  0000 L CNN
-F 1 "10 pF" H 5210 2620 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 5200 2700 50  0001 C CNN
-F 3 "" H 5200 2700 50  0001 C CNN
-	1    5200 2700
-	0    1    1    0   
-$EndComp
-$Comp
 L Device:C_Small C201
 U 1 1 5AC31536
 P 5200 1600
 F 0 "C201" H 5210 1670 50  0000 L CNN
-F 1 "10 pF" H 5210 1520 50  0000 L CNN
+F 1 "100 nF UWB" H 5210 1520 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0402_1005Metric" H 5200 1600 50  0001 C CNN
 F 3 "" H 5200 1600 50  0001 C CNN
 	1    5200 1600
@@ -100,4 +84,15 @@ Wire Wire Line
 	5850 1800 5850 1900
 Wire Wire Line
 	5850 3000 5850 2900
+$Comp
+L Device:C_Small C202
+U 1 1 5AC31626
+P 5200 2700
+F 0 "C202" H 5210 2770 50  0000 L CNN
+F 1 "100 nF" H 5210 2620 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 5200 2700 50  0001 C CNN
+F 3 "" H 5200 2700 50  0001 C CNN
+	1    5200 2700
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC

@@ -1,4 +1,4 @@
-EESchema Schematic File Version 5
+EESchema Schematic File Version 4
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -12,11 +12,6 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
-Comment5 ""
-Comment6 ""
-Comment7 ""
-Comment8 ""
-Comment9 ""
 $EndDescr
 $Comp
 L vna_mm:HMC576LC3B U601
@@ -370,4 +365,6 @@ Wire Wire Line
 Connection ~ 2450 4000
 Wire Wire Line
 	1700 3450 1850 3450
+Text Notes 1700 5000 0    50   ~ 0
+TODO: IS THE HMC576 STABLE INTO THIS LOAD?
 $EndSCHEMATC

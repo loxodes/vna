@@ -1,4 +1,4 @@
-EESchema Schematic File Version 5
+EESchema Schematic File Version 4
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -12,11 +12,6 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
-Comment5 ""
-Comment6 ""
-Comment7 ""
-Comment8 ""
-Comment9 ""
 $EndDescr
 $Comp
 L vna_mm:MAAM-011101 U501
@@ -264,4 +259,6 @@ Wire Wire Line
 	3300 4950 3300 5000
 Text HLabel 6050 2700 1    50   Input ~ 0
 MIDBAND_VAMP
+Text Notes 5450 4650 0    50   ~ 0
+TODO: ADD FEATURE TO MATCH SHUNT INDUCTOR?
 $EndSCHEMATC

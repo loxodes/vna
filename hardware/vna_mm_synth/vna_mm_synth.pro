@@ -1,4 +1,4 @@
-update=Wed Dec  4 22:41:15 2019
+update=12/28/2019 9:29:47 PM
 version=1
 last_client=kicad
 [cvpcb]
@@ -239,6 +239,39 @@ Enabled=0
 [pcbnew/Netclasses]
 [pcbnew/Netclasses/Default]
 Name=Default
+Clearance=0.135
+TrackWidth=0.25
+ViaDiameter=0.51
+ViaDrill=0.3
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/1]
+Name=Digital
+Clearance=0.135
+TrackWidth=0.25
+ViaDiameter=0.51
+ViaDrill=0.3
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/2]
+Name=Power
+Clearance=0.135
+TrackWidth=0.25
+ViaDiameter=0.51
+ViaDrill=0.3
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/3]
+Name=RF
 Clearance=0.135
 TrackWidth=0.25
 ViaDiameter=0.51

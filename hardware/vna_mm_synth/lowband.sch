@@ -1,4 +1,4 @@
-EESchema Schematic File Version 5
+EESchema Schematic File Version 4
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -12,23 +12,7 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
-Comment5 ""
-Comment6 ""
-Comment7 ""
-Comment8 ""
-Comment9 ""
 $EndDescr
-$Comp
-L vna_mm:MABA-011082 T401
-U 1 1 5D2A9E51
-P 3750 5000
-F 0 "T401" H 3750 5515 50  0000 C CNN
-F 1 "MABA-011082" H 3750 5424 50  0000 C CNN
-F 2 "vna_mm:transformer_3p81_3p81" H 3650 5900 50  0001 C CNN
-F 3 "https://cdn.macom.com/datasheets/MABA-011082.pdf" H 3650 5900 50  0001 C CNN
-	1    3750 5000
-	-1   0    0    -1  
-$EndComp
 $Comp
 L power:GND #PWR0403
 U 1 1 5D2AB500
@@ -319,7 +303,7 @@ U 1 1 5D2D9325
 P 8600 4900
 F 0 "U404" H 8600 5267 50  0000 C CNN
 F 1 "PAT1220-C-0DB" H 8600 5176 50  0000 C CNN
-F 2 "vna_mm:PAT0510S" H 8600 4900 50  0001 C CNN
+F 2 "RF_Converter:RF_Attenuator_Susumu_PAT1220" H 8600 4900 50  0001 C CNN
 F 3 "https://www.susumu.co.jp/common/pdf/n_catalog_partition16_en.pdf" H 8350 5150 50  0001 C CNN
 	1    8600 4900
 	1    0    0    -1  
@@ -345,10 +329,10 @@ U 1 1 5D2E3F13
 P 2500 5650
 F 0 "U402" H 2500 6017 50  0000 C CNN
 F 1 "PAT1220-C-0DB" H 2500 5926 50  0000 C CNN
-F 2 "vna_mm:PAT0510S" H 2500 5650 50  0001 C CNN
+F 2 "RF_Converter:RF_Attenuator_Susumu_PAT1220" H 2500 5650 50  0001 C CNN
 F 3 "https://www.susumu.co.jp/common/pdf/n_catalog_partition16_en.pdf" H 2250 5900 50  0001 C CNN
 	1    2500 5650
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 $Comp
 L RF:PAT1220-C-0DB U401
@@ -356,7 +340,7 @@ U 1 1 5D2F0F18
 P 2500 4650
 F 0 "U401" H 2500 5017 50  0000 C CNN
 F 1 "PAT1220-C-0DB" H 2500 4926 50  0000 C CNN
-F 2 "vna_mm:PAT0510S" H 2500 4650 50  0001 C CNN
+F 2 "RF_Converter:RF_Attenuator_Susumu_PAT1220" H 2500 4650 50  0001 C CNN
 F 3 "https://www.susumu.co.jp/common/pdf/n_catalog_partition16_en.pdf" H 2250 4900 50  0001 C CNN
 	1    2500 4650
 	1    0    0    -1  
@@ -440,4 +424,23 @@ Wire Wire Line
 Connection ~ 5900 5350
 Wire Wire Line
 	5900 5350 6000 5350
+Text Notes 1350 4150 0    50   ~ 0
+TODO: PICK LOWBAND DC BLOCKING CAP
+Text Notes 7000 4300 0    50   ~ 0
+TODO: ADD FEATURE TO MATCH BIAS TEE?
+Text Notes 5700 5850 0    50   ~ 0
+20 dBm PSAT\n15 dBm MAX IN
+Text Notes 8100 4500 0    50   ~ 0
+PAT0510S rated for 32 mW, use PAT1220!
+$Comp
+L vna_mm:MABA-011082 T401
+U 1 1 5D2A9E51
+P 3750 5000
+F 0 "T401" H 3750 5515 50  0000 C CNN
+F 1 "MABA-011082" H 3750 5424 50  0000 C CNN
+F 2 "vna_mm:transformer_3p81_3p81" H 3650 5900 50  0001 C CNN
+F 3 "https://cdn.macom.com/datasheets/MABA-011082.pdf" H 3650 5900 50  0001 C CNN
+	1    3750 5000
+	-1   0    0    -1  
+$EndComp
 $EndSCHEMATC

@@ -1,4 +1,4 @@
-EESchema Schematic File Version 5
+EESchema Schematic File Version 4
 EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
@@ -12,11 +12,6 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
-Comment5 ""
-Comment6 ""
-Comment7 ""
-Comment8 ""
-Comment9 ""
 $EndDescr
 $Comp
 L power:GND #PWR01318
@@ -36,7 +31,7 @@ L Device:CP_Small C1301
 U 1 1 5ACDBB5E
 P 1450 3000
 F 0 "C1301" H 1460 3070 50  0000 L CNN
-F 1 "220 uF" H 1460 2920 50  0000 L CNN
+F 1 "330 uF" H 1460 2920 50  0000 L CNN
 F 2 "Capacitor_SMD:CP_Elec_6.3x5.8" H 1450 3000 50  0001 C CNN
 F 3 "" H 1450 3000 50  0001 C CNN
 	1    1450 3000
@@ -451,8 +446,6 @@ Text HLabel 7600 1500 2    50   Output ~ 0
 AMP_~SYNC
 Text HLabel 7600 1600 2    50   Output ~ 0
 AMP_~CLR
-Text HLabel 7600 1700 2    50   Output ~ 0
-AMP_~LDAC
 Text HLabel 7600 1800 2    50   Output ~ 0
 AMP_SCK
 Text HLabel 7600 1900 2    50   Output ~ 0
@@ -542,7 +535,7 @@ PLL_SDO_UNBUF
 Text Label 9850 1600 2    50   ~ 0
 PLL_SDI_UNBUF
 Text Label 9850 2100 2    50   ~ 0
-PLL_SDO_UNBUF
+MAAM_VC_EN_UNBUF
 Text Label 9850 1900 2    50   ~ 0
 PLL_CSB_UNBUF
 Text Label 9850 1700 2    50   ~ 0
@@ -556,8 +549,6 @@ Wire Wire Line
 Wire Wire Line
 	7400 1600 7500 1600
 Wire Wire Line
-	7400 1700 7600 1700
-Wire Wire Line
 	7400 1800 7600 1800
 Wire Wire Line
 	7400 1900 7600 1900
@@ -569,8 +560,6 @@ Text Label 9850 2800 2    50   ~ 0
 AMP_SCK_UNBUF
 Text Label 9850 2400 2    50   ~ 0
 FILT_BANDSEL_UNBUF
-Text Label 9850 2700 2    50   ~ 0
-AMP_~LDAC~_UNBUF
 Text Label 9850 2900 2    50   ~ 0
 AMP_SDI_UNBUF
 Wire Wire Line
@@ -1036,8 +1025,6 @@ Wire Wire Line
 Connection ~ 7500 1600
 Wire Wire Line
 	7500 1600 7600 1600
-Text Label 4550 1700 2    50   ~ 0
-AMP_~LDAC~_UNBUF
 Text Label 4450 4600 2    50   ~ 0
 SW3_HIGH_SEL_UNBUF
 Wire Wire Line
@@ -1199,7 +1186,7 @@ L 74xx:74HC244 U1303
 U 1 1 5E008B8C
 P 6900 10100
 F 0 "U1303" H 6450 10900 50  0000 C CNN
-F 1 "74HC244" H 6550 10800 50  0000 C CNN
+F 1 "74AHC244" H 6550 10800 50  0000 C CNN
 F 2 "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm" H 6900 10100 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT244.pdf" H 6900 10100 50  0001 C CNN
 	1    6900 10100
@@ -1847,7 +1834,7 @@ L 74xx:74HC244 U1304
 U 1 1 5DFEC5AC
 P 6900 7400
 F 0 "U1304" H 6450 8200 50  0000 C CNN
-F 1 "74HC244" H 6550 8100 50  0000 C CNN
+F 1 "74AHC244" H 6550 8100 50  0000 C CNN
 F 2 "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm" H 6900 7400 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT244.pdf" H 6900 7400 50  0001 C CNN
 	1    6900 7400
@@ -2395,4 +2382,11 @@ Wire Wire Line
 	4450 4600 5400 4600
 Wire Wire Line
 	4950 4300 4950 5250
+NoConn ~ 9850 2300
+Text Notes 8250 2300 0    50   ~ 0
+TODO: CONNECT SOMETHING TO THIS PIN\n
+Text Notes 9850 2700 2    50   ~ 0
+TODO: CONNECT SOMETHING TO THIS PIN\n
+NoConn ~ 7400 1700
+NoConn ~ 4550 1700
 $EndSCHEMATC

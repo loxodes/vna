@@ -1,4 +1,4 @@
-EESchema Schematic File Version 5
+EESchema Schematic File Version 4
 EELAYER 30 0
 EELAYER END
 $Descr A2 23386 16535
@@ -12,11 +12,6 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
-Comment5 ""
-Comment6 ""
-Comment7 ""
-Comment8 ""
-Comment9 ""
 $EndDescr
 Text HLabel 21300 8150 2    60   Output ~ 0
 SW_RFOUT
@@ -111,7 +106,7 @@ Wire Wire Line
 	17600 7500 17600 7450
 Text Notes 17050 9310 2    60   ~ 0
 APPLY VSS AND VDD BEFORE DIGITAL INPUTS\n-2.5V and 2.5V do not need to be sequenced
-Text Notes 15550 8560 2    60   ~ 0
+Text Notes 16200 8800 2    60   ~ 0
 CTRL 3V3, RFC -> RF1\nCTRL  0V, RFC -> RF2
 $Comp
 L power:GND #PWR0729
@@ -312,8 +307,6 @@ Text HLabel 6500 6900 2    50   Output ~ 0
 X2_FEED_RFOUT
 Text Notes 1600 10100 0    50   ~ 0
 LPF, 8 GHz
-Text Notes 10300 10550 0    50   ~ 0
-SIW waveguidie cutoff filter, 18-26.5 GHz
 Wire Wire Line
 	17000 8350 17150 8350
 Wire Wire Line
@@ -1445,6 +1438,32 @@ Wire Wire Line
 	9400 6450 11700 6450
 Wire Wire Line
 	9400 6450 9400 10250
+$Comp
+L RF:PAT1220-C-0DB U705
+U 1 1 5E09900C
+P 4200 10350
+F 0 "U705" H 4200 10717 50  0000 C CNN
+F 1 "PAT1220-C-0DB" H 4200 10626 50  0000 C CNN
+F 2 "RF_Converter:RF_Attenuator_Susumu_PAT1220" H 4200 10350 50  0001 C CNN
+F 3 "https://www.susumu.co.jp/common/pdf/n_catalog_partition16_en.pdf" H 3950 10600 50  0001 C CNN
+	1    4200 10350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0148
+U 1 1 5E099013
+P 4200 10700
+F 0 "#PWR0148" H 4200 10450 50  0001 C CNN
+F 1 "GND" H 4205 10527 50  0000 C CNN
+F 2 "" H 4200 10700 50  0001 C CNN
+F 3 "" H 4200 10700 50  0001 C CNN
+	1    4200 10700
+	1    0    0    -1  
+$EndComp
 Wire Wire Line
-	3300 10250 9400 10250
+	4200 10650 4200 10700
+Wire Wire Line
+	3300 10250 3800 10250
+Wire Wire Line
+	4600 10250 9400 10250
 $EndSCHEMATC
