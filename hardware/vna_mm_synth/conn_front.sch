@@ -75,7 +75,7 @@ U 1 1 5D64149F
 P 5850 2700
 F 0 "J202" H 5950 2675 50  0000 L CNN
 F 1 "Conn_Coaxial" H 5950 2584 50  0000 L CNN
-F 2 "Connector_Coaxial:SMA_Amphenol_132203-12_Horizontal" H 5850 2700 50  0001 C CNN
+F 2 "Connector_Coaxial:SMA_Amphenol_132289_EdgeMount" H 5850 2700 50  0001 C CNN
 F 3 " ~" H 5850 2700 50  0001 C CNN
 	1    5850 2700
 	1    0    0    -1  
