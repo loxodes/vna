@@ -11,10 +11,10 @@ analyzer.configure_group(0)
 
 # trigger conditions will depend upon each other in sequence
 #analyzer.add_falling_edge_trigger("spi_test1_cs_n")
-analyzer.add_rising_edge_trigger("soc_memory_test_start")
+analyzer.add_rising_edge_trigger("soc_dac_test_csrfield_load")
 #analyzer.add_trigger(cond={"soc_videooverlaysoc_hdmi_in0_timing_payload_hsync" : 1}) 
 
-analyzer.run(offset=16, length=32)  ### CHANGE THIS TO MATCH DEPTH
+analyzer.run(offset=16, length=128)  ### CHANGE THIS TO MATCH DEPTH
 analyzer.wait_done()
 analyzer.upload()
 analyzer.save("dump.vcd")

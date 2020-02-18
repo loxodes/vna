@@ -33,6 +33,7 @@ from liteeth.phy.ecp5rgmii import LiteEthPHYRGMII
 from liteeth.mac import LiteEthMAC
 
 from memtest import MemtestCore
+from dac7563 import DAC7563Core
 
 # CRG ----------------------------------------------------------------------------------------------
 
@@ -106,16 +107,22 @@ class BaseSoC(SoCSDRAM):
 
         # add spi master, from ~/repos/litex/litex/litex/soc/cores
         self.add_csr("spi_test")
-        spi_test = SPIMaster(platform.request("spi_test",1), 8, int(75e6), int(15e6))
+        spi_test = SPIMaster(platform.request("spi_test",1), 8, sys_clk_freq, int(sys_clk_freq/5))
         self.submodules.spi_test = spi_test
+
+    
+        self.add_csr("dac_test")
+        dac_test = DAC7563Core(platform.request("dac_test",1))
+        self.submodules.dac_test = dac_test
+
+
 
         # https://github.com/timvideos/litex-buildenv/wiki/LiteX-for-Hardware-Engineers litescope bridge
         # added io to platform, serial_wb
-        self.submodules.bridge = UARTWishboneBridge(platform.request("serial_wb",1), int(75e6), baudrate=115200)
+        self.submodules.bridge = UARTWishboneBridge(platform.request("serial_wb",1), sys_clk_freq, baudrate=115200)
         self.add_wb_master(self.bridge.wishbone)
         
 
-    
         # DDR3 SDRAM -------------------------------------------------------------------------------
         if not self.integrated_main_ram_size:
             print("creating DDR3 SDRAM")
@@ -137,14 +144,17 @@ class BaseSoC(SoCSDRAM):
             # litescope, track spi
             self.add_csr("analyzer")
             analyzer_signals = [
-                memory_test.dma.sink.valid,
-                memory_test._ready.status,
-                memory_test._start.fields.start,
-                memory_test.dma.sink.address,
-            #    memory_test.dma.sink.data,
+                dac_test.dac.dac_load,
+                dac_test._load.fields.load,
+                dac_test.dac.load,
+                dac_test.dac.dac_cs,
+                dac_test.dac.dac_sck,
+                dac_test.dac.dac_sdi,
+                dac_test.dac.dac_ready,
+                dac_test.dac.state,
             ]
 
-            analyzer_depth = 32 # samples
+            analyzer_depth = 256 # samples
             analyzer_clock_domain = "sys"
             self.submodules.analyzer = LiteScopeAnalyzer(analyzer_signals,
                                                          analyzer_depth,

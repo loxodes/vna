@@ -89,6 +89,7 @@ static void help(void)
 	puts("reboot                          - reboot CPU");
 	puts("memory                          - memory test");
 	puts("coremem                         - memory core test");
+	puts("dac                             - dac core test");
 	puts("spi                             - spi test");
 	puts("led                             - led test");
 }
@@ -174,6 +175,25 @@ static void memory_test(void)
 	printf("test complete!\n");
 }
 
+static void dac_test(void)
+{
+	uint16_t i,j;
+	dac_test_output_en_write(0xff);
+	printf("starting dac sweep!\n");
+	for(j=0;j<32;j++) {
+	for(i=0;i<4096;i++) {
+		printf("step %d!\n", i);
+		dac_test_value_a_write(i);
+		dac_test_value_b_write(j);
+		dac_test_load_write(1);
+		busy_wait(1);
+	}
+	printf("sweep %d!\n", j);
+	}
+	printf("dac sweep complete!\n");
+
+}
+
 static void spi_test(void)
 {
 	int i;
@@ -217,6 +237,8 @@ static void console_service(void)
 		memory_test();
 	else if(strcmp(token, "coremem") == 0)
 		core_memory_test();
+	else if(strcmp(token, "dac") == 0)
+		dac_test();
 	else if(strcmp(token, "led") == 0)
 		led_test();
 	else if(strcmp(token, "spi") == 0)
