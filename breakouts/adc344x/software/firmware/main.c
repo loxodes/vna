@@ -90,6 +90,7 @@ static void help(void)
 	puts("memory                          - memory test");
 	puts("coremem                         - memory core test");
 	puts("dac                             - dac core test");
+	puts("adc                             - adc core test");
 	puts("spi                             - spi test");
 	puts("led                             - led test");
 }
@@ -97,6 +98,59 @@ static void help(void)
 static void reboot(void)
 {
 //asm("call r0");
+}
+
+static void adc_test(void)
+{
+	static unsigned int test_offset_bytes = 1048576 + 1024 * 1024;
+	volatile unsigned int *dram_array = (unsigned int *)(MAIN_RAM_BASE + test_offset_bytes);
+	uint32_t j;
+	
+	while(1) {
+		// set _base
+		adc_test_base_write(test_offset_bytes);
+		memory_test_offset_write(0);
+
+		printf("starting adc test burst, waiting for ready\n");
+		// wait for ready, then start adc
+		while(!adc_test_ready_read()) {
+			busy_wait(1);
+		}
+
+		printf("start pulse written, waiting for ready\n");
+		adc_test_start_write(1);
+		
+		// wait for ready, then start adc
+		while(!adc_test_ready_read()) {
+			busy_wait(1);
+		}
+		printf("burst complete, reading back samples\n");
+
+		for(j=0; j<1024; j+= 1) {
+			printf("memory[%d] = %u\n", j, dram_array[j*4+3]);
+		}
+
+		printf("finished reading memory\n");
+
+		busy_wait(50);
+	}
+
+	/*
+	// set memory[address] = value
+	printf("memory value is %u!\n", dram_array[0]);
+	printf("writing 0 to memory\n");
+	memory_test_addr_write(test_offset / 128);
+	memory_test_start_write(1);
+	busy_wait(1);
+	printf("waiting..\n");
+	printf("memory value is %u!\n", dram_array[0]);
+	printf("writing 1 to memory\n");
+	memory_test_addr_write(test_offset / 128);
+	memory_test_start_write(1);
+	busy_wait(1);
+	printf("waiting..\n");
+	printf("memory value is %u!\n", dram_array[0]);
+	*/
 }
 
 static void core_memory_test(void)
@@ -239,6 +293,8 @@ static void console_service(void)
 		core_memory_test();
 	else if(strcmp(token, "dac") == 0)
 		dac_test();
+	else if(strcmp(token, "adc") == 0)
+		adc_test();
 	else if(strcmp(token, "led") == 0)
 		led_test();
 	else if(strcmp(token, "spi") == 0)

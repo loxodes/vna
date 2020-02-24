@@ -34,6 +34,7 @@ from liteeth.mac import LiteEthMAC
 
 from memtest import MemtestCore
 from dac7563 import DAC7563Core
+from ad7984 import AD7984Core 
 
 # CRG ----------------------------------------------------------------------------------------------
 
@@ -115,8 +116,6 @@ class BaseSoC(SoCSDRAM):
         dac_test = DAC7563Core(platform.request("dac_test",1))
         self.submodules.dac_test = dac_test
 
-
-
         # https://github.com/timvideos/litex-buildenv/wiki/LiteX-for-Hardware-Engineers litescope bridge
         # added io to platform, serial_wb
         self.submodules.bridge = UARTWishboneBridge(platform.request("serial_wb",1), sys_clk_freq, baudrate=115200)
@@ -140,7 +139,11 @@ class BaseSoC(SoCSDRAM):
             self.add_csr("memory_test", allow_user_defined=True)
             memory_test = MemtestCore(self.sdram.crossbar.get_port())
             self.submodules.memory_test = memory_test
-   
+  
+            self.add_csr("adc_test")
+            adc_test = AD7984Core(self.sdram.crossbar.get_port(), platform.request("adc_test",1))
+            self.submodules.adc_test = adc_test
+      
             # litescope, track spi
             self.add_csr("analyzer")
             analyzer_signals = [

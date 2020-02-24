@@ -2,8 +2,6 @@ from migen import *
 from migen.genlib.cdc import MultiReg
 
 from litex.soc.interconnect.csr import *
-from litedram.frontend.dma import LiteDRAMDMAWriter
-from litedram.common import LiteDRAMNativePort
 
 from dac import DacController
 

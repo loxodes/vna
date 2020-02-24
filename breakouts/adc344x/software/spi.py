@@ -59,45 +59,89 @@ class _SPI_TX_Master(Module):
                 NextState("DATA_CLKH")
             )
         )
-
-        spifsm.act("SETUP",
-            self.cs.eq(0),
-            self.sck.eq(1),
-            If(self.spi_strobe == 0,
-                NextState("DATA_CLKH")
-            )
-        )
-
-        spifsm.act("DATA_CLKH",
-            self.cs.eq(0),
-            self.sck.eq(1),
-            If(self.spi_strobe == 0,
-                NextState("DATA_CLKL")
-            )
-        )
-
-        spifsm.act("DATA_CLKL",
-            self.cs.eq(0),
-            self.sck.eq(0),
-            If(self.spi_strobe == 0,
-                NextValue(self.data_reg, self.data_reg >> 1),
-                NextValue(self.bit_count, self.bit_count +1),
-                If(self.bit_count != width - 1,
+        
+        if not rising_data:
+            spifsm.act("SETUP",
+                self.cs.eq(0),
+                self.sck.eq(1),
+                If(self.spi_strobe == 0,
                     NextState("DATA_CLKH")
-                ).Else(
-                    NextState("POST")
                 )
             )
 
-        )
-
-        spifsm.act("POST",
-            self.cs.eq(1),
-            self.sck.eq(0),
-            If(self.spi_strobe == 0,
-                NextState("INIT")
+            spifsm.act("DATA_CLKH",
+                self.cs.eq(0),
+                self.sck.eq(1),
+                If(self.spi_strobe == 0,
+                    NextState("DATA_CLKL")
+                )
             )
-        )
+
+            spifsm.act("DATA_CLKL",
+                self.cs.eq(0),
+                self.sck.eq(0),
+                If(self.spi_strobe == 0,
+                    NextValue(self.data_reg, self.data_reg >> 1),
+                    NextValue(self.bit_count, self.bit_count +1),
+                    If(self.bit_count != width - 1,
+                        NextState("DATA_CLKH")
+                    ).Else(
+                        NextState("POST")
+                    )
+                )
+
+            )
+
+            spifsm.act("POST",
+                self.cs.eq(1),
+                self.sck.eq(0),
+                If(self.spi_strobe == 0,
+                    NextState("INIT")
+                )
+            )
+        else:
+            spifsm.act("SETUP",
+                self.cs.eq(0),
+                self.sck.eq(0),
+                If(self.spi_strobe == 0,
+                    NextState("DATA_CLKH")
+                )
+            )
+
+            spifsm.act("DATA_CLKH",
+                self.cs.eq(0),
+                self.sck.eq(1),
+
+                If(self.spi_strobe == 0,
+                    NextValue(self.data_reg, self.data_reg >> 1),
+                    NextValue(self.bit_count, self.bit_count +1),
+                    If(self.bit_count != width - 1,
+                        NextState("DATA_CLKL")
+                    ).Else(
+                        NextState("POST")
+                    )
+                )
+
+            )
+
+            spifsm.act("DATA_CLKL",
+                self.cs.eq(0),
+                self.sck.eq(0),
+                If(self.spi_strobe == 0,
+                    NextState("DATA_CLKH"),
+                )
+
+            )
+
+
+            spifsm.act("POST",
+                self.cs.eq(0),
+                self.sck.eq(1),
+                If(self.spi_strobe == 0,
+                    NextState("INIT")
+                )
+            )
+
 
 def spi_test(dut):
     yield dut.data_in.eq(0x33)
