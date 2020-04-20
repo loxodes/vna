@@ -1,0 +1,51 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A3 16535 11693
+encoding utf-8
+Sheet 1 4
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Sheet
+S 10100 5250 1650 4050
+U 5E9D7371
+F0 "adc" 50
+F1 "adc.sch" 50
+F2 "IN_A_P" I L 10100 6100 50 
+F3 "IN_A_M" I L 10100 6400 50 
+F4 "IN_B_M" I L 10100 8000 50 
+F5 "IN_B_P" I L 10100 7700 50 
+F6 "VCM" I L 10100 7050 50 
+F7 "CLK_M" I L 10100 8700 50 
+F8 "CLK_P" I L 10100 8550 50 
+F9 "SYSREF_M" I L 10100 8900 50 
+F10 "SYSREF_P" I L 10100 9050 50 
+$EndSheet
+$Sheet
+S 7000 5600 2700 1250
+U 5E9D5B60
+F0 "input_match_A" 50
+F1 "adc_frontend_A.sch" 50
+F2 "VCM" I R 9700 6250 50 
+F3 "OUT_P" O R 9700 6100 50 
+F4 "OUT_M" O R 9700 6400 50 
+F5 "IN_P" I L 7000 6100 50 
+$EndSheet
+$Sheet
+S 7000 7200 2700 1250
+U 5E9E6BF0
+F0 "input_match_b" 50
+F1 "adc_frontend_A.sch" 50
+F2 "VCM" I R 9700 7850 50 
+F3 "OUT_P" O R 9700 7700 50 
+F4 "OUT_M" O R 9700 8000 50 
+F5 "IN_P" I L 7000 7700 50 
+$EndSheet
+$EndSCHEMATC
