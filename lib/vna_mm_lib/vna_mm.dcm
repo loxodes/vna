@@ -6,6 +6,12 @@ K SPDT RF Relay
 F https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-98000&DocType=SS&DocLang=EN
 $ENDCMP
 #
+$CMP ADC322x
+D Dual-Channel, 12-Bit, 25-MSPS to 125-MSPS, Analog-to-Digital Converters
+K ADC
+F http://www.ti.com/lit/ds/symlink/adc3222.pdf
+$ENDCMP
+#
 $CMP ADMV8416
 D 7 GHz to 16 GHz, Tunable Band-Pass Filter
 K Filter

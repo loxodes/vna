@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name gkl_housings_bga)(type KiCad)(uri C:/Users/Jon/Documents/GitHub/gsd-kicad-libs/gkl_housings_bga.pretty)(options "")(descr ""))
+)
