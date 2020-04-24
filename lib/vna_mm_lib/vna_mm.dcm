@@ -12,6 +12,12 @@ K ADC
 F http://www.ti.com/lit/ds/symlink/adc3222.pdf
 $ENDCMP
 #
+$CMP ADM7170
+D 6.5 V, 500 mA, Ultralow Noise, High PSRR, Fast Transient Response CMOS LDO
+K LDO
+F https://www.analog.com/media/en/technical-documentation/data-sheets/ADM7170.pdf
+$ENDCMP
+#
 $CMP ADMV8416
 D 7 GHz to 16 GHz, Tunable Band-Pass Filter
 K Filter

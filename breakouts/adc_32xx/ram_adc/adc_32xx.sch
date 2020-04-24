@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 1 4
+Sheet 1 5
 Title ""
 Date ""
 Rev ""
@@ -23,10 +23,7 @@ F3 "IN_A_M" I L 10100 6400 50
 F4 "IN_B_M" I L 10100 8000 50 
 F5 "IN_B_P" I L 10100 7700 50 
 F6 "VCM" I L 10100 7050 50 
-F7 "CLK_M" I L 10100 8700 50 
-F8 "CLK_P" I L 10100 8550 50 
-F9 "SYSREF_M" I L 10100 8900 50 
-F10 "SYSREF_P" I L 10100 9050 50 
+F7 "EN" O L 10100 9200 50 
 $EndSheet
 $Sheet
 S 7000 5600 2700 1250
@@ -36,7 +33,6 @@ F1 "adc_frontend_A.sch" 50
 F2 "VCM" I R 9700 6250 50 
 F3 "OUT_P" O R 9700 6100 50 
 F4 "OUT_M" O R 9700 6400 50 
-F5 "IN_P" I L 7000 6100 50 
 $EndSheet
 $Sheet
 S 7000 7200 2700 1250
@@ -46,6 +42,34 @@ F1 "adc_frontend_A.sch" 50
 F2 "VCM" I R 9700 7850 50 
 F3 "OUT_P" O R 9700 7700 50 
 F4 "OUT_M" O R 9700 8000 50 
-F5 "IN_P" I L 7000 7700 50 
 $EndSheet
+Wire Wire Line
+	9700 6100 10100 6100
+Wire Wire Line
+	9700 6400 10100 6400
+Wire Wire Line
+	9700 7700 10100 7700
+Wire Wire Line
+	9700 8000 10100 8000
+Wire Wire Line
+	9700 7850 9750 7850
+Text Label 9750 7850 0    50   ~ 0
+VCM
+Wire Wire Line
+	9700 6250 9800 6250
+Text Label 9800 6250 0    50   ~ 0
+VCM
+Text Label 10000 7050 2    50   ~ 0
+VCM
+Wire Wire Line
+	10000 7050 10100 7050
+$Sheet
+S 7000 9000 2650 900 
+U 5ED11961
+F0 "power" 50
+F1 "power.sch" 50
+F2 "EN" I R 9650 9200 50 
+$EndSheet
+Wire Wire Line
+	10100 9200 9650 9200
 $EndSCHEMATC
