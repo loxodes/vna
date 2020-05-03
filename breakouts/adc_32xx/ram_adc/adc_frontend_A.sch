@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 5
+Sheet 2 5
 Title ""
 Date ""
 Rev ""
@@ -18,7 +18,7 @@ VCM
 Text HLabel 8850 2900 2    50   Output ~ 0
 OUT_P
 Text HLabel 8850 3900 2    50   Output ~ 0
-OUT_M
+OUT_N
 Wire Wire Line
 	1150 3200 1350 3200
 $Comp
@@ -770,7 +770,7 @@ F 1 "Conn_Coaxial" V 833 3300 50  0000 L CNN
 F 2 "vna_footprints:732512200_SMA" H 950 3200 50  0001 C CNN
 F 3 " ~" H 950 3200 50  0001 C CNN
 	1    950  3200
-	0    -1   -1   0   
+	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	950  3400 950  3500

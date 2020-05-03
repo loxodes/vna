@@ -1,4 +1,4 @@
-update=4/23/2020 10:46:04 PM
+update=5/2/2020 5:24:23 PM
 version=1
 last_client=kicad
 [general]
@@ -39,6 +39,8 @@ MinMicroViaDiameter=0.2
 MinMicroViaDrill=0.09999999999999999
 MinHoleToHole=0.25
 TrackWidth1=0.15
+TrackWidth2=0.2
+TrackWidth3=0.35
 ViaDiameter1=0.56
 ViaDrill1=0.3
 dPairWidth1=0.2
@@ -245,4 +247,15 @@ uViaDiameter=0.3
 uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/1]
+Name=LVDS
+Clearance=0.127
+TrackWidth=0.3048
+ViaDiameter=0.56
+ViaDrill=0.3
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.3048
+dPairGap=0.1524
 dPairViaGap=0.25

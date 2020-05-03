@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 5
+Sheet 5 5
 Title ""
 Date ""
 Rev ""
@@ -75,9 +75,9 @@ $EndComp
 Text HLabel 2550 2550 0    50   Input ~ 0
 IN_A_P
 Text HLabel 2550 2650 0    50   Input ~ 0
-IN_A_M
+IN_A_N
 Text HLabel 2550 3000 0    50   Input ~ 0
-IN_B_M
+IN_B_N
 Text HLabel 2550 2900 0    50   Input ~ 0
 IN_B_P
 Text HLabel 2550 3300 0    50   Input ~ 0
@@ -739,29 +739,29 @@ Text Label 5600 4100 0    50   ~ 0
 DA0_N
 Wire Wire Line
 	5600 4100 5500 4100
-Text Label 8500 2250 2    50   ~ 0
-DB1_P
-Text Label 9500 2250 0    50   ~ 0
-DB1_N
-Text Label 8500 2450 2    50   ~ 0
-DB0_P
-Text Label 9500 2450 0    50   ~ 0
-DB0_N
-Text Label 8500 2650 2    50   ~ 0
-FCLK_P
-Text Label 9500 2650 0    50   ~ 0
-FCLK_N
-Text Label 8500 2850 2    50   ~ 0
-DCLK_P
-Text Label 9500 2850 0    50   ~ 0
-DCLK_N
-Text Label 8500 3050 2    50   ~ 0
-DA1_P
-Text Label 9500 3050 0    50   ~ 0
-DA1_N
 Text Label 8500 3250 2    50   ~ 0
-DA0_P
+DB1_P
 Text Label 9500 3250 0    50   ~ 0
+DB1_N
+Text Label 8500 3050 2    50   ~ 0
+DB0_P
+Text Label 9500 3050 0    50   ~ 0
+DB0_N
+Text Label 8500 2850 2    50   ~ 0
+FCLK_P
+Text Label 9500 2850 0    50   ~ 0
+FCLK_N
+Text Label 8500 2650 2    50   ~ 0
+DCLK_P
+Text Label 9500 2650 0    50   ~ 0
+DCLK_N
+Text Label 8500 2450 2    50   ~ 0
+DA1_P
+Text Label 9500 2450 0    50   ~ 0
+DA1_N
+Text Label 8500 2250 2    50   ~ 0
+DA0_P
+Text Label 9500 2250 0    50   ~ 0
 DA0_N
 Wire Wire Line
 	8750 2250 8500 2250
@@ -816,9 +816,9 @@ SYSREF_N
 Wire Wire Line
 	3100 3900 3200 3900
 Text Label 8500 3450 2    50   ~ 0
-CLK_P_FPGA
+CLK_FPGA_P
 Text Label 9500 3450 0    50   ~ 0
-CLK_N_FPGA
+CLK_FPGA_N
 Text Label 8500 3650 2    50   ~ 0
 SYSREF_P
 Text Label 9500 3650 0    50   ~ 0
@@ -1145,14 +1145,8 @@ Wire Wire Line
 	4700 1000 4700 1050
 Wire Wire Line
 	4700 750  4700 800 
-Text Label 6300 5600 0    50   ~ 0
-CLK_ADC_P
-Text Label 6300 6700 0    50   ~ 0
-CLK_ADC_N
 Text Label 5400 6700 2    50   ~ 0
-CLK_FPGA_P
-Text Label 5200 5600 2    50   ~ 0
-CLK_FPGA_P
+CLK_FPGA_N
 $Comp
 L Device:R_Small R204
 U 1 1 5EA27E70
@@ -1204,7 +1198,7 @@ F 1 "Conn_Coaxial" V 5033 6050 50  0000 L CNN
 F 2 "vna_footprints:732512200_SMA" H 5150 5950 50  0001 C CNN
 F 3 " ~" H 5150 5950 50  0001 C CNN
 	1    5150 5950
-	0    -1   -1   0   
+	-1   0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR?
@@ -1276,7 +1270,7 @@ F 1 "Conn_Coaxial" V 4983 7150 50  0000 L CNN
 F 2 "vna_footprints:732512200_SMA" H 5100 7050 50  0001 C CNN
 F 3 " ~" H 5100 7050 50  0001 C CNN
 	1    5100 7050
-	0    -1   -1   0   
+	-1   0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR?
@@ -1464,4 +1458,70 @@ Wire Wire Line
 	1350 5900 1350 5800
 Wire Wire Line
 	1450 5800 1350 5800
+$Comp
+L Device:C_Small C220
+U 1 1 5EBA28B5
+P 8000 1600
+F 0 "C220" H 8092 1646 50  0000 L CNN
+F 1 "100 nF" H 8092 1555 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 8000 1600 50  0001 C CNN
+F 3 "~" H 8000 1600 50  0001 C CNN
+	1    8000 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5EBA28BB
+P 8000 1750
+AR Path="/5EBA28BB" Ref="#PWR?"  Part="1" 
+AR Path="/5E9D7371/5EBA28BB" Ref="#PWR0102"  Part="1" 
+F 0 "#PWR0102" H 8000 1500 50  0001 C CNN
+F 1 "GND" H 8005 1577 50  0000 C CNN
+F 2 "" H 8000 1750 50  0001 C CNN
+F 3 "" H 8000 1750 50  0001 C CNN
+	1    8000 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8000 1700 8000 1750
+Wire Wire Line
+	8000 1450 8000 1500
+Wire Wire Line
+	7550 1450 8000 1450
+$Comp
+L Device:C_Small C221
+U 1 1 5EBB3C4B
+P 8450 1600
+F 0 "C221" H 8542 1646 50  0000 L CNN
+F 1 "100 nF" H 8542 1555 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 8450 1600 50  0001 C CNN
+F 3 "~" H 8450 1600 50  0001 C CNN
+	1    8450 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5EBB3C51
+P 8450 1750
+AR Path="/5EBB3C51" Ref="#PWR?"  Part="1" 
+AR Path="/5E9D7371/5EBB3C51" Ref="#PWR0103"  Part="1" 
+F 0 "#PWR0103" H 8450 1500 50  0001 C CNN
+F 1 "GND" H 8455 1577 50  0000 C CNN
+F 2 "" H 8450 1750 50  0001 C CNN
+F 3 "" H 8450 1750 50  0001 C CNN
+	1    8450 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8450 1700 8450 1750
+Wire Wire Line
+	8450 1450 8450 1500
+Wire Wire Line
+	8000 1450 8450 1450
+Text Label 5200 5600 2    50   ~ 0
+CLK_FPGA_P
+Text Label 6300 5600 0    50   ~ 0
+CLK_ADC_P
+Text Label 6300 6700 0    50   ~ 0
+CLK_ADC_N
 $EndSCHEMATC
