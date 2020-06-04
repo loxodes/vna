@@ -1,4 +1,4 @@
-BUILD_DIR=/home/jtklein/repos/vna/breakouts/adc_32xx/software/soc_basesoc_ecp5_evn/
+BUILD_DIR=/home/jtklein/repos/vna/breakouts/adc_32xx/software/build/ecp5_evn
 SOC_DIRECTORY=/home/jtklein/repos/litex/litex/litex/soc
 
 include $(BUILD_DIR)/software/include/generated/variables.mak

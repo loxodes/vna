@@ -9,6 +9,7 @@ from litex.soc.interconnect.csr import *
 from litedram.frontend.dma import LiteDRAMDMAWriter
 from litedram.common import LiteDRAMNativePort
 
+
 # X4 pin 10, SDI
 # X4 pin 11, SCK
 # X4 pin 12, SDO

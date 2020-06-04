@@ -286,7 +286,7 @@ Connection ~ 3250 3550
 Wire Wire Line
 	3250 3550 3350 3550
 $Comp
-L vna_mm:ADM7170 U501
+L adc_32xx-rescue:ADM7170-vna_mm U501
 U 1 1 5E9F6CDD
 P 3800 3600
 F 0 "U501" H 3800 4015 50  0000 C CNN

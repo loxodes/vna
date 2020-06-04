@@ -102,7 +102,7 @@ class BaseSoC(SoCSDRAM):
         # https://github.com/enjoy-digital/litex/issues/234
         # https://github.com/enjoy-digital/litex/blob/master/litex/soc/cores/gpio.py
         # /repos/litex/litex-boards/litex_boards/official/platforms/versa_ecp5.py
-        self.add_csr("gpio_leds", allow_user_defined=True)
+        self.add_csr("gpio_leds")
         self.submodules.gpio_leds = GPIOOut(Cat([platform.request("user_led", i) for i in range(8)]))
 
 
@@ -136,7 +136,7 @@ class BaseSoC(SoCSDRAM):
                 geom_settings   = sdram_module.geom_settings,
                 timing_settings = sdram_module.timing_settings)
 
-            self.add_csr("memory_test", allow_user_defined=True)
+            self.add_csr("memory_test")
             memory_test = MemtestCore(self.sdram.crossbar.get_port())
             self.submodules.memory_test = memory_test
   

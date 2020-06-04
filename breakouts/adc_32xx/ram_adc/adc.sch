@@ -60,7 +60,7 @@ F 3 "" H 4350 5050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L vna_mm:ADC322x U?
+L adc_32xx-rescue:ADC322x-vna_mm U?
 U 1 1 5E9D7BC3
 P 4350 3550
 AR Path="/5E9D7BC3" Ref="U?"  Part="1" 
@@ -824,7 +824,7 @@ SYSREF_P
 Text Label 9500 3650 0    50   ~ 0
 SYSREF_N
 $Comp
-L vna_mm:VEMI65AB-HCI U201
+L adc_32xx-rescue:VEMI65AB-HCI-vna_mm U201
 U 1 1 5EB301B2
 P 2200 4300
 F 0 "U201" H 2200 4815 50  0000 C CNN

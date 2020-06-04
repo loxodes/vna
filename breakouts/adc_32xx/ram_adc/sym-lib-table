@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name vna_mm)(type Legacy)(uri C:/Users/Jon/Documents/GitHub/vna/lib/vna_mm_lib/vna_mm.lib)(options "")(descr ""))
+  (lib (name adc_32xx-rescue)(type Legacy)(uri ${KIPRJMOD}/adc_32xx-rescue.lib)(options "")(descr ""))
 )

@@ -16,7 +16,9 @@ from litex.soc.integration.soc_core import *
 from litex.soc.integration.builder import *
 from litex.soc.cores.led import LedChaser
 
-from litex.soc.cores.hyperbus import HyperRAM
+from litehyperbus.core.hyperbus import HyperRAM
+
+from ddr_test import ADC3321_DMA
 
 # CRG ----------------------------------------------------------------------------------------------
 
@@ -58,10 +60,16 @@ class BaseSoC(SoCCore):
         crg = _CRG(platform, sys_clk_freq, x5_clk_freq)
         self.submodules.crg = crg
 
-        # HyperRam --------------------------------------------------------------------------------
+        # HyperRam ---------------------------------------------------------------------------------
         self.submodules.hyperram = HyperRAM(platform.request("hyperram"))
         self.add_wb_slave(self.mem_map["hyperram"], self.hyperram.bus)
         self.add_memory_region("hyperram", self.mem_map["hyperram"], 8*1024*1024)
+
+
+        # ADC --------------------------------------------------------------------------------------
+        self.submodules.adc = ADC3321_DMA()
+        self.add_wb_master(self.adc.wishbone)
+        self.add_csr("adc")
 
         # Leds -------------------------------------------------------------------------------------
         self.submodules.leds = LedChaser(
@@ -70,12 +78,11 @@ class BaseSoC(SoCCore):
         self.add_csr("leds")
 
 # Build --------------------------------------------------------------------------------------------
-
 def main():
     parser = argparse.ArgumentParser(description="LiteX SoC on ECP5 Evaluation Board")
     parser.add_argument("--build", action="store_true", help="Build bitstream")
     parser.add_argument("--load",  action="store_true", help="Load bitstream")
-    parser.add_argument("--gateware-toolchain", dest="toolchain", default="trellis", help="Gateware toolchain to use, trellis (default) or diamond")
+    parser.add_argument("--toolchain", default="trellis", help="Gateware toolchain to use, trellis (default) or diamond")
     builder_args(parser)
     soc_core_args(parser)
     parser.add_argument("--sys-clk-freq", default=60e6, help="System clock frequency (default=60MHz)")
@@ -91,7 +98,7 @@ def main():
 
     if args.load:
         prog = soc.platform.create_programmer()
-        prog.load_bitstream(os.path.join(builder.gateware_dir, "top.svf"))
+        prog.load_bitstream(os.path.join(builder.gateware_dir, soc.build_name + ".svf"))
 
 if __name__ == "__main__":
     main()
