@@ -98,63 +98,49 @@ class ADC3321_DMA(Module, AutoCSR):
         # clear out FIFO (discard FIFO_DEPTH bytes?)
 
 
-        self.comb +=[
-            self.wishbone.adr.eq(0x8000000),#self._base.storage >> 2),
-            self.wishbone.dat_w.eq(42),#self._offset.storage),
-            self.wishbone.sel.eq(15)
-        ]
- 
-
         # FIFO 
-        #adc_frontend = FIFO_Stuffer()#ADC_Frontend()
-        #self.submodules += adc_frontend
+        adc_frontend = FIFO_Stuffer()#ADC_Frontend()
+        self.submodules += adc_frontend
 
         fsm = FSM(reset_state="WAIT-FOR-TRIGGER")
         self.submodules += fsm
 
         fsm.act("WAIT-FOR-TRIGGER",
             self._ready.status.eq(1),
-#            NextValue(words_count, 0),
+            NextValue(words_count, 0),
             If(self._start.fields.start_burst,
-                NextState("WRITE_BASE"),
+                NextState("WAIT-FOR-DATA"),
             )
         )
 
-        fsm.act("WRITE_BASE",
-            self.wishbone.stb.eq(1),
-            self.wishbone.we.eq(1),
-            self.wishbone.cyc.eq(1),
-            If(self.wishbone.ack,
-                NextState("WAIT-FOR-TRIGGER")
-            ),
+        fsm.act("WAIT-FOR-DATA",
+            If(adc_frontend.fifo.readable,
+                NextState("WRITE-DATA"),
+            )
         )
 
-        # fsm.act("WAIT-FOR-DATA",
-        #     If(adc_frontend.fifo.readable,
-        #         NextState("WRITE-DATA"),
-        #     )
-        # )
+        self.comb +=[
+            self.wishbone.adr.eq((self._base.storage >> 2) + (self._offset.storage>>2) + words_count),
+            self.wishbone.dat_w.eq(adc_frontend.fifo.dout),
+            self.wishbone.sel.eq(2**(32//8)-1),
+        ]
 
-#        self.comb +=[self.wishbone.adr.eq((self._base.storage) + self._offset.storage + words_count)]
-#        self.comb +=[self.wishbone.dat_w.eq(adc_frontend.fifo.dout)]
-#        self.comb +=[self.wishbone.sel.eq(2**(32//8)-1)]
-
-        # fsm.act("WRITE-DATA",
-        #     self.wishbone.stb.eq(1), # bring high for valid request
-        #     self.wishbone.we.eq(1),  # true for write requests
-        #     self.wishbone.cyc.eq(1), # true when transaction takes place
+        fsm.act("WRITE-DATA",
+            self.wishbone.stb.eq(1), # bring high for valid request
+            self.wishbone.we.eq(1),  # true for write requests
+            self.wishbone.cyc.eq(1), # true when transaction takes place
             
-        #     If(self.wishbone.ack,
-        #         NextValue(words_count, words_count+1),
-        #         adc_frontend.fifo.re.eq(1),
-        #         If(words_count == (self._burst_size.storage-1),
-        #             NextState("WAIT-FOR-TRIGGER")
-        #         ).Else(
-        #             NextState("WAIT-FOR-DATA")
-        #         )
+            If(self.wishbone.ack,
+                NextValue(words_count, words_count+1),
+                adc_frontend.fifo.re.eq(1),
+                If(words_count == (self._burst_size.storage-1),
+                    NextState("WAIT-FOR-TRIGGER")
+                ).Else(
+                    NextState("WAIT-FOR-DATA")
+                )
 
-        #     )
-        # )
+            )
+        )
 
 def pulse_test(dut):
     yield dut.input.eq(0)
