@@ -72,7 +72,7 @@ class FIFO_Stuffer(Module):
         self.comb += fifo.din.eq(counter)
 
 class ADC3321_DMA(Module, AutoCSR):
-    def __init__(self):
+    def __init__(self, trigger_pad):
         self.wishbone = wishbone.Interface()
 
         self._start = CSRStorage(fields=[CSRField("start_burst", size=1, offset=0, pulse=True)])
@@ -82,7 +82,7 @@ class ADC3321_DMA(Module, AutoCSR):
         self._offset = CSRStorage(32) 
 
         words_count = Signal(16)
-
+        pass_count = Signal(5)
 
 
         # talk to HyperRam over wishbone?
@@ -104,6 +104,7 @@ class ADC3321_DMA(Module, AutoCSR):
 
         fsm = FSM(reset_state="WAIT-FOR-TRIGGER")
         self.submodules += fsm
+        self.comb += trigger_pad.eq(self._ready.status)
 
         fsm.act("WAIT-FOR-TRIGGER",
             self._ready.status.eq(1),
@@ -121,7 +122,7 @@ class ADC3321_DMA(Module, AutoCSR):
 
         self.comb +=[
             self.wishbone.adr.eq((self._base.storage >> 2) + (self._offset.storage>>2) + words_count),
-            self.wishbone.dat_w.eq(adc_frontend.fifo.dout),
+            self.wishbone.dat_w.eq(pass_count),#dc_frontend.fifo.dout),
             self.wishbone.sel.eq(2**(32//8)-1),
         ]
 
@@ -134,9 +135,11 @@ class ADC3321_DMA(Module, AutoCSR):
                 NextValue(words_count, words_count+1),
                 adc_frontend.fifo.re.eq(1),
                 If(words_count == (self._burst_size.storage-1),
-                    NextState("WAIT-FOR-TRIGGER")
+                    NextState("WAIT-FOR-TRIGGER"),
+                    NextValue(pass_count, pass_count+1)
                 ).Else(
-                    NextState("WAIT-FOR-DATA")
+                    NextState("WAIT-FOR-DATA"),
+
                 )
 
             )

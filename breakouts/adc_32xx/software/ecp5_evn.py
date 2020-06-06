@@ -10,13 +10,17 @@ from migen import *
 from migen.genlib.resetsync import AsyncResetSynchronizer
 
 from litex_boards.platforms import ecp5_evn
+from litex.build.tools import write_to_file
 
 from litex.soc.cores.clock import *
 from litex.soc.integration.soc_core import *
 from litex.soc.integration.builder import *
-from litex.soc.cores.led import LedChaser
+from litex.soc.integration import export
 
+from litex.soc.cores.led import LedChaser
+from litex.soc.cores.uart import UARTWishboneBridge
 from litehyperbus.core.hyperbus import HyperRAM
+from litescope import LiteScopeAnalyzer
 
 from ddr_test import ADC3321_DMA
 
@@ -67,7 +71,8 @@ class BaseSoC(SoCCore):
 
 
         # ADC --------------------------------------------------------------------------------------
-        self.submodules.adc = ADC3321_DMA()
+        trig_pad = platform.request("adc_trig", 0)
+        self.submodules.adc = ADC3321_DMA(trig_pad)
         self.add_wb_master(self.adc.wishbone)
         self.add_csr("adc")
 
@@ -76,6 +81,27 @@ class BaseSoC(SoCCore):
             pads         = Cat(*[platform.request("user_led", i) for i in range(8)]),
             sys_clk_freq = sys_clk_freq)
         self.add_csr("leds")
+
+        # Wishbone Debug
+        # added io to platform, serial_wb
+        self.submodules.bridge = UARTWishboneBridge(platform.request("serial_wb",1), sys_clk_freq, baudrate=115200)
+        self.add_wb_master(self.bridge.wishbone)
+
+
+        self.add_csr("analyzer")
+        analyzer_signals = [
+            trig_pad,
+#            self.adc.wishbone.stb,
+#            self.adc.wishbone.dat_w,
+#            self.adc.wishbone.ack,
+#            self.adc.wishbone.adr,
+        ]
+
+        analyzer_depth = 256 # samples
+        analyzer_clock_domain = "sys"
+        self.submodules.analyzer = LiteScopeAnalyzer(analyzer_signals,
+                                                     analyzer_depth,
+                                                     clock_domain=analyzer_clock_domain)
 
 # Build --------------------------------------------------------------------------------------------
 def main():
@@ -94,11 +120,15 @@ def main():
         x5_clk_freq  = args.x5_clk_freq,
         **soc_core_argdict(args))
     builder = Builder(soc, **builder_argdict(args))
-    builder.build(run=args.build)
+    vns = builder.build(run=args.build)
 
     if args.load:
         prog = soc.platform.create_programmer()
         prog.load_bitstream(os.path.join(builder.gateware_dir, soc.build_name + ".svf"))
+
+    csr_csv = export.get_csr_csv(soc.csr_regions, soc.constants)
+    write_to_file("test/csr.csv", csr_csv)
+    soc.analyzer.export_csv(vns, "test/analyzer.csv") # Export the current analyzer configuration
 
 if __name__ == "__main__":
     main()

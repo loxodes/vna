@@ -145,7 +145,7 @@ static void wishbone_test(void)
 	printf("wishbone burst test...\n");
 	volatile unsigned int *dram_array = (unsigned int *)(HYPERRAM_BASE);
 
-	adc_burst_size_write(128);
+	adc_burst_size_write(20);
 	adc_base_write(HYPERRAM_BASE);
 	adc_offset_write(0);
 
@@ -158,7 +158,7 @@ static void wishbone_test(void)
     }
 
 	printf("memory readback!\n");
-	for(uint16_t i=0; i<128; i++) {
+	for(uint16_t i=0; i<30; i++) {
 		printf("memory[%d]: %d\n", i, dram_array[i]);
 	}
 }
@@ -173,21 +173,22 @@ static void memory_test(void)
 
 	printf("writing memory to base %x!\n", dram_array);
 	printf("HYPERRAM_BASE is %x!\n", HYPERRAM_BASE);
-	for(i=0; i<1024; i++) {
+	for(i=0; i<500000; i++) {
 		//#printf("writing memory, %d!\n", i);
 		dram_array[i] = 0;
 	}
 
-	// printf("memory readback!\n");
-	// for(i=0; i<128; i++) {
-	// 	printf("reading memory[%d] = %d\n", i, dram_array[i]);
-	// 	if(dram_array[i] == i) {
-	// 	}
-	// 	else {
-	// 		printf("pattern mismatch!, read %d expected %d\n", dram_array[i], i*4);
-	// 	}
+	printf("memory readback!\n");
+	for(i=0; i<500000; i++) {
+		// 	printf("reading memory[%d] = %d\n", i, dram_array[i]);
+		if(dram_array[i] == 0) {
+			;
+		}
+		else {
+			printf("pattern mismatch!, read %d expected %d\n", dram_array[i], i*4);
+		}
 
-	// }
+	}
 	printf("test complete!\n");
 }
 
