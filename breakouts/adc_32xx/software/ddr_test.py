@@ -81,14 +81,9 @@ class ADC3321_DMA(Module, AutoCSR):
         self._base = CSRStorage(32)
         self._offset = CSRStorage(32) 
 
+        delay_count = Signal(8)
         words_count = Signal(16)
         pass_count = Signal(5)
-
-
-        # talk to HyperRam over wishbone?
-        # https://lab.whitequark.org/notes/2016-10-19/implementing-a-simple-soc-in-migen/#digression-the-wishbone-bus
-        # https://zipcpu.com/zipcpu/2017/05/29/simple-wishbone.html
-        
         
         # set up clock domains for FIFO input/output
         # set up PHY
@@ -104,26 +99,29 @@ class ADC3321_DMA(Module, AutoCSR):
 
         fsm = FSM(reset_state="WAIT-FOR-TRIGGER")
         self.submodules += fsm
-        self.comb += trigger_pad.eq(self._ready.status)
+        self.comb += trigger_pad.eq(words_count==15)
 
         fsm.act("WAIT-FOR-TRIGGER",
             self._ready.status.eq(1),
             NextValue(words_count, 0),
             If(self._start.fields.start_burst,
                 NextState("WAIT-FOR-DATA"),
+                NextValue(delay_count, 1),
             )
         )
 
         fsm.act("WAIT-FOR-DATA",
-            If(adc_frontend.fifo.readable,
+            NextValue(delay_count, delay_count-1),
+#            If(adc_frontend.fifo.readable,
+            If(delay_count == 0,
                 NextState("WRITE-DATA"),
             )
-        )
+        )  
 
         self.comb +=[
             self.wishbone.adr.eq((self._base.storage >> 2) + (self._offset.storage>>2) + words_count),
             self.wishbone.dat_w.eq(pass_count),#dc_frontend.fifo.dout),
-            self.wishbone.sel.eq(2**(32//8)-1),
+            self.wishbone.sel.eq(0b1111),
         ]
 
         fsm.act("WRITE-DATA",
@@ -139,6 +137,7 @@ class ADC3321_DMA(Module, AutoCSR):
                     NextValue(pass_count, pass_count+1)
                 ).Else(
                     NextState("WAIT-FOR-DATA"),
+                    NextValue(delay_count, 1),
 
                 )
 

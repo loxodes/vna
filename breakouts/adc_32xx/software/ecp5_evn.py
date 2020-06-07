@@ -66,6 +66,7 @@ class BaseSoC(SoCCore):
 
         # HyperRam ---------------------------------------------------------------------------------
         self.submodules.hyperram = HyperRAM(platform.request("hyperram"))
+        #self.submodules.hyperram = HyperRAMX2(platform.request("hyperram"))
         self.add_wb_slave(self.mem_map["hyperram"], self.hyperram.bus)
         self.add_memory_region("hyperram", self.mem_map["hyperram"], 8*1024*1024)
 
@@ -91,10 +92,14 @@ class BaseSoC(SoCCore):
         self.add_csr("analyzer")
         analyzer_signals = [
             trig_pad,
-#            self.adc.wishbone.stb,
-#            self.adc.wishbone.dat_w,
-#            self.adc.wishbone.ack,
-#            self.adc.wishbone.adr,
+            self.hyperram.bus.stb,
+            self.hyperram.bus.ack,
+            self.hyperram.bus.we,
+            self.hyperram.pads.cs_n,
+            self.hyperram.pads.clk,
+            self.hyperram.rwds_copy,
+            self.hyperram.rwds_input,
+            self.hyperram.dq_copy,
         ]
 
         analyzer_depth = 256 # samples
@@ -111,7 +116,7 @@ def main():
     parser.add_argument("--toolchain", default="trellis", help="Gateware toolchain to use, trellis (default) or diamond")
     builder_args(parser)
     soc_core_args(parser)
-    parser.add_argument("--sys-clk-freq", default=60e6, help="System clock frequency (default=60MHz)")
+    parser.add_argument("--sys-clk-freq", default=90e6, help="System clock frequency (default=60MHz)")
     parser.add_argument("--x5-clk-freq",  type=int,     help="Use X5 oscillator as system clock at the specified frequency")
     args = parser.parse_args()
 
