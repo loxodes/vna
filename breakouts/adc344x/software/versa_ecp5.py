@@ -111,7 +111,7 @@ class BaseSoC(SoCSDRAM):
         spi_test = SPIMaster(platform.request("spi_test",1), 8, sys_clk_freq, int(sys_clk_freq/5))
         self.submodules.spi_test = spi_test
 
-    
+        
         self.add_csr("dac_test")
         dac_test = DAC7563Core(platform.request("dac_test",1))
         self.submodules.dac_test = dac_test

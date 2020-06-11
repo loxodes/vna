@@ -50,6 +50,7 @@ class ADC_Frontend(Module):
         shiftreg.input.eq(self.din)
         
         # https://m-labs.hk/migen/manual/reference.html#module-migen.genlib.fifo
+        # see https://github.com/enjoy-digital/litex/blob/master/litex/build/lattice/common.py,  wrappers for DDR
         fifo = AsyncFIFO(ADC_BITS, FIFO_DEPTH)
         fifo.din.eq()
         fifo.we.eq(pulser.output)
