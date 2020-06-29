@@ -75,6 +75,7 @@ static void help(void)
 	puts("reboot                          - reboot CPU");
 	puts("memory                          - memory test");
 	puts("wishbone                        - wishbone dma test");
+	puts("adc                        	  - adc test");
 }
 
 static void reboot(void)
@@ -82,6 +83,52 @@ static void reboot(void)
   	ctrl_reset_write(1);
 }
 
+static uint32_t adc_spi_read(uint16_t addr)
+{
+	while(adc_spi_status_read() != 1 << CSR_ADC_SPI_STATUS_DONE_OFFSET) {
+		;
+	}
+
+	uint32_t spi_control_start = (24 << CSR_ADC_SPI_CONTROL_LENGTH_OFFSET) | (1 << CSR_ADC_SPI_CONTROL_START_OFFSET);
+	adc_spi_cs_write(0);
+	adc_spi_mosi_write((addr << 8) + (1 << 23) + (1 << 22));
+	adc_spi_control_write(spi_control_start);
+
+	adc_spi_cs_write(1);
+	while(adc_spi_status_read() != 1 << CSR_ADC_SPI_STATUS_DONE_OFFSET) {
+		;
+	}
+
+	uint32_t r = adc_spi_miso_read();
+	printf("recieved %x\n", r);
+
+	return r & 0xFF;
+
+}
+
+
+static void adc_spi_write(uint16_t addr, uint8_t value)
+{
+	while(adc_spi_status_read() != 1 << CSR_ADC_SPI_STATUS_DONE_OFFSET) {
+		;
+	}
+
+	uint32_t spi_control_start = (24 << CSR_ADC_SPI_CONTROL_LENGTH_OFFSET) | (1 << CSR_ADC_SPI_CONTROL_START_OFFSET);
+	adc_spi_cs_write(0);
+
+	uint32_t payload = (1 << 22) + (addr << 8) + value;
+
+	adc_spi_mosi_write(payload);
+	adc_spi_control_write(spi_control_start);
+
+	adc_spi_cs_write(1);
+
+	uint8_t r = adc_spi_read(addr);
+
+	if(r != value) {
+		printf("adc readback after write to %x failed!, expected %x got %x\n", addr, value, r);
+	}
+}
 
 static void adc_init(void)
 {
@@ -102,42 +149,69 @@ static void adc_init(void)
 	// 0x0b, default ok, normal operation (not a test pattern)
 	// 0x0e, default ok
 	// 0x0f, default ok
-	// 0x13, set to 0b00000011, low seed two wire mode (default okay for fs=25 MSPS)
+	// 0x13, default ok, >25 MSPS
 	// 0x15, default ok, enable both channels and normal operation
 	// 0x25, default ok, max LVDS swing
 	// 0x27, default ok, no sample clock division
 	// 0x41D, default ok, <100 MHz operation
 	// 0x422, default ok, chopper enabled on ch a
 	// 0x434, default ok, dithering on cha
+	adc_spi_write(0x439, 0x08);
 	// 0x439, write 0b1000 after reset for best performance on ch a
 	// 0x51D, default ok, <100 MHz operation
 	// 0x522, default ok, chopper enabled on ch b
 	// 0x534, default ok, dithering on channel a
+	//adc_spi_write(0x539, 0x08);
 	// 0x539, write 0b1000 after reset for best performance on ch b
 	// 0x608, default ok, <100 MHz operation
+
+	//adc_spi_write(0x70A, 0x01);
 	// 0x70A, 0b1, disable sysref buffer
 }
 
+
 static void adc_testpattern_en(void)
 {
-	// 0x06 to 0b00000010
-	// 0x0a to 0b00000100
-	// 0x0b to 0b01000000
+	adc_spi_write(0x06, 0x02);
+	adc_spi_write(0x0a, 0x04);
+	adc_spi_write(0x0b, 0x40);
 }
 
 static void adc_testpattern_disable(void)
 {
-	// 0x06 to 0
-	// 0x0a to 0
-	// 0x0b to 0
+	adc_spi_write(0x06, 0x00);
+	adc_spi_write(0x0a, 0x00);
+	adc_spi_write(0x0b, 0x00);
 }
 
-static void adc_capture(void)
+static void adc_test(void)
 {
 	// capture a burst, 20 MSPS, a
 	// provide a 20 MHz sample clock
 	// read in data at .. 120 MHz
 	//
+	volatile unsigned int *dram_array = (unsigned int *)(HYPERRAM_BASE);
+	adc_init();
+	return;
+	adc_testpattern_en();
+
+	adc_burst_size_write(20);
+	adc_base_write(HYPERRAM_BASE);
+	adc_offset_write(0);
+
+	adc_start_write(1 << CSR_ADC_START_START_BURST_OFFSET);
+
+	printf("waiting for ready!\n");
+    while(!adc_ready_read())
+    {
+    	;
+    }
+
+	printf("memory readback!\n");
+	for(uint16_t i=0; i<30; i++) {
+		printf("memory[%d]: %d\n", i, dram_array[i]);
+	}
+
 }
 
 static void wishbone_test(void)
@@ -208,6 +282,8 @@ static void console_service(void)
 		memory_test();
 	else if(strcmp(token, "wishbone") == 0)
 		wishbone_test();
+	else if(strcmp(token, "adc") == 0)
+		adc_test();
 	prompt();
 }
 

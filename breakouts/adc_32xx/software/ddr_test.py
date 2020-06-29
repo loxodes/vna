@@ -15,12 +15,12 @@ from migen.genlib.fifo import AsyncFIFO, SyncFIFO
 from litex.soc.interconnect import wishbone
 
 class ADC_ShiftReg(Module):
-    def __init__(self, bits=ADC_BITS):
+    def __init__(self, bits=ADC_BITS, bits_per_cycle=4):
         self.output = Signal(bits)
-        self.input = Signal(2)
+        self.input = Signal(bits_per_cycle)
         
-        self.sync += [
-            self.output.eq(Cat(self.input,self.output[:-2]))]
+        self.sync.adc_bitclk += [
+            self.output.eq(Cat(self.input,self.output[:-bits_per_cycle]))]
 
 class Pulser(Module):
     def __init__(self):
@@ -32,30 +32,104 @@ class Pulser(Module):
         self.comb += [
             self.output.eq(self.input & (self.state))
         ]
-        self.sync += [
+
+        self.sync.adc_bitclk += [
             self.state.eq(~self.input)
         ]
 
-class ADC_Frontend(Module):
+class ADC_DDR_PHY(Module):
+    def __init__(self, i_din):
+        # take in DCLK, multiply up x2
+ 
+        # GDDRX1_RX.SCLK.Centered Interface, Static Delay
+
+        # see ECP5 High-Speed I/O Interface document, Figure 5.1.
+        self.i_din = Signal()
+        self.i_clk = Signal()
+        self.i_fclk = Signal()
+
+        self.o_q = Signal(2)
+
+        din_delay = Signal()
+
+        self.specials += Instance("IDDRX1F",
+            i_SCLK = self.i_clk,
+            i_D    = din_delay,
+            i_RST  = self.i_fclk,
+            o_Q0   = self.o_q[0],
+            o_Q1   = self.o_q[1],
+        )
+
+        self.specials += Instance("DELAYG",
+            p_DEL_MODE="USER_DEFINED",
+            p_DEL_VALUE=0, # (25ps per tap)
+            i_A=self.i_din,
+            o_Z=din_delay
+        )
+
+
+class ADC_SampleBuffer(Module):
     def __init__(self, FIFO_DEPTH=1024, ADC_BITS=12):
-        self.din = Signal(2)
-        self.frame = Signal()
-        
+        self.i_din_0 = Signal(2)
+        self.i_din_1 = Signal(2) 
+
+        self.i_fclk = Signal()
+        self.i_we = Signal()
+
+        self.i_re = Signal()
+        self.o_readable = Signal()
+        self.o_dout = Signal()
+
+
         pulser = Pulser()
-        pulser.input.eq(self.frame)
+        self.comb += pulser.input.eq(self.i_fclk)
         self.submodules += pulser
-        
-        shiftreg = ADC_ShiftReg()
-        shiftreg.sync.eq(pulser.output)
-        shiftreg.input.eq(self.din)
-        
-        # https://m-labs.hk/migen/manual/reference.html#module-migen.genlib.fifo
-        # see https://github.com/enjoy-digital/litex/blob/master/litex/build/lattice/common.py,  wrappers for DDR
-        fifo = AsyncFIFO(ADC_BITS, FIFO_DEPTH)
-        fifo.din.eq()
-        fifo.we.eq(pulser.output)
-        fifo.din.eq(shiftreg.output)
+
+
+        shiftreg = ADC_ShiftReg(bits_per_cycle=4)
+        self.comb += shiftreg.input.eq(Cat(self.i_din_0, self.i_din_1))
+        self.submodules += shiftreg
+
+        # change sys to adc_dclk
+        fifo = ClockDomainsRenamer({"write": "adc_bitclk", "read": "sys"})(AsyncFIFO(ADC_BITS, FIFO_DEPTH))
+        self.comb += [
+            fifo.we.eq(self.i_we & pulser.output),
+            fifo.din.eq(shiftreg.output),
+            fifo.re.eq(self.i_re),
+            self.o_readable.eq(fifo.readable),
+            self.o_dout.eq(fifo.dout),
+        ]
         self.submodules += fifo
+
+
+        
+class ADC_Frontend(Module):
+    def __init__(self):
+        self.i_re = Signal()
+        self.i_we = Signal()
+        self.o_readable = Signal()
+        self.o_dout = Signal()
+
+        self.i_din_0 = Signal()
+        self.i_din_1 = Signal()
+        self.i_dclk = Signal()
+        self.i_fclk = Signal()
+
+        adc_phy_0 = ADC_DDR_PHY(self.i_din_0)
+        adc_phy_1 = ADC_DDR_PHY(self.i_din_1)
+
+
+        for adc_phy in [adc_phy_0, adc_phy_1]:
+            self.comb += adc_phy.i_clk.eq(self.i_dclk)
+            self.comb += adc_phy.i_fclk.eq(self.i_fclk)
+
+        self.submodules += [adc_phy_0, adc_phy_1]
+
+        adc_buffer = ADC_SampleBuffer()
+
+        self.comb += adc_buffer.i_din_0.eq(adc_phy_0.o_q)
+        self.comb += adc_buffer.i_din_1.eq(adc_phy_1.o_q)
+        self.comb += adc_buffer.i_fclk.eq(self.i_fclk)
 
 class FIFO_Stuffer(Module):
     def __init__(self):
@@ -73,7 +147,7 @@ class FIFO_Stuffer(Module):
         self.comb += fifo.din.eq(counter)
 
 class ADC3321_DMA(Module, AutoCSR):
-    def __init__(self, trigger_pad):
+    def __init__(self, adc_ctrl, adc_data):
         self.wishbone = wishbone.Interface()
 
         self._start = CSRStorage(fields=[CSRField("start_burst", size=1, offset=0, pulse=True)])
@@ -82,64 +156,81 @@ class ADC3321_DMA(Module, AutoCSR):
         self._base = CSRStorage(32)
         self._offset = CSRStorage(32) 
 
-        delay_count = Signal(8)
         words_count = Signal(16)
         pass_count = Signal(5)
         
-        # set up clock domains for FIFO input/output
-        # set up PHY
-        # set up clock input
+        self.comb += [
+            adc_ctrl.en_pwr.eq(1),
+            adc_ctrl.pdn.eq(0),
+            
+        ]
 
+
+        # TODO: Create record with inverted inputs, feed to ADC_Frontend
+        # TODO: Create clock from adc_clk
+
+        # set up clock domains for FIFO input/output
         # upon triggering,
         # clear out FIFO (discard FIFO_DEPTH bytes?)
+        
 
 
         # FIFO 
-        adc_frontend = FIFO_Stuffer()#ADC_Frontend()
+        self.adc_frontend = adc_frontend = ADC_Frontend()
         self.submodules += adc_frontend
 
-        fsm = FSM(reset_state="WAIT-FOR-TRIGGER")
-        self.submodules += fsm
-        self.comb += trigger_pad.eq(words_count==15)
+        self.comb += [
+            adc_frontend.i_fclk.eq(~adc_data.fclk),
+            adc_frontend.i_dclk.eq(ClockSignal("adc_bitclk")),
+            adc_frontend.i_din_0.eq(~adc_data.da0),
+            adc_frontend.i_din_1.eq(~adc_data.da1),
+        ]
 
+
+        fsm = FSM(reset_state="ADC_RESET")
+        self.submodules += fsm
+
+        fsm.act("ADC_RESET",
+            adc_ctrl.reset.eq(1),
+            NextState("WAIT-FOR-TRIGGER"),
+        )
+        
         fsm.act("WAIT-FOR-TRIGGER",
             self._ready.status.eq(1),
+            self.adc_frontend.i_we.eq(0),
             NextValue(words_count, 0),
             If(self._start.fields.start_burst,
                 NextState("WAIT-FOR-DATA"),
-                NextValue(delay_count, 1),
             )
         )
 
         fsm.act("WAIT-FOR-DATA",
-            NextValue(delay_count, delay_count-1),
-#            If(adc_frontend.fifo.readable,
-            If(delay_count == 0,
+            self.adc_frontend.i_we.eq(0),
+            If(adc_frontend.o_readable,
                 NextState("WRITE-DATA"),
             )
         )  
 
         self.comb +=[
             self.wishbone.adr.eq((self._base.storage >> 2) + (self._offset.storage>>2) + words_count),
-            self.wishbone.dat_w.eq(pass_count),#dc_frontend.fifo.dout),
+            self.wishbone.dat_w.eq(adc_frontend.o_dout),
             self.wishbone.sel.eq(0b1111),
         ]
 
-        fsm.act("WRITE-DATA",
+        fsm.act("WRITE-DATA",\
+            self.adc_frontend.i_we.eq(0),
             self.wishbone.stb.eq(1), # bring high for valid request
             self.wishbone.we.eq(1),  # true for write requests
             self.wishbone.cyc.eq(1), # true when transaction takes place
             
             If(self.wishbone.ack,
                 NextValue(words_count, words_count+1),
-                adc_frontend.fifo.re.eq(1),
+                adc_frontend.i_re.eq(1),
                 If(words_count == (self._burst_size.storage-1),
                     NextState("WAIT-FOR-TRIGGER"),
                     NextValue(pass_count, pass_count+1)
                 ).Else(
                     NextState("WAIT-FOR-DATA"),
-                    NextValue(delay_count, 1),
-
                 )
 
             )
@@ -198,10 +289,66 @@ def fifo_stuffer_test(dut):
     yield
     yield
 
+def c2bool(c):
+    return {"-": 1, "_": 0}[c]
 
+def adc_write_sample(dut, value):
+    # TODO: break down value to i_din_o/1
+    # see https://github.com/litex-hub/litehyperbus/blob/master/test/test_hyperbus.py for better example on how to structure testing?
+
+    yield dut.i_din_0.eq(1)
+    yield dut.i_din_1.eq(1)
+
+    adc_clk = "___--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__-"
+    fclk    = "__-_______________________________________________-_____________________"
+    we      = "___---------------------------------------------------------------------"
+    re      = "________________________________________________________________________"
+    
+    for i in range(len(adc_clk)):
+        yield dut.i_re.eq(c2bool(re[i]))
+        yield dut.i_we.eq(c2bool(we[i]))
+        yield dut.i_fclk.eq(c2bool(fclk[i]))  
+        yield       
+
+
+
+# def adc_read_sample(dut, value):
+#     pass
+#         self.i_din_0 = Signal(2)
+#         self.i_din_1 = Signal(2) 
+
+
+#         self.i_fclk = Signal()
+#         self.i_we = Signal()
+
+#         self.i_re = Signal()
+#         self.o_readable = Signal()
+#         self.o_dout = Signal()
+
+def adc_samplebuffer_test(dut):
+    yield from adc_write_sample(dut, 1)
+    yield from adc_write_sample(dut, 1)
+    yield from adc_write_sample(dut, 1)
+    yield dut.i_re.eq(1)
+    yield
+    yield
+    yield
+    yield
+    yield
+    yield
+
+    # sample_values = [0x0f, 0x0a]
+
+    # for s in sample_values:
+    #     yield from adc_sample(dut, s)
+
+    # for s in sample_values:
+    #     yield from read_sample(dut, s)
+
+    
 if __name__ == '__main__':
-    dut = FIFO_Stuffer()
-    run_simulation(dut, fifo_stuffer_test(dut), vcd_name="fifostuff.vcd")
+    dut = ADC_SampleBuffer()
+    run_simulation(dut, adc_samplebuffer_test(dut), vcd_name="adc_buffer.vcd")
     
 
 # create shift register
