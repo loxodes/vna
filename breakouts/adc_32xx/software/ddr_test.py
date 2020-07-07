@@ -19,59 +19,45 @@ class ADC_ShiftReg(Module):
         self.output = Signal(bits)
         self.input = Signal(bits_per_cycle)
         
-        self.sync.adc_bitclk += [
+        self.sync += [
             self.output.eq(Cat(self.input,self.output[:-bits_per_cycle]))]
 
 class Pulser(Module):
     def __init__(self):
         self.output = Signal(1)
         self.input = Signal(1)
-        
-        self.state = Signal()
-        
-        self.comb += [
-            self.output.eq(self.input & (self.state))
-        ]
 
-        self.sync.adc_bitclk += [
-            self.state.eq(~self.input)
-        ]
+        state  = Signal(1)
+
+        self.comb += self.output.eq(~state & self.input)
+        self.sync.adc_bitclk += state.eq(self.input)
 
 class ADC_DDR_PHY(Module):
-    def __init__(self, i_din):
-        # take in DCLK, multiply up x2
- 
+    def __init__(self, i_din, rst):
         # GDDRX1_RX.SCLK.Centered Interface, Static Delay
-
         # see ECP5 High-Speed I/O Interface document, Figure 5.1.
-        self.i_din = Signal()
-        self.i_clk = Signal()
-        self.i_fclk = Signal()
-
         self.o_q = Signal(2)
 
         din_delay = Signal()
 
         self.specials += Instance("IDDRX1F",
-            i_SCLK = self.i_clk,
+            i_SCLK = ClockSignal("adc_bitclk"),
             i_D    = din_delay,
-            i_RST  = self.i_fclk,
+            i_RST  = rst, # resets on high
             o_Q0   = self.o_q[0],
             o_Q1   = self.o_q[1],
         )
 
         self.specials += Instance("DELAYG",
             p_DEL_MODE="USER_DEFINED",
-            p_DEL_VALUE=0, # (25ps per tap)
-            i_A=self.i_din,
+            p_DEL_VALUE=0, # (25ps per tap, max 127)
+            i_A=i_din,
             o_Z=din_delay
         )
 
-
 class ADC_SampleBuffer(Module):
     def __init__(self, FIFO_DEPTH=1024, ADC_BITS=12):
-        self.i_din_0 = Signal(2)
-        self.i_din_1 = Signal(2) 
+        self.adc_dout = Signal(4)
 
         self.i_fclk = Signal()
         self.i_we = Signal()
@@ -81,16 +67,16 @@ class ADC_SampleBuffer(Module):
         self.o_dout = Signal()
 
 
-        pulser = Pulser()
+        self.pulser = pulser = Pulser()
         self.comb += pulser.input.eq(self.i_fclk)
         self.submodules += pulser
 
 
-        shiftreg = ADC_ShiftReg(bits_per_cycle=4)
-        self.comb += shiftreg.input.eq(Cat(self.i_din_0, self.i_din_1))
+        self.shiftreg = shiftreg = ClockDomainsRenamer("adc_bitclk")(ADC_ShiftReg(bits_per_cycle=4))
+        self.comb += shiftreg.input.eq(self.adc_dout)
         self.submodules += shiftreg
-
-        # change sys to adc_dclk
+        # TODO: feed fifo with incrementing counter, see FIFO stuffer?
+        # TODO: trigger off ADC WE, capture readable/adc input/etc..
         fifo = ClockDomainsRenamer({"write": "adc_bitclk", "read": "sys"})(AsyncFIFO(ADC_BITS, FIFO_DEPTH))
         self.comb += [
             fifo.we.eq(self.i_we & pulser.output),
@@ -115,21 +101,22 @@ class ADC_Frontend(Module):
         self.i_dclk = Signal()
         self.i_fclk = Signal()
 
-        adc_phy_0 = ADC_DDR_PHY(self.i_din_0)
-        adc_phy_1 = ADC_DDR_PHY(self.i_din_1)
+        self.adc_dout = Signal(4)
+
+        self.adc_buffer = adc_buffer = ADC_SampleBuffer()
+        self.submodules += adc_buffer
+        self.comb += adc_buffer.i_fclk.eq(self.i_fclk)
 
 
-        for adc_phy in [adc_phy_0, adc_phy_1]:
-            self.comb += adc_phy.i_clk.eq(self.i_dclk)
-            self.comb += adc_phy.i_fclk.eq(self.i_fclk)
-
+        # TODO: synchronize DDR PHY to clock with reset?
+        adc_phy_0 = ADC_DDR_PHY(self.i_din_0, 0)
+        adc_phy_1 = ADC_DDR_PHY(self.i_din_1, 0)
         self.submodules += [adc_phy_0, adc_phy_1]
 
-        adc_buffer = ADC_SampleBuffer()
+        # invert bits, p/n lines are swapped into differential buffer
+        self.comb += self.adc_dout.eq(Cat(~adc_phy_0.o_q, ~adc_phy_1.o_q))
+        self.comb += self.adc_buffer.adc_dout.eq(self.adc_dout)
 
-        self.comb += adc_buffer.i_din_0.eq(adc_phy_0.o_q)
-        self.comb += adc_buffer.i_din_1.eq(adc_phy_1.o_q)
-        self.comb += adc_buffer.i_fclk.eq(self.i_fclk)
 
 class FIFO_Stuffer(Module):
     def __init__(self):
@@ -165,27 +152,15 @@ class ADC3321_DMA(Module, AutoCSR):
             
         ]
 
-
-        # TODO: Create record with inverted inputs, feed to ADC_Frontend
-        # TODO: Create clock from adc_clk
-
-        # set up clock domains for FIFO input/output
-        # upon triggering,
-        # clear out FIFO (discard FIFO_DEPTH bytes?)
-        
-
-
         # FIFO 
         self.adc_frontend = adc_frontend = ADC_Frontend()
-        self.submodules += adc_frontend
-
         self.comb += [
-            adc_frontend.i_fclk.eq(~adc_data.fclk),
+            adc_frontend.i_fclk.eq(adc_data.fclk),
             adc_frontend.i_dclk.eq(ClockSignal("adc_bitclk")),
-            adc_frontend.i_din_0.eq(~adc_data.da0),
-            adc_frontend.i_din_1.eq(~adc_data.da1),
+            adc_frontend.i_din_0.eq(adc_data.da0),
+            adc_frontend.i_din_1.eq(adc_data.da1),
         ]
-
+        self.submodules += adc_frontend
 
         fsm = FSM(reset_state="ADC_RESET")
         self.submodules += fsm
@@ -205,7 +180,7 @@ class ADC3321_DMA(Module, AutoCSR):
         )
 
         fsm.act("WAIT-FOR-DATA",
-            self.adc_frontend.i_we.eq(0),
+            self.adc_frontend.i_we.eq(1),
             If(adc_frontend.o_readable,
                 NextState("WRITE-DATA"),
             )
@@ -218,7 +193,7 @@ class ADC3321_DMA(Module, AutoCSR):
         ]
 
         fsm.act("WRITE-DATA",\
-            self.adc_frontend.i_we.eq(0),
+            self.adc_frontend.i_we.eq(0), # TODO: should this be 1?
             self.wishbone.stb.eq(1), # bring high for valid request
             self.wishbone.we.eq(1),  # true for write requests
             self.wishbone.cyc.eq(1), # true when transaction takes place
@@ -347,8 +322,8 @@ def adc_samplebuffer_test(dut):
 
     
 if __name__ == '__main__':
-    dut = ADC_SampleBuffer()
-    run_simulation(dut, adc_samplebuffer_test(dut), vcd_name="adc_buffer.vcd")
+    dut = Pulser()
+    run_simulation(dut, pulse_test(dut), vcd_name="pulser_test.vcd")
     
 
 # create shift register

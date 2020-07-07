@@ -67,11 +67,9 @@ class _CRG(Module):
         self.submodules.bitclk_pll = bitclk_pll = ECP5PLL()
         platform.add_period_constraint(adc_clks.dclk, 1e9/bitclk_freq)
 
-        #self.comb += [self.cd_adc_bitclk.clk.eq(~adc_clks.dclk)]
-        #self.comb += [self.cd_adc_bitclk.rst.eq(~rst_n)]
         self.comb += bitclk_pll.reset.eq(~rst_n)
         bitclk_pll.register_clkin(adc_clks.dclk, bitclk_freq)
-        bitclk_pll.create_clkout(self.cd_adc_bitclk, bitclk_freq, phase = 180)
+        bitclk_pll.create_clkout(self.cd_adc_bitclk, bitclk_freq, phase = 200)
 
 
 # BaseSoC ------------------------------------------------------------------------------------------
@@ -86,6 +84,13 @@ class BaseSoC(SoCCore):
             ("serial_wb", 1,
                 Subsignal("rx", Pins("E9")),
                 Subsignal("tx", Pins("D9")),
+                IOStandard("LVCMOS33")
+            ),
+
+            ("debug_pins", 1,
+                Subsignal("dbg1", Pins("B6")),
+                Subsignal("dbg2", Pins("C9")),
+                Subsignal("dbg3", Pins("D10")),
                 IOStandard("LVCMOS33")
             ),
 
@@ -187,7 +192,7 @@ class BaseSoC(SoCCore):
         # ADC SPI bus ------------------------------------------------------------------------------
         # max SPI frequency is 20 MHz
         self.add_csr("adc_spi")
-        self.submodules.adc_spi = SPIMaster(platform.request("adc_spi",1), 24, sys_clk_freq, int(sys_clk_freq/20), with_csr=True)
+        self.submodules.adc_spi = SPIMaster(platform.request("adc_spi",1), 24, sys_clk_freq, int(sys_clk_freq/80), with_csr=True)
 
 
         # Wishbone Debug
@@ -196,26 +201,34 @@ class BaseSoC(SoCCore):
         self.add_wb_master(self.bridge.wishbone)
 
 
+
         self.add_csr("analyzer")
         analyzer_signals = [
-            self.hyperram.bus.stb,
-            # self.hyperram.bus.ack,
-            # self.hyperram.bus.we,
-            # self.hyperram.pads.cs_n,
-            # self.hyperram.pads.clk,
-            # self.hyperram.rwds_copy,
-            # self.hyperram.rwds_input,
-            # self.hyperram.dq_copy,
+            self.adc.adc_frontend.adc_dout,
+            self.adc.adc_frontend.adc_buffer.i_fclk,
+            self.adc.adc_frontend.adc_buffer.i_we,
+            self.adc.adc_frontend.adc_buffer.i_re,
+            self.adc.adc_frontend.adc_buffer.o_readable,
+            self.adc.adc_frontend.adc_buffer.o_dout,
+            self.adc.adc_frontend.adc_buffer.pulser.output,
+            self.adc.adc_frontend.adc_buffer.shiftreg.output,
+
         ]
 
         #t = Signal()
         #self.comb += [t.eq(clk_outputs.hr_p)]
 
         analyzer_depth = 256 # samples
-        analyzer_clock_domain = "sys"
+        analyzer_clock_domain = "adc_bitclk"
         self.submodules.analyzer = LiteScopeAnalyzer(analyzer_signals,
                                                      analyzer_depth,
                                                      clock_domain=analyzer_clock_domain)
+
+
+        # put pulser on pin..
+        debug_pins  = platform.request("debug_pins")
+        self.comb += debug_pins.dbg1.eq(self.adc.adc_frontend.adc_buffer.pulser.output)
+        
 
 # Build --------------------------------------------------------------------------------------------
 def main():

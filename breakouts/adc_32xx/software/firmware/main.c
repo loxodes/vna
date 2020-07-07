@@ -100,8 +100,6 @@ static uint32_t adc_spi_read(uint16_t addr)
 	}
 
 	uint32_t r = adc_spi_miso_read();
-	printf("recieved %x\n", r);
-
 	return r & 0xFF;
 
 }
@@ -161,11 +159,11 @@ static void adc_init(void)
 	// 0x51D, default ok, <100 MHz operation
 	// 0x522, default ok, chopper enabled on ch b
 	// 0x534, default ok, dithering on channel a
-	//adc_spi_write(0x539, 0x08);
+	adc_spi_write(0x539, 0x08);
 	// 0x539, write 0b1000 after reset for best performance on ch b
 	// 0x608, default ok, <100 MHz operation
 
-	//adc_spi_write(0x70A, 0x01);
+	adc_spi_write(0x70A, 0x01);
 	// 0x70A, 0b1, disable sysref buffer
 }
 
@@ -173,8 +171,16 @@ static void adc_init(void)
 static void adc_testpattern_en(void)
 {
 	adc_spi_write(0x06, 0x02);
-	adc_spi_write(0x0a, 0x04);
-	adc_spi_write(0x0b, 0x40);
+	adc_spi_write(0x0a, 0x09);
+	adc_spi_write(0x0b, 0x09);
+
+	// 0a
+	// 0 - normal
+	// 1 - all 0
+	// 2 - all 1
+	// 3 - alternate 010101 101010 
+	// 4 - ramp
+	// 9 - 8 point sine wave, 0, [599,2048,3496,4095,3496,2048,599]
 }
 
 static void adc_testpattern_disable(void)
@@ -192,13 +198,12 @@ static void adc_test(void)
 	//
 	volatile unsigned int *dram_array = (unsigned int *)(HYPERRAM_BASE);
 	adc_init();
-	return;
 	adc_testpattern_en();
 
 	adc_burst_size_write(20);
 	adc_base_write(HYPERRAM_BASE);
 	adc_offset_write(0);
-
+	return;
 	adc_start_write(1 << CSR_ADC_START_START_BURST_OFFSET);
 
 	printf("waiting for ready!\n");
