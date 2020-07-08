@@ -15,12 +15,12 @@ from migen.genlib.fifo import AsyncFIFO, SyncFIFO
 from litex.soc.interconnect import wishbone
 
 class ADC_ShiftReg(Module):
-    def __init__(self, bits=ADC_BITS, bits_per_cycle=4):
+    def __init__(self, bits=int(ADC_BITS/2), bits_per_cycle=2):
         self.output = Signal(bits)
         self.input = Signal(bits_per_cycle)
         
-        self.sync += [
-            self.output.eq(Cat(self.input,self.output[:-bits_per_cycle]))]
+        self.sync.adc_bitclk += [
+            self.output.eq(Cat(self.output[bits_per_cycle:], self.input))]
 
 class Pulser(Module):
     def __init__(self):
@@ -57,7 +57,8 @@ class ADC_DDR_PHY(Module):
 
 class ADC_SampleBuffer(Module):
     def __init__(self, FIFO_DEPTH=1024, ADC_BITS=12):
-        self.adc_dout = Signal(4)
+        self.adc_dout0 = Signal(2)
+        self.adc_dout1 = Signal(2)
 
         self.i_fclk = Signal()
         self.i_we = Signal()
@@ -66,27 +67,33 @@ class ADC_SampleBuffer(Module):
         self.o_readable = Signal()
         self.o_dout = Signal()
 
+        self.twos_complement = Signal(ADC_BITS)
+
 
         self.pulser = pulser = Pulser()
         self.comb += pulser.input.eq(self.i_fclk)
         self.submodules += pulser
 
 
-        self.shiftreg = shiftreg = ClockDomainsRenamer("adc_bitclk")(ADC_ShiftReg(bits_per_cycle=4))
-        self.comb += shiftreg.input.eq(self.adc_dout)
-        self.submodules += shiftreg
+        self.shiftreg0 = shiftreg0 = ADC_ShiftReg(bits_per_cycle=2)
+        self.shiftreg1 = shiftreg1 = ADC_ShiftReg(bits_per_cycle=2)
+        self.comb += shiftreg0.input.eq(self.adc_dout0)
+        self.comb += shiftreg1.input.eq(self.adc_dout1)
+        self.submodules += [shiftreg0, shiftreg1]
+
         # TODO: feed fifo with incrementing counter, see FIFO stuffer?
         # TODO: trigger off ADC WE, capture readable/adc input/etc..
-        fifo = ClockDomainsRenamer({"write": "adc_bitclk", "read": "sys"})(AsyncFIFO(ADC_BITS, FIFO_DEPTH))
+        self.fifo = fifo = ClockDomainsRenamer({"write": "adc_bitclk", "read": "sys"})(AsyncFIFO(ADC_BITS, FIFO_DEPTH))
         self.comb += [
             fifo.we.eq(self.i_we & pulser.output),
-            fifo.din.eq(shiftreg.output),
+            fifo.din.eq(Cat(shiftreg0.output, shiftreg1.output)),
             fifo.re.eq(self.i_re),
             self.o_readable.eq(fifo.readable),
             self.o_dout.eq(fifo.dout),
         ]
         self.submodules += fifo
 
+        self.comb += self.twos_complement.eq(~fifo.din + 1)
 
         
 class ADC_Frontend(Module):
@@ -101,8 +108,6 @@ class ADC_Frontend(Module):
         self.i_dclk = Signal()
         self.i_fclk = Signal()
 
-        self.adc_dout = Signal(4)
-
         self.adc_buffer = adc_buffer = ADC_SampleBuffer()
         self.submodules += adc_buffer
         self.comb += adc_buffer.i_fclk.eq(self.i_fclk)
@@ -114,9 +119,8 @@ class ADC_Frontend(Module):
         self.submodules += [adc_phy_0, adc_phy_1]
 
         # invert bits, p/n lines are swapped into differential buffer
-        self.comb += self.adc_dout.eq(Cat(~adc_phy_0.o_q, ~adc_phy_1.o_q))
-        self.comb += self.adc_buffer.adc_dout.eq(self.adc_dout)
-
+        self.comb += adc_buffer.adc_dout0.eq(~adc_phy_0.o_q)
+        self.comb += adc_buffer.adc_dout1.eq(~adc_phy_1.o_q)
 
 class FIFO_Stuffer(Module):
     def __init__(self):
@@ -323,14 +327,5 @@ def adc_samplebuffer_test(dut):
     
 if __name__ == '__main__':
     dut = Pulser()
-    run_simulation(dut, pulse_test(dut), vcd_name="pulser_test.vcd")
+    run_simulation(dut, shift_test(dut), vcd_name="pulser_test.vcd")
     
-
-# create shift register
-# inputs: d0, d1
-# load in two at a time,
-# 
-# turn frame sync to pulse
-#
-# async fifo, 12 bit, latch in shift register output on frame sync pulse
-#  

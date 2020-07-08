@@ -173,6 +173,11 @@ static void adc_testpattern_en(void)
 	adc_spi_write(0x06, 0x02);
 	adc_spi_write(0x0a, 0x09);
 	adc_spi_write(0x0b, 0x09);
+	adc_spi_write(0x09, 0x00);
+
+	// custom pattern: 0x040
+	adc_spi_write(0x0e, 0x04);
+	adc_spi_write(0x0f, 0x00);
 
 	// 0a
 	// 0 - normal
@@ -180,7 +185,9 @@ static void adc_testpattern_en(void)
 	// 2 - all 1
 	// 3 - alternate 010101 101010 
 	// 4 - ramp
-	// 9 - 8 point sine wave, 0, [599,2048,3496,4095,3496,2048,599]
+	// 5 - custom pattern (0x0AA)
+	// 9 - 8 point sine wave, [0, 599,2048,3496,4095,3496,2048,599]
+	// 10 - Deskew pattern, data are AAAh
 }
 
 static void adc_testpattern_disable(void)
@@ -199,11 +206,12 @@ static void adc_test(void)
 	volatile unsigned int *dram_array = (unsigned int *)(HYPERRAM_BASE);
 	adc_init();
 	adc_testpattern_en();
+	return;
 
 	adc_burst_size_write(20);
 	adc_base_write(HYPERRAM_BASE);
 	adc_offset_write(0);
-	return;
+
 	adc_start_write(1 << CSR_ADC_START_START_BURST_OFFSET);
 
 	printf("waiting for ready!\n");
