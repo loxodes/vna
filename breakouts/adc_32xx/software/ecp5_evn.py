@@ -206,13 +206,13 @@ class BaseSoC(SoCCore):
         analyzer_signals = [
  #           self.adc.adc_frontend.adc_buffer.adc_dout0,
  #           self.adc.adc_frontend.adc_buffer.adc_dout1,
-            self.adc.adc_frontend.adc_buffer.i_fclk,
-            self.adc.adc_frontend.adc_buffer.i_we,
-            self.adc.adc_frontend.adc_buffer.i_re,
-            self.adc.adc_frontend.adc_buffer.o_readable,
-            self.adc.adc_frontend.adc_buffer.o_dout,
-            self.adc.adc_frontend.adc_buffer.pulser.output,
-            self.adc.adc_frontend.adc_buffer.fifo.din,
+ #           self.adc.adc_frontend.adc_buffer.i_fclk,
+            self.adc.adc_frontend.i_we,
+            self.adc.adc_frontend.i_re,
+            self.adc.adc_frontend.o_readable,
+ #           self.adc.adc_frontend.adc_buffer.o_dout,
+ #           self.adc.adc_frontend.adc_buffer.pulser.output,
+ #           self.adc.adc_frontend.adc_buffer.fifo.din,
             self.adc.adc_frontend.o_dout,
         ]
 
@@ -220,7 +220,7 @@ class BaseSoC(SoCCore):
         #self.comb += [t.eq(clk_outputs.hr_p)]
 
         analyzer_depth = 512 # samples
-        analyzer_clock_domain = "adc_bitclk"
+        analyzer_clock_domain = "sys"
         self.submodules.analyzer = LiteScopeAnalyzer(analyzer_signals,
                                                      analyzer_depth,
                                                      clock_domain=analyzer_clock_domain)

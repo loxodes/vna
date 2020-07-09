@@ -173,7 +173,7 @@ static void adc_init(void)
 static void adc_testpattern_en(void)
 {
 	adc_spi_write(0x06, 0x02);
-	adc_spi_write(0x0a, 0x09);
+	adc_spi_write(0x0a, 0x04);
 	adc_spi_write(0x0b, 0x09<<4);
 
 
@@ -209,7 +209,7 @@ static void adc_test(void)
 	adc_init();
 	adc_testpattern_en();
 
-	adc_burst_size_write(15);
+	adc_burst_size_write(1024);
 	adc_base_write(HYPERRAM_BASE);
 	adc_offset_write(0);
 
@@ -222,7 +222,7 @@ static void adc_test(void)
     }
 
 	printf("memory readback!\n");
-	for(uint16_t i=0; i<15; i++) {
+	for(uint16_t i=0; i<1024; i++) {
 		printf("memory[%d]: %d\n", i, dram_array[i]);
 	}
 

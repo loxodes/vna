@@ -6,7 +6,7 @@
 # output clock domain, system clock
 
 ADC_BITS = 12
-FIFO_DEPTH = 128
+FIFO_DEPTH = 1024
 
 from migen import *
 from litex.soc.interconnect.csr import AutoCSR, CSRStorage, CSRStatus, CSRField
@@ -56,7 +56,7 @@ class ADC_DDR_PHY(Module):
         )
 
 class ADC_SampleBuffer(Module):
-    def __init__(self, FIFO_DEPTH=1024, ADC_BITS=12):
+    def __init__(self):
         self.adc_dout0 = Signal(2)
         self.adc_dout1 = Signal(2)
 
@@ -154,6 +154,7 @@ class ADC3321_DMA(Module, AutoCSR):
         self._base = CSRStorage(32)
         self._offset = CSRStorage(32) 
 
+
         words_count = Signal(16)
         pass_count = Signal(5)
         
@@ -186,8 +187,17 @@ class ADC3321_DMA(Module, AutoCSR):
             self.adc_frontend.i_we.eq(0),
             NextValue(words_count, 0),
             If(self._start.fields.start_burst,
+                NextState("CLEAR-FIFO"),
+            )
+        )
+
+        # TODO: clear fifo at end of read instead of before..
+        fsm.act("CLEAR-FIFO",
+            self.adc_frontend.i_re.eq(1),
+            If(adc_frontend.o_readable == 0,
                 NextState("WAIT-FOR-DATA"),
             )
+
         )
 
         fsm.act("WAIT-FOR-DATA",
@@ -203,8 +213,8 @@ class ADC3321_DMA(Module, AutoCSR):
             self.wishbone.sel.eq(0b1111),
         ]
 
-        fsm.act("WRITE-DATA",\
-            self.adc_frontend.i_we.eq(0), # TODO: should this be 1?
+        fsm.act("WRITE-DATA",
+            self.adc_frontend.i_we.eq(1),
             self.wishbone.stb.eq(1), # bring high for valid request
             self.wishbone.we.eq(1),  # true for write requests
             self.wishbone.cyc.eq(1), # true when transaction takes place

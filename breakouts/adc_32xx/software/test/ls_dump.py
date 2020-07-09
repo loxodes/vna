@@ -12,7 +12,7 @@ analyzer.configure_group(0)
 # trigger conditions will depend upon each other in sequence
 #analyzer.add_rising_edge_trigger("adc_i_fclk1")
 
-analyzer.add_rising_edge_trigger("adc_i_we1")
+analyzer.add_rising_edge_trigger("adc_i_we0")
 
 analyzer.run(offset=16, length=512)  ### CHANGE THIS TO MATCH DEPTH
 analyzer.wait_done()
