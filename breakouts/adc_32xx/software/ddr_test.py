@@ -65,7 +65,7 @@ class ADC_SampleBuffer(Module):
 
         self.i_re = Signal()
         self.o_readable = Signal()
-        self.o_dout = Signal()
+        self.o_dout = Signal(ADC_BITS)
 
         self.twos_complement = Signal(ADC_BITS)
 
@@ -101,7 +101,7 @@ class ADC_Frontend(Module):
         self.i_re = Signal()
         self.i_we = Signal()
         self.o_readable = Signal()
-        self.o_dout = Signal()
+        self.o_dout = Signal(ADC_BITS)
 
         self.i_din_0 = Signal()
         self.i_din_1 = Signal()
@@ -110,7 +110,14 @@ class ADC_Frontend(Module):
 
         self.adc_buffer = adc_buffer = ADC_SampleBuffer()
         self.submodules += adc_buffer
-        self.comb += adc_buffer.i_fclk.eq(self.i_fclk)
+
+        self.comb += [
+            adc_buffer.i_fclk.eq(self.i_fclk),
+            adc_buffer.i_we.eq(self.i_we),
+            adc_buffer.i_re.eq(self.i_re),
+            self.o_readable.eq(adc_buffer.fifo.readable),
+            self.o_dout.eq(adc_buffer.o_dout),
+        ]
 
 
         # TODO: synchronize DDR PHY to clock with reset?

@@ -133,7 +133,9 @@ static void adc_init(void)
 	// setup for 2-Wire (6x serialization)
 	// Fs = 25 MSPS, Fbit = 150 MHz
 	
-
+	// soft reset
+	adc_spi_write(0x06, 0x01);
+	adc_spi_write(0x06, 0x00);
 	// high pulse on reset, minimum duration 10 nanoseconds
 	// max SPI SCLK 20 MHz
 	// 0x01, default ok, dithering on both channels
@@ -142,7 +144,7 @@ static void adc_init(void)
 	// 0x05, default ok, transmit on two output wires
 	// 0x06, default ok, normal output (not a test pattern)
 	// 0x07, default ok, bit 0 is lsb
-	// 0x09, default ok, data format is twos complement 
+	adc_spi_write(0x09, 0x01); // 0x09, set data format as offset binary
 	// 0x0a, default ok, normal operation (not a test pattern)
 	// 0x0b, default ok, normal operation (not a test pattern)
 	// 0x0e, default ok
@@ -172,20 +174,20 @@ static void adc_testpattern_en(void)
 {
 	adc_spi_write(0x06, 0x02);
 	adc_spi_write(0x0a, 0x09);
-	adc_spi_write(0x0b, 0x09);
-	adc_spi_write(0x09, 0x00);
+	adc_spi_write(0x0b, 0x09<<4);
 
-	// custom pattern: 0x040
-	adc_spi_write(0x0e, 0x04);
-	adc_spi_write(0x0f, 0x00);
+
+	// custom pattern:
+	adc_spi_write(0x0e, 0x16);
+	adc_spi_write(0x0f, 0x50); // 0x05
 
 	// 0a
 	// 0 - normal
 	// 1 - all 0
 	// 2 - all 1
 	// 3 - alternate 010101 101010 
-	// 4 - ramp
-	// 5 - custom pattern (0x0AA)
+	// 4 - ramp, datasheet is incorrect, value increments every 4 samples (https://e2e.ti.com/support/data-converters/f/73/t/469423)
+	// 5 - custom pattern
 	// 9 - 8 point sine wave, [0, 599,2048,3496,4095,3496,2048,599]
 	// 10 - Deskew pattern, data are AAAh
 }
@@ -206,9 +208,8 @@ static void adc_test(void)
 	volatile unsigned int *dram_array = (unsigned int *)(HYPERRAM_BASE);
 	adc_init();
 	adc_testpattern_en();
-	return;
 
-	adc_burst_size_write(20);
+	adc_burst_size_write(15);
 	adc_base_write(HYPERRAM_BASE);
 	adc_offset_write(0);
 
@@ -221,7 +222,7 @@ static void adc_test(void)
     }
 
 	printf("memory readback!\n");
-	for(uint16_t i=0; i<30; i++) {
+	for(uint16_t i=0; i<15; i++) {
 		printf("memory[%d]: %d\n", i, dram_array[i]);
 	}
 
