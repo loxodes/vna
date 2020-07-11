@@ -76,6 +76,7 @@ class _CRG(Module):
 class BaseSoC(SoCCore):
     mem_map = {
         "hyperram" : 0x20000000,
+        "adc_sram" : 0x30000000,
     }
     mem_map.update(SoCCore.mem_map)
 
@@ -173,6 +174,8 @@ class BaseSoC(SoCCore):
         self.add_wb_slave(self.mem_map["hyperram"], self.hyperram.bus)
         self.add_memory_region("hyperram", self.mem_map["hyperram"], 8*1024*1024)
 
+        # ADC RAM
+        self.add_ram("adc_sram", self.mem_map["adc_sram"], 8*4*1024)
 
         # ADC --------------------------------------------------------------------------------------
         adc_ctrl = platform.request("adc_ctrl", 0)
@@ -246,6 +249,7 @@ def main():
     soc = BaseSoC(toolchain=args.toolchain,
         sys_clk_freq = int(float(args.sys_clk_freq)),
         x5_clk_freq  = args.x5_clk_freq,
+        bus_timeout = 1e6,
         **soc_core_argdict(args))
     builder = Builder(soc, **builder_argdict(args))
     vns = builder.build(run=args.build)

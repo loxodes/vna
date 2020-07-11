@@ -205,12 +205,12 @@ static void adc_test(void)
 	// provide a 20 MHz sample clock
 	// read in data at .. 120 MHz
 	//
-	volatile unsigned int *dram_array = (unsigned int *)(HYPERRAM_BASE);
+	volatile unsigned int *dram_array = (unsigned int *)(ADC_SRAM_BASE);
 	adc_init();
 	adc_testpattern_en();
 
 	adc_burst_size_write(1024);
-	adc_base_write(HYPERRAM_BASE);
+	adc_base_write(ADC_SRAM_BASE);
 	adc_offset_write(0);
 
 	adc_start_write(1 << CSR_ADC_START_START_BURST_OFFSET);

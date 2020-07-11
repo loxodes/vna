@@ -209,8 +209,8 @@ class ADC3321_DMA(Module, AutoCSR):
 
         self.comb +=[
             self.wishbone.adr.eq((self._base.storage >> 2) + (self._offset.storage>>2) + words_count),
-            self.wishbone.dat_w.eq(adc_frontend.o_dout),
-            self.wishbone.sel.eq(0b1111),
+            self.wishbone.dat_w.eq(pass_count),#adc_frontend.o_dout),
+            self.wishbone.sel.eq(0b1111), 
         ]
 
         fsm.act("WRITE-DATA",
@@ -219,7 +219,9 @@ class ADC3321_DMA(Module, AutoCSR):
             self.wishbone.we.eq(1),  # true for write requests
             self.wishbone.cyc.eq(1), # true when transaction takes place
             
-            If(self.wishbone.ack,
+            If(self.wishbone.err,
+                NextState("WAIT-FOR-DATA"),
+            ).Elif(self.wishbone.ack,
                 NextValue(words_count, words_count+1),
                 adc_frontend.i_re.eq(1),
                 If(words_count == (self._burst_size.storage-1),
