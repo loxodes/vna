@@ -205,11 +205,19 @@ static void adc_test(void)
 	// provide a 20 MHz sample clock
 	// read in data at .. 120 MHz
 	//
-	volatile unsigned int *dram_array = (unsigned int *)(ADC_SRAM_BASE);
-	adc_init();
-	adc_testpattern_en();
+	uint16_t burst_size = 1024;
+	volatile uint32_t *dram_array = (uint32_t *)(ADC_SRAM_BASE);
+	volatile uint32_t *hyperram_array = (uint32_t *)(HYPERRAM_BASE);
+	for(uint16_t i=0; i<burst_size; i++) {
+		if(hyperram_array[i] == -1) {
+			printf("this is a workaround..\n");
+		}
+	}
 
-	adc_burst_size_write(1024);
+	adc_init();
+	//adc_testpattern_en();
+
+	adc_burst_size_write(burst_size);
 	adc_base_write(ADC_SRAM_BASE);
 	adc_offset_write(0);
 
@@ -222,7 +230,7 @@ static void adc_test(void)
     }
 
 	printf("memory readback!\n");
-	for(uint16_t i=0; i<1024; i++) {
+	for(uint16_t i=0; i<burst_size; i++) {
 		printf("memory[%d]: %d\n", i, dram_array[i]);
 	}
 
@@ -258,16 +266,16 @@ static void memory_test(void)
 
 	int i;
 	printf("memory test...\n");
-
+	/*
 	printf("writing memory to base %x!\n", dram_array);
 	printf("HYPERRAM_BASE is %x!\n", HYPERRAM_BASE);
 	for(i=0; i<500000; i++) {
 		//#printf("writing memory, %d!\n", i);
 		dram_array[i] = 0;
 	}
-
+	*/
 	printf("memory readback!\n");
-	for(i=0; i<500000; i++) {
+	for(i=0; i<1024; i++) {
 		// 	printf("reading memory[%d] = %d\n", i, dram_array[i]);
 		if(dram_array[i] == 0) {
 			;
@@ -278,6 +286,7 @@ static void memory_test(void)
 
 	}
 	printf("test complete!\n");
+	
 }
 
 static void console_service(void)

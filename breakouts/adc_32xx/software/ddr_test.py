@@ -81,8 +81,6 @@ class ADC_SampleBuffer(Module):
         self.comb += shiftreg1.input.eq(self.adc_dout1)
         self.submodules += [shiftreg0, shiftreg1]
 
-        # TODO: feed fifo with incrementing counter, see FIFO stuffer?
-        # TODO: trigger off ADC WE, capture readable/adc input/etc..
         self.fifo = fifo = ClockDomainsRenamer({"write": "adc_bitclk", "read": "sys"})(AsyncFIFO(ADC_BITS, FIFO_DEPTH))
         self.comb += [
             fifo.we.eq(self.i_we & pulser.output),
@@ -204,19 +202,20 @@ class ADC3321_DMA(Module, AutoCSR):
             self.adc_frontend.i_we.eq(1),
             If(adc_frontend.o_readable,
                 NextState("WRITE-DATA"),
-            )
+            ),
         )  
 
         self.comb +=[
             self.wishbone.adr.eq((self._base.storage >> 2) + (self._offset.storage>>2) + words_count),
-            self.wishbone.dat_w.eq(pass_count),#adc_frontend.o_dout),
+            self.wishbone.dat_w.eq(adc_frontend.o_dout), # pass_count
             self.wishbone.sel.eq(0b1111), 
+            self.wishbone.we.eq(1),  # always writing
+
         ]
 
         fsm.act("WRITE-DATA",
             self.adc_frontend.i_we.eq(1),
             self.wishbone.stb.eq(1), # bring high for valid request
-            self.wishbone.we.eq(1),  # true for write requests
             self.wishbone.cyc.eq(1), # true when transaction takes place
             
             If(self.wishbone.err,

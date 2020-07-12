@@ -170,12 +170,13 @@ class BaseSoC(SoCCore):
 
         # HyperRam ---------------------------------------------------------------------------------
         self.submodules.hyperram = HyperRAM(platform.request("hyperram"))
-#        self.submodules.hyperram = HyperRAMX2(platform.request("hyperram"))
+        #self.submodules.hyperram = HyperRAMX2(platform.request("hyperram"))
+        
         self.add_wb_slave(self.mem_map["hyperram"], self.hyperram.bus)
         self.add_memory_region("hyperram", self.mem_map["hyperram"], 8*1024*1024)
 
         # ADC RAM
-        self.add_ram("adc_sram", self.mem_map["adc_sram"], 8*4*1024)
+        self.add_ram("adc_sram", self.mem_map["adc_sram"], 8*4*4096)
 
         # ADC --------------------------------------------------------------------------------------
         adc_ctrl = platform.request("adc_ctrl", 0)
