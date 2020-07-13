@@ -95,26 +95,6 @@ class BaseSoC(SoCCore):
                 IOStandard("LVCMOS33")
             ),
 
-            # ("adc_lvds", 0,
-            #     Subsignal("da0_p", Pins("A5")),
-            #     Subsignal("da0_n", Pins("A4")),
-            #     Subsignal("da1_p", Pins("C5")),
-            #     Subsignal("da1_n", Pins("B5")),
-            #     Subsignal("db0_p", Pins("D5")),
-            #     Subsignal("db0_n", Pins("E4")),
-            #     Subsignal("db1_p", Pins("D3")),
-            #     Subsignal("db1_n", Pins("C3")),
-            #     Subsignal("dclk_p", Pins("B4")),
-            #     Subsignal("dclk_n", Pins("C4")),
-            #     Subsignal("fclk_p", Pins("B3")),
-            #     Subsignal("fclk_n", Pins("A3")),
-            #     Subsignal("sysref_p", Pins("F5")),
-            #     Subsignal("sysref_n", Pins("E5")),
-            #     Subsignal("sclk_p", Pins("E3")),
-            #     Subsignal("sclk_n", Pins("F4")),
-            #     IOStandard("LVDS")
-            # ),
-
             ("adc_data", 0,
                 Subsignal("da0", Pins("A4")), # INVERTED
                 Subsignal("da1", Pins("B5")), # INVERTED
@@ -171,7 +151,7 @@ class BaseSoC(SoCCore):
         # HyperRam ---------------------------------------------------------------------------------
         self.submodules.hyperram = HyperRAM(platform.request("hyperram"))
         #self.submodules.hyperram = HyperRAMX2(platform.request("hyperram"))
-        
+
         self.add_wb_slave(self.mem_map["hyperram"], self.hyperram.bus)
         self.add_memory_region("hyperram", self.mem_map["hyperram"], 8*1024*1024)
 
@@ -198,14 +178,10 @@ class BaseSoC(SoCCore):
         self.add_csr("adc_spi")
         self.submodules.adc_spi = SPIMaster(platform.request("adc_spi",1), 24, sys_clk_freq, int(sys_clk_freq/80), with_csr=True)
 
-
         # Wishbone Debug
         # added io to platform, serial_wb
         self.submodules.bridge = UARTWishboneBridge(platform.request("serial_wb",1), sys_clk_freq, baudrate=115200)
         self.add_wb_master(self.bridge.wishbone)
-
-
-
         self.add_csr("analyzer")
         analyzer_signals = [
  #           self.adc.adc_frontend.adc_buffer.adc_dout0,
@@ -250,7 +226,6 @@ def main():
     soc = BaseSoC(toolchain=args.toolchain,
         sys_clk_freq = int(float(args.sys_clk_freq)),
         x5_clk_freq  = args.x5_clk_freq,
-        bus_timeout = 1e6,
         **soc_core_argdict(args))
     builder = Builder(soc, **builder_argdict(args))
     vns = builder.build(run=args.build)

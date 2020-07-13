@@ -9,6 +9,7 @@ ADC_BITS = 12
 FIFO_DEPTH = 1024
 
 from migen import *
+from litex.soc.cores.dma import WishboneDMAWriter
 from litex.soc.interconnect.csr import AutoCSR, CSRStorage, CSRStatus, CSRField
 
 from migen.genlib.fifo import AsyncFIFO, SyncFIFO
@@ -152,7 +153,6 @@ class ADC3321_DMA(Module, AutoCSR):
         self._base = CSRStorage(32)
         self._offset = CSRStorage(32) 
 
-
         words_count = Signal(16)
         pass_count = Signal(5)
         
@@ -171,6 +171,14 @@ class ADC3321_DMA(Module, AutoCSR):
             adc_frontend.i_din_1.eq(adc_data.da1),
         ]
         self.submodules += adc_frontend
+
+        self.wb_dma = wb_dma = WishboneDMAWriter(self.wishbone, endianness="big")
+        self.submodules += wb_dma
+        self.comb += [
+            self.wb_dma.sink.address.eq((self._base.storage >> 2) + (self._offset.storage>>2) + words_count),
+            self.wb_dma.sink.data.eq(adc_frontend.o_dout)
+        ]
+                   
 
         fsm = FSM(reset_state="ADC_RESET")
         self.submodules += fsm
@@ -205,22 +213,12 @@ class ADC3321_DMA(Module, AutoCSR):
             ),
         )  
 
-        self.comb +=[
-            self.wishbone.adr.eq((self._base.storage >> 2) + (self._offset.storage>>2) + words_count),
-            self.wishbone.dat_w.eq(adc_frontend.o_dout), # pass_count
-            self.wishbone.sel.eq(0b1111), 
-            self.wishbone.we.eq(1),  # always writing
-
-        ]
 
         fsm.act("WRITE-DATA",
             self.adc_frontend.i_we.eq(1),
-            self.wishbone.stb.eq(1), # bring high for valid request
-            self.wishbone.cyc.eq(1), # true when transaction takes place
-            
-            If(self.wishbone.err,
-                NextState("WAIT-FOR-DATA"),
-            ).Elif(self.wishbone.ack,
+            self.wb_dma.sink.valid.eq(1),
+
+            If(self.wb_dma.sink.ready,    
                 NextValue(words_count, words_count+1),
                 adc_frontend.i_re.eq(1),
                 If(words_count == (self._burst_size.storage-1),
@@ -232,6 +230,9 @@ class ADC3321_DMA(Module, AutoCSR):
 
             )
         )
+
+
+
 
 def pulse_test(dut):
     yield dut.input.eq(0)
