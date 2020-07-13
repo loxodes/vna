@@ -1,0 +1,168 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Connector:Conn_Coaxial J1
+U 1 1 5F0BBD12
+P 2500 3100
+F 0 "J1" H 2428 3338 50  0000 C CNN
+F 1 "UNBAL" H 2428 3247 50  0000 C CNN
+F 2 "Connector_Coaxial:SMA_Amphenol_132134_Vertical" H 2500 3100 50  0001 C CNN
+F 3 " ~" H 2500 3100 50  0001 C CNN
+	1    2500 3100
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_Coaxial J2
+U 1 1 5F0BC91E
+P 5500 3100
+F 0 "J2" H 5600 3075 50  0000 L CNN
+F 1 "BAL1" H 5600 2984 50  0000 L CNN
+F 2 "Connector_Coaxial:SMA_Amphenol_132134_Vertical" H 5500 3100 50  0001 C CNN
+F 3 " ~" H 5500 3100 50  0001 C CNN
+	1    5500 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_Coaxial J3
+U 1 1 5F0BD78E
+P 5500 3500
+F 0 "J3" H 5600 3475 50  0000 L CNN
+F 1 "BAL2" H 5600 3384 50  0000 L CNN
+F 2 "Connector_Coaxial:SMA_Amphenol_132134_Vertical" H 5500 3500 50  0001 C CNN
+F 3 " ~" H 5500 3500 50  0001 C CNN
+	1    5500 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C1
+U 1 1 5F0BE945
+P 3100 3100
+F 0 "C1" V 2871 3100 50  0000 C CNN
+F 1 "100 nF" V 2962 3100 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 3100 3100 50  0001 C CNN
+F 3 "~" H 3100 3100 50  0001 C CNN
+	1    3100 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5F0BEF14
+P 3400 3650
+F 0 "#PWR0101" H 3400 3400 50  0001 C CNN
+F 1 "GND" H 3405 3477 50  0000 C CNN
+F 2 "" H 3400 3650 50  0001 C CNN
+F 3 "" H 3400 3650 50  0001 C CNN
+	1    3400 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3400 3500 3400 3650
+Wire Wire Line
+	2700 3100 3000 3100
+$Comp
+L power:GND #PWR0102
+U 1 1 5F0C228A
+P 2500 3650
+F 0 "#PWR0102" H 2500 3400 50  0001 C CNN
+F 1 "GND" H 2505 3477 50  0000 C CNN
+F 2 "" H 2500 3650 50  0001 C CNN
+F 3 "" H 2500 3650 50  0001 C CNN
+	1    2500 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2500 3650 2500 3300
+$Comp
+L Device:C_Small C3
+U 1 1 5F0C35D1
+P 4900 3500
+F 0 "C3" V 4671 3500 50  0000 C CNN
+F 1 "100 nF" V 4762 3500 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 4900 3500 50  0001 C CNN
+F 3 "~" H 4900 3500 50  0001 C CNN
+	1    4900 3500
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C2
+U 1 1 5F0C38EF
+P 4900 3100
+F 0 "C2" V 4671 3100 50  0000 C CNN
+F 1 "100 nF" V 4762 3100 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 4900 3100 50  0001 C CNN
+F 3 "~" H 4900 3100 50  0001 C CNN
+	1    4900 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 5F0C3C1B
+P 4400 3300
+F 0 "#PWR0103" H 4400 3050 50  0001 C CNN
+F 1 "GND" V 4405 3172 50  0000 R CNN
+F 2 "" H 4400 3300 50  0001 C CNN
+F 3 "" H 4400 3300 50  0001 C CNN
+	1    4400 3300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 5F0CAEF1
+P 5500 3300
+F 0 "#PWR0104" H 5500 3050 50  0001 C CNN
+F 1 "GND" H 5650 3250 50  0000 C CNN
+F 2 "" H 5500 3300 50  0001 C CNN
+F 3 "" H 5500 3300 50  0001 C CNN
+	1    5500 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0105
+U 1 1 5F0CD16A
+P 5500 3700
+F 0 "#PWR0105" H 5500 3450 50  0001 C CNN
+F 1 "GND" H 5650 3650 50  0000 C CNN
+F 2 "" H 5500 3700 50  0001 C CNN
+F 3 "" H 5500 3700 50  0001 C CNN
+	1    5500 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5000 3500 5300 3500
+Wire Wire Line
+	5000 3100 5300 3100
+$Comp
+L Transformer:ADT2-1T TR1
+U 1 1 5F0D7489
+P 3950 3300
+F 0 "TR1" H 3950 3681 50  0000 C CNN
+F 1 "ADT2-1T" H 3950 3590 50  0000 C CNN
+F 2 "RF_Mini-Circuits:Mini-Circuits_CD542_H2.84mm" H 3950 2950 50  0001 C CNN
+F 3 "https://www.minicircuits.com/pdfs/ADT2-1T+.pdf" H 3950 3300 50  0001 C CNN
+	1    3950 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3200 3100 3750 3100
+Wire Wire Line
+	3400 3500 3750 3500
+Wire Wire Line
+	4150 3500 4800 3500
+Wire Wire Line
+	4150 3300 4400 3300
+Wire Wire Line
+	4150 3100 4800 3100
+$EndSCHEMATC
