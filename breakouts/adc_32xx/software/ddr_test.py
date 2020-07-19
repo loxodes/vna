@@ -162,21 +162,38 @@ class ADC3321_DMA(Module, AutoCSR):
             
         ]
 
+        frontend_we = Signal()
+        frontend_re = Signal()
+
         # FIFO 
-        self.adc_frontend = adc_frontend = ADC_Frontend()
+        self.adc_frontend_a = adc_frontend_a = ADC_Frontend()
         self.comb += [
-            adc_frontend.i_fclk.eq(adc_data.fclk),
-            adc_frontend.i_dclk.eq(ClockSignal("adc_bitclk")),
-            adc_frontend.i_din_0.eq(adc_data.da0),
-            adc_frontend.i_din_1.eq(adc_data.da1),
+            adc_frontend_a.i_fclk.eq(adc_data.fclk),
+            adc_frontend_a.i_dclk.eq(ClockSignal("adc_bitclk")),
+            adc_frontend_a.i_din_0.eq(adc_data.da0),
+            adc_frontend_a.i_din_1.eq(adc_data.da1),
+            adc_frontend_a.i_we.eq(frontend_we),
+            adc_frontend_a.i_re.eq(frontend_re),
         ]
-        self.submodules += adc_frontend
+        self.submodules += adc_frontend_a
+
+
+        self.adc_frontend_b = adc_frontend_b = ADC_Frontend()
+        self.comb += [
+            adc_frontend_b.i_fclk.eq(adc_data.fclk),
+            adc_frontend_b.i_dclk.eq(ClockSignal("adc_bitclk")),
+            adc_frontend_b.i_din_0.eq(adc_data.db0),
+            adc_frontend_b.i_din_1.eq(adc_data.db1),
+            adc_frontend_b.i_we.eq(frontend_we),
+            adc_frontend_b.i_re.eq(frontend_re),
+        ]
+        self.submodules += adc_frontend_b
 
         self.wb_dma = wb_dma = WishboneDMAWriter(self.wishbone, endianness="big")
         self.submodules += wb_dma
         self.comb += [
             self.wb_dma.sink.address.eq((self._base.storage >> 2) + (self._offset.storage>>2) + words_count),
-            self.wb_dma.sink.data.eq(adc_frontend.o_dout)
+            self.wb_dma.sink.data.eq(adc_frontend_a.o_dout + (adc_frontend_b.o_dout << 16))
         ]
                    
 
@@ -190,7 +207,7 @@ class ADC3321_DMA(Module, AutoCSR):
         
         fsm.act("WAIT-FOR-TRIGGER",
             self._ready.status.eq(1),
-            self.adc_frontend.i_we.eq(0),
+            frontend_we.eq(0),
             NextValue(words_count, 0),
             If(self._start.fields.start_burst,
                 NextState("CLEAR-FIFO"),
@@ -199,28 +216,28 @@ class ADC3321_DMA(Module, AutoCSR):
 
         # TODO: clear fifo at end of read instead of before..
         fsm.act("CLEAR-FIFO",
-            self.adc_frontend.i_re.eq(1),
-            If(adc_frontend.o_readable == 0,
+            frontend_re.eq(1),
+            If(adc_frontend_a.o_readable == 0,
                 NextState("WAIT-FOR-DATA"),
             )
 
         )
 
         fsm.act("WAIT-FOR-DATA",
-            self.adc_frontend.i_we.eq(1),
-            If(adc_frontend.o_readable,
+            frontend_we.eq(1),
+            If(adc_frontend_a.o_readable,
                 NextState("WRITE-DATA"),
             ),
         )  
 
 
         fsm.act("WRITE-DATA",
-            self.adc_frontend.i_we.eq(1),
+            frontend_we.eq(1),
             self.wb_dma.sink.valid.eq(1),
 
             If(self.wb_dma.sink.ready,    
                 NextValue(words_count, words_count+1),
-                adc_frontend.i_re.eq(1),
+                frontend_re.eq(1),
                 If(words_count == (self._burst_size.storage-1),
                     NextState("WAIT-FOR-TRIGGER"),
                     NextValue(pass_count, pass_count+1)

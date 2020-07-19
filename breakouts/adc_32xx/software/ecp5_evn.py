@@ -187,13 +187,13 @@ class BaseSoC(SoCCore):
  #           self.adc.adc_frontend.adc_buffer.adc_dout0,
  #           self.adc.adc_frontend.adc_buffer.adc_dout1,
  #           self.adc.adc_frontend.adc_buffer.i_fclk,
-            self.adc.adc_frontend.i_we,
-            self.adc.adc_frontend.i_re,
-            self.adc.adc_frontend.o_readable,
+           self.adc.adc_frontend_a.i_we,
+#            self.adc.adc_frontend.i_re,
+#            self.adc.adc_frontend.o_readable,
  #           self.adc.adc_frontend.adc_buffer.o_dout,
  #           self.adc.adc_frontend.adc_buffer.pulser.output,
  #           self.adc.adc_frontend.adc_buffer.fifo.din,
-            self.adc.adc_frontend.o_dout,
+ #           self.adc.adc_frontend.o_dout,
         ]
 
         #t = Signal()
@@ -208,7 +208,7 @@ class BaseSoC(SoCCore):
 
         # put pulser on pin..
         debug_pins  = platform.request("debug_pins")
-        self.comb += debug_pins.dbg1.eq(self.adc.adc_frontend.adc_buffer.pulser.output)
+        self.comb += debug_pins.dbg1.eq(self.adc.adc_frontend_a.adc_buffer.pulser.output)
         
 
 # Build --------------------------------------------------------------------------------------------
