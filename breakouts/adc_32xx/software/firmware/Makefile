@@ -1,5 +1,4 @@
-BUILD_DIR=/home/jtklein/repos/vna/breakouts/adc_32xx/software/build/ecp5_evn
-SOC_DIRECTORY=/home/jtklein/repos/litex/litex/litex/soc
+BUILD_DIR=../build/ecp5_evn
 
 include $(BUILD_DIR)/software/include/generated/variables.mak
 include $(SOC_DIRECTORY)/software/common.mak
@@ -19,7 +18,7 @@ firmware.elf: $(OBJECTS)
 	$(LD) $(LDFLAGS) \
 		-T linker.ld \
 		-N -o $@ \
-		 $(BUILD_DIR)/software/libbase/crt0-ctr.o \
+		 $(BUILD_DIR)/software/libbase/crt0.o \
 		$(OBJECTS) \
 		-L$(BUILD_DIR)/software/libbase \
 		-L$(BUILD_DIR)/software/libcompiler_rt \

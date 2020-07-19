@@ -208,7 +208,7 @@ static void adc_test(void)
 	uint16_t burst_size = 1024;
 	volatile uint32_t *dram_array = (uint32_t *)(HYPERRAM_BASE);
 	adc_init();
-	adc_testpattern_en();
+	adc_testpattern_disable();
 
 	adc_burst_size_write(burst_size);
 	adc_base_write(HYPERRAM_BASE);

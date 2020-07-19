@@ -180,7 +180,7 @@ class BaseSoC(SoCCore):
 
         # Wishbone Debug
         # added io to platform, serial_wb
-        self.submodules.bridge = UARTWishboneBridge(platform.request("serial_wb",1), sys_clk_freq, baudrate=115200)
+        self.submodules.bridge = UARTWishboneBridge(platform.request("serial_wb",1), sys_clk_freq, baudrate=3000000)
         self.add_wb_master(self.bridge.wishbone)
         self.add_csr("analyzer")
         analyzer_signals = [
