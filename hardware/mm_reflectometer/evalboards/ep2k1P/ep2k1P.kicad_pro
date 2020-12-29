@@ -33,9 +33,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.762,
-          "height": 1.524,
-          "width": 1.524
+          "drill": 0.0,
+          "height": 5.1,
+          "width": 13.0
         },
         "silk_line_width": 0.12,
         "silk_text_italic": false,
@@ -45,7 +45,7 @@
         "silk_text_upright": false,
         "zones": {
           "45_degree_only": false,
-          "min_clearance": 0.1308
+          "min_clearance": 0.7
         }
       },
       "diff_pair_dimensions": [
@@ -133,7 +133,7 @@
       "track_widths": [
         0.0,
         0.2,
-        0.25,
+        0.3,
         0.39,
         0.5,
         1.0,
@@ -342,7 +342,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "sumusu_ats2012.kicad_pro",
+    "filename": "ep2k1P.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -412,7 +412,7 @@
   },
   "sheets": [
     [
-      "ff0bc0c8-9ebb-4da1-96b6-3d2a1fd5e6ad",
+      "9dbce7d6-c7bc-47c8-8648-338769384da7",
       ""
     ]
   ],

@@ -9,14 +9,9 @@ wb.open()
 ADC_SRAM_BASE = 0x20000000
 nsamples = 1024
 MAX_SAMPLES = 128 
+Fs = 50e6
+midrange = 2048
 
-def rev_bits(x):
-    rev = 0
-    while x:
-        rev <<= 1
-        rev += x & 1
-        x >>= 1
-    return rev
 
 if __name__ == '__main__':
 
@@ -33,12 +28,14 @@ if __name__ == '__main__':
     s_b = np.uint16([s_i >> 16 for s_i in s])
 
     wb.close()
-    plt.subplot(2,1,1)
+    plt.subplot(3,1,1)
     plt.plot(s_a)
     plt.plot(s_b)
-    plt.subplot(2,1,2)
-    plt.magnitude_spectrum(s_a - 2048, Fs=25e6, scale = 'dB')
-    plt.magnitude_spectrum(s_b - 2048, Fs=25e6, scale = 'dB')
+    plt.subplot(3,1,2)
+    plt.magnitude_spectrum(s_a - midrange, Fs=Fs, scale = 'dB')
+    plt.magnitude_spectrum(s_b - midrange, Fs=Fs, scale = 'dB')
+    plt.subplot(3,1,3)
+    plt.psd(s_a - midrange, Fs=Fs)
+    plt.psd(s_b - midrange, Fs=Fs)
     plt.show()
-
 

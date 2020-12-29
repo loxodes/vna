@@ -44,8 +44,8 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "45_degree_only": false,
-          "min_clearance": 0.1308
+          "45_degree_only": true,
+          "min_clearance": 0.19999999999999998
         }
       },
       "diff_pair_dimensions": [
@@ -342,7 +342,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "sumusu_ats2012.kicad_pro",
+    "filename": "maam_011101.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -412,7 +412,7 @@
   },
   "sheets": [
     [
-      "ff0bc0c8-9ebb-4da1-96b6-3d2a1fd5e6ad",
+      "1297f624-b93e-42f6-8039-34380e94a335",
       ""
     ]
   ],

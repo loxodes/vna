@@ -63,7 +63,7 @@ class _CRG(Module):
         self.specials += AsyncResetSynchronizer(self.cd_sys, ~rst_n)
 
         # bitclk pll
-        bitclk_freq = 75e6
+        bitclk_freq = 150e6
         self.submodules.bitclk_pll = bitclk_pll = ECP5PLL()
         platform.add_period_constraint(adc_clks.dclk, 1e9/bitclk_freq)
 
