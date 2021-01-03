@@ -65,7 +65,14 @@
           "width": 0.16764
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "silk_over_copper|133464285|100750000|f056b4fe-07c6-415a-b609-90ff9616a7a1|fc4c54cd-ad74-46d5-8530-804f2fed18ce",
+        "silk_over_copper|134642857|45839285|fe6b222b-7124-4a19-8956-f94a511eb0b4|c724bbeb-4700-4ba8-8a6f-cb48aeb7e550",
+        "silk_over_copper|56214285|100750000|d5692b48-78d2-413e-b19c-104a20921d12|80a6c2e5-b411-4f13-815d-b44ed6224039",
+        "silk_over_copper|56214285|45500000|f1a7e802-6828-4540-9bc1-7783e9e8eed3|6c43bc8a-f5c8-41a2-8c91-f2b8ebfb0f18",
+        "silk_over_copper|91185000|61875000|e945dbb9-625d-4897-b7ad-36013c65693f|e99f7deb-7c39-408a-8c26-988e4dd5e5f6",
+        "silk_overlap|69910000|86589285|4587c947-4de7-4912-acde-61425f89c8c2|ed57af60-d1cb-40d5-b17f-954bfe50ec06"
+      ],
       "meta": {
         "version": 1
       },
@@ -351,7 +358,7 @@
     "classes": [
       {
         "bus_width": 12.0,
-        "clearance": 0.2,
+        "clearance": 0.127,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
