@@ -339,6 +339,9 @@
     (path "/1f10dc2d-6680-47ab-9c49-922dbabf842a/f6392e4a-551b-432d-90b6-5e4353f881ae"
       (reference "#PWR0236") (unit 1) (value "+15V") (footprint "")
     )
+    (path "/1f10dc2d-6680-47ab-9c49-922dbabf842a/77711a7c-e0f2-41bf-b353-ccd35886a63f"
+      (reference "#PWR0245") (unit 1) (value "GND") (footprint "")
+    )
     (path "/1f10dc2d-6680-47ab-9c49-922dbabf842a/2926b3dc-9c3c-4229-9e1c-2c5750bb3dc5"
       (reference "#PWR0273") (unit 1) (value "GND") (footprint "")
     )
@@ -503,6 +506,9 @@
     )
     (path "/1f10dc2d-6680-47ab-9c49-922dbabf842a/7bcd46e3-2913-430a-a4c8-1e8f2e72e159"
       (reference "TP203") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Keystone_5015_Micro-Minature")
+    )
+    (path "/1f10dc2d-6680-47ab-9c49-922dbabf842a/71574f94-7242-4b06-b0a5-195899f49cf4"
+      (reference "TP204") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Keystone_5015_Micro-Minature")
     )
     (path "/1f10dc2d-6680-47ab-9c49-922dbabf842a/63f6cbb5-d0f6-4d79-80cb-c6252b099010"
       (reference "U101") (unit 1) (value "ECP5U_25_CABGA256") (footprint "Package_BGA:BGA-256_14.0x14.0mm_Layout16x16_P0.8mm_Ball0.45mm_Pad0.32mm_NSMD")
@@ -1523,30 +1529,6 @@
     )
     (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/4df04204-c56a-46ab-8867-6d356e9e1a1a"
       (reference "#PWR0283") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/868ca17b-f711-4e8c-8c67-38a0d958e34b"
-      (reference "#PWR0284") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/b9fd76f4-fdf9-45f9-b697-5ee3993c09f3"
-      (reference "#PWR0285") (unit 1) (value "+1V8") (footprint "")
-    )
-    (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/44bdcdae-3624-4035-a2f5-0ed21ff856af"
-      (reference "#PWR0286") (unit 1) (value "+3V3") (footprint "")
-    )
-    (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/c54f5102-c299-4fc8-809e-61e56fa3af84"
-      (reference "C801") (unit 1) (value "10uF") (footprint "Capacitor_SMD:C_0603_1608Metric")
-    )
-    (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/8a35e729-121d-4c6a-8760-acf9f4070e76"
-      (reference "C802") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_0402_1005Metric")
-    )
-    (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/0d3af2b9-295a-4d46-b5a3-d65601d800a2"
-      (reference "R801") (unit 1) (value "0") (footprint "Resistor_SMD:R_0402_1005Metric")
-    )
-    (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/c6087d0b-60d4-4b0c-b122-bee360f62bfd"
-      (reference "R802") (unit 1) (value "DNI") (footprint "Resistor_SMD:R_0402_1005Metric")
-    )
-    (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/66a91ec8-e0e3-419f-8ebe-efcc43356fba"
-      (reference "R803") (unit 1) (value "DNI") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/9118a128-58e7-41ec-bbda-f4f8df1a1459/ff1a8864-d1f4-4e0a-a1ba-00ed841b3c81"
       (reference "U101") (unit 4) (value "ECP5U_25_CABGA256") (footprint "Package_BGA:BGA-256_14.0x14.0mm_Layout16x16_P0.8mm_Ball0.45mm_Pad0.32mm_NSMD")
