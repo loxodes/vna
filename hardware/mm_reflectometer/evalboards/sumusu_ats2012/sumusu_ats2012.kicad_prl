@@ -60,7 +60,8 @@
       37,
       38
     ],
-    "visible_layers": "7fdffff_80000007"
+    "visible_layers": "7fdffff_80000007",
+    "zone_display_mode": 0
   },
   "meta": {
     "filename": "sumusu_ats2012.kicad_prl",

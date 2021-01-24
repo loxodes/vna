@@ -2794,6 +2794,10 @@
   (text "Turn on at VBUS >4.1V" (at 162.56 151.13 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
   )
+  (text "TODO: DON'T PULL 3.3V REGULATOR ENABLE HIGH USING OUTPUT OF THAT REGULATOR...."
+    (at 248.92 175.26 0)
+    (effects (font (size 3 3) (thickness 0.6) bold) (justify right bottom))
+  )
   (text "VccA pins should be isolated from Vcc and switching regulator noise if serdes is used!"
     (at 250.19 160.02 90)
     (effects (font (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
