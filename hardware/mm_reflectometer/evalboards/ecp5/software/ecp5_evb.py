@@ -20,6 +20,8 @@ from litex.soc.cores.clock import *
 from litex.soc.integration.soc_core import *
 from litex.soc.integration.builder import *
 from litex.soc.cores.led import LedChaser
+from litehyperbus.core.hyperbus import HyperRAM
+from litex.soc.cores.spi_flash import ECP5SPIFlash
 
 # CRG ----------------------------------------------------------------------------------------------
 
@@ -31,7 +33,7 @@ class _CRG(Module):
         # # #
 
         # clk / rst
-        clk = clk12 = platform.request("clk48")
+        clk = platform.request("clk48")
         rst_n = platform.request("rst_n")
     
         # pll
@@ -56,6 +58,20 @@ class BaseSoC(SoCCore):
         crg = _CRG(platform, sys_clk_freq)
         self.submodules.crg = crg
 
+        # HyperRam ---------------------------------------------------------------------------------
+        self.mem_map["hyperram"] = 0x20000000
+        self.submodules.hyperram = HyperRAM(platform.request("hyperram"))
+        self.add_wb_slave(self.mem_map["hyperram"], self.hyperram.bus)
+        self.add_memory_region("hyperram", self.mem_map["hyperram"], 8*1024*1024)
+
+        # SPIFlash ---------------------------------------------------------------------------------
+        self.submodules.spiflash = ECP5SPIFlash(
+            pads         = platform.request("spiflash"),
+            sys_clk_freq = sys_clk_freq,
+            spi_clk_freq = 5e6,
+        )
+        self.add_csr("spiflash")
+
         # Leds -------------------------------------------------------------------------------------
         self.submodules.leds = LedChaser(
             pads         = platform.request_all("user_led"),
@@ -68,6 +84,7 @@ def main():
     parser = argparse.ArgumentParser(description="LiteX SoC on ECP5 Evaluation Board")
     parser.add_argument("--build",        action="store_true", help="Build bitstream")
     parser.add_argument("--load",         action="store_true", help="Load bitstream")
+    parser.add_argument("--flash",        action="store_true", help="Flash bitstream")
     parser.add_argument("--toolchain",    default="trellis",   help="FPGA toolchain: trellis (default) or diamond")
     parser.add_argument("--sys-clk-freq", default=60e6,        help="System clock frequency (default: 60MHz)")
     builder_args(parser)
@@ -83,6 +100,13 @@ def main():
     if args.load:
         prog = soc.platform.create_programmer()
         prog.load_bitstream(os.path.join(builder.gateware_dir, soc.build_name + ".svf"))
+
+    if args.flash:
+        prog = soc.platform.create_programmer()
+        os.system("cp bit_to_flash.py build/evb_platform/gateware/")
+        # use bits_to_flash from https://github.com/enjoy-digital/colorlite
+        os.system("cd build/evb_platform/gateware && ./bit_to_flash.py evb_platform.bit evb_platform.flash.svf")
+        prog.load_bitstream(os.path.join(builder.gateware_dir, soc.build_name + ".flash.svf"))
 
 if __name__ == "__main__":
     main()

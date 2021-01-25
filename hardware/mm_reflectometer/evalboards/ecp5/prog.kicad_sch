@@ -3812,9 +3812,15 @@
   (text "add CYPD3177? CYPD2134?" (at 55.88 153.67 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
   )
+  (text "TODO: fix eeprom footprint, should be narrow SOIC" (at 92.71 233.68 180)
+    (effects (font (size 3 3) (thickness 0.6) bold) (justify right bottom))
+  )
   (text "Flash and sequencer schematic and symbol adapted from Greg Davill's ECPBreaker\nCC-BY-SA V4.0"
     (at 175.26 25.4 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
+  )
+  (text "TODO: ADD RESET.." (at 391.16 181.61 180)
+    (effects (font (size 3 3) (thickness 0.6) bold) (justify right bottom))
   )
 
   (label "FT_EECS" (at 66.04 222.25 180)

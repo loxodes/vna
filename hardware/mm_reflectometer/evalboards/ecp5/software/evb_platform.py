@@ -41,7 +41,25 @@ _io = [
         Subsignal("cs_n", Pins("N8"),          IOStandard("LVCMOS33")),
         Subsignal("dq",   Pins("T8 T7 M7 N7"), IOStandard("LVCMOS33")),
     ),
-]
+
+    ("hyperram", 0,
+        Subsignal("clk_p",   Pins("N5")),
+        Subsignal("clk_n",   Pins("N6")),
+        Subsignal("rst_n", Pins("N3")),
+        Subsignal("dq",    Pins("P4 R3 P5 T4 P6 R5 M5 M6")),
+        Subsignal("cs_n",  Pins("R4")),
+        Subsignal("rwds",  Pins("P3")),
+        IOStandard("LVCMOS18")
+    ),
+    
+    ("usb_aux", 0,
+        Subsignal("d_p", Pins("M11")),
+        Subsignal("d_n", Pins("N11")),
+        Subsignal("pullup", Pins("P12")),
+        IOStandard("LVCMOS33")
+    ),
+
+    ]
 
 # Connectors ---------------------------------------------------------------------------------------
 
@@ -61,6 +79,9 @@ _connectors = [
         "None",  # 11 GND
         "None",  # 12 VCCIO0
     ),
+
+
+
  ]
 
 # Platform -----------------------------------------------------------------------------------------
