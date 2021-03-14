@@ -567,10 +567,6 @@
     (uuid 4a6c7461-e2a4-4c5c-9617-3a97a7d54847)
   )
 
-  (text "Consider TLV9151?" (at 167.64 57.15 180)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 6938ce6b-7b5d-4bfd-9ea6-b175984e11a1)
-  )
   (text "Bias Conditions for MMIC Amplifiers,\nMimix Broadband application note"
     (at 217.17 21.59 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -1235,7 +1231,7 @@
     (property "Reference" "U4" (id 0) (at 224.79 68.58 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "TLV9001IDCK" (id 1) (at 234.95 66.04 90)
+    (property "Value" "TLV9151IDCKR" (id 1) (at 234.95 66.04 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Package_TO_SOT_SMD:SOT-353_SC-70-5" (id 2) (at 240.03 80.01 0)

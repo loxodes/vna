@@ -2237,7 +2237,7 @@
       (reference "R20") (unit 1) (value "1k") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/8eae4371-d130-4b11-8d87-c166b3374bf9/847fb613-5842-423b-9096-5adaaefe0b9f"
-      (reference "U4") (unit 1) (value "TLV9001IDCK") (footprint "Package_TO_SOT_SMD:SOT-353_SC-70-5")
+      (reference "U4") (unit 1) (value "TLV9151IDCKR") (footprint "Package_TO_SOT_SMD:SOT-353_SC-70-5")
     )
     (path "/cc145459-8c32-4f49-b8c6-9a2cd16186de/b3bb4b43-73f7-4947-b359-26623e99402d"
       (reference "#PWR01") (unit 1) (value "-5V") (footprint "")
@@ -2375,7 +2375,7 @@
       (reference "R22") (unit 1) (value "1k") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/847fb613-5842-423b-9096-5adaaefe0b9f"
-      (reference "U5") (unit 1) (value "TLV9001IDCK") (footprint "Package_TO_SOT_SMD:SOT-353_SC-70-5")
+      (reference "U5") (unit 1) (value "TLV9151IDCKR") (footprint "Package_TO_SOT_SMD:SOT-353_SC-70-5")
     )
   )
 )
