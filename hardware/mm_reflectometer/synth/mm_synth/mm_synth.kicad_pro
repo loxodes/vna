@@ -51,7 +51,7 @@
       "diff_pair_dimensions": [],
       "drc_exclusions": [],
       "meta": {
-        "version": 1
+        "version": 2
       },
       "rule_severities": {
         "annular_width": "error",
@@ -105,11 +105,7 @@
         "min_through_hole_diameter": 0.3,
         "min_track_width": 0.19999999999999998,
         "min_via_annular_width": 0.049999999999999996,
-        "min_via_diameter": 0.39999999999999997,
-        "solder_mask_clearance": 0.0,
-        "solder_mask_min_width": 0.0,
-        "solder_paste_clearance": 0.0,
-        "solder_paste_margin_ratio": 0.0
+        "min_via_diameter": 0.39999999999999997
       },
       "track_widths": [],
       "via_dimensions": [],
@@ -439,6 +435,14 @@
     [
       "c8cff2d1-726b-4874-8fdc-4a6c97b23fd5",
       "bypass"
+    ],
+    [
+      "9b7f2231-efff-47f4-9e05-b31f2c12c964",
+      "drain_sequencer"
+    ],
+    [
+      "56b68513-6572-4299-9546-27e3545233de",
+      "active_bias"
     ]
   ],
   "text_variables": {}

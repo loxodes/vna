@@ -59,6 +59,20 @@ _io = [
         IOStandard("LVCMOS33")
     ),
 
+    ("adc", 0,
+        Subsignal("cs_n", Pins("A15"), IOStandard("LVCMOS33")),
+        Subsignal("sck",   Pins("A14"), IOStandard("LVCMOS33")),
+        Subsignal("mosi",   Pins("A13"), IOStandard("LVCMOS33")),
+    ),
+
+    ("dac", 0,
+        Subsignal("clr_n", Pins("B11"), IOStandard("LVCMOS33")),
+        Subsignal("sync_n",   Pins("B10"), IOStandard("LVCMOS33")),
+        Subsignal("sclk",   Pins("A10"), IOStandard("LVCMOS33")),
+        Subsignal("mosi",   Pins("A12"), IOStandard("LVCMOS33")),
+        Subsignal("vout_en",   Pins("A11"), IOStandard("LVCMOS33")),
+    ),
+
     ]
 
 # Connectors ---------------------------------------------------------------------------------------

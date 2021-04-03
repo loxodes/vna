@@ -1,6 +1,4 @@
 TODO:
-	- add HyperRAM to LiteX core
-	- test programming from on-board flash
 	- add DAC driver to LiteX 
 		- test DAC output range
 	- add ADC driver to LiteX
