@@ -8,6 +8,10 @@
 
   (no_connect (at 87.63 35.56) (uuid 2047d682-0c5b-4db7-95d2-e88c97b0362b))
 
+  (wire (pts (xy 50.8 30.48) (xy 55.88 30.48))
+    (stroke (width 0) (type solid) (color 0 0 0 0))
+    (uuid fa871966-08cd-4a57-8014-429dc6ffc3e2)
+  )
   (wire (pts (xy 50.8 35.56) (xy 55.88 35.56))
     (stroke (width 0) (type solid) (color 0 0 0 0))
     (uuid fea52c95-64ec-4652-87e6-23215ef5faff)
@@ -166,12 +170,12 @@
     (uuid a9c7299c-464d-4ff8-900c-767c20734c7a)
   )
   (text "goals:\n\n100 MHz - 36 GHz\n10 dBm to -30 dBm output power\n-40 dBc harmonic and subharmonic spurs, 2-34 GHz\n10 MHz external reference\nbom <$1000\nusb and/or ethernet controlled, usb-pd powered\necp5 litex core"
-    (at 252.73 27.94 0)
+    (at 243.84 50.8 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid d2982322-5680-45e8-b0a4-4cc755bb3798)
   )
-  (text "four boards:\n- reference clock (1x)\n- control (1x)\n- fundamental filterbank (0x)\n- microwave (2x)"
-    (at 254 39.37 0)
+  (text "four boards?\n- reference clock (1x)\n- control (1x)\n- fundamental filterbank (0x)\n- microwave (2x)"
+    (at 245.11 62.23 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a156acaa-b234-4c30-a631-b11fc9a01b17)
   )
@@ -341,14 +345,14 @@
     )
   )
 
-  (sheet (at 25.4 119.38) (size 46.99 50.8)
+  (sheet (at 25.4 115.57) (size 46.99 50.8)
     (stroke (width 0.001) (type solid) (color 0 0 0 0))
     (fill (color 0 0 0 0.0000))
     (uuid cc54e965-c5da-4c6a-b46b-62359ebc99d4)
-    (property "Sheet name" "digital_control" (id 0) (at 25.4 118.7441 0)
+    (property "Sheet name" "digital_control" (id 0) (at 25.4 114.9341 0)
       (effects (font (size 1.27 1.27)) (justify left bottom))
     )
-    (property "Sheet file" "digital_control.kicad_sch" (id 1) (at 25.4 170.6889 0)
+    (property "Sheet file" "digital_control.kicad_sch" (id 1) (at 25.4 166.8789 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
   )
@@ -1010,7 +1014,7 @@
       (reference "R?") (unit 1) (value "1k") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/6a285ab7-f3e7-4d62-a24d-17d77c990199/42a4645e-6c44-4e2d-bcb1-cded0f281f68"
-      (reference "R?") (unit 1) (value "22") (footprint "Resistor_SMD:R_0402_1005Metric")
+      (reference "R?") (unit 1) (value "33") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/6a285ab7-f3e7-4d62-a24d-17d77c990199/7f0eefdb-efe5-48e7-95c4-81aa5b12aeba"
       (reference "R?") (unit 1) (value "DNI") (footprint "Resistor_SMD:R_0402_1005Metric")
