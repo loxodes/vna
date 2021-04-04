@@ -443,6 +443,14 @@
     [
       "56b68513-6572-4299-9546-27e3545233de",
       "active_bias"
+    ],
+    [
+      "63740d75-e040-44f5-b56f-326f566eb2a1",
+      "monitor"
+    ],
+    [
+      "cc54e965-c5da-4c6a-b46b-62359ebc99d4",
+      "digital_control"
     ]
   ],
   "text_variables": {}
