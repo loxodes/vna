@@ -4,12 +4,15 @@ I'm developing a proof of concept two port microwave vector network analyzer. Th
 
 ## Usage
 This project is still under development, y'all probably don't want to try reproducing it yet.
-Two port measurements to 14 GHz work, a redesign for operation out to 26.5 GHz is in progress.
+Two port measurements to 14 GHz work, a redesign for operation out to 36 GHz is in progress.
 
 ## Hardware Design
 See `breakouts` and `hardware` for various modules developed for the network analyzer.
-![picture of VNA R1](./doc/vna_r1_ctrl.jpg)
+![picture of VNA R1](./doc/vna_r1.jpg)
 ![picture of VNA](./doc/vna_picture.jpg)
+![picture of VNA reference](./doc/vna_ref.jpg)
+![picture of mm modules](./doc/mm_modules.jpg)
+
 
 ## Software Design
 See the `software` directory for scraps of software written for testing VNA modules. 
