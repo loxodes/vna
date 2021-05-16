@@ -374,6 +374,7 @@
       "default_text_size": 50.0,
       "default_wire_thickness": 6.0,
       "field_names": [],
+      "intersheets_ref_own_page": false,
       "intersheets_ref_prefix": "",
       "intersheets_ref_short": false,
       "intersheets_ref_show": false,
@@ -388,6 +389,12 @@
       "version": 0
     },
     "net_format_name": "",
+    "ngspice": {
+      "meta": {
+        "version": 0
+      },
+      "model_mode": 0
+    },
     "page_layout_descr_file": "",
     "plot_directory": "",
     "spice_adjust_passive_values": false,
@@ -397,7 +404,7 @@
   },
   "sheets": [
     [
-      "a06d4049-2855-46a9-8269-1b43dc8abbe3",
+      "36c08ce6-e9de-44f0-b100-d5b19f10228e",
       ""
     ],
     [
@@ -418,7 +425,7 @@
     ],
     [
       "eb8f1f16-a5e6-4227-b665-8ccaf150e7a9",
-      "power"
+      "rf_power"
     ],
     [
       "3bb48852-aeff-47d5-91e7-09e50eeacf58",
@@ -451,6 +458,22 @@
     [
       "cc54e965-c5da-4c6a-b46b-62359ebc99d4",
       "digital_control"
+    ],
+    [
+      "6ee2a6e2-a2ed-4da1-93ec-d7114d41e5c4",
+      "ctrl_power"
+    ],
+    [
+      "08cfc09f-ab0b-47a1-810b-669541ccad97",
+      "ecp_prog"
+    ],
+    [
+      "03f236a9-e383-4b3b-8e0f-66b5f768f502",
+      "ecp_ram"
+    ],
+    [
+      "4400cb28-d812-4902-9409-d296bbf0d8b0",
+      "ecp_io"
     ]
   ],
   "text_variables": {}

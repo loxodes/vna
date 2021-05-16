@@ -1,4 +1,6 @@
-(kicad_sch (version 20210126) (generator eeschema)
+(kicad_sch (version 20210406) (generator eeschema)
+
+  (uuid 5676720e-7e45-44c9-9bf7-71627f350f71)
 
   (paper "A3")
 
@@ -1386,42 +1388,6 @@
     (uuid d970bba8-ab47-4533-bf99-287c61a9b86e)
   )
 
-  (symbol (lib_id "Connector:TestPoint") (at 35.56 123.19 0) (unit 1)
-    (in_bom yes) (on_board yes)
-    (uuid a8941517-effd-44e7-8a56-015ff4eda1d3)
-    (property "Reference" "TP1" (id 0) (at 38.1 121.92 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "TestPoint" (id 1) (at 38.1 124.46 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "TestPoint:TestPoint_Keystone_5015_Micro-Minature" (id 2) (at 40.64 123.19 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (id 3) (at 40.64 123.19 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 43965237-00df-4175-84d4-223f9963f5e3))
-  )
-
-  (symbol (lib_id "Connector:TestPoint") (at 38.1 68.58 0) (unit 1)
-    (in_bom yes) (on_board yes)
-    (uuid 3657f6af-e656-4744-9b6c-9f7c35b43e84)
-    (property "Reference" "TP2" (id 0) (at 40.64 67.31 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "TestPoint" (id 1) (at 40.64 69.85 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "TestPoint:TestPoint_Keystone_5015_Micro-Minature" (id 2) (at 43.18 68.58 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (id 3) (at 43.18 68.58 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid a46aae48-6ff0-4685-ac4a-77c9b41d8682))
-  )
-
   (symbol (lib_id "power:-5V") (at 139.7 30.48 270) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 4c7c26c3-ace2-40ac-b129-3c66e43b4e95)
@@ -1490,6 +1456,42 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 2c975392-a7b0-43e6-9541-1ea71ee01152))
+  )
+
+  (symbol (lib_id "Connector:TestPoint") (at 35.56 123.19 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid a8941517-effd-44e7-8a56-015ff4eda1d3)
+    (property "Reference" "TP1" (id 0) (at 38.1 121.92 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "TestPoint" (id 1) (at 38.1 124.46 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Keystone_5015_Micro-Minature" (id 2) (at 40.64 123.19 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (id 3) (at 40.64 123.19 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 43965237-00df-4175-84d4-223f9963f5e3))
+  )
+
+  (symbol (lib_id "Connector:TestPoint") (at 38.1 68.58 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid 3657f6af-e656-4744-9b6c-9f7c35b43e84)
+    (property "Reference" "TP2" (id 0) (at 40.64 67.31 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "TestPoint" (id 1) (at 40.64 69.85 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Keystone_5015_Micro-Minature" (id 2) (at 43.18 68.58 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (id 3) (at 43.18 68.58 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a46aae48-6ff0-4685-ac4a-77c9b41d8682))
   )
 
   (symbol (lib_id "power:GND") (at 30.48 91.44 0) (unit 1)
@@ -2688,7 +2690,7 @@
       (reference "#PWR02") (unit 1) (value "GND") (footprint "")
     )
     (path "/cc145459-8c32-4f49-b8c6-9a2cd16186de/1bad7088-4504-4d90-8e13-24bdd65e85e2"
-      (reference "#PWR?") (unit 1) (value "+5V") (footprint "")
+      (reference "#PWR0133") (unit 1) (value "+5V") (footprint "")
     )
     (path "/cc145459-8c32-4f49-b8c6-9a2cd16186de/646a0ed2-79f9-4203-a304-f545e4c06d61"
       (reference "D1") (unit 1) (value "MM5Z3V3T1G") (footprint "Diode_SMD:D_SOD-523")
@@ -2719,6 +2721,12 @@
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/13dd78b7-2724-4f3b-9ce4-5d1c05860e4b"
       (reference "#PWR0132") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/04b4e9a4-e0ef-4602-a5ee-f1ce9276b47c"
+      (reference "#PWR0134") (unit 1) (value "+5V") (footprint "")
+    )
+    (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/6e1e9237-7b2e-4780-804f-c7f0a1f6f607"
+      (reference "#PWR0135") (unit 1) (value "+5V") (footprint "")
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/ca1ad909-2b59-401a-a9e7-2785534320c0"
       (reference "#PWR0141") (unit 1) (value "GND") (footprint "")
@@ -2755,12 +2763,6 @@
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/fa186b50-1073-48e9-bb2c-bd707f752001"
       (reference "#PWR0156") (unit 1) (value "-5V") (footprint "")
-    )
-    (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/04b4e9a4-e0ef-4602-a5ee-f1ce9276b47c"
-      (reference "#PWR?") (unit 1) (value "+5V") (footprint "")
-    )
-    (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/6e1e9237-7b2e-4780-804f-c7f0a1f6f607"
-      (reference "#PWR?") (unit 1) (value "+5V") (footprint "")
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/f2ece939-6203-451b-b1e2-8dc505ee930c"
       (reference "C15") (unit 1) (value "100 pF") (footprint "Capacitor_SMD:C_0402_1005Metric")
@@ -2799,13 +2801,13 @@
       (reference "D7") (unit 1) (value "BAS516") (footprint "Diode_SMD:D_SOD-523")
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/2133f2d9-a486-4804-98ae-2f3c3c6e5444"
-      (reference "R13") (unit 1) (value "DNI") (footprint "Resistor_SMD:R_0402_1005Metric")
+      (reference "R13") (unit 1) (value "0") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/55e36ff7-0771-4621-8b42-1612743cd37e"
       (reference "R14") (unit 1) (value "15k") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/a75fa1cf-d534-4013-ac71-db67486e6b07"
-      (reference "R15") (unit 1) (value "0.5") (footprint "Resistor_SMD:R_0603_1608Metric")
+      (reference "R15") (unit 1) (value "0") (footprint "Resistor_SMD:R_0603_1608Metric")
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/a7746e98-465a-47e5-a0b2-85eadb94e5d2"
       (reference "R16") (unit 1) (value "1k") (footprint "Resistor_SMD:R_0402_1005Metric")
@@ -2817,7 +2819,7 @@
       (reference "R18") (unit 1) (value "100k") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/a502aab3-3ec9-4d42-a6f7-1325ca2d12be"
-      (reference "R19") (unit 1) (value "0") (footprint "Resistor_SMD:R_0402_1005Metric")
+      (reference "R19") (unit 1) (value "DNI") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/9b11019f-ab7b-47b4-8602-d0b98ab79f45/a57faf19-d541-478c-b1b2-ba371d1ffbf2"
       (reference "R21") (unit 1) (value "1k") (footprint "Resistor_SMD:R_0402_1005Metric")

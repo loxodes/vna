@@ -1,4 +1,6 @@
-(kicad_sch (version 20210126) (generator eeschema)
+(kicad_sch (version 20210406) (generator eeschema)
+
+  (uuid 07f52722-4fa4-4459-bf8d-870ba787a746)
 
   (paper "A4")
 
@@ -524,7 +526,7 @@
   (symbol (lib_id "power:+5V") (at 165.1 88.9 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 1bad7088-4504-4d90-8e13-24bdd65e85e2)
-    (property "Reference" "#PWR?" (id 0) (at 165.1 92.71 0)
+    (property "Reference" "#PWR0133" (id 0) (at 165.1 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (id 1) (at 166.37 83.82 0))

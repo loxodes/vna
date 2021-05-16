@@ -1,4 +1,6 @@
-(kicad_sch (version 20210126) (generator eeschema)
+(kicad_sch (version 20210406) (generator eeschema)
+
+  (uuid bcfea3ec-449d-4ad0-b053-86fd7adbd471)
 
   (paper "A3")
 
@@ -502,6 +504,22 @@
     (uuid 975717ee-c0dc-4796-a8ca-a4ae7507dc8c)
   )
 
+  (symbol (lib_id "power:+3.3V") (at 191.77 106.68 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid 4d46fe92-39dd-45a0-a5a7-a99b9f4fe477)
+    (property "Reference" "#PWR0270" (id 0) (at 191.77 110.49 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3.3V" (id 1) (at 193.04 101.6 0))
+    (property "Footprint" "" (id 2) (at 191.77 106.68 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (id 3) (at 191.77 106.68 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 33903b99-9a3d-4bdd-927f-9743f9cad7c5))
+  )
+
   (symbol (lib_id "Device:L_Small") (at 191.77 113.03 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid abe8adbe-a804-4877-ba20-694c77ead1a8)
@@ -538,22 +556,6 @@
     )
     (pin "1" (uuid 0f5dda4e-4f43-4301-8e50-6263bee10955))
     (pin "2" (uuid d662c07b-6202-4394-8dc9-193f953bec21))
-  )
-
-  (symbol (lib_id "power:+3.3V") (at 191.77 106.68 0) (unit 1)
-    (in_bom yes) (on_board yes)
-    (uuid 4d46fe92-39dd-45a0-a5a7-a99b9f4fe477)
-    (property "Reference" "#PWR0270" (id 0) (at 191.77 110.49 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3.3V" (id 1) (at 193.04 101.6 0))
-    (property "Footprint" "" (id 2) (at 191.77 106.68 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (id 3) (at 191.77 106.68 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 33903b99-9a3d-4bdd-927f-9743f9cad7c5))
   )
 
   (symbol (lib_id "power:GND") (at 156.21 140.97 0) (unit 1)
