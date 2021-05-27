@@ -1089,6 +1089,9 @@
     (path "/6ee2a6e2-a2ed-4da1-93ec-d7114d41e5c4/2120334c-0f7c-4ef8-9311-b8867a813221"
       (reference "#PWR?") (unit 1) (value "+5V") (footprint "")
     )
+    (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/213f6194-e5b2-469b-b44a-ea436871bb33"
+      (reference "#PWR?") (unit 1) (value "+1V1") (footprint "")
+    )
     (path "/3bb48852-aeff-47d5-91e7-09e50eeacf58/21af8412-0542-4bc7-86a8-716ce584d422"
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
@@ -1213,6 +1216,9 @@
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
     (path "/3bb48852-aeff-47d5-91e7-09e50eeacf58/3913f418-b5bd-46af-b10c-ea7d3f79759b"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/4400cb28-d812-4902-9409-d296bbf0d8b0/3aedcf3a-a428-45f5-b58b-7cccfa5ccd35"
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
     (path "/6ee2a6e2-a2ed-4da1-93ec-d7114d41e5c4/3b91ec74-c9a5-4da4-b9b9-69f2833fa76a"
@@ -1410,6 +1416,9 @@
     (path "/eb8f1f16-a5e6-4227-b665-8ccaf150e7a9/67f9e4ed-2752-4df4-a161-2710788b39b4"
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
+    (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/68382a22-7dc4-43d8-ba8a-614a76333882"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
     (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/08cfc09f-ab0b-47a1-810b-669541ccad97/69346b57-e01a-4d1c-a195-956b789005ae"
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
@@ -1451,6 +1460,9 @@
     )
     (path "/eb8f1f16-a5e6-4227-b665-8ccaf150e7a9/746685dd-b8f9-4733-92a5-6df9b0f553e0"
       (reference "#PWR?") (unit 1) (value "+5V5") (footprint "")
+    )
+    (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/4400cb28-d812-4902-9409-d296bbf0d8b0/749b88fb-f685-469f-ae66-8b98218430ef"
+      (reference "#PWR?") (unit 1) (value "+3V3") (footprint "")
     )
     (path "/3bb48852-aeff-47d5-91e7-09e50eeacf58/74a68e0b-ad2e-4b70-a430-d952f390d9cf"
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
@@ -1619,6 +1631,9 @@
     )
     (path "/6a285ab7-f3e7-4d62-a24d-17d77c990199/99a04971-e066-491a-8484-a2d416d20d03"
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/99c6de03-2ef7-40af-80da-f65b55c07570"
+      (reference "#PWR?") (unit 1) (value "+2V5") (footprint "")
     )
     (path "/6ee2a6e2-a2ed-4da1-93ec-d7114d41e5c4/9a00ee8a-9633-43fe-a86d-a1326d571bd4"
       (reference "#PWR?") (unit 1) (value "+3V3") (footprint "")
@@ -2384,6 +2399,9 @@
     )
     (path "/df8ddd09-75ed-41ef-afa2-a49607e9c977/6e163bb5-9246-4bf9-ada3-b0ddd5849b81"
       (reference "C?") (unit 1) (value "10 nF") (footprint "")
+    )
+    (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/4400cb28-d812-4902-9409-d296bbf0d8b0/6f240b51-3964-4636-88a5-88fc016a8aa2"
+      (reference "C?") (unit 1) (value "100 nF") (footprint "Capacitor_SMD:C_0402_1005Metric")
     )
     (path "/6ee2a6e2-a2ed-4da1-93ec-d7114d41e5c4/6f31c1cb-0793-4760-8bec-fef522b4524f"
       (reference "C?") (unit 1) (value "47 uF") (footprint "Capacitors_SMD:C_1210")
@@ -3597,6 +3615,9 @@
     (path "/3bb48852-aeff-47d5-91e7-09e50eeacf58/d978850d-8abe-452f-b245-fbfd172df27f"
       (reference "U?") (unit 1) (value "VEMI65AB-HCI") (footprint "")
     )
+    (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/dfa64157-f96a-468a-b937-18c6511ba5a6"
+      (reference "U?") (unit 1) (value "ECP5U_25_CABGA256") (footprint "Package_BGA:BGA-256_14.0x14.0mm_Layout16x16_P0.8mm_Ball0.45mm_Pad0.32mm_NSMD")
+    )
     (path "/6ee2a6e2-a2ed-4da1-93ec-d7114d41e5c4/f12dc452-be0b-4424-ad84-edb86911f9c4"
       (reference "U?") (unit 1) (value "LM3880MF-1AF") (footprint "Package_TO_SOT_SMD:SOT-23-6")
     )
@@ -3614,6 +3635,9 @@
     )
     (path "/a3c7a6e6-9f9e-4573-b5b8-b3e1ea176435/33fb863b-b13b-4d1d-8195-1a45c3b77432"
       (reference "U?") (unit 3) (value "OPA2140") (footprint "Package_SO:MSOP-8_3x3mm_P0.65mm")
+    )
+    (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/4400cb28-d812-4902-9409-d296bbf0d8b0/a5204dd4-2627-4a3c-9831-ea802f4c5d8e"
+      (reference "U?") (unit 3) (value "ECP5U_25_CABGA256") (footprint "Package_BGA:BGA-256_14.0x14.0mm_Layout16x16_P0.8mm_Ball0.45mm_Pad0.32mm_NSMD")
     )
     (path "/cc54e965-c5da-4c6a-b46b-62359ebc99d4/4400cb28-d812-4902-9409-d296bbf0d8b0/f3d752cd-3a93-4d63-9521-223d48b4150f"
       (reference "U?") (unit 4) (value "ECP5U_25_CABGA256") (footprint "Package_BGA:BGA-256_14.0x14.0mm_Layout16x16_P0.8mm_Ball0.45mm_Pad0.32mm_NSMD")
