@@ -406,7 +406,8 @@
       "meta": {
         "version": 0
       },
-      "model_mode": 0
+      "model_mode": 0,
+      "workbook_filename": ""
     },
     "page_layout_descr_file": "",
     "plot_directory": "",
@@ -487,6 +488,10 @@
     [
       "4400cb28-d812-4902-9409-d296bbf0d8b0",
       "ecp_io"
+    ],
+    [
+      "f67b2d2e-517d-4800-9820-4d96137a2d08",
+      "drain_sequencer1"
     ]
   ],
   "text_variables": {}

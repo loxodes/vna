@@ -1543,6 +1543,11 @@
     (uuid bca6e10f-8e94-41a7-8900-6d3ee1dc5311)
   )
 
+  (text "TODO: CHECK CONNECTIONS ON ECP5, DOES IT SUPPORT DDR?"
+    (at 64.77 110.49 0)
+    (effects (font (size 2.5 2.5) (thickness 0.5) bold) (justify left bottom))
+    (uuid 97eb326f-5eaf-413e-93d6-d69ef3dfa12d)
+  )
   (text "HyperRAM schematic and symbol copied from Greg Davill's ECPBreaker\nCC-BY-SA V4.0"
     (at 142.875 29.845 0)
     (effects (font (size 1.27 1.27)) (justify right bottom))

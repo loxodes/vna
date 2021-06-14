@@ -505,7 +505,7 @@
     (uuid 71aed51f-190f-4029-a960-38da4b353372)
   )
 
-  (symbol (lib_id "power:-5VA") (at 62.23 87.63 90) (unit 1)
+  (symbol (lib_id "power:-5VA") (at 62.23 87.63 90)
     (in_bom yes) (on_board yes)
     (uuid 5bf47301-935a-4b8b-84fe-3bb9ff732a59)
     (property "Reference" "#PWR?" (id 0) (at 59.69 87.63 0)
@@ -521,7 +521,7 @@
     (pin "1" (uuid 32f87e35-cf7a-4c52-9358-a10f34b36eb0))
   )
 
-  (symbol (lib_id "power:+5VA") (at 137.16 83.82 0) (unit 1)
+  (symbol (lib_id "power:+5VA") (at 137.16 83.82 0)
     (in_bom yes) (on_board yes)
     (uuid 69f72998-33da-4999-835a-2f1869cf4562)
     (property "Reference" "#PWR?" (id 0) (at 137.16 87.63 0)
@@ -537,7 +537,7 @@
     (pin "1" (uuid 88283c92-1eed-41b7-9577-274ec5350d99))
   )
 
-  (symbol (lib_id "power:GND") (at 82.55 107.95 0) (unit 1)
+  (symbol (lib_id "power:GND") (at 82.55 107.95 0)
     (in_bom yes) (on_board yes)
     (uuid 0ec202c3-4d60-42db-aeb1-02d6ae2e2a60)
     (property "Reference" "#PWR?" (id 0) (at 82.55 114.3 0)
@@ -553,7 +553,7 @@
     (pin "1" (uuid e5605b8f-44f2-42e6-971d-201dadf4c03f))
   )
 
-  (symbol (lib_id "Device:R_Small") (at 82.55 101.6 0) (unit 1)
+  (symbol (lib_id "Device:R_Small") (at 82.55 101.6 0)
     (in_bom yes) (on_board yes)
     (uuid 781831ed-5c93-4c9a-8198-292582fbff5d)
     (property "Reference" "R?" (id 0) (at 85.09 100.33 0)
@@ -572,7 +572,7 @@
     (pin "2" (uuid 727aa763-0331-4892-ba15-6800d126d165))
   )
 
-  (symbol (lib_id "Device:R_Small") (at 87.63 67.31 180) (unit 1)
+  (symbol (lib_id "Device:R_Small") (at 87.63 67.31 180)
     (in_bom yes) (on_board yes)
     (uuid b8c29942-1855-4cfd-b32c-3b8e9b676ced)
     (property "Reference" "R?" (id 0) (at 81.28 67.31 90))
@@ -587,7 +587,7 @@
     (pin "2" (uuid 801ef95c-270d-4781-abfd-a5e19d506696))
   )
 
-  (symbol (lib_id "Device:R_Small") (at 95.25 87.63 90) (unit 1)
+  (symbol (lib_id "Device:R_Small") (at 95.25 87.63 90)
     (in_bom yes) (on_board yes)
     (uuid 30406d64-0da5-41ba-b06a-e693a3f1150b)
     (property "Reference" "R?" (id 0) (at 95.25 85.09 90)
@@ -606,7 +606,7 @@
     (pin "2" (uuid 7bfee4bc-cd48-48c6-911d-a8c105445740))
   )
 
-  (symbol (lib_id "Device:R_Small") (at 119.38 87.63 90) (unit 1)
+  (symbol (lib_id "Device:R_Small") (at 119.38 87.63 90)
     (in_bom yes) (on_board yes)
     (uuid 7a9f85f2-cc3b-4659-b3f3-35e80057bef9)
     (property "Reference" "R?" (id 0) (at 119.38 85.09 90)
@@ -625,7 +625,7 @@
     (pin "2" (uuid 77c06819-86b9-4640-9e35-8e32767d03d2))
   )
 
-  (symbol (lib_id "Diode:MM5Zxx") (at 69.85 87.63 180) (unit 1)
+  (symbol (lib_id "Diode:MM5Zxx") (at 69.85 87.63 180)
     (in_bom yes) (on_board yes)
     (uuid d6ff98e4-470e-4758-9257-4fdc73b09658)
     (property "Reference" "D?" (id 0) (at 69.85 81.28 0))
@@ -640,7 +640,7 @@
     (pin "2" (uuid a2d18482-51b0-4ea3-9a37-e113d861f943))
   )
 
-  (symbol (lib_id "Transistor_BJT:BC848W") (at 82.55 90.17 270) (mirror x) (unit 1)
+  (symbol (lib_id "Transistor_BJT:BC848W") (at 82.55 90.17 270) (mirror x)
     (in_bom yes) (on_board yes)
     (uuid cb75f3a9-9c29-4339-bb2e-e9ac42571595)
     (property "Reference" "Q?" (id 0) (at 82.55 81.28 90))
@@ -656,7 +656,7 @@
     (pin "3" (uuid d1e46fa6-daef-42d2-89f2-21018c5f51c7))
   )
 
-  (symbol (lib_id "Transistor_FET:IRLML6401") (at 107.95 76.2 90) (unit 1)
+  (symbol (lib_id "Transistor_FET:IRLML6401") (at 107.95 76.2 90)
     (in_bom yes) (on_board yes)
     (uuid fc85e821-7bcc-4cfb-9db7-810b1c482345)
     (property "Reference" "Q?" (id 0) (at 107.95 66.04 90))
