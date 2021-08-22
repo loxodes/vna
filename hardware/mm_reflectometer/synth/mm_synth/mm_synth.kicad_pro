@@ -308,6 +308,7 @@
     ],
     "rule_severities": {
       "bus_definition_conflict": "error",
+      "bus_entry_needed": "error",
       "bus_label_syntax": "error",
       "bus_to_bus_conflict": "error",
       "bus_to_net_conflict": "error",
@@ -364,7 +365,7 @@
       }
     ],
     "meta": {
-      "version": 0
+      "version": 1
     },
     "net_colors": null
   },
@@ -380,6 +381,7 @@
     "page_layout_descr_file": ""
   },
   "schematic": {
+    "annotate_start_num": 0,
     "drawing": {
       "default_bus_thickness": 12.0,
       "default_junction_size": 36.0,
@@ -492,6 +494,10 @@
     [
       "f67b2d2e-517d-4800-9820-4d96137a2d08",
       "drain_sequencer1"
+    ],
+    [
+      "a6dc4e3b-8e22-4044-ae18-4bc101b2a322",
+      "panel"
     ]
   ],
   "text_variables": {}
