@@ -498,6 +498,10 @@
     [
       "a6dc4e3b-8e22-4044-ae18-4bc101b2a322",
       "panel"
+    ],
+    [
+      "deb9fb27-028c-4413-96d6-263cf5810ed3",
+      "ecp_aux_usb"
     ]
   ],
   "text_variables": {}

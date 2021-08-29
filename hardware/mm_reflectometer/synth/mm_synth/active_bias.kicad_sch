@@ -335,7 +335,6 @@
     )
   )
 
-
   (junction (at 99.06 105.41) (diameter 1.016) (color 0 0 0 0))
   (junction (at 105.41 72.39) (diameter 1.016) (color 0 0 0 0))
   (junction (at 110.49 105.41) (diameter 1.016) (color 0 0 0 0))
@@ -1327,6 +1326,25 @@
     )
     (pin "1" (uuid ffbdfdbc-cd0a-4386-9452-7637106ba8fa))
     (pin "2" (uuid 929a7fe4-0ffc-46ee-b4e7-2030f91e315f))
+  )
+
+  (symbol (lib_id "Diode:BAS516") (at 161.4396 134.1338 270) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid 48f66c77-366c-4b8d-90af-e7225820c5d2)
+    (property "Reference" "D1204" (id 0) (at 163.9796 132.8638 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "BAS516" (id 1) (at 163.9796 135.4038 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Diode_SMD:D_SOD-523" (id 2) (at 156.9946 134.1338 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/BAS16_SER.pdf" (id 3) (at 161.4396 134.1338 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid e6880383-a830-4166-a8a8-eb039b9cdb75))
+    (pin "2" (uuid 1efdf57b-6149-41ef-a982-f01d182a72dc))
   )
 
   (symbol (lib_id "Amplifier_Operational:TLV9001IDCK") (at 154.94 86.36 90) (mirror x) (unit 1)

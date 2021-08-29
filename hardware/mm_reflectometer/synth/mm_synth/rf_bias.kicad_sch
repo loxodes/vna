@@ -604,7 +604,6 @@
     )
   )
 
-
   (junction (at 54.61 57.15) (diameter 0.9144) (color 0 0 0 0))
   (junction (at 64.77 57.15) (diameter 0.9144) (color 0 0 0 0))
   (junction (at 76.2 57.15) (diameter 0.9144) (color 0 0 0 0))
