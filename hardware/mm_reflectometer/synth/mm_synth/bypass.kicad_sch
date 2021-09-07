@@ -369,7 +369,7 @@
     (property "Reference" "J1001" (id 0) (at 140.97 93.98 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "Conn_Coaxial" (id 1) (at 140.97 95.25 0)
+    (property "Value" "Conn_Coaxial" (id 1) (at 140.97 96.52 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "jtk_rf_footprints:sw_edge_oshpark_4layer" (id 2) (at 135.89 91.44 0)

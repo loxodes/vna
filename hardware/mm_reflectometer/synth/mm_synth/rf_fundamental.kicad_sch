@@ -1759,7 +1759,7 @@
   (symbol (lib_id "Device:FerriteBead_Small") (at 184.15 148.59 180) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 865c63cb-1b1a-43dd-bf44-ce0dfd9fcfda)
-    (property "Reference" "FB404" (id 0) (at 190.5 149.86 0)
+    (property "Reference" "FB404" (id 0) (at 193.04 149.86 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "BLM15GG471SZ1D" (id 1) (at 204.47 147.32 0)
