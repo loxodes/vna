@@ -2126,6 +2126,10 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 5ec6c506-c0bb-484f-9fa9-6f391fbdcdd2)
   )
+  (text "SUB WITH MADT-011000 AND LOG AMPLIFIER?" (at 341.63 143.51 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid b85330a1-c669-4c48-8075-3b276032f9b0)
+  )
 
   (label "SW_V1" (at 54.61 123.19 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))

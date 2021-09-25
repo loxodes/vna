@@ -2713,7 +2713,7 @@
     (property "Reference" "C310" (id 0) (at 154.7368 38.2016 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "22 uF" (id 1) (at 154.7368 40.513 0)
+    (property "Value" "10 uF" (id 1) (at 154.7368 40.513 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (id 2) (at 152.4 39.37 0)
