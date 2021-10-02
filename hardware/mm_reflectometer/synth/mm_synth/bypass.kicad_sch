@@ -237,6 +237,11 @@
     (uuid db98bd22-0461-4e8e-b567-099274e1dc12)
   )
 
+  (text "TODO: ADD SERIES ELEMENT TO REMOVE STUB.." (at 138.43 86.36 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 206c5391-32ee-46fd-9c98-d0807960006b)
+  )
+
   (hierarchical_label "BYPASS_IN" (shape input) (at 107.95 91.44 180)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 6e4624cc-7c75-4a3e-88e0-14a8e2c13560)
