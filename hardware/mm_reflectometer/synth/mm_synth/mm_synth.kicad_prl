@@ -1,10 +1,10 @@
 {
   "board": {
-    "active_layer": 44,
-    "active_layer_preset": "",
+    "active_layer": 0,
+    "active_layer_preset": "All Layers",
     "auto_track_width": false,
     "hidden_nets": [],
-    "high_contrast_mode": 0,
+    "high_contrast_mode": 1,
     "net_color_mode": 1,
     "opacity": {
       "pads": 1.0,
@@ -33,7 +33,6 @@
       3,
       4,
       5,
-      6,
       8,
       9,
       10,
@@ -43,6 +42,7 @@
       14,
       15,
       16,
+      17,
       18,
       19,
       20,
@@ -62,7 +62,7 @@
       35,
       36
     ],
-    "visible_layers": "7ffffff_8000007f",
+    "visible_layers": "fffffff_ffffffff",
     "zone_display_mode": 0
   },
   "meta": {
