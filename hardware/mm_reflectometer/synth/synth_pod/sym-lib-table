@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name "tcm2-33wx")(type "Legacy")(uri "/home/jtklein/repos/snapeda/TCM2-33WX_.lib")(options "")(descr ""))
+  (lib (name "tagconnect")(type "Legacy")(uri "/home/jtklein/repos/snapeda/TC2050-IDC-NL.lib")(options "")(descr ""))
+)

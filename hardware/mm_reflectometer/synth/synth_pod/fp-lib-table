@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name "jtk_rf_footprints")(type "KiCad")(uri "/home/jtklein/repos/jtk_kicad_libs/jtk_rf_footprints.pretty")(options "")(descr ""))
+  (lib (name "snapeda")(type "KiCad")(uri "/home/jtklein/repos/snapeda/snapeda.pretty")(options "")(descr ""))
+  (lib (name "gkl_conn")(type "KiCad")(uri "/home/jtklein/repos/gsd-kicad-libs/gkl_conn.pretty")(options "")(descr ""))
+)
