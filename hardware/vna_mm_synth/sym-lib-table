@@ -1,4 +1,4 @@
 (sym_lib_table
   (lib (name "vna_mm")(type "Legacy")(uri "${KIPRJMOD}/../..//lib/vna_mm_lib/vna_mm.lib")(options "")(descr "vna_mm project library"))
-  (lib (name "vna_mm_synth-rescue")(type "Legacy")(uri "${KIPRJMOD}/vna_mm_synth-rescue.lib")(options "")(descr ""))
+  (lib (name "vna_mm_synth-rescue")(type "KiCad")(uri "${KIPRJMOD}/vna_mm_synth-rescue.kicad_sym")(options "")(descr ""))
 )

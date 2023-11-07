@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "tps83a")(type "KiCad")(uri "/home/jtklein/repos/snap_kicad/TPS7A8300RGRR.kicad_sym")(options "")(descr ""))
+)

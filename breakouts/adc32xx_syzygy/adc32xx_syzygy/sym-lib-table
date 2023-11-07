@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "adc_32xx-rescue")(type "KiCad")(uri "${KIPRJMOD}/adc_32xx-rescue.kicad_sym")(options "")(descr ""))
+  (lib (name "adc32xx_syzygy-rescue")(type "KiCad")(uri "${KIPRJMOD}/adc32xx_syzygy-rescue.kicad_sym")(options "")(descr ""))
+)
