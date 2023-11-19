@@ -1,4 +1,5 @@
 (sym_lib_table
-  (lib (name vna_mm)(type Legacy)(uri C:/Users/Jon/Documents/GitHub/vna/lib/vna_mm_lib/vna_mm.lib)(options "")(descr ""))
-  (lib (name adc_32xx-rescue)(type Legacy)(uri ${KIPRJMOD}/adc_32xx-rescue.lib)(options "")(descr ""))
+  (version 7)
+  (lib (name "vna_mm")(type "Legacy")(uri "C:/Users/Jon/Documents/GitHub/vna/lib/vna_mm_lib/vna_mm.lib")(options "")(descr ""))
+  (lib (name "adc_32xx-rescue")(type "KiCad")(uri "${KIPRJMOD}/adc_32xx-rescue.kicad_sym")(options "")(descr ""))
 )
