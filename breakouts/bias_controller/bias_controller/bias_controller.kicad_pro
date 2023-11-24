@@ -562,6 +562,10 @@
     [
       "d5b71baa-35d6-4c93-9f12-bbf3cd21e244",
       "load switch"
+    ],
+    [
+      "46898e39-ca1f-41cd-852b-9175d370901f",
+      "ext_conn"
     ]
   ],
   "text_variables": {}
