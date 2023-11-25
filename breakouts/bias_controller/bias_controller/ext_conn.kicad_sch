@@ -77,6 +77,12 @@
     (uuid fc340ceb-48fb-44e0-a22e-f7b7bc23e8a4)
   )
 
+  (text "assuming TMP102 on i2c" (exclude_from_sim no)
+ (at 169.418 62.23 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid 4bdc6545-bd36-4df9-8987-6f905097915e)
+  )
+
   (hierarchical_label "EXT_SPI_TX" (shape input) (at 137.16 93.98 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 0239c4c4-6198-478e-a40f-7bfae11b7b75)
@@ -108,10 +114,6 @@
   (hierarchical_label "EXT_PIO_4" (shape bidirectional) (at 151.13 146.05 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 402e3d14-b9ca-4ada-a3b7-5212e41d7db3)
-  )
-  (hierarchical_label "DUT_TEMP" (shape output) (at 139.7 113.03 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 40475e99-bf0c-4e2d-8b53-d0e000ee443e)
   )
   (hierarchical_label "EXT_PIO_3" (shape bidirectional) (at 151.13 143.51 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
