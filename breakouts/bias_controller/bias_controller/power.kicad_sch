@@ -2043,7 +2043,7 @@
   (symbol (lib_id "jtk_rf_libs:Vusb") (at 26.67 132.08 0) (unit 1)
     (exclude_from_sim no) (in_bom no) (on_board no) (dnp no) (fields_autoplaced)
     (uuid 145a0da9-9319-42d0-a69d-5aba14bbe2e0)
-    (property "Reference" "PWR#02" (at 26.67 127 0)
+    (property "Reference" "#PWR#02" (at 26.67 127 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Vusb" (at 26.67 128.27 0) (do_not_autoplace)
@@ -2062,7 +2062,7 @@
     (instances
       (project "bias_controller"
         (path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/2cfa1368-8338-4b21-8f25-dfe9e24adaf3"
-          (reference "PWR#02") (unit 1)
+          (reference "#PWR#02") (unit 1)
         )
       )
     )
