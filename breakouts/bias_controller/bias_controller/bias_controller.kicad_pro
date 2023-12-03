@@ -169,6 +169,13 @@
       "via_dimensions": [],
       "zones_allow_external_fillets": false
     },
+    "ipc2581": {
+      "dist": "",
+      "distpn": "",
+      "internal_id": "",
+      "mfg": "",
+      "mpn": ""
+    },
     "layer_presets": [],
     "viewports": []
   },
@@ -537,7 +544,7 @@
   "sheets": [
     [
       "c9087306-c5f7-4203-b4d2-ad73ff81b231",
-      ""
+      "Root"
     ],
     [
       "a373009e-dcc6-4439-9527-61129fdcd3b6",
