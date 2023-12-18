@@ -1773,7 +1773,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1c69aea8-5266-4d21-a222-b34ff961daf1")
-		(property "Reference" "U10"
+		(property "Reference" "U405"
 			(at 83.82 95.25 0)
 			(effects
 				(font
@@ -1860,14 +1860,6 @@
 		)
 		(instances
 			(project "bias_controller"
-				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/2cfa1368-8338-4b21-8f25-dfe9e24adaf3"
-					(reference "U10")
-					(unit 2)
-				)
-				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
-					(reference "U10")
-					(unit 2)
-				)
 				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/b00e743d-fcf2-432a-aaae-98b69021177d"
 					(reference "U405")
 					(unit 2)
@@ -2705,7 +2697,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a73a28e4-1e51-4086-a4c6-dfaeb6a83b89")
-		(property "Reference" "U10"
+		(property "Reference" "U405"
 			(at 83.82 36.83 0)
 			(effects
 				(font
@@ -2792,14 +2784,6 @@
 		)
 		(instances
 			(project "bias_controller"
-				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/2cfa1368-8338-4b21-8f25-dfe9e24adaf3"
-					(reference "U10")
-					(unit 3)
-				)
-				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
-					(reference "U10")
-					(unit 3)
-				)
 				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/b00e743d-fcf2-432a-aaae-98b69021177d"
 					(reference "U405")
 					(unit 3)
@@ -3225,7 +3209,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f5b34182-6892-47f4-9aba-411e4d99e1cf")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR0502"
 			(at 64.77 157.48 0)
 			(effects
 				(font
@@ -3274,14 +3258,6 @@
 		)
 		(instances
 			(project "bias_controller"
-				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/2cfa1368-8338-4b21-8f25-dfe9e24adaf3"
-					(reference "#PWR016")
-					(unit 1)
-				)
-				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a373009e-dcc6-4439-9527-61129fdcd3b6"
-					(reference "#PWR094")
-					(unit 1)
-				)
 				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/b00e743d-fcf2-432a-aaae-98b69021177d"
 					(reference "#PWR0502")
 					(unit 1)
@@ -3299,7 +3275,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ff071ac0-2ee0-4d37-9737-d4b50dedbace")
-		(property "Reference" "U10"
+		(property "Reference" "U405"
 			(at 92.71 160.02 0)
 			(effects
 				(font
@@ -3386,14 +3362,6 @@
 		)
 		(instances
 			(project "bias_controller"
-				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/2cfa1368-8338-4b21-8f25-dfe9e24adaf3"
-					(reference "U10")
-					(unit 4)
-				)
-				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
-					(reference "U10")
-					(unit 4)
-				)
 				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/b00e743d-fcf2-432a-aaae-98b69021177d"
 					(reference "U405")
 					(unit 4)

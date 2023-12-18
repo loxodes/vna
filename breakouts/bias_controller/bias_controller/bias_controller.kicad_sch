@@ -405,7 +405,7 @@
 		)
 		(uuid "e78e1134-5436-4111-b591-6f7877eea25b")
 	)
-	(text "todo:\n- clean up op-amp refdes\n- find tvs diode on jlcpcb\n- calculate switching converter sense resistors\n- add footprint for board to board connector\n- create breakout for board to board connector with screw terminals\n- clear erc\n- assign jlcpcb part numbers"
+	(text "todo:\n- clean up op-amp refdes\n- add crystal part number\n- add switch part number\n- find tvs diode on jlcpcb\n- calculate switching converter sense resistors\n- create breakout for board to board connector with screw terminals\n- clear erc\n- assign jlcpcb part numbers"
 		(exclude_from_sim no)
 		(at 15.748 99.822 0)
 		(effects
