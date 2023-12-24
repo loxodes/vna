@@ -3039,7 +3039,7 @@
 	)
 	(wire
 		(pts
-			(xy 79.375 77.47) (xy 79.375 78.74)
+			(xy 80.01 72.39) (xy 80.01 80.01)
 		)
 		(stroke
 			(width 0)
@@ -3489,16 +3489,6 @@
 	)
 	(wire
 		(pts
-			(xy 79.375 77.47) (xy 80.01 77.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ce86b001-5b7f-4772-ad04-bac49d7c8fea")
-	)
-	(wire
-		(pts
 			(xy 68.58 41.91) (xy 68.58 87.63)
 		)
 		(stroke
@@ -3646,16 +3636,6 @@
 			(type default)
 		)
 		(uuid "f1a77c43-0782-4ad4-ac71-f83cdffcba6d")
-	)
-	(wire
-		(pts
-			(xy 80.01 77.47) (xy 80.01 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f2095a8a-2bde-4b6a-9ff2-b850e69d9c15")
 	)
 	(wire
 		(pts
@@ -4834,7 +4814,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 79.375 78.74 0)
+		(at 80.01 80.01 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4844,7 +4824,7 @@
 		(fields_autoplaced yes)
 		(uuid "43c4f11d-a065-4572-9f0c-83b82cfb3433")
 		(property "Reference" "#PWR0303"
-			(at 79.375 85.09 0)
+			(at 80.01 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4853,7 +4833,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 79.375 83.82 0)
+			(at 80.01 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4861,7 +4841,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 79.375 78.74 0)
+			(at 80.01 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4870,7 +4850,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 79.375 78.74 0)
+			(at 80.01 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4879,7 +4859,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 79.375 78.74 0)
+			(at 80.01 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6226,10 +6206,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "a4486598-9354-4f39-b3f8-402cbc0ffb45")
 		(property "Reference" "D301"
-			(at 114.3 99.06 90)
+			(at 114.3 99.0599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6237,8 +6216,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "D_TVS"
-			(at 114.3 101.6 90)
+		(property "Value" "ESD9B5VL"
+			(at 112.014 104.902 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6246,7 +6225,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "jtk_rf_footprints:DFN1006-2"
 			(at 111.76 100.33 0)
 			(effects
 				(font
@@ -7174,10 +7153,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "f811a30e-7556-4963-b808-2b4c1aabb8b9")
 		(property "Reference" "D302"
-			(at 124.46 99.06 90)
+			(at 124.46 99.0599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7185,8 +7163,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "D_TVS"
-			(at 124.46 101.6 90)
+		(property "Value" "ESD9B5VL"
+			(at 123.698 104.648 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7194,7 +7172,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "jtk_rf_footprints:DFN1006-2"
 			(at 121.92 100.33 0)
 			(effects
 				(font

@@ -1542,6 +1542,16 @@
 	)
 	(wire
 		(pts
+			(xy 135.89 250.19) (xy 140.97 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "24aa898c-c425-4f8e-9142-1101b72879fa")
+	)
+	(wire
+		(pts
 			(xy 48.26 40.64) (xy 48.26 127)
 		)
 		(stroke
@@ -1642,6 +1652,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 252.73) (xy 156.21 252.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "46e90879-2e5c-4aad-a940-52229d4c5cd2")
+	)
+	(wire
+		(pts
 			(xy 74.93 261.62) (xy 74.93 267.97)
 		)
 		(stroke
@@ -1702,6 +1722,16 @@
 	)
 	(wire
 		(pts
+			(xy 137.16 261.62) (xy 161.29 261.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d6e395e-c274-4f69-a09b-f981d659b595")
+	)
+	(wire
+		(pts
 			(xy 160.02 214.63) (xy 154.94 214.63)
 		)
 		(stroke
@@ -1719,6 +1749,16 @@
 			(type default)
 		)
 		(uuid "61758e06-1692-42e9-a043-aaf1b367d43d")
+	)
+	(wire
+		(pts
+			(xy 161.29 261.62) (xy 161.29 252.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "63909a16-b4c2-49c7-911d-2d35e5c213f8")
 	)
 	(wire
 		(pts
@@ -1872,6 +1912,16 @@
 	)
 	(wire
 		(pts
+			(xy 137.16 255.27) (xy 137.16 261.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "814f6b78-f4e6-4815-99e1-cb150b2ef1b9")
+	)
+	(wire
+		(pts
 			(xy 106.68 204.47) (xy 115.57 204.47)
 		)
 		(stroke
@@ -1909,6 +1959,16 @@
 			(type default)
 		)
 		(uuid "88e6887e-6621-4942-80a5-b04df53fc235")
+	)
+	(wire
+		(pts
+			(xy 140.97 255.27) (xy 137.16 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "89c4a1d1-d602-480e-abfc-c77beb5256b9")
 	)
 	(wire
 		(pts
@@ -4137,7 +4197,7 @@
 		(lib_id "Amplifier_Operational:LM324")
 		(at 147.32 170.18 0)
 		(mirror x)
-		(unit 1)
+		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -4232,7 +4292,7 @@
 			(project "bias_controller"
 				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
 					(reference "U406")
-					(unit 1)
+					(unit 2)
 				)
 			)
 		)
@@ -4449,7 +4509,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "564fdbc4-c83a-4f14-a9bf-2ca65f992ce9")
-		(property "Reference" "U405"
+		(property "Reference" "U406"
 			(at 132.08 55.88 0)
 			(effects
 				(font
@@ -4537,7 +4597,7 @@
 		(instances
 			(project "bias_controller"
 				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
-					(reference "U405")
+					(reference "U406")
 					(unit 1)
 				)
 			)
@@ -4807,6 +4867,109 @@
 				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
 					(reference "#PWR0409")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:LM324")
+		(at 148.59 252.73 0)
+		(unit 4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "61f36ae3-6a7d-4bc9-81a2-da9da93c84bd")
+		(property "Reference" "U406"
+			(at 148.59 242.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LM324DT"
+			(at 148.59 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:SO-14_3.9x8.65mm_P1.27mm"
+			(at 147.32 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm2902-n.pdf"
+			(at 149.86 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 148.59 252.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ee3e1304-ab49-419c-bb1e-29a15db4e314")
+		)
+		(pin "2"
+			(uuid "00dfa46f-09cc-4934-8740-35c8d4de1e01")
+		)
+		(pin "3"
+			(uuid "34d691e9-e654-4f39-82df-5dc894161a60")
+		)
+		(pin "5"
+			(uuid "0bc95d55-b473-4732-8630-512eacdc7c47")
+		)
+		(pin "6"
+			(uuid "a33f89a1-e412-4a52-94d7-3fae13c1dbbc")
+		)
+		(pin "7"
+			(uuid "7c3df6b8-eafc-4e98-8615-09e47c6e9014")
+		)
+		(pin "10"
+			(uuid "4b7f80fd-e5d3-45d0-bc1b-3eafa42c1b59")
+		)
+		(pin "8"
+			(uuid "fc5ebd8c-2c61-4703-b0b6-eed79f69625e")
+		)
+		(pin "9"
+			(uuid "cff51324-b1a0-43bb-b8fe-709b36c0943a")
+		)
+		(pin "12"
+			(uuid "f7129058-d83c-425c-8f11-c281df4ede22")
+		)
+		(pin "13"
+			(uuid "fe35b285-6131-4388-9899-25a98a27a890")
+		)
+		(pin "14"
+			(uuid "878ba4f1-f3c4-4293-ac02-34d5c77c28c3")
+		)
+		(pin "11"
+			(uuid "566b29ed-8051-4c1d-b106-c8f422f8fc5c")
+		)
+		(pin "4"
+			(uuid "4585981c-9f72-4553-b1e0-4d3a76064aa1")
+		)
+		(instances
+			(project "bias_controller"
+				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
+					(reference "U406")
+					(unit 4)
 				)
 			)
 		)
@@ -5702,13 +5865,13 @@
 		(lib_id "Amplifier_Operational:LM324")
 		(at 147.32 214.63 0)
 		(mirror x)
-		(unit 1)
+		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "902b9a36-f008-41ea-a499-3b1618c07285")
-		(property "Reference" "U407"
+		(property "Reference" "U406"
 			(at 147.32 224.79 0)
 			(effects
 				(font
@@ -5730,7 +5893,6 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm2902-n.pdf"
@@ -5752,22 +5914,22 @@
 			)
 		)
 		(pin "1"
-			(uuid "ee3e1304-ab49-419c-bb1e-29a15db4e314")
+			(uuid "ee3e1304-ab49-419c-bb1e-29a15db4e315")
 		)
 		(pin "2"
-			(uuid "00dfa46f-09cc-4934-8740-35c8d4de1e01")
+			(uuid "00dfa46f-09cc-4934-8740-35c8d4de1e02")
 		)
 		(pin "3"
-			(uuid "34d691e9-e654-4f39-82df-5dc894161a60")
+			(uuid "34d691e9-e654-4f39-82df-5dc894161a61")
 		)
 		(pin "5"
-			(uuid "0bc95d55-b473-4732-8630-512eacdc7c47")
+			(uuid "0bc95d55-b473-4732-8630-512eacdc7c48")
 		)
 		(pin "6"
-			(uuid "a33f89a1-e412-4a52-94d7-3fae13c1dbbc")
+			(uuid "a33f89a1-e412-4a52-94d7-3fae13c1dbbd")
 		)
 		(pin "7"
-			(uuid "7c3df6b8-eafc-4e98-8615-09e47c6e9014")
+			(uuid "7c3df6b8-eafc-4e98-8615-09e47c6e9015")
 		)
 		(pin "10"
 			(uuid "c423a7ca-7c0d-41fc-a77a-d49a4b47c4d3")
@@ -5779,25 +5941,25 @@
 			(uuid "aa942fac-9d95-47c8-a8ef-507c99af6e2e")
 		)
 		(pin "12"
-			(uuid "f7129058-d83c-425c-8f11-c281df4ede22")
+			(uuid "f7129058-d83c-425c-8f11-c281df4ede23")
 		)
 		(pin "13"
-			(uuid "fe35b285-6131-4388-9899-25a98a27a890")
+			(uuid "fe35b285-6131-4388-9899-25a98a27a891")
 		)
 		(pin "14"
-			(uuid "878ba4f1-f3c4-4293-ac02-34d5c77c28c3")
+			(uuid "878ba4f1-f3c4-4293-ac02-34d5c77c28c4")
 		)
 		(pin "11"
-			(uuid "566b29ed-8051-4c1d-b106-c8f422f8fc5c")
+			(uuid "566b29ed-8051-4c1d-b106-c8f422f8fc5d")
 		)
 		(pin "4"
-			(uuid "4585981c-9f72-4553-b1e0-4d3a76064aa1")
+			(uuid "4585981c-9f72-4553-b1e0-4d3a76064aa2")
 		)
 		(instances
 			(project "bias_controller"
 				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
-					(reference "U407")
-					(unit 1)
+					(reference "U406")
+					(unit 3)
 				)
 			)
 		)
@@ -6549,6 +6711,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 135.89 250.19 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b718cde9-fd42-443d-8737-57da487cbdeb")
+		(property "Reference" "#PWR0432"
+			(at 129.54 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 130.81 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 135.89 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 135.89 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 135.89 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c48baf11-f88a-4293-9da7-37eb40ea0877")
+		)
+		(instances
+			(project "bias_controller"
+				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
+					(reference "#PWR0432")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_Small")
 		(at 175.26 170.18 90)
 		(mirror x)
@@ -6692,8 +6921,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b99e055d-9151-4c67-bbef-d21df9c5e5ce")
-		(property "Reference" "U405"
-			(at 227.33 55.88 0)
+		(property "Reference" "U406"
+			(at 227.33 55.8799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6702,7 +6931,7 @@
 			)
 		)
 		(property "Value" "LM324DT"
-			(at 227.33 58.42 0)
+			(at 227.33 58.4199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6782,7 +7011,7 @@
 		(instances
 			(project "bias_controller"
 				(path "/c9087306-c5f7-4203-b4d2-ad73ff81b231/a65e423d-62be-42bd-822a-ad0aeb32a2a2"
-					(reference "U405")
+					(reference "U406")
 					(unit 5)
 				)
 			)

@@ -1907,26 +1907,24 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U"
-				(at -12.7 16.24 0)
+			(property "Reference" "U602"
+				(at 0 20.32 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left bottom)
 				)
 			)
 			(property "Value" "TPS63070RNMT"
-				(at -23.876 -18.288 0)
+				(at 0 17.78 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left bottom)
 				)
 			)
 			(property "Footprint" "snapeda:VREG_TPS63070RNMR"
-				(at -29.718 32.004 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1936,7 +1934,7 @@
 				)
 			)
 			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps63070.pdf"
-				(at -6.604 20.574 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1945,7 +1943,7 @@
 				)
 			)
 			(property "Description" "TPS63070 2-V to 16-V Buck-Boost Converter With 3.6-A Switch Current"
-				(at -8.89 28.702 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1964,7 +1962,7 @@
 				)
 			)
 			(property "Description_1" "\nWide input voltage (2V-16V) buck-boost converter\n"
-				(at -19.812 30.734 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1974,7 +1972,7 @@
 				)
 			)
 			(property "Package" "VQFN-HR-15 Texas Instruments"
-				(at -28.956 33.782 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1994,7 +1992,7 @@
 				)
 			)
 			(property "SnapEDA_Link" "https://www.snapeda.com/parts/TPS63070RNMT/Texas+Instruments/view-part/?ref=snap"
-				(at -0.508 24.384 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2014,7 +2012,7 @@
 				)
 			)
 			(property "Purchase-URL" "https://www.snapeda.com/api/url_track_click_mouser/?unipart_id=561618&manufacturer=Texas Instruments&part_name=TPS63070RNMT&search_term=tps63070"
-				(at 34.036 22.352 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2024,7 +2022,7 @@
 				)
 			)
 			(property "Availability" "In Stock"
-				(at -4.826 35.306 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2034,7 +2032,7 @@
 				)
 			)
 			(property "Check_prices" "https://www.snapeda.com/parts/TPS63070RNMT/Texas+Instruments/view-part/?ref=eda"
-				(at -1.27 26.162 0)
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2102,24 +2100,6 @@
 						)
 					)
 					(number "11"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -17.78 8.89 0)
-					(length 5.08)
-					(name "VIN"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "12-13"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -2253,24 +2233,6 @@
 						)
 					)
 				)
-				(pin output line
-					(at 17.78 8.89 180)
-					(length 5.08)
-					(name "VOUT"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "7-8"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
 				(pin input line
 					(at 17.78 12.7 180)
 					(length 5.08)
@@ -2282,6 +2244,44 @@
 						)
 					)
 					(number "9"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+			(symbol "TPS63070RNMT_1_0"
+				(pin input line
+					(at -17.78 8.89 0)
+					(length 5.08)
+					(name "VIN"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "12_13"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 17.78 8.89 180)
+					(length 5.08)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "7_8"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -4519,9 +4519,9 @@
 		)
 		(uuid "aaf27673-db34-4eb3-863c-aca118e40bd1")
 	)
-	(text "todo:\n- design buck-boost converter, 4.5 V to 9 V input, 6 V output\n- design LDO for 3.3 V supply, max 1 A (use adm7172)\n- design LDO for the 3 V analog supply, 0.1 A (use adm7172)\n- design LDO for the Vdd supply, 2 V to 5.5 V, max 2 A (use adm7172)"
+	(text "todo:\n- design buck-boost converter, 4.5 V to 9 V input, 6 V output"
 		(exclude_from_sim no)
-		(at 232.918 46.228 0)
+		(at 130.302 129.794 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4608,7 +4608,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "360k"
 			(at 125.73 156.2099 0)
 			(effects
 				(font
@@ -6590,7 +6590,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "470k"
 			(at 116.84 148.5899 0)
 			(effects
 				(font
@@ -8350,7 +8350,7 @@
 		(pin "6"
 			(uuid "73126451-5ae3-469e-93ba-fecced0654a3")
 		)
-		(pin "12-13"
+		(pin "7_8"
 			(uuid "183217fa-1b65-4b3e-94d9-c92b6703080a")
 		)
 		(pin "15"
@@ -8368,7 +8368,7 @@
 		(pin "4"
 			(uuid "252b0395-f89c-4227-ad01-e7b206c38c71")
 		)
-		(pin "7-8"
+		(pin "12_13"
 			(uuid "bf8592b6-94e7-4f09-8f33-41aeb39fa766")
 		)
 		(pin "5"
@@ -9020,7 +9020,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "150k"
 			(at 116.84 156.2099 0)
 			(effects
 				(font
