@@ -2730,7 +2730,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" ""
+		(property "LCSC Part #" "C306040"
 			(at 190.5 113.03 0)
 			(effects
 				(font
